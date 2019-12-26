@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lis.service", "lis.service.csproj", "{32D82255-3D5D-4A0A-99DA-04F0D0FE7C09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lis.itf", "..\lis.itf\lis.itf.csproj", "{A8CDDDD4-1529-4039-B1D3-183EE952BB00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32D82255-3D5D-4A0A-99DA-04F0D0FE7C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32D82255-3D5D-4A0A-99DA-04F0D0FE7C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32D82255-3D5D-4A0A-99DA-04F0D0FE7C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32D82255-3D5D-4A0A-99DA-04F0D0FE7C09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8CDDDD4-1529-4039-B1D3-183EE952BB00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8CDDDD4-1529-4039-B1D3-183EE952BB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8CDDDD4-1529-4039-B1D3-183EE952BB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8CDDDD4-1529-4039-B1D3-183EE952BB00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59B08BC2-B72A-4A56-B877-F420D5CA2D1A}
+	EndGlobalSection
+EndGlobal

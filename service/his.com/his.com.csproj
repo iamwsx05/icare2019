@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1E5214EF-3386-4901-B4BB-A8184E737926}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>His.Com</RootNamespace>
+    <AssemblyName>his.com</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>tttt.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="comm.com, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0bcca75560d02c54, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\comm.com.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Oracle.DataAccess, Version=2.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Debug\Oracle.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="utility, Version=2.0.0.1, Culture=neutral, PublicKeyToken=55813ad8fa3e5102, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\utility.dll</HintPath>
+    </Reference>
+    <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\wecare.core.dll</HintPath>
+    </Reference>
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=4bdb6de9b3ca5966, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\wecaredata.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="base\com\clsChargeInputSvc.cs" />
+    <Compile Include="base\com\clsDepart.cs" />
+    <Compile Include="base\com\clsHisBase.cs" />
+    <Compile Include="base\com\clsIDataParameterCreator.cs" />
+    <Compile Include="base\com\clsMainTenace_Svc.cs" />
+    <Compile Include="base\com\clsPatientQuery.cs" />
+    <Compile Include="base\com\clsSystemPowerBase.cs" />
+    <Compile Include="drug\com\clsAccountPeriodSVC.cs" />
+    <Compile Include="drug\com\clsAccountPeriod_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsAccountPeriod_SVC.cs" />
+    <Compile Include="drug\com\clsAccount_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsAccount_SVC.cs" />
+    <Compile Include="drug\com\clsAdjustmentSVC.cs" />
+    <Compile Include="drug\com\clsAdjustmentSVC_drug.cs" />
+    <Compile Include="drug\com\clsAdjustment_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsAdjustment_Supported_SVC_drug.cs" />
+    <Compile Include="drug\com\clsAskForMedicineSVC.cs" />
+    <Compile Include="drug\com\clsAskForMedicine_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsAskSVC.cs" />
+    <Compile Include="drug\com\clsBalanceReportSVC.cs" />
+    <Compile Include="drug\com\clsCheckMedicineOrderSVC.cs" />
+    <Compile Include="drug\com\clsConnectToSecondDB_SVC.cs" />
+    <Compile Include="drug\com\clsDrugStorageQuery_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsDrugStorageQuery_SVC.cs" />
+    <Compile Include="drug\com\clsDrugStoreCheck_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsDrugStoreCheck_SVC.cs" />
+    <Compile Include="drug\com\clsDS_PublicSVC.cs" />
+    <Compile Include="drug\com\clsDS_Public_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsExportdeptSetSVC.cs" />
+    <Compile Include="drug\com\clsForeignRetreatOutStorageSVC.cs" />
+    <Compile Include="drug\com\clsGetOrderCheckMedicineSVC.cs" />
+    <Compile Include="drug\com\clsGetStorageCheckMedicineSVC.cs" />
+    <Compile Include="drug\com\clsGetStoreCheckMedicine_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsInitialDS_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsInitialDS_SVC.cs" />
+    <Compile Include="drug\com\clsInStorageMedicineWithdrawSVC.cs" />
+    <Compile Include="drug\com\clsInStorageMedicineWithdraw_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsInStorageStatisticsReportSVC.cs" />
+    <Compile Include="drug\com\clsInStorageStatisticsReport_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsInStorageSVC.cs" />
+    <Compile Include="drug\com\clsInStorage_Supported_MS_SVC.cs" />
+    <Compile Include="drug\com\clsInstorage_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsInstorage_SVC.cs" />
+    <Compile Include="drug\com\clsInventoryRecordSVC.cs" />
+    <Compile Include="drug\com\clsInventoryRecord_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsMedicineAcceptanceSVC.cs" />
+    <Compile Include="drug\com\clsMedIcineCheckSVC.cs" />
+    <Compile Include="drug\com\clsMedicineGrossProfitRateSetSVC.cs" />
+    <Compile Include="drug\com\clsMedicineLimitInfoSVC.cs" />
+    <Compile Include="drug\com\clsMedicineLimitSVC.cs" />
+    <Compile Include="drug\com\clsMedicineLimitSVC_drug.cs" />
+    <Compile Include="drug\com\clsMedicineLimit_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsMedicineLimit_Supported_SVC_drug.cs" />
+    <Compile Include="drug\com\clsMedicineStoreroomSetSVC.cs" />
+    <Compile Include="drug\com\clsMedicineStoreroomSet_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsMedicineTypeSetSVC.cs" />
+    <Compile Include="drug\com\clsMedicineTypeVisionmSetSVC.cs" />
+    <Compile Include="drug\com\clsMedStoreBseInfoSvc.cs" />
+    <Compile Include="drug\com\clsMiddleTier_StorageDetailQuerySVC.cs" />
+    <Compile Include="drug\com\clsMS_AccountSVC.cs" />
+    <Compile Include="drug\com\clsMS_PublicSVC.cs" />
+    <Compile Include="drug\com\clsMS_Public_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsNewPurchaseMedicine.cs" />
+    <Compile Include="drug\com\clsOutStorageStatSvc.cs" />
+    <Compile Include="drug\com\clsOutStorageStat_Supported_Svc.cs" />
+    <Compile Include="drug\com\clsOutStorageSVC.cs" />
+    <Compile Include="drug\com\clsOutStorage_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsOutstorage_Supported_SVC_drug.cs" />
+    <Compile Include="drug\com\clsOutstorage_SVC.cs" />
+    <Compile Include="drug\com\clsQueryMedicineDetailSVC.cs" />
+    <Compile Include="drug\com\clsQueryMedicinePriceSVC.cs" />
+    <Compile Include="drug\com\clsQueryMedicinePrice_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsRecipeReportSVC.cs" />
+    <Compile Include="drug\com\clsRejectOutStorageSVC.cs" />
+    <Compile Include="drug\com\clsRejectStorageReportSVC.cs" />
+    <Compile Include="drug\com\clsReportInStorageBillSVC.cs" />
+    <Compile Include="drug\com\clsReportInStorageBill_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsReportOutStorageBillSVC.cs" />
+    <Compile Include="drug\com\clsReportOutStorageBill_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsRptAdjustpriceDetailSVC.cs" />
+    <Compile Include="drug\com\clsRptAdjustpriceDetail_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsRptAdjustpricefulllossSVC.cs" />
+    <Compile Include="drug\com\clsRptAdjustpricefullloss_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsRptAdjustpriceRecordSVC.cs" />
+    <Compile Include="drug\com\clsRptAdjustpriceRecord_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsRptSelectAllMedicine_SVC.cs" />
+    <Compile Include="drug\com\clsStockPlanSVC.cs" />
+    <Compile Include="drug\com\clsStorageCheckSVC.cs" />
+    <Compile Include="drug\com\clsStorageRacksetSVC.cs" />
+    <Compile Include="drug\com\clsStorageRackset_Supported_SVC.cs" />
+    <Compile Include="drug\com\clsStorageSVC.cs" />
+    <Compile Include="drug\com\clsVendorSupplyDetaiSVC.cs" />
+    <Compile Include="ip\com\clsAdviceReportSvc.cs" />
+    <Compile Include="ip\com\clsAidDictionary.cs" />
+    <Compile Include="ip\com\clsAreaMed2Query.cs" />
+    <Compile Include="ip\com\clsAreaMedQuery.cs" />
+    <Compile Include="ip\com\clsAttachRelationService.cs" />
+    <Compile Include="ip\com\clsAutoCharge.cs" />
+    <Compile Include="ip\com\clsBedManageSvc.cs" />
+    <Compile Include="ip\com\clsBeINpatientNOSvc.cs" />
+    <Compile Include="ip\com\clsBIHChargeItemService.cs" />
+    <Compile Include="ip\com\clsBIHChargeSvc.cs" />
+    <Compile Include="ip\com\clsBIHGroup_ICareData.cs" />
+    <Compile Include="ip\com\clsBihLeaHosSvc.cs" />
+    <Compile Include="ip\com\clsBIHOrderBedManager.cs" />
+    <Compile Include="ip\com\clsBIHOrderChangeService.cs" />
+    <Compile Include="ip\com\clsBIHORDERCHARGEDService.cs" />
+    <Compile Include="ip\com\clsBIHOrderExecService.cs" />
+    <Compile Include="ip\com\clsBIHOrderGroupService.cs" />
+    <Compile Include="ip\com\clsBIHOrderInterface.cs" />
+    <Compile Include="ip\com\clsBIHOrderService.cs" />
+    <Compile Include="ip\com\clsBihRegisterSvc.cs" />
+    <Compile Include="ip\com\clsBIHReportService.cs" />
+    <Compile Include="ip\com\clsBihStatQuerySvc.cs" />
+    <Compile Include="ip\com\clsBIHTransferSvc.cs" />
+    <Compile Include="ip\com\clsCharge.cs" />
+    <Compile Include="ip\com\clsCheckDeptRoleSvc.cs" />
+    <Compile Include="ip\com\clsCommonQuery.cs" />
+    <Compile Include="ip\com\clsCommonUseOrderDicSVC.cs" />
+    <Compile Include="ip\com\clsDemandPayment.cs" />
+    <Compile Include="ip\com\clsDoctorAdviceSvc.cs" />
+    <Compile Include="ip\com\clsExecuteOrderService.cs" />
+    <Compile Include="ip\com\clsInPatientQuerySvc.cs" />
+    <Compile Include="ip\com\clsItemStandarPriceSvc.cs" />
+    <Compile Include="ip\com\clsMedicineYBSvc.cs" />
+    <Compile Include="ip\com\clsModifyZyh.cs" />
+    <Compile Include="ip\com\clsOcDeptDefaultSvc.cs" />
+    <Compile Include="ip\com\clsOcDeptMapSvc.cs" />
+    <Compile Include="ip\com\clsOrderBookingSvc.cs" />
+    <Compile Include="ip\com\clsOrderdicChargeSvc.cs" />
+    <Compile Include="ip\com\clsOrderExecuteReportSvc.cs" />
+    <Compile Include="ip\com\ClsOrderVSChargeRelation.cs" />
+    <Compile Include="ip\com\clsPatienInfLogSvc.cs" />
+    <Compile Include="ip\com\clsPrePay.cs" />
+    <Compile Include="ip\com\clsPrepayCheckoutSvc.cs" />
+    <Compile Include="ip\com\clsPrepayQuerySvc.cs" />
+    <Compile Include="ip\com\clsQueryChargeSve.cs" />
+    <Compile Include="ip\com\clsRecordMark.cs" />
+    <Compile Include="ip\com\clsReport.cs" />
+    <Compile Include="ip\com\clsReportSvc.cs" />
+    <Compile Include="ip\com\clsReport_d_bihSvc.cs" />
+    <Compile Include="ip\com\clsSpecialRemarkDicService.cs" />
+    <Compile Include="ip\com\clsSpecreMarkSvc.cs" />
+    <Compile Include="ip\com\clsZyYB.cs" />
+    <Compile Include="ip\com\clsZyYBSS.cs" />
+    <Compile Include="medstore\com\clsCenterMedManageSvc.cs" />
+    <Compile Include="medstore\com\clsCenterReturnMedicineSvc.cs" />
+    <Compile Include="medstore\com\clsChangPrice.cs" />
+    <Compile Include="medstore\com\clsCheckSVC.cs" />
+    <Compile Include="medstore\com\clsCompoundReport.cs" />
+    <Compile Include="medstore\com\clsHisMedStoreSelect.cs" />
+    <Compile Include="medstore\com\clsIDataParameterCreator.cs" />
+    <Compile Include="medstore\com\clsImpExpTypeSvc.cs" />
+    <Compile Include="medstore\com\clsInitStorageMedicineSvc.cs" />
+    <Compile Include="medstore\com\clsMedAndStorageSvc.cs" />
+    <Compile Include="medstore\com\clsMedicinePriceChgSvc.cs" />
+    <Compile Include="medstore\com\clsMedicinePriceSvc.cs" />
+    <Compile Include="medstore\com\clsMedicineReportSVC.cs" />
+    <Compile Include="medstore\com\clsMedicineStdManage.cs" />
+    <Compile Include="medstore\com\clsMedicineSvc.cs" />
+    <Compile Include="medstore\com\clsMedReportSvc.cs" />
+    <Compile Include="medstore\com\clsMedSendConfigRelation_SVC.cs" />
+    <Compile Include="medstore\com\clsMedStorageManage.cs" />
+    <Compile Include="medstore\com\clsMedStoreBseInfoSvc.cs" />
+    <Compile Include="medstore\com\clsMedStoreLED.cs" />
+    <Compile Include="medstore\com\clsMedStoreSvc.cs" />
+    <Compile Include="medstore\com\clsPatchMedicine_Svc.cs" />
+    <Compile Include="medstore\com\clsPutMedicineService.cs" />
+    <Compile Include="medstore\com\clsPutMedicineSvc.cs" />
+    <Compile Include="medstore\com\clsPutMedicine_ICareData.cs" />
+    <Compile Include="medstore\com\clsPutMedRequisitionSvc.cs" />
+    <Compile Include="medstore\com\clsReturnTicketSvc.cs" />
+    <Compile Include="medstore\com\clsStockMedApplSvc.cs" />
+    <Compile Include="medstore\com\clsStorageAidInfoSvc.cs" />
+    <Compile Include="medstore\com\clsStorageCheckSvc.cs" />
+    <Compile Include="medstore\com\clsStorageFinSvc.cs" />
+    <Compile Include="medstore\com\clsStorageLimitSvc.cs" />
+    <Compile Include="medstore\com\clsStorageMedDetailSvc.cs" />
+    <Compile Include="medstore\com\clsStorageMedicineSvc.cs" />
+    <Compile Include="medstore\com\clsStorageOrdSvc.cs" />
+    <Compile Include="medstore\com\clsStorageReportSvc.cs" />
+    <Compile Include="medstore\com\clsStorageSetupStarSVC.cs" />
+    <Compile Include="op\com\clsAccordRecipeSvc.cs" />
+    <Compile Include="op\com\clsAccountCharge_Svc.cs" />
+    <Compile Include="op\com\clsBillSvc.cs" />
+    <Compile Include="op\com\clsCalPatientChargeSvc.cs" />
+    <Compile Include="op\com\clsChargeItemSourceSvc.cs" />
+    <Compile Include="op\com\clsChargeItemSvc.cs" />
+    <Compile Include="op\com\clsChargeMaintenanceSvc.cs" />
+    <Compile Include="op\com\clsCmCookingMethodItemGroupSvc.cs" />
+    <Compile Include="op\com\clsDigitalWaveHisService.cs" />
+    <Compile Include="op\com\clsDoctorChargeQuerySvc.cs" />
+    <Compile Include="op\com\clsDoctorChargeSvc.cs" />
+    <Compile Include="op\com\clsDoctorWorkStationSvc.cs" />
+    <Compile Include="op\com\clsDoctorWorkStation_SupportedSvc.cs" />
+    <Compile Include="op\com\clsFeeAndMedSortRelSvc.cs" />
+    <Compile Include="op\com\clsGetBase.cs" />
+    <Compile Include="op\com\clsGetServerDate.cs" />
+    <Compile Include="op\com\clsHISInfoDefineSvc.cs" />
+    <Compile Include="op\com\clsHisMedInOrderStatisticSvc.cs" />
+    <Compile Include="op\com\clsHISMedTypeManageSvc.cs" />
+    <Compile Include="op\com\clsIDataParameterCreator.cs" />
+    <Compile Include="op\com\clsinjectInfoSvc.cs" />
+    <Compile Include="op\com\clsInvoiceManageSvc.cs" />
+    <Compile Include="op\com\clsKillLockSVC.cs" />
+    <Compile Include="op\com\clsMedCommonUseSvc.cs" />
+    <Compile Include="op\com\clsMedicineSourceSvc.cs" />
+    <Compile Include="op\com\clsMultiunit_drug_Svc.cs" />
+    <Compile Include="op\com\clsOPChargeInsSvc.cs" />
+    <Compile Include="op\com\clsOPChargeSvc.cs" />
+    <Compile Include="op\com\clsOPDoctorPlanSvc.cs" />
+    <Compile Include="op\com\clsOPDoctorSvc.cs" />
+    <Compile Include="op\com\clsOPLogSvc.cs" />
+    <Compile Include="op\com\clsOPMedStoreSvc.cs" />
+    <Compile Include="op\com\clsOPMedStore_Supported_Svc.cs" />
+    <Compile Include="op\com\clsOPSelectChargeItemSvc.cs" />
+    <Compile Include="op\com\clsOutpatientChargeIdetityPrintSvc.cs" />
+    <Compile Include="op\com\clsOutPatientSvc.cs" />
+    <Compile Include="op\com\clsPatRegFeeSvc.cs" />
+    <Compile Include="op\com\clsRecipeConfirmSvc.cs" />
+    <Compile Include="op\com\clsReckoningReport.cs" />
+    <Compile Include="op\com\clsRegChargeTypeSvc.cs" />
+    <Compile Include="op\com\clsRegisterSvc.cs" />
+    <Compile Include="op\com\clsRegTypeSvc.cs" />
+    <Compile Include="op\com\clsReportEarningSvc.cs" />
+    <Compile Include="op\com\clsReportMaintenanceSvc.cs" />
+    <Compile Include="op\com\clsShowReportsSvc.cs" />
+    <Compile Include="op\com\clsStstemSetingSvc.cs" />
+    <Compile Include="op\com\clsSysParamSvc.cs" />
+    <Compile Include="op\com\clsWindowsCortrol.cs" />
+    <Compile Include="op\com\clsYB.cs" />
+    <Compile Include="op\com\clsYbdeaDefChargeitemSvc.cs" />
+    <Compile Include="op\com\clsYbdeadeficdSvc.cs" />
+    <Compile Include="op\com\clsYBSpecialTypeDisease_SVC.cs" />
+    <Compile Include="op\com\HISBillPrint\clsBaseMethod_Svc.cs" />
+    <Compile Include="op\com\HISBillPrint\clsReport_Svc.cs" />
+    <Compile Include="op\com\HISBillPrint\clsShowBillRequired_Svc.cs" />
+    <Compile Include="op\com\HISBillPrint\clsShowBill_Svc.cs" />
+    <Compile Include="op\com\MFZ\clsHISInterfaceSvc.cs" />
+    <Compile Include="op\com\MFZ\clsQueueManageSvc.cs" />
+    <Compile Include="op\com\MFZ\clsTmdDept.cs" />
+    <Compile Include="op\com\MFZ\clsTmdDoctorSvc.cs" />
+    <Compile Include="op\com\MFZ\clsTmdRoomSvc.cs" />
+    <Compile Include="op\com\MFZ\clsTmdStatisticsSvc.cs" />
+    <Compile Include="op\com\MFZ\clsTmdWorkStationSvc.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ris\com\clsCardiogramManageSvc.cs" />
+    <Compile Include="ris\com\clsEEGManageSvc.cs" />
+    <Compile Include="ris\com\clsES_ReportModifyService.cs" />
+    <Compile Include="ris\com\clsES_ReportQueryService.cs" />
+    <Compile Include="ris\com\clsFileService.cs" />
+    <Compile Include="ris\com\clsGlspub.cs" />
+    <Compile Include="ris\com\clsGlsWSServer.cs" />
+    <Compile Include="ris\com\clsGls_QuerySvc.cs" />
+    <Compile Include="ris\com\clsMyConverter.cs" />
+    <Compile Include="ris\com\clsRISCardiogramDataQuerySvc.cs" />
+    <Compile Include="ris\com\clsRISEEGDataQuerySvc.cs" />
+    <Compile Include="ris\com\clsRISUtility_Svc.cs" />
+    <Compile Include="ris\com\clsRIS_USReportModify_Svc.cs" />
+    <Compile Include="ris\com\clsRIS_USReportQuery_Svc.cs" />
+    <Compile Include="ris\com\clsTemplateService.cs" />
+    <Compile Include="yb\com\clsYBCSQuerySVC.cs" />
+    <Compile Include="yb\com\clsYBCSRequiredSVC.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\his.com.csproj.CoreCompileInputs.cache" />
+    <None Include="tttt.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

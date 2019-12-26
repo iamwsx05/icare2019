@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <VideoPreviewWidth>640</VideoPreviewWidth>
+  <VideoPreviewHeight>480</VideoPreviewHeight>
+  <VideoChannelNum>0</VideoChannelNum>
+  <VideoFrameRate>25</VideoFrameRate>
+  <GraphicCollectionSet>
+    <node key="shape" value="rect" />
+    <node key="fill" value="0" />
+    <node key="x1" value="83" />
+    <node key="y1" value="33" />
+    <node key="x2" value="687" />
+    <node key="y2" value="533" />
+    <node key="PicSavePath" value="D:\newImg" />
+    <node key="Com" value="1" />
+    <node key="BaudRate" value="19200" />
+  </GraphicCollectionSet>
+  <CompressorName>XviD MPEG-4 Codec</CompressorName>
+  <ManualOrDefault>True</ManualOrDefault>
+  <VideoSavePath>D:\newImg</VideoSavePath>
+  <CaptureTime>1</CaptureTime>
+  <VideoCaptureMode>DSHOW</VideoCaptureMode>
+  <imageCount>10</imageCount>
+  <imageColumn>0</imageColumn>
+  <RowCount>6</RowCount>
+  <CT>CT_report.ald</CT>
+  <CR>CR_report.ald</CR>
+  <DX>DX_report.ald</DX>
+  <DR>DR_report.ald</DR>
+  <MR>
+  </MR>
+  <MRI>
+  </MRI>
+  <RF>
+  </RF>
+  <XA>
+  </XA>
+  <OT>
+  </OT>
+  <OpenImagePath>C:\Program Files\Nero\Nero 7\Nero PhotoSnap\PhotoSnapViewer.exe</OpenImagePath>
+</configuration>

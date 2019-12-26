@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--请注意：key会存入数据库中的instrumentmodel字段(该字段需要获取生产厂商，要获取该字段，请用ezDICOM.exe查询0008,0070,Manufacturer=xxxxx),value会存入数据库中的ScheduledStationAETitle字段(仪器AETitle)-->
+<SCHEDULEDStationAetitle>
+	<Title key="CT飞利浦" value="CT飞利浦"/>
+	<Title key="CT西门子" value="CT西门子"/>
+        <Title key="DX瑞科" value="DX瑞科"/>
+        <Title key="DX万东" value="DX万东"/>
+        <Title key="MR飞利浦" value="MR飞利浦"/>
+</SCHEDULEDStationAetitle>

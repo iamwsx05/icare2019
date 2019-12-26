@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ebm>
+  <parentHandle>0</parentHandle>
+  <parentTitle>看图阅片</parentTitle>
+  <monitorIndex>0</monitorIndex>
+  <windowsLeft>0</windowsLeft>
+  <windowsHeight>10000</windowsHeight>
+  <windowsTop>0</windowsTop>
+  <windowsWidth>10000</windowsWidth>
+  <EBMIP>http://192.168.1.199/DicomWeb/</EBMIP>
+  <LANGUAGE>0</LANGUAGE>
+  <KeepAlive>1</KeepAlive>
+  <AutoStackModality>CT,MR</AutoStackModality>
+  <UserName>Administrator</UserName>
+  <PacssWord></PacssWord>
+  <HOST>192.168.1.199</HOST>
+  <DB>DICOMDB</DB>
+  <USER>sa</USER>
+  <PWD>123</PWD>
+</ebm>

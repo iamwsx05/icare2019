@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B21AF487-444F-4970-A4D8-D609842B0117}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lis.Com</RootNamespace>
+    <AssemblyName>lis.com</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>snklis.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="utility, Version=2.0.0.1, Culture=neutral, PublicKeyToken=55813ad8fa3e5102, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\utility.dll</HintPath>
+    </Reference>
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=4bdb6de9b3ca5966, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\wecaredata.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="com\AssemblyInfo.cs" />
+    <Compile Include="com\bizCriticalValue.cs" />
+    <Compile Include="com\clsAdvis2120Svc.cs" />
+    <Compile Include="com\clsAppGroupSvc.cs" />
+    <Compile Include="com\clsApplicationSvc.cs" />
+    <Compile Include="com\clsApplyPropertySvc.cs" />
+    <Compile Include="com\clsApplyUnitSvc.cs" />
+    <Compile Include="com\clsAssistantSvc.cs" />
+    <Compile Include="com\clsBaseCheckGroupSvc.cs" />
+    <Compile Include="com\clsBatchSaveReportSvc.cs" />
+    <Compile Include="com\clsCheckGroupSvc.cs" />
+    <Compile Include="com\clsCheckItemSvc.cs" />
+    <Compile Include="com\clsCheckResultSvc.cs" />
+    <Compile Include="com\clsDeviceSvc.cs" />
+    <Compile Include="com\clsDictSvc.cs" />
+    <Compile Include="com\clsInputGroupSvc.cs" />
+    <Compile Include="com\clsLisBarcodeSortSvc.cs" />
+    <Compile Include="com\clsLisDeviceSvc.cs" />
+    <Compile Include="com\clsLisInerfaceSvc.cs" />
+    <Compile Include="com\clsLisMainSvc.cs" />
+    <Compile Include="com\clsLIS_Svc.cs" />
+    <Compile Include="com\clsMBY2010Svc.cs" />
+    <Compile Include="com\clsMicReportSvc.cs" />
+    <Compile Include="com\clsPublicSvc.cs" />
+    <Compile Include="com\clsQueryAdvis2120Svc.cs" />
+    <Compile Include="com\clsQueryAppGroupSvc.cs" />
+    <Compile Include="com\clsQueryApplicationSvc.cs" />
+    <Compile Include="com\clsQueryApplyPropertySvc.cs" />
+    <Compile Include="com\clsQueryApplyUnitSvc.cs" />
+    <Compile Include="com\clsQueryCheckGroupSvc.cs" />
+    <Compile Include="com\clsQueryCheckItemSvc.cs" />
+    <Compile Include="com\clsQueryCheckResultSvc.cs" />
+    <Compile Include="com\clsQueryInputGroupSvc.cs" />
+    <Compile Include="com\clsQueryLIS_Svc.cs" />
+    <Compile Include="com\clsQueryReportGroupSvc.cs" />
+    <Compile Include="com\clsQueryReportSvc.cs" />
+    <Compile Include="com\clsQuerySampleBackSvc.cs" />
+    <Compile Include="com\clsQuerySampleGroupSvc.cs" />
+    <Compile Include="com\clsQuerySampleSvc.cs" />
+    <Compile Include="com\clsQueryStatSvc.cs" />
+    <Compile Include="com\clsReportGroupSvc.cs" />
+    <Compile Include="com\clsReportSvc.cs" />
+    <Compile Include="com\clsSampleGroupSvc.cs" />
+    <Compile Include="com\clsSampleSvc.cs" />
+    <Compile Include="com\clsST360Svc.cs" />
+    <Compile Include="com\clsStatSvc.cs" />
+    <Compile Include="com\clsWorkStatsticSvc.cs" />
+    <Compile Include="com\Lis.Self.ReportPrint\clsCPReportPrintQuery_Svc.cs" />
+    <Compile Include="com\Lis.Self.ReportPrint\clsReportPrintUpdate_Svc.cs" />
+    <Compile Include="com\LIS_DataAcquisition\clsLIS_DataAcquisitionServ.cs" />
+    <Compile Include="com\LIS_DataAcquisition\clsLIS_QueryDataAcquisitionServ.cs" />
+    <Compile Include="com\LIS_ReportPrinter\clsLis_ReportPrinterServ.cs" />
+    <Compile Include="com\MK3\clsItemSetSvc.cs" />
+    <Compile Include="com\MK3\clsMK3DeviceCommunications.cs" />
+    <Compile Include="com\NewQC\clsNewQC.cs" />
+    <Compile Include="com\QC\BusinessService\clsBnsQCBatchSvc.cs" />
+    <Compile Include="com\QC\SearcherService\clsSchBaseInfoSvc.cs" />
+    <Compile Include="com\QC\SearcherService\clsSchQCBatchSvc.cs" />
+    <Compile Include="com\QC\TableModule\BaseInfoTable\clsTmdCheckMethodSvc.cs" />
+    <Compile Include="com\QC\TableModule\BaseInfoTable\clsTmdConcentrationSvc.cs" />
+    <Compile Include="com\QC\TableModule\BaseInfoTable\clsTmdQCRulesSvc.cs" />
+    <Compile Include="com\QC\TableModule\BaseInfoTable\clsTmdVendorSvc.cs" />
+    <Compile Include="com\QC\TableModule\BaseInfoTable\clsTmdWorkGroupSvc.cs" />
+    <Compile Include="com\QC\TableModule\BusinessTable\clsTmdQCBatchConcentrationSvc.cs" />
+    <Compile Include="com\QC\TableModule\BusinessTable\clsTmdQCBatchSvc.cs" />
+    <Compile Include="com\QC\TableModule\BusinessTable\clsTmdQCDataSvc.cs" />
+    <Compile Include="com\QC\TableModule\BusinessTable\clsTmdQCLisServ.cs" />
+    <Compile Include="com\QC\TableModule\BusinessTable\clsTmdQCReportSvc.cs" />
+    <Compile Include="com\QC\TableModule\BusinessTable\clsTmdQCSampleLotParaSvc.cs" />
+    <Compile Include="com\QC\TableModule\BusinessTable\clsTmdQCSampleLotSvc.cs" />
+    <Compile Include="com\Report\bizLisReport.cs" />
+    <Compile Include="com\Report\bizLisReport_cs.cs" />
+    <Compile Include="com\TableModule\BaseInfoTable\clsApplicationMainSvc.cs" />
+    <Compile Include="com\TableModule\BaseInfoTable\clsChargeInfoStatusSvc.cs" />
+    <Compile Include="com\TableModule\BusinessTable\clsApplicationBizSvc.cs" />
+    <Compile Include="com\TableModule\BusinessTable\clsLisInterfaceSvc.cs" />
+    <Compile Include="com\TableModule\BusinessTable\clsLisSearchSvc.cs" />
+    <Compile Include="com\VOConstruct.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="snklis.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="com\QC\StatisticService\" />
+    <Folder Include="com\QC\SysInterfaceService\" />
+    <Folder Include="com\QC\TableModule\AIDTable\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

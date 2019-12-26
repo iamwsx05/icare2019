@@ -1,0 +1,2 @@
+Param.xml文件
+中isVisible标签配成true则打开后2秒自动隐藏后台，否则false不隐藏

@@ -1,0 +1,118 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="AnaesthesiaMode_GD">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="code" type="xs:string" minOccurs="0" />
+          <xs:element name="name" type="xs:string" minOccurs="0" />
+          <xs:element name="py" type="xs:string" minOccurs="0" />
+          <xs:element name="seq" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="AnaesthesiaMode_GD" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="AnaesthesiaMode_GD" />
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <AnaesthesiaMode_GD>
+    <code>1</code>
+    <name>全麻</name>
+    <py>QM</py>
+    <seq>0001</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>2</code>
+    <name>硬外麻</name>
+    <py>YMWM</py>
+    <seq>0002</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>3</code>
+    <name>基础麻</name>
+    <py>JCM</py>
+    <seq>0003</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>4</code>
+    <name>基麻+局麻</name>
+    <py>JMJJM</py>
+    <seq>0004</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>5</code>
+    <name>局麻</name>
+    <py>JM</py>
+    <seq>0005</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>6</code>
+    <name>腰麻</name>
+    <py>YM</py>
+    <seq>0006</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>7</code>
+    <name>骶麻</name>
+    <py>DM</py>
+    <seq>0007</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>8</code>
+    <name>臂丛</name>
+    <py>BC</py>
+    <seq>0008</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>9</code>
+    <name>颈丛</name>
+    <py>JC</py>
+    <seq>0009</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>10</code>
+    <name>表麻</name>
+    <py>BM</py>
+    <seq>0010</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>11</code>
+    <name>静脉麻</name>
+    <py>JMM</py>
+    <seq>0011</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>12</code>
+    <name>气管麻</name>
+    <py>QGM</py>
+    <seq>0012</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>13</code>
+    <name>插管麻</name>
+    <py>CGQM</py>
+    <seq>0013</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>14</code>
+    <name>其它</name>
+    <py>QT</py>
+    <seq>0014</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>15</code>
+    <name>腰硬麻</name>
+    <py>YYM</py>
+    <seq>0015</seq>
+  </AnaesthesiaMode_GD>
+  <AnaesthesiaMode_GD>
+    <code>16</code>
+    <name>神经阻滞麻</name>
+    <py>SJZZM</py>
+    <seq>0016</seq>
+  </AnaesthesiaMode_GD>
+</NewDataSet>

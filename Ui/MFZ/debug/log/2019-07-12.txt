@@ -1,0 +1,27 @@
+-->>>>> 2019-07-12 10:33:03:015
+<request>
+<sourceId>2</sourceId>
+<registerId>000000193778</registerId>
+<patientId>0001636215</patientId>
+<patientName>王廷仙</patientName>
+<sex>女</sex>
+<birthday>2001-09-29</birthday>
+<cardNo>0001626981</cardNo>
+<ipNo>164726</ipNo>
+<bedNo>Q001</bedNo>
+<homeTel>13266202566</homeTel>
+<homeAddr>向西工业区</homeAddr>
+<marriage>未婚</marriage>
+<occupation></occupation>
+<nativeplace></nativeplace>
+<appDeptId>0000222</appDeptId>
+<appDeptName>妇科病区</appDeptName>
+<appDoctId>1000045</appDoctId>
+<appDoctName>程丽师</appDoctName>
+<payTypeId>0001</payTypeId>
+<currAreaId>0000225</currAreaId>
+<currBedId>0010635</currBedId>
+<clinicDiag>产前出血 胎盘早剥 无四维</clinicDiag>
+</request>
+
+

@@ -1,0 +1,8 @@
+[MYSQL]
+Host =dxs
+User =system2
+Passwd =m123
+DB =
+Port =
+DataBaseType = Oracle ODBC 5.1 Driver
+

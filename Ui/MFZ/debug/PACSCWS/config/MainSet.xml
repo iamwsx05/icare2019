@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MainSet>
+  <!--设置本工作站类型，详见参考工作站对应数字.txt -->
+  <ProductType>PACSCWS</ProductType>
+  <!--设置左边病人区域、检查区域的宽度420  一半205-->
+  <LeftControlWidth>420</LeftControlWidth>
+  <!--切换选项页至“病人检索”、是否自动刷新病人列表-->
+  <TabPageChangeUpdatePatientList>true</TabPageChangeUpdatePatientList>
+  <!--对于超声、肠镜、胃镜等工作站，开启软件   是否自动连接视频-->
+  <AutomaticallyConnectVideo>false</AutomaticallyConnectVideo>
+  <!--是不是走蜂鸣器(true是走蜂鸣器，false是走声卡)-->
+  <IsBeep>true</IsBeep>
+  <!--是不是网络版加密狗(true是网络版，false是单机版)-->
+  <IsCodeMeter>true</IsCodeMeter>
+  <!--是否隐藏报告编辑选项页控件 true：显示-->
+  <HideReportTabPage>true</HideReportTabPage>
+  <!--是否隐藏视频图像选项页控件  true：显示-->
+  <HideVideoAndImageTabPage>false</HideVideoAndImageTabPage>
+  <!--是否隐藏历史记录选项页控件 true：显示-->
+  <HideHistoryTabPage>false</HideHistoryTabPage>
+  <!--是否隐藏模板窗口选项页控件 true：显示-->
+  <HideTemplateControlTabPage>false</HideTemplateControlTabPage>
+  <!--是否隐藏his登记窗口选项页控件 true：显示-->
+  <HideImportDataTabPage>false</HideImportDataTabPage>
+  <!--是否隐藏新建病人选项页控件  true：显示-->
+  <HideNewPatientTabPage>false</HideNewPatientTabPage>
+  <!--是否隐藏视频、图片选项页控件 true：显示-->
+  <HidePreviewImageTabPage>false</HidePreviewImageTabPage>
+  <!--是否隐藏病人检索选项页控件  true：显示-->
+  <HidePatientSearchTabPage>true</HidePatientSearchTabPage>
+  <!--是否隐藏看图阅片选项页控件  true：显示-->
+  <HideImageViewerTabPage>true</HideImageViewerTabPage>
+  <!--控制布局是否可以拖拽cmbIsAutoDocking-->
+  <AllowEndUserDocking>true</AllowEndUserDocking>
+  <!--对于超声，胃镜等工作站，病人检索选项页 是否默认勾上本诊室复选框  true 勾上，false：不勾-->
+  <CheckTheClinic>false</CheckTheClinic>
+  <!--是否加载StoreSCP  true:是,false:否-->
+  <LoadStoreSCP>false</LoadStoreSCP>
+  <!--如果加载storescp，弹出DOS还是静默模式，  true:弹出DOS，false:静默模式-->
+  <SelectStoreSCPDisplayMode>false</SelectStoreSCPDisplayMode>
+  <!--设置工作站默认语言-->
+  <DefaultLanguage>中文(简体) - 美式键盘</DefaultLanguage>
+  <!--设置工作站左上角的文字-->
+  <SetProductType>
+    <PACSREGWSProductType>预约登记工作站V2.0</PACSREGWSProductType>
+    <PACSCWSProductType>临床调研工作站V2.0</PACSCWSProductType>
+    <PACSDWSProductType>放射科医生报告工作站V2.0</PACSDWSProductType>
+    <PACSSERVERProductType>服务器V2.0</PACSSERVERProductType>
+    <PACSUSWSProductType>超声图文报告工作站V2.0</PACSUSWSProductType>
+    <PACSCOLPOSCOPYProductType>内窥镜-阴道镜工作站V2.0</PACSCOLPOSCOPYProductType>
+    <PACSNOSETHROATWSProductType>耳鼻咽喉镜V2.0</PACSNOSETHROATWSProductType>
+    <PACSGASTROWSProductType>胃肠镜工作站V2.0</PACSGASTROWSProductType>
+    <PACSSTATProductType>主任统计工作站V2.0</PACSSTATProductType>
+    <USWSProductType>超声图文报告工作站V2.0</USWSProductType>
+    <GASTROWSProductType>胃肠镜工作站V2.0</GASTROWSProductType>
+    <USWSGJJProductType>关节镜工作站V2.0</USWSGJJProductType>
+    <PACSCHOLEDOCHOSCOPEProductType>胆道镜工作站V2.0</PACSCHOLEDOCHOSCOPEProductType>
+    <PACSBRONCHUSProductType>支气管镜工作站V2.0</PACSBRONCHUSProductType>
+    <GQJWSProductType>宫腔镜工作站V2.0</GQJWSProductType>
+    <FQJWSProductType>腹腔镜工作站V2.0</FQJWSProductType>
+  </SetProductType>
+  <!--在listview搜索列表中不同的检查类型要有不同的颜色可以用单词，也可以用HTML格式(如#000000)-->
+  <ExaminationStateForeColor>
+    <CaptureToExpendNotreport>#000000</CaptureToExpendNotreport>
+    <registered>red</registered>
+    <examineNoReport>blue</examineNoReport>
+    <reported>#009100</reported>
+    <waitCheck>black</waitCheck>
+    <checkSendBack>black</checkSendBack>
+    <checkOk>#336666</checkOk>
+    <reportPrinted>black</reportPrinted>
+    <filmprintstatus>black</filmprintstatus>
+    <!--说明：新增一个特殊状态，图像缓存完毕。-->
+    <ImageCacheEnd>blue</ImageCacheEnd>
+  </ExaminationStateForeColor>
+  <!--不同的工作站只能访问下面设定的检查类型的数据。比如PACSUSWS只能访问USWS类型的数据-->
+  <LocalEnabledExamineTypes>
+    <PACSREGWS>CT|DR|CR|DX|MR|MRI</PACSREGWS>
+    <PACSCWS>CT|DR|DX|MR|CR|PX|彩超|黑白超</PACSCWS>
+    <PACSDWS>CT|DR|CR|DX|MR|RF</PACSDWS>
+    <PACSSRV>CT|DR|CR|DX|MR|MRI</PACSSRV>
+    <PACSSERVER>CT|DR|DX|MR|CR|USWS|GASTROWS|INSTESINEWS</PACSSERVER>
+    <PACSUSWS>彩超|彩超1111|黑白超|USWS</PACSUSWS>
+    <PACSCOLPOSCOPY>阴道镜</PACSCOLPOSCOPY>
+    <PACSNOSETHROATWS>耳鼻咽喉镜</PACSNOSETHROATWS>
+    <PACSGASTROWS>GASTROWS</PACSGASTROWS>
+    <PACSSTAT>CT|DR|DX|CR|USWS|GASTROWS|INSTESINEWS</PACSSTAT>
+    <USWS>USWS</USWS>
+    <USWSGJJ>关节镜</USWSGJJ>
+    <GASTROWS>胃镜|肠镜</GASTROWS>
+    <PACSCHOLEDOCHOSCOPE>胆道镜</PACSCHOLEDOCHOSCOPE>
+    <PACSBRONCHUS>支气管镜</PACSBRONCHUS>
+    <GQJWS>宫腔镜</GQJWS>
+    <FQJWS>腹腔镜</FQJWS>
+  </LocalEnabledExamineTypes>
+  <!--保存报告联动保存病人  true:联动-->
+  <SaveReportLinkageSavePatient>false</SaveReportLinkageSavePatient>
+</MainSet>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<text>
+  <MaxRecentListTotal>10</MaxRecentListTotal>
+  <lbPort>
+    <value>3306</value>
+  </lbPort>
+  <lbDBName>
+    <value>ihospitalpacs|ihospitaldicomws|ihospital</value>
+  </lbDBName>
+  <lbSaveraddress>
+    <value>ora10|bvpacs|dxs|192.168.1.102|192.168.1.199|192.168.1.99|192.168.1.190|localhost|127.0.0.1|172.16.15.160</value>
+  </lbSaveraddress>
+  <lbUserName>
+    <value>system2|pacs_dws|root</value>
+  </lbUserName>
+  <btnLoginOK>
+    <value>王清廉|黄东|admin|FS_wql|FS_test|test|mxl|xlg|SH|BG</value>
+  </btnLoginOK>
+</text>

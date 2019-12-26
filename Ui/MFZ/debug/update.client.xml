@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Main>
+  <!-- 0. 不启用  1. 启用  -->
+  <isStartUsing text="是否启用" value="1" />
+  <!-- 1. basicHttp  2. wsHttp  3. Tcp  -->
+  <wcfBinding text="wcf绑定协议" value="1" />
+  <wcfAddress text="wcf地址" value="http://10.37.0.243:9008/" />
+  <!--版本号-->
+  <version text="版本号" value="3.4" />
+</Main>

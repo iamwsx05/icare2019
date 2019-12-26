@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MFZ_GUI", "MFZ_GUI.csproj", "{F56121D5-3724-4935-AA79-432EC121A6D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiagnoseClient", "..\DiagnoseClient\DiagnoseClient.csproj", "{C1486D3A-D13B-4788-B7FD-6E4CA6A4BEE9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F56121D5-3724-4935-AA79-432EC121A6D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F56121D5-3724-4935-AA79-432EC121A6D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F56121D5-3724-4935-AA79-432EC121A6D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F56121D5-3724-4935-AA79-432EC121A6D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1486D3A-D13B-4788-B7FD-6E4CA6A4BEE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1486D3A-D13B-4788-B7FD-6E4CA6A4BEE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1486D3A-D13B-4788-B7FD-6E4CA6A4BEE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1486D3A-D13B-4788-B7FD-6E4CA6A4BEE9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8C959C0-1DD5-4F3C-BD06-FECFF163DFE5}
+	EndGlobalSection
+EndGlobal

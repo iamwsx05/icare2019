@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="VendorDaset" targetNamespace="http://tempuri.org/VendorDaset.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/VendorDaset.xsd" xmlns:mstns="http://tempuri.org/VendorDaset.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="VendorDaset" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="verdorTable">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="USERCODE_CHR" type="xs:string" minOccurs="0" />
+							<xs:element name="VENDORNAME_VCHR" type="xs:string" minOccurs="0" />
+							<xs:element name="VENDORTYPE_Vchr" type="xs:string" minOccurs="0" />
+							<xs:element name="PRODUCTTYPE_Vchr" type="xs:string" minOccurs="0" />
+							<xs:element name="ADDRESS_VCHR" type="xs:string" minOccurs="0" />
+							<xs:element name="PHONE_CHR" type="xs:string" minOccurs="0" />
+							<xs:element name="CONTACTOR_CHR" type="xs:string" minOccurs="0" />
+							<xs:element name="CONTACTORPHONE_CHR" type="xs:string" minOccurs="0" />
+							<xs:element name="EMAIL_VCHR" type="xs:string" minOccurs="0" />
+							<xs:element name="FAX_CHR" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

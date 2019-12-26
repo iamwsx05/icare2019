@@ -1,0 +1,7 @@
+D:\icare\iCare2019\Debug\report.itf.dll
+D:\icare\iCare2019\Debug\report.itf.pdb
+D:\icare\iCare2019\Service\report.itf\obj\Debug\report.itf.csprojAssemblyReference.cache
+D:\icare\iCare2019\Service\report.itf\obj\Debug\report.itf.csproj.CoreCompileInputs.cache
+D:\icare\iCare2019\Service\report.itf\obj\Debug\report.itf.csproj.CopyComplete
+D:\icare\iCare2019\Service\report.itf\obj\Debug\report.itf.dll
+D:\icare\iCare2019\Service\report.itf\obj\Debug\report.itf.pdb

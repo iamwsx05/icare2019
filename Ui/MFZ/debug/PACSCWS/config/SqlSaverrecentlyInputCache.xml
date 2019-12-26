@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<text>
+  <MaxRecentListTotal>10</MaxRecentListTotal>
+  <lbPort>
+    <value>3306</value>
+  </lbPort>
+  <lbSaveraddress>
+    <value>192.168.1.88|127.0.0.1,7788|192.168.1.254,7788|192.168.1.109,7788|orcl|pacs|pacsdb|ora10|dxs|bvpacs</value>
+  </lbSaveraddress>
+  <lbUserName>
+    <value>sa|pacs|system2|pacs_dws|root</value>
+  </lbUserName>
+  <lbDBName>
+    <value>PACSInitial|pacs1|pacs|ihospitalpacs|ihospitaldicomws|ihospital</value>
+  </lbDBName>
+  <btnLoginOK>
+    <!--是否自动登录(仅支持密码为空的账号) true:自动登录-->
+    <AutomaticLogon>true</AutomaticLogon>
+    <value>gswk</value>
+  </btnLoginOK>
+</text>

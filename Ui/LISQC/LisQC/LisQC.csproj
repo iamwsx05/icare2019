@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B4C83487-3070-4625-BBC4-2DB6C7FE0CFD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LisQC</RootNamespace>
+    <AssemblyName>LisQC</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="comm.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\comm.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonInfo, Version=2.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\CommonInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="DataWindow, Version=2.0.4600.0, Culture=neutral, PublicKeyToken=cc0f66dd9541b3da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\DataWindow.dll</HintPath>
+    </Reference>
+    <Reference Include="DigitalWaveControls, Version=2.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\DigitalWaveControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Emr.StaticObject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=345ab2ad0324e11c, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\Emr.StaticObject.dll</HintPath>
+    </Reference>
+    <Reference Include="ExpressionEval, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\ExpressionEval.dll</HintPath>
+    </Reference>
+    <Reference Include="gui_base, Version=2.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\gui_base.dll</HintPath>
+    </Reference>
+    <Reference Include="his.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\his.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="HISZY, Version=2.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\HISZY.dll</HintPath>
+    </Reference>
+    <Reference Include="lis.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\lis.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="PinkieControls, Version=1.0.1362.15156, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\PinkieControls.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="unityproxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\unityproxy.dll</HintPath>
+    </Reference>
+    <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\wecare.core.dll</HintPath>
+    </Reference>
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=90ad5968fbc6e760, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\wecaredata.dll</HintPath>
+    </Reference>
+    <Reference Include="ZedGraph, Version=4.3.5.32942, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Control\clsLISQCChartPrintVO.cs" />
+    <Compile Include="Control\clsLISQCDailyReportPrintVO.cs" />
+    <Compile Include="Control\clsQCBatch.cs" />
+    <Compile Include="Control\clsQCBatchNew.cs" />
+    <Compile Include="Control\clsQCChartTool.cs" />
+    <Compile Include="Control\clsQCChartToolStrategy.cs" />
+    <Compile Include="Control\clsQCDailyReportTool.cs" />
+    <Compile Include="Control\clsQCDailyReportToolStrategy.cs" />
+    <Compile Include="Control\clsQCDataPair.cs" />
+    <Compile Include="Control\clsQCDataPairItem.cs" />
+    <Compile Include="Control\ctlCheckItemTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\ctlCheckMethodCombox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\ctlConcentrationCombox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\ctlDateSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctlEmpTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\ctlLISDeviceComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\ctlQCBatchQuery.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctlQCBatchQuery.Designer.cs">
+      <DependentUpon>ctlQCBatchQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\ctlQCBatchReportEditorNew.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctlQCChartNew.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctlQCDataEditorNew.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\ctlVendorCombox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\ctlWorkGroupCombox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Control\frmCheckItemSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\infPrintRecord.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\frmQCBatchManagerNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmQCBatchManagerNew.Designer.cs">
+      <DependentUpon>frmQCBatchManagerNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmBaseInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmQCBatchConcentrationSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmQCBatchSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmQCBatchSetNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmQCBatchSetNew.Designer.cs">
+      <DependentUpon>frmQCBatchSetNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmQCCheckItemSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmQCConcentrationSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmQCReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmQCResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmQCRules.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmQCSampleLot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmQCSampleLot.Designer.cs">
+      <DependentUpon>frmQCSampleLot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmQCSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\dll\lis.com\lis.com.csproj">
+      <Project>{b21af487-444f-4970-a4d8-d609842b0117}</Project>
+      <Name>lis.com</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Control\ctlCheckItemTree.resx">
+      <DependentUpon>ctlCheckItemTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\ctlQCBatchQuery.resx">
+      <DependentUpon>ctlQCBatchQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmQCBatchManagerNew.resx">
+      <DependentUpon>frmQCBatchManagerNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmQCBatchSetNew.resx">
+      <DependentUpon>frmQCBatchSetNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmQCCheckItemSelector.resx">
+      <DependentUpon>frmQCCheckItemSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmQCSampleLot.resx">
+      <DependentUpon>frmQCSampleLot.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

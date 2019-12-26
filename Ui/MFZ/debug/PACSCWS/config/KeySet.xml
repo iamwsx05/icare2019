@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KeySet>
+<Right查询>G</Right查询>
+<Right清空>E</Right清空>
+<Right保存报告>S</Right保存报告>
+<Right报告预览>M</Right报告预览>
+<Right打印报告>K</Right打印报告>
+<Left新建病人检查>N</Left新建病人检查>
+<Left快速新建后台病人检查>V</Left快速新建后台病人检查>
+<Left保存病人检查>A</Left保存病人检查>
+<Left查询>B</Left查询>
+<Left清空ListView>T</Left清空ListView>
+<Left清空病人信息>W</Left清空病人信息>
+<Left缩放>Z</Left缩放>
+</KeySet>
+  

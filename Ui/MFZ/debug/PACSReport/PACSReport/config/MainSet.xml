@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MainSet>
+  <!--开机是否自动执行一次左下角的查询按钮单击事件-->
+  <OpenLeftSelectButton>false</OpenLeftSelectButton>
+  <!--设置左边病人区域、检查区域的宽度420  一半205-->
+  <LeftControlWidth>205</LeftControlWidth>
+  <!--双击病人列表某一病人跳到哪个选项页(参数:报告编辑,看图阅片)-->
+  <DoubleClickOptionsPage>报告编辑</DoubleClickOptionsPage>
+  <!--是否开机启动true为开机启动，false为不开机启动-->
+  <WhetherTheBoot>false</WhetherTheBoot>
+  <!--切换选项页至“病人检索”、是否自动刷新病人列表-->
+  <TabPageChangeUpdatePatientList>true</TabPageChangeUpdatePatientList>
+  <!--删除文件的路径-->
+  <DeleteFilePath>D:\Program Files\软件\测试用DICOMWS\TEMP\FilmPrintInterMedia</DeleteFilePath>
+  <!--在listview搜索列表中不同的检查类型要有不同的颜色可以用单词，也可以用HTML格式(如#000000)-->
+  <ExaminationStateForeColor>
+    <CaptureToExpendNotreport>#000000</CaptureToExpendNotreport>
+    <registered>red</registered>
+    <examineNoReport>blue</examineNoReport>
+    <reported>#009100</reported>
+    <waitCheck>black</waitCheck>
+    <checkSendBack>black</checkSendBack>
+    <checkOk>#336666</checkOk>
+    <reportPrinted>black</reportPrinted>
+    <filmprintstatus>black</filmprintstatus>
+  </ExaminationStateForeColor>
+
+  <!--不同的工作站只能访问下面设定的检查类型的数据。比如PACSUSWS只能访问USWS类型的数据-->
+  <LocalEnabledExamineTypes>
+    <PACSREGWS>CT|DR|CR|DX|MR|MRI</PACSREGWS>
+    <PACSCWS>CT|DR|DX|CR|USWS|GASTROWS|INSTESINEWS</PACSCWS>
+    <PACSDWS>CT|DR|CR|DX</PACSDWS>
+    <PACSSERVER>CT|DR|DX|CR|USWS|GASTROWS|INSTESINEWS</PACSSERVER>
+    <PACSUSWS>USWS</PACSUSWS>
+    <PACSGASTROWS>GASTROWS</PACSGASTROWS>
+    <PACSINSTESINEWS>INSTESINEWS</PACSINSTESINEWS>
+    <PACSSTAT>CT|DR|DX|CR|USWS|GASTROWS|INSTESINEWS</PACSSTAT>
+
+    <USWS>USWS</USWS>
+    <INSTESINEWS>INSTESINEWS</INSTESINEWS>
+    <GASTROWS>GASTROWS</GASTROWS>
+  </LocalEnabledExamineTypes>
+</MainSet>

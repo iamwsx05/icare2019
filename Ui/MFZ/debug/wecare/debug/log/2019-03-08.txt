@@ -1,0 +1,14 @@
+-->>>>> 2019-03-08 14:30:41:171
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId></producerId>
+<workStartDate>2019-03-08</workStartDate>
+<workEndDate>2019-03-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+</base>
+
+
+-->>>>> 2019-03-08 14:30:41:187
+-1|用户名不存在|<?xml version='1.0' encoding='UTF-8'?>
+

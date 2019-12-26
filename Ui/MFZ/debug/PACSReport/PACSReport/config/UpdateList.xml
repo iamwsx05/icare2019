@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="gb2312"?>
+<AutoUpdater>
+  <description>Application autoUpdate</description>
+  <Updater>
+    <Url>http://192.168.1.199/pacsupdate/</Url>
+    <LastUpdateTime>2012-07-07</LastUpdateTime>
+    <ProdectType></ProdectType>
+    <exeName></exeName>
+  </Updater>
+  <Application applicationId="ItemSoft">
+    <EntryPoint>ihospital-PACSDWS.exe</EntryPoint>
+    <Location>.</Location>
+    <Version>1.0.0.0</Version>
+  </Application>
+  <Files>
+  </Files>
+</AutoUpdater>

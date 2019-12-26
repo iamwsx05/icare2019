@@ -1,0 +1,562 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6AA2B080-238C-44BE-997B-E751DFC6285D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Registration.Ui</RootNamespace>
+    <AssemblyName>registration.ui</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="comm.control, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\comm.control.dll</HintPath>
+    </Reference>
+    <Reference Include="comm.entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\comm.entity.dll</HintPath>
+    </Reference>
+    <Reference Include="comm.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\comm.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="comm.utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\comm.utils.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.BonusSkins.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.BonusSkins.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Charts.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.CodeConverter.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.CodeConverter.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.CodeParser.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.CodeParser.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Data.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Images.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Images.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Office.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Office.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Pdf.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v16.2.Drawing, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Pdf.v16.2.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Printing.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.RichEdit.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Snap.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Snap.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Snap.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Snap.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Sparkline.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Sparkline.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Tutorials.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Tutorials.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Utils.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v16.2.UI, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Utils.v16.2.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraBars.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraCharts.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v16.2.Extensions, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraCharts.v16.2.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v16.2.UI, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraCharts.v16.2.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraEditors.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraGrid.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraLayout.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraNavBar.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPdfViewer.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraPdfViewer.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraPivotGrid.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraPrinting.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraReports.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.2.Extensions, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraReports.v16.2.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraRichEdit.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraScheduler.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraSpreadsheet.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraSpreadsheet.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraTreeList.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraVerticalGrid.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraVerticalGrid.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=a20767533a162583, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="registration.entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\registration.entity.dll</HintPath>
+    </Reference>
+    <Reference Include="registration.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\registration.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\wecare.core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="controller\ctlaccountcheck.cs" />
+    <Compile Include="controller\ctldoctregcode.cs" />
+    <Compile Include="controller\ctlregisterb.cs" />
+    <Compile Include="controller\ctlregisterbcancel.cs" />
+    <Compile Include="controller\ctlregisterbedit.cs" />
+    <Compile Include="controller\ctlregisterqueue.cs" />
+    <Compile Include="controller\ctlregisterstat1.cs" />
+    <Compile Include="controller\ctlregisterstat2.cs" />
+    <Compile Include="controller\ctlregisterstat3.cs" />
+    <Compile Include="controller\ctlregisterstatrate.cs" />
+    <Compile Include="controller\ctlregisterstatstopadmi.cs" />
+    <Compile Include="controller\ctlregistertype.cs" />
+    <Compile Include="controller\ctlregwechatpay.cs" />
+    <Compile Include="controller\ctlschedulingcopy.cs" />
+    <Compile Include="controller\ctlschedulingday.cs" />
+    <Compile Include="controller\ctlschedulingedit.cs" />
+    <Compile Include="controller\ctlschedulingedit2.cs" />
+    <Compile Include="controller\ctlschedulingweek.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="proxy\proxyd8.cs" />
+    <Compile Include="proxy\proxymiddle.cs" />
+    <Compile Include="proxy\proxyregistration.cs" />
+    <Compile Include="proxy\proxyscheduling.cs" />
+    <Compile Include="viewer\frmdoctregcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmdoctregcode.Designer.cs">
+      <DependentUpon>frmdoctregcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmregisterqueue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmregisterqueue.Designer.cs">
+      <DependentUpon>frmregisterqueue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmschedulingeditaddno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmschedulingeditaddno.Designer.cs">
+      <DependentUpon>frmschedulingeditaddno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmschedulingeditcopy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmschedulingeditcopy.Designer.cs">
+      <DependentUpon>frmschedulingeditcopy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmwechatregacccheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmwechatregacccheck.Designer.cs">
+      <DependentUpon>frmwechatregacccheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmregisterb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmregisterb.Designer.cs">
+      <DependentUpon>frmregisterb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmregisterbcancel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmregisterbcancel.Designer.cs">
+      <DependentUpon>frmregisterbcancel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmregisterbedit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmregisterbedit.Designer.cs">
+      <DependentUpon>frmregisterbedit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmregisterbquery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmregisterbquery.Designer.cs">
+      <DependentUpon>frmregisterbquery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmregisterstat1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmregisterstat1.Designer.cs">
+      <DependentUpon>frmregisterstat1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmregisterstat2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmregisterstat2.Designer.cs">
+      <DependentUpon>frmregisterstat2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmregisterstat3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmregisterstat3.Designer.cs">
+      <DependentUpon>frmregisterstat3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmregisterstatrate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmregisterstatrate.Designer.cs">
+      <DependentUpon>frmregisterstatrate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmregisterstatstopadmi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmregisterstatstopadmi.Designer.cs">
+      <DependentUpon>frmregisterstatstopadmi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmregistertype.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmregistertype.Designer.cs">
+      <DependentUpon>frmregistertype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmregwechatpay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmregwechatpay.Designer.cs">
+      <DependentUpon>frmregwechatpay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmschedulingcopy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmschedulingcopy.Designer.cs">
+      <DependentUpon>frmschedulingcopy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmschedulingday.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmschedulingday.Designer.cs">
+      <DependentUpon>frmschedulingday.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmschedulingedit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmschedulingedit.Designer.cs">
+      <DependentUpon>frmschedulingedit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmschedulingedit2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmschedulingedit2.Designer.cs">
+      <DependentUpon>frmschedulingedit2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmschedulingimport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmschedulingimport.Designer.cs">
+      <DependentUpon>frmschedulingimport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmschedulingweek.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmschedulingweek.Designer.cs">
+      <DependentUpon>frmschedulingweek.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmtest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmtest.Designer.cs">
+      <DependentUpon>frmtest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="viewer\frmwechatregaccsum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewer\frmwechatregaccsum.Designer.cs">
+      <DependentUpon>frmwechatregaccsum.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmdoctregcode.resx">
+      <DependentUpon>frmdoctregcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmregisterqueue.resx">
+      <DependentUpon>frmregisterqueue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmschedulingeditaddno.resx">
+      <DependentUpon>frmschedulingeditaddno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmschedulingeditcopy.resx">
+      <DependentUpon>frmschedulingeditcopy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmwechatregacccheck.resx">
+      <DependentUpon>frmwechatregacccheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmregisterb.resx">
+      <DependentUpon>frmregisterb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmregisterbcancel.resx">
+      <DependentUpon>frmregisterbcancel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmregisterbedit.resx">
+      <DependentUpon>frmregisterbedit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmregisterbquery.resx">
+      <DependentUpon>frmregisterbquery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmregisterstat1.resx">
+      <DependentUpon>frmregisterstat1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmregisterstat2.resx">
+      <DependentUpon>frmregisterstat2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmregisterstat3.resx">
+      <DependentUpon>frmregisterstat3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmregisterstatrate.resx">
+      <DependentUpon>frmregisterstatrate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmregisterstatstopadmi.resx">
+      <DependentUpon>frmregisterstatstopadmi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmregistertype.resx">
+      <DependentUpon>frmregistertype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmregwechatpay.resx">
+      <DependentUpon>frmregwechatpay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmschedulingcopy.resx">
+      <DependentUpon>frmschedulingcopy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmschedulingday.resx">
+      <DependentUpon>frmschedulingday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmschedulingedit.resx">
+      <DependentUpon>frmschedulingedit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmschedulingedit2.resx">
+      <DependentUpon>frmschedulingedit2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmschedulingimport.resx">
+      <DependentUpon>frmschedulingimport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmschedulingweek.resx">
+      <DependentUpon>frmschedulingweek.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmtest.resx">
+      <DependentUpon>frmtest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="viewer\frmwechatregaccsum.resx">
+      <DependentUpon>frmwechatregaccsum.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\11.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\12.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\21.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\22.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\31.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\32.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\41.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\42.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\51.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\52.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\61.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\62.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\all1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\all2.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\71.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\72.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unknow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unknow2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pat.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

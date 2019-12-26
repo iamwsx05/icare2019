@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HtmlSetting>
+    <!--是否生成HTML网页报告-->
+    <IsCreateHtmlReport>true</IsCreateHtmlReport>
+    <!--在生成Html文件时以什么名字命名?申请单号：requisitionsid？住院号：INHOSPITALNUM？门诊号：CLINICALNUM？-->
+    <CreateHtmlType>requisitionsid</CreateHtmlType>
+    <!--在判断该病人的Html文件是否存在时，根据什么条件来进行判断?申请单号？住院号？门诊号？-->
+    <SelectHtmlType>requisitionsid</SelectHtmlType>
+    <!--生成html文件时存放的临时路径,必须将临时文件夹存放于PACSDATE文件夹根目录-->
+    <HtmlTemporaryPath></HtmlTemporaryPath>
+    <FullPath>http://10.37.0.24:8080/Html/</FullPath>
+    <!--服务器存放HTML文件目录-->
+    <HtmlRootDirectory>192.168.1.88\Html</HtmlRootDirectory>
+    <!--BS报告长度设置-->
+    <ReportHeight>5</ReportHeight>
+   <ReportColor>
+     <!--医院标题字体颜色-->
+     <HospitalNameColor>000000</HospitalNameColor>
+     <!--ald模板副标题字体颜色，如：超声医学影像报告-->
+     <ReportNameColor>0000e3</ReportNameColor>
+     <!--'检查所见'(CaptionSee)文字字体颜色-->
+     <CaptionSeeColor>f00</CaptionSeeColor>
+     <!--'检查结论'(CaptionResult)文字字体颜色-->
+     <CaptionResultColor>f00</CaptionResultColor>
+     <!--病人基本信息字体颜色-->
+     <PatientInformationColor>00cc99</PatientInformationColor>
+   </ReportColor>
+</HtmlSetting>

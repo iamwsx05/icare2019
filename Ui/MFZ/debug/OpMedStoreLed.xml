@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <Client text="门诊药房本地参数">    
+    <!--门诊药房.发药LED.位置X-->
+    <sendLedLocationX>337</sendLedLocationX>  
+    <!--门诊药房.发药LED.位置Y-->
+    <sendLedLocationY>374</sendLedLocationY>
+    <!--门诊药房.发药LED.宽度-->
+    <sendLedWidth>450</sendLedWidth>
+    <!--门诊药房.发药LED.高度-->
+    <sendLedHeight>142</sendLedHeight>
+    <!--门诊药房.挂起LED.位置X-->
+    <hungupLedLocationX>332</hungupLedLocationX>
+    <!--门诊药房.挂起LED.位置Y-->
+    <hungupLedLocationY>145</hungupLedLocationY>
+    <!--门诊药房.挂起LED.宽度-->
+    <hungupLedWidth>465</hungupLedWidth>
+    <!--门诊药房.挂起LED.高度-->
+    <hungupLedHeight>150</hungupLedHeight>
+	 <!--门诊药房.挂起LED.行显示字数-->
+    <hungupLedShowNum>10</hungupLedShowNum>
+    <!--门诊药房.挂起LED.取药流程描述-->
+    <hungupLedTakeMedDesc>交费-->等候   
+配药-->凭收据取药</hungupLedTakeMedDesc>
+    <!--门诊药房.挂起LED.优抚对象-->
+    <hungupLedEntiGroups>60岁以上老人危急重
+患者优抚对象</hungupLedEntiGroups>
+    <!--门诊药房.挂起LED.刷新时间.秒-->
+    <hungupLedRefreshTime>5</hungupLedRefreshTime>
+    <!--socket.serverIp-->
+    <socketServerIp>10.37.8.223</socketServerIp>
+    <!--socket.serverPort-->
+    <socketServerPort>8089</socketServerPort>
+  </Client>
+</configuration>

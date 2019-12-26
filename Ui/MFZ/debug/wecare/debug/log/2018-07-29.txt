@@ -1,0 +1,28 @@
+-->>>>> 2018-07-29 14:15:06:935
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466780092197</producerId>
+<workStartDate>2018-07-29</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+</base>
+
+
+-->>>>> 2018-07-29 14:15:07:045
+1|没有可预约时间段！|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466780092197</producerId><producerName>林艳副主任医师</producerName><total>0</total><rows></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-29 16:53:31:913
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466780092197</producerId>
+<workStartDate>2018-07-29</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+</base>
+
+
+-->>>>> 2018-07-29 16:53:32:069
+1|没有可预约时间段！|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466780092197</producerId><producerName>林艳副主任医师</producerName><total>0</total><rows></rows></subscribeProducerTime></base>
+

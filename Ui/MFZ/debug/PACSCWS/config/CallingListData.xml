@@ -1,0 +1,7 @@
+<?xml version="1.0" standalone="yes"?>
+<configuration>
+  <ListSetting>
+    <OpenTheConfiguration>true</OpenTheConfiguration>
+    <RefreshInterval>4000</RefreshInterval>
+  </ListSetting>
+</configuration>

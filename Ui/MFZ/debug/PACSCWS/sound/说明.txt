@@ -1,0 +1,5 @@
+1.在工作站根目录放一个Sound文件夹
+2.需要调用哪个声音，就将哪个wav文件改名
+录像对应文件SoundCapture.wav
+前台采图对应文件SoundGrabber.wav
+后台采图对应文件SoundBackgroundStock.wav

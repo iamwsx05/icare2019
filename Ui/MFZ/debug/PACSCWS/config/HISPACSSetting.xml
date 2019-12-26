@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HISPACSSetting>
+  <!--是否开启PACS抓取HIS的视图 true为开启、false为关闭-->
+  <WhetherOpen>true</WhetherOpen>
+  <HISRefViewName>v_criticalvalue_ref</HISRefViewName>
+  <CaCheDays>0</CaCheDays>
+  <!--连接HIS数据库的配置 -->
+  <HISConfig>
+    <Host>orcl</Host>
+    <User>pacs</User>
+    <PassWord>pacs</PassWord>
+    <DataBaseName>
+     pacs_test
+    </DataBaseName>
+    <Port>
+    </Port>
+    <!--HIS数据库类型。参数:SqlServer,MySql,Oracle,DB2-->
+    <DataBaseType>Oracle</DataBaseType>
+  </HISConfig>
+  <!--其他工作站(比如体检)数据库配合 -->
+  <OtherConfig>
+    <Host>192.168.1.222\sql2008</Host>
+    <User>sa</User>
+    <PassWord>zoneking</PassWord>
+    <DataBaseName>zonekingnet</DataBaseName>
+    <Port>
+    </Port>
+    <!--HIS数据库类型。参数:SqlServer,MySql,Oracle,DB2-->
+    <DataBaseType>SqlServer</DataBaseType>
+  </OtherConfig>
+  <!--从HIS抓取需做放射科检查的视图(有多个视图用|符号分隔)-->
+  <GrabViewName>VIEW_HOSPITALIZED|VIEW_OUTPATIENT</GrabViewName>
+  <!--从第三方抓取数据的视图-->
+  <OtherGrabViewName>Pacs_InterFace_View</OtherGrabViewName>
+  <!--是否开启更新HIS数据库的申请单表的检查状态-->
+  <WhetherToOpenUpdate>false</WhetherToOpenUpdate>
+  <!--更新HIS数据库的申请单表的检查状态，有两种方式：1:SQL语句、2：存储过程-->
+  <!--HIS数据库更新检查表检查状态的方式: SQL:SQL语句、StoredProcedure：存储过程、不填：默认为SQL语句RequisitionsTableUpdateStyle-->
+  <RequisitionsTableUpdateStyle>SQL</RequisitionsTableUpdateStyle>
+  <!--更新HIS申请表检查状态的存储过程名字、存储过程需要的参数(用|符号分隔)-->
+  <StoredProcedurePair>
+    <StoredProcedureName>存储过程名</StoredProcedureName>
+    <StoredProcedureParameter>PATIENTUSERDEFINE3</StoredProcedureParameter>
+  </StoredProcedurePair>
+  <!--HIS数据库中： 检查申请单表、检查状态字段、申请单ID-->
+  <ExamineStatus>
+    <TableName>BC_REQUEST</TableName>
+    <StatusFieldName>STATUS</StatusFieldName>
+    <RequisitionID>REQ_NO</RequisitionID>
+  </ExamineStatus>
+  <!--可以查询到检查类型(用,符号分隔例如'CT','DR')-->
+  <AllowSelectExamineType>'CT','彩超','黑白超','MR','DR','CR'</AllowSelectExamineType>
+  <IsOpenNonexaminationPart>false</IsOpenNonexaminationPart>
+  <!--检查类型的别名，如果不写，则默认读取datagridview中的检查类型-->
+  <examineTypeAliasPair>
+    <Title Alias="彩超" Modality="彩超" />
+    <Title Alias="黑" Modality="黑白超" />
+    <Title Alias="USWS" Modality="USWS" />
+    <Title Alias="CT" Modality="CT" />
+    <Title Alias="DX" Modality="DX" />
+    <Title Alias="DR" Modality="DR" />
+    <Title Alias="CR" Modality="CR" />
+    <Title Alias="MRI" Modality="MRI" />
+  </examineTypeAliasPair>
+  <!--哪些字段不需要读到申请单列表中,用|符号分隔Patientid,AcuteLevelDiagnosis(急平诊),BalanceSheetNo(结算号)-->
+  <NotAddToThePatientLlistColumnsName>Patientid|AcuteLevelDiagnosis|BalanceSheetNo</NotAddToThePatientLlistColumnsName>
+  <!--不同的检查类型默认仪器型号、AETitle-->
+  <ModalityInstrumentmodelPair>
+    <Title Modality="DX" Instrumentmodel="Philips Medical Systems" AETitle="DIDI" ClinicID="" />
+    <Title Modality="DR" Instrumentmodel="Philips Medical Systems" AETitle="DIDI" ClinicID="" />
+    <Title Modality="CT" Instrumentmodel="TOSHIBA" AETitle="TOSHIBACT" ClinicID="" />
+    <Title Modality="USWS" Instrumentmodel="" AETitle="" ClinicID="" />
+  </ModalityInstrumentmodelPair>
+  <!--这里存储检查类型与仪器型号的联动、 检查类型用|符号分隔  同时也可以根据仪器型号得到AETitle，ClinicID(诊室ID)-->
+  <SCHEDULEDStationAetitle>
+    <Title Instrumentmodel="Philips Medical Systems" Modality="DX" AETitle="DIDI" ClinicID="" />
+    <Title Instrumentmodel="日立医疗系统(苏州)有限公司" Modality="DX" AETitle="HITACHIDX" ClinicID="" />
+    <Title Instrumentmodel="TOSHIBA" Modality="CT" AETitle="TOSHIBACT" ClinicID="" />
+    <Title Instrumentmodel="GE" Modality="DR" AETitle="GE" ClinicID="" />
+    <Title Instrumentmodel="GD" Modality="DR" AETitle="GD" ClinicID="" />
+    <Title Instrumentmodel="FLP" Modality="MR" AETitle="GE" ClinicID="" />
+    <Title Instrumentmodel="CARESTREAM HEALTH" Modality="DX" AETitle="CARESTREAMDX" ClinicID="" />
+  </SCHEDULEDStationAetitle>
+  <!--是否开启：  判断是否到PACS中去配置字段，并判断是否已经做过检查-->
+  <MatchPatient_UID>false</MatchPatient_UID>
+  <!--HIS厂商  根据哪些字段判断传过来的病人在PACS和超声中是否已经做过检查(用于影像号的自增),用|符号分隔-->
+  <WhetherTheSamePatientCondition>patientuserdefine3</WhetherTheSamePatientCondition>
+  <!--第三方厂商  根据哪些字段判断传过来的病人在PACS和超声中是否已经做过检查(用于影像号的自增),用|符号分隔-->
+  <OtherWhetherTheSamePatientCondition>patientuserdefine3</OtherWhetherTheSamePatientCondition>
+  <!--切换选项页至非检查部位维护是否执行查询操作-->
+  <SwitchWrongexaminePartsPage>true</SwitchWrongexaminePartsPage>
+  <!--是否显示配置选项页true为显示-->
+  <IsShowTabPageConfig>true</IsShowTabPageConfig>
+  <!--是否显示非检查部位选项页true为显示-->
+  <IsShowTabPageShieldWrongexamineParts>true</IsShowTabPageShieldWrongexamineParts>
+  <!--如果是非检查部位，设置提示文字-->
+  <ShieldWrongexaminePartsTips>(非检查部位)</ShieldWrongexaminePartsTips>
+  <!--HIS厂商  登记操作前，根据设置的字段匹配(用|符号分隔),判断该病人在PACS、超声中是否已经登记过-->
+  <PACSHasAlreadyRegistered>examineType|PATIENTUSERDEFINE3</PACSHasAlreadyRegistered>
+  <!--第三方厂商  登记操作前，根据设置的字段匹配(用|符号分隔),判断该病人在PACS、超声中是否已经登记过-->
+  <OtherPACSHasAlreadyRegistered>examineType|PATIENTUSERDEFINE3</OtherPACSHasAlreadyRegistered>
+  <!--HIS数据库  中缴费时间的格式(示例：yyyy-MM-dd HH:mm:ss、yyyy.MM.dd HH:mm:ss)-->
+  <HISOrderEntryTimeFormat>yyyy-MM-dd HH:mm:ss</HISOrderEntryTimeFormat>
+  <!--第三方厂商  中缴费时间的格式(示例：yyyy-MM-dd HH:mm:ss、yyyy.MM.dd HH:mm:ss)-->
+  <OtherOrderEntryTimeFormat>yyyy-MM-dd HH:mm:ss</OtherOrderEntryTimeFormat>
+  <!--HIS厂商  缴费时间字段的数据类型 (datetime,varchar)-->
+  <HISOrderEntryTimeFieleType>datetime</HISOrderEntryTimeFieleType>
+  <!--第三方厂商  缴费时间字段的数据类型 (datetime,varchar)-->
+  <OtherOrderEntryTimeFieleType>varchar</OtherOrderEntryTimeFieleType>
+  <!--HIS视图中唯一标识字段：（医嘱ID:DoctorAdviseNum、申请单号:ApplicationNumber）-->
+  <HISVIEWUniquelyIdentifies>ApplicationNumber</HISVIEWUniquelyIdentifies>
+  <!--第三方厂商视图中唯一标识字段 （医嘱ID:DoctorAdviseNum、申请单号:ApplicationNumber）-->
+  <OtherVIEWUniquelyIdentifies>ApplicationNumber</OtherVIEWUniquelyIdentifies>
+  <!--双击选中行配置-->
+  <DoubleSelectedRowPair>
+    <!--双击选中行是否执行登记操作。true:开启。false:关闭-->
+    <DoubleSelectedRowIsRegistered>true</DoubleSelectedRowIsRegistered>
+    <!--配置需要剪切DataGridView中的字段，用|分割(patient_UID|patientName|patientAge)-->
+    <SetTheClipboardField>patient_UID|patientName|patientAge</SetTheClipboardField>
+  </DoubleSelectedRowPair>
+  <!--设置病人病人年龄是获取虚岁还是实岁  true：获取虚岁-->
+  <WhetherNominalAge>true</WhetherNominalAge>
+  <!--打开His登记界面是否自动查询一次-->
+  <FirstLoadRefresh>false</FirstLoadRefresh>
+  <!--刷卡时，截断字符，用|符号分隔   比如1234=5678,只需要获取1234，-->
+  <InterceptionCharacters>?|？|=</InterceptionCharacters>
+  <!--排队叫号-->
+  <!--是否开启排队叫号功能(专门针对南城人民医院)-->
+  <OpenCallQueuing>false</OpenCallQueuing>
+  <!--排队叫号 只允许某钟检查类型的数据到排队叫号表  格式:'CT','DX'-->
+  <CallQueuingAllowExamineType>'USWS','彩超','黑白超'</CallQueuingAllowExamineType>
+  <!--排队叫号只接收某种病人来源的病人，用|符号分隔(门诊|住院)-->
+  <CallQueuingReceiveFrom>门诊|住院</CallQueuingReceiveFrom>
+  <!--临床调阅配置-->
+  <!--是否开启看图阅片-->
+  <WhetherToOpenImageView>true</WhetherToOpenImageView>
+  <!--是否开启视频-->
+  <WhetherToOpenViewPlay>false</WhetherToOpenViewPlay>
+  <!--是否开启报告预览-->
+  <WhetherToOpenReport>true</WhetherToOpenReport>
+  <!--是否开启心电图（检查申请单扫描图片） true:显示-->
+  <WhetherToOpenECG>true</WhetherToOpenECG>
+  <!--传给临床调阅控件EXE的字符串的含义： examinationID:检查id,requisitionsid:申请单号码、DoctorAdviceNumber:医嘱号-->
+  <PACSFieldType>examinationID</PACSFieldType>
+  <!--如果直接双击临床调阅控件，手动传值给exe，需要4719    4772传递检查ID-->
+  <TestExaminationID>11</TestExaminationID>
+  <!--只加载指定天数的数据，如果超过指定天数，那么直接关闭临床调阅控件,(小于0或者为空为不指定天数，大于等于0开启检索条件)-->
+  <ClinicalAccessToFormExamMatchQueryDates>-1</ClinicalAccessToFormExamMatchQueryDates>
+  <!--如果在指定的天数内(必须大于等于0该属性才起作用)没有搜索到任何数据，那么设定提示语、  如果为空则不弹出提示语-->
+  <ClinicalAccessToFormTips>对不起,该检查不在指定的天数内！请更新HISPACSSetting.xml中ClinicalAccessToFormExamMatchQueryDates属性。</ClinicalAccessToFormTips>
+  <!--临床调阅是否允许打印报告 true 允许false 不允许-->
+  <AllowPrintReport>true</AllowPrintReport>
+  <!--配置临床调阅控件的路径是否读取本属性-->
+  <AldReportPathPair>
+    <!--是否开启 报告路径读取本属性-->
+    <WhetherOpenConfig>true</WhetherOpenConfig>
+    <!--报告模版路径-->
+    <ReportTemplatesPath>\\10.36.0.40\reportStyle</ReportTemplatesPath>
+    <!--服务器IP地址配置  将指定的旧的字符串替换成新的字符串，比如放射科路径将\\10.36.0.40替换成\\10.36.0.38  格式:旧字符串|新字符串-->
+    <ServerIpPath>\\10.36.0.40|\\10.36.0.38</ServerIpPath>
+  </AldReportPathPair>
+  <!--到PACS、超声中匹配影像号、病人信息、更新存储过程需要可能用到的列-->
+  <HISPACSColumnPair>
+    <HISPACSPair Name="卡号ID" PacsTableName="t_patient" ColumnName="PATIENTUSERDEFINE1" />
+    <HISPACSPair Name="医嘱ID" PacsTableName="t_patient" ColumnName="PATIENTUSERDEFINE2" />
+    <HISPACSPair Name="申请单ID" PacsTableName="t_patient" ColumnName="PATIENTUSERDEFINE3" />
+    <HISPACSPair Name="病人姓名" PacsTableName="t_patient" ColumnName="patientName" />
+    <HISPACSPair Name="出生日期" PacsTableName="t_patient" ColumnName="patientBirthday" />
+    <HISPACSPair Name="年龄" PacsTableName="t_patient" ColumnName="patientAge" />
+    <HISPACSPair Name="年龄单位" PacsTableName="t_patient" ColumnName="patientAgeUnit" />
+    <HISPACSPair Name="性别" PacsTableName="t_patient" ColumnName="patientSex" />
+    <HISPACSPair Name="病人地址" PacsTableName="t_patient" ColumnName="patientAddress" />
+    <HISPACSPair Name="民族" PacsTableName="t_patient" ColumnName="patientNation" />
+    <HISPACSPair Name="电话" PacsTableName="t_patient" ColumnName="patientTelephone" />
+    <HISPACSPair Name="工作单位" PacsTableName="t_patient" ColumnName="patientUnit" />
+    <HISPACSPair Name="婚姻状态" PacsTableName="t_patient" ColumnName="patientMarriageStatus" />
+    <HISPACSPair Name="床位号" PacsTableName="t_examination" ColumnName="bedNum" />
+    <HISPACSPair Name="临床诊断" PacsTableName="t_examination" ColumnName="clinicalDiagnosis" />
+    <HISPACSPair Name="门诊号" PacsTableName="t_examination" ColumnName="clinicalNum" />
+    <HISPACSPair Name="检查部位" PacsTableName="t_examination" ColumnName="examineParts" />
+    <HISPACSPair Name="检查类型" PacsTableName="t_examination" ColumnName="examineType" />
+    <HISPACSPair Name="病区" PacsTableName="t_examination" ColumnName="hospitalDistrictNum" />
+    <HISPACSPair Name="住院号" PacsTableName="t_examination" ColumnName="inHospitalNum" />
+    <HISPACSPair Name="病人来源" PacsTableName="t_examination" ColumnName="patientFrom" />
+    <HISPACSPair Name="送检科室" PacsTableName="t_examination" ColumnName="sentByDepartment" />
+    <HISPACSPair Name="送检医生" PacsTableName="t_examination" ColumnName="sentByDoctor" />
+    <HISPACSPair Name="检查收费" PacsTableName="t_examination" ColumnName="fee" />
+    <HISPACSPair Name="医嘱缴费时间" PacsTableName="t_examination" ColumnName="registerDate" />
+  </HISPACSColumnPair>
+</HISPACSSetting>

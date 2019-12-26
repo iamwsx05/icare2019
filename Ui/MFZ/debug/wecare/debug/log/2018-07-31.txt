@@ -1,0 +1,454 @@
+-->>>>> 2018-07-31 14:32:57:123
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+</base>
+
+
+-->>>>> 2018-07-31 14:32:57:451
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>6</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>14:30</startTime><endTime>15:00</endTime><residueNum>2</residueNum><timeUnit>14:30-15:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>2</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>2</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>2</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 14:33:39:889
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+<departmentId>1075877466325023571</departmentId>
+</base>
+
+
+-->>>>> 2018-07-31 14:33:39:983
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>6</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>14:30</startTime><endTime>15:00</endTime><residueNum>2</residueNum><timeUnit>14:30-15:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>2</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>2</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>2</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 14:34:04:745
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+<departmentId>1075877466325023571</departmentId>
+</base>
+
+
+-->>>>> 2018-07-31 14:34:04:792
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>6</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>14:30</startTime><endTime>15:00</endTime><residueNum>2</residueNum><timeUnit>14:30-15:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>2</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>2</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>2</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 14:36:33:183
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+<departmentId>1075877466325023571</departmentId>
+</base>
+
+
+-->>>>> 2018-07-31 14:36:33:261
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>6</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>14:30</startTime><endTime>15:00</endTime><residueNum>2</residueNum><timeUnit>14:30-15:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>2</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>2</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>2</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 14:37:08:602
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+<departmentId>1075877466325023571</departmentId>
+</base>
+
+
+-->>>>> 2018-07-31 14:37:08:649
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>6</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>14:30</startTime><endTime>15:00</endTime><residueNum>2</residueNum><timeUnit>14:30-15:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>2</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>2</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>2</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 14:37:13:495
+功能号: 900211
+<base>
+<producerType>1</producerType>
+<orgId>4419001030020000000</orgId>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<customer>许韩真</customer>
+<diagnosisNumber>0001578140</diagnosisNumber>
+<sex>302003</sex>
+<brithday>1997-11-10</brithday>
+<credentialsType>5418001</credentialsType>
+<credentialsNum>0001578140</credentialsNum>
+<phoneNum></phoneNum>
+<workDate>2018-07-31</workDate>
+<startTime>15:00</startTime>
+<endTime>15:30</endTime>
+</base>
+
+
+-->>>>> 2018-07-31 14:37:13:744
+功能号: 900211
+0|成功|<?xml version='1.0' encoding='GBK'?><base><bookSubscribeProducer><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>null</producerName><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><subscribeNo>44190010300200011807315466682589</subscribeNo></bookSubscribeProducer></base>
+
+-->>>>> 2018-07-31 14:37:13:744
+功能号: 900213
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<orgId>4419001030020000000</orgId>
+<producerId>1075877466771937943</producerId>
+<workDate>2018-07-31</workDate>
+<subscribeNo>44190010300200011807315466682589</subscribeNo>
+<tranNo>0001587287201807311437</tranNo>
+<sumAmount>0.00</sumAmount>
+<accountType></accountType>
+<accountTranNo></accountTranNo>
+<socailSecuNum></socailSecuNum>
+<socailSecuNo></socailSecuNo>
+<socailSecuAmount></socailSecuAmount>
+<subscribeType>3</subscribeType>
+</base>
+
+
+-->>>>> 2018-07-31 14:37:13:806
+功能号: 900213
+0|成功|<?xml version='1.0' encoding='GBK'?><base><confirmSubscribeProducer><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><workDate>2018-07-31</workDate><subscribeNo>44190010300200011807315466682589</subscribeNo><takePassword>170189</takePassword></confirmSubscribeProducer></base>
+
+-->>>>> 2018-07-31 14:37:14:975
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+</base>
+
+
+-->>>>> 2018-07-31 14:37:15:037
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>6</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>14:30</startTime><endTime>15:00</endTime><residueNum>2</residueNum><timeUnit>14:30-15:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>1</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>2</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>2</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 14:48:31:553
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+<departmentId>1075877466325023571</departmentId>
+</base>
+
+
+-->>>>> 2018-07-31 14:48:31:647
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>5</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>1</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>2</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>2</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 14:49:07:750
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+<departmentId>1075877466325023571</departmentId>
+</base>
+
+
+-->>>>> 2018-07-31 14:49:07:797
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>5</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>1</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>2</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>2</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 14:49:10:671
+功能号: 900211
+<base>
+<producerType>1</producerType>
+<orgId>4419001030020000000</orgId>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<customer>陶泽艳</customer>
+<diagnosisNumber>0001620167</diagnosisNumber>
+<sex>302003</sex>
+<brithday>1989-10-10</brithday>
+<credentialsType>5418001</credentialsType>
+<credentialsNum>522427198910100740</credentialsNum>
+<phoneNum></phoneNum>
+<workDate>2018-07-31</workDate>
+<startTime>15:30</startTime>
+<endTime>16:00</endTime>
+</base>
+
+
+-->>>>> 2018-07-31 14:49:10:764
+功能号: 900211
+0|成功|<?xml version='1.0' encoding='GBK'?><base><bookSubscribeProducer><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>null</producerName><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><subscribeNo>44190010300200011807315466682591</subscribeNo></bookSubscribeProducer></base>
+
+-->>>>> 2018-07-31 14:49:10:764
+功能号: 900213
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<orgId>4419001030020000000</orgId>
+<producerId>1075877466771937943</producerId>
+<workDate>2018-07-31</workDate>
+<subscribeNo>44190010300200011807315466682591</subscribeNo>
+<tranNo>0001596176201807311449</tranNo>
+<sumAmount>0.00</sumAmount>
+<accountType></accountType>
+<accountTranNo></accountTranNo>
+<socailSecuNum></socailSecuNum>
+<socailSecuNo></socailSecuNo>
+<socailSecuAmount></socailSecuAmount>
+<subscribeType>3</subscribeType>
+</base>
+
+
+-->>>>> 2018-07-31 14:49:10:827
+功能号: 900213
+0|成功|<?xml version='1.0' encoding='GBK'?><base><confirmSubscribeProducer><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><workDate>2018-07-31</workDate><subscribeNo>44190010300200011807315466682591</subscribeNo><takePassword>021662</takePassword></confirmSubscribeProducer></base>
+
+-->>>>> 2018-07-31 14:49:22:929
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+</base>
+
+
+-->>>>> 2018-07-31 14:49:22:976
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>5</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>1</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>1</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>2</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 14:58:56:788
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+<departmentId>1075877466325023571</departmentId>
+</base>
+
+
+-->>>>> 2018-07-31 14:58:56:881
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>5</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>1</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>1</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>2</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 14:59:16:895
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+<departmentId>1075877466325023571</departmentId>
+</base>
+
+
+-->>>>> 2018-07-31 14:59:16:942
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>5</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>1</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>1</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>2</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 14:59:19:801
+功能号: 900211
+<base>
+<producerType>1</producerType>
+<orgId>4419001030020000000</orgId>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<customer>吴金环</customer>
+<diagnosisNumber>0000523166</diagnosisNumber>
+<sex>302003</sex>
+<brithday>1985-02-25</brithday>
+<credentialsType>5418001</credentialsType>
+<credentialsNum>522631198502254228</credentialsNum>
+<phoneNum></phoneNum>
+<workDate>2018-07-31</workDate>
+<startTime>16:00</startTime>
+<endTime>16:30</endTime>
+</base>
+
+
+-->>>>> 2018-07-31 14:59:19:911
+功能号: 900211
+0|成功|<?xml version='1.0' encoding='GBK'?><base><bookSubscribeProducer><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>null</producerName><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><subscribeNo>44190010300200011807315466682593</subscribeNo></bookSubscribeProducer></base>
+
+-->>>>> 2018-07-31 14:59:19:911
+功能号: 900213
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<orgId>4419001030020000000</orgId>
+<producerId>1075877466771937943</producerId>
+<workDate>2018-07-31</workDate>
+<subscribeNo>44190010300200011807315466682593</subscribeNo>
+<tranNo>0000641878201807311459</tranNo>
+<sumAmount>0.00</sumAmount>
+<accountType></accountType>
+<accountTranNo></accountTranNo>
+<socailSecuNum></socailSecuNum>
+<socailSecuNo></socailSecuNo>
+<socailSecuAmount></socailSecuAmount>
+<subscribeType>3</subscribeType>
+</base>
+
+
+-->>>>> 2018-07-31 14:59:19:973
+功能号: 900213
+0|成功|<?xml version='1.0' encoding='GBK'?><base><confirmSubscribeProducer><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><workDate>2018-07-31</workDate><subscribeNo>44190010300200011807315466682593</subscribeNo><takePassword>848121</takePassword></confirmSubscribeProducer></base>
+
+-->>>>> 2018-07-31 14:59:21:067
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+</base>
+
+
+-->>>>> 2018-07-31 14:59:21:114
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>5</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>1</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>1</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>1</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 15:05:41:662
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+<departmentId>1075877466325023571</departmentId>
+</base>
+
+
+-->>>>> 2018-07-31 15:05:41:771
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>5</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>1</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>1</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>1</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 15:06:12:360
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+<departmentId>1075877466325023571</departmentId>
+</base>
+
+
+-->>>>> 2018-07-31 15:06:12:423
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>5</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>1</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>1</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>1</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 15:06:15:672
+功能号: 900211
+<base>
+<producerType>1</producerType>
+<orgId>4419001030020000000</orgId>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<customer>莫绮丽</customer>
+<diagnosisNumber>0001620166</diagnosisNumber>
+<sex>302003</sex>
+<brithday>1997-09-03</brithday>
+<credentialsType>5418001</credentialsType>
+<credentialsNum>440881199709033120</credentialsNum>
+<phoneNum></phoneNum>
+<workDate>2018-07-31</workDate>
+<startTime>16:00</startTime>
+<endTime>16:30</endTime>
+</base>
+
+
+-->>>>> 2018-07-31 15:06:15:797
+功能号: 900211
+0|成功|<?xml version='1.0' encoding='GBK'?><base><bookSubscribeProducer><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>null</producerName><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><subscribeNo>44190010300200011807315466682594</subscribeNo></bookSubscribeProducer></base>
+
+-->>>>> 2018-07-31 15:06:15:797
+功能号: 900213
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<orgId>4419001030020000000</orgId>
+<producerId>1075877466771937943</producerId>
+<workDate>2018-07-31</workDate>
+<subscribeNo>44190010300200011807315466682594</subscribeNo>
+<tranNo>0001596178201807311506</tranNo>
+<sumAmount>0.00</sumAmount>
+<accountType></accountType>
+<accountTranNo></accountTranNo>
+<socailSecuNum></socailSecuNum>
+<socailSecuNo></socailSecuNo>
+<socailSecuAmount></socailSecuAmount>
+<subscribeType>3</subscribeType>
+</base>
+
+
+-->>>>> 2018-07-31 15:06:15:844
+功能号: 900213
+0|成功|<?xml version='1.0' encoding='GBK'?><base><confirmSubscribeProducer><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><workDate>2018-07-31</workDate><subscribeNo>44190010300200011807315466682594</subscribeNo><takePassword>929928</takePassword></confirmSubscribeProducer></base>
+
+-->>>>> 2018-07-31 15:06:16:859
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+</base>
+
+
+-->>>>> 2018-07-31 15:06:16:953
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>5</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:00</startTime><endTime>15:30</endTime><residueNum>1</residueNum><timeUnit>15:00-15:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>15:30</startTime><endTime>16:00</endTime><residueNum>1</residueNum><timeUnit>15:30-16:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:00</startTime><endTime>16:30</endTime><residueNum>0</residueNum><timeUnit>16:00-16:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>2</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 16:43:27:118
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+</base>
+
+
+-->>>>> 2018-07-31 16:43:27:181
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>2</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>16:30</startTime><endTime>17:00</endTime><residueNum>1</residueNum><timeUnit>16:30-17:00</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 16:51:59:689
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+</base>
+
+
+-->>>>> 2018-07-31 16:51:59:782
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>1</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+
+-->>>>> 2018-07-31 17:02:18:067
+<base>
+<producerType>1</producerType>
+<providerId>4419001030020000000</providerId>
+<producerId>1075877466771937943</producerId>
+<workStartDate>2018-07-31</workStartDate>
+<workEndDate>2018-07-31</workEndDate>
+<orgId>4419001030020000000</orgId>
+</base>
+
+
+-->>>>> 2018-07-31 17:02:18:129
+0|获取可预约时间段成功|<?xml version='1.0' encoding='GBK'?><base><subscribeProducerTime><providerId>4419001030020000000</providerId><producerType>1</producerType><producerId>1075877466771937943</producerId><producerName>廖庆辉副主任医师</producerName><total>1</total><rows><subscribeProducerTimeRsInfo><orgId>4419001030020000000</orgId><orgName></orgName><departmentId>1075877466325023571</departmentId><departmentName>妇产科</departmentName><teamId>1075877509216738752</teamId><teamName></teamName><feeId>4419001030020000002</feeId><feePrice>12.0</feePrice><workDate>2018-07-31</workDate><startTime>17:00</startTime><endTime>17:30</endTime><residueNum>2</residueNum><timeUnit>17:00-17:30</timeUnit><scheduleId>null</scheduleId><subscribeFlag>0</subscribeFlag><shift>2</shift></subscribeProducerTimeRsInfo></rows></subscribeProducerTime></base>
+

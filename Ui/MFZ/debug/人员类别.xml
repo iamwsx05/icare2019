@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by  () -->
+<人员类别>
+	<记录 PAYTYPEID_CHR="0003" PAYTYPENAME_VCHR="医保" YBID="001" YBName="在职" ISYB="1"/>
+	<记录 PAYTYPEID_CHR="0004" PAYTYPENAME_VCHR="职工" YBID="002" YBName="退休" ISYB="1"/>
+	<记录 PAYTYPEID_CHR="0005" PAYTYPENAME_VCHR="职属" YBID="001" YBName="在职" ISYB="1"/>
+	<记录 PAYTYPEID_CHR="0006" PAYTYPENAME_VCHR="军人/烈属" YBID="001" YBName="在职" ISYB="1"/>
+	<记录 PAYTYPEID_CHR="0007" PAYTYPENAME_VCHR="伤残/残疾" YBID="001" YBName="在职" ISYB="1"/>
+	<记录 PAYTYPEID_CHR="0008" PAYTYPENAME_VCHR="金卡贵宾" YBID="003" YBName="离休" ISYB="1"/>
+	<记录 PAYTYPEID_CHR="0009" PAYTYPENAME_VCHR="银卡贵宾" YBID="001" YBName="在职" ISYB="1"/>
+	<记录 PAYTYPEID_CHR="0001" PAYTYPENAME_VCHR="自费" YBID="001" YBName="在职" ISYB="0"/>
+	<记录 PAYTYPEID_CHR="0002" PAYTYPENAME_VCHR="老人" YBID="001" YBName="在职" ISYB="0"/>
+	<记录 PAYTYPEID_CHR="0010" PAYTYPENAME_VCHR="特困" YBID="001" YBName="在职" ISYB="0"/>
+	<记录 PAYTYPEID_CHR="0011" PAYTYPENAME_VCHR="记帐" YBID="001" YBName="在职" ISYB="1"/>
+	<记录 PAYTYPEID_CHR="0012" PAYTYPENAME_VCHR="离休干部" YBID="001" YBName="在职" ISYB="0"/>
+	<记录 PAYTYPEID_CHR="0013" PAYTYPENAME_VCHR="医保(在职)" YBID="001" YBName="在职" ISYB="1"/>
+	<记录 PAYTYPEID_CHR="0014" PAYTYPENAME_VCHR="医保(离休)" YBID="001" YBName="在职" ISYB="1"/>
+</人员类别>

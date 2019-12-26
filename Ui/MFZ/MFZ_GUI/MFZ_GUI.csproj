@@ -1,0 +1,415 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F56121D5-3724-4935-AA79-432EC121A6D0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>com.digitalwave.iCare.gui.MFZ</RootNamespace>
+    <AssemblyName>MFZ_GUI</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="comm.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\comm.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonInfo, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="DataWindow, Version=2.0.4600.0, Culture=neutral, PublicKeyToken=cc0f66dd9541b3da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Sybase\DataWindow .NET 2.0\DataWindow.dll</HintPath>
+    </Reference>
+    <Reference Include="DataWindowInterop, Version=2.0.4600.0, Culture=neutral, PublicKeyToken=cc0f66dd9541b3da" />
+    <Reference Include="DigitalWaveControls, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="DigitalWaveControlsBase, Version=2.0.0.1, Culture=neutral" />
+    <Reference Include="GUI_Base, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="his.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\his.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="HISControl, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="HISZY, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="LEDManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\LEDManager.dll</HintPath>
+    </Reference>
+    <Reference Include="LED_LianCheng, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\LED_LianCheng.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PinkieControls, Version=1.0.1362.15156, Culture=neutral" />
+    <Reference Include="RegionMasterControls, Version=1.0.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\windowsForm\GUI\MSN Massenger Clone\MessengerClone\bin\Debug\RegionMasterControls.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="unityproxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\unityproxy.dll</HintPath>
+    </Reference>
+    <Reference Include="utility, Version=2.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\utility.dll</HintPath>
+    </Reference>
+    <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\wecare.core.dll</HintPath>
+    </Reference>
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\wecaredata.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\clsCommunicationSvc.cs" />
+    <Compile Include="Business\clsConfig.cs" />
+    <Compile Include="Business\clsDataSerial.cs" />
+    <Compile Include="Business\clsDataStatistics.cs" />
+    <Compile Include="Business\clsLCDManager.cs" />
+    <Compile Include="Business\clsLED.cs" />
+    <Compile Include="Business\clsLEDImage.cs" />
+    <Compile Include="Business\clsMain.cs" />
+    <Compile Include="Business\clsQueueManage.cs" />
+    <Compile Include="Class1.cs" />
+    <None Include="MFZ_GUI.config" />
+    <Compile Include="Controls\ctlDeptCombox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ctlDeptCombox.Designer.cs">
+      <DependentUpon>ctlDeptCombox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctlDiagnoseAreaCombox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ctlDiagnoseAreaCombox.Designer.cs">
+      <DependentUpon>ctlDiagnoseAreaCombox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctlDocPatientWaitQueue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ctlDocPatientWaitQueue.Designer.cs">
+      <DependentUpon>ctlDocPatientWaitQueue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctlDoctorList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ctlDoctorList.Designer.cs">
+      <DependentUpon>ctlDoctorList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctlLCDRoomElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ctlLCDRoomElement.Designer.cs">
+      <DependentUpon>ctlLCDRoomElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctlRoomElement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ctlRoomElement.Designer.cs">
+      <DependentUpon>ctlRoomElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctlSchemeCombox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ctlSchemeCombox.Designer.cs">
+      <DependentUpon>ctlSchemeCombox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GradientPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\GradientPanel.Designer.cs">
+      <DependentUpon>GradientPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SvcMapping\TableMapping\clsHISInterfaceSmp.cs" />
+    <Compile Include="SvcMapping\TableMapping\clsTmdDeptSmp.cs" />
+    <Compile Include="SvcMapping\TableMapping\clsTmdDiagnoseAreaSmp.cs" />
+    <Compile Include="SvcMapping\TableMapping\clsTmdScheme.cs" />
+    <Compile Include="SvcMapping\TableMapping\clsTmdStatisticsSmp.cs" />
+    <Compile Include="Viewer\frmSetLCDMonSize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmSetLCDMonSize.Designer.cs">
+      <DependentUpon>frmSetLCDMonSize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmAddDoctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmAddDoctor.Designer.cs">
+      <DependentUpon>frmAddDoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmAddRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmAddRoom.Designer.cs">
+      <DependentUpon>frmAddRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmDept.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmDept.Designer.cs">
+      <DependentUpon>frmDept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmDiagnoseArea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmDiagnoseArea.Designer.cs">
+      <DependentUpon>frmDiagnoseArea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmLCDShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmLCDShow.Designer.cs">
+      <DependentUpon>frmLCDShow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmScheme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmScheme.Designer.cs">
+      <DependentUpon>frmScheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmSelectDept.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmSelectDept.Designer.cs">
+      <DependentUpon>frmSelectDept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmSelectScheme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmSelectScheme.Designer.cs">
+      <DependentUpon>frmSelectScheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmStation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmStation.Designer.cs">
+      <DependentUpon>frmStation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SvcMapping\TableMapping\clsTmdDoctorSmp.cs" />
+    <Compile Include="SvcMapping\TableMapping\clsTmdRoomSmp.cs" />
+    <Compile Include="SvcMapping\TableMapping\clsTmdWorkStationSmp.cs" />
+    <Compile Include="Viewer\frmDoctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmDoctor.Designer.cs">
+      <DependentUpon>frmDoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmPatientManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmPatientManager.Designer.cs">
+      <DependentUpon>frmPatientManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmRoomStation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmRoomStation.Designer.cs">
+      <DependentUpon>frmRoomStation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmStatistics.Designer.cs">
+      <DependentUpon>frmStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmVoiceLibSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmVoiceLibSet.Designer.cs">
+      <DependentUpon>frmVoiceLibSet.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\ctlDocPatientWaitQueue.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ctlDocPatientWaitQueue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ctlDoctorList.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ctlDoctorList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ctlLCDRoomElement.resx">
+      <DependentUpon>ctlLCDRoomElement.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ctlRoomElement.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ctlRoomElement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmSetLCDMonSize.resx">
+      <DependentUpon>frmSetLCDMonSize.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmAddDoctor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmAddDoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmAddRoom.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmAddRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmDept.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmDept.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmDiagnoseArea.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmDiagnoseArea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmDoctor.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmDoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmLCDShow.resx">
+      <DependentUpon>frmLCDShow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmPatientManager.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmPatientManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmRoomStation.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmRoomStation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmScheme.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmScheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmSelectDept.resx">
+      <DependentUpon>frmSelectDept.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmSelectScheme.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmSelectScheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmStation.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmStation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmStatistics.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmVoiceLibSet.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmVoiceLibSet.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\room.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\room.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\roomBlue.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\roomBlueLine.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\men_online.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\men_offline.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minimize.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minimized.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\50.ico" />
+    <Content Include="Resources\logo1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="SpeechLib">
+      <Guid>{C866CA3A-32F7-11D2-9602-00C04F8EE628}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
