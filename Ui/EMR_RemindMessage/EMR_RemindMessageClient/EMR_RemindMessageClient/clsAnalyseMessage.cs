@@ -8,7 +8,7 @@ using com.digitalwave.Emr.StaticObject;
 namespace com.digitalwave.iCare.RemindMessage
 {
     /// <summary>
-    /// 检查匹配信息
+    /// 检查匹配信 息
     /// </summary>
     public class clsAnalyseMessage
     {
