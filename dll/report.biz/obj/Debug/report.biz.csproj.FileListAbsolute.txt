@@ -36,7 +36,6 @@ D:\debug\report.biz.pdb
 D:\iCare2019\dll\report.biz\obj\Debug\report.biz.csproj.CopyComplete
 D:\icare250\debug\report.biz.dll
 D:\icare250\debug\report.biz.pdb
-D:\icare250\dll\report.biz\obj\Debug\report.biz.csprojAssemblyReference.cache
 D:\icare250\dll\report.biz\obj\Debug\report.biz.csproj.CoreCompileInputs.cache
 D:\icare250\dll\report.biz\obj\Debug\report.biz.csproj.CopyComplete
 D:\icare250\dll\report.biz\obj\Debug\report.biz.dll

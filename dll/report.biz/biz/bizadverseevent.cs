@@ -2994,7 +2994,7 @@ namespace Report.Biz
                         on a.deptcode = c.code_vchr
                         where a.formid = 26      
                         and a.status = 1 ";
-                
+
 
                 svc = new SqlHelper(EnumBiz.onlineDB);
                 string strSub = string.Empty;
@@ -3080,8 +3080,9 @@ namespace Report.Biz
 
                         voClone.XH = i;
                         i++;
-                        voClone.KS = dicXml["KS"].ToString();
-                        voClone.FSRQSJ = Function.Datetime(dicXml["FSRQSJ"]).ToString("yyyy-MM-dd HH:mm");
+                        if (dicXml.ContainsKey("X242"))
+                            voClone.KS = dicXml["X242"].ToString();
+                        voClone.FSRQSJ = Function.Datetime(dicXml["X005"]).ToString("yyyy-MM-dd HH:mm");
 
                         if (!string.IsNullOrEmpty(startTime) && !string.IsNullOrEmpty(voClone.FSRQSJ))
                         {
@@ -3107,171 +3108,229 @@ namespace Report.Biz
                             voClone.XB = dr["XB"].ToString();
                         voClone.ZYHZLH = dr["ZYHZLH"].ToString();
 
-                        voClone.CH = dicXml["CH"].ToString();
-                        voClone.NL = dicXml["NL"].ToString();                       
-                        voClone.AQSJDJ = dicXml["AQSJDJ"].ToString();
-                        voClone.AQSJJG = dicXml["AQSJJG"].ToString();
+                        if (dicXml.ContainsKey("X004"))
+                            voClone.CH = dicXml["X004"].ToString();
+                        if (dicXml.ContainsKey("PatientAge"))
+                            voClone.NL = dicXml["PatientAge"].ToString();
+                        if (dicXml.ContainsKey("X007"))
+                            voClone.AQSJDJ = dicXml["X007"].ToString();
+                        if (dicXml.ContainsKey("X081"))
+                            voClone.AQSJJG = dicXml["X081"].ToString();
                         voClone.AQSJJG = voClone.AQSJJG.Replace("<X081><![CDATA[", "");
                         voClone.AQSJJG = voClone.AQSJJG.Replace("]]></X081>", "");
-
-                        voClone.SBZ = dicXml["SBZ"].ToString();
-                        voClone.DSR = dicXml["DSR"].ToString();
-                        voClone.DSRZC = dicXml["DSRZC"].ToString();
+                        if (dicXml.ContainsKey("X002"))
+                            voClone.SBZ = dicXml["X002"].ToString();
+                        if (dicXml.ContainsKey("X0801"))
+                            voClone.DSR = dicXml["X0801"].ToString();
+                        if (dicXml.ContainsKey("X0802"))
+                            voClone.DSRZC = dicXml["X0802"].ToString();
 
                         //隐患事件
-                        if (dicXml["YHSJ"].ToString() == "1")
-                            voClone.AQSJSHCD += "隐患事件";
+                        if (dicXml.ContainsKey("X174"))
+                            if (dicXml["X174"].ToString() == "1")
+                                voClone.AQSJSHCD += "隐患事件";
                         //无伤害事件
-                        if (dicXml["WSH"].ToString() == "1")
-                            voClone.AQSJSHCD += "无伤害事件";
+                        if (dicXml.ContainsKey("X175"))
+                            if (dicXml["X175"].ToString() == "1")
+                                voClone.AQSJSHCD += "无伤害事件";
                         //轻度伤害事件
-                        if (dicXml["JDSH"].ToString() == "1")
-                            voClone.AQSJSHCD += "轻度伤害事件";
+                        if (dicXml.ContainsKey("X240"))
+                            if (dicXml["X240"].ToString() == "1")
+                                voClone.AQSJSHCD += "轻度伤害事件";
                         //中度伤害事件
-                        if (dicXml["ZDSH"].ToString() == "1")
-                            voClone.AQSJSHCD += "中度伤害事件";
+                        if (dicXml.ContainsKey("X176"))
+                            if (dicXml["X176"].ToString() == "1")
+                                voClone.AQSJSHCD += "中度伤害事件";
                         //重度伤害事件
-                        if (dicXml["CDSH"].ToString() == "1")
-                            voClone.AQSJSHCD += "重度伤害事件";
+                        if (dicXml.ContainsKey("X177"))
+                            if (dicXml["X177"].ToString() == "1")
+                                voClone.AQSJSHCD += "重度伤害事件";
                         //极重度伤害事件
-                        if (dr["JCDSH"].ToString() == "1")
-                            voClone.AQSJSHCD += "极重度伤害事件";
+
+                        if (dicXml.ContainsKey("X178"))
+                            if (dicXml["X178"].ToString() == "1")
+                                voClone.AQSJSHCD += "极重度伤害事件";
                         //死亡
-                        if (dicXml["SW"].ToString() == "1")
-                            voClone.AQSJSHCD += "死亡";
+                        if (dicXml.ContainsKey("X179"))
+                            if (dicXml["X179"].ToString() == "1")
+                                voClone.AQSJSHCD += "死亡";
                         #region 安全事件类型
                         //查对不合格
-                        if (dicXml["CDBHG"].ToString() == "1")
-                            voClone.AQSJLX += "查对不合格；";
+                        if (dicXml.ContainsKey("X017"))
+                            if (dicXml["X017"].ToString() == "1")
+                                voClone.AQSJLX += "查对不合格；";
                         //身份识别错误（患者身份查对）
-                        if (dicXml["SFSBCW"].ToString() == "1")
-                            voClone.AQSJLX += "身份识别错误（患者身份查对）；";
+                        if (dicXml.ContainsKey("X020"))
+                            if (dicXml["X020"].ToString() == "1")
+                                voClone.AQSJLX += "身份识别错误（患者身份查对）；";
                         //使用药物错误（发生在患者身上）
-                        if (dicXml["SYYWCW"].ToString() == "1")
-                            voClone.AQSJLX += "使用药物错误（发生在患者身上）；";
+                        if (dicXml.ContainsKey("X021"))
+                            if (dicXml["X021"].ToString() == "1")
+                                voClone.AQSJLX += "使用药物错误（发生在患者身上）；";
                         //标本丢失、损毁 
-                        if (dicXml["BBDSSH"].ToString() == "1")
-                            voClone.AQSJLX += "标本丢失、损毁； ";
+                        if (dicXml.ContainsKey("X019"))
+                            if (dicXml["X019"].ToString() == "1")
+                                voClone.AQSJLX += "标本丢失、损毁； ";
                         //急救设备器材药品不合格
-                        if (dicXml["JQSBJCYPBHG"].ToString() == "1")
-                            voClone.AQSJLX += "急救设备器材药品不合格；";
+                        if (dicXml.ContainsKey("X018"))
+                            if (dicXml["X018"].ToString() == "1")
+                                voClone.AQSJLX += "急救设备器材药品不合格；";
                         //无菌物品不合格
-                        if (dicXml["WJWPBHG"].ToString() == "1")
-                            voClone.AQSJLX += "无菌物品不合格；";
+                        if (dicXml.ContainsKey("X022"))
+                            if (dicXml["X022"].ToString() == "1")
+                                voClone.AQSJLX += "无菌物品不合格；";
                         //发放不合格的消毒或灭菌物品
-                        if (dicXml["FFBHGXDHMJWP"].ToString() == "1")
-                            voClone.AQSJLX += "发放不合格的消毒或灭菌物品；";
+                        if (dicXml.ContainsKey("X023"))
+                            if (dicXml["X023"].ToString() == "1")
+                                voClone.AQSJLX += "发放不合格的消毒或灭菌物品；";
                         //贵重医疗器材损毁或丢失
-                        if (dicXml["GCYLJCSH"].ToString() == "1")
-                            voClone.AQSJLX += "贵重医疗器材损毁或丢失；";
+                        if (dicXml.ContainsKey("X026"))
+                            if (dicXml["X026"].ToString() == "1")
+                                voClone.AQSJLX += "贵重医疗器材损毁或丢失；";
                         //发生召回灭菌物品事件
-                        if (dicXml["FSZHMJWPSJ"].ToString() == "1")
-                            voClone.AQSJLX += "发生召回灭菌物品事件；";
+                        if (dicXml.ContainsKey("X024"))
+                            if (dicXml["X024"].ToString() == "1")
+                                voClone.AQSJLX += "发生召回灭菌物品事件；";
                         //包内器械物品配置错误影响手术进程
-                        if (dicXml["BNJXWPPZCW"].ToString() == "1")
-                            voClone.AQSJLX += "包内器械物品配置错误影响手术进程；";
+                        if (dicXml.ContainsKey("X027"))
+                            if (dicXml["X027"].ToString() == "1")
+                                voClone.AQSJLX += "包内器械物品配置错误影响手术进程；";
                         //发生与灭菌器械相关的感染事件
-                        if (dicXml["FSYMJJXXDSJ"].ToString() == "1")
-                            voClone.AQSJLX += "发生与灭菌器械相关的感染事件；";
+                        if (dicXml.ContainsKey("X025"))
+                            if (dicXml["X025"].ToString() == "1")
+                                voClone.AQSJLX += "发生与灭菌器械相关的感染事件；";
                         //药物外渗
-                        if (dicXml["YWWS"].ToString() == "1")
-                            voClone.AQSJLX += "药物外渗；";
+                        if (dicXml.ContainsKey("X029"))
+                            if (dicXml["X029"].ToString() == "1")
+                                voClone.AQSJLX += "药物外渗；";
                         //药物渗出
-                        if (dicXml["YWSC"].ToString() == "1")
-                            voClone.AQSJLX += "药物渗出；";
+                        if (dicXml.ContainsKey("X035"))
+                            if (dicXml["X035"].ToString() == "1")
+                                voClone.AQSJLX += "药物渗出；";
                         //输液反应
-                        if (dicXml["SYFY"].ToString() == "1" || dicXml["SYFY_DETAIL"].ToString() != "")
-                            voClone.AQSJLX += "输液反应；";
+                        if (dicXml.ContainsKey("B002") && dicXml.ContainsKey("B001"))
+                            if (dicXml["B002"].ToString() == "1" || dicXml["B001"].ToString() != "")
+                                voClone.AQSJLX += "输液反应；";
                         //非计划性拔管
-                        if (dicXml["FJHXBG"].ToString() == "1" || dicXml["FJHXBG_DETAIL"].ToString() != "")
-                            voClone.AQSJLX += "非计划性拔管；";
+                        if (dicXml.ContainsKey("X031") && dicXml.ContainsKey("X032"))
+                            if (dicXml["X031"].ToString() == "1" || dicXml["X032"].ToString() != "")
+                                voClone.AQSJLX += "非计划性拔管；";
                         //跌倒
-                        if (dicXml["TD"].ToString() == "1")
-                            voClone.AQSJLX += "跌倒；";
+                        if (dicXml.ContainsKey("X041"))
+                            if (dicXml["X041"].ToString() == "1")
+                                voClone.AQSJLX += "跌倒；";
                         //坠床 
-                        if (dicXml["ZC"].ToString() == "1")
-                            voClone.AQSJLX += "坠床；";
+                        if (dicXml.ContainsKey("X042"))
+                            if (dicXml["X042"].ToString() == "1")
+                                voClone.AQSJLX += "坠床；";
                         //走失
-                        if (dicXml["ZS"].ToString() == "1")
-                            voClone.AQSJLX += "走失；";
+                        if (dicXml.ContainsKey("X043"))
+                            if (dicXml["X043"].ToString() == "1")
+                                voClone.AQSJLX += "走失；";
                         //误吸
-                        if (dicXml["WX"].ToString() == "1" || dicXml["WX_DETAIL"].ToString() != "")
-                            voClone.AQSJLX += "误吸；";
+                        if (dicXml.ContainsKey("X037") && dicXml.ContainsKey("X038"))
+                            if (dicXml["X037"].ToString() == "1" || dicXml["X038"].ToString() != "")
+                                voClone.AQSJLX += "误吸；";
                         //足下垂/关节僵硬/肌肉萎缩
-                        if (dicXml["CXZGJJYJRWS"].ToString() == "1")
-                            voClone.AQSJLX += "足下垂/关节僵硬/肌肉萎缩；";
+                        if (dicXml.ContainsKey("X044"))
+                            if (dicXml["X044"].ToString() == "1")
+                                voClone.AQSJLX += "足下垂/关节僵硬/肌肉萎缩；";
                         //DVT/PET 
-                        if (dicXml["DVTPET"].ToString() == "1")
-                            voClone.AQSJLX += "DVT/PET；";
+                        if (dicXml.ContainsKey("X046"))
+                            if (dicXml["X046"].ToString() == "1")
+                                voClone.AQSJLX += "DVT/PET；";
                         //新生儿烧伤、烫伤
-                        if (dicXml["XSESS"].ToString() == "1")
-                            voClone.AQSJLX += "新生儿烧伤、烫伤；";
+                        if (dicXml.ContainsKey("X048"))
+                            if (dicXml["X048"].ToString() == "1")
+                                voClone.AQSJLX += "新生儿烧伤、烫伤；";
                         //新生儿鼻中隔压伤
-                        if (dicXml["CHCX"].ToString() == "1" || dicXml["CHCX_DETAIL"].ToString() != "")
-                            voClone.AQSJLX += "新生儿鼻中隔压伤；";
+                        if (dicXml.ContainsKey("X051") && dicXml.ContainsKey("X052"))
+                            if (dicXml["X051"].ToString() == "1" || dicXml["X052"].ToString() != "")
+                                voClone.AQSJLX += "新生儿鼻中隔压伤；";
                         //阴道分娩新生儿产伤
-                        if (dicXml["YDFMXSECS"].ToString() == "1" || dicXml["YDFMXSECS_DETAIL"].ToString() != "")
-                            voClone.AQSJLX += "阴道分娩新生儿产伤；";
+                        if (dicXml.ContainsKey("X053") && dicXml.ContainsKey("X054"))
+                            if (dicXml["X053"].ToString() == "1" || dicXml["X054"].ToString() != "")
+                                voClone.AQSJLX += "阴道分娩新生儿产伤；";
                         //阴道分娩产妇尿潴留
-                        if (dicXml["YDFMCFNCL"].ToString() == "1")
-                            voClone.AQSJLX += "阴道分娩产妇尿潴留；";
+                        if (dicXml.ContainsKey("X055"))
+                            if (dicXml["X055"].ToString() == "1")
+                                voClone.AQSJLX += "阴道分娩产妇尿潴留；";
                         //使用催产素并发症
-                        if (dicXml["SYCCSBFZ"].ToString() == "1")
-                            voClone.AQSJLX += "使用催产素并发症；";
+                        if (dicXml.ContainsKey("X056"))
+                            if (dicXml["X056"].ToString() == "1")
+                                voClone.AQSJLX += "使用催产素并发症；";
                         //会阴裂伤
-                        if (dicXml["HYLS"].ToString() == "1")
-                            voClone.AQSJLX += "会阴裂伤；";
+                        if (dicXml.ContainsKey("X050"))
+                            if (dicXml["X050"].ToString() == "1")
+                                voClone.AQSJLX += "会阴裂伤；";
                         //手术查对不合格
-                        if (dicXml["SSCD"].ToString() == "1" || dicXml["SSCD_DETAIL"].ToString() != "")
-                            voClone.AQSJLX += "手术查对不合格；";
+                        if (dicXml.ContainsKey("X059") && dicXml.ContainsKey("X060"))
+                            if (dicXml["X059"].ToString() == "1" || dicXml["X060"].ToString() != "")
+                                voClone.AQSJLX += "手术查对不合格；";
                         //手术过程异物遗留
-                        if (dicXml["SSGCYWYL"].ToString() == "1")
-                            voClone.AQSJLX += "手术过程异物遗留；";
+                        if (dicXml.ContainsKey("X061"))
+                            if (dicXml["X061"].ToString() == "1")
+                                voClone.AQSJLX += "手术过程异物遗留；";
                         //手术标本处理不合格
-                        if (dicXml["SSBBCL"].ToString() == "1" || dicXml["SSBBCL_DETAIL"].ToString() != "")
-                            voClone.AQSJLX += "手术标本处理不合格；";
+                        if (dicXml.ContainsKey("X063") && dicXml.ContainsKey("X243"))
+                            if (dicXml["X063"].ToString() == "1" || dicXml["X243"].ToString() != "")
+                                voClone.AQSJLX += "手术标本处理不合格；";
                         //中心静脉导管相关血流感染
-                        if (dicXml["ZXJMDGXLGR"].ToString() == "1")
-                            voClone.AQSJLX += "中心静脉导管相关血流感染；";
+                        if (dicXml.ContainsKey("X057"))
+                            if (dicXml["X057"].ToString() == "1")
+                                voClone.AQSJLX += "中心静脉导管相关血流感染；";
                         //使用呼吸机卧位不正确
-                        if (dicXml["SYHXJWWBZQ"].ToString() == "1")
-                            voClone.AQSJLX += "使用呼吸机卧位不正确；";
+                        if (dicXml.ContainsKey("X058"))
+                            if (dicXml["X058"].ToString() == "1")
+                                voClone.AQSJLX += "使用呼吸机卧位不正确；";
                         //急诊分诊不合格
-                        if (dicXml["JZFZBHG"].ToString() == "1")
-                            voClone.AQSJLX += "急诊分诊不合格；";
+                        if (dicXml.ContainsKey("X064"))
+                            if (dicXml["X064"].ToString() == "1")
+                                voClone.AQSJLX += "急诊分诊不合格；";
                         //运送中病情变化    
-                        if (dicXml["YSZBQBH"].ToString() == "1")
-                            voClone.AQSJLX += "运送中病情变化；";
+                        if (dicXml.ContainsKey("X066"))
+                            if (dicXml["X066"].ToString() == "1")
+                                voClone.AQSJLX += "运送中病情变化；";
                         //擅自离院 
-                        if (dicXml["SZLY"].ToString() == "1")
-                            voClone.AQSJLX += "擅自离院 ；";
+                        if (dicXml.ContainsKey("X067"))
+                            if (dicXml["X067"].ToString() == "1")
+                                voClone.AQSJLX += "擅自离院 ；";
                         //自残   
-                        if (dicXml["ZC_1"].ToString() == "1")
-                            voClone.AQSJLX += "自残 ；";
+                        if (dicXml.ContainsKey("X068"))
+                            if (dicXml["X068"].ToString() == "1")
+                                voClone.AQSJLX += "自残 ；";
                         //自杀   
-                        if (dicXml["ZS_1"].ToString() == "1")
-                            voClone.AQSJLX += "自杀；";
+                        if (dicXml.ContainsKey("X069"))
+                            if (dicXml["X069"].ToString() == "1")
+                                voClone.AQSJLX += "自杀；";
                         //猝死  
-                        if (dicXml["CS"].ToString() == "1")
-                            voClone.AQSJLX += "猝死；";
+                        if (dicXml.ContainsKey("X070"))
+                            if (dicXml["X070"].ToString() == "1")
+                                voClone.AQSJLX += "猝死；";
                         //失窃    
-                        if (dicXml["SQ"].ToString() == "1")
-                            voClone.AQSJLX += "失窃；";
+                        if (dicXml.ContainsKey("X071"))
+                            if (dicXml["X071"].ToString() == "1")
+                                voClone.AQSJLX += "失窃；";
                         //投诉纠纷 
-                        if (dicXml["DSJF"].ToString() == "1")
-                            voClone.AQSJLX += "投诉纠纷；";
-                        //暴力行为      
-                        if (dicXml["BLXW"].ToString() == "1")
-                            voClone.AQSJLX += "暴力行为；";
-                        //意外伤害    
-                        if (dicXml["YWSH"].ToString() == "1")
-                            voClone.AQSJLX += "意外伤害";
-                        //意外伤害    
-                        if (dicXml["BFZ"].ToString() == "1")
-                            voClone.AQSJLX += "并发症";
-                        //其他事件    
-                        if (dicXml["QTSJ_8"].ToString() == "1")
-                            voClone.AQSJLX += "其他事件";
+                        if (dicXml.ContainsKey("X072"))
+                            if (dicXml["X072"].ToString() == "1")
+                                voClone.AQSJLX += "投诉纠纷；";
+                        //暴力行为   
+                        if (dicXml.ContainsKey("X073"))
+                            if (dicXml["X073"].ToString() == "1")
+                                voClone.AQSJLX += "暴力行为；";
+                        //意外伤害   
+                        if (dicXml.ContainsKey("B003"))
+                            if (dicXml["B003"].ToString() == "1")
+                                voClone.AQSJLX += "意外伤害";
+                        //意外伤害 
+                        if (dicXml.ContainsKey("C001"))
+                            if (dicXml["C001"].ToString() == "1")
+                                voClone.AQSJLX += "并发症";
+                        //其他事件
+                        if (dicXml.ContainsKey("X080"))
+                            if (dicXml["X080"].ToString() == "1")
+                                voClone.AQSJLX += "其他事件";
 
                         #endregion
 
