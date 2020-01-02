@@ -109,17 +109,17 @@
             this.tabPage1.Controls.Add(this.txtSearchName);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.dgvItem);
-            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(308, 479);
+            this.tabPage1.Size = new System.Drawing.Size(308, 478);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnTabClose
             // 
-            this.btnTabClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
+            this.btnTabClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnTabClose.DefaultScheme = true;
             this.btnTabClose.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnTabClose.Hint = "";
@@ -373,7 +373,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnClear.DefaultScheme = true;
             this.btnClear.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnClear.Hint = "";
@@ -407,7 +407,7 @@
             // 
             // btnByDept
             // 
-            this.btnByDept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
+            this.btnByDept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnByDept.DefaultScheme = true;
             this.btnByDept.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnByDept.Font = new System.Drawing.Font("宋体", 10.5F);
@@ -422,7 +422,7 @@
             // 
             // btnCount
             // 
-            this.btnCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
+            this.btnCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnCount.DefaultScheme = true;
             this.btnCount.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnCount.Font = new System.Drawing.Font("宋体", 10.5F);
@@ -437,7 +437,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnExport.DefaultScheme = true;
             this.btnExport.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnExport.Hint = "";
@@ -451,7 +451,7 @@
             // 
             // btnExite
             // 
-            this.btnExite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
+            this.btnExite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnExite.DefaultScheme = true;
             this.btnExite.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnExite.Hint = "";
@@ -469,9 +469,9 @@
             this.label2.Font = new System.Drawing.Font("宋体", 10.5F);
             this.label2.Location = new System.Drawing.Point(4, 144);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 14);
+            this.label2.Size = new System.Drawing.Size(70, 14);
             this.label2.TabIndex = 2;
-            this.label2.Text = "报告日期：";
+            this.label2.Text = "报告日期:";
             // 
             // dgvCheckItem
             // 
@@ -508,9 +508,9 @@
             this.dteEnd.CustomFormat = "yyyy-MM-dd HH:mm";
             this.dteEnd.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dteEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dteEnd.Location = new System.Drawing.Point(80, 167);
+            this.dteEnd.Location = new System.Drawing.Point(76, 167);
             this.dteEnd.Name = "dteEnd";
-            this.dteEnd.Size = new System.Drawing.Size(135, 23);
+            this.dteEnd.Size = new System.Drawing.Size(139, 23);
             this.dteEnd.TabIndex = 8;
             // 
             // dteStart
@@ -519,9 +519,9 @@
             this.dteStart.CustomFormat = "yyyy-MM-dd HH:mm";
             this.dteStart.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dteStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dteStart.Location = new System.Drawing.Point(80, 138);
+            this.dteStart.Location = new System.Drawing.Point(76, 138);
             this.dteStart.Name = "dteStart";
-            this.dteStart.Size = new System.Drawing.Size(136, 23);
+            this.dteStart.Size = new System.Drawing.Size(140, 23);
             this.dteStart.TabIndex = 6;
             this.dteStart.Value = new System.DateTime(2018, 3, 27, 0, 0, 0, 0);
             // 
@@ -555,8 +555,8 @@
             this.cbxGroup.Name = "cbxGroup";
             this.cbxGroup.Size = new System.Drawing.Size(208, 22);
             this.cbxGroup.TabIndex = 15;
-            this.cbxGroup.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cbxGroup_MouseClick);
             this.cbxGroup.SelectedIndexChanged += new System.EventHandler(this.cbxGroup_SelectedIndexChanged);
+            this.cbxGroup.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cbxGroup_MouseClick);
             this.cbxGroup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cbxGroup_MouseDown);
             // 
             // panel2
