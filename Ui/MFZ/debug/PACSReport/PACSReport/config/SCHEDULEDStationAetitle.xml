@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<!--请注意：key会存入数据库中的instrumentmodel字段(该字段需要获取生产厂商，要获取该字段，请用ezDICOM.exe查询0008,0070,Manufacturer=xxxxx),value会存入数据库中的ScheduledStationAETitle字段(仪器AETitle)-->
-<SCHEDULEDStationAetitle>
-	<Title key="Philips Medical Systems" value="DIDI"/>
-	<Title key="日立医疗系统(苏州)有限公司" value="HITACHIDX"/>
-        <Title key="TOSHIBA" value="TOSHIBACT"/>
-        <Title key="CARESTREAM HEALTH" value="CARESTREAMDX"/>
-</SCHEDULEDStationAetitle>

@@ -1,3 +1,0 @@
-ImageView0 INT类型
-ImageVIew1 PDT_BYTE类型
-imageView2 PDT_UINT_16类型
