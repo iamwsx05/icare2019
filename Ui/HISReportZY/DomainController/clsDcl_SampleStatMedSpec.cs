@@ -1,0 +1,79 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text; 
+using System.Data;
+
+namespace com.digitalwave.iCare.gui.HIS.Reports
+{
+    public class clsDcl_SampleStatMedSpec : com.digitalwave.GUI_Base.clsDomainController_Base
+    {
+        public clsDcl_SampleStatMedSpec()
+        {
+        }
+
+        #region 检验标本周转中位数统计表
+        /// <summary>
+        /// 检验标本周转中位数统计表
+        /// </summary>
+        /// <param name="dtbResult"></param>
+        /// <returns></returns>
+        public long lngGetSampleMedSpec(out DataTable dtbResult, string dteStart, string dteEnd,string groupId, string applyUnitId,string strDept,string enmergencyFlg,string patType,int tsFlg)
+        {
+            //using (clsHISReportZy_Supported_Svc svc = (clsHISReportZy_Supported_Svc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsHISReportZy_Supported_Svc)))
+            //{
+                return (new weCare.Proxy.ProxyReport()).Service.GetSampleMedSpec(out dtbResult, dteStart, dteEnd, groupId, applyUnitId, strDept, enmergencyFlg, patType, tsFlg);
+            //}
+        }
+        #endregion
+
+        #region 获取专业组
+        /// <summary>
+        /// 获取专业组
+        /// </summary>
+        /// <param name="dtbResult"></param>
+        /// <returns></returns>
+        public long GetAllCheckSpec(out DataTable dtbResult)
+        {
+            long lngRes = 0;
+
+            //using (clsHISReportZy_Supported_Svc svc = (clsHISReportZy_Supported_Svc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsHISReportZy_Supported_Svc)))
+            //{
+                dtbResult = (new weCare.Proxy.ProxyReport()).Service.GetGategoryType();
+                return lngRes;
+            //}
+        }
+        #endregion
+
+        #region 获取所有检验项目
+        /// <summary>
+        /// 获取所有检验项目
+        /// </summary>
+        /// <param name="dtbResult"></param>
+        /// <returns></returns>
+        public long lngGetAllCheckItem(out DataTable dtbResult, string groupId)
+        {
+            //using (clsHISReportZy_Supported_Svc svc = (clsHISReportZy_Supported_Svc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsHISReportZy_Supported_Svc)))
+            //{
+                return (new weCare.Proxy.ProxyReport()).Service.GetAllCheckItemCpy(out dtbResult, groupId);
+            //}
+        }
+        #endregion
+
+        #region 名称检索检验项目
+        /// <summary>
+        /// 名称检索检验项目
+        /// </summary>
+        /// <param name="strTempName"></param>
+        /// <param name="dtbResult"></param>
+        /// <returns></returns>
+        public long lngGetCheckItemByName(string strTempName, string groudId, out DataTable dtbResult)
+        {
+            //using (clsHISReportZy_Supported_Svc svc = (clsHISReportZy_Supported_Svc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsHISReportZy_Supported_Svc)))
+            //{
+                return (new weCare.Proxy.ProxyReport()).Service.GetCheckItemByNameCpy(strTempName, groudId, out dtbResult);
+            //}
+        }
+        #endregion
+
+    }
+}

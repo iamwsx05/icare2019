@@ -4,6 +4,7 @@ using weCare.Core.Entity; //iCareData.dll
 using com.digitalwave.iCare.middletier.LIS; //ILISDataAnalysis.dll --- data analysis interface; LIS_Svc.dll --- middle tier
 using System.Net;
 using System.Net.Sockets;
+using com.digitalwave.Utility;
 
 namespace com.digitalwave.iCare.gui.LIS_Data_Acquisition_Controller
 {
@@ -64,22 +65,31 @@ namespace com.digitalwave.iCare.gui.LIS_Data_Acquisition_Controller
         /// <param name="objConfig_List">设备详细设置信息（VO）</param>
         public void GetInstrumentSerialSetting(com.digitalwave.iCare.gui.LIS_Data_Acquisition_Controller.frmLIS_Data_Acquisition_Controller frmLIS_Controller, ref clsLIS_Equip_ConfigVO[] objConfig_List)
         {
-            string strHost_Name = System.Net.Dns.GetHostName();
-            System.Net.IPAddress objHost_IP = System.Net.Dns.Resolve(strHost_Name).AddressList[0];
-            string strHost_IP = objHost_IP.ToString();
-
-            long lngRes = (new weCare.Proxy.ProxyLis()).Service.lngGetInstrumentSerialSetting(strHost_Name, out objConfig_List);
-            if (lngRes == 1)
+            try
             {
-                if (objConfig_List != null)
+                string strHost_Name = System.Net.Dns.GetHostName();
+                System.Net.IPAddress objHost_IP = System.Net.Dns.GetHostEntry(strHost_Name).AddressList[0];
+                
+                string strHost_IP = objHost_IP.ToString();
+
+                long lngRes = (new weCare.Proxy.ProxyLis()).Service.lngGetInstrumentSerialSetting(strHost_Name, out objConfig_List);
+                if (lngRes == 1)
                 {
-                    int intCount = objConfig_List.Length;
-                    if (intCount > 0)
+                    if (objConfig_List != null)
                     {
-                        frmLIS_Controller.m_cboInstrument.AddRangeItems(objConfig_List);
+                        int intCount = objConfig_List.Length;
+                        if (intCount > 0)
+                        {
+                            frmLIS_Controller.m_cboInstrument.AddRangeItems(objConfig_List);
+                        }
                     }
                 }
             }
+            catch(Exception ex)
+            {
+                Log.Output(ex.ToString());
+            }
+           
         }
 
 
@@ -91,7 +101,7 @@ namespace com.digitalwave.iCare.gui.LIS_Data_Acquisition_Controller
         public void GetInstrumentSerialSetting2(com.digitalwave.iCare.gui.LIS_Data_Acquisition_Controller.frmLIS_Data_Acquisition_Controller frmLIS_Controller, ref clsLIS_Equip_Base[] objConfig_List)
         {
             string strHost_Name = System.Net.Dns.GetHostName();
-            System.Net.IPAddress objHost_IP = System.Net.Dns.Resolve(strHost_Name).AddressList[0];
+            System.Net.IPAddress objHost_IP = System.Net.Dns.GetHostEntry(strHost_Name).AddressList[0];
             string strHost_IP = objHost_IP.ToString();
 
             //com.digitalwave.iCare.middletier.LIS.clsQueryLIS_Svc objLIS_Svc = (clsQueryLIS_Svc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(com.digitalwave.iCare.middletier.LIS.clsQueryLIS_Svc));

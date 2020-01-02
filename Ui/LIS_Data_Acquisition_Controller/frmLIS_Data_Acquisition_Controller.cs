@@ -11,7 +11,7 @@ using com.digitalwave.iCare.gui.LIS;
 using com.digitalwave.iCare.middletier.LIS;
 using com.digitalwave.iCare.LIS;
 using System.Collections.Generic;
-
+using com.digitalwave.Utility;
 
 namespace com.digitalwave.iCare.gui.LIS_Data_Acquisition_Controller
 {
@@ -1243,9 +1243,29 @@ namespace com.digitalwave.iCare.gui.LIS_Data_Acquisition_Controller
                     dbConfigVo.strLIS_Instrument_Name = "BioCHip";
                 }
 
+                // 特殊处理.暂时写死(调试.更新中间件麻烦 2018-06-19)
+                if (objDataAcquisition2 == null && !string.IsNullOrEmpty(objEquipBse2.strLIS_Instrument_Name) && objEquipBse2.strLIS_Instrument_Name.Trim() == "ATB法国梅里艾")
+                {
+                    objDataAcquisition2 = objLIS_Controller.objGetDataAnalyzer("ATB.DLL", "com.digitalwave.iCare.gui.LIS.clsDataAnalysis_ATB");
+                    dbConfigVo = new clsLIS_Equip_DB_ConfigVO();
+                    dbConfigVo.strData_Acquisition_Computer_IP = "";
+                    dbConfigVo.strONLINE_DNS_VCHR = "dsn=ATB";
+                    // 联机方式1=ORACLE,2=SQL,3=ADO,4=ODBC,5=TEXT
+                    dbConfigVo.strONLINE_MODULE_CHR = "4";
+                    dbConfigVo.strOTHER_PRAM_VCHR = "";
+                    dbConfigVo.strPIC_PATH_VCHR = "";
+                    // 自动读取时,轮循间隔(s)
+                    dbConfigVo.strWORK_AUTO_INTERNAL_VCHR = "10";
+                    // 工作方式,1位表示自动读取,2位事件驱动,3位表示手工驱动
+                    dbConfigVo.strWORK_MODULE_CHR = "1";
+                    dbConfigVo.strLIS_Instrument_ID = "000034";
+                    dbConfigVo.strLIS_Instrument_Name = "ATB";
+                }
+
                 if (objDataAcquisition2 is infLISDataAcquisition_DB)
                 {
                     #region 新接口模式 -- 读数据
+                   
                     infLISDataAcquisition_DB objLISDataAcqu_DB = objDataAcquisition2 as infLISDataAcquisition_DB;
                     objLISDataAcqu_DB.m_frmParent = this;
                     if (dbConfigVo == null)
@@ -1257,6 +1277,7 @@ namespace com.digitalwave.iCare.gui.LIS_Data_Acquisition_Controller
                     lngRes = objLISDataAcqu_DB.m_lngStartWork();
                     if (lngRes > 0)
                     {
+                        //Log.Output(objEquipBse2.strLIS_Instrument_Name);
                         objLISDataAcqu_DB.evnDataShow += new DataShowEventHandler(LISDataAcquisition_evnDataShow);
                         ListViewItem objItem = new ListViewItem();
                         objItem.Text = objEquipBse2.strLIS_Instrument_Name;
