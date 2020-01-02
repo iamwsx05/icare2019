@@ -453,11 +453,11 @@ namespace com.digitalwave.iCare.gui.HIS
         public void m_mthGeSampleStatSpecStat()
         {
             DataTable dtbResult;
-            if (string.IsNullOrEmpty(m_objViewer.cbxGroup.Text) && m_objViewer.dgvCheckItem.Rows.Count < 2)
-            {
-                MessageBox.Show("请选择专业组或检验项目 ！");
-                return;
-            }
+            //if (string.IsNullOrEmpty(m_objViewer.cbxGroup.Text) && m_objViewer.dgvCheckItem.Rows.Count < 2)
+            //{
+            //    MessageBox.Show("请选择专业组或检验项目 ！");
+            //    return;
+            //}
 
             List<EntitySamepleStat> data = new List<EntitySamepleStat>();
             string groupId = string.Empty;
