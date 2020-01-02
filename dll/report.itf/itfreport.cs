@@ -251,7 +251,7 @@ namespace Report.Itf
         long GetWorkLoadCount(string dteStart, string dteEnd, string categoryId, out DataTable dtbResult);
 
         [OperationContract]
-        long GetSampleMedSpec(out DataTable dtbResult, string dteStart, string dteEnd, string groupId, string applyUnitId, string strDept, string enmergencyFlg, string patType);
+        long GetSampleMedSpec(out DataTable dtbResult, string dteStart, string dteEnd, string groupId, string applyUnitId, string strDept, string enmergencyFlg, string patType,int tsFlg);
 
         [OperationContract]
         long GetSampleAcceptable(out DataTable dtbResult, string dteStart, string dteEnd, string applyUnitId, string strDept, string enmergencyFlg, string patType);

@@ -688,11 +688,11 @@ namespace Report.Service
             }
         }
 
-        public long GetSampleMedSpec(out DataTable dtbResult, string dteStart, string dteEnd, string groupId, string applyUnitId, string strDept, string enmergencyFlg, string patType)
+        public long GetSampleMedSpec(out DataTable dtbResult, string dteStart, string dteEnd, string groupId, string applyUnitId, string strDept, string enmergencyFlg, string patType,int tsFlg)
         {
             using (clsHISReportZy_Supported_Svc svc = new clsHISReportZy_Supported_Svc())
             {
-                long rec = svc.GetSampleMedSpec(out dtbResult, dteStart, dteEnd, groupId, applyUnitId, strDept, enmergencyFlg, patType);
+                long rec = svc.GetSampleMedSpec(out dtbResult, dteStart, dteEnd, groupId, applyUnitId, strDept, enmergencyFlg, patType,tsFlg);
                 dtbResult = Function.ReNameDatatable(dtbResult);
                 return rec;
             }

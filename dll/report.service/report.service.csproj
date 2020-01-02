@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Debug\</OutputPath>
+    <OutputPath>..\..\..\debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -42,6 +42,18 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="utility, Version=2.0.0.1, Culture=neutral, PublicKeyToken=55813ad8fa3e5102, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\debug\utility.dll</HintPath>
+    </Reference>
+    <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\debug\wecare.core.dll</HintPath>
+    </Reference>
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=4bdb6de9b3ca5966, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\debug\wecaredata.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="bizopreport.cs" />
@@ -56,18 +68,6 @@
     <ProjectReference Include="..\report.itf\report.itf.csproj">
       <Project>{1ae15029-22f8-427c-9561-bb925e8d7b80}</Project>
       <Name>report.itf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\utility\utility.csproj">
-      <Project>{0de55f8f-7c1d-4325-a340-d25d88371fa4}</Project>
-      <Name>utility</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\wecare.core\wecare.core.csproj">
-      <Project>{29eb1dd7-a9cd-4549-a6ac-1ae99cae93fc}</Project>
-      <Name>wecare.core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\wecaredata\weCareData.csproj">
-      <Project>{943209fb-bfbe-4371-867f-fbd354a6a4cb}</Project>
-      <Name>weCareData</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
