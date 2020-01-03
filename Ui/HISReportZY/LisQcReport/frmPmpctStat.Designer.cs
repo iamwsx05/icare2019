@@ -37,21 +37,6 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.txtSearchName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnClear = new PinkieControls.ButtonXP();
-            this.cboPatType = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnExite = new PinkieControls.ButtonXP();
-            this.btnExport = new PinkieControls.ButtonXP();
-            this.dteEnd = new System.Windows.Forms.DateTimePicker();
-            this.btnCount = new PinkieControls.ButtonXP();
-            this.dteStart = new System.Windows.Forms.DateTimePicker();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dgvCheckItem = new System.Windows.Forms.DataGridView();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cbxGroup = new System.Windows.Forms.ComboBox();
             this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.gcData = new DevExpress.XtraGrid.GridControl();
@@ -82,15 +67,28 @@
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemMemoEdit4 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnClear = new PinkieControls.ButtonXP();
+            this.cboPatType = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnExite = new PinkieControls.ButtonXP();
+            this.btnExport = new PinkieControls.ButtonXP();
+            this.dteEnd = new System.Windows.Forms.DateTimePicker();
+            this.btnCount = new PinkieControls.ButtonXP();
+            this.dteStart = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dgvCheckItem = new System.Windows.Forms.DataGridView();
             this.antiID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.anti_cname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cbxGroup = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             this.tabContorl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItem)).BeginInit();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCheckItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
             this.xtraTabControl.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -103,6 +101,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit4)).BeginInit();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCheckItem)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -210,197 +210,6 @@
             this.label4.Size = new System.Drawing.Size(70, 14);
             this.label4.TabIndex = 1;
             this.label4.Text = "名称检索:";
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.btnClear);
-            this.panel3.Controls.Add(this.cboPatType);
-            this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.btnExite);
-            this.panel3.Controls.Add(this.btnExport);
-            this.panel3.Controls.Add(this.dteEnd);
-            this.panel3.Controls.Add(this.btnCount);
-            this.panel3.Controls.Add(this.dteStart);
-            this.panel3.Controls.Add(this.label6);
-            this.panel3.Controls.Add(this.label5);
-            this.panel3.Controls.Add(this.dgvCheckItem);
-            this.panel3.Controls.Add(this.label10);
-            this.panel3.Controls.Add(this.label11);
-            this.panel3.Controls.Add(this.cbxGroup);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(2, 2);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(233, 645);
-            this.panel3.TabIndex = 168;
-            // 
-            // btnClear
-            // 
-            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnClear.DefaultScheme = true;
-            this.btnClear.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.btnClear.Hint = "";
-            this.btnClear.Location = new System.Drawing.Point(90, 195);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
-            this.btnClear.Size = new System.Drawing.Size(125, 27);
-            this.btnClear.TabIndex = 172;
-            this.btnClear.Text = "清空";
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // cboPatType
-            // 
-            this.cboPatType.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cboPatType.FormattingEnabled = true;
-            this.cboPatType.Items.AddRange(new object[] {
-            ""});
-            this.cboPatType.Location = new System.Drawing.Point(88, 112);
-            this.cboPatType.Name = "cboPatType";
-            this.cboPatType.Size = new System.Drawing.Size(125, 22);
-            this.cboPatType.TabIndex = 178;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.label1.Location = new System.Drawing.Point(8, 115);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 14);
-            this.label1.TabIndex = 170;
-            this.label1.Text = "病人类型：";
-            // 
-            // btnExite
-            // 
-            this.btnExite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnExite.DefaultScheme = true;
-            this.btnExite.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.btnExite.Hint = "";
-            this.btnExite.Location = new System.Drawing.Point(151, 10);
-            this.btnExite.Name = "btnExite";
-            this.btnExite.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
-            this.btnExite.Size = new System.Drawing.Size(71, 27);
-            this.btnExite.TabIndex = 166;
-            this.btnExite.Text = "退出";
-            this.btnExite.Click += new System.EventHandler(this.btnExite_Click);
-            // 
-            // btnExport
-            // 
-            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnExport.DefaultScheme = true;
-            this.btnExport.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.btnExport.Hint = "";
-            this.btnExport.Location = new System.Drawing.Point(79, 10);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
-            this.btnExport.Size = new System.Drawing.Size(66, 27);
-            this.btnExport.TabIndex = 167;
-            this.btnExport.Text = "导出";
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
-            // dteEnd
-            // 
-            this.dteEnd.CustomFormat = "yyyy-MM-dd";
-            this.dteEnd.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dteEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dteEnd.Location = new System.Drawing.Point(87, 83);
-            this.dteEnd.Name = "dteEnd";
-            this.dteEnd.Size = new System.Drawing.Size(104, 23);
-            this.dteEnd.TabIndex = 12;
-            // 
-            // btnCount
-            // 
-            this.btnCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.btnCount.DefaultScheme = true;
-            this.btnCount.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.btnCount.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.btnCount.Hint = "";
-            this.btnCount.Location = new System.Drawing.Point(6, 10);
-            this.btnCount.Name = "btnCount";
-            this.btnCount.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
-            this.btnCount.Size = new System.Drawing.Size(67, 27);
-            this.btnCount.TabIndex = 168;
-            this.btnCount.Text = "统计";
-            this.btnCount.Click += new System.EventHandler(this.btnCount_Click);
-            // 
-            // dteStart
-            // 
-            this.dteStart.CalendarFont = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dteStart.CustomFormat = "yyyy-MM-dd";
-            this.dteStart.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dteStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dteStart.Location = new System.Drawing.Point(87, 54);
-            this.dteStart.Name = "dteStart";
-            this.dteStart.Size = new System.Drawing.Size(104, 23);
-            this.dteStart.TabIndex = 11;
-            this.dteStart.Value = new System.DateTime(2018, 3, 1, 0, 0, 0, 0);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.label6.Location = new System.Drawing.Point(10, 203);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 14);
-            this.label6.TabIndex = 167;
-            this.label6.Text = "检验项目：";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.label5.Location = new System.Drawing.Point(14, 60);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 14);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "查询日期:";
-            // 
-            // dgvCheckItem
-            // 
-            this.dgvCheckItem.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvCheckItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCheckItem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.antiID,
-            this.anti_cname});
-            this.dgvCheckItem.Location = new System.Drawing.Point(7, 233);
-            this.dgvCheckItem.Name = "dgvCheckItem";
-            this.dgvCheckItem.ReadOnly = true;
-            this.dgvCheckItem.RowHeadersVisible = false;
-            this.dgvCheckItem.RowTemplate.Height = 23;
-            this.dgvCheckItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCheckItem.Size = new System.Drawing.Size(219, 351);
-            this.dgvCheckItem.TabIndex = 1;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(52, 83);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(21, 14);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "至";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.label11.Location = new System.Drawing.Point(10, 143);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(63, 14);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "专业组：";
-            // 
-            // cbxGroup
-            // 
-            this.cbxGroup.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxGroup.FormattingEnabled = true;
-            this.cbxGroup.Items.AddRange(new object[] {
-            ""});
-            this.cbxGroup.Location = new System.Drawing.Point(10, 167);
-            this.cbxGroup.Name = "cbxGroup";
-            this.cbxGroup.Size = new System.Drawing.Size(205, 22);
-            this.cbxGroup.TabIndex = 15;
-            this.cbxGroup.SelectedIndexChanged += new System.EventHandler(this.cbxGroup_SelectedIndexChanged);
-            this.cbxGroup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cbxGroup_MouseDown);
             // 
             // xtraTabControl
             // 
@@ -926,6 +735,164 @@
             // 
             this.repositoryItemMemoEdit4.Name = "repositoryItemMemoEdit4";
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnClear);
+            this.panel3.Controls.Add(this.cboPatType);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.btnExite);
+            this.panel3.Controls.Add(this.btnExport);
+            this.panel3.Controls.Add(this.dteEnd);
+            this.panel3.Controls.Add(this.btnCount);
+            this.panel3.Controls.Add(this.dteStart);
+            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.dgvCheckItem);
+            this.panel3.Controls.Add(this.label10);
+            this.panel3.Controls.Add(this.label11);
+            this.panel3.Controls.Add(this.cbxGroup);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(2, 2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(233, 645);
+            this.panel3.TabIndex = 168;
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnClear.DefaultScheme = true;
+            this.btnClear.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnClear.Hint = "";
+            this.btnClear.Location = new System.Drawing.Point(90, 195);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
+            this.btnClear.Size = new System.Drawing.Size(125, 27);
+            this.btnClear.TabIndex = 172;
+            this.btnClear.Text = "清空";
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // cboPatType
+            // 
+            this.cboPatType.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cboPatType.FormattingEnabled = true;
+            this.cboPatType.Items.AddRange(new object[] {
+            ""});
+            this.cboPatType.Location = new System.Drawing.Point(88, 112);
+            this.cboPatType.Name = "cboPatType";
+            this.cboPatType.Size = new System.Drawing.Size(125, 22);
+            this.cboPatType.TabIndex = 178;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.label1.Location = new System.Drawing.Point(8, 115);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 14);
+            this.label1.TabIndex = 170;
+            this.label1.Text = "病人类型：";
+            // 
+            // btnExite
+            // 
+            this.btnExite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnExite.DefaultScheme = true;
+            this.btnExite.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnExite.Hint = "";
+            this.btnExite.Location = new System.Drawing.Point(151, 10);
+            this.btnExite.Name = "btnExite";
+            this.btnExite.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
+            this.btnExite.Size = new System.Drawing.Size(71, 27);
+            this.btnExite.TabIndex = 166;
+            this.btnExite.Text = "退出";
+            this.btnExite.Click += new System.EventHandler(this.btnExite_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnExport.DefaultScheme = true;
+            this.btnExport.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnExport.Hint = "";
+            this.btnExport.Location = new System.Drawing.Point(79, 10);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
+            this.btnExport.Size = new System.Drawing.Size(66, 27);
+            this.btnExport.TabIndex = 167;
+            this.btnExport.Text = "导出";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // dteEnd
+            // 
+            this.dteEnd.CustomFormat = "yyyy-MM-dd";
+            this.dteEnd.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dteEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dteEnd.Location = new System.Drawing.Point(87, 83);
+            this.dteEnd.Name = "dteEnd";
+            this.dteEnd.Size = new System.Drawing.Size(104, 23);
+            this.dteEnd.TabIndex = 12;
+            // 
+            // btnCount
+            // 
+            this.btnCount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnCount.DefaultScheme = true;
+            this.btnCount.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnCount.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.btnCount.Hint = "";
+            this.btnCount.Location = new System.Drawing.Point(6, 10);
+            this.btnCount.Name = "btnCount";
+            this.btnCount.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
+            this.btnCount.Size = new System.Drawing.Size(67, 27);
+            this.btnCount.TabIndex = 168;
+            this.btnCount.Text = "统计";
+            this.btnCount.Click += new System.EventHandler(this.btnCount_Click);
+            // 
+            // dteStart
+            // 
+            this.dteStart.CalendarFont = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dteStart.CustomFormat = "yyyy-MM-dd";
+            this.dteStart.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dteStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dteStart.Location = new System.Drawing.Point(87, 54);
+            this.dteStart.Name = "dteStart";
+            this.dteStart.Size = new System.Drawing.Size(104, 23);
+            this.dteStart.TabIndex = 11;
+            this.dteStart.Value = new System.DateTime(2018, 3, 1, 0, 0, 0, 0);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.label6.Location = new System.Drawing.Point(10, 203);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 14);
+            this.label6.TabIndex = 167;
+            this.label6.Text = "检验项目：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.label5.Location = new System.Drawing.Point(14, 60);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(70, 14);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "查询日期:";
+            // 
+            // dgvCheckItem
+            // 
+            this.dgvCheckItem.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvCheckItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCheckItem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.antiID,
+            this.anti_cname});
+            this.dgvCheckItem.Location = new System.Drawing.Point(7, 233);
+            this.dgvCheckItem.Name = "dgvCheckItem";
+            this.dgvCheckItem.ReadOnly = true;
+            this.dgvCheckItem.RowHeadersVisible = false;
+            this.dgvCheckItem.RowTemplate.Height = 23;
+            this.dgvCheckItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCheckItem.Size = new System.Drawing.Size(219, 325);
+            this.dgvCheckItem.TabIndex = 1;
+            // 
             // antiID
             // 
             this.antiID.HeaderText = "检验项目编号";
@@ -939,6 +906,39 @@
             this.anti_cname.Name = "anti_cname";
             this.anti_cname.ReadOnly = true;
             this.anti_cname.Width = 200;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.Location = new System.Drawing.Point(52, 83);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(21, 14);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "至";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.label11.Location = new System.Drawing.Point(10, 143);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(63, 14);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "专业组：";
+            // 
+            // cbxGroup
+            // 
+            this.cbxGroup.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxGroup.FormattingEnabled = true;
+            this.cbxGroup.Items.AddRange(new object[] {
+            ""});
+            this.cbxGroup.Location = new System.Drawing.Point(10, 167);
+            this.cbxGroup.Name = "cbxGroup";
+            this.cbxGroup.Size = new System.Drawing.Size(205, 22);
+            this.cbxGroup.TabIndex = 15;
+            this.cbxGroup.SelectedIndexChanged += new System.EventHandler(this.cbxGroup_SelectedIndexChanged);
+            this.cbxGroup.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cbxGroup_MouseDown);
             // 
             // frmPmpctStat
             // 
@@ -955,9 +955,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItem)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCheckItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
             this.xtraTabControl.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
@@ -970,6 +967,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit4)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCheckItem)).EndInit();
             this.ResumeLayout(false);
 
         }
