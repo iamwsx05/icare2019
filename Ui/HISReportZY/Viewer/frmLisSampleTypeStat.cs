@@ -93,7 +93,7 @@ namespace com.digitalwave.iCare.gui.HIS
             //using (clsHISReportZy_Supported_Svc svc = (clsHISReportZy_Supported_Svc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsHISReportZy_Supported_Svc)))
             //{
                 dtbResult = (new weCare.Proxy.ProxyReport()).Service.GetGategoryType();
-                dtbApplyUnit = (new weCare.Proxy.ProxyReport()).Service.GetGategoryType2();
+                dtbApplyUnit = (new weCare.Proxy.ProxyReport()).Service.GetGategoryType2("33");
             //}
 
             for (int i = 0; i < dtbResult.Rows.Count; i++)
