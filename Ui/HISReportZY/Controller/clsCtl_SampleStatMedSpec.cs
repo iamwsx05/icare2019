@@ -66,6 +66,8 @@ namespace com.digitalwave.iCare.gui.HIS
             public decimal preTime { get; set; }
             public decimal lisTime { get; set; }
             public string color { get; set; }
+            public string DBSJ { get; set; }
+            public string DYSJ { get; set; }
         }
         #endregion
 
@@ -522,6 +524,10 @@ namespace com.digitalwave.iCare.gui.HIS
                         vo.Checker = dr["lastname_vchr"].ToString();
                         vo.item = dr["check_content_vchr"].ToString();
                         vo.color = dr["color"].ToString();
+                        if (dr["pattype"].ToString().Trim() == "2")
+                            vo.DYSJ = dr["DBSJ"].ToString();
+                        if (dr["pattype"].ToString().Trim() == "1")
+                            vo.DBSJ = dr["DBSJ"].ToString();
                         if (dr["preTime"] != DBNull.Value)
                             vo.preTime = Convert.ToDecimal(dr["preTime"]) > 0 ? Convert.ToDecimal(dr["preTime"]) : 0;
                         if (dr["lisTime"] != DBNull.Value)

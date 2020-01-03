@@ -2056,6 +2056,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                 {
                     strSQL1 = @"select distinct a.application_id_chr,a.age_chr as Age,
                                                     d.barcode_vchr  AS BARCODE,
+                                                    d.patient_type_chr AS pattype,
                                                     pv.vlaue_vchr AS color,
                                                     a.check_content_vchr,
                                                     --t1.apply_unit_name_vchr,
@@ -2105,6 +2106,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
 
                     strSQL2 = @"select distinct a.application_id_chr,a.age_chr as Age,
                                                     d.barcode_vchr   AS BARCODE,
+                                                    d.patient_type_chr AS pattype,
                                                     pv.vlaue_vchr AS color,
                                                     a.check_content_vchr,
                                                     --t1.apply_unit_name_vchr,
@@ -2155,6 +2157,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                 {
                     strSQL = @"select distinct a.application_id_chr,a.age_chr as Age,
                                                     d.barcode_vchr   AS BARCODE,
+                                                    d.patient_type_chr AS pattype,
                                                     pv.vlaue_vchr AS color,
                                                      a.check_content_vchr,
                                                     --t1.apply_unit_name_vchr,
@@ -2205,6 +2208,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                 {
                     strSQL = @"select distinct a.application_id_chr,a.age_chr as Age,
                                                     d.barcode_vchr AS BARCODE,
+                                                    d.patient_type_chr AS pattype,
                                                     pv.vlaue_vchr AS color,
                                                      a.check_content_vchr,
                                                     --t1.apply_unit_name_vchr,
@@ -2587,7 +2591,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
 
         #endregion
 
-        #region 免费母婴阻断阳性结果汇总表表表表表表表
+        #region 免费母婴阻断阳性结果汇总表
         /// <summary>
         /// 
         /// </summary>
