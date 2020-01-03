@@ -43,6 +43,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             public string XMJG { get; set; }
             public string SQYS { get; set; }
             public string JYZ { get; set; }
+            public string BARCODE { get; set; }
         }
 
         public class EntityPmpctStat
@@ -111,12 +112,80 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
         /// </summary>
         public void m_mthInit()
         {
+            DataTable dtbResult;
             dicGroup = new Dictionary<string, string>();
-            m_objViewer.dgvData.Visible = true;
             m_objViewer.dteStart.Value = Convert.ToDateTime(DateTime.Now.Year.ToString() + "-" + DateTime.Now.Month.ToString() + "-01");
-            m_objViewer.cboStatType.Items.AddRange(new object[] { "免费母婴阻断检测工作情况记录表", "免费母婴阻断阳性结果明细表" });
-            m_objViewer.cboStatType.SelectedIndex = 0;
             m_objViewer.cboPatType.Items.AddRange(new object[] { "住院","门诊"  });
+
+            m_objManage.GetAllCheckSpec(out dtbResult);
+
+            for (int i = 0; i < dtbResult.Rows.Count; i++)
+            {
+                m_objViewer.cbxGroup.Items.Add(dtbResult.Rows[i]["check_category_desc_vchr"].ToString());
+                dicGroup.Add(dtbResult.Rows[i]["check_category_id_chr"].ToString(), dtbResult.Rows[i]["check_category_desc_vchr"].ToString());
+            }
+
+            DataTable dtbApplyUnit = (new weCare.Proxy.ProxyReport()).Service.GetGategoryType2("34");
+
+            if (dtbApplyUnit != null && dtbApplyUnit.Rows.Count > 0)
+            {
+                for (int i = 0; i < dtbApplyUnit.Rows.Count; i++)
+                    m_objViewer.dgvCheckItem.Rows.Add(dtbApplyUnit.Rows[i].ItemArray);
+            }
+        }
+        #endregion
+
+        #region 列出所有检验项目
+        /// <summary>
+        /// 列出所有检验项目
+        /// </summary>
+        public void m_mthListCheckItem()
+        {
+            DataTable dtbResult;
+            string groupId = string.Empty;
+            foreach (KeyValuePair<string, string> kvp in dicGroup)
+            {
+                if (kvp.Value.Equals(this.m_objViewer.cbxGroup.Text))
+                {
+                    groupId = kvp.Key;
+                }
+            }
+
+            long lngRes = m_objManage.lngGetAllCheckItem(out dtbResult, groupId);
+
+            if (lngRes > 0 && dtbResult.Rows.Count > 0)
+            {
+                m_objViewer.dgvItem.DataSource = dtbResult;
+            }
+        }
+        #endregion
+
+        #region m_mthGetCheckItemByName
+        /// <summary>
+        /// m_mthGetCheckItemByName
+        /// </summary>
+        public void m_mthGetCheckItemByName()
+        {
+            DataTable dtbResult;
+            string strTempName = string.Empty;
+            string strGroupId = string.Empty;
+            strTempName = m_objViewer.txtSearchName.Text.Trim();
+            string groupId = string.Empty;
+
+            foreach (KeyValuePair<string, string> kvp in dicGroup)
+            {
+                if (kvp.Value.Equals(this.m_objViewer.cbxGroup.Text))
+                {
+                    strGroupId = kvp.Key;
+                }
+            }
+
+            long lngRes = m_objManage.lngGetCheckItemByName(strTempName, strGroupId, out dtbResult);
+
+            if (lngRes > 0 && dtbResult.Rows.Count > 0)
+            {
+                m_objViewer.dgvItem.DataSource = dtbResult;
+            }
         }
         #endregion
 
@@ -141,219 +210,246 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             int resultFlg = 0;
             int itemFlg = 0;
             int yfrcFlg = 0;
-            //clsPublic.PlayAvi();
-            patType = m_objViewer.cboPatType.SelectedIndex.ToString() ;
+            string applyUnitId = string.Empty;
 
-            long lngRes = m_objManage.lngGetPmpcStat(dteStart, dteEnd,patType, out dtbResult);
-
-            if (lngRes > 0 && dtbResult.Rows.Count > 0)
+            try
             {
-                foreach (DataRow dr in dtbResult.Rows)
+                if (string.IsNullOrEmpty(m_objViewer.cbxGroup.Text) && m_objViewer.dgvCheckItem.Rows.Count < 2)
                 {
-                    month = Convert.ToDateTime(dr["modify_dat"]).ToString("yyyy-MM");
-                    applicationId = dr["application_id_chr"].ToString();
-                    patType = dr["patient_type_chr"].ToString();
-                    resultFlg = 0;
+                    MessageBox.Show("请选择专业组或检验项目 ！");
+                    return;
+                }
 
-                    for (int i = 0; i < dataResult.Count; i++)
+                clsPublic.PlayAvi("findFILE.avi", "正在查询项目信息，请稍候...");
+                patType = m_objViewer.cboPatType.SelectedIndex.ToString();
+
+                if (m_objViewer.dgvCheckItem.Rows.Count >= 2)
+                {
+                    for (int i = 0; i < m_objViewer.dgvCheckItem.Rows.Count - 1; i++)
                     {
-                        if (applicationId == dataResult[i].ApplicationId)
+                        applyUnitId += "'" + m_objViewer.dgvCheckItem.Rows[i].Cells[0].Value.ToString() + "',";
+                    }
+
+                    applyUnitId = "(" + applyUnitId.TrimEnd(',') + ")";
+                }
+
+                long lngRes = m_objManage.lngGetPmpcStat(dteStart, dteEnd, patType, applyUnitId, out dtbResult);
+
+                if (lngRes > 0 && dtbResult.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dtbResult.Rows)
+                    {
+                        month = Convert.ToDateTime(dr["modify_dat"]).ToString("yyyy-MM");
+                        applicationId = dr["application_id_chr"].ToString();
+                        patType = dr["patient_type_chr"].ToString();
+                        resultFlg = 0;
+
+                        for (int i = 0; i < dataResult.Count; i++)
                         {
-                            EntityResult voClone = dataResult[i];
-                            voClone.YF = month;
-                            voClone.ApplicationId = applicationId;
-                            voClone.patType = patType;
-                            if (dr["check_item_id_chr"].ToString() == "000199")
-                                voClone.HIV = dr["result_vchr"].ToString();
-                            else if (dr["check_item_id_chr"].ToString() == "001448")
-                                voClone.TRUST = dr["result_vchr"].ToString();
-                            else if (dr["check_item_id_chr"].ToString() == "000196")
-                                voClone.TPPA = dr["result_vchr"].ToString();
+                            if (applicationId == dataResult[i].ApplicationId)
+                            {
+                                EntityResult voClone = dataResult[i];
+                                voClone.YF = month;
+                                voClone.ApplicationId = applicationId;
+                                voClone.patType = patType;
+                                if (dr["check_item_id_chr"].ToString() == "000199" || dr["check_item_id_chr"].ToString() == "001737")
+                                    voClone.HIV = dr["result_vchr"].ToString();
+                                else if (dr["check_item_id_chr"].ToString() == "001448" || dr["check_item_id_chr"].ToString() == "002133")
+                                    voClone.TRUST = dr["result_vchr"].ToString();
+                                else if (dr["check_item_id_chr"].ToString() == "000196" || dr["check_item_id_chr"].ToString() == "001069")
+                                    voClone.TPPA = dr["result_vchr"].ToString();
+                                else if (dr["check_item_id_chr"].ToString() == "000195")
+                                    voClone.RPR = dr["result_vchr"].ToString();
+                                else if (dr["check_item_id_chr"].ToString() == "000194" && patType == "1")
+                                    voClone.YGYXZY = dr["result_vchr"].ToString();
+                                else if (dr["check_item_id_chr"].ToString() == "000194" && patType == "2")
+                                    voClone.YGYXMZ = dr["result_vchr"].ToString();
+                                resultFlg = 1;
+                            }
+                        }
+
+                        if (resultFlg == 0)
+                        {
+                            EntityResult vo = new EntityResult();
+                            vo.YF = month;
+                            vo.ApplicationId = applicationId;
+                            vo.patType = patType;
+                            if (dr["check_item_id_chr"].ToString() == "000199" || dr["check_item_id_chr"].ToString() == "001737")
+                                vo.HIV = dr["result_vchr"].ToString();
+                            else if (dr["check_item_id_chr"].ToString() == "001448" || dr["check_item_id_chr"].ToString() == "002133")
+                                vo.TRUST = dr["result_vchr"].ToString();
+                            else if (dr["check_item_id_chr"].ToString() == "000196" || dr["check_item_id_chr"].ToString() == "001069")
+                                vo.TPPA = dr["result_vchr"].ToString();
                             else if (dr["check_item_id_chr"].ToString() == "000195")
-                                voClone.RPR = dr["result_vchr"].ToString();
+                                vo.RPR = dr["result_vchr"].ToString();
                             else if (dr["check_item_id_chr"].ToString() == "000194" && patType == "1")
-                                voClone.YGYXZY = dr["result_vchr"].ToString();
+                                vo.YGYXZY = dr["result_vchr"].ToString();
                             else if (dr["check_item_id_chr"].ToString() == "000194" && patType == "2")
-                                voClone.YGYXMZ = dr["result_vchr"].ToString();
-                            resultFlg = 1;
+                                vo.YGYXMZ = dr["result_vchr"].ToString();
+                            dataResult.Add(vo);
                         }
                     }
 
-                    if (resultFlg == 0)
+                    for (int j = 0; j < dataResult.Count; j++)
                     {
-                        EntityResult vo = new EntityResult();
-                        vo.YF = month;
-                        vo.ApplicationId = applicationId;
-                        vo.patType = patType;
-                        if (dr["check_item_id_chr"].ToString() == "000199")
-                            vo.HIV = dr["result_vchr"].ToString();
-                        else if (dr["check_item_id_chr"].ToString() == "001448")
-                            vo.TRUST = dr["result_vchr"].ToString();
-                        else if (dr["check_item_id_chr"].ToString() == "000196" || dr["check_item_id_chr"].ToString() == "001069")
-                            vo.TPPA = dr["result_vchr"].ToString();
-                        else if (dr["check_item_id_chr"].ToString() == "000195")
-                            vo.RPR = dr["result_vchr"].ToString();
-                        else if (dr["check_item_id_chr"].ToString() == "000194" && patType == "1")
-                            vo.YGYXZY = dr["result_vchr"].ToString();
-                        else if (dr["check_item_id_chr"].ToString() == "000194" && patType == "2")
-                            vo.YGYXMZ = dr["result_vchr"].ToString();
-                        dataResult.Add(vo);
-                    }
-                }
+                        EntityResult voResult = dataResult[j];
 
-                //DataView dataView = dtbResult.DefaultView;
-                //DataTable dataTableDistinct = dataView.ToTable(true, "patientid_chr", "patient_type_chr");
+                        EntityPmpctItem vo = new EntityPmpctItem();
+                        vo.YF = voResult.YF;
+                        vo.ApplicationId = voResult.ApplicationId;
+                        vo.patType = voResult.patType;
+                        yfrcFlg = 0;
 
-                for (int j = 0; j < dataResult.Count; j++)
-                {
-                    EntityResult voResult = dataResult[j];
-
-                    EntityPmpctItem vo = new EntityPmpctItem();
-                    vo.YF = voResult.YF;
-                    vo.ApplicationId = voResult.ApplicationId;
-                    vo.patType = voResult.patType;
-                    yfrcFlg = 0;
-
-                    #region  计算月份人次
-                    for (int yfI = 0; yfI < dataYfrc.Count; yfI++)
-                    {
-                        if (voResult.YF == dataYfrc[yfI].YF)
+                        #region  计算月份人次
+                        for (int yfI = 0; yfI < dataYfrc.Count; yfI++)
                         {
+                            if (voResult.YF == dataYfrc[yfI].YF)
+                            {
+                                if (voResult.patType == "1")
+                                    dataYfrc[yfI].ZYRC++;
+                                if (voResult.patType == "2")
+                                    dataYfrc[yfI].MZRC++;
+                                dataYfrc[yfI].HJRC++;
+                                yfrcFlg = 1;
+                            }
+                        }
+
+                        if (yfrcFlg == 0)
+                        {
+                            EntityYfrc voYfrc = new EntityYfrc();
                             if (voResult.patType == "1")
-                                dataYfrc[yfI].ZYRC++;
+                                voYfrc.ZYRC = 1;
                             if (voResult.patType == "2")
-                                dataYfrc[yfI].MZRC++;
-                            dataYfrc[yfI].HJRC++;
-                            yfrcFlg = 1;
+                                voYfrc.MZRC = 1;
+                            voYfrc.HJRC = 1;
+                            voYfrc.YF = vo.YF;
+                            dataYfrc.Add(voYfrc);
+                        }
+                        #endregion
+
+                        #region  计算阳性个数
+                        if (string.IsNullOrEmpty(voResult.TPPA))
+                            voResult.TPPA = "";
+                        if (string.IsNullOrEmpty(voResult.RPR))
+                            voResult.RPR = "";
+                        if (string.IsNullOrEmpty(voResult.TRUST))
+                            voResult.TRUST = "";
+                        if (string.IsNullOrEmpty(voResult.HIV))
+                            voResult.HIV = "";
+                        if (string.IsNullOrEmpty(voResult.YGYXMZ))
+                            voResult.YGYXMZ = "";
+                        if (string.IsNullOrEmpty(voResult.YGYXZY))
+                            voResult.YGYXZY = "";
+
+                        if (voResult.TPPA.Contains("阳") && voResult.RPR.Contains("阳"))
+                        {
+                            vo.MDYX = "阳";
+                        }
+                        else if (voResult.TRUST.Contains("阳") && voResult.RPR.Contains("阳"))
+                        {
+                            vo.MDYX = "阳";
+                        }
+                        else if (voResult.TPPA.Contains("阳") || voResult.TRUST.Contains("阳") || voResult.RPR.Contains("阳"))
+                        {
+                            vo.MDDXMYX = "阳";
+                        }
+
+                        if (voResult.HIV.Contains("阳"))
+                        {
+                            vo.HIVYX = "阳";
+                        }
+
+                        if (voResult.YGYXZY.Contains("阳"))
+                        {
+                            vo.YGYXZY = "阳";
+                        }
+
+                        if (voResult.YGYXMZ.Contains("阳"))
+                        {
+                            vo.YGYXMZ = "阳";
+                        }
+
+                        if (string.IsNullOrEmpty(vo.MDYX) && string.IsNullOrEmpty(vo.MDDXMYX) && string.IsNullOrEmpty(vo.HIVYX) && string.IsNullOrEmpty(vo.YGYXMZ) && string.IsNullOrEmpty(vo.YGYXZY))
+                            continue;
+                        #endregion
+
+                        dataItem.Add(vo);
+                    }
+
+                    for (int k = 0; k < dataItem.Count; k++)
+                    {
+                        EntityPmpctItem vo = dataItem[k];
+                        itemFlg = 0;
+
+                        for (int dataI = 0; dataI < data.Count; dataI++)
+                        {
+                            if (vo.YF == data[dataI].YF)
+                            {
+                                if (vo.HIVYX == "阳")
+                                    data[dataI].HIVYXS++;
+                                if (vo.MDYX == "阳")
+                                    data[dataI].MDYXS++;
+                                if (vo.MDDXMYX == "阳")
+                                    data[dataI].MDDXYX++;
+                                if (vo.YGYXMZ == "阳")
+                                    data[dataI].YGYXMZ++;
+                                if (vo.YGYXZY == "阳")
+                                    data[dataI].YGYXZY++;
+                                itemFlg = 1;
+                            }
+                        }
+                        if (itemFlg == 0)
+                        {
+                            EntityPmpctStat voStat = new EntityPmpctStat();
+                            if (vo.HIVYX == "阳")
+                                voStat.HIVYXS = 1;
+                            if (vo.MDYX == "阳")
+                                voStat.MDYXS = 1;
+                            if (vo.MDDXMYX == "阳")
+                                voStat.MDDXYX = 1;
+                            if (vo.YGYXZY == "阳")
+                                voStat.YGYXZY = 1;
+                            if (vo.YGYXMZ == "阳")
+                                voStat.YGYXMZ = 1;
+
+                            voStat.YF = vo.YF;
+                            data.Add(voStat);
                         }
                     }
 
-                    if (yfrcFlg == 0)
-                    {
-                        EntityYfrc voYfrc = new EntityYfrc();
-                        if (voResult.patType == "1")
-                            voYfrc.ZYRC = 1;
-                        if (voResult.patType == "2")
-                            voYfrc.MZRC = 1;
-                        voYfrc.HJRC = 1;
-                        voYfrc.YF = vo.YF;
-                        dataYfrc.Add(voYfrc);
-                    }
-                    #endregion
-
-                    #region  计算阳性个数
-                    if (string.IsNullOrEmpty(voResult.TPPA))
-                        voResult.TPPA = "";
-                    if (string.IsNullOrEmpty(voResult.RPR))
-                        voResult.RPR = "";
-                    if (string.IsNullOrEmpty(voResult.TRUST))
-                        voResult.TRUST = "";
-                    if (string.IsNullOrEmpty(voResult.HIV))
-                        voResult.HIV = "";
-                    if (string.IsNullOrEmpty(voResult.YGYXMZ))
-                        voResult.YGYXMZ = "";
-                    if (string.IsNullOrEmpty(voResult.YGYXZY))
-                        voResult.YGYXZY = "";
-
-                    if (voResult.TPPA.Contains("阳") && voResult.RPR.Contains("阳"))
-                    {
-                        vo.MDYX = "阳";
-                    }
-                    else if (voResult.TRUST.Contains("阳") && voResult.RPR.Contains("阳"))
-                    {
-                        vo.MDYX = "阳";
-                    }
-                    else if (voResult.TPPA.Contains("阳") || voResult.TRUST.Contains("阳") || voResult.RPR.Contains("阳"))
-                    {
-                        vo.MDDXMYX = "阳";
-                    }
-
-                    if (voResult.HIV.Contains("阳"))
-                    {
-                        vo.HIVYX = "阳";
-                    }
-
-                    if (voResult.YGYXZY.Contains("阳"))
-                    {
-                        vo.YGYXZY = "阳";
-                    }
-
-                    if (voResult.YGYXMZ.Contains("阳"))
-                    {
-                        vo.YGYXMZ = "阳";
-                    }
-
-                    if (string.IsNullOrEmpty(vo.MDYX) && string.IsNullOrEmpty(vo.MDDXMYX) && string.IsNullOrEmpty(vo.HIVYX) && string.IsNullOrEmpty(vo.YGYXMZ) && string.IsNullOrEmpty(vo.YGYXZY))
-                        continue;
-                    #endregion
-
-                    dataItem.Add(vo);
-                }
-
-                for (int k = 0; k < dataItem.Count; k++)
-                {
-                    EntityPmpctItem vo = dataItem[k];
-                    itemFlg = 0;
 
                     for (int dataI = 0; dataI < data.Count; dataI++)
                     {
-                        if (vo.YF == data[dataI].YF)
+                        for (int yfrcI = 0; yfrcI < dataYfrc.Count; yfrcI++)
                         {
-                            if (vo.HIVYX == "阳")
-                                data[dataI].HIVYXS++;
-                            if (vo.MDYX == "阳")
-                                data[dataI].MDYXS++;
-                            if (vo.MDDXMYX == "阳")
-                                data[dataI].MDDXYX++;
-                            if (vo.YGYXMZ == "阳")
-                                data[dataI].YGYXMZ++;
-                            if (vo.YGYXZY == "阳")
-                                data[dataI].YGYXZY++;
-                            itemFlg = 1;
+                            if (dataYfrc[yfrcI].YF == data[dataI].YF)
+                            {
+                                dataYfrc[yfrcI].HIVYXS = data[dataI].HIVYXS;
+                                dataYfrc[yfrcI].MDYXS = data[dataI].MDYXS;
+                                dataYfrc[yfrcI].YGYXZY = data[dataI].YGYXZY;
+                                dataYfrc[yfrcI].YGYXMZ = data[dataI].YGYXMZ;
+                                dataYfrc[yfrcI].MDDXYX = data[dataI].MDDXYX;
+                            }
                         }
                     }
-                    if (itemFlg == 0)
-                    {
-                        EntityPmpctStat voStat = new EntityPmpctStat();
-                        if (vo.HIVYX == "阳")
-                            voStat.HIVYXS = 1;
-                        if (vo.MDYX == "阳")
-                            voStat.MDYXS = 1;
-                        if (vo.MDDXMYX == "阳")
-                            voStat.MDDXYX = 1;
-                        if (vo.YGYXZY == "阳")
-                            voStat.YGYXZY = 1;
-                        if (vo.YGYXMZ == "阳")
-                            voStat.YGYXMZ = 1;
 
-                        voStat.YF = vo.YF;
-                        data.Add(voStat);
-                    }
                 }
-
-
-                for (int dataI = 0; dataI < data.Count; dataI++)
+                else
                 {
-                    for (int yfrcI = 0; yfrcI < dataYfrc.Count; yfrcI++)
-                    {
-                        if (dataYfrc[yfrcI].YF == data[dataI].YF)
-                        {
-                            dataYfrc[yfrcI].HIVYXS = data[dataI].HIVYXS;
-                            dataYfrc[yfrcI].MDYXS = data[dataI].MDYXS;
-                            dataYfrc[yfrcI].YGYXZY = data[dataI].YGYXZY;
-                            dataYfrc[yfrcI].YGYXMZ = data[dataI].YGYXMZ;
-                            dataYfrc[yfrcI].MDDXYX = data[dataI].MDDXYX;
-                        }
-                    }
+                    MessageBox.Show("没有相关数据。");
                 }
 
+                m_objViewer.gcData.DataSource = dataYfrc;
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("没有相关数据。");
+                MessageBox.Show(ex.ToString());
+                clsPublic.CloseAvi();
             }
-
-            m_objViewer.dgvData.DataSource = dataYfrc;
+            finally
+            {
+                clsPublic.CloseAvi();
+            }
         }
 
         #endregion
@@ -371,40 +467,69 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             string dteStart = m_objViewer.dteStart.Text;
             string dteEnd = m_objViewer.dteEnd.Text;
             string patType = m_objViewer.cboPatType.SelectedIndex.ToString();
-            long lngRes = m_objManage.lngGetPmpcDetail(dteStart, dteEnd, patType,  out dtbResult);
-
-            if (lngRes > 0 && dtbResult.Rows.Count > 0)
+            string applyUnitId = string.Empty;
+            try
             {
-                foreach (DataRow dr in dtbResult.Rows)
+                if (string.IsNullOrEmpty(m_objViewer.cbxGroup.Text) && m_objViewer.dgvCheckItem.Rows.Count < 2)
                 {
-                    EntityPmpctDetail vo = new EntityPmpctDetail();
-
-                    vo.RQ = dr["RQ"].ToString();
-                    vo.XM = dr["XM"].ToString();
-                    vo.XB = dr["XB"].ToString().Trim();
-                    vo.KS = dr["KS"].ToString();
-                    patType = dr["patient_type_chr"].ToString();
-                    if (patType == "1")
-                        vo.MZZYH = dr["ZYH"].ToString().Trim();
-                    else
-                        vo.MZZYH = dr["MZH"].ToString();
-
-                    vo.XMMC = dr["XMMC"].ToString();
-                    vo.XMJG = dr["XMJG"].ToString();
-                    if (!vo.XMJG.Contains("阳"))
-                        continue;
-                    vo.SQYS = dr["SQYS"].ToString();
-                    vo.JYZ = dr["JYZ"].ToString();
-
-                    data.Add(vo);
+                    MessageBox.Show("请选择专业组或检验项目 ！");
+                    return;
                 }
-            }
-            else
-            {
-                MessageBox.Show("没有相关数据。");
-            }
 
-            m_objViewer.dgvDetail.DataSource = data;
+                if (m_objViewer.dgvCheckItem.Rows.Count >= 2)
+                {
+                    for (int i = 0; i < m_objViewer.dgvCheckItem.Rows.Count - 1; i++)
+                    {
+                        applyUnitId += "'" + m_objViewer.dgvCheckItem.Rows[i].Cells[0].Value.ToString() + "',";
+                    }
+
+                    applyUnitId = "(" + applyUnitId.TrimEnd(',') + ")";
+                }
+
+                long lngRes = m_objManage.lngGetPmpcDetail(dteStart, dteEnd, patType, applyUnitId, out dtbResult);
+
+                if (lngRes > 0 && dtbResult.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dtbResult.Rows)
+                    {
+                        EntityPmpctDetail vo = new EntityPmpctDetail();
+
+                        vo.RQ = dr["RQ"].ToString();
+                        vo.BARCODE = dr["BARCODE"].ToString();
+                        vo.XM = dr["XM"].ToString();
+                        vo.XB = dr["XB"].ToString().Trim();
+                        vo.KS = dr["KS"].ToString();
+                        patType = dr["patient_type_chr"].ToString();
+                        if (patType == "1")
+                            vo.MZZYH = dr["ZYH"].ToString().Trim();
+                        else
+                            vo.MZZYH = dr["MZH"].ToString();
+
+                        vo.XMMC = dr["XMMC"].ToString();
+                        vo.XMJG = dr["XMJG"].ToString();
+                        if (!vo.XMJG.Contains("阳"))
+                            continue;
+                        vo.SQYS = dr["SQYS"].ToString();
+                        vo.JYZ = dr["JYZ"].ToString();
+
+                        data.Add(vo);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("没有相关数据。");
+                }
+
+                m_objViewer.gcDetail.DataSource = data;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+
+            }
         }
 
         #endregion
@@ -414,94 +539,94 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
         /// 
         /// </summary>
         /// <param name="statType"></param>
-        public void m_mthExportToExcel(int statType,DataGridView dgvData)
+        public void m_mthExportToExcel()
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Excel files (*.xls)|*.xls";
-            saveFileDialog.FilterIndex = 0;
-            saveFileDialog.RestoreDirectory = true;
-            saveFileDialog.CreatePrompt = true;
-            saveFileDialog.Title = "导出Excel文件到";
-            string dteStart = m_objViewer.dteStart.Text;
-            string dteEnd = m_objViewer.dteEnd.Text;
+            //SaveFileDialog saveFileDialog = new SaveFileDialog();
+            //saveFileDialog.Filter = "Excel files (*.xls)|*.xls";
+            //saveFileDialog.FilterIndex = 0;
+            //saveFileDialog.RestoreDirectory = true;
+            //saveFileDialog.CreatePrompt = true;
+            //saveFileDialog.Title = "导出Excel文件到";
+            //string dteStart = m_objViewer.dteStart.Text;
+            //string dteEnd = m_objViewer.dteEnd.Text;
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                Stream stream = saveFileDialog.OpenFile();
-                StreamWriter streamWriter = new StreamWriter(stream, Encoding.GetEncoding("gb2312"));
-                string text = "";
-                string itemStr = string.Empty;
-                string title = string.Empty;
+            //if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    Stream stream = saveFileDialog.OpenFile();
+            //    StreamWriter streamWriter = new StreamWriter(stream, Encoding.GetEncoding("gb2312"));
+            //    string text = "";
+            //    string itemStr = string.Empty;
+            //    string title = string.Empty;
 
-                try
-                {
-                    for (int i = 0; i < dgvData.ColumnCount / 2; i++)
-                    {
-                        if (dgvData.Columns[i].Visible)
-                        {
-                            if (i > 0)
-                            {
-                                text += "\t";
-                            }
-                        }
-                    }
- 
-                    if (statType == 0)
-                    {
-                        text += "免费母婴阻断检测工作情况记录表";
-                    }
-                    if (statType == 1)
-                    {
-                        text += "免费母婴阻断阳性结果明细表";
-                    }
+            //    try
+            //    {
+            //        for (int i = 0; i < dgvData.ColumnCount / 2; i++)
+            //        {
+            //            if (dgvData.Columns[i].Visible)
+            //            {
+            //                if (i > 0)
+            //                {
+            //                    text += "\t";
+            //                }
+            //            }
+            //        }
 
-                    streamWriter.WriteLine(text);
-                    text = dteStart + "~" + dteEnd;
-                    streamWriter.WriteLine(text);
-                    text = "";
+            //        if (statType == 0)
+            //        {
+            //            text += "免费母婴阻断检测工作情况记录表";
+            //        }
+            //        if (statType == 1)
+            //        {
+            //            text += "免费母婴阻断阳性结果明细表";
+            //        }
 
-                    for (int i = 0; i < dgvData.ColumnCount; i++)
-                    {
-                        if (dgvData.Columns[i].Visible)
-                        {
-                            if (i > 0)
-                            {
-                                text += "\t";
-                            }
-                            text += dgvData.Columns[i].HeaderText.Replace("\n", "");
-                        }
-                    }
-                    streamWriter.WriteLine(text);
-                    for (int i = 0; i < dgvData.Rows.Count; i++)
-                    {
-                        StringBuilder stringBuilder = new StringBuilder();
-                        for (int j = 0; j < dgvData.Columns.Count; j++)
-                        {
-                            if (dgvData.Columns[j].Visible)
-                            {
-                                if (j > 0)
-                                {
-                                    stringBuilder.Append("\t");
-                                }
-                                stringBuilder.Append((dgvData.Rows[i].Cells[j].Value == null) ? "" : dgvData.Rows[i].Cells[j].Value.ToString());
-                            }
-                        }
-                        streamWriter.WriteLine(stringBuilder);
-                    }
-                    MessageBox.Show("导出成功！", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    streamWriter.Close();
-                    stream.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    streamWriter.Close();
-                    stream.Close();
-                }
-            }
+            //        streamWriter.WriteLine(text);
+            //        text = dteStart + "~" + dteEnd;
+            //        streamWriter.WriteLine(text);
+            //        text = "";
+
+            //        for (int i = 0; i < dgvData.ColumnCount; i++)
+            //        {
+            //            if (dgvData.Columns[i].Visible)
+            //            {
+            //                if (i > 0)
+            //                {
+            //                    text += "\t";
+            //                }
+            //                text += dgvData.Columns[i].HeaderText.Replace("\n", "");
+            //            }
+            //        }
+            //        streamWriter.WriteLine(text);
+            //        for (int i = 0; i < dgvData.Rows.Count; i++)
+            //        {
+            //            StringBuilder stringBuilder = new StringBuilder();
+            //            for (int j = 0; j < dgvData.Columns.Count; j++)
+            //            {
+            //                if (dgvData.Columns[j].Visible)
+            //                {
+            //                    if (j > 0)
+            //                    {
+            //                        stringBuilder.Append("\t");
+            //                    }
+            //                    stringBuilder.Append((dgvData.Rows[i].Cells[j].Value == null) ? "" : dgvData.Rows[i].Cells[j].Value.ToString());
+            //                }
+            //            }
+            //            streamWriter.WriteLine(stringBuilder);
+            //        }
+            //        MessageBox.Show("导出成功！", "", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            //        streamWriter.Close();
+            //        stream.Close();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //    }
+            //    finally
+            //    {
+            //        streamWriter.Close();
+            //        stream.Close();
+            //    }
+            //}
         }
         #endregion
     }
