@@ -1,9 +1,0 @@
-SCC = This is a Source Code Control file
-
-[DiagnoseClient.csproj]
-SCC_Aux_Path = "D:\datasource"
-SCC_Project_Name = "$/icare/code/门诊分诊/DiagnoseClient", FPFBAAAA
-
-[DiagnoseClient.sln]
-SCC_Aux_Path = "D:\datasource"
-SCC_Project_Name = "$/icare/code/门诊分诊/DiagnoseClient", FPFBAAAA
