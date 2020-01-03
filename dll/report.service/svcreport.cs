@@ -638,11 +638,11 @@ namespace Report.Service
             }
         }
 
-        public DataTable GetGategoryType2(string classid)
+        public DataTable GetGategoryType2()
         {
             using (clsHISReportZy_Supported_Svc svc = new clsHISReportZy_Supported_Svc())
             {
-                return Function.ReNameDatatable(svc.GetGategoryType2(classid));
+                return Function.ReNameDatatable(svc.GetGategoryType2());
             }
         }
 
@@ -718,21 +718,21 @@ namespace Report.Service
             }
         }
 
-        public long GetPmpctDetail(string dteStart, string dteEnd, string patType, string applyUnitId, out DataTable dtbResult)
+        public long GetPmpctDetail(string dteStart, string dteEnd, string patType, out DataTable dtbResult)
         {
             using (clsHISReportZy_Supported_Svc svc = new clsHISReportZy_Supported_Svc())
             {
-                long rec = svc.GetPmpctDetail(dteStart, dteEnd, patType, applyUnitId, out dtbResult);
+                long rec = svc.GetPmpctDetail(dteStart, dteEnd, patType, out dtbResult);
                 dtbResult = Function.ReNameDatatable(dtbResult);
                 return rec;
             }
         }
 
-        public long GetPmpctStat(string dteStart, string dteEnd, string patType, string applyUnitId, out DataTable dtbResult)
+        public long GetPmpctStat(string dteStart, string dteEnd, string patType, out DataTable dtbResult)
         {
             using (clsHISReportZy_Supported_Svc svc = new clsHISReportZy_Supported_Svc())
             {
-                long rec = svc.GetPmpctStat(dteStart, dteEnd, patType, applyUnitId, out dtbResult);
+                long rec = svc.GetPmpctStat(dteStart, dteEnd, patType, out dtbResult);
                 dtbResult = Function.ReNameDatatable(dtbResult);
                 return rec;
             }

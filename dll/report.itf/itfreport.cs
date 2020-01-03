@@ -233,7 +233,7 @@ namespace Report.Itf
         DataTable GetGategoryType();
 
         [OperationContract]
-        DataTable GetGategoryType2(string classid);
+        DataTable GetGategoryType2();
 
         [OperationContract]
         DataTable GetYGItemType();
@@ -260,10 +260,10 @@ namespace Report.Itf
         long GetPositiveReport(out DataTable dtbResult, string dteStart, string dteEnd, string checkItemId, string strDept, string groupId, string patNo);
 
         [OperationContract]
-        long GetPmpctDetail(string dteStart, string dteEnd, string patType, string applyUnitId, out DataTable dtbResult);
+        long GetPmpctDetail(string dteStart, string dteEnd, string patType, out DataTable dtbResult);
 
         [OperationContract]
-        long GetPmpctStat(string dteStart, string dteEnd, string patType, string applyUnitId, out DataTable dtbResult);
+        long GetPmpctStat(string dteStart, string dteEnd, string patType, out DataTable dtbResult);
 
         [OperationContract]
         long GetCheckerQc(out DataTable dtbResult, string dteStart, string dteEnd);
