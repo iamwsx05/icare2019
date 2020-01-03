@@ -1748,14 +1748,14 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
         /// </summary>
         /// <returns></returns>
         [AutoComplete]
-        public DataTable GetGategoryType2()
+        public DataTable GetGategoryType2(string classid)
         {
             string Sql = string.Empty;
             DataTable dt = new DataTable();
             clsHRPTableService svc = new clsHRPTableService();
             try
             {
-                Sql = @"select a.itemcode,a.itemname from diccommon a where a.classid = 33";
+                Sql = @"select a.itemcode,a.itemname from diccommon a where a.classid = " + classid;
 
                 svc.lngGetDataTableWithoutParameters(Sql, ref dt);
                 if (dt != null) dt.TableName = "applyUnit";
@@ -2596,7 +2596,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
         /// <param name="dtbResult"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long GetPmpctDetail(string dteStart, string dteEnd, string patType, out DataTable dtbResult)
+        public long GetPmpctDetail(string dteStart, string dteEnd, string patType,string applyUnitId, out DataTable dtbResult)
         {
             long lngRes = 0;
             dtbResult = null;
@@ -2609,6 +2609,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
 
                 string strSQL = @"select c.application_id_chr,
                                        c.modify_dat           as RQ,
+                                       c.barcode_vchr              as BARCODE,
                                        d.patient_name_vchr    as XM,
                                        c.sex_chr              as XB,
                                        e.deptname_vchr        as KS,
@@ -2641,8 +2642,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                        to_date(?, 'yyyy-mm-dd hh24:mi:ss')
                                    and c.status_int >= 5
                                    and d.pstatus_int = 2
-                                   and a.status_int = 1 
-                                    and  t.apply_unit_id_chr in ('001174','001127','001126','001176','001078','001080','001006','001252','001239') ";
+                                   and a.status_int = 1 ";
 
                 if (patType == "1")
                 {
@@ -2654,6 +2654,11 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                 }
                 else
                     strSQL += " and (c.patient_type_chr = 1 or c.patient_type_chr = 2)";
+
+                if(!string.IsNullOrEmpty(applyUnitId))
+                {
+                    strSQL += " and  t.apply_unit_id_chr in " + applyUnitId;
+                }
 
                 strSQL += " order by KS , c.application_id_chr";
 
@@ -2688,7 +2693,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
         /// <param name="dtbResult"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long GetPmpctStat(string dteStart, string dteEnd, string patType, out DataTable dtbResult)
+        public long GetPmpctStat(string dteStart, string dteEnd, string patType,string applyUnitId, out DataTable dtbResult)
         {
             long lngRes = 0;
             dtbResult = null;
@@ -2717,8 +2722,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                        to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
                                        to_date(?, 'yyyy-mm-dd hh24:mi:ss')
                                    and c.status_int >= 5
-                                   and a.status_int = 1 
-                                   and  t.apply_unit_id_chr in('001174','001127','001126','001176','001078','001080','001006','001252','001239') ";
+                                   and a.status_int = 1 ";
                 if (patType == "1")
                 {
                     strSQL += Environment.NewLine + " and c.patient_type_chr = 1";
@@ -2729,6 +2733,11 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                 }
                 else
                     strSQL += " and (c.patient_type_chr = 1 or c.patient_type_chr = 2)";
+
+                if(!string.IsNullOrEmpty(applyUnitId))
+                {
+                    strSQL += "  and  t.apply_unit_id_chr in " + applyUnitId;
+                }
 
                 strSQL += " order by c.modify_dat";
                 objHRPServ.CreateDatabaseParameter(2, out parm);

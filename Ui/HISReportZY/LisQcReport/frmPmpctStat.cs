@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using com.digitalwave.iCare.gui.HIS.Reports;
+using Common.Controls;
 
 namespace com.digitalwave.iCare.gui.HIS
 {
@@ -38,11 +39,11 @@ namespace com.digitalwave.iCare.gui.HIS
 
         private void btnCount_Click(object sender, EventArgs e)
         {
-            int intTem = this.cboStatType.SelectedIndex;
+            int intTem = this.xtraTabControl.SelectedTabPageIndex;
 
             if (intTem == 0)
             {
-                m_objController.m_mthGetPmpctStat(); 
+                m_objController.m_mthGetPmpctStat();
             }
 
             if (intTem == 1)
@@ -53,44 +54,61 @@ namespace com.digitalwave.iCare.gui.HIS
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            int intTem = this.cboStatType.SelectedIndex;
-
-            if(intTem == 0)
-                m_objController.m_mthExportToExcel(intTem,this.dgvData);
-            else
-                m_objController.m_mthExportToExcel(intTem, this.dgvDetail);
-        }
-
-        private void cboStatType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int intTem = this.cboStatType.SelectedIndex;
+            int intTem = this.xtraTabControl.SelectedTabPageIndex;
 
             if (intTem == 0)
-            {
-                this.dgvData.Visible = true;
-                this.dgvDetail.Visible = false;
-            }
-            if (intTem == 1)
-            {
-                this.dgvData.Visible = false;
-                this.dgvDetail.Visible = true;
-            }
+                uiHelper.ExportToXls(gvData);
+            else
+                uiHelper.ExportToXls(gvDetail);
         }
 
-        private void dgvDetail_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
-        {
-            //显示在HeaderCell上
-            for (int i = 0; i < this.dgvDetail.Rows.Count; i++)
-            {
-                DataGridViewRow r = this.dgvDetail.Rows[i];
-                r.HeaderCell.Value = string.Format("{0}", i + 1);
-            }
-            this.dgvDetail.Refresh();
-        }
 
         private void btnExite_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cbxGroup_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.tabContorl.Visible = true;
+            this.tabContorl.SelectedTab.Text = "选择检验项目";
+            m_objController.m_mthListCheckItem();
+        }
+
+        private void cbxGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.tabContorl.Visible = true;
+            this.tabContorl.SelectedTab.Text = "选择检验项目";
+            m_objController.m_mthListCheckItem();
+        }
+
+        private void dgvItem_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.dgvItem.CurrentRow != null)
+            {
+                object[] value = new object[dgvItem.Columns.Count];
+                for (int i = 0; i < dgvItem.Columns.Count; i++)
+                {
+                    value[i] = dgvItem.CurrentRow.Cells[i].Value;
+                }
+
+                dgvCheckItem.Rows.Add(value);
+            }
+        }
+
+        private void txtSearchName_TextChanged(object sender, EventArgs e)
+        {
+            m_objController.m_mthGetCheckItemByName();
+        }
+
+        private void btnTabClose_Click(object sender, EventArgs e)
+        {
+            this.tabContorl.Visible = false;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            this.dgvCheckItem.Rows.Clear();
         }
     }
 }
