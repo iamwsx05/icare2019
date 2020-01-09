@@ -2430,7 +2430,8 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                 on a.operator_id_chr = g.empid_chr
                                 where d.status_int > 5
                                 and a.pstatus_int  = 2
-                                and d.modify_dat between to_date(?, 'yyyy-mm-dd hh24:mi:ss') 
+                                and d.patient_type_chr in(1,2)
+                                and d.accept_dat between to_date(?, 'yyyy-mm-dd hh24:mi:ss') 
                                 and to_date(?, 'yyyy-mm-dd hh24:mi:ss') 
                                 and e.deptid_chr is not null ";
 

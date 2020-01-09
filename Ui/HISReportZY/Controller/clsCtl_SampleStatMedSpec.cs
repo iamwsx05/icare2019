@@ -518,16 +518,16 @@ namespace com.digitalwave.iCare.gui.HIS
                         vo.DEPTNAME = dr["DEPTNAME"].ToString();
                         vo.BARCODE = dr["BARCODE"].ToString();
                         vo.CARDNO = string.IsNullOrEmpty(dr["CARDNO"].ToString()) ? dr["patInNo"].ToString() : dr["CARDNO"].ToString();
-                        vo.ApplyTime = dr["applyTime"].ToString();
-                        vo.AcceptTime = dr["HSSJ"].ToString();
-                        vo.ConfirmTime = dr["SHSJ"].ToString();
+                        vo.ApplyTime = Function.Datetime(dr["applyTime"]).ToString("yyyy-MM-dd HH:mm");
+                        vo.AcceptTime = Function.Datetime(dr["HSSJ"]).ToString("yyyy-MM-dd HH:mm");
+                        vo.ConfirmTime = Function.Datetime(dr["SHSJ"]).ToString("yyyy-MM-dd HH:mm");
                         vo.Checker = dr["lastname_vchr"].ToString();
                         vo.item = dr["check_content_vchr"].ToString();
                         vo.color = dr["color"].ToString();
                         if (dr["pattype"].ToString().Trim() == "2")
-                            vo.DYSJ = dr["DBSJ"].ToString();
+                            vo.DYSJ = Function.Datetime(dr["DBSJ"]).ToString("yyyy-MM-dd HH:mm");
                         if (dr["pattype"].ToString().Trim() == "1")
-                            vo.DBSJ = dr["DBSJ"].ToString();
+                            vo.DBSJ = Function.Datetime(dr["DBSJ"]).ToString("yyyy-MM-dd HH:mm");
                         if (dr["preTime"] != DBNull.Value)
                             vo.preTime = Convert.ToDecimal(dr["preTime"]) > 0 ? Convert.ToDecimal(dr["preTime"]) : 0;
                         if (dr["lisTime"] != DBNull.Value)

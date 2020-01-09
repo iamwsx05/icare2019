@@ -33,6 +33,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
         private void frmSampleStatMedSpec_Load(object sender, EventArgs e)
         {
+
             m_objController.m_mthInit();
         }
 
