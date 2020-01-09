@@ -23,7 +23,7 @@ namespace com.digitalwave.iCare.gui.HIS
         /// <summary>
         /// 服务器IP
         /// </summary>
-        string ServerIp = "http://10.10.2.109";
+        string ServerIp = "http://10.10.2.110";
 
         #endregion
 

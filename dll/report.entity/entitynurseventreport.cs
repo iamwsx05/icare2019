@@ -900,10 +900,12 @@ namespace Report.Entity
         /// <summary>
         /// 当事人
         /// </summary>
+        [DataMember]
         public string DSR { get; set; }
         /// <summary>
         /// 当事人职称
         /// </summary>
+        [DataMember]
         public string DSRZC { get; set; }
         #endregion
     }
