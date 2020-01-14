@@ -3864,8 +3864,8 @@ from t_atb_germ t where instr(t.cname,?)> 0 order by germid ";
                                       on mm.cvmid = lis.cvmid
                              where d.status_int > 5
                                and a.pstatus_int = 2
-                               and r1.status_int = 1
-                               and r1.result_vchr <> '\'";
+                               and r1.status_int = 1 ";
+                // and r1.result_vchr <> '\'";
 
                 if (!string.IsNullOrEmpty(applicationStr))
                 {
@@ -4497,9 +4497,9 @@ from t_atb_germ t where instr(t.cname,?)> 0 order by germid ";
                                       on d.application_id_chr = mm.applyid and mm.status >= 0
                                 left join t_criticalvalue_lis lis 
                                       on mm.cvmid = lis.cvmid
-                             where r1.check_item_name_vchr = '鉴定结果'
-                                and d.status_int > 5
+                             where  d.status_int > 5
                              and r1.status_int = 1
+                             --and r1.check_item_name_vchr = '鉴定结果'
                                and d.application_id_chr in (select distinct d.application_id_chr
                                   from t_opr_lis_sample d
                                   left join t_opr_lis_check_result r1
@@ -4657,7 +4657,7 @@ from t_atb_germ t where instr(t.cname,?)> 0 order by germid ";
                                                    and a.pstatus_int = 2
                                                    and r.report_dat is not null
                                                    and r.status_int > 1
-                                                   and r1.result_vchr <> '\'
+                                                   --and r1.result_vchr <> '\'
                                                    and r1.status_int = 1 ";
 
                 objHRPServ = new clsHRPTableService();

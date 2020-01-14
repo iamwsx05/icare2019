@@ -195,6 +195,7 @@ namespace com.digitalwave.iCare.gui.HIS
             public string antiName { get;set;}
             public string appStr { get; set; }
             public decimal antiCount {get;set;}
+            public List<string> gss { get; set; }
         }
 
         /// <summary>
@@ -364,9 +365,12 @@ namespace com.digitalwave.iCare.gui.HIS
                 {
                     foreach (DataRow dr in dtbMicAp.Rows)
                     {
-                        applicationStr += "'" + dr["application_id_chr"].ToString() + "',";
+                        string itemname = dr["itemname"].ToString().Trim();
+                        if(itemname == "鉴定结果")
+                            applicationStr += "'" + dr["application_id_chr"].ToString() + "',";
                     }
-                    applicationStr = "(" + applicationStr.TrimEnd(',') + ")";
+                    if(!string.IsNullOrEmpty(applicationStr))
+                        applicationStr = "(" + applicationStr.TrimEnd(',') + ")";
                 }
             }
 
@@ -571,6 +575,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     {
                         #region  列 细菌
                         string XJMC = dr["xjmc"].ToString().Trim();
+                        string itemName = dr["itemname"].ToString().Trim();
 
                         if (!XJMC.Contains("无乳"))
                         {
@@ -623,6 +628,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         else
                         {
                             int micFlg = 0;
+
                             for (int i = 0; i < lstAntiApp.Count; i++)
                             {
                                 if (lstAntiApp[i].antiName == XJMC)
@@ -630,22 +636,61 @@ namespace com.digitalwave.iCare.gui.HIS
                                     micFlg = 1;
                                     lstAntiApp[i].appStr += "'" + dr["application_id_chr"].ToString() + "',";
                                     lstAntiApp[i].antiCount++;
+
+                                    #region 抗生素
+                                    DataRow[] drrGss = dtbResult.Select("application_id_chr = " + dr["application_id_chr"].ToString() + "'");
+                                    for (int i1 = 0; i1 < drrGss.Length; i1++)
+                                    {
+                                        string gss = drrGss[i]["itemname"].ToString();
+                                        if (gss == "鉴定结果")
+                                            continue;
+                                        if (lstAntiApp[i].gss.Contains(gss))
+                                        {
+                                            continue;
+                                        }
+                                        else
+                                        {
+                                            lstAntiApp[i].gss.Add(gss);
+                                        }
+                                    }
+                                    #endregion
                                 }
                             }
                             if (micFlg == 0)
                             {
-                                EntityAntiApp vo = new EntityAntiApp();
-                                vo.antiName = XJMC;
-                                vo.appStr += "'" + dr["application_id_chr"].ToString() + "',";
-                                vo.antiCount = 1;
+                                if(itemName == "鉴定结果")
+                                {
+                                    EntityAntiApp vo = new EntityAntiApp();
+                                    vo.antiName = XJMC;
+                                    vo.appStr += "'" + dr["application_id_chr"].ToString() + "',";
+                                    vo.antiCount = 1;
 
-                                lstAntiApp.Add(vo);
+                                    #region 抗生素
+                                    DataRow[] drrGss = dtbResult.Select("application_id_chr = " + vo.appStr + "'");
+                                    for(int i = 0;i< drrGss.Length;i++)
+                                    {
+                                        string gss = drrGss[i]["itemname"].ToString();
+                                        if (gss == "鉴定结果")
+                                            continue;
+                                        if (vo.gss.Contains(gss))
+                                        {
+                                            continue;
+                                        }
+                                        else
+                                        {
+                                            vo.gss.Add(gss);
+                                        }
+                                    }
+                                    #endregion
+
+                                    lstAntiApp.Add(vo);
+                                }
                             }
                         }
-                      
-                        #endregion
+                        if (!string.IsNullOrEmpty(applictionStr))
+                            applictionStr += "'" + dr["application_id_chr"].ToString() + "',";
 
-                        applictionStr += "'" + dr["application_id_chr"].ToString() + "',";
+                        #endregion
 
                         #region 危急值
                         string criticalResult = dr["criticalResult"].ToString();
@@ -683,27 +728,10 @@ namespace com.digitalwave.iCare.gui.HIS
                 MessageBox.Show("没有相关数据。");
                 return;
             }
-                
-
-            #region 抗生素
-            List<string> lstGSS = new List<string>();
-            lngRes = m_objManage.lngGetGss(applictionStr, out dtbGSS);
-            if (lngRes >= 0 && dtbGSS.Rows.Count > 0)
-            {
-                foreach (DataRow dr in dtbGSS.Rows)
-                {
-                    string gssName = dr["ITEMNAME"].ToString().Trim();
-                    if (string.IsNullOrEmpty(gssName) || gssName == "细菌计数" || gssName == "鉴定结果" || gssName.Contains("培养结果"))
-                        continue;
-                    else
-                        lstGSS.Add(gssName);
-                }
-            }
-            #endregion
 
             if (lngRes > 0 && dtbResult.Rows.Count > 0)
             {
-                this.FillDWMicSensitive(lstAntiApp, dtbResult, strTempName,lstGSS, lstCritical);
+                this.FillDWMicSensitive(lstAntiApp, dtbResult, strTempName, lstCritical);
             }
             else
             {
@@ -711,7 +739,7 @@ namespace com.digitalwave.iCare.gui.HIS
             }
         }
 
-        public void FillDWMicSensitive(List<EntityAntiApp> lstAntiApp, DataTable dtbResult, string strTempName,List<string> lstGSS, List<EntityMicSensitive> lstCritical)
+        public void FillDWMicSensitive(List<EntityAntiApp> lstAntiApp, DataTable dtbResult, string strTempName,List<EntityMicSensitive> lstCritical)
         {
             try
             {
@@ -750,10 +778,10 @@ namespace com.digitalwave.iCare.gui.HIS
                     {
                         string appStr = "(" + lstAntiApp[i].appStr.TrimEnd(',') + ")";
 
-                        for (int iG = 0; iG < lstGSS.Count; iG++)
+                        for (int iG = 0; iG < lstAntiApp[i].gss.Count; iG++)
                         {
                             int rowFlg = 0;
-                            Gss = lstGSS[iG];
+                            Gss = lstAntiApp[i].gss[iG];
                             if (string.IsNullOrEmpty(Gss) || Gss == lstAntiApp[i].antiName || Gss == "细菌计数" || Gss == "鉴定结果")
                                 continue;
                             DataRow[] drrAntiType = dtbResult.Select("application_id_chr in " + appStr + " and itemname = '" + Gss + "'");
@@ -849,9 +877,12 @@ namespace com.digitalwave.iCare.gui.HIS
                 {
                     foreach (DataRow dr in dtbMicAp.Rows)
                     {
-                        applicationStr += "'" + dr["application_id_chr"].ToString() + "',";
+                        string itemname = dr["itemname"].ToString().Trim();
+                        if (itemname == "鉴定结果")
+                            applicationStr += "'" + dr["application_id_chr"].ToString() + "',";
                     }
-                    applicationStr = "(" + applicationStr.TrimEnd(',') + ")";
+                    if(!string.IsNullOrEmpty(applicationStr))
+                         applicationStr = "(" + applicationStr.TrimEnd(',') + ")";
                 }
             }
             lngRes = m_objManage.lngGetMicdistributionTend(strTempName, dtDateFrom, dtDateTo,applicationStr, DeptIdArr, sampleId, DisNo, Sex, TestMethod, out dtbResult);
@@ -1205,7 +1236,11 @@ namespace com.digitalwave.iCare.gui.HIS
                     foreach (DataRow dr in dtbMicAp.Rows)
                     {
                         flgM = 0;
-                        applictionStr += "'" + dr["application_id_chr"].ToString() + "',";
+                        string itemname = dr["itemname"].ToString().Trim();
+                        if (itemname == "鉴定结果")
+                            applictionStr += "'" + dr["application_id_chr"].ToString() + "',";
+                        else
+                            continue;
 
                         if (dr["HSSJ"] != DBNull.Value && dr["criticalResult"] != DBNull.Value)
                         {
@@ -1537,9 +1572,12 @@ namespace com.digitalwave.iCare.gui.HIS
                 {
                     foreach (DataRow dr in dtbMicAp.Rows)
                     {
-                        applicationStr += "'" + dr["application_id_chr"].ToString() + "',";
+                        string itemname = dr["itemname"].ToString().Trim();
+                        if (itemname == "鉴定结果")
+                            applicationStr += "'" + dr["application_id_chr"].ToString() + "',";
                     }
-                    applicationStr = "(" + applicationStr.TrimEnd(',') + ")";
+                    if(!string.IsNullOrEmpty(applicationStr))
+                        applicationStr = "(" + applicationStr.TrimEnd(',') + ")";
                 }
             }
             if (!string.IsNullOrEmpty(applicationStr))
@@ -1920,7 +1958,11 @@ namespace com.digitalwave.iCare.gui.HIS
 
                     foreach (DataRow dr in dtbMicAp.Rows)
                     {
-                        applicationStr += "'" + dr["application_id_chr"].ToString() + "',";
+                        string itemname = dr["itemname"].ToString().Trim();
+                        if (itemname == "鉴定结果")
+                            applicationStr += "'" + dr["application_id_chr"].ToString() + "',";
+                        else
+                            continue;
                         string criticalResult = dr["criticalResult"].ToString();
                         flgCrit = 0;
 
