@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\debug\</OutputPath>
+    <OutputPath>..\..\..\..\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -202,12 +202,6 @@
     <Compile Include="View\frmQCSetup.cs">
       <SubType>Form</SubType>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\dll\lis.com\lis.com.csproj">
-      <Project>{b21af487-444f-4970-a4d8-d609842b0117}</Project>
-      <Name>lis.com</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Control\ctlCheckItemTree.resx">
