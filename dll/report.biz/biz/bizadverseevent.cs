@@ -3158,7 +3158,23 @@ namespace Report.Biz
                         //查对不合格
                         if (dicXml.ContainsKey("X017"))
                             if (dicXml["X017"].ToString() == "1")
-                                voClone.AQSJLX += "查对不合格；";
+                                voClone.AQSJLX += "查对不合格";
+
+                        if (dicXml.ContainsKey("A017"))
+                        {
+                            if (!string.IsNullOrEmpty(dicXml["A017"].ToString()))
+                            {
+                                if (voClone.AQSJLX.Contains("查对不合格"))
+                                    voClone.AQSJLX += "(" + dicXml["A017"].ToString() + ")；";
+                                else
+                                    voClone.AQSJLX += "查对不合格" + "(" + dicXml["A017"].ToString() + ")；";
+                            }
+                            else if ( !string.IsNullOrEmpty(voClone.AQSJLX) )
+                            {
+                                if(voClone.AQSJLX.Contains("查对不合格"))
+                                    voClone.AQSJLX += "；";
+                            }
+                        }
                         //身份识别错误（患者身份查对）
                         if (dicXml.ContainsKey("X020"))
                             if (dicXml["X020"].ToString() == "1")

@@ -5,13 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{19ADDE2D-8E19-4D17-A2E5-C3E7CF719E65}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{0D272B88-F908-4D57-8786-2463F4AA13B3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MAGLUMI_4000_plus</RootNamespace>
-    <AssemblyName>MAGLUMI_4000_plus</AssemblyName>
+    <RootNamespace>EH8600</RootNamespace>
+    <AssemblyName>EH8600</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>superkaramba.ico</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -23,7 +24,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Debug\</OutputPath>
+    <OutputPath>..\..\..\debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -38,15 +39,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="clsLISDataAnalysisBase, Version=2.0.0.1, Culture=neutral, PublicKeyToken=286e4b4465bcc72f" />
-    <Reference Include="ILISDataAnalysis, Version=2.0.0.1, Culture=neutral, PublicKeyToken=e9910d2d0695c98e" />
+    <Reference Include="comm.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\comm.itf.dll</HintPath>
+    </Reference>
     <Reference Include="lis.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Debug\lis.itf.dll</HintPath>
     </Reference>
-    <Reference Include="SerialPort, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Windows.Forms" />
@@ -55,7 +58,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Debug\unityproxy.dll</HintPath>
     </Reference>
-    <Reference Include="utility, Version=2.0.0.1, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="utility, Version=2.0.0.1, Culture=neutral, PublicKeyToken=55813ad8fa3e5102, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Debug\utility.dll</HintPath>
     </Reference>
@@ -63,45 +66,46 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Debug\wecare.core.dll</HintPath>
     </Reference>
-    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=90ad5968fbc6e760, processorArchitecture=x86">
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=4bdb6de9b3ca5966, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Debug\wecaredata.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmMSComm.cs">
+    <Compile Include="Console.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMSComm.Designer.cs">
-      <DependentUpon>frmMSComm.cs</DependentUpon>
+    <Compile Include="Console.Designer.cs">
+      <DependentUpon>Console.cs</DependentUpon>
     </Compile>
-    <Compile Include="MAGLUMI_4000_plus_controlcode.cs" />
-    <Compile Include="MAGLUMI_4000_plus_dataanalysis.cs" />
-    <Compile Include="MAGLUMI_4000_plus_duplex.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="frmMSComm.resx">
-      <DependentUpon>frmMSComm.cs</DependentUpon>
+    <EmbeddedResource Include="Console.resx">
+      <DependentUpon>Console.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AxMSCommLib">
-      <Guid>{648A5603-2C6E-101B-82B6-000000000014}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="MSCommLib">
-      <Guid>{648A5603-2C6E-101B-82B6-000000000014}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
+    <Content Include="superkaramba.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

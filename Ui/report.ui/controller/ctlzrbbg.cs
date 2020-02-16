@@ -321,9 +321,12 @@ namespace Report.Ui.controller
 
             if (vo != null && Function.Dec(vo.rptId) > 0)
             {
-                using (ProxyAdverseEvent proxy = new ProxyAdverseEvent())
+                if (GlobalLogin.objLogin.lstRoleID.Contains("34"))
                 {
-                    proxy.Service.UpdateZrbbgPrintFlg(Function.Dec(vo.rptId));
+                    using (ProxyAdverseEvent proxy = new ProxyAdverseEvent())
+                    {
+                        proxy.Service.UpdateZrbbgPrintFlg(Function.Dec(vo.rptId));
+                    }
                 }
             }
 
