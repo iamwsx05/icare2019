@@ -97,6 +97,7 @@
             this.txtSearchName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.chkPe = new DevExpress.XtraEditors.CheckEdit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rdgTime.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCheckItem)).BeginInit();
@@ -117,10 +118,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chkPe.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.chkPe);
             this.panel1.Controls.Add(this.rdgTime);
             this.panel1.Controls.Add(this.btnClear);
             this.panel1.Controls.Add(this.label8);
@@ -162,7 +165,7 @@
             this.btnClear.DefaultScheme = true;
             this.btnClear.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnClear.Hint = "";
-            this.btnClear.Location = new System.Drawing.Point(87, 305);
+            this.btnClear.Location = new System.Drawing.Point(87, 326);
             this.btnClear.Name = "btnClear";
             this.btnClear.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
             this.btnClear.Size = new System.Drawing.Size(125, 27);
@@ -174,7 +177,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.label8.Location = new System.Drawing.Point(7, 189);
+            this.label8.Location = new System.Drawing.Point(7, 210);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(77, 14);
             this.label8.TabIndex = 170;
@@ -186,7 +189,7 @@
             this.cboPatType.FormattingEnabled = true;
             this.cboPatType.Items.AddRange(new object[] {
             ""});
-            this.cboPatType.Location = new System.Drawing.Point(87, 185);
+            this.cboPatType.Location = new System.Drawing.Point(87, 206);
             this.cboPatType.Name = "cboPatType";
             this.cboPatType.Size = new System.Drawing.Size(125, 22);
             this.cboPatType.TabIndex = 171;
@@ -195,7 +198,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.label7.Location = new System.Drawing.Point(7, 221);
+            this.label7.Location = new System.Drawing.Point(7, 242);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(112, 14);
             this.label7.TabIndex = 168;
@@ -207,7 +210,7 @@
             this.cboEmergency.FormattingEnabled = true;
             this.cboEmergency.Items.AddRange(new object[] {
             ""});
-            this.cboEmergency.Location = new System.Drawing.Point(127, 217);
+            this.cboEmergency.Location = new System.Drawing.Point(127, 238);
             this.cboEmergency.Name = "cboEmergency";
             this.cboEmergency.Size = new System.Drawing.Size(85, 22);
             this.cboEmergency.TabIndex = 169;
@@ -216,7 +219,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.label6.Location = new System.Drawing.Point(7, 313);
+            this.label6.Location = new System.Drawing.Point(7, 334);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 14);
             this.label6.TabIndex = 167;
@@ -226,7 +229,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.label1.Location = new System.Drawing.Point(7, 157);
+            this.label1.Location = new System.Drawing.Point(7, 178);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(49, 14);
             this.label1.TabIndex = 165;
@@ -239,7 +242,7 @@
             this.btnByDept.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnByDept.Font = new System.Drawing.Font("宋体", 10.5F);
             this.btnByDept.Hint = "";
-            this.btnByDept.Location = new System.Drawing.Point(62, 149);
+            this.btnByDept.Location = new System.Drawing.Point(62, 170);
             this.btnByDept.Name = "btnByDept";
             this.btnByDept.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
             this.btnByDept.Size = new System.Drawing.Size(150, 27);
@@ -307,7 +310,7 @@
             this.dgvCheckItem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.antiID,
             this.anti_cname});
-            this.dgvCheckItem.Location = new System.Drawing.Point(4, 343);
+            this.dgvCheckItem.Location = new System.Drawing.Point(4, 364);
             this.dgvCheckItem.Name = "dgvCheckItem";
             this.dgvCheckItem.ReadOnly = true;
             this.dgvCheckItem.RowHeadersVisible = false;
@@ -366,7 +369,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.label5.Location = new System.Drawing.Point(7, 253);
+            this.label5.Location = new System.Drawing.Point(7, 274);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 14);
             this.label5.TabIndex = 10;
@@ -378,7 +381,7 @@
             this.cbxGroup.FormattingEnabled = true;
             this.cbxGroup.Items.AddRange(new object[] {
             ""});
-            this.cbxGroup.Location = new System.Drawing.Point(7, 277);
+            this.cbxGroup.Location = new System.Drawing.Point(7, 298);
             this.cbxGroup.Name = "cbxGroup";
             this.cbxGroup.Size = new System.Drawing.Size(205, 22);
             this.cbxGroup.TabIndex = 15;
@@ -1167,6 +1170,14 @@
             this.panelControl1.Size = new System.Drawing.Size(921, 659);
             this.panelControl1.TabIndex = 168;
             // 
+            // chkPe
+            // 
+            this.chkPe.Location = new System.Drawing.Point(12, 145);
+            this.chkPe.Name = "chkPe";
+            this.chkPe.Properties.Caption = "明细包含体检";
+            this.chkPe.Size = new System.Drawing.Size(132, 19);
+            this.chkPe.TabIndex = 174;
+            // 
             // frmSampleStatMedSpec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1203,6 +1214,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvItem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chkPe.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1278,5 +1290,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        internal DevExpress.XtraEditors.CheckEdit chkPe;
     }
 }

@@ -17,11 +17,11 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
         /// </summary>
         /// <param name="dtbResult"></param>
         /// <returns></returns>
-        public long lngGetSampleMedSpec(out DataTable dtbResult, string dteStart, string dteEnd,string groupId, string applyUnitId,string strDept,string enmergencyFlg,string patType,int tsFlg)
+        public long lngGetSampleMedSpec(out DataTable dtbResult, string dteStart, string dteEnd,string groupId, string applyUnitId,string strDept,string enmergencyFlg,string patType,int tsFlg,bool peFlg)
         {
             //using (clsHISReportZy_Supported_Svc svc = (clsHISReportZy_Supported_Svc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsHISReportZy_Supported_Svc)))
             //{
-                return (new weCare.Proxy.ProxyReport()).Service.GetSampleMedSpec(out dtbResult, dteStart, dteEnd, groupId, applyUnitId, strDept, enmergencyFlg, patType, tsFlg);
+                return (new weCare.Proxy.ProxyReport()).Service.GetSampleMedSpec(out dtbResult, dteStart, dteEnd, groupId, applyUnitId, strDept, enmergencyFlg, patType, tsFlg,peFlg);
             //}
         }
         #endregion

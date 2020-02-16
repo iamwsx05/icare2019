@@ -3169,12 +3169,12 @@ namespace Report.Biz
                                 else
                                     voClone.AQSJLX += "查对不合格" + "(" + dicXml["A017"].ToString() + ")；";
                             }
-                            else if ( !string.IsNullOrEmpty(voClone.AQSJLX) )
+                            else if(voClone.AQSJLX.Contains("查对不合格"))
                             {
-                                if(voClone.AQSJLX.Contains("查对不合格"))
-                                    voClone.AQSJLX += "；";
+                                voClone.AQSJLX += "；";
                             }
                         }
+                            
                         //身份识别错误（患者身份查对）
                         if (dicXml.ContainsKey("X020"))
                             if (dicXml["X020"].ToString() == "1")

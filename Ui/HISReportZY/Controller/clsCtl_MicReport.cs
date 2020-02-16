@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using System.Windows.Forms; 
+using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using Sybase.DataWindow;
 using com.digitalwave.iCare.gui.HIS.Reports;
@@ -181,8 +181,8 @@ namespace com.digitalwave.iCare.gui.HIS
         /// </summary>
         public class EnitySampleSum
         {
-            public  string sampleType{ get; set; }
-            public decimal count{ get; set; }
+            public string sampleType { get; set; }
+            public decimal count { get; set; }
             public string countPer { get; set; }
         }
         #endregion
@@ -192,9 +192,9 @@ namespace com.digitalwave.iCare.gui.HIS
         /// </summary>
         public class EntityAntiApp
         {
-            public string antiName { get;set;}
+            public string antiName { get; set; }
             public string appStr { get; set; }
-            public decimal antiCount {get;set;}
+            public decimal antiCount { get; set; }
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace com.digitalwave.iCare.gui.HIS
         {
             DataTable dtbResult;
             m_objViewer.tabContorl.Visible = false;
-            m_objViewer.m_cboCondition.Items.AddRange(new object[] { "细菌分布趋势报告", "敏感率报告", "敏感率趋势报告", "累计敏感性报告", "累计MIC报告", "细菌分布报告统计", "细菌分布按标本类型统计", "细菌分布按科室统计", "微生物明细统计","阳性标本来源表" });
+            m_objViewer.m_cboCondition.Items.AddRange(new object[] { "细菌分布趋势报告", "敏感率报告", "敏感率趋势报告", "累计敏感性报告", "累计MIC报告", "细菌分布报告统计", "细菌分布按标本类型统计", "细菌分布按科室统计", "微生物明细统计", "阳性标本来源表" });
             m_objViewer.cbxDistrict.Items.AddRange(new object[] { "住院", "门诊", "体检" });
             m_objManage.lngGetSamType(out dtbResult);
 
@@ -370,7 +370,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 }
             }
 
-            lngRes = m_objManage.lngGetBacteriaDistribution(strTempName, dtDateFrom, dtDateTo,applicationStr, DeptIdArr, sampleId, DisNo, Sex, AgeFrom, AgeTo, TestMethod, out dtbResult);
+            lngRes = m_objManage.lngGetBacteriaDistribution(strTempName, dtDateFrom, dtDateTo, applicationStr, DeptIdArr, sampleId, DisNo, Sex, AgeFrom, AgeTo, TestMethod, out dtbResult);
             if (lngRes > 0 && dtbResult.Rows.Count > 0)
             {
                 this.FillDWBacStatstic(dtbResult);
@@ -447,7 +447,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
                     if (GlFlgStr == "1")
                     {
-                        DataRow[] drr = dtGlAnti.Select("xjmc = '" + XJMC + "' and glys = '" +"+'");
+                        DataRow[] drr = dtGlAnti.Select("xjmc = '" + XJMC + "' and glys = '" + "+'");
                         if (drr != null && drr.Length > 0)
                         {
 
@@ -502,7 +502,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 if (data.Count > 0)
                 {
                     //细菌总数
-                    m_objViewer.lblBacStatstic.Text = "细菌总数:(" + sumTotal + ") " +"        "+ "革兰细菌总数:(" + total + ") ";
+                    m_objViewer.lblBacStatstic.Text = "细菌总数:(" + sumTotal + ") " + "        " + "革兰细菌总数:(" + total + ") ";
                     m_objViewer.lblBacStatstic.Visible = true;
                 }
 
@@ -560,7 +560,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 }
             }
 
-            lngRes = m_objManage.lngGetMicApplication("",dtDateFrom, dtDateTo, CriticalStr, DeptIdArr, out dtbMicAp);
+            lngRes = m_objManage.lngGetMicApplication("", dtDateFrom, dtDateTo, CriticalStr, DeptIdArr, out dtbMicAp);
             if (lngRes > 0 && dtbMicAp.Rows.Count > 0)
             {
                 if (dtbMicAp != null && dtbMicAp.Rows.Count > 0)
@@ -642,7 +642,7 @@ namespace com.digitalwave.iCare.gui.HIS
                                 lstAntiApp.Add(vo);
                             }
                         }
-                      
+
                         #endregion
 
                         applictionStr += "'" + dr["application_id_chr"].ToString() + "',";
@@ -671,7 +671,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         #endregion
                     }
 
-                    lstAntiApp = antiSort( lstAntiApp);
+                    lstAntiApp = antiSort(lstAntiApp);
 
                     applictionStr = "(" + applictionStr.TrimEnd(',') + ")";
                 }
@@ -683,7 +683,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 MessageBox.Show("没有相关数据。");
                 return;
             }
-                
+
 
             #region 抗生素
             List<string> lstGSS = new List<string>();
@@ -693,7 +693,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 foreach (DataRow dr in dtbGSS.Rows)
                 {
                     string gssName = dr["ITEMNAME"].ToString().Trim();
-                    if (string.IsNullOrEmpty(gssName) || gssName == "细菌计数" || gssName == "鉴定结果" || gssName.Contains("培养结果"))
+                    if (string.IsNullOrEmpty(gssName) || gssName == "细菌计数" || gssName.Contains("结果"))
                         continue;
                     else
                         lstGSS.Add(gssName);
@@ -703,7 +703,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
             if (lngRes > 0 && dtbResult.Rows.Count > 0)
             {
-                this.FillDWMicSensitive(lstAntiApp, dtbResult, strTempName,lstGSS, lstCritical);
+                this.FillDWMicSensitive(lstAntiApp, dtbResult, strTempName, lstGSS, lstCritical);
             }
             else
             {
@@ -711,7 +711,7 @@ namespace com.digitalwave.iCare.gui.HIS
             }
         }
 
-        public void FillDWMicSensitive(List<EntityAntiApp> lstAntiApp, DataTable dtbResult, string strTempName,List<string> lstGSS, List<EntityMicSensitive> lstCritical)
+        public void FillDWMicSensitive(List<EntityAntiApp> lstAntiApp, DataTable dtbResult, string strTempName, List<string> lstGSS, List<EntityMicSensitive> lstCritical)
         {
             try
             {
@@ -754,7 +754,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         {
                             int rowFlg = 0;
                             Gss = lstGSS[iG];
-                            if (string.IsNullOrEmpty(Gss) || Gss == lstAntiApp[i].antiName || Gss == "细菌计数" || Gss == "鉴定结果")
+                            if (string.IsNullOrEmpty(Gss) || Gss == lstAntiApp[i].antiName || Gss == "细菌计数" || Gss.Contains("鉴定结果"))
                                 continue;
                             DataRow[] drrAntiType = dtbResult.Select("application_id_chr in " + appStr + " and itemname = '" + Gss + "'");
 
@@ -768,12 +768,12 @@ namespace com.digitalwave.iCare.gui.HIS
                             string sPer = string.Empty;
                             string mPer = string.Empty;
                             string rPer = string.Empty;
-                            if ( drrAntiType.Length > 0)
-                                sPer = (Convert.ToDecimal(drrAntiTypeS.Length) / Convert.ToDecimal(drrAntiType.Length)).ToString("0.00%");
-                            if ( drrAntiType.Length > 0)
-                                mPer = (Convert.ToDecimal(drrAntiTypeM.Length) / Convert.ToDecimal(drrAntiType.Length)).ToString("0.00%");
-                            if ( drrAntiType.Length > 0)
-                                rPer = (Convert.ToDecimal(drrAntiTypeR.Length) / Convert.ToDecimal(drrAntiType.Length)).ToString("0.00%");
+                            if (drrAntiType.Length > 0)
+                                sPer = (Convert.ToDecimal(drrAntiTypeS.Length) / lstAntiApp[i].antiCount).ToString("0.00%");
+                            if (drrAntiType.Length > 0)
+                                mPer = (Convert.ToDecimal(drrAntiTypeM.Length) / lstAntiApp[i].antiCount).ToString("0.00%");
+                            if (drrAntiType.Length > 0)
+                                rPer = (Convert.ToDecimal(drrAntiTypeR.Length) / lstAntiApp[i].antiCount).ToString("0.00%");
 
                             decCritical = 0;
                             criticalName = string.Empty;
@@ -791,7 +791,7 @@ namespace com.digitalwave.iCare.gui.HIS
                                 if (dtData.Rows[rowI][0].ToString() == Gss)
                                 {
                                     rowFlg = 1;
-                                    dtData.Rows[rowI][i + 1] = drrAntiType.Length.ToString() + "/" + rPer + "/" + mPer + "/" + sPer;
+                                    dtData.Rows[rowI][i + 1] = lstAntiApp[i].antiCount.ToString() + "/" + rPer + "/" + mPer + "/" + sPer;
                                 }
                                 #region 危急值
                                 if (dtData.Rows[rowI][0].ToString() == criticalName)
@@ -854,7 +854,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     applicationStr = "(" + applicationStr.TrimEnd(',') + ")";
                 }
             }
-            lngRes = m_objManage.lngGetMicdistributionTend(strTempName, dtDateFrom, dtDateTo,applicationStr, DeptIdArr, sampleId, DisNo, Sex, TestMethod, out dtbResult);
+            lngRes = m_objManage.lngGetMicdistributionTend(strTempName, dtDateFrom, dtDateTo, applicationStr, DeptIdArr, sampleId, DisNo, Sex, TestMethod, out dtbResult);
             if (lngRes > 0 && dtbResult.Rows.Count > 0)
             {
                 this.FillDWMicdistributionTend(dtbResult, dtDateFrom, dtDateTo);
@@ -1412,7 +1412,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         }
                     }
                 }
-                
+
                 #endregion
 
                 #region 名细
@@ -2109,7 +2109,7 @@ namespace com.digitalwave.iCare.gui.HIS
         /// </summary>
         /// <param name="intall"></param>
         /// <param name="dtRsult"></param>
-        public void FillDetail(DataTable dtbResult,DataTable dtbItem )
+        public void FillDetail(DataTable dtbResult, DataTable dtbItem)
         {
             try
             {
@@ -2322,7 +2322,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         dtData.Columns.Add(XJMC, Type.GetType("System.String"));
                     }
 
-                    applicationStr += "'" +dr["application_id_chr"] + "',";
+                    applicationStr += "'" + dr["application_id_chr"] + "',";
                 }
                 #endregion
 
@@ -2437,7 +2437,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 strTempName = null;
             }
             long lngRes = -1;
-            
+
             lngRes = m_objManage.lngGetAnti(strTempName, dtDateFrom, dtDateTo, DeptIdArr, out dtbMicName);
 
             if (lngRes > 0 && dtbMicName.Rows.Count > 0)
@@ -2453,7 +2453,7 @@ namespace com.digitalwave.iCare.gui.HIS
         ///填充 分布趋势报表
         /// </summary>
         /// <param name="dtbResult"></param>
-        public void FillDgvAntiByDept( DataTable dtbMicName)
+        public void FillDgvAntiByDept(DataTable dtbMicName)
         {
             try
             {
@@ -2587,7 +2587,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         }
                     }
                 }
-                
+
                 m_objViewer.dgvAntiByDept.DataSource = dtData;
             }
             catch (Exception objEx)
@@ -2669,7 +2669,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     }
                     else
                     {
-                        int rowIdx = data.Count -1;
+                        int rowIdx = data.Count - 1;
                         data[rowIdx].count++;
                     }
                 }
@@ -2709,7 +2709,7 @@ namespace com.digitalwave.iCare.gui.HIS
             {
                 appArr1 = data[i].appStr.Split(',');
 
-                for (int j = 0; j<data.Count;j++)
+                for (int j = 0; j < data.Count; j++)
                 {
                     appArr2 = data[j].appStr.Split(',');
 
