@@ -189,7 +189,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
             try
             {
-                long lngRes = m_objManage.lngGetSampleMedSpec(out dtbResult, dteStart, dteEnd, groupId, applyUnitId, strDept, enmergencyFlg, patType, tsFlg);
+                long lngRes = m_objManage.lngGetSampleMedSpec(out dtbResult, dteStart, dteEnd, groupId, applyUnitId, strDept, enmergencyFlg, patType, tsFlg,false);
                 int flgKS = 0;
 
                 if (lngRes > 0 && dtbResult.Rows.Count > 0)
@@ -493,6 +493,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     patType = "2";
 
                 int tsFlg = m_objViewer.rdgTime.SelectedIndex;
+                bool peFlg = m_objViewer.chkPe.Checked;
 
                 foreach (var item in dicGroup)
                 {
@@ -505,7 +506,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
                 clsPublic.PlayAvi("findFILE.avi", "正在查询项目信息，请稍候...");
 
-                long lngRes = m_objManage.lngGetSampleMedSpec(out dtbResult, dteStart, dteEnd, groupId, applyUnitId, strDept, enmergencyFlg, patType, tsFlg);
+                long lngRes = m_objManage.lngGetSampleMedSpec(out dtbResult, dteStart, dteEnd, groupId, applyUnitId, strDept, enmergencyFlg, patType, tsFlg, peFlg);
 
                 if (lngRes > 0 && dtbResult.Rows.Count > 0)
                 {

@@ -244,10 +244,12 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                             vo.orderStatus = dr["orderStatus"].ToString();
                             vo.deptName = dr["deptName"].ToString();
                             vo.medId = dr["assistcode_chr"].ToString();
-                            vo.medName = dr["medicinename_vchr"].ToString();
+                            vo.medName = dr["medicinename_vchr"].ToString().Trim();
                             if (vo.medName.Length > 18)
                                 vo.medName = vo.medName.Substring(0,18);
-                            vo.medGg = dr["medspec_vchr"].ToString();
+                            vo.medGg = dr["medspec_vchr"].ToString().Trim();
+                            if (vo.medGg.Length > 18)
+                                vo.medGg = vo.medGg.Substring(0, 18);
                             vo.medMount = Convert.ToDecimal(dr["preAmount"]);
                             if (dr["recOperName"] != DBNull.Value && dr["recDate"] != DBNull.Value)
                                 vo.isHs = "是";
@@ -405,8 +407,10 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                             vo.orderStatus = dr["orderStatus"].ToString();
                             vo.deptName = dr["deptName"].ToString();
                             vo.medId = dr["assistcode_chr"].ToString();
-                            vo.medName = dr["medicinename_vchr"].ToString();
-                            vo.medGg = dr["medspec_vchr"].ToString();
+                            vo.medName = dr["medicinename_vchr"].ToString().Trim();
+                            vo.medGg = dr["medspec_vchr"].ToString().Trim();
+                            if (vo.medGg.Length > 18)
+                                vo.medGg = vo.medGg.Substring(0, 18);
                             vo.medMount = Convert.ToDecimal(dr["preAmount"]);
                             if (dr["recOperName"] != DBNull.Value && dr["recDate"] != DBNull.Value)
                                 vo.isHs = "是";

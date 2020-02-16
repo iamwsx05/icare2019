@@ -2037,7 +2037,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
         /// <param name="enmergencyFlg"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long GetSampleMedSpec(out DataTable dtbResult, string dteStart, string dteEnd, string groupId, string applyUnitId, string strDept, string enmergencyFlg, string patType, int tsFlg = 0)
+        public long GetSampleMedSpec(out DataTable dtbResult, string dteStart, string dteEnd, string groupId, string applyUnitId, string strDept, string enmergencyFlg, string patType, int tsFlg ,bool peFlg)
         {
             long lngRes = 0;
             dtbResult = null;
@@ -2104,6 +2104,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                        and e.deptid_chr is not null
                                        and d.patient_type_chr = 1 ";
 
+
                     strSQL2 = @"select distinct a.application_id_chr,a.age_chr as Age,
                                                     d.barcode_vchr   AS BARCODE,
                                                     d.patient_type_chr AS pattype,
@@ -2150,8 +2151,12 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                        and d.accept_dat between
                                            to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
                                            to_date(?, 'yyyy-mm-dd hh24:mi:ss')
-                                       and e.deptid_chr is not null
-                                       and d.patient_type_chr = 2 ";
+                                       and e.deptid_chr is not null ";
+
+                    if (peFlg)
+                    {
+                        strSQL2 += " and d.patient_type_chr in(2 ,3)";
+                    }
                 }
                 if (patType == "2")   //门诊
                 {
@@ -2312,7 +2317,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                 {
                     if (dtbResult != null && dtbResult.Rows.Count > 0)
                     {
-                        for (int i = 0;i < dtbResult.Rows.Count;i++)
+                        for (int i = 0; i < dtbResult.Rows.Count; i++)
                         {
                             DataRow dr = dtbResult.Rows[i];
                             #region 时间点
@@ -2344,7 +2349,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                     dtbResult.Rows.Remove(dtbResult.Rows[i]);
                                     i--;
                                 }
-                                    
+
                             }
                             #endregion
                         }
@@ -2601,7 +2606,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
         /// <param name="dtbResult"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long GetPmpctDetail(string dteStart, string dteEnd, string patType,string applyUnitId, out DataTable dtbResult)
+        public long GetPmpctDetail(string dteStart, string dteEnd, string patType, string applyUnitId, out DataTable dtbResult)
         {
             long lngRes = 0;
             dtbResult = null;
@@ -2660,7 +2665,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                 else
                     strSQL += " and (c.patient_type_chr = 1 or c.patient_type_chr = 2)";
 
-                if(!string.IsNullOrEmpty(applyUnitId))
+                if (!string.IsNullOrEmpty(applyUnitId))
                 {
                     strSQL += " and  t.apply_unit_id_chr in " + applyUnitId;
                 }
@@ -2698,7 +2703,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
         /// <param name="dtbResult"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long GetPmpctStat(string dteStart, string dteEnd, string patType,string applyUnitId, out DataTable dtbResult)
+        public long GetPmpctStat(string dteStart, string dteEnd, string patType, string applyUnitId, out DataTable dtbResult)
         {
             long lngRes = 0;
             dtbResult = null;
@@ -2739,7 +2744,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                 else
                     strSQL += " and (c.patient_type_chr = 1 or c.patient_type_chr = 2)";
 
-                if(!string.IsNullOrEmpty(applyUnitId))
+                if (!string.IsNullOrEmpty(applyUnitId))
                 {
                     strSQL += "  and  t.apply_unit_id_chr in " + applyUnitId;
                 }
@@ -3864,8 +3869,8 @@ from t_atb_germ t where instr(t.cname,?)> 0 order by germid ";
                                       on mm.cvmid = lis.cvmid
                              where d.status_int > 5
                                and a.pstatus_int = 2
-                               and r1.status_int = 1 ";
-                // and r1.result_vchr <> '\'";
+                               and r1.status_int = 1
+                               and r1.result_vchr <> '\'";
 
                 if (!string.IsNullOrEmpty(applicationStr))
                 {
@@ -4497,9 +4502,9 @@ from t_atb_germ t where instr(t.cname,?)> 0 order by germid ";
                                       on d.application_id_chr = mm.applyid and mm.status >= 0
                                 left join t_criticalvalue_lis lis 
                                       on mm.cvmid = lis.cvmid
-                             where  d.status_int > 5
+                             where r1.check_item_name_vchr = '鉴定结果'
+                                and d.status_int > 5
                              and r1.status_int = 1
-                             --and r1.check_item_name_vchr = '鉴定结果'
                                and d.application_id_chr in (select distinct d.application_id_chr
                                   from t_opr_lis_sample d
                                   left join t_opr_lis_check_result r1
@@ -4657,7 +4662,7 @@ from t_atb_germ t where instr(t.cname,?)> 0 order by germid ";
                                                    and a.pstatus_int = 2
                                                    and r.report_dat is not null
                                                    and r.status_int > 1
-                                                   --and r1.result_vchr <> '\'
+                                                   and r1.result_vchr <> '\'
                                                    and r1.status_int = 1 ";
 
                 objHRPServ = new clsHRPTableService();
@@ -4718,7 +4723,7 @@ from t_atb_germ t where instr(t.cname,?)> 0 order by germid ";
                                                             on d.sample_id_chr = r1.sample_id_chr
                                                          where d.status_int > 5
                                                            and a.pstatus_int = 2
-                                                           and d.accept_dat between
+                                                           and d.confirm_dat between
                                                                to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
                                                                to_date(?, 'yyyy-mm-dd hh24:mi:ss')
                                                            and r1.result_vchr <> '\'
