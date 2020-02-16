@@ -41,8 +41,6 @@ namespace com.digitalwave.iCare.gui.HIS
         {
             int intTem = this.cboStatType.SelectedIndex;
 
-            //"检验标本周转中位数统计表", "检验标本周转中位数明细" 
-
             if (intTem == 0)
             {
                 m_objController.m_mthGeSampleAcceptable();

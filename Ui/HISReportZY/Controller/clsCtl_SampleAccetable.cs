@@ -169,8 +169,6 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                         if (!string.IsNullOrEmpty(applyUnitIdStr))
                             applyUnitIdStr = applyUnitIdStr.TrimEnd(',');
                     }
-
-                    applyUnitIdStr = "(" + applyUnitIdStr.TrimEnd(',') + ")";
                 }
 
                 if (m_objViewer.dgvCheckItem.Rows.Count >= 2)
@@ -193,6 +191,9 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                     if (!string.IsNullOrEmpty(applyUnitIdStr))
                         applyUnitIdStr = applyUnitIdStr.TrimEnd(',');
                 }
+
+                if(!string.IsNullOrEmpty(applyUnitIdStr))
+                    applyUnitIdStr = "(" + applyUnitIdStr.TrimEnd(',') + ")";
 
                 clsPublic.PlayAvi("findFILE.avi", "正在查询项目信息，请稍候...");
 
@@ -362,12 +363,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                                     applyUnitIdStr += "'" + drr[0]["applyunitid"].ToString() + "',";
                             }
                         }
-
-                        if (!string.IsNullOrEmpty(applyUnitIdStr))
-                            applyUnitIdStr = applyUnitIdStr.TrimEnd(',');
                     }
-
-                    applyUnitIdStr = "(" + applyUnitIdStr.TrimEnd(',') + ")";
                 }
 
                 if (m_objViewer.dgvCheckItem.Rows.Count >= 2)
@@ -385,11 +381,11 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                             if (drr != null && drr.Length > 0)
                                 applyUnitIdStr += "'" + drr[0]["applyunitid"].ToString() + "',";
                         }
-                    }
-
-                    if (!string.IsNullOrEmpty(applyUnitIdStr))
-                        applyUnitIdStr = applyUnitIdStr.TrimEnd(',');
+                    }  
                 }
+
+                if (!string.IsNullOrEmpty(applyUnitIdStr))
+                    applyUnitIdStr = "(" + applyUnitIdStr.TrimEnd(',') + ")";
 
                 clsPublic.PlayAvi("findFILE.avi", "正在查询项目信息，请稍候...");
 

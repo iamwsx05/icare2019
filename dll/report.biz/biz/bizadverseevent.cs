@@ -3162,16 +3162,23 @@ namespace Report.Biz
 
                         if (dicXml.ContainsKey("A017"))
                         {
-                            if (!string.IsNullOrEmpty(dicXml["A017"].ToString()))
+                            if (!string.IsNullOrEmpty(voClone.AQSJLX) )
                             {
-                                if (voClone.AQSJLX.Contains("查对不合格"))
-                                    voClone.AQSJLX += "(" + dicXml["A017"].ToString() + ")；";
-                                else
-                                    voClone.AQSJLX += "查对不合格" + "(" + dicXml["A017"].ToString() + ")；";
+                                if(!string.IsNullOrEmpty(dicXml["A017"].ToString()))
+                                {
+                                    if (!string.IsNullOrEmpty(voClone.AQSJLX))
+                                    {
+                                        if (voClone.AQSJLX.Contains("查对不合格"))
+                                            voClone.AQSJLX += "(" + dicXml["A017"].ToString() + ")；";
+                                    }
+                                    else
+                                        voClone.AQSJLX += "查对不合格" + "(" + dicXml["A017"].ToString() + ")；";
+                                }
                             }
-                            else if(voClone.AQSJLX.Contains("查对不合格"))
+                            else if(!string.IsNullOrEmpty(voClone.AQSJLX)  )
                             {
-                                voClone.AQSJLX += "；";
+                                if(voClone.AQSJLX.Contains("查对不合格"))
+                                    voClone.AQSJLX += "；";
                             }
                         }
                             

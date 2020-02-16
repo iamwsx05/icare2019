@@ -769,11 +769,11 @@ namespace com.digitalwave.iCare.gui.HIS
                             string mPer = string.Empty;
                             string rPer = string.Empty;
                             if (drrAntiType.Length > 0)
-                                sPer = (Convert.ToDecimal(drrAntiTypeS.Length) / lstAntiApp[i].antiCount).ToString("0.00%");
+                                sPer = (Convert.ToDecimal(drrAntiTypeS.Length) / Convert.ToDecimal(drrAntiType.Length)).ToString("0.00%");
                             if (drrAntiType.Length > 0)
-                                mPer = (Convert.ToDecimal(drrAntiTypeM.Length) / lstAntiApp[i].antiCount).ToString("0.00%");
+                                mPer = (Convert.ToDecimal(drrAntiTypeM.Length) / Convert.ToDecimal(drrAntiType.Length)).ToString("0.00%");
                             if (drrAntiType.Length > 0)
-                                rPer = (Convert.ToDecimal(drrAntiTypeR.Length) / lstAntiApp[i].antiCount).ToString("0.00%");
+                                rPer = (Convert.ToDecimal(drrAntiTypeR.Length) / Convert.ToDecimal(drrAntiType.Length)).ToString("0.00%");
 
                             decCritical = 0;
                             criticalName = string.Empty;

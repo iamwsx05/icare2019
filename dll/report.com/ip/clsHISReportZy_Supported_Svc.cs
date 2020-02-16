@@ -2054,6 +2054,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
 
                 if (string.IsNullOrEmpty(patType))
                 {
+                    //住院
                     strSQL1 = @"select distinct a.application_id_chr,a.age_chr as Age,
                                                     d.barcode_vchr  AS BARCODE,
                                                     d.patient_type_chr AS pattype,
@@ -2104,7 +2105,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                        and e.deptid_chr is not null
                                        and d.patient_type_chr = 1 ";
 
-
+                    //2 门诊 3 体检
                     strSQL2 = @"select distinct a.application_id_chr,a.age_chr as Age,
                                                     d.barcode_vchr   AS BARCODE,
                                                     d.patient_type_chr AS pattype,
@@ -2156,6 +2157,10 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                     if (peFlg)
                     {
                         strSQL2 += " and d.patient_type_chr in(2 ,3)";
+                    }
+                    else
+                    {
+                        strSQL2 += " and d.patient_type_chr in(2)";
                     }
                 }
                 if (patType == "2")   //门诊
@@ -4510,12 +4515,12 @@ from t_atb_germ t where instr(t.cname,?)> 0 order by germid ";
                                   left join t_opr_lis_check_result r1
                                     on d.sample_id_chr = r1.sample_id_chr
                                  where d.status_int > 5
-                                   and d.accept_dat between
+                                   and d.confirm_dat between
                                        to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
                                        to_date(?, 'yyyy-mm-dd hh24:mi:ss')
                                    and r1.result_vchr <> '\'
-                                   and (r1.result_vchr = '耐药' or r1.result_vchr = '敏感' or
-                                       r1.result_vchr = '中介')
+                                   and (trim(r1.result_vchr) = '耐药' or trim(r1.result_vchr) = '敏感' or
+                                       trim(r1.result_vchr) = '中介')
                                    and r1.status_int = 1 )  ";
 
                 objHRPServ = new clsHRPTableService();
