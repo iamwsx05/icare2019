@@ -1,0 +1,244 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A60A7783-AAD6-4A1B-8B41-D1FEC6C80F01}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>EMR_HRPControl</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>HRPControl</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\..\..\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\..\..\bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MenuImageLib, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b5136c76be6bb5d5">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\MenuImageLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="utility, Version=2.0.0.1, Culture=neutral, PublicKeyToken=a48271451c5bd35f, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\utility.dll</HintPath>
+    </Reference>
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=90ad5968fbc6e760, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\wecaredata.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsBornScheduleRecordInfo.cs" />
+    <Compile Include="clsJudgeCharType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsPartogramLocation.cs" />
+    <Compile Include="clsPartogramPrintTool.cs" />
+    <Compile Include="clsPrintRichTextContext.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsTextLikeTool.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="cltDataGridDSTRichTextBox.cs" />
+    <Compile Include="ctlBornScheduleRecord.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ctlBornScheduleRecordPrintTool.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ctlDataGridDSTCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ctlPaintContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlPainter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlPartogramRecord.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ctlRichTextBox.cs" />
+    <Compile Include="ctlThreeMeasureRecord.cs" />
+    <Compile Include="ctlThreeMeasureRecordInfos.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ctlThreeMeasureRecordInfosNew.cs" />
+    <Compile Include="ctlThreeMeasureRecordInfos_GN.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ctlThreeMeasureRecordNew.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ctlThreeMeasureRecordPrintTool.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ctlThreeMeasureRecordPrintTool_GN.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ctlThreeMeasureRecord_GN.cs" />
+    <Compile Include="ctlThreeMeasureRecord_NewPrintTool.cs" />
+    <Compile Include="ctlThumbContainer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlThumbPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dwtDataGridComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="UtilityClass.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsPartogramManager.cs" />
+    <EmbeddedResource Include="ctlBornScheduleRecord.resx">
+      <DependentUpon>ctlBornScheduleRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlDataGridDSTCheckBox.resx">
+      <DependentUpon>ctlDataGridDSTCheckBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlPaintContainer.resx">
+      <DependentUpon>ctlPaintContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlPainter.resx">
+      <DependentUpon>ctlPainter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlPartogramRecord.resx">
+      <DependentUpon>ctlPartogramRecord.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlRichTextBox.resx">
+      <DependentUpon>ctlRichTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlThreeMeasureRecord.resx">
+      <DependentUpon>ctlThreeMeasureRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlThreeMeasureRecordNew.resx">
+      <DependentUpon>ctlThreeMeasureRecordNew.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlThreeMeasureRecordPrintTool.resx">
+      <DependentUpon>ctlThreeMeasureRecordPrintTool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlThreeMeasureRecord_NewPrintTool.resx">
+      <DependentUpon>ctlThreeMeasureRecord_NewPrintTool.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlThumbContainer.resx">
+      <DependentUpon>ctlThumbContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlThumbPanel.resx">
+      <DependentUpon>ctlThumbPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Image.resources" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
