@@ -2278,7 +2278,10 @@ namespace com.digitalwave.Utility.Controls.New
             else
             {
                 p_objEvent.m_intTimeIndex = (int)(p_objEvent.m_dtmEventTime.AddHours(-2).TimeOfDay.TotalSeconds - 60) / (4 * 3600);
-
+                if((p_objEvent.m_dtmEventTime.ToString().Contains("22:00:00")))
+                {
+                    p_objEvent.m_intTimeIndex += 1;
+                }
                 //计算最近的位置，在事件重叠时使用(交由m_mthResetEventTimeIndex处理 －－ bhuang)
                 //if((p_objEvent.m_dtmEventTime.Hour%6)%4 < 2)
                 //    p_objEvent.m_intNearTimeIndex = p_objEvent.m_intTimeIndex - 1;

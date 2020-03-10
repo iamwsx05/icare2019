@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iCare", "iCare.csproj", "{1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMR_RemindMessageClient", "..\EMR_RemindMessage\EMR_RemindMessageClient\EMR_RemindMessageClient\EMR_RemindMessageClient.csproj", "{A5ABDEAF-5531-4E4A-931A-049D79A5A526}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRPControl", "..\HRPControl\HRPControl.csproj", "{A60A7783-AAD6-4A1B-8B41-D1FEC6C80F01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{A5ABDEAF-5531-4E4A-931A-049D79A5A526}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5ABDEAF-5531-4E4A-931A-049D79A5A526}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5ABDEAF-5531-4E4A-931A-049D79A5A526}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A60A7783-AAD6-4A1B-8B41-D1FEC6C80F01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A60A7783-AAD6-4A1B-8B41-D1FEC6C80F01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A60A7783-AAD6-4A1B-8B41-D1FEC6C80F01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A60A7783-AAD6-4A1B-8B41-D1FEC6C80F01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

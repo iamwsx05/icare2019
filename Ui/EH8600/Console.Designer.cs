@@ -92,7 +92,7 @@
             this.txtIpAddr.Name = "txtIpAddr";
             this.txtIpAddr.Size = new System.Drawing.Size(316, 29);
             this.txtIpAddr.TabIndex = 4;
-            this.txtIpAddr.Text = "127.0.0.1";
+            this.txtIpAddr.Text = "10.37.9.49";
             // 
             // txtPortNo
             // 
@@ -102,7 +102,7 @@
             this.txtPortNo.Name = "txtPortNo";
             this.txtPortNo.Size = new System.Drawing.Size(316, 29);
             this.txtPortNo.TabIndex = 5;
-            this.txtPortNo.Text = "5600";
+            this.txtPortNo.Text = "8089";
             // 
             // btnListen
             // 
@@ -155,9 +155,9 @@
             this.Name = "Console";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EH8600 控制台";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Console_FormClosing);
             this.Load += new System.EventHandler(this.Console_Load);
             this.SizeChanged += new System.EventHandler(this.Console_SizeChanged);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Console_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -51,12 +51,138 @@ namespace EH8600
 
         #region 方法
 
+        #region 从本地配置文件读取参数值
+
+        /// <summary>
+        /// 本地配置文件
+        /// </summary>
+        string LocalSettingFile = System.AppDomain.CurrentDomain.BaseDirectory + @"\app.xml";
+
+        /// <summary>
+        /// 从本地配置文件读取参数值
+        /// </summary>
+        /// <param name="p_strNode"></param>
+        /// <param name="p_strKey"></param>
+        /// <returns></returns>
+        string ReadLocalSettingValue(string p_strNode, string p_strKey)
+        {
+            string strValue = string.Empty;
+            System.Xml.XmlDocument doc = new System.Xml.XmlDocument();
+            try
+            {
+                System.Xml.XmlElement element = null;
+                doc.Load(LocalSettingFile);
+
+                int n = -1;
+                string[] strNodeArr = p_strNode.Split('|');
+                switch (strNodeArr.Length)
+                {
+                    case 1:
+                        element = doc[strNodeArr[++n]];
+                        break;
+                    case 2:
+                        element = doc[strNodeArr[++n]][strNodeArr[++n]];
+                        break;
+                    case 3:
+                        element = doc[strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]];
+                        break;
+                    case 4:
+                        element = doc[strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]];
+                        break;
+                    case 5:
+                        element = doc[strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]];
+                        break;
+                    case 6:
+                        element = doc[strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]];
+                        break;
+                    case 7:
+                        element = doc[strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]];
+                        break;
+                    case 8:
+                        element = doc[strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]];
+                        break;
+                    case 9:
+                        element = doc[strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]];
+                        break;
+                    case 10:
+                        element = doc[strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]][strNodeArr[++n]];
+                        break;
+                    default:
+                        return string.Empty;
+                }
+
+                if (element != null)
+                {
+                    strValue = element.Attributes[p_strKey].Value.Trim();
+                }
+            }
+            catch
+            {
+            }
+            finally
+            {
+                doc = null;
+            }
+            return strValue;
+        }
+        #endregion
+
+        #region 本地配置
+        /// <summary>
+        /// 本地配置
+        /// </summary>
+        /// <param name="empNo"></param>
+        /// <returns></returns>
+        List<EntityAppConfig> GetAppConfig(string empNo)
+        {
+            EntityPC pc = new EntityPC();
+            pc.MachineName = weCare.Core.Utils.Function.LocalHostName();
+            pc.IpAddr = weCare.Core.Utils.Function.LocalIP();
+            pc.MacAddr = weCare.Core.Utils.Function.LocalMac();
+            pc.EmpNo = empNo;
+            return (new weCare.Proxy.ProxySysPower()).Service.GetAppConfig(pc);
+        }
+        #endregion
+
+        #region Int
+        /// <summary>
+        /// Int
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public int Int(string str)
+        {
+            int i = 0;
+            int.TryParse(str, out i);
+            return i;
+        }
+        #endregion
+
         #region Init
         /// <summary>
         /// Init
         /// </summary>
         void Init()
         {
+            try
+            {
+                // 运行模式
+                GlobalAppConfig.RunningMode = this.Int(this.ReadLocalSettingValue("Main|runningMode", "value"));
+                if (GlobalAppConfig.RunningMode != 2 && GlobalAppConfig.RunningMode != 3)
+                {
+                    GlobalAppConfig.RunningMode = 2;
+                }
+            }
+            catch
+            {
+                GlobalAppConfig.RunningMode = 2;
+            }
+            finally
+            {
+                // config
+                GlobalAppConfig.AppConfig = GetAppConfig(null);
+            }
+
             // 通道号配置信息
             this.ChannelConfig = new Dictionary<string, string>();
             DataSet ds = new DataSet();
@@ -69,6 +195,16 @@ namespace EH8600
                     for (int i = 0; i < dt.Columns.Count; i++)
                     {
                         ChannelConfig.Add(dt.Columns[i].ColumnName, dt.Rows[0][dt.Columns[i].ColumnName].ToString());
+
+                        if(dt.Columns[i].ColumnName == "IP")
+                        {
+                            this.txtIpAddr.Text = dt.Rows[0][dt.Columns[i].ColumnName].ToString();
+                        }
+
+                        if (dt.Columns[i].ColumnName == "PORT")
+                        {
+                            this.txtPortNo.Text = dt.Rows[0][dt.Columns[i].ColumnName].ToString();
+                        }
                     }
                 }
             }
@@ -98,7 +234,7 @@ namespace EH8600
             //{
             long ret = (new weCare.Proxy.ProxyLis()).Service.lngGetInstrumentSerialSetting(hostName, out EquipConfig);
             if (ret == 1)
-            {
+            { 
                 if (EquipConfig != null && EquipConfig.Length > 0)
                 {
                     this.lblEquipName.Text = EquipConfig[0].strLIS_Instrument_Name;
@@ -236,7 +372,6 @@ namespace EH8600
                 idxEnd = data.IndexOf(chrEnd);
             } while (idxStart > 0 && idxEnd > 0);
             this.ReceiveData.Remove(0, idxEnd + 1);
-
             if (lstData.Count > 0)
             {
                 foreach (string sampleData in lstData)
