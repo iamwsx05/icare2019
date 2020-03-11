@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A38FA123-442B-4181-BD98-1E9008A89EFB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Emr.com</RootNamespace>
+    <AssemblyName>emr.com</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>snkemr.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="comm.com, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0bcca75560d02c54, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\comm.com.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="utility, Version=2.0.0.1, Culture=neutral, PublicKeyToken=55813ad8fa3e5102, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\utility.dll</HintPath>
+    </Reference>
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=4bdb6de9b3ca5966, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\wecaredata.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="com\AnaService\clsAnaesthesia_ConfirmService.cs" />
+    <Compile Include="com\AnaService\clsAnaesthesia_PlanService.cs" />
+    <Compile Include="com\AnaService\clsAnaParamSettingService.cs" />
+    <Compile Include="com\AnaService\clsAnaPCARegisterService.cs" />
+    <Compile Include="com\AnaService\clsOperationRequisitionService.cs" />
+    <Compile Include="com\AssistantToolService\Approve_FlowService.cs" />
+    <Compile Include="com\AssistantToolService\clsCaseGradeServ.cs" />
+    <Compile Include="com\AssistantToolService\clsCaseRecallServ.cs" />
+    <Compile Include="com\AssistantToolService\clsCaseRecallServ_Modify.cs" />
+    <Compile Include="com\AssistantToolService\clsComboBoxService.cs" />
+    <Compile Include="com\AssistantToolService\clsCommonUseServ.cs" />
+    <Compile Include="com\AssistantToolService\clsDefaultValueService.cs" />
+    <Compile Include="com\AssistantToolService\clsElectronIdiograph.cs" />
+    <Compile Include="com\AssistantToolService\clsEMR_HIS_CheckRequisitionServ.cs" />
+    <Compile Include="com\AssistantToolService\clsGetAllRuningFormsServ.cs" />
+    <Compile Include="com\AssistantToolService\clsGetDatasSvc.cs" />
+    <Compile Include="com\AssistantToolService\clsInactiveRecorBase.cs" />
+    <Compile Include="com\AssistantToolService\clsInPatientArchivingService.cs" />
+    <Compile Include="com\AssistantToolService\clsManageDocAndNurseService.cs" />
+    <Compile Include="com\AssistantToolService\clsMedicalExamService.cs" />
+    <Compile Include="com\AssistantToolService\clsMinElementColServ.cs" />
+    <Compile Include="com\AssistantToolService\clsSpecialSymbolServ.cs" />
+    <Compile Include="com\AssistantToolService\clsTemplateService.cs" />
+    <Compile Include="com\AssistantToolService\cslTimeDirectionService.cs" />
+    <Compile Include="com\AssistantToolService\CustomForm\clsCustomFormServ.cs" />
+    <Compile Include="com\AssistantToolService\DataShare\clsBeforeOperSumShareService.cs" />
+    <Compile Include="com\AssistantToolService\DataShare\clsEMR_HolidayService.cs" />
+    <Compile Include="com\AssistantToolService\DataShare\clsGeneralDiseaseRecordShareService.cs" />
+    <Compile Include="com\AssistantToolService\DataShare\clsInPatientCaseHisoryDefaultService.cs" />
+    <Compile Include="com\AssistantToolService\DataShare\clsOperationRecordDoctorShareService.cs" />
+    <Compile Include="com\AssistantToolService\DataShare\clsThreeMeasureShareService.cs" />
+    <Compile Include="com\AssistantToolService\LabResultSvc.cs" />
+    <Compile Include="com\AssistantToolService\Statistics\clsRecordSearchService.cs" />
+    <Compile Include="com\AssistantToolService\Statistics\clsStatisticsService.cs" />
+    <Compile Include="com\AssistModuleServ\CaseGrade\clsCaseQualityFeedBackServ.cs" />
+    <Compile Include="com\AssistModuleServ\CaseGrade\clsCaseViceStatServ.cs" />
+    <Compile Include="com\AssistModuleServ\CaseGrade\clsGradedServ.cs" />
+    <Compile Include="com\AssistModuleServ\CaseGrade\clsGradeItemSetServ.cs" />
+    <Compile Include="com\AssistModuleServ\CaseGrade\clsInpatientCaseGradeAndStatServ.cs" />
+    <Compile Include="com\AssistModuleServ\CaseGrade\clsPublicGradeServ.cs" />
+    <Compile Include="com\AssistModuleServ\CaseGrade\clsQueryDeduceCauseServ.cs" />
+    <Compile Include="com\AssistModuleServ\CaseGrade\clsSingleCaseReportServ.cs" />
+    <Compile Include="com\AssistModuleServ\clsAuditCaseServ.cs" />
+    <Compile Include="com\AssistModuleServ\clsCaseTypingServ.cs" />
+    <Compile Include="com\AssistModuleServ\clsInactiveViewServ.cs" />
+    <Compile Include="com\AssistModuleServ\clsLockCaseServ.cs" />
+    <Compile Include="com\AssistModuleServ\SQLHelper\clsSqlStringHelper.cs" />
+    <Compile Include="com\CheckOrderService\clsApplyReportServer.cs" />
+    <Compile Include="com\CheckOrderService\clsBUltrasonicCheckOrderServ.cs" />
+    <Compile Include="com\CheckOrderService\clsCTCheckOrderServ.cs" />
+    <Compile Include="com\CheckOrderService\clsEKGOrderService.cs" />
+    <Compile Include="com\CheckOrderService\clsHighOxygenServ.cs" />
+    <Compile Include="com\CheckOrderService\clsLabAnalysisOrderService.cs" />
+    <Compile Include="com\CheckOrderService\clsLabCheckItemAdminService.cs" />
+    <Compile Include="com\CheckOrderService\clsMRIApplyServ.cs" />
+    <Compile Include="com\CheckOrderService\clsNuclearOrderService.cs" />
+    <Compile Include="com\CheckOrderService\clsPathologyOrgCheckOrderServ.cs" />
+    <Compile Include="com\CheckOrderService\clsPSGOrderService.cs" />
+    <Compile Include="com\CheckOrderService\clsSPECTCheckOrderServ.cs" />
+    <Compile Include="com\CheckOrderService\clsXRayCheckOrderServ.cs" />
+    <Compile Include="com\clsAfterOperationService\clsAfterOperationService.cs" />
+    <Compile Include="com\clsDiseaseTrackService\clsDiseaseTrackAddBlankService.cs" />
+    <Compile Include="com\clsDiseaseTrackService\clsDiseaseTrackService.cs" />
+    <Compile Include="com\clsDocVueSyncService\clsDocVueSyncService.cs" />
+    <Compile Include="com\clsRecordsService\clsCaseHistorySearchService.cs" />
+    <Compile Include="com\clsRecordsService\clsRecordsService.cs" />
+    <Compile Include="com\CustomFromService\clsComboBoxService.cs" />
+    <Compile Include="com\CustomFromService\clsCustomFormServ.cs" />
+    <Compile Include="com\CustomFromService\clsDefaultValueService.cs" />
+    <Compile Include="com\CustomFromService\clsGetAllRuningFormsServ.cs" />
+    <Compile Include="com\CustomFromService\clsMinElementColServ.cs" />
+    <Compile Include="com\DigitalSign_srv\clsDigitalSign_srv.cs" />
+    <Compile Include="com\DoctorRecordService\clsAYQBabyAssessmentEspRecordService.cs" />
+    <Compile Include="com\DoctorRecordService\clsAYQBabyAssessmentRecordService.cs" />
+    <Compile Include="com\DoctorRecordService\clsBaseCaseHistoryServ.cs" />
+    <Compile Include="com\DoctorRecordService\clsBeforeOperationSummaryService.cs" />
+    <Compile Include="com\DoctorRecordService\clsBrothRecords_F2RecService.cs" />
+    <Compile Include="com\DoctorRecordService\clsBrothRecords_F2Service.cs" />
+    <Compile Include="com\DoctorRecordService\clsclsEMR_VaginalExaminationServ.cs" />
+    <Compile Include="com\DoctorRecordService\clsConsultationService.cs" />
+    <Compile Include="com\DoctorRecordService\clsEMR_CesareanRecordServ.cs" />
+    <Compile Include="com\DoctorRecordService\clsEMR_DeathRecorIn24HoursService.cs" />
+    <Compile Include="com\DoctorRecordService\clsEMR_OutHospitalIn24HoursService.cs" />
+    <Compile Include="com\DoctorRecordService\clsEMR_PullDeliverRecordServ.cs" />
+    <Compile Include="com\DoctorRecordService\clsEMR_SummaryBeforeOPServ.cs" />
+    <Compile Include="com\DoctorRecordService\clsFetalCustodialRecordDomain.cs" />
+    <Compile Include="com\DoctorRecordService\clsFetalCustodialRecordService.cs" />
+    <Compile Include="com\DoctorRecordService\clsGestationMisbirthsthreeRecService.cs" />
+    <Compile Include="com\DoctorRecordService\clsGestationMisbirthsthreeService.cs" />
+    <Compile Include="com\DoctorRecordService\clsInHospitalMainRecordServ.cs" />
+    <Compile Include="com\DoctorRecordService\clsInHospitalMainRecordServ_GX.cs" />
+    <Compile Include="com\DoctorRecordService\clsInPatientCaseHistoryServ.cs" />
+    <Compile Include="com\DoctorRecordService\clsInpatMedRecServ.cs" />
+    <Compile Include="com\DoctorRecordService\clsLargeConsultationService.cs" />
+    <Compile Include="com\DoctorRecordService\clsMainDiseaseTrackService.cs" />
+    <Compile Include="com\DoctorRecordService\clsNewBabyCircsRecordService.cs" />
+    <Compile Include="com\DoctorRecordService\clsNewBabyInRoomRecordService.cs" />
+    <Compile Include="com\DoctorRecordService\clsOperationAgreedRecordServ.cs" />
+    <Compile Include="com\DoctorRecordService\clsOperationRecordDoctorServ.cs" />
+    <Compile Include="com\DoctorRecordService\clsOutHospitalService.cs" />
+    <Compile Include="com\DoctorRecordService\clsOutPatientRevisitServ.cs" />
+    <Compile Include="com\DoctorRecordService\clsPICUShiftInService.cs" />
+    <Compile Include="com\DoctorRecordService\clsPICUShiftOutService.cs" />
+    <Compile Include="com\DoctorRecordService\clsQCRecordService.cs" />
+    <Compile Include="com\DoctorRecordService\clsQuery8iServ.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsBeforeOperationDiscussService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsCaseDiscussService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsCheckRoomService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsConveyService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsDeadCaseDiscussService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsDeadRecordService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsDiseaseSummaryService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsFirstIllnessNoteService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsFirstIllnessNote_ZYService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsGeneralDiseaseService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsHandOverService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsSaveRecordService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsTakeOverService.cs" />
+    <Compile Include="com\DoctorRecordService\DiseaseTreck\clsTurnInService.cs" />
+    <Compile Include="com\DomainUserLoginInfoServ\clsDomainUserLoginInfoServ.cs" />
+    <Compile Include="com\EMR_CaseArchivingService\clsEMR_ApproveArchivedCaseService.cs" />
+    <Compile Include="com\EMR_CaseArchivingService\clsEMR_BorrowArchivedCaseService.cs" />
+    <Compile Include="com\EMR_CaseArchivingService\clsEMR_CaseArchivingService.cs" />
+    <Compile Include="com\Emr_ConfigService\clsCaseMessageDeptServ.cs" />
+    <Compile Include="com\Emr_ConfigService\clsConfigService.cs" />
+    <Compile Include="com\Emr_ConfigService\clsInitFormElementService.cs" />
+    <Compile Include="com\EMR_FollowUpSurveyServ\clsEMR_FollowUpSurveyPatientServ.cs" />
+    <Compile Include="com\EMR_FollowUpSurveyServ\clsEMR_FollowUpSurveyRecordServ.cs" />
+    <Compile Include="com\EMR_FollowUpSurveyServ\clsEMR_FollowUpSurveyRemindServ.cs" />
+    <Compile Include="com\EMR_FollowUpSurveyServ\clsEMR_FollowUpSurveyStatisticsServ.cs" />
+    <Compile Include="com\EMR_FollowUpSurveyServ\EMR_FollowUpSurveyServ.cs" />
+    <Compile Include="com\EquipmentTypeService\clsEquipmentTypeService.cs" />
+    <Compile Include="com\EvaluationRecordService\APACHEIIIValuation.cs" />
+    <Compile Include="com\EvaluationRecordService\APACHEIIValuation.cs" />
+    <Compile Include="com\EvaluationRecordService\BabyInjuryCaseEvaluationServ.cs" />
+    <Compile Include="com\EvaluationRecordService\clsImproveGlasgowComaEvaluationServ.cs" />
+    <Compile Include="com\EvaluationRecordService\clsLungInjuryEvaluationServ.cs" />
+    <Compile Include="com\EvaluationRecordService\CTEvaluationServ.cs" />
+    <Compile Include="com\EvaluationRecordService\MODSEvaluation.cs" />
+    <Compile Include="com\EvaluationRecordService\MortalityRateEvaluationServ.cs" />
+    <Compile Include="com\EvaluationRecordService\NewBabyInjuryCaseEvaluationService.cs" />
+    <Compile Include="com\EvaluationRecordService\RansonEvaluationServ.cs" />
+    <Compile Include="com\EvaluationRecordService\SIRSEvaluation.cs" />
+    <Compile Include="com\EvaluationRecordService\SOFAEvaluation.cs" />
+    <Compile Include="com\EvaluationRecordService\TISSValuationServ.cs" />
+    <Compile Include="com\GLS_WS_SERV\clsApplyReportServer.cs" />
+    <Compile Include="com\GLS_WS_SERV\clsApplyReportServerNew.cs" />
+    <Compile Include="com\GLS_WS_SERV\DataProcess.cs" />
+    <Compile Include="com\HospitalInfoService\Dept\clsDepartmentHandlerService.cs" />
+    <Compile Include="com\HospitalInfoService\Dept\clsDepartmentManagerService.cs" />
+    <Compile Include="com\HospitalInfoService\Dept\clsDeptRecordDateTimeInfoService.cs" />
+    <Compile Include="com\HospitalInfoService\Employee\clsDutyManagerService.cs" />
+    <Compile Include="com\HospitalInfoService\Employee\clsEmployeeManagerService.cs" />
+    <Compile Include="com\HospitalInfoService\Employee\clsEmployee_OuterExpertService.cs" />
+    <Compile Include="com\HospitalInfoService\InBedInfo\clsInBedRelationManagerService.cs" />
+    <Compile Include="com\HospitalInfoService\InBedInfo\clsInPatientAreaManagerService.cs" />
+    <Compile Include="com\HospitalInfoService\InBedInfo\clsInPatientBedManagerService.cs" />
+    <Compile Include="com\HospitalInfoService\InBedInfo\clsInPatientRoomManagerService.cs" />
+    <Compile Include="com\HospitalInfoService\Patient\clsPatientManagerService.cs" />
+    <Compile Include="com\HospitalInfoService\Patient\clsWholeHosPatientManageServ.cs" />
+    <Compile Include="com\HospitalManagerService\clsCaseMessageServ.cs" />
+    <Compile Include="com\HospitalManagerService\clsGetInfoService.cs" />
+    <Compile Include="com\HospitalManagerService\IGetInfoService.cs" />
+    <Compile Include="com\ICD10\clsAssistantDiagnosisItemTypeInitServ.cs" />
+    <Compile Include="com\ICD10\clsAtlasForChecksLabServ.cs" />
+    <Compile Include="com\ICD10\clsAutoCAD_ICD10Serv.cs" />
+    <Compile Include="com\ICD10\clsCheckPageServ.cs" />
+    <Compile Include="com\ICD10\clsDiseaseAutoCADServ.cs" />
+    <Compile Include="com\ICD10\clsHospitalInfectionServ.cs" />
+    <Compile Include="com\ICD10\clsHRPMedicineMasterServ.cs" />
+    <Compile Include="com\ICD10\clsICD10DialogServ.cs" />
+    <Compile Include="com\ICD10\clsICD10InfServ.cs" />
+    <Compile Include="com\ICD10\clsIllnessDescServ.cs" />
+    <Compile Include="com\ICD10\clsIllnessSymptomServ.cs" />
+    <Compile Include="com\ICD10\clsOperationBeforeEvaluateServ.cs" />
+    <Compile Include="com\ICD10\PatientInfoAidCureServ.cs" />
+    <Compile Include="com\ICU_Service\clsEvaluation_QuerySvc.cs" />
+    <Compile Include="com\ICU_Service\clsEvaluation_UpdataSvc.cs" />
+    <Compile Include="com\ICU_Service\clsHRPICUServ.cs" />
+    <Compile Include="com\ICU_Service\clsICUControlServ.cs" />
+    <Compile Include="com\ICU_Service\clsICUGEMaintenanceServ.cs" />
+    <Compile Include="com\ICU_Service\clsICURef.cs" />
+    <Compile Include="com\ICU_Service\clsICU_120Service.cs" />
+    <Compile Include="com\ICU_Service\clsInitICUParameterServ.cs" />
+    <Compile Include="com\ICU_Service\clsMedicalParameterCollateServ.cs" />
+    <Compile Include="com\ICU_Service\clsSettingICUParameterServ.cs" />
+    <Compile Include="com\MenuExtendServ\clsBeforeOperSumShareService.cs" />
+    <Compile Include="com\MenuExtendServ\clsDefaultValueService.cs" />
+    <Compile Include="com\MenuExtendServ\clsGeneralDiseaseRecordShareService.cs" />
+    <Compile Include="com\MenuExtendServ\clsInPatientCaseHisoryDefaultService.cs" />
+    <Compile Include="com\MenuExtendServ\clsOperationRecordDoctorShareService.cs" />
+    <Compile Include="com\MenuExtendServ\clsSpecialSymbolServ.cs" />
+    <Compile Include="com\MenuExtendServ\clsThreeMeasureShareService.cs" />
+    <Compile Include="com\NurseRecordService\clsBedCardManageServ.cs" />
+    <Compile Include="com\NurseRecordService\clsBloodCleanseRecord_contentService.cs" />
+    <Compile Include="com\NurseRecordService\clsBloodCleanseRecord_MainService.cs" />
+    <Compile Include="com\NurseRecordService\clsBornScheduleService.cs" />
+    <Compile Include="com\NurseRecordService\clsCardiovascularTend_GXMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsCardiovascularTend_GXService.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_GestationDiabetesCureMainServ.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_GestationDiabetesCureService.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_InPatientEvaluateServ.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_IntakeAndOutputVolumeMainServ.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_IntakeAndOutputVolumeServ.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_IntakeAndOutputVolumeSumServ.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_intbloodsugarwatchMainServ.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_intbloodsugarwatchServ.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_MicroBooldSugarCheckMainServ.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_MicroBooldSugarCheckService.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_OperationRecord_GXService.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_OPInstrumentService.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_OXTIntravenousDripMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_OXTIntravenousDripService.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_WAITLAYRECORD_GXMainServ.cs" />
+    <Compile Include="com\NurseRecordService\clsEMR_WAITLAYRECORD_GXServ.cs" />
+    <Compile Include="com\NurseRecordService\clsGeneralNurseRecordService.cs" />
+    <Compile Include="com\NurseRecordService\clsGeneralNurseRecordWK_CSMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsGeneralNurseRecordWK_CSService.cs" />
+    <Compile Include="com\NurseRecordService\clsGeneralNurseRecord_CSMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsGeneralNurseRecord_CSObstetricNewChildMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsGeneralNurseRecord_CSObstetricNewChildService.cs" />
+    <Compile Include="com\NurseRecordService\clsGeneralNurseRecord_CSService.cs" />
+    <Compile Include="com\NurseRecordService\clsGeneralNurseRecord_DGCSMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsGeneralNurseRecord_DGCSService.cs" />
+    <Compile Include="com\NurseRecordService\clsGeneralNurseRecord_GXService.cs" />
+    <Compile Include="com\NurseRecordService\clsHurryVeinRecord_ContentService.cs" />
+    <Compile Include="com\NurseRecordService\clsHurryVeinRecord_MainService.cs" />
+    <Compile Include="com\NurseRecordService\clsIcuAcad_PostPartumRecord_contentService.cs" />
+    <Compile Include="com\NurseRecordService\clsIcuAcad_PostPartumRecord_MainService.cs" />
+    <Compile Include="com\NurseRecordService\clsICUBreathTrackService.cs" />
+    <Compile Include="com\NurseRecordService\clsICUIntensiveTendRecordServ.cs" />
+    <Compile Include="com\NurseRecordService\clsICUIntensiveTrackService.cs" />
+    <Compile Include="com\NurseRecordService\clsICUNurseRecord_GXMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsICUNurseRecord_GXService.cs" />
+    <Compile Include="com\NurseRecordService\clsICUNurseService.cs" />
+    <Compile Include="com\NurseRecordService\clsInPatientEvaluateServ.cs" />
+    <Compile Include="com\NurseRecordService\clsIntensiveTendMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsIntensiveTendMain_CSWKMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsIntensiveTendMain_CSWKService.cs" />
+    <Compile Include="com\NurseRecordService\clsIntensiveTendRecordService.cs" />
+    <Compile Include="com\NurseRecordService\clsIntensivetendRecord_CSMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsIntensivetendRecord_CSService.cs" />
+    <Compile Include="com\NurseRecordService\clsIntensiveTendRecord_GXMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsIntensiveTendRecord_GXService.cs" />
+    <Compile Include="com\NurseRecordService\clsMainGeneralNurseRecordService.cs" />
+    <Compile Include="com\NurseRecordService\clsMiniBloodSugarChkServ.cs" />
+    <Compile Include="com\NurseRecordService\clsMiniBloodSugarChk_GXServ.cs" />
+    <Compile Include="com\NurseRecordService\clsNewBorthBabyGeneralNurseRecord_CSService.cs" />
+    <Compile Include="com\NurseRecordService\clsNewBrothGeneralNurseRecord_CSMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsOperationEqipmentQtyServ.cs" />
+    <Compile Include="com\NurseRecordService\clsOperationRecordServ.cs" />
+    <Compile Include="com\NurseRecordService\clsPartogramService.cs" />
+    <Compile Include="com\NurseRecordService\clsPostartumSeeRecordMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsPostartumSeeRecordService.cs" />
+    <Compile Include="com\NurseRecordService\clsQuickeningTutelar_AcadMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsQuickeningTutelar_AcadService.cs" />
+    <Compile Include="com\NurseRecordService\clsRegisterQuantityService.cs" />
+    <Compile Include="com\NurseRecordService\clsSubDiseaseTrackServer.cs" />
+    <Compile Include="com\NurseRecordService\clsSubICUBreathService.cs" />
+    <Compile Include="com\NurseRecordService\clsSubICUIntensiveTendService.cs" />
+    <Compile Include="com\NurseRecordService\clsSubWatchItemRecordService.cs" />
+    <Compile Include="com\NurseRecordService\clsSURGERYICUWARDSHIPMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsSURGERYICUWARDSHIPService.cs" />
+    <Compile Include="com\NurseRecordService\clsThreeMeasureEventManagerService.cs" />
+    <Compile Include="com\NurseRecordService\clsThreeMeasureRecordService.cs" />
+    <Compile Include="com\NurseRecordService\clsVeinSpecialUseDrug_ConService.cs" />
+    <Compile Include="com\NurseRecordService\clsVeinSpecialUseDrug_MainService.cs" />
+    <Compile Include="com\NurseRecordService\clsWaitLayRecord_AcadMainService.cs" />
+    <Compile Include="com\NurseRecordService\clsWaitLayRecord_AcadService.cs" />
+    <Compile Include="com\NurseRecordService\clsWatchItemTrackService.cs" />
+    <Compile Include="com\PACSService\clsPACSService.cs" />
+    <Compile Include="com\PhysicianOrderService\PhysicianOrderService.cs" />
+    <Compile Include="com\PrivilegeSystemService\clsPrivilegeHandleService2.cs" />
+    <Compile Include="com\PrivilegeSystemService\clsPrivilegeSystemService2.cs" />
+    <Compile Include="com\PublicMiddleTier\clsDeactiveRecordService.cs" />
+    <Compile Include="com\PublicMiddleTier\clsPrintDateInfoServ.cs" />
+    <Compile Include="com\PublicMiddleTier\PublicMiddleTier.cs" />
+    <Compile Include="com\Signature_srv\clsSignature_srv.cs" />
+    <Compile Include="com\SynchronousCaseServ\clsEMR_SynchronousCaseServ.cs" />
+    <Compile Include="com\SynchronousCaseServ\clsEMR_SynchronousCaseServ_2009.cs" />
+    <Compile Include="com\SynchronousCaseServ\clsEMR_SynchronousCaseServ_2009_Modify.cs" />
+    <Compile Include="com\SynchronousCaseServ\clsEMR_SynchronousDeptServ.cs" />
+    <Compile Include="com\SynchronousCaseServ\clsEMR_SynchronousPayTypeServ.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="snkemr.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

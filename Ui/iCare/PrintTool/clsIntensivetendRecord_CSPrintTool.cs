@@ -1503,7 +1503,15 @@ namespace iCare
             m_intPosX1 = (int)enmRecordRectangleInfo.LeftX + (int)enmRecordRectangleInfo.RightX;//当前的X坐标
             intTempColumn = 30;
             strTemp = m_strConvertObjectValue(objDataArr[m_intCurrentContentRow][intTempColumn]);
-            if (strTemp.Trim().Length != 0)
+            ////判断前29项 是否都为空
+            bool emptyFlg = false;
+            for (int i = 0; i < 29; i++)
+            {
+                if (objDataArr[m_intCurrentContentRow][i] != null)
+                    emptyFlg = true;
+            }
+
+            if (strTemp.Trim().Length != 0 && emptyFlg)
             {
                 //if (strTemp.Length > 5)
                 //{
