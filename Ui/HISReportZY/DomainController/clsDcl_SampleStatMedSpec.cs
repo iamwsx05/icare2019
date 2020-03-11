@@ -26,6 +26,22 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
         }
         #endregion
 
+
+        #region 检验标本试管颜色
+        /// <summary>
+        /// 检验标本试管颜色
+        /// </summary>
+        /// <param name="dtbResult"></param>
+        /// <returns></returns>
+        public long lngGetSampleColor(out DataTable dtbResult, string dteStart, string dteEnd)
+        {
+            //using (clsHISReportZy_Supported_Svc svc = (clsHISReportZy_Supported_Svc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsHISReportZy_Supported_Svc)))
+            //{
+            return (new weCare.Proxy.ProxyReport()).Service.GetSampleColor(out dtbResult, dteStart, dteEnd);
+            //}
+        }
+        #endregion
+
         #region 获取专业组
         /// <summary>
         /// 获取专业组

@@ -254,6 +254,9 @@ namespace Report.Itf
         long GetSampleMedSpec(out DataTable dtbResult, string dteStart, string dteEnd, string groupId, string applyUnitId, string strDept, string enmergencyFlg, string patType,int tsFlg,bool peFlg);
 
         [OperationContract]
+        long GetSampleColor(out DataTable dtbResult, string dteStart, string dteEnd);
+
+        [OperationContract]
         long GetSampleAcceptable(out DataTable dtbResult, string dteStart, string dteEnd, string applyUnitId, string strDept, string enmergencyFlg, string patType);
 
         [OperationContract]
