@@ -698,6 +698,16 @@ namespace Report.Service
             }
         }
 
+        public long GetSampleColor(out DataTable dtbResult, string dteStart, string dteEnd)
+        {
+            using (clsHISReportZy_Supported_Svc svc = new clsHISReportZy_Supported_Svc())
+            {
+                long rec = svc.GetSampleColor(out dtbResult, dteStart, dteEnd);
+                dtbResult = Function.ReNameDatatable(dtbResult);
+                return rec;
+            }
+        }
+
         public long GetSampleAcceptable(out DataTable dtbResult, string dteStart, string dteEnd, string applyUnitId, string strDept, string enmergencyFlg, string patType)
         {
             using (clsHISReportZy_Supported_Svc svc = new clsHISReportZy_Supported_Svc())

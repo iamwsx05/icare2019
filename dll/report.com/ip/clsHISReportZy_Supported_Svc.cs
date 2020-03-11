@@ -1410,20 +1410,37 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                 left join t_bse_lis_check_category t3
                                 on t2.check_category_id_chr = t3.check_category_id_chr
                                 where t.status_int >= 0 and t.status_int <= 7
-                                and (t.modify_dat between to_date(?, 'yyyy-mm-dd hh24:mi:ss') 
+                                and (t.accept_dat between to_date(?, 'yyyy-mm-dd hh24:mi:ss') 
                                 and to_date(?, 'yyyy-mm-dd hh24:mi:ss'))
-                                and b.deptname_vchr is not null ";
+                                and b.deptname_vchr is not null and t.application_id_chr not in (select 
+                                                                                                c.application_id_chr,
+                                                                                                c.sample_id_chr,
+                                                                                                a.patient_name_vchr,
+                                                                                                b.code_vchr,
+                                                                                                b.deptname_vchr,
+                                                                                                c.sampletype_vchr,
+                                                                                                a.sample_back_reason_vchr,
+                                                                                                a.feedback_date_date
+                                                                                                from t_opr_lis_sample_feedback a
+                                                                                                inner join t_opr_lis_sample c
+                                                                                                on a.sample_id_chr = c.sample_id_chr
+                                                                                                inner join t_opr_lis_application d
+                                                                                                on c.application_id_chr = d.application_id_chr
+                                                                                                left outer join t_bse_deptdesc b
+                                                                                                on a.appl_empid_chr = b.deptid_chr
+                                                                                                where a.feedback_date_date between to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
+                                                                                                to_date(?, 'yyyy-mm-dd hh24:mi:ss'))";
 
-                //if (!string.IsNullOrEmpty(sampleType) && sampleType != "全部")
-                //    Sql += " and trim(t3.check_category_desc_vchr) = '" + sampleType.Trim() + "'";
                 if (patType != 0)
                     Sql += " and t.patient_type_chr = " + patType;
 
                 Sql += " order by b.deptname_vchr";
 
-                svc.CreateDatabaseParameter(2, out parm);
-                parm[0].Value = beginDate + ":01";
+                svc.CreateDatabaseParameter(4, out parm);
+                parm[0].Value = beginDate + ":00";
                 parm[1].Value = endDate + ":59";
+                parm[3].Value = beginDate + ":00";
+                parm[4].Value = endDate + ":59";
                 svc.lngGetDataTableWithParameters(Sql, ref dtSample, parm);
 
                 if (dtSample != null && dtSample.Rows.Count > 0)
@@ -1459,7 +1476,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                 Sql += " order by a.sample_id_chr, a.feedback_date_date";
 
                 svc.CreateDatabaseParameter(2, out parm);
-                parm[0].Value = beginDate + ":01";
+                parm[0].Value = beginDate + ":00";
                 parm[1].Value = endDate + ":59";
                 svc.lngGetDataTableWithParameters(Sql, ref dtBack, parm);
 
@@ -2037,7 +2054,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
         /// <param name="enmergencyFlg"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long GetSampleMedSpec(out DataTable dtbResult, string dteStart, string dteEnd, string groupId, string applyUnitId, string strDept, string enmergencyFlg, string patType, int tsFlg ,bool peFlg)
+        public long GetSampleMedSpec(out DataTable dtbResult, string dteStart, string dteEnd, string groupId, string applyUnitId, string strDept, string enmergencyFlg, string patType, int tsFlg, bool peFlg)
         {
             long lngRes = 0;
             dtbResult = null;
@@ -2058,9 +2075,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                     strSQL1 = @"select distinct a.application_id_chr,a.age_chr as Age,
                                                     d.barcode_vchr  AS BARCODE,
                                                     d.patient_type_chr AS pattype,
-                                                    pv.vlaue_vchr AS color,
                                                     a.check_content_vchr,
-                                                    --t1.apply_unit_name_vchr,
                                                     a.patient_name_vchr AS HZXM, --患者姓名
                                                     d.patient_inhospitalno_chr   AS patInNo,
                                                     d.patientcardid_chr   AS CARDNO,
@@ -2081,12 +2096,6 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                         on a.application_id_chr = d.application_id_chr
                                       left join t_opr_lis_app_apply_unit t
                                         on a.application_id_chr = t.application_id_chr
-                                      left join t_aid_lis_unit_propert_relate r
-                                       on t.apply_unit_id_chr = r.apply_unit_id_chr
-                                     inner join t_aid_lis_unit_property p
-                                       on r.unit_property_id_chr = p.property_id_chr and p.property_name_vchr = '颜色'
-                                      left join t_aid_lis_unit_property_value pv
-                                        on r.value_id_chr = pv.vlaue_id_chr
                                       left join t_aid_lis_apply_unit t1
                                         on t.apply_unit_id_chr = t1.apply_unit_id_chr
                                      left join t_bse_lis_check_category t2
@@ -2109,9 +2118,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                     strSQL2 = @"select distinct a.application_id_chr,a.age_chr as Age,
                                                     d.barcode_vchr   AS BARCODE,
                                                     d.patient_type_chr AS pattype,
-                                                    pv.vlaue_vchr AS color,
                                                     a.check_content_vchr,
-                                                    --t1.apply_unit_name_vchr,
                                                     a.patient_name_vchr AS HZXM, --患者姓名
                                                     d.patient_inhospitalno_chr   AS patInNo,
                                                     d.patientcardid_chr   AS CARDNO,
@@ -2132,13 +2139,6 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                         on a.application_id_chr = d.application_id_chr
                                       left join t_opr_lis_app_apply_unit t
                                         on a.application_id_chr = t.application_id_chr
-                                    left join t_aid_lis_unit_propert_relate r
-                                        on t.apply_unit_id_chr = r.apply_unit_id_chr
-                                     inner join t_aid_lis_unit_property p
-                                        on r.unit_property_id_chr = p.property_id_chr
-                                       and p.property_name_vchr = '颜色'
-                                      left join t_aid_lis_unit_property_value pv
-                                        on r.value_id_chr = pv.vlaue_id_chr
                                       left join t_aid_lis_apply_unit t1
                                         on t.apply_unit_id_chr = t1.apply_unit_id_chr
                                       left join t_bse_lis_check_category t2
@@ -2168,9 +2168,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                     strSQL = @"select distinct a.application_id_chr,a.age_chr as Age,
                                                     d.barcode_vchr   AS BARCODE,
                                                     d.patient_type_chr AS pattype,
-                                                    pv.vlaue_vchr AS color,
-                                                     a.check_content_vchr,
-                                                    --t1.apply_unit_name_vchr,
+                                                    a.check_content_vchr,
                                                     a.patient_name_vchr AS HZXM, --患者姓名
                                                     d.patient_inhospitalno_chr   AS patInNo,
                                                     d.patientcardid_chr   AS CARDNO,
@@ -2191,13 +2189,6 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                         on a.application_id_chr = d.application_id_chr
                                       left join t_opr_lis_app_apply_unit t
                                         on a.application_id_chr = t.application_id_chr
-                                      left join t_aid_lis_unit_propert_relate r
-                                        on t.apply_unit_id_chr = r.apply_unit_id_chr
-                                     inner join t_aid_lis_unit_property p
-                                        on r.unit_property_id_chr = p.property_id_chr
-                                       and p.property_name_vchr = '颜色'
-                                      left join t_aid_lis_unit_property_value pv
-                                        on r.value_id_chr = pv.vlaue_id_chr
                                       left join t_aid_lis_apply_unit t1
                                         on t.apply_unit_id_chr = t1.apply_unit_id_chr
                                       left join t_bse_lis_check_category t2
@@ -2208,7 +2199,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                       on a.operator_id_chr = f.empid_chr
                                      where d.status_int > 5
                                        and a.pstatus_int = 2
-                                       and d.modify_dat between
+                                       and d.accept_dat between
                                            to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
                                            to_date(?, 'yyyy-mm-dd hh24:mi:ss')
                                        and e.deptid_chr is not null
@@ -2219,9 +2210,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                     strSQL = @"select distinct a.application_id_chr,a.age_chr as Age,
                                                     d.barcode_vchr AS BARCODE,
                                                     d.patient_type_chr AS pattype,
-                                                    pv.vlaue_vchr AS color,
-                                                     a.check_content_vchr,
-                                                    --t1.apply_unit_name_vchr,
+                                                    a.check_content_vchr,
                                                     a.patient_name_vchr AS HZXM, --患者姓名
                                                     d.patient_inhospitalno_chr AS patInNo, 
                                                     d.patientcardid_chr  AS CARDNO,
@@ -2242,13 +2231,6 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                         on a.application_id_chr = d.application_id_chr
                                       left join t_opr_lis_app_apply_unit t
                                         on a.application_id_chr = t.application_id_chr
-                                      left join t_aid_lis_unit_propert_relate r
-                                        on t.apply_unit_id_chr = r.apply_unit_id_chr
-                                     inner join t_aid_lis_unit_property p
-                                        on r.unit_property_id_chr = p.property_id_chr
-                                       and p.property_name_vchr = '颜色'
-                                      left join t_aid_lis_unit_property_value pv
-                                        on r.value_id_chr = pv.vlaue_id_chr
                                       left join t_aid_lis_apply_unit t1
                                         on t.apply_unit_id_chr = t1.apply_unit_id_chr
                                       left join t_bse_lis_check_category t2
@@ -2261,7 +2243,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                         on a.operator_id_chr = f.empid_chr
                                      where d.status_int > 5
                                        and a.pstatus_int = 2
-                                       and d.modify_dat between
+                                       and d.accept_dat between
                                            to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
                                            to_date(?, 'yyyy-mm-dd hh24:mi:ss')
                                        and e.deptid_chr is not null
@@ -2359,9 +2341,67 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                             #endregion
                         }
                         dtbResult.AcceptChanges();
-
                     }
                 }
+
+            }
+            catch (Exception objEx)
+            {
+                lngRes = 0;
+                clsLogText objLogger = new clsLogText();
+                bool blnRes = objLogger.LogDetailError(objEx, true);
+            }
+            finally
+            {
+                objHRPServ = null;
+            }
+
+            return lngRes;
+        }
+
+        #endregion
+
+        #region  试管颜色
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dtbResult"></param>
+        /// <param name="dteStart"></param>
+        /// <param name="dteEnd"></param>
+        /// <returns></returns>
+        [AutoComplete]
+        public long GetSampleColor(out DataTable dtbResult, string dteStart, string dteEnd)
+        {
+            long lngRes = 0;
+            dtbResult = null;
+            string strSQL = string.Empty;
+
+            clsHRPTableService objHRPServ = null;
+            IDataParameter[] parm = null;
+
+            try
+            {
+                objHRPServ = new clsHRPTableService();
+                strSQL = @"select distinct a.application_id_chr,
+                                            pv.vlaue_vchr AS color
+                                            from  t_opr_lis_sample d
+                                            on a.application_id_chr = d.application_id_chr
+                                            left join t_opr_lis_app_apply_unit t
+                                            on a.application_id_chr = t.application_id_chr
+                                            left join t_aid_lis_unit_propert_relate r
+                                            on t.apply_unit_id_chr = r.apply_unit_id_chr
+                                            inner join t_aid_lis_unit_property p
+                                            on r.unit_property_id_chr = p.property_id_chr and p.property_name_vchr = '颜色'
+                                            left join t_aid_lis_unit_property_value pv
+                                            on r.value_id_chr = pv.vlaue_id_chr
+                                            where d.status_int > 5
+                                            and d.accept_dat between
+                                            to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
+                                            to_date(?, 'yyyy-mm-dd hh24:mi:ss') order by pv.vlaue_vchr ";
+                objHRPServ.CreateDatabaseParameter(2, out parm);
+                parm[0].Value = dteStart + ":00";
+                parm[1].Value = dteEnd + ":59";
+                lngRes = objHRPServ.lngGetDataTableWithParameters(strSQL, ref dtbResult, parm);
 
             }
             catch (Exception objEx)

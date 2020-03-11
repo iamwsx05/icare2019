@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.IO;
 using Common.Controls;
 using weCare.Core.Utils;
+using System.Linq;
 
 namespace com.digitalwave.iCare.gui.HIS
 {
@@ -53,6 +54,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
         public class EntitySamepleStat
         {
+            public string applicationId { get; set; }
             public string HZXM { get; set; }
             public string DEPTNAME { get; set; }
             public string BARCODE { get; set; }
@@ -70,6 +72,12 @@ namespace com.digitalwave.iCare.gui.HIS
             public string DYSJ { get; set; }
         }
         #endregion
+
+        public class EntityColor
+        {
+            public string applicationId { get; set; }
+            public string color { get; set; }
+        }
 
         #region 设置窗体对象
         /// <summary>
@@ -455,13 +463,11 @@ namespace com.digitalwave.iCare.gui.HIS
         public void m_mthGeSampleStatSpecStat()
         {
             DataTable dtbResult;
-            //if (string.IsNullOrEmpty(m_objViewer.cbxGroup.Text) && m_objViewer.dgvCheckItem.Rows.Count < 2)
-            //{
-            //    MessageBox.Show("请选择专业组或检验项目 ！");
-            //    return;
-            //}
+            DataTable dtbColor;
+            long lngRes = -1;
 
             List<EntitySamepleStat> data = new List<EntitySamepleStat>();
+            List<EntityColor> lstColor = null;
             string groupId = string.Empty;
             string enmergencyFlg = string.Empty;
             string patType = string.Empty;
@@ -506,14 +512,28 @@ namespace com.digitalwave.iCare.gui.HIS
 
                 clsPublic.PlayAvi("findFILE.avi", "正在查询项目信息，请稍候...");
 
-                long lngRes = m_objManage.lngGetSampleMedSpec(out dtbResult, dteStart, dteEnd, groupId, applyUnitId, strDept, enmergencyFlg, patType, tsFlg, peFlg);
+                lngRes =  m_objManage.lngGetSampleColor(out dtbColor, dteStart, dteEnd);
+                if (lngRes > 0 && dtbColor.Rows.Count > 0)
+                {
+                    lstColor = new List<EntityColor>();
+
+                    foreach (DataRow dr in dtbColor.Rows)
+                    {
+                        EntityColor vo = new EntityColor();
+                        vo.applicationId = dr["application_id_chr"].ToString();
+                        vo.color = dr["color"].ToString();
+                        lstColor.Add(vo);
+                    }
+                }
+
+                lngRes = m_objManage.lngGetSampleMedSpec(out dtbResult, dteStart, dteEnd, groupId, applyUnitId, strDept, enmergencyFlg, patType, tsFlg, peFlg);
 
                 if (lngRes > 0 && dtbResult.Rows.Count > 0)
                 {
                     foreach (DataRow dr in dtbResult.Rows)
                     {
                         EntitySamepleStat vo = new EntitySamepleStat();
-
+                        vo.applicationId = dr["application_id_chr"].ToString();
                         vo.HZXM = dr["HZXM"].ToString();
                         vo.Age = dr["Age"].ToString().Trim();
                         vo.DEPTNAME = dr["DEPTNAME"].ToString();
@@ -524,7 +544,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         vo.ConfirmTime = Function.Datetime(dr["SHSJ"]).ToString("yyyy-MM-dd HH:mm");
                         vo.Checker = dr["lastname_vchr"].ToString();
                         vo.item = dr["check_content_vchr"].ToString();
-                        vo.color = dr["color"].ToString();
+                        vo.color = lstColor.FindAll(r=>r.applicationId == vo.applicationId).FirstOrDefault().color;
                         if (dr["pattype"].ToString().Trim() == "2")
                             vo.DYSJ = Function.Datetime(dr["DBSJ"]).ToString("yyyy-MM-dd HH:mm");
                         if (dr["pattype"].ToString().Trim() == "1")
