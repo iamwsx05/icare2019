@@ -530,6 +530,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
                 if (lngRes > 0 && dtbResult.Rows.Count > 0)
                 {
+                    MessageBox.Show(dtbResult.Rows.Count.ToString());
                     foreach (DataRow dr in dtbResult.Rows)
                     {
                         EntitySamepleStat vo = new EntitySamepleStat();
@@ -544,7 +545,11 @@ namespace com.digitalwave.iCare.gui.HIS
                         vo.ConfirmTime = Function.Datetime(dr["SHSJ"]).ToString("yyyy-MM-dd HH:mm");
                         vo.Checker = dr["lastname_vchr"].ToString();
                         vo.item = dr["check_content_vchr"].ToString();
-                        vo.color = lstColor.FindAll(r=>r.applicationId == vo.applicationId).FirstOrDefault().color;
+                        EntityColor color = lstColor.FindAll(r => r.applicationId == vo.applicationId).FirstOrDefault();
+                        if(color != null)
+                        {
+                            vo.color = color.color;
+                        }
                         if (dr["pattype"].ToString().Trim() == "2")
                             vo.DYSJ = Function.Datetime(dr["DBSJ"]).ToString("yyyy-MM-dd HH:mm");
                         if (dr["pattype"].ToString().Trim() == "1")

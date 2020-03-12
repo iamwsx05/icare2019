@@ -872,6 +872,10 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                 string week = calWeek(Convert.ToDateTime(acceptTime));
                 if (week == week1 || week == week2 || week == week3 || week == week4 || week == week5 || week == week6)
                 {
+                    IsAccept = false;
+                }
+                else
+                {
                     if (tsConfirTime <= tsConfirmEndTime)
                     {
                         IsAccept = true;
