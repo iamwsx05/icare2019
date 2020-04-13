@@ -1859,155 +1859,155 @@ values
             lstInDetail.CopyTo(objInDetailArr);
         }
 
-        private long m_lngSaveCheckToInStorageOne( clsDS_Instorage_VO p_objInMain, clsDS_StorageCheckDetail_VO[] p_objSufCheckDetail,bool p_blnIsHospital)
-        {
-            if (p_objInMain == null || p_objSufCheckDetail == null)
-            {
-                return -1;
-            }
+//        private long m_lngSaveCheckToInStorageOne( clsDS_Instorage_VO p_objInMain, clsDS_StorageCheckDetail_VO[] p_objSufCheckDetail,bool p_blnIsHospital)
+//        {
+//            if (p_objInMain == null || p_objSufCheckDetail == null)
+//            {
+//                return -1;
+//            }
 
-            long lngRes = 0;
-            clsHRPTableService objHRPServ = new clsHRPTableService();
-            clsDS_Public_Supported_SVC objPublic = new clsDS_Public_Supported_SVC();
-            IDataParameter[] objLisAddItemRefArr = null;
+//            long lngRes = 0;
+//            clsHRPTableService objHRPServ = new clsHRPTableService();
+//            clsDS_Public_Supported_SVC objPublic = new clsDS_Public_Supported_SVC();
+//            IDataParameter[] objLisAddItemRefArr = null;
 
-            try
-            {
-                string strSQL = @"insert into t_ds_instorage a
-  (seriesid_int,
-			 formtype_int,
-			 a.status,
-			 a.drugstoreid_chr,
-			 a.inaccounterid_chr,
-			 a.indrugstoreid_vchr,
-			 a.makeorder_dat,
-			 a.drugstoreexam_date,			 
-			 a.comment_vchr,
-			 makerid_chr,
-			 a.drugstoreexamid_chr,typecode_vchr)
-values
-  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+//            try
+//            {
+//                string strSQL = @"insert into t_ds_instorage a
+//  (seriesid_int,
+//			 formtype_int,
+//			 a.status,
+//			 a.drugstoreid_chr,
+//			 a.inaccounterid_chr,
+//			 a.indrugstoreid_vchr,
+//			 a.makeorder_dat,
+//			 a.drugstoreexam_date,			 
+//			 a.comment_vchr,
+//			 makerid_chr,
+//			 a.drugstoreexamid_chr,typecode_vchr)
+//values
+//  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
 
-                long lngSEQ = 0;
-                lngRes = objPublic.m_lngGetSequence( "SEQ_DS_INSTORAGE", out lngSEQ);
-                if (lngSEQ <= 0)
-                {
-                    objHRPServ.Dispose();
-                    objHRPServ = null;
-                    return -1;
-                }
+//                long lngSEQ = 0;
+//                lngRes = objPublic.m_lngGetSequence( "SEQ_DS_INSTORAGE", out lngSEQ);
+//                if (lngSEQ <= 0)
+//                {
+//                    objHRPServ.Dispose();
+//                    objHRPServ = null;
+//                    return -1;
+//                }
 
-                objHRPServ.CreateDatabaseParameter(12, out objLisAddItemRefArr);
-                objLisAddItemRefArr[0].Value = lngSEQ;
-                objLisAddItemRefArr[1].Value = p_objInMain.m_intFORMTYPE_INT;
-                objLisAddItemRefArr[2].Value = p_objInMain.m_intSTATUS;
-                objLisAddItemRefArr[3].Value = p_objInMain.m_strDRUGSTOREID_INT;
-                objLisAddItemRefArr[4].Value = p_objInMain.m_strINACCOUNTERID_CHR;
-                objLisAddItemRefArr[5].Value = p_objInMain.m_strINDRUGSTOREID_VCHR;
-                objLisAddItemRefArr[6].Value = p_objInMain.m_datMAKEORDER_DAT;
-                if (p_objInMain.m_datDRUGSTOREEXAM_DATE == DateTime.MinValue)
-                {
-                    objLisAddItemRefArr[7].Value = DBNull.Value;
-                }
-                else
-                {
-                    objLisAddItemRefArr[7].Value = p_objInMain.m_datDRUGSTOREEXAM_DATE;
-                }
-                objLisAddItemRefArr[8].Value = p_objInMain.m_strCOMMENT_VCHR;
-                objLisAddItemRefArr[9].Value = p_objInMain.m_strMAKERID_CHR;
-                objLisAddItemRefArr[10].Value = p_objInMain.m_strSTORAGEEXAMID_CHR;
-                objLisAddItemRefArr[11].Value = p_objInMain.m_strTYPECODE_VCHR;
-                long lngRecEff = -1;
-                //往表增加记录
+//                objHRPServ.CreateDatabaseParameter(12, out objLisAddItemRefArr);
+//                objLisAddItemRefArr[0].Value = lngSEQ;
+//                objLisAddItemRefArr[1].Value = p_objInMain.m_intFORMTYPE_INT;
+//                objLisAddItemRefArr[2].Value = p_objInMain.m_intSTATUS;
+//                objLisAddItemRefArr[3].Value = p_objInMain.m_strDRUGSTOREID_INT;
+//                objLisAddItemRefArr[4].Value = p_objInMain.m_strINACCOUNTERID_CHR;
+//                objLisAddItemRefArr[5].Value = p_objInMain.m_strINDRUGSTOREID_VCHR;
+//                objLisAddItemRefArr[6].Value = p_objInMain.m_datMAKEORDER_DAT;
+//                if (p_objInMain.m_datDRUGSTOREEXAM_DATE == DateTime.MinValue)
+//                {
+//                    objLisAddItemRefArr[7].Value = DBNull.Value;
+//                }
+//                else
+//                {
+//                    objLisAddItemRefArr[7].Value = p_objInMain.m_datDRUGSTOREEXAM_DATE;
+//                }
+//                objLisAddItemRefArr[8].Value = p_objInMain.m_strCOMMENT_VCHR;
+//                objLisAddItemRefArr[9].Value = p_objInMain.m_strMAKERID_CHR;
+//                objLisAddItemRefArr[10].Value = p_objInMain.m_strSTORAGEEXAMID_CHR;
+//                objLisAddItemRefArr[11].Value = p_objInMain.m_strTYPECODE_VCHR;
+//                long lngRecEff = -1;
+//                //往表增加记录
 
-                lngRes = objHRPServ.lngExecuteParameterSQL(strSQL, ref lngRecEff, objLisAddItemRefArr);
+//                lngRes = objHRPServ.lngExecuteParameterSQL(strSQL, ref lngRecEff, objLisAddItemRefArr);
 
-                if (lngRes <= 0)
-                {
-                    objHRPServ.Dispose();
-                    objHRPServ = null;
-                    return -1;
-                }
+//                if (lngRes <= 0)
+//                {
+//                    objHRPServ.Dispose();
+//                    objHRPServ = null;
+//                    return -1;
+//                }
 
-                strSQL = @"insert into t_ds_instorage_detail a
-  (a.seriesid_int,
-   a.seriesid2_int,
-   a.medicineid_chr,
-   a.medicinename_vchr,
-   a.medspec_vchr,
-	 a.opamount_int,
-	 a.opunit_chr,
-	 a.opwholesaleprice_int,
-	 a.opretailprice_int,
-	 a.ipamount_int,
-	 a.ipunit_chr,
-	 a.ipwholesaleprice_int,
-	 a.ipretailprice_int,
-	 a.packqty_dec,
-	 a.lotno_vchr,
-	 a.validperiod_dat,
-	 a.status,
-	 a.productorid_chr)
-values
-  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+//                strSQL = @"insert into t_ds_instorage_detail a
+//  (a.seriesid_int,
+//   a.seriesid2_int,
+//   a.medicineid_chr,
+//   a.medicinename_vchr,
+//   a.medspec_vchr,
+//	 a.opamount_int,
+//	 a.opunit_chr,
+//	 a.opwholesaleprice_int,
+//	 a.opretailprice_int,
+//	 a.ipamount_int,
+//	 a.ipunit_chr,
+//	 a.ipwholesaleprice_int,
+//	 a.ipretailprice_int,
+//	 a.packqty_dec,
+//	 a.lotno_vchr,
+//	 a.validperiod_dat,
+//	 a.status,
+//	 a.productorid_chr)
+//values
+//  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-                //long[] lngSEQArr = null;
-                DbType[] dbTypes = new DbType[] { DbType.Int64, DbType.Int64,DbType.String,DbType.String,DbType.String,DbType.Double,DbType.String,
-                        DbType.Double,DbType.Double,DbType.Double,DbType.String,DbType.Double,DbType.Double,DbType.Double,DbType.String,
-                        DbType.DateTime,DbType.Int32,DbType.String };
+//                //long[] lngSEQArr = null;
+//                DbType[] dbTypes = new DbType[] { DbType.Int64, DbType.Int64,DbType.String,DbType.String,DbType.String,DbType.Double,DbType.String,
+//                        DbType.Double,DbType.Double,DbType.Double,DbType.String,DbType.Double,DbType.Double,DbType.Double,DbType.String,
+//                        DbType.DateTime,DbType.Int32,DbType.String };
 
-                object[][] objValues = new object[18][];
+//                object[][] objValues = new object[18][];
 
-                int intItemCount = p_objSufCheckDetail.Length;
-                for (int j = 0; j < objValues.Length; j++)
-                {
-                    objValues[j] = new object[intItemCount];//初始化
+//                int intItemCount = p_objSufCheckDetail.Length;
+//                for (int j = 0; j < objValues.Length; j++)
+//                {
+//                    objValues[j] = new object[intItemCount];//初始化
 
-                }
+//                }
 
-                //lngRes = objPublic.m_lngGetSequenceArr( "SEQ_DS_INSTORAGE_DETAIL", intItemCount, out lngSEQArr);
-                //if (lngSEQArr == null || lngSEQArr.Length == 0)
-                //{
-                //    objHRPServ.Dispose();
-                //    objHRPServ = null;
-                //    return -1;
-                //}
+//                //lngRes = objPublic.m_lngGetSequenceArr( "SEQ_DS_INSTORAGE_DETAIL", intItemCount, out lngSEQArr);
+//                //if (lngSEQArr == null || lngSEQArr.Length == 0)
+//                //{
+//                //    objHRPServ.Dispose();
+//                //    objHRPServ = null;
+//                //    return -1;
+//                //}
 
-                for (int iRow = 0; iRow < intItemCount; iRow++)
-                {
-                    objValues[0][iRow] = objPublic.GetSeqNextVal("SEQ_DS_INSTORAGE_DETAIL");    // lngSEQArr[iRow];
-                    objValues[1][iRow] = lngSEQ;
-                    objValues[2][iRow] = p_objSufCheckDetail[iRow].m_strMedicineCode;
-                    objValues[3][iRow] = p_objSufCheckDetail[iRow].m_strMEDICINENAME_VCHR;
-                    objValues[4][iRow] = p_objSufCheckDetail[iRow].m_strMEDSPEC_VCHR;
+//                for (int iRow = 0; iRow < intItemCount; iRow++)
+//                {
+//                    objValues[0][iRow] = objPublic.GetSeqNextVal("SEQ_DS_INSTORAGE_DETAIL");    // lngSEQArr[iRow];
+//                    objValues[1][iRow] = lngSEQ;
+//                    objValues[2][iRow] = p_objSufCheckDetail[iRow].m_strMedicineCode;
+//                    objValues[3][iRow] = p_objSufCheckDetail[iRow].m_strMEDICINENAME_VCHR;
+//                    objValues[4][iRow] = p_objSufCheckDetail[iRow].m_strMEDSPEC_VCHR;
 
-                    objValues[5][iRow] = p_objSufCheckDetail[iRow].m_dblOPCHECKRESULT_INT;
-                    objValues[6][iRow] = p_objSufCheckDetail[iRow].m_strOPUNIT_CHR;
-                    objValues[7][iRow] = p_objSufCheckDetail[iRow].m_dblOPCALLPRICE_INT;
-                    objValues[8][iRow] = p_objSufCheckDetail[iRow].m_dblOPRETAILPRICE_INT;
-                    objValues[9][iRow] = p_objSufCheckDetail[iRow].m_dblIPCHECKRESULT_INT;
-                    objValues[10][iRow] = p_objSufCheckDetail[iRow].m_strIPUNIT_CHR;
-                    objValues[11][iRow] = p_objSufCheckDetail[iRow].m_dblIPCALLPRICE_INT;
-                    objValues[12][iRow] = p_objSufCheckDetail[iRow].m_dblIPCHECKRESULT_INT;
+//                    objValues[5][iRow] = p_objSufCheckDetail[iRow].m_dblOPCHECKRESULT_INT;
+//                    objValues[6][iRow] = p_objSufCheckDetail[iRow].m_strOPUNIT_CHR;
+//                    objValues[7][iRow] = p_objSufCheckDetail[iRow].m_dblOPCALLPRICE_INT;
+//                    objValues[8][iRow] = p_objSufCheckDetail[iRow].m_dblOPRETAILPRICE_INT;
+//                    objValues[9][iRow] = p_objSufCheckDetail[iRow].m_dblIPCHECKRESULT_INT;
+//                    objValues[10][iRow] = p_objSufCheckDetail[iRow].m_strIPUNIT_CHR;
+//                    objValues[11][iRow] = p_objSufCheckDetail[iRow].m_dblIPCALLPRICE_INT;
+//                    objValues[12][iRow] = p_objSufCheckDetail[iRow].m_dblIPCHECKRESULT_INT;
 
-                    objValues[13][iRow] = p_objSufCheckDetail[iRow].m_dblPACKQTY_DEC;
-                    objValues[14][iRow] = p_objSufCheckDetail[iRow].m_strLOTNO_VCHR;
-                    objValues[15][iRow] = p_objSufCheckDetail[iRow].m_dtmVALIDPERIOD_DAT;
-                    objValues[16][iRow] = p_objSufCheckDetail[iRow].m_intSTATUS_INT;
-                    objValues[17][iRow] = p_objSufCheckDetail[iRow].m_strPRODUCTORID_CHR;
-                }
-                lngRes = objHRPServ.m_lngSaveArrayWithParameters(strSQL, objValues, dbTypes);
-                objHRPServ.Dispose();
-                objHRPServ = null;
-            }
-            catch (Exception objEx)
-            {
-                com.digitalwave.Utility.clsLogText objLogger = new com.digitalwave.Utility.clsLogText();
-                bool blnRes = objLogger.LogError(objEx);
-            }
-            return lngRes;
-        }
+//                    objValues[13][iRow] = p_objSufCheckDetail[iRow].m_dblPACKQTY_DEC;
+//                    objValues[14][iRow] = p_objSufCheckDetail[iRow].m_strLOTNO_VCHR;
+//                    objValues[15][iRow] = p_objSufCheckDetail[iRow].m_dtmVALIDPERIOD_DAT;
+//                    objValues[16][iRow] = p_objSufCheckDetail[iRow].m_intSTATUS_INT;
+//                    objValues[17][iRow] = p_objSufCheckDetail[iRow].m_strPRODUCTORID_CHR;
+//                }
+//                lngRes = objHRPServ.m_lngSaveArrayWithParameters(strSQL, objValues, dbTypes);
+//                objHRPServ.Dispose();
+//                objHRPServ = null;
+//            }
+//            catch (Exception objEx)
+//            {
+//                com.digitalwave.Utility.clsLogText objLogger = new com.digitalwave.Utility.clsLogText();
+//                bool blnRes = objLogger.LogError(objEx);
+//            }
+//            return lngRes;
+//        }
 
         #region 一张盘点单的所有盘亏记录保存到同一张出库单
         /// <summary>

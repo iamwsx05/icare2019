@@ -530,7 +530,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
                 if (lngRes > 0 && dtbResult.Rows.Count > 0)
                 {
-                    MessageBox.Show(dtbResult.Rows.Count.ToString());
+                    //MessageBox.Show(dtbResult.Rows.Count.ToString());
                     foreach (DataRow dr in dtbResult.Rows)
                     {
                         EntitySamepleStat vo = new EntitySamepleStat();

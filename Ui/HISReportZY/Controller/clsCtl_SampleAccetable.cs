@@ -427,9 +427,9 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                                 vo.BARCODE = dr["BARCODE"].ToString();
                                 vo.CARDNO = string.IsNullOrEmpty(dr["CARDNO"].ToString()) ? dr["patInNo"].ToString() : dr["CARDNO"].ToString();
                                 vo.ApplyTime = dr["applyTime"].ToString();
-                                vo.AcceptTime = dr["accepttime"].ToString();
-                                vo.HsWeek = calWeek(Convert.ToDateTime(vo.AcceptTime));
+                                vo.AcceptTime = dr["accepttime"].ToString();  
                                 vo.ConfirmTime = dr["confirmtime"].ToString();
+                                vo.HsWeek = calWeek(Convert.ToDateTime(vo.ConfirmTime));
                                 vo.Checker = dr["lastname_vchr"].ToString();
                                 vo.item = dr["checkContent"].ToString();
                                 if (dr["lisTime"] != DBNull.Value)
@@ -869,7 +869,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             if ((!string.IsNullOrEmpty(confirmTime.ToString()) && (!string.IsNullOrEmpty(week1) || !string.IsNullOrEmpty(week2) ||
                     !string.IsNullOrEmpty(week3) || !string.IsNullOrEmpty(week4) || !string.IsNullOrEmpty(week5) || !string.IsNullOrEmpty(week6))))
             {
-                string week = calWeek(Convert.ToDateTime(acceptTime));
+                string week = calWeek(Convert.ToDateTime(confirmTime));
                 if (week == week1 || week == week2 || week == week3 || week == week4 || week == week5 || week == week6)
                 {
                     IsAccept = false;

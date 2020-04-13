@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.705
+VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "his.com", "his.com.csproj", "{1E5214EF-3386-4901-B4BB-A8184E737926}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicineStore", "MedicineStore\MedicineStore.csproj", "{14449951-2ED6-4B7D-AD8E-015296120D73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "his.com", "..\..\service\his.com\his.com.csproj", "{1E5214EF-3386-4901-B4BB-A8184E737926}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14449951-2ED6-4B7D-AD8E-015296120D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14449951-2ED6-4B7D-AD8E-015296120D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14449951-2ED6-4B7D-AD8E-015296120D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14449951-2ED6-4B7D-AD8E-015296120D73}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1E5214EF-3386-4901-B4BB-A8184E737926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1E5214EF-3386-4901-B4BB-A8184E737926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E5214EF-3386-4901-B4BB-A8184E737926}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -20,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8F9F4C6E-01C7-4794-92B9-DD8C080A9816}
+		SolutionGuid = {457EF1BC-F1C9-46F4-B2B0-E7B1DDC8A8E6}
 	EndGlobalSection
 EndGlobal

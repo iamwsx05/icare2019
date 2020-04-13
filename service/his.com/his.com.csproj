@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\debug\</OutputPath>
+    <OutputPath>..\..\..\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,12 +35,12 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>tttt.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>snkhis.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="comm.com, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0bcca75560d02c54, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\debug\comm.com.dll</HintPath>
+      <HintPath>..\..\..\Debug\comm.com.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Oracle.DataAccess, Version=2.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86">
@@ -59,15 +59,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="utility, Version=2.0.0.1, Culture=neutral, PublicKeyToken=55813ad8fa3e5102, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\debug\utility.dll</HintPath>
+      <HintPath>..\..\..\Debug\utility.dll</HintPath>
     </Reference>
     <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\debug\wecare.core.dll</HintPath>
+      <HintPath>..\..\..\Debug\wecare.core.dll</HintPath>
     </Reference>
     <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=4bdb6de9b3ca5966, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\debug\wecaredata.dll</HintPath>
+      <HintPath>..\..\..\Debug\wecaredata.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -338,7 +338,7 @@
   <ItemGroup>
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\his.com.csproj.CoreCompileInputs.cache" />
-    <None Include="tttt.snk" />
+    <None Include="snkhis.snk" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
