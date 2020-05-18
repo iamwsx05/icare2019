@@ -1318,7 +1318,7 @@ namespace com.digitalwave.iCare.gui.LIS
                     //保存
                     lngRes = objDomainSampleGroup.m_lngAddSampleGroup(ref objSampleGroup, ref objSampleGroupUnitArr, objApplUnitArr,
                         arlSampleModelAdd, arlSampleModelRemove, m_arlGroupSampleAdd, m_arlGroupSampleRemove);
-                    if (lngRes > 0)
+                    if (lngRes >= 0)
                     {
                         //						MessageBox.Show("标本组添加成功!","标本组",MessageBoxButtons.OK);
                         arlSampleModelRemove.Clear();

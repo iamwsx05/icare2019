@@ -1,0 +1,284 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B0A49F25-7F50-42CB-8FAE-7F8D6E9C7BC3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>com.digitalwave.emr.EMR_SynchronousCase</RootNamespace>
+    <AssemblyName>EMR_SynchronousCase</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="comm.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Debug\comm.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonInfo, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Digitalwave.Controls, Version=3.0.0.0, Culture=neutral, PublicKeyToken=bbdca74e493306ff, processorArchitecture=MSIL" />
+    <Reference Include="Digitalwave.ControlsLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Debug\Digitalwave.ControlsLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DigitalWaveControls, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Debug\DigitalWaveControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Emr.DomainControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3706371e4bc59968, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Debug\Emr.DomainControls.dll</HintPath>
+    </Reference>
+    <Reference Include="emr.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Debug\emr.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="Emr.StaticObject, Version=3.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Debug\Emr.StaticObject.dll</HintPath>
+    </Reference>
+    <Reference Include="EMR_BEDExplorer_GUI, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="EMR_PublicTools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="EMR_Signature_gui, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="GUI_Base, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="unityproxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Debug\unityproxy.dll</HintPath>
+    </Reference>
+    <Reference Include="utility, Version=2.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Debug\utility.dll</HintPath>
+    </Reference>
+    <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Debug\wecare.core.dll</HintPath>
+    </Reference>
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=90ad5968fbc6e760, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Debug\wecaredata.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clsEMR_SynchronousCaseDomain.cs" />
+    <Compile Include="clsEMR_SynchronousCaseDomain_2009.cs" />
+    <Compile Include="clsEMR_SynchronousDeptDomain.cs" />
+    <Compile Include="clsEMR_SynchronousPayTypeDomain.cs" />
+    <Compile Include="clsGDCaseDictVO.cs" />
+    <Compile Include="EditCaseControl\ctlDiagnosisInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditCaseControl\ctlDiagnosisInfo.designer.cs">
+      <DependentUpon>ctlDiagnosisInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditCaseControl\ctlExpenseAndOthers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditCaseControl\ctlExpenseAndOthers.designer.cs">
+      <DependentUpon>ctlExpenseAndOthers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditCaseControl\ctlOperationAndInfant.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditCaseControl\ctlOperationAndInfant.designer.cs">
+      <DependentUpon>ctlOperationAndInfant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditCaseControl\ctlPatientInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditCaseControl\ctlPatientInfo.designer.cs">
+      <DependentUpon>ctlPatientInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditCaseControl\ctlTumorInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditCaseControl\ctlTumorInfo.designer.cs">
+      <DependentUpon>ctlTumorInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditCaseControl\infSynchronousCaseControl.cs" />
+    <Compile Include="frmEditCase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditCase.designer.cs">
+      <DependentUpon>frmEditCase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEMR_SynchronousCase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEMR_SynchronousCase.Designer.cs">
+      <DependentUpon>frmEMR_SynchronousCase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEMR_SynchronousCase_2009.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEMR_SynchronousCase_2009.designer.cs">
+      <DependentUpon>frmEMR_SynchronousCase_2009.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEMR_SynchronousDepartment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEMR_SynchronousDepartment.Designer.cs">
+      <DependentUpon>frmEMR_SynchronousDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEMR_SynchronousPayType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEMR_SynchronousPayType.Designer.cs">
+      <DependentUpon>frmEMR_SynchronousPayType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEMR_WarningDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEMR_WarningDialog.Designer.cs">
+      <DependentUpon>frmEMR_WarningDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="EditCaseControl\ctlDiagnosisInfo.resx">
+      <DependentUpon>ctlDiagnosisInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCaseControl\ctlExpenseAndOthers.resx">
+      <DependentUpon>ctlExpenseAndOthers.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCaseControl\ctlOperationAndInfant.resx">
+      <DependentUpon>ctlOperationAndInfant.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCaseControl\ctlPatientInfo.resx">
+      <DependentUpon>ctlPatientInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditCaseControl\ctlTumorInfo.resx">
+      <DependentUpon>ctlTumorInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditCase.resx">
+      <DependentUpon>frmEditCase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEMR_SynchronousCase.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmEMR_SynchronousCase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEMR_SynchronousCase_2009.resx">
+      <DependentUpon>frmEMR_SynchronousCase_2009.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEMR_SynchronousDepartment.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmEMR_SynchronousDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEMR_SynchronousPayType.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmEMR_SynchronousPayType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEMR_WarningDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmEMR_WarningDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

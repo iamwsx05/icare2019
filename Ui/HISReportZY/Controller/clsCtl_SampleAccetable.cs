@@ -869,8 +869,12 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             if ((!string.IsNullOrEmpty(confirmTime.ToString()) && (!string.IsNullOrEmpty(week1) || !string.IsNullOrEmpty(week2) ||
                     !string.IsNullOrEmpty(week3) || !string.IsNullOrEmpty(week4) || !string.IsNullOrEmpty(week5) || !string.IsNullOrEmpty(week6))))
             {
-                string week = calWeek(Convert.ToDateTime(acceptTime));
+                string week = calWeek(Convert.ToDateTime(confirmTime));
                 if (week == week1 || week == week2 || week == week3 || week == week4 || week == week5 || week == week6)
+                {
+                    IsAccept = false;
+                }
+                else
                 {
                     if (tsConfirTime <= tsConfirmEndTime)
                     {

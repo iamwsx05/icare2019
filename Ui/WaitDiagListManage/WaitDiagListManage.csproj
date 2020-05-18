@@ -1,0 +1,337 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8642087E-804A-445F-B813-E7A760F52CC7}</ProjectGuid>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>WaitDiagListManage</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>WaitDiagListManage</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\..\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalcPatientCharge, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="comm.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\comm.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonInfo">
+      <Name>CommonInfo</Name>
+      <HintPath>..\..\..\bin\Debug\CommonInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="DataWindow, Version=2.0.4600.0, Culture=neutral, PublicKeyToken=cc0f66dd9541b3da, processorArchitecture=MSIL" />
+    <Reference Include="digitalwavecontrols">
+      <Name>digitalwavecontrols</Name>
+      <HintPath>..\..\..\bin\debug\digitalwavecontrols.dll</HintPath>
+    </Reference>
+    <Reference Include="Emr.AssistModule, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="emr.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\emr.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="EMR_iCareComponent">
+      <Name>EMR_iCareComponent</Name>
+      <HintPath>..\..\..\bin\Debug\EMR_iCareComponent.dll</HintPath>
+    </Reference>
+    <Reference Include="EMR_iCareFormBase">
+      <Name>EMR_iCareFormBase</Name>
+      <HintPath>..\..\..\bin\Debug\EMR_iCareFormBase.dll</HintPath>
+    </Reference>
+    <Reference Include="EMR_iCareFunctionBase">
+      <Name>EMR_iCareFunctionBase</Name>
+      <HintPath>..\..\..\bin\Debug\EMR_iCareFunctionBase.dll</HintPath>
+    </Reference>
+    <Reference Include="GUI_Base">
+      <Name>GUI_Base</Name>
+      <HintPath>D:\ICARE_VER2\CODE\bin\Debug\GUI_Base.dll</HintPath>
+    </Reference>
+    <Reference Include="his.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\his.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="HISControl">
+      <Name>HISControl</Name>
+      <HintPath>..\..\..\bin\Debug\HISControl.dll</HintPath>
+    </Reference>
+    <Reference Include="HISRegister">
+      <Name>HISRegister</Name>
+      <HintPath>..\..\..\BIN\Debug\HISRegister.dll</HintPath>
+    </Reference>
+    <Reference Include="HISZY, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="PinkieControls">
+      <Name>pinkiecontrols</Name>
+      <HintPath>d:\icare_ver2\code\bin\debug\pinkiecontrols.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Name>System.EnterpriseServices</Name>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Name>System.Web.Services</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="TemplateLib">
+      <Name>TemplateLib</Name>
+      <HintPath>..\..\..\bin\Debug\TemplateLib.dll</HintPath>
+    </Reference>
+    <Reference Include="unityproxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\unityproxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Utility">
+      <Name>Utility</Name>
+      <HintPath>..\..\..\bin\Debug\Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\wecare.core.dll</HintPath>
+    </Reference>
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=90ad5968fbc6e760, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\wecaredata.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+    <Content Include="print\Dataset1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Dataset1.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="print\Dataset3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Dataset3.Designer.cs</LastGenOutput>
+    </Content>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controller\clsCtl_injectInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controller\clsCtl_WaitDiagListManage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controller\clsCtl_WaitDiagListManage2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controller\clsSinature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainController\clsDcl_injectInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainController\clsDcl_WaitDiagListManage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="print\frmShowPrintNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="print\Dataset1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dataset1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="print\Dataset3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dataset3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmAllergichintManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmDeleteNameComfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmDeleteNameComfirm.Designer.cs">
+      <DependentUpon>frmDeleteNameComfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\frmDocList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmDocList2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frminjectInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmSinature.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmWaitDiagListManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\frmWaitDiagListManage2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Include="print\frmShowPrintNew.resx">
+      <DependentUpon>frmShowPrintNew.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmAllergichintManage.resx">
+      <DependentUpon>frmAllergichintManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmDeleteNameComfirm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmDeleteNameComfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmDocList.resx">
+      <DependentUpon>frmDocList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmDocList2.resx">
+      <DependentUpon>frmDocList2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frminjectInfo.resx">
+      <DependentUpon>frminjectInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmSinature.resx">
+      <DependentUpon>frmSinature.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmWaitDiagListManage.resx">
+      <DependentUpon>frmWaitDiagListManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\frmWaitDiagListManage2.resx">
+      <DependentUpon>frmWaitDiagListManage2.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="print\Dataset1.xsx">
+      <DependentUpon>Dataset1.xsd</DependentUpon>
+    </None>
+    <None Include="print\Dataset3.xsx">
+      <DependentUpon>Dataset3.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

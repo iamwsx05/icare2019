@@ -1403,33 +1403,28 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                 from t_opr_lis_sample t 
                                 left join t_bse_deptdesc b 
                                 on t.appl_deptid_chr = b.deptid_chr
-                                left join t_opr_lis_app_check_item t1
+                                left join t_opr_lis_app_apply_unit t1
                                 on t.application_id_chr = t1.application_id_chr
-                                left join  t_bse_lis_check_item t2
-                                on t1.check_item_id_chr = t2.check_item_id_chr
+                                left join  t_aid_lis_apply_unit t2
+                                on t1.application_id_chr = t2.apply_unit_id_chr
                                 left join t_bse_lis_check_category t3
                                 on t2.check_category_id_chr = t3.check_category_id_chr
-                                where t.status_int >= 0 and t.status_int <= 7
-                                and (t.accept_dat between to_date(?, 'yyyy-mm-dd hh24:mi:ss') 
-                                and to_date(?, 'yyyy-mm-dd hh24:mi:ss'))
-                                and b.deptname_vchr is not null and t.application_id_chr not in (select 
-                                                                                                c.application_id_chr,
-                                                                                                c.sample_id_chr,
-                                                                                                a.patient_name_vchr,
-                                                                                                b.code_vchr,
-                                                                                                b.deptname_vchr,
-                                                                                                c.sampletype_vchr,
-                                                                                                a.sample_back_reason_vchr,
-                                                                                                a.feedback_date_date
-                                                                                                from t_opr_lis_sample_feedback a
-                                                                                                inner join t_opr_lis_sample c
-                                                                                                on a.sample_id_chr = c.sample_id_chr
-                                                                                                inner join t_opr_lis_application d
-                                                                                                on c.application_id_chr = d.application_id_chr
-                                                                                                left outer join t_bse_deptdesc b
-                                                                                                on a.appl_empid_chr = b.deptid_chr
-                                                                                                where a.feedback_date_date between to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
-                                                                                                to_date(?, 'yyyy-mm-dd hh24:mi:ss'))";
+                                where t.status_int >5
+                                and t.patient_type_chr in (1,2,3)
+                                and b.deptname_vchr is not null
+                                and t.accept_dat between to_date(?, 'yyyy-mm-dd hh24:mi:ss') 
+                                and to_date(?, 'yyyy-mm-dd hh24:mi:ss')
+                                and t.application_id_chr not in (select 
+                                c.application_id_chr
+                                   from t_opr_lis_sample_feedback a
+                                    inner join t_opr_lis_sample c
+                                    on a.sample_id_chr = c.sample_id_chr
+                                    inner join t_opr_lis_application d
+                                    on c.application_id_chr = d.application_id_chr
+                                    left outer join t_bse_deptdesc b
+                                    on a.appl_empid_chr = b.deptid_chr
+                                    where a.feedback_date_date between to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
+                                    to_date(?, 'yyyy-mm-dd hh24:mi:ss'))";
 
                 if (patType != 0)
                     Sql += " and t.patient_type_chr = " + patType;
@@ -1439,8 +1434,8 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                 svc.CreateDatabaseParameter(4, out parm);
                 parm[0].Value = beginDate + ":00";
                 parm[1].Value = endDate + ":59";
-                parm[3].Value = beginDate + ":00";
-                parm[4].Value = endDate + ":59";
+                parm[2].Value = beginDate + ":00";
+                parm[3].Value = endDate + ":59";
                 svc.lngGetDataTableWithParameters(Sql, ref dtSample, parm);
 
                 if (dtSample != null && dtSample.Rows.Count > 0)
@@ -2382,12 +2377,11 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
             try
             {
                 objHRPServ = new clsHRPTableService();
-                strSQL = @"select distinct a.application_id_chr,
+                strSQL = @"select distinct d.application_id_chr,
                                             pv.vlaue_vchr AS color
                                             from  t_opr_lis_sample d
-                                            on a.application_id_chr = d.application_id_chr
                                             left join t_opr_lis_app_apply_unit t
-                                            on a.application_id_chr = t.application_id_chr
+                                            on d.application_id_chr = t.application_id_chr
                                             left join t_aid_lis_unit_propert_relate r
                                             on t.apply_unit_id_chr = r.apply_unit_id_chr
                                             inner join t_aid_lis_unit_property p
@@ -2397,7 +2391,9 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                             where d.status_int > 5
                                             and d.accept_dat between
                                             to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
-                                            to_date(?, 'yyyy-mm-dd hh24:mi:ss') order by pv.vlaue_vchr ";
+                                            to_date(?, 'yyyy-mm-dd hh24:mi:ss') order by pv.vlaue_vchr 
+
+ ";
                 objHRPServ.CreateDatabaseParameter(2, out parm);
                 parm[0].Value = dteStart + ":00";
                 parm[1].Value = dteEnd + ":59";

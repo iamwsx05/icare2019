@@ -943,7 +943,7 @@ namespace com.digitalwave.iCare.middletier.LIS
                     }
                 }
             }
-            if (lngRes > 0)
+            if (lngRes >= 0)
             {
                 lngRes = m_lngSetApplUnitItemPrintSeqArr(p_objApplUnitDetailArr);
                 if (lngRes > 0)

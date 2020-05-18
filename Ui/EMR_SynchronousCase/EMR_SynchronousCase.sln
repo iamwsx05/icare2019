@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMR_SynchronousCase", "EMR_SynchronousCase\EMR_SynchronousCase.csproj", "{B0A49F25-7F50-42CB-8FAE-7F8D6E9C7BC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "emr.com", "..\..\service\emr.com\emr.com.csproj", "{A38FA123-442B-4181-BD98-1E9008A89EFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0A49F25-7F50-42CB-8FAE-7F8D6E9C7BC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0A49F25-7F50-42CB-8FAE-7F8D6E9C7BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0A49F25-7F50-42CB-8FAE-7F8D6E9C7BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0A49F25-7F50-42CB-8FAE-7F8D6E9C7BC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A38FA123-442B-4181-BD98-1E9008A89EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A38FA123-442B-4181-BD98-1E9008A89EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A38FA123-442B-4181-BD98-1E9008A89EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A38FA123-442B-4181-BD98-1E9008A89EFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {362EC04B-7468-41BF-BC80-B1855DBBFBE0}
+	EndGlobalSection
+EndGlobal

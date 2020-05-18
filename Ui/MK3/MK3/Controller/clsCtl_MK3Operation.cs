@@ -826,245 +826,235 @@ namespace com.digitalwave.iCare.gui.LIS
             List<clslisPlateResult> m_lstNC = new List<clslisPlateResult>();
             List<clslisPlateResult> m_lstPC = new List<clslisPlateResult>();
             clslisPlateResult objFormula = null;
-            try
+            for (int i = 0; i < m_objViewer.m_lstTextBos.Count; i++)
             {
-                for (int i = 0; i < m_objViewer.m_lstTextBos.Count; i++)
+                objTemp = new clsLIS_Device_Test_ResultVO();
+                dvTemp.RowFilter = "check_item_id_chr='" + m_objViewer.m_lstTextBos[i].m_strItmeID + "'";
+                switch (m_objViewer.m_lstTextBos[i].m_enmSelceType.ToString().ToLower())
                 {
-                    objTemp = new clsLIS_Device_Test_ResultVO();
-                    dvTemp.RowFilter = "check_item_id_chr='" + m_objViewer.m_lstTextBos[i].m_strItmeID + "'";
-                    switch (m_objViewer.m_lstTextBos[i].m_enmSelceType.ToString().ToLower())
-                    {
-                        case "none":
-                            objTemp.strResult = "";
-                            break;
-                        case "neg":
-                            objFormula = new clslisPlateResult();
-                            m_strNC = strReviceDataArr[i];
-                            m_strQCNC = strReviceDataArr[i];
-                            objTemp.strResult = strReviceDataArr[i];
-                            objTemp.strResult2 = strReviceDataArr[i];
-                            if (strQCCheckItemID == m_objViewer.m_lstTextBos[i].m_strItmeID)
-                            {
-                                objFormula.m_strSample_Result_vchr = m_strNC;
-                                objFormula.m_strSampleid_vchr = m_objViewer.m_lstTextBos[i].m_strSampleID;
-                                m_lstNC.Add(objFormula);
-                            }
-                            else
-                            {
-                                m_lstNC.Clear();
-                            }
-                            break;
-                        case "pos":
-                            objFormula = new clslisPlateResult();
-                            m_strPC = strReviceDataArr[i];
-                            objTemp.strResult = strReviceDataArr[i];
-                            objTemp.strResult2 = strReviceDataArr[i];
-                            if (strQCCheckItemID == m_objViewer.m_lstTextBos[i].m_strItmeID)
-                            {
-                                objFormula.m_strSample_Result_vchr = m_strPC;
-                                objFormula.m_strSampleid_vchr = m_objViewer.m_lstTextBos[i].m_strSampleID;
-                                m_lstPC.Add(objFormula);
-                            }
-                            else
-                            {
-                                m_lstPC.Clear();
-                            }
-                            break;
-                        case "blk":
-                            objTemp.strResult = strReviceDataArr[i];
-                            objTemp.strResult2 = strReviceDataArr[i];
-                            break;
-                        case "qc":
-                            if (m_lstNC.Count <= 0 || m_lstPC.Count <= 0)
-                            {
-                                return;
-                            }
-                            if (dvTemp != null && dvTemp.Count > 0)
-                            {
-                                strQcFormula = dvTemp[0]["qcfromula_vchr"].ToString().Trim();
-                                strQCResultFormula = dvTemp[0]["qc_result_vchr"].ToString().Trim();
-                                strQCNCFormula = dvTemp[0]["qc_neg_formula_vchr"].ToString().Trim();
-                                strQCPCFormula = dvTemp[0]["qc_pos_formula_vchr"].ToString().Trim();
-                            }
-                            if (strQcFormula == null)
-                                return;
-
-                            m_mthCalcContrast(strQCNCFormula, m_lstNC, out dblQCNC);
-                            if (!string.IsNullOrEmpty(dvTemp[0]["qc_neg_maxvalue_vchr"].ToString().Trim()))
-                            {
-                                m_strQCNC = dvTemp[0]["qc_neg_maxvalue_vchr"].ToString().Trim();
-                                if (dblQCNC > Convert.ToDouble(m_strQCNC))
-                                {
-                                    m_strQCNC = m_strQCNC;
-                                }
-                                else
-                                {
-                                    m_strQCNC = dblQCNC.ToString();
-                                }
-                            }
-                            if (!string.IsNullOrEmpty(dvTemp[0]["qc_neg_minvalue_vchr"].ToString().Trim()))
-                            {
-                                m_strQCNC = dvTemp[0]["qc_neg_minvalue_vchr"].ToString().Trim();
-                                if (dblQCNC < Convert.ToDouble(m_strQCNC))
-                                {
-                                    m_strQCNC = m_strQCNC;
-                                }
-                                else
-                                {
-                                    m_strQCNC = dblQCNC.ToString();
-                                }
-                            }
-                            m_mthCalcContrast(strQCPCFormula, m_lstPC, out dblQCPC);
-                            if (!string.IsNullOrEmpty(dvTemp[0]["qc_pos_maxvalue_vchr"].ToString().Trim()))
-                            {
-                                m_strQCPC = dvTemp[0]["qc_pos_maxvalue_vchr"].ToString().Trim();
-                                if (dblQCPC > Convert.ToDouble(m_strQCPC))
-                                {
-                                    m_strQCPC = m_strQCPC;
-                                }
-                                else
-                                {
-                                    m_strQCPC = dblQCPC.ToString();
-                                }
-                            }
-                            if (!string.IsNullOrEmpty(dvTemp[0]["qc_pos_minvalue_vchr"].ToString().Trim()))
-                            {
-                                m_strQCPC = dvTemp[0]["qc_pos_minvalue_vchr"].ToString().Trim();
-                                if (dblQCPC < Convert.ToDouble(m_strQCPC))
-                                {
-                                    m_strQCPC = m_strQCPC;
-                                }
-                                else
-                                {
-                                    m_strQCPC = dblQCPC.ToString();
-                                }
-                            }
-                            m_mthCalculator(strQcFormula, m_strQCNC, m_strQCPC, out dblFormalResult);
-                            dbTemp = Convert.ToDouble(strReviceDataArr[i]);
-                            if (dblFormalResult == 0.0)
-                                return;
-                            //dbQCResult = dbTemp / dblFormalResult;
-                            m_mthGetQcResult(strReviceDataArr[i], dblFormalResult.ToString(), strQCResultFormula, out strQCResult);
-                            objTemp.strResult = strQCResult;
-                            objTemp.strResult2 = strReviceDataArr[i];
-                            break;
-                        case "smp":
-                            if (m_lstNC.Count <= 0 || m_lstPC.Count <= 0)
-                            {
-                                return;
-                            }
-                            if (strCheckItemID != m_objViewer.m_lstTextBos[i].m_strItmeID)
-                            {
-                                if (m_lstNC.Count <= 0 || m_lstPC.Count <= 0)
-                                    return;
-                                strFormula = dvTemp[0]["check_item_formula_vchr"].ToString().Trim();
-
-                                if (string.IsNullOrEmpty(strFormula))
-                                {
-                                    continue;
-                                }
-                                strNCFormula = dvTemp[0]["qc_neg_formula_vchr"].ToString().Trim();
-                                strPCFormula = dvTemp[0]["qc_pos_formula_vchr"].ToString().Trim();
-                                m_mthCalcContrast(strNCFormula, m_lstNC, out dblNC);
-                                if (!string.IsNullOrEmpty(dvTemp[0]["neg_maxvalue_vchr"].ToString().Trim()))
-                                {
-                                    m_strNC = dvTemp[0]["neg_maxvalue_vchr"].ToString().Trim();
-                                    if (dblNC > Convert.ToDouble(m_strNC))
-                                    {
-                                        m_strNC = m_strNC;
-                                    }
-                                    else
-                                    {
-                                        m_strNC = dblNC.ToString();
-                                    }
-                                }
-                                if (!string.IsNullOrEmpty(dvTemp[0]["neg_minvalue_vchr"].ToString().Trim()))
-                                {
-                                    m_strNC = dvTemp[0]["neg_minvalue_vchr"].ToString().Trim();
-                                    if (dblNC < Convert.ToDouble(m_strNC))
-                                    {
-                                        m_strNC = m_strNC;
-                                    }
-                                    else
-                                    {
-                                        m_strNC = dblNC.ToString();
-                                    }
-                                }
-                                m_mthCalcContrast(strPCFormula, m_lstPC, out dblPC);
-                                if (!string.IsNullOrEmpty(dvTemp[0]["pos_maxvalue_vchr"].ToString().Trim()))
-                                {
-                                    m_strPC = dvTemp[0]["pos_maxvalue_vchr"].ToString().Trim();
-                                    if (dblPC > Convert.ToDouble(m_strPC))
-                                    {
-                                        m_strPC = m_strPC;
-                                    }
-                                    else
-                                    {
-                                        m_strPC = dblPC.ToString();
-                                    }
-                                }
-                                if (!string.IsNullOrEmpty(dvTemp[0]["pos_minvalue_vchr"].ToString().Trim()))
-                                {
-                                    m_strPC = dvTemp[0]["pos_minvalue_vchr"].ToString().Trim();
-                                    if (dblPC < Convert.ToDouble(m_strPC))
-                                    {
-                                        m_strPC = m_strPC;
-                                    }
-                                    else
-                                    {
-                                        m_strPC = dblPC.ToString();
-                                    }
-                                }
-                                if (string.IsNullOrEmpty(m_strNC) || string.IsNullOrEmpty(m_strPC))
-                                {
-                                    return;
-                                }
-                                m_mthCalculator(strFormula, m_strNC, m_strPC, out dblFormalResult);
-                            }
-                            m_blnResultJudge(m_objViewer.m_lstTextBos[i].m_strItmeID, strReviceDataArr[i], dblFormalResult.ToString(), out strResult);
-                            objTemp.strResult = strResult;
-                            objTemp.strResult2 = strReviceDataArr[i];
-                            strCheckItemID = m_objViewer.m_lstTextBos[i].m_strItmeID;
-                            break;
-                    }
-                    objTemp.strDevice_ID = strDeviceId;
-                    objTemp.strCheck_Date = strCheckDate;
-                    objTemp.strDevice_Check_Item_Name = m_objViewer.m_lstTextBos[i].m_strCheckItemName;
-                    objTemp.strDevice_Sample_ID = m_objViewer.m_lstTextBos[i].m_strSampleID;
-                    if (m_objViewer.m_lstTextBos[i].m_enmSelceType.ToString().ToLower() == "none")
-                    {
-                        p_lstResult2.Add(objTemp);
-                    }
-                    else
-                    {
-                        p_lstResult.Add(objTemp);
-                        p_lstResult2.Add(objTemp);
-                    }
-                    strQCCheckItemID = m_objViewer.m_lstTextBos[i].m_strItmeID;
-                }
-                Log.Output("p_lstResult-->" + p_lstResult.Count.ToString());
-                Log.Output("p_lstResult2-->" + p_lstResult2.Count.ToString());
-                if (p_lstResult.Count > 0)
-                {
-                    // 2019-09-04
-                    //lngRes = new clsDomainController_MK3ItemSetManage().m_lngInsertDeviceResult(p_lstResult.ToArray());
-                    clsLIS_Device_Test_ResultVO[] reultArr = null;
-                    //clsLIS_Svc svc = (clsLIS_Svc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsLIS_Svc));
-                    lngRes = (new weCare.Proxy.ProxyLis()).Service.lngAddLabResult(p_lstResult.ToArray(), out reultArr);
-                    Log.Output("lngAddLabResult--lngRes-->" + lngRes.ToString());
-                    if (lngRes > 0)
-                    {
-                        if (p_lstResult2.Count > 0)
+                    case "none":
+                        objTemp.strResult = "";
+                        break;
+                    case "neg":
+                        objFormula = new clslisPlateResult();
+                        m_strNC = strReviceDataArr[i];
+                        m_strQCNC = strReviceDataArr[i];
+                        objTemp.strResult = strReviceDataArr[i];
+                        objTemp.strResult2 = strReviceDataArr[i];
+                        if (strQCCheckItemID == m_objViewer.m_lstTextBos[i].m_strItmeID)
                         {
-                            m_mthDataShow(p_lstResult2.ToArray());
+                            objFormula.m_strSample_Result_vchr = m_strNC;
+                            objFormula.m_strSampleid_vchr = m_objViewer.m_lstTextBos[i].m_strSampleID;
+                            m_lstNC.Add(objFormula);
                         }
-                    }
-                    //m_mthDataShow(p_lstResult2.ToArray());
+                        else
+                        {
+                            m_lstNC.Clear();
+                        }
+                        break;
+                    case "pos":
+                        objFormula = new clslisPlateResult();
+                        m_strPC = strReviceDataArr[i];
+                        objTemp.strResult = strReviceDataArr[i];
+                        objTemp.strResult2 = strReviceDataArr[i];
+                        if (strQCCheckItemID == m_objViewer.m_lstTextBos[i].m_strItmeID)
+                        {
+                            objFormula.m_strSample_Result_vchr = m_strPC;
+                            objFormula.m_strSampleid_vchr = m_objViewer.m_lstTextBos[i].m_strSampleID;
+                            m_lstPC.Add(objFormula);
+                        }
+                        else
+                        {
+                            m_lstPC.Clear();
+                        }
+                        break;
+                    case "blk":
+                        objTemp.strResult = strReviceDataArr[i];
+                        objTemp.strResult2 = strReviceDataArr[i];
+                        break;
+                    case "qc":
+                        if (m_lstNC.Count <= 0 || m_lstPC.Count <= 0)
+                        {
+                            return;
+                        }
+                        if (dvTemp != null && dvTemp.Count > 0)
+                        {
+                            strQcFormula = dvTemp[0]["qcfromula_vchr"].ToString().Trim();
+                            strQCResultFormula = dvTemp[0]["qc_result_vchr"].ToString().Trim();
+                            strQCNCFormula = dvTemp[0]["qc_neg_formula_vchr"].ToString().Trim();
+                            strQCPCFormula = dvTemp[0]["qc_pos_formula_vchr"].ToString().Trim();
+                        }
+                        if (strQcFormula == null)
+                            return;
+
+                        m_mthCalcContrast(strQCNCFormula, m_lstNC, out dblQCNC);
+                        if (!string.IsNullOrEmpty(dvTemp[0]["qc_neg_maxvalue_vchr"].ToString().Trim()))
+                        {
+                            m_strQCNC = dvTemp[0]["qc_neg_maxvalue_vchr"].ToString().Trim();
+                            if (dblQCNC > Convert.ToDouble(m_strQCNC))
+                            {
+                                m_strQCNC = m_strQCNC;
+                            }
+                            else
+                            {
+                                m_strQCNC = dblQCNC.ToString();
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(dvTemp[0]["qc_neg_minvalue_vchr"].ToString().Trim()))
+                        {
+                            m_strQCNC = dvTemp[0]["qc_neg_minvalue_vchr"].ToString().Trim();
+                            if (dblQCNC < Convert.ToDouble(m_strQCNC))
+                            {
+                                m_strQCNC = m_strQCNC;
+                            }
+                            else
+                            {
+                                m_strQCNC = dblQCNC.ToString();
+                            }
+                        }
+                        m_mthCalcContrast(strQCPCFormula, m_lstPC, out dblQCPC);
+                        if (!string.IsNullOrEmpty(dvTemp[0]["qc_pos_maxvalue_vchr"].ToString().Trim()))
+                        {
+                            m_strQCPC = dvTemp[0]["qc_pos_maxvalue_vchr"].ToString().Trim();
+                            if (dblQCPC > Convert.ToDouble(m_strQCPC))
+                            {
+                                m_strQCPC = m_strQCPC;
+                            }
+                            else
+                            {
+                                m_strQCPC = dblQCPC.ToString();
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(dvTemp[0]["qc_pos_minvalue_vchr"].ToString().Trim()))
+                        {
+                            m_strQCPC = dvTemp[0]["qc_pos_minvalue_vchr"].ToString().Trim();
+                            if (dblQCPC < Convert.ToDouble(m_strQCPC))
+                            {
+                                m_strQCPC = m_strQCPC;
+                            }
+                            else
+                            {
+                                m_strQCPC = dblQCPC.ToString();
+                            }
+                        }
+                        m_mthCalculator(strQcFormula, m_strQCNC, m_strQCPC, out dblFormalResult);
+                        dbTemp = Convert.ToDouble(strReviceDataArr[i]);
+                        if (dblFormalResult == 0.0)
+                            return;
+                        //dbQCResult = dbTemp / dblFormalResult;
+                        m_mthGetQcResult(strReviceDataArr[i], dblFormalResult.ToString(), strQCResultFormula, out strQCResult);
+                        objTemp.strResult = strQCResult;
+                        objTemp.strResult2 = strReviceDataArr[i];
+                        break;
+                    case "smp":
+                        if (m_lstNC.Count <= 0 || m_lstPC.Count <= 0)
+                        {
+                            return;
+                        }
+                        if (strCheckItemID != m_objViewer.m_lstTextBos[i].m_strItmeID)
+                        {
+                            if (m_lstNC.Count <= 0 || m_lstPC.Count <= 0)
+                                return;
+                            strFormula = dvTemp[0]["check_item_formula_vchr"].ToString().Trim();
+
+                            if (string.IsNullOrEmpty(strFormula))
+                            {
+                                continue;
+                            }
+                            strNCFormula = dvTemp[0]["qc_neg_formula_vchr"].ToString().Trim();
+                            strPCFormula = dvTemp[0]["qc_pos_formula_vchr"].ToString().Trim();
+                            m_mthCalcContrast(strNCFormula, m_lstNC, out dblNC);
+                            if (!string.IsNullOrEmpty(dvTemp[0]["neg_maxvalue_vchr"].ToString().Trim()))
+                            {
+                                m_strNC = dvTemp[0]["neg_maxvalue_vchr"].ToString().Trim();
+                                if (dblNC > Convert.ToDouble(m_strNC))
+                                {
+                                    m_strNC = m_strNC;
+                                }
+                                else
+                                {
+                                    m_strNC = dblNC.ToString();
+                                }
+                            }
+                            if (!string.IsNullOrEmpty(dvTemp[0]["neg_minvalue_vchr"].ToString().Trim()))
+                            {
+                                m_strNC = dvTemp[0]["neg_minvalue_vchr"].ToString().Trim();
+                                if (dblNC < Convert.ToDouble(m_strNC))
+                                {
+                                    m_strNC = m_strNC;
+                                }
+                                else
+                                {
+                                    m_strNC = dblNC.ToString();
+                                }
+                            }
+                            m_mthCalcContrast(strPCFormula, m_lstPC, out dblPC);
+                            if (!string.IsNullOrEmpty(dvTemp[0]["pos_maxvalue_vchr"].ToString().Trim()))
+                            {
+                                m_strPC = dvTemp[0]["pos_maxvalue_vchr"].ToString().Trim();
+                                if (dblPC > Convert.ToDouble(m_strPC))
+                                {
+                                    m_strPC = m_strPC;
+                                }
+                                else
+                                {
+                                    m_strPC = dblPC.ToString();
+                                }
+                            }
+                            if (!string.IsNullOrEmpty(dvTemp[0]["pos_minvalue_vchr"].ToString().Trim()))
+                            {
+                                m_strPC = dvTemp[0]["pos_minvalue_vchr"].ToString().Trim();
+                                if (dblPC < Convert.ToDouble(m_strPC))
+                                {
+                                    m_strPC = m_strPC;
+                                }
+                                else
+                                {
+                                    m_strPC = dblPC.ToString();
+                                }
+                            }
+                            if (string.IsNullOrEmpty(m_strNC) || string.IsNullOrEmpty(m_strPC))
+                            {
+                                return;
+                            }
+                            m_mthCalculator(strFormula, m_strNC, m_strPC, out dblFormalResult);
+                        }
+                        m_blnResultJudge(m_objViewer.m_lstTextBos[i].m_strItmeID, strReviceDataArr[i], dblFormalResult.ToString(), out strResult);
+                        objTemp.strResult = strResult;
+                        objTemp.strResult2 = strReviceDataArr[i];
+                        strCheckItemID = m_objViewer.m_lstTextBos[i].m_strItmeID;
+                        break;
                 }
+                objTemp.strDevice_ID = strDeviceId;
+                objTemp.strCheck_Date = strCheckDate;
+                objTemp.strDevice_Check_Item_Name = m_objViewer.m_lstTextBos[i].m_strCheckItemName;
+                objTemp.strDevice_Sample_ID = m_objViewer.m_lstTextBos[i].m_strSampleID;
+                if (m_objViewer.m_lstTextBos[i].m_enmSelceType.ToString().ToLower() == "none")
+                {
+                    p_lstResult2.Add(objTemp);
+                }
+                else
+                {
+                    p_lstResult.Add(objTemp);
+                    p_lstResult2.Add(objTemp);
+                }
+                strQCCheckItemID = m_objViewer.m_lstTextBos[i].m_strItmeID;
             }
-            catch (Exception ex)
+            if (p_lstResult.Count > 0)
             {
-                Log.Output(ex.ToString());
+                // 2019-09-04
+                //lngRes = new clsDomainController_MK3ItemSetManage().m_lngInsertDeviceResult(p_lstResult.ToArray());
+                clsLIS_Device_Test_ResultVO[] reultArr = null;
+                //clsLIS_Svc svc = (clsLIS_Svc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsLIS_Svc));
+                lngRes = (new weCare.Proxy.ProxyLis()).Service.lngAddLabResult(p_lstResult.ToArray(), out reultArr);
+                if (lngRes > 0)
+                {
+                    if (p_lstResult2.Count > 0)
+                    {
+                        m_mthDataShow(p_lstResult2.ToArray());
+                    }
+                }
+                //m_mthDataShow(p_lstResult2.ToArray());
             }
         }
         #endregion
