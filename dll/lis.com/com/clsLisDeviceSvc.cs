@@ -359,7 +359,7 @@ values
             {
                 DataTable dtbResult = new DataTable();
                 com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
-                objHRPSvc.lngGetDataTableWithoutParameters(strSQL, ref dtbResult);
+                lngRes = objHRPSvc.lngGetDataTableWithoutParameters(strSQL, ref dtbResult);
                 objHRPSvc.Dispose();
                 if (lngRes > 0 && dtbResult.Rows.Count > 0)
                 {

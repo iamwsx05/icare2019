@@ -427,9 +427,9 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                                 vo.BARCODE = dr["BARCODE"].ToString();
                                 vo.CARDNO = string.IsNullOrEmpty(dr["CARDNO"].ToString()) ? dr["patInNo"].ToString() : dr["CARDNO"].ToString();
                                 vo.ApplyTime = dr["applyTime"].ToString();
-                                vo.AcceptTime = dr["accepttime"].ToString();
-                                vo.HsWeek = calWeek(Convert.ToDateTime(vo.AcceptTime));
+                                vo.AcceptTime = dr["accepttime"].ToString();  
                                 vo.ConfirmTime = dr["confirmtime"].ToString();
+                                vo.HsWeek = calWeek(Convert.ToDateTime(vo.ConfirmTime));
                                 vo.Checker = dr["lastname_vchr"].ToString();
                                 vo.item = dr["checkContent"].ToString();
                                 if (dr["lisTime"] != DBNull.Value)

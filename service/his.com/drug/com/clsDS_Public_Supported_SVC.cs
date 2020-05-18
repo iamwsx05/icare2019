@@ -92,33 +92,44 @@ namespace com.digitalwave.iCare.middletier.HIS
             {
                 if (clsHRPTableService.bytDatabase_Selector == (byte)clsHRPTableService.enumDatabase_Selector.bytOracle)
                 {
-                    string strSQL = "select getseq(?,?) seqarr from dual";
-
-                    clsHRPTableService objHRPServ = new clsHRPTableService();
-                    DataTable dtValue = null;
-
-                    IDataParameter[] objDPArr = null;
-                    objHRPServ.CreateDatabaseParameter(2, out objDPArr);
-                    objDPArr[0].Value = p_strSEQName;
-                    objDPArr[1].Value = p_intNum;
-
-                    lngRes = objHRPServ.lngGetDataTableWithParameters(strSQL, ref dtValue, objDPArr);
-                    objHRPServ.Dispose();
-                    objHRPServ = null;
-                    if (lngRes > 0 && dtValue != null && dtValue.Rows.Count == 1)
+                    DataTable dt = null;
+                    p_lngSEQArr = new long[p_intNum];
+                    string Sql = string.Format("select {0}.nextval from dual", p_strSEQName);
+                    clsHRPTableService svc = new clsHRPTableService();
+                    for (int i = p_intNum - 1; i >= 0; i--)
                     {
-                        p_lngSEQArr = new long[p_intNum];
-                        long lngLastSeq = Convert.ToInt64(dtValue.Rows[0][0]);
-                        for (int iRow = p_intNum - 1; iRow >= 0; iRow--)
-                        {
-                            p_lngSEQArr[iRow] = lngLastSeq--;
-                        }
+                        svc.lngGetDataTableWithoutParameters(Sql, ref dt);
+                        p_lngSEQArr[i] = Convert.ToInt64(dt.Rows[0][0].ToString());
                     }
-                    else
-                    {
-                        p_lngSEQArr = new long[1];
-                        p_lngSEQArr[0] = 1;
-                    }
+                    return 1;
+
+                    //string strSQL = "select getseq(?,?) seqarr from dual";
+
+                    //clsHRPTableService objHRPServ = new clsHRPTableService();
+                    //DataTable dtValue = null;
+
+                    //IDataParameter[] objDPArr = null;
+                    //objHRPServ.CreateDatabaseParameter(2, out objDPArr);
+                    //objDPArr[0].Value = p_strSEQName;
+                    //objDPArr[1].Value = p_intNum;
+
+                    //lngRes = objHRPServ.lngGetDataTableWithParameters(strSQL, ref dtValue, objDPArr);
+                    //objHRPServ.Dispose();
+                    //objHRPServ = null;
+                    //if (lngRes > 0 && dtValue != null && dtValue.Rows.Count == 1)
+                    //{
+                    //    p_lngSEQArr = new long[p_intNum];
+                    //    long lngLastSeq = Convert.ToInt64(dtValue.Rows[0][0]);
+                    //    for (int iRow = p_intNum - 1; iRow >= 0; iRow--)
+                    //    {
+                    //        p_lngSEQArr[iRow] = lngLastSeq--;
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    p_lngSEQArr = new long[1];
+                    //    p_lngSEQArr[0] = 1;
+                    //}
                 }
             }
             catch (Exception objEx)

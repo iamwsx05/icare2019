@@ -864,32 +864,43 @@ values
         public long m_lngGetSequenceArr(int p_intNum, out long[] p_lngSEQArr)
         {
             long rec = 0;
-            string Sql;
-            clsHRPTableService svc = null;
-            IDataParameter[] parm = null;
-            DataTable dt = null;
+            //string Sql;
+            //clsHRPTableService svc = null;
+            //IDataParameter[] parm = null;
+            //DataTable dt = null;
             p_lngSEQArr = null;
             try
             {
-                Sql = @"select getseq(?, ?) seqarr from dual";
+                DataTable dt = null;
+                p_lngSEQArr = new long[p_intNum];
+                string Sql = string.Format("select {0}.nextval from dual", "seq_template");
+                clsHRPTableService svc = new clsHRPTableService();
+                for (int i = p_intNum - 1; i >= 0; i--)
+                {
+                    svc.lngGetDataTableWithoutParameters(Sql, ref dt);
+                    p_lngSEQArr[i] = Convert.ToInt64(dt.Rows[0][0].ToString());
+                }
+                return 1;
 
-                svc = new clsHRPTableService();
-                svc.CreateDatabaseParameter(2, out parm);
-                parm[0].Value = "seq_template";
-                parm[1].Value = p_intNum;
-                rec = svc.lngGetDataTableWithParameters(Sql, ref dt, parm);
-                if (dt != null && dt.Rows.Count > 0)
-                {
-                    p_lngSEQArr = new long[p_intNum];
-                    for (int i = 0; i < p_intNum - 1; i++)
-                    {
-                        p_lngSEQArr[i] = Convert.ToInt64(dt.Rows[0][0]);
-                    }
-                }
-                else
-                {
-                    p_lngSEQArr = new long[] { 1L };
-                }
+                //Sql = @"select getseq(?, ?) seqarr from dual";
+
+                //svc = new clsHRPTableService();
+                //svc.CreateDatabaseParameter(2, out parm);
+                //parm[0].Value = "seq_template";
+                //parm[1].Value = p_intNum;
+                //rec = svc.lngGetDataTableWithParameters(Sql, ref dt, parm);
+                //if (dt != null && dt.Rows.Count > 0)
+                //{
+                //    p_lngSEQArr = new long[p_intNum];
+                //    for (int i = 0; i < p_intNum - 1; i++)
+                //    {
+                //        p_lngSEQArr[i] = Convert.ToInt64(dt.Rows[0][0]);
+                //    }
+                //}
+                //else
+                //{
+                //    p_lngSEQArr = new long[] { 1L };
+                //}
             }
             catch (Exception ex)
             {
