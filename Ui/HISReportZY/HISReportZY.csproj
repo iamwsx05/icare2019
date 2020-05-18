@@ -86,6 +86,7 @@
     <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Sparkline.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -174,6 +175,12 @@
     </Compile>
     <Compile Include="LisQcReport\frmLimitTimeMaitain.Designer.cs">
       <DependentUpon>frmLimitTimeMaitain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LisQcReport\frmState.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LisQcReport\frmState.Designer.cs">
+      <DependentUpon>frmState.cs</DependentUpon>
     </Compile>
     <Compile Include="Viewer\frmKsMed.cs">
       <SubType>Form</SubType>
@@ -334,6 +341,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LisQcReport\frmLisWorkloadCount.resx">
       <DependentUpon>frmLisWorkloadCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LisQcReport\frmState.resx">
+      <DependentUpon>frmState.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Viewer\frmKsMed.resx">

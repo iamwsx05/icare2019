@@ -2416,6 +2416,94 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
 
         #endregion
 
+        #region  尿沉渣定量报表
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dtbResult"></param>
+        /// <param name="dteStart"></param>
+        /// <param name="dteEnd"></param>
+        /// <returns></returns>
+        [AutoComplete]
+        public long GetSampleArenaStat(out DataTable dtbResult, string dteStart, string dteEnd)
+        {
+            long lngRes = 0;
+            dtbResult = null;
+            string strSQL = string.Empty;
+
+            clsHRPTableService objHRPServ = null;
+            IDataParameter[] parm = null;
+
+            try
+            {
+                objHRPServ = new clsHRPTableService();
+                strSQL = @"select d.application_id_chr    as application,
+                                a.application_dat as applyDate,
+                                d.accept_dat as acceptDate,
+                               a.age_chr                  as age,
+                               d.barcode_vchr             AS barcode,
+                               d.patient_type_chr         AS pattype,
+                               a.check_content_vchr      AS chcekContent,
+                               a.patient_name_vchr        AS name, --患者姓名
+                               d.patient_inhospitalno_chr AS patInNo,
+                               d.patientcardid_chr        AS cardNo, 
+                               t.apply_unit_id_chr     as applyunitid,
+                               t1.apply_unit_name_vchr as applyunitname,
+                               d.patientid_chr         as patientid,
+                               dept.deptid_chr,
+                               dept.deptname_vchr      as depteName,
+                               r1.check_item_id_chr    as itemid,
+                               r1.CHECK_ITEM_NAME_VCHR as itemname,
+                               rpt.summary_vchr  as summary,
+                               r1.result_vchr          as result,
+                               e.lastname_vchr         as checktor,
+                               d.confirm_dat           as checkdate
+                          from t_opr_lis_sample d
+                          left join t_opr_lis_application a
+                            on d.application_id_chr = a.application_id_chr
+                            left join t_opr_lis_app_report rpt
+                              on d.application_id_chr = rpt.application_id_chr
+                          left join t_opr_lis_check_result r1
+                            on d.sample_id_chr = r1.sample_id_chr
+                          left join t_opr_lis_app_apply_unit t
+                            on d.application_id_chr = t.application_id_chr
+                          left join t_aid_lis_apply_unit t1
+                            on t.apply_unit_id_chr = t1.apply_unit_id_chr
+                          left join t_bse_deptdesc dept
+                            on d.appl_deptid_chr = dept.deptid_chr
+                          left join t_bse_employee e
+                            on r1.operator_id_chr = e.empid_chr
+                         where d.status_int > 5
+                           and d.confirm_dat between
+                               to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
+                               to_date(?, 'yyyy-mm-dd hh24:mi:ss')
+                           and t.apply_unit_id_chr = '001060'
+                           and a.pstatus_int = 2
+                            and rpt.status_int > 0
+                           and r1.check_item_id_chr in ('000142', '002166', '002165') ";
+                objHRPServ.CreateDatabaseParameter(2, out parm);
+                parm[0].Value = dteStart + ":00";
+                parm[1].Value = dteEnd + ":59";
+                lngRes = objHRPServ.lngGetDataTableWithParameters(strSQL, ref dtbResult, parm);
+
+            }
+            catch (Exception objEx)
+            {
+                lngRes = 0;
+                clsLogText objLogger = new clsLogText();
+                bool blnRes = objLogger.LogDetailError(objEx, true);
+            }
+            finally
+            {
+                objHRPServ = null;
+            }
+
+            return lngRes;
+        }
+
+        #endregion
+
+
         #region 检验报告发放时限符合率统计报表
         /// <summary>
         /// 
@@ -3557,6 +3645,10 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
             return lngRes;
         }
         #endregion
+
+
+
+
 
         #endregion
 

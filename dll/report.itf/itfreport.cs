@@ -272,6 +272,9 @@ namespace Report.Itf
         long GetCheckerQc(out DataTable dtbResult, string dteStart, string dteEnd);
 
         [OperationContract]
+        long GetSampleArenaStat(out DataTable dtbResult, string dteStart, string dteEnd);
+
+        [OperationContract]
         long GetLimitTime(out DataTable dtbResult, string applyunitid);
 
         [OperationContract]

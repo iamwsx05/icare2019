@@ -748,6 +748,17 @@ namespace Report.Service
             }
         }
 
+        public long GetSampleArenaStat(out DataTable dtbResult, string dteStart, string dteEnd)
+        {
+            using (clsHISReportZy_Supported_Svc svc = new clsHISReportZy_Supported_Svc())
+            {
+                long rec = svc.GetSampleArenaStat(out dtbResult, dteStart, dteEnd);
+                dtbResult = Function.ReNameDatatable(dtbResult);
+                return rec;
+            }
+        }
+
+
         public long GetCheckerQc(out DataTable dtbResult, string dteStart, string dteEnd)
         {
             using (clsHISReportZy_Supported_Svc svc = new clsHISReportZy_Supported_Svc())
