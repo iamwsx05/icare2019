@@ -8600,6 +8600,7 @@ namespace com.digitalwave.iCare.BIHOrder
                     request += string.Format("<payTypeId>{0}</payTypeId>", patVo.m_strPayTypeID) + Environment.NewLine;
                     request += string.Format("<currAreaId>{0}</currAreaId>", patVo.m_strAreaID) + Environment.NewLine;
                     request += string.Format("<currBedId>{0}</currBedId>", patVo.m_strBedID) + Environment.NewLine;
+                    request += string.Format("<inDate>{0}</inDate>", patVo.m_dtInHospital.ToString("yyyy-MM-dd HH:mm:ss")) + Environment.NewLine;
                     request += string.Format("<clinicDiag><![CDATA[{0}]]></clinicDiag>", this.m_ctlPatient.m_txtDiagnose.Text.Trim()) + Environment.NewLine;
                     request += "</request>" + Environment.NewLine;
                     //Log.Output(request);
@@ -8611,7 +8612,8 @@ namespace com.digitalwave.iCare.BIHOrder
                     object obj = Activator.CreateInstance(type);
                     System.Reflection.MethodInfo objMethodInfo = type.GetMethod("Invoke");
                     object[] objParamArr = new object[1];
-                    objParamArr[0] = request.Replace(" ", "");
+                    //objParamArr[0] = request.Replace(" ", "");
+                    objParamArr[0] = request;
                     objMethodInfo.Invoke(obj, objParamArr);
                 }
             }

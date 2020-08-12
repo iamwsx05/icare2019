@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.dgvItem = new System.Windows.Forms.DataGridView();
@@ -38,6 +38,7 @@
             this.txtSearchName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnCpy = new PinkieControls.ButtonXP();
             this.txtTimeLimit6 = new System.Windows.Forms.TextBox();
             this.txtTimeLimit5 = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -124,7 +125,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtEmergency = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnCpy = new PinkieControls.ButtonXP();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItem)).BeginInit();
@@ -159,14 +159,14 @@
             this.dgvItem.AllowUserToAddRows = false;
             this.dgvItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvItem.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvItem.Location = new System.Drawing.Point(0, 0);
@@ -257,6 +257,21 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(877, 693);
             this.panel2.TabIndex = 1;
+            // 
+            // btnCpy
+            // 
+            this.btnCpy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnCpy.DefaultScheme = true;
+            this.btnCpy.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnCpy.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCpy.Hint = "";
+            this.btnCpy.Location = new System.Drawing.Point(416, 568);
+            this.btnCpy.Name = "btnCpy";
+            this.btnCpy.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
+            this.btnCpy.Size = new System.Drawing.Size(112, 36);
+            this.btnCpy.TabIndex = 174;
+            this.btnCpy.Text = "复制";
+            this.btnCpy.Click += new System.EventHandler(this.btnCpy_Click);
             // 
             // txtTimeLimit6
             // 
@@ -1261,7 +1276,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnClear.DefaultScheme = true;
             this.btnClear.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnClear.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1276,7 +1291,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnSave.DefaultScheme = true;
             this.btnSave.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnSave.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1291,7 +1306,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.btnDelete.DefaultScheme = true;
             this.btnDelete.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnDelete.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -3076,15 +3091,15 @@
             this.cboAceepH_1.FormattingEnabled = true;
             this.cboAceepH_1.Items.AddRange(new object[] {
             "",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
             "10",
             "11",
             "12",
@@ -3444,21 +3459,6 @@
             this.label2.Size = new System.Drawing.Size(120, 16);
             this.label2.TabIndex = 2;
             this.label2.Text = "急诊报告时长：";
-            // 
-            // btnCpy
-            // 
-            this.btnCpy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
-            this.btnCpy.DefaultScheme = true;
-            this.btnCpy.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.btnCpy.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCpy.Hint = "";
-            this.btnCpy.Location = new System.Drawing.Point(416, 568);
-            this.btnCpy.Name = "btnCpy";
-            this.btnCpy.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
-            this.btnCpy.Size = new System.Drawing.Size(112, 36);
-            this.btnCpy.TabIndex = 174;
-            this.btnCpy.Text = "复制";
-            this.btnCpy.Click += new System.EventHandler(this.btnCpy_Click);
             // 
             // frmLimitTimeMaitain
             // 

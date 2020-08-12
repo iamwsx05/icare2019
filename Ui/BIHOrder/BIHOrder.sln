@@ -2,6 +2,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comm.control", "..\comm.control\comm.control.csproj", "{415A6157-FFBE-40BA-B933-70151E1F04AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eapplication", "..\eapplication\eapplication.csproj", "{BF30B75A-B39A-47E1-8B5A-5614AA39B285}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIHOrder", "BIHOrder.csproj", "{B2FBD124-EC8D-4CAB-96B9-7E246F0819AF}"
 EndProject
 Global
@@ -12,6 +16,22 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Debug|x86.ActiveCfg = Debug|x86
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Debug|x86.Build.0 = Debug|x86
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Release|x86.ActiveCfg = Release|x86
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Release|x86.Build.0 = Release|x86
+		{BF30B75A-B39A-47E1-8B5A-5614AA39B285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF30B75A-B39A-47E1-8B5A-5614AA39B285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF30B75A-B39A-47E1-8B5A-5614AA39B285}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BF30B75A-B39A-47E1-8B5A-5614AA39B285}.Debug|x86.Build.0 = Debug|Any CPU
+		{BF30B75A-B39A-47E1-8B5A-5614AA39B285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF30B75A-B39A-47E1-8B5A-5614AA39B285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF30B75A-B39A-47E1-8B5A-5614AA39B285}.Release|x86.ActiveCfg = Release|Any CPU
+		{BF30B75A-B39A-47E1-8B5A-5614AA39B285}.Release|x86.Build.0 = Release|Any CPU
 		{B2FBD124-EC8D-4CAB-96B9-7E246F0819AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B2FBD124-EC8D-4CAB-96B9-7E246F0819AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2FBD124-EC8D-4CAB-96B9-7E246F0819AF}.Debug|x86.ActiveCfg = Debug|Any CPU

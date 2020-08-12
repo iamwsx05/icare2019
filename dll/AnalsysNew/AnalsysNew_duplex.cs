@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using weCare.Core.Utils;
 
 namespace AnalsysNew
 {
@@ -20,7 +21,8 @@ namespace AnalsysNew
         /// <summary>
         /// 串口控制类
         /// </summary>
-        //public clsSerialPortIO SerialPort = null;
+        // public clsSerialPortIO SerialPort = null;
+        System.IO.Ports.SerialPort SerialPort = null;
         /// <summary>
         /// 仪器代号
         /// </summary>
@@ -57,13 +59,9 @@ namespace AnalsysNew
 
         //clsLIS_Data_Acquisition_SendCommend sendObj = null;
 
-        // MS.Comm控件
-        AxMSCommLib.AxMSComm axMSComm;
-
-        frmMSComm frmMS = null;
 
         clsLIS_Equip_ConfigVO configVo = null;
-
+        System.Timers.Timer timer;
         #endregion
 
         #region 构造函数
@@ -78,12 +76,19 @@ namespace AnalsysNew
             DateAnalysis = new DataAnalysis_AnalsysNew();
             Logger = new com.digitalwave.Utility.clsLogText();
 
-            //System.Data.DataSet ds = new System.Data.DataSet();
-            //ds.ReadXml(System.Windows.Forms.Application.StartupPath + "\\sm2100i.xml");
-            //if (ds != null && ds.Tables != null && ds.Tables.Count > 0)
-            //{
-            //    DateAnalysis.dtConfig = ds.Tables[0];
-            //}
+            timer = new System.Timers.Timer(5000);
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(Timeout);
+            timer.AutoReset = true;
+            timer.Enabled = true;
+        }
+
+        public void Timeout(object source, System.Timers.ElapsedEventArgs e)
+        {
+            if(SerialPort != null )
+            {
+                if(!SerialPort.IsOpen)
+                    SerialPort.Open();
+            }
         }
         /// <summary>
         /// 构造函数
@@ -110,12 +115,26 @@ namespace AnalsysNew
         {
             if (p_objConfig != null)
             {
-                // 1.
-                //if (SerialPort != null && SerialPort.IsOpen)
-                //{
-                //    SerialPort.Close();
-                //}
-                //SerialPort = new clsSerialPortIO(p_objConfig);
+                if (SerialPort != null && SerialPort.IsOpen)
+                {
+                    SerialPort.Close();
+                }
+                SerialPort = new System.IO.Ports.SerialPort() ;
+
+                SerialPort.ReadTimeout = 1000; // 1000
+                SerialPort.WriteTimeout = 50;  // 50
+
+                SerialPort.PortName = "COM" + configVo.strCOM_No ;
+                SerialPort.BaudRate = 1200;//波特率
+                SerialPort.DataBits = 8;//数据位
+                SerialPort.Parity = System.IO.Ports.Parity.None;
+
+                SerialPort.Handshake = System.IO.Ports.Handshake.RequestToSend;
+
+                SerialPort.StopBits = System.IO.Ports.StopBits.One;
+
+                SerialPort.ReadBufferSize = 1024;
+                SerialPort.WriteBufferSize = 1024;
 
                 configVo = p_objConfig;
                 DeviceNO = p_objConfig.strLIS_Instrument_NO;
@@ -131,40 +150,38 @@ namespace AnalsysNew
         public long Start()
         {
             long lngRes = 0;
-            // 1.
-            //SerialPort.Open();
-            //if (SerialPort.IsOpen)
-            //{
-            //    lngRes = 1;
-            //    SerialPort.DataComing -= new DataComingEvent(SerialPort_DataComing);
-            //    SerialPort.DataComing += new DataComingEvent(SerialPort_DataComing);
-            //    //sendObj = clsLIS_Data_Acquisition_SendCommend.GetInstance(null);
-            //}
+
+            SerialPort = new System.IO.Ports.SerialPort();
             
-            // 2.
-            frmMS = new frmMSComm();
-            frmMS.Location = new System.Drawing.Point(-200, 0);
-            frmMS.Show();
+            
+            SerialPort.ReadTimeout = 1000; // 1000
+            SerialPort.WriteTimeout = 50;  // 50
 
-            axMSComm = frmMS.axMSComm;
-            axMSComm.Name = configVo.strLIS_Instrument_ID;
-            axMSComm.CommPort = short.Parse(configVo.strCOM_No);
-            axMSComm.Settings = configVo.strBaud_Rate + ",n," + configVo.strData_Bit + "," + configVo.strStop_Bit; //  "9600,n,8,1";
-            axMSComm.DTREnable = true;
-            axMSComm.EOFEnable = false;
-            axMSComm.Handshaking = MSCommLib.HandshakeConstants.comNone;
-            axMSComm.InBufferSize = 1024;
-            axMSComm.InputLen = 20000;
-            axMSComm.InputMode = MSCommLib.InputModeConstants.comInputModeText;
-            axMSComm.OutBufferSize = 1024;
-            axMSComm.RThreshold = 1;
-            axMSComm.SThreshold = 0;
+            SerialPort.PortName = "COM"  + configVo.strCOM_No;
+            Log.Output("SerialPort.PortName ---"+ SerialPort.PortName);
+            SerialPort.BaudRate = 1200;//波特率
+            SerialPort.DataBits = 8;//数据位
+            SerialPort.Parity = System.IO.Ports.Parity.None;
 
-            axMSComm.PortOpen = true;
-            axMSComm.OnComm -= new System.EventHandler(this.axMSComm_OnComm);
-            axMSComm.OnComm += new System.EventHandler(this.axMSComm_OnComm);
+            SerialPort.Handshake = System.IO.Ports.Handshake.RequestToSend;
 
-            return 1;
+            SerialPort.StopBits = System.IO.Ports.StopBits.One;
+
+            SerialPort.ReadBufferSize = 1024;
+            SerialPort.WriteBufferSize = 1024;
+
+            DeviceNO = configVo.strLIS_Instrument_NO;
+            DeviceID = configVo.strLIS_Instrument_ID;
+           
+            SerialPort.Open();
+            Log.Output("22222");
+            if (SerialPort.IsOpen)
+            {
+                lngRes = 1;
+                SerialPort.DataReceived -= new System.IO.Ports.SerialDataReceivedEventHandler(SerialPort_DataComing);
+                SerialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(SerialPort_DataComing);
+            }
+            return lngRes;
         }
         #endregion
 
@@ -175,12 +192,8 @@ namespace AnalsysNew
         public void Close()
         {
             // 1.
-            //SerialPort.DataComing -= new DataComingEvent(SerialPort_DataComing);
-            //SerialPort.Close();
-
-            // 2.
-            axMSComm.OnComm -= new System.EventHandler(this.axMSComm_OnComm);
-            axMSComm.PortOpen = false;
+            SerialPort.DataReceived -= new System.IO.Ports.SerialDataReceivedEventHandler(SerialPort_DataComing);
+            SerialPort.Close();
         }
         #endregion
 
@@ -192,62 +205,11 @@ namespace AnalsysNew
         /// <param name="e"></param>
         void SerialPort_DataComing(object sender, EventArgs e)
         {
-            //LastReceive =  SerialPort.Read();
-            //ReceiveBuf.Append(LastReceive);
-
-            //Logger.Log2File(@"D:\code\logData.txt", LastReceive);
-
-            //string strTemp = ReceiveBuf.ToString();
-            //if (strTemp.Length < 0) return;
-            //int idxStart = strTemp.IndexOf(SM2100i_ControlCode.StartCode);
-            //int idxEnd = strTemp.IndexOf(SM2100i_ControlCode.EndCode);
-            //if (idxStart < 0 || idxEnd < 0) return;
-            //if (idxEnd - idxStart - 6 < 0)
-            //{
-            //    ReceiveBuf.Remove(0, idxEnd + 1);
-            //    return;
-            //}
-            //List<string> lstResultData = new List<string>();
-            //do
-            //{
-            //    if (idxEnd - idxStart - 6 > 0)
-            //    {
-            //        //if (p_strRawData.Contains(m_strENQ) || p_strRawData.Contains(""))
-            //        //{
-            //        //    m_objSend.m_mthSendCommend(m_strACK);
-            //        //}
-            //        //sendObj.m_mthSendCommend("");
-
-            //        string data = strTemp.Substring(idxStart + 1, idxEnd - idxStart - 1);
-            //        if (lstResultData.IndexOf(data) < 0) lstResultData.Add(data);
-            //    }
-            //    ReceiveBuf.Remove(0, idxEnd + 1);
-            //    strTemp = strTemp.Substring(idxEnd + 1);
-            //    idxStart = strTemp.IndexOf(SM2100i_ControlCode.StartCode);
-            //    idxEnd = strTemp.IndexOf(SM2100i_ControlCode.EndCode);
-            //} while (idxStart > 0 && idxEnd > 0);
-            //ReceiveBuf.Remove(0, idxEnd + 1);
-
-            //if (lstResultData != null && lstResultData.Count > 0)
-            //{
-            //    AddResult(lstResultData);
-            //}
-        }
-        #endregion
-
-        #region 接收数据
-        /// <summary>
-        /// 接收数据
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void axMSComm_OnComm(object sender, EventArgs e)
-        {
-            LastReceive = axMSComm.Input.ToString();
+            byte[] buffer = new byte[SerialPort.BytesToRead];
+            SerialPort.Read(buffer, 0, buffer.Length);
+            LastReceive = Encoding.ASCII.GetString(buffer);
             ReceiveBuf.Append(LastReceive);
-
             Logger.Log2File(@"D:\code\logData.txt", LastReceive);
-
             string strTemp = ReceiveBuf.ToString();
             if (strTemp.Length < 0) return;
             strTemp = strTemp.Replace('\r', '^').Replace('\n', '^');
@@ -255,7 +217,9 @@ namespace AnalsysNew
 
             int idxStart = strTemp.IndexOf(AnalsysNew_ControlCode.StartCode);
             int idxEnd = strTemp.IndexOf(AnalsysNew_ControlCode.EndCode);
+
             if (idxStart < 0 || idxEnd < 0) return;
+            Log.Output("strTemp-->" + strTemp);
             if (idxEnd - idxStart - 20 < 0)
             {
                 ReceiveBuf.Remove(0, idxEnd + 1);
@@ -283,6 +247,57 @@ namespace AnalsysNew
         }
         #endregion
 
+        //#region 接收数据
+        ///// <summary>
+        ///// 接收数据
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void axMSComm_OnComm(object sender, EventArgs e)
+        //{
+        //    LastReceive = axMSComm.Input.ToString();
+        //    ReceiveBuf.Append(LastReceive);
+
+        //    Log.Output("-->" + LastReceive);
+        //    //Logger.Log2File(@"D:\code\logData.txt", LastReceive);
+
+        //    string strTemp = ReceiveBuf.ToString();
+        //    if (strTemp.Length < 0) return;
+        //    strTemp = strTemp.Replace('\r', '^').Replace('\n', '^');
+        //    strTemp = strTemp.Replace("^", "");
+
+        //    int idxStart = strTemp.IndexOf(AnalsysNew_ControlCode.StartCode);
+        //    int idxEnd = strTemp.IndexOf(AnalsysNew_ControlCode.EndCode);
+
+        //    if (idxStart < 0 || idxEnd < 0) return;
+        //    Log.Output("strTemp-->" + strTemp);
+        //    if (idxEnd - idxStart - 20 < 0)
+        //    {
+        //        ReceiveBuf.Remove(0, idxEnd + 1);
+        //        return;
+        //    }
+        //    List<string> lstResultData = new List<string>();
+        //    do
+        //    {
+        //        if (idxEnd - idxStart - 20 > 0)
+        //        {
+        //            string data = strTemp.Substring(idxStart + 1, idxEnd - idxStart - 1);
+        //            if (lstResultData.IndexOf(data) < 0) lstResultData.Add(data);
+        //        }
+        //        ReceiveBuf.Remove(0, idxEnd + 1);
+        //        strTemp = strTemp.Substring(idxEnd + 1);
+        //        idxStart = strTemp.IndexOf(AnalsysNew_ControlCode.StartCode);
+        //        idxEnd = strTemp.IndexOf(AnalsysNew_ControlCode.EndCode);
+        //    } while (idxStart > 0 && idxEnd > 0);
+        //    ReceiveBuf.Remove(0, idxEnd + 1);
+
+        //    if (lstResultData != null && lstResultData.Count > 0)
+        //    {
+        //        AddResult(lstResultData);
+        //    }
+        //}
+        //#endregion
+
         #region AddResult
         /// <summary>
         /// AddResult
@@ -308,7 +323,9 @@ namespace AnalsysNew
                             vo.strDevice_ID = DeviceID;
                         }
                         clsLIS_Device_Test_ResultVO[] reultArr = null;
-                        lngRes = (new weCare.Proxy.ProxyLis()).Service.lngAddLabResult(resultVo.ToArray(), out reultArr);
+                        lngRes = (new weCare.Proxy.ProxyLis()).Service.lngAddLabResult(resultVo.ToArray(), out reultArr);          
+                       
+                        //lngRes = new clsLIS_Svc().lngAddLabResult(resultVo.ToArray(), out reultArr);
                         if (lngRes > 0)
                         {
                             if (ShowResult != null)

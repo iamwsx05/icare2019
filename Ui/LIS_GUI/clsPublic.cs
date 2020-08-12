@@ -9,7 +9,7 @@ using com.digitalwave.Utility;
 
 namespace com.digitalwave.iCare.gui.LIS
 {
-   
+
     #region ListView比较排序类
 
 
@@ -93,7 +93,7 @@ namespace com.digitalwave.iCare.gui.LIS
             return i;
         }
     }
-    
+
 
     #endregion
 
@@ -354,6 +354,12 @@ namespace com.digitalwave.iCare.gui.LIS
 
             return s_strToAge(p_dtmBirth, "/y|/m|/d");
         }
+
+        public static string m_strGetAgeNum(DateTime dtmBirthday)
+        {
+            return new clsBrithdayToAge().m_intGetAge(dtmBirthday).ToString();
+        }
+
         /// <summary>
         /// 根据复合年龄字串得到年龄大小
         /// </summary>
@@ -363,7 +369,6 @@ namespace com.digitalwave.iCare.gui.LIS
         /// </returns>
         public static string m_strGetAgeNum(string strAge)
         {
-
             try
             {
                 int intAgeNum = 0;
@@ -544,7 +549,7 @@ namespace com.digitalwave.iCare.gui.LIS
                 strRes = p_strAge;
             }
             return strRes;
-        } 
+        }
         #endregion
 
         private static string[] s_strGetUnit(string strFormating)
@@ -569,7 +574,7 @@ namespace com.digitalwave.iCare.gui.LIS
             int months = datNow.Month - datBirth.Month;
             int days = datNow.Day - datBirth.Day;
             int hours = datNow.Hour - datBirth.Hour;
-            int minutes  = datNow.Minute - datBirth.Minute;
+            int minutes = datNow.Minute - datBirth.Minute;
 
             TimeSpan compare = datNow.Date - datBirth.Date;
             //int hours = (int)(compare.TotalHours) % 24;
@@ -605,19 +610,19 @@ namespace com.digitalwave.iCare.gui.LIS
             }
             else if (years >= 1)
             {
-                    strResult = years.ToString() + "岁" + months.ToString() + "月";
+                strResult = years.ToString() + "岁" + months.ToString() + "月";
             }
             else if (months >= 1)
             {
-                    strResult = months.ToString() + "月" + days.ToString() + "天";
+                strResult = months.ToString() + "月" + days.ToString() + "天";
             }
             else if (days >= 1)
             {
-                    strResult = compare.Days.ToString() + "天" + hours.ToString() + "小时";
+                strResult = compare.Days.ToString() + "天" + hours.ToString() + "小时";
             }
             else if (hours >= 1)
             {
-                    strResult = hours.ToString() + "小时" + minutes.ToString() + "分钟";
+                strResult = hours.ToString() + "小时" + minutes.ToString() + "分钟";
             }
             else
                 strResult = minutes.ToString() + "分钟";
@@ -630,15 +635,15 @@ namespace com.digitalwave.iCare.gui.LIS
     #region 检验编号解析器
     public class clsCheckNODecoder
     {
-         /* ===============================================================================
-         * CheckNO:检验编号;
-         * SampleCode:包含在 CheckNO 中的代表仪器样本的信息,其中包含仪器代号和仪器样本号;
-         * DeviceCode: 仪器代号
-         * DRVO: 即 DeviceRelation_VO,用于存放从 SampleCode 中解析出来的仪器ID和仪器样本号;
-         * lngRes 返回值,只有为 1 是表示成功
+        /* ===============================================================================
+        * CheckNO:检验编号;
+        * SampleCode:包含在 CheckNO 中的代表仪器样本的信息,其中包含仪器代号和仪器样本号;
+        * DeviceCode: 仪器代号
+        * DRVO: 即 DeviceRelation_VO,用于存放从 SampleCode 中解析出来的仪器ID和仪器样本号;
+        * lngRes 返回值,只有为 1 是表示成功
 
-         * ===============================================================================
-         */
+        * ===============================================================================
+        */
 
         #region 私有成员
 
@@ -650,7 +655,7 @@ namespace com.digitalwave.iCare.gui.LIS
         private int m_intSampleCodeLength;
         private int m_intDeviceCodeLength;
         private int m_intDeviceSampleIDLength;
-        
+
         #endregion
 
         #region 构造函数
@@ -964,7 +969,7 @@ namespace com.digitalwave.iCare.gui.LIS
             }
             return lngRes;
         }
-        
+
         private void m_mthLoadCodeRule()
         {
             this.m_blnIsDeviceCodeSeparator = false;

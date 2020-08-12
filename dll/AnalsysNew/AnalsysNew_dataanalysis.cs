@@ -48,57 +48,111 @@ namespace AnalsysNew
             string checkDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
             int poss = data.IndexOf("SAMPLE");
-            int pose = data.IndexOf("BLOOD Na,K,Cl");
-            data = data.Substring(poss, pose - poss);
-
-            poss = data.IndexOf("Na");
-            string sampleId = data.Substring(6, poss - 6).Trim();
-            data = data.Substring(poss);
-
-            poss = data.IndexOf("K");
-            string Na_value = data.Substring(2, poss - 2).Replace('^', ' ').Replace("LO", "").Replace("HI", "").Trim();
-            data = data.Substring(poss);
-
-            vo = new clsLIS_Device_Test_ResultVO();
-            vo.strDevice_Sample_ID = sampleId;
-            vo.strCheck_Date = checkDate;
-            vo.strDevice_Check_Item_Name = "Na";            // 名称         Na
-            vo.strResult = Na_value;                        // 检验结果
-            p_arlResult.Add(vo);
-
-            poss = data.IndexOf("Cl");
-            string K_value = data.Substring(1, poss - 1).Replace('^', ' ').Replace("LO", "").Replace("HI", "").Trim();
-            data = data.Substring(poss);
-
-            vo = new clsLIS_Device_Test_ResultVO();
-            vo.strDevice_Sample_ID = sampleId;
-            vo.strCheck_Date = checkDate;
-            vo.strDevice_Check_Item_Name = "K";             // 名称         K
-            vo.strResult = K_value;                         // 检验结果
-            p_arlResult.Add(vo);
-
-            string Cl_value = string.Empty;
-            poss = -1;
-            if (data.IndexOf("Na") >= 0)
-                poss = data.IndexOf("Na");
-            else if (data.IndexOf("K") >= 0)
-                poss = data.IndexOf("K");
-            else if (data.IndexOf("Cl") >= 3)
-                poss = data.IndexOf("Cl");
-            if (poss >= 0)
+            int poss2 = data.IndexOf("BLOOD Na,K,Cl");
+            if (poss2 - poss > 0)
             {
-                Cl_value = data.Substring(2, poss - 2).Trim();
-                Cl_value = Cl_value.Replace('^', ' ').Replace("LO", "").Replace("HI", "").Trim();
+                data = data.Substring(poss, poss2 - poss);
+
+                poss = data.IndexOf("Na");
+                string sampleId = data.Substring(6, poss - 6).Trim();
+                data = data.Substring(poss);
+
+                poss = data.IndexOf("K");
+                string Na_value = data.Substring(2, poss - 2).Replace('^', ' ').Replace("LO", "").Replace("HI", "").Trim();
+                data = data.Substring(poss);
+
+                vo = new clsLIS_Device_Test_ResultVO();
+                vo.strDevice_Sample_ID = sampleId;
+                vo.strCheck_Date = checkDate;
+                vo.strDevice_Check_Item_Name = "Na";            // 名称         Na
+                vo.strResult = Na_value;                        // 检验结果
+                p_arlResult.Add(vo);
+
+                poss = data.IndexOf("Cl");
+                string K_value = data.Substring(1, poss - 1).Replace('^', ' ').Replace("LO", "").Replace("HI", "").Trim();
+                data = data.Substring(poss);
+
+                vo = new clsLIS_Device_Test_ResultVO();
+                vo.strDevice_Sample_ID = sampleId;
+                vo.strCheck_Date = checkDate;
+                vo.strDevice_Check_Item_Name = "K";             // 名称         K
+                vo.strResult = K_value;                         // 检验结果
+                p_arlResult.Add(vo);
+
+                string Cl_value = string.Empty;
+                poss = -1;
+                if (data.IndexOf("Na") >= 0)
+                    poss = data.IndexOf("Na");
+                else if (data.IndexOf("K") >= 0)
+                    poss = data.IndexOf("K");
+                else if (data.IndexOf("Cl") >= 3)
+                    poss = data.IndexOf("Cl");
+                if (poss >= 0)
+                {
+                    Cl_value = data.Substring(2, poss - 2).Trim();
+                    Cl_value = Cl_value.Replace('^', ' ').Replace("LO", "").Replace("HI", "").Trim();
+                }
+                else
+                    Cl_value = data.Replace("Cl", "").Replace("LO", "").Replace("HI", "").Trim();
+
+                vo = new clsLIS_Device_Test_ResultVO();
+                vo.strDevice_Sample_ID = sampleId;
+                vo.strCheck_Date = checkDate;
+                vo.strDevice_Check_Item_Name = "Cl";            // 名称         Cl
+                vo.strResult = Cl_value.Replace("LO", "").Replace("HI", "").Replace("L0", "").Trim();                        // 检验结果
+                p_arlResult.Add(vo);
             }
             else
-                Cl_value = data.Replace("Cl", "").Replace("LO", "").Replace("HI", "").Trim();
+            {
+                string sampleId = data.Substring(poss + 6, 5).Trim();
+                poss = data.IndexOf("Na");
+                data = data.Substring(poss);
 
-            vo = new clsLIS_Device_Test_ResultVO();
-            vo.strDevice_Sample_ID = sampleId;
-            vo.strCheck_Date = checkDate;
-            vo.strDevice_Check_Item_Name = "Cl";            // 名称         Cl
-            vo.strResult = Cl_value.Replace("LO", "").Replace("HI", "").Replace("L0", "").Trim();                        // 检验结果
-            p_arlResult.Add(vo);
+                poss = data.IndexOf("K");
+                string Na_value = data.Substring(2, poss - 2).Replace('^', ' ').Replace("LO", "").Replace("HI", "").Trim();
+                data = data.Substring(poss);
+
+                vo = new clsLIS_Device_Test_ResultVO();
+                vo.strDevice_Sample_ID = sampleId;
+                vo.strCheck_Date = checkDate;
+                vo.strDevice_Check_Item_Name = "Na";            // 名称         Na
+                vo.strResult = Na_value;                        // 检验结果
+                p_arlResult.Add(vo);
+
+                poss = data.IndexOf("Cl");
+                string K_value = data.Substring(1, poss - 1).Replace('^', ' ').Replace("LO", "").Replace("HI", "").Trim();
+                data = data.Substring(poss);
+
+                vo = new clsLIS_Device_Test_ResultVO();
+                vo.strDevice_Sample_ID = sampleId;
+                vo.strCheck_Date = checkDate;
+                vo.strDevice_Check_Item_Name = "K";             // 名称         K
+                vo.strResult = K_value;                         // 检验结果
+                p_arlResult.Add(vo);
+
+                string Cl_value = string.Empty;
+                poss = -1;
+                if (data.IndexOf("Na") >= 0)
+                    poss = data.IndexOf("Na");
+                else if (data.IndexOf("K") >= 0)
+                    poss = data.IndexOf("K");
+                else if (data.IndexOf("Cl") >= 3)
+                    poss = data.IndexOf("Cl");
+                if (poss >= 0)
+                {
+                    Cl_value = data.Substring(2, poss - 2).Trim();
+                    Cl_value = Cl_value.Replace('^', ' ').Replace("LO", "").Replace("HI", "").Trim();
+                }
+                else
+                    Cl_value = data.Replace("Cl", "").Replace("LO", "").Replace("HI", "").Trim();
+
+                vo = new clsLIS_Device_Test_ResultVO();
+                vo.strDevice_Sample_ID = sampleId;
+                vo.strCheck_Date = checkDate;
+                vo.strDevice_Check_Item_Name = "Cl";            // 名称         Cl
+                vo.strResult = Cl_value.Replace("LO", "").Replace("HI", "").Replace("L0", "").Trim();                        // 检验结果
+                p_arlResult.Add(vo);
+            }
 
             return (p_arlResult.Count > 0 ? 1 : 0);
         }

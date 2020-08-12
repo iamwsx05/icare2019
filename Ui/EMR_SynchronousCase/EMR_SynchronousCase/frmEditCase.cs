@@ -187,7 +187,6 @@ namespace com.digitalwave.emr.EMR_SynchronousCase
                     {
                         m_intSaveStatus = objVO.m_intType;
                         m_dsSavedContent = new DataSet();
-                        objVO.m_strContentXML = objVO.m_strContentXML.Replace("£¿<CaseContent>", "<CaseContent>");
                         m_dsSavedContent.ReadXml(new System.IO.StringReader(objVO.m_strContentXML), XmlReadMode.ReadSchema);
                     }
                 }

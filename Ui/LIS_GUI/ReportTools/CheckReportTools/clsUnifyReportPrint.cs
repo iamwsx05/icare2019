@@ -7,6 +7,9 @@ using System.Drawing.Printing;
 using System.IO;
 using com.digitalwave.iCare.gui.HIS;
 using System.Windows.Forms;
+using System.Linq;
+using weCare.Core.Utils;
+using weCare.Core.Entity;
 
 namespace com.digitalwave.iCare.gui.LIS
 {
@@ -123,6 +126,8 @@ namespace com.digitalwave.iCare.gui.LIS
 
         List<string> lstAppUnitID { get; set; }
 
+        List<EntityAidRemark> lstAidRemark { get; set; }
+
         private Image objImage;  //医院图标
 
         public clsUnifyReportPrint()
@@ -175,15 +180,21 @@ namespace com.digitalwave.iCare.gui.LIS
         /// </summary>
         /// <param name="appId"></param>
         /// <returns></returns>
-        string GetAllergenRemarkInfo(string appId)
+        string GetAllergenRemarkInfo(string appId, string contrastStr, string contrastSex)
         {
             try
             {
-                if (this.lstAppUnitID == null || this.lstAppUnitID.Count == 0)
+                //if (this.lstAppUnitID == null || this.lstAppUnitID.Count == 0)
+                //{
+                //    this.CurrAppUnit = null;
+                //    return "";
+                //}
+                if (this.lstAidRemark == null || this.lstAidRemark.Count == 0)
                 {
                     this.CurrAppUnit = null;
                     return "";
                 }
+
                 if (this.CurrAppUnit != null && this.CurrAppUnit.appId == appId)
                 {
                     return this.CurrAppUnit.remarkInfo;
@@ -194,20 +205,105 @@ namespace com.digitalwave.iCare.gui.LIS
 
                 if (lstTempId != null && lstTempId.Count > 0)
                 {
+                    string remarkInfoStr = string.Empty;
                     foreach (string id in lstTempId)
                     {
-                        if (this.lstAppUnitID.IndexOf(id) >= 0)
+                        // 2020-07-15
+                        if (lstAidRemark.Any(p => p.appUnitId.IndexOf(id) >= 0))
                         {
-                            this.CurrAppUnit = new EntityAppUnit();
-                            this.CurrAppUnit.appId = appId;
+                            EntityAidRemark aidRemarkVO = lstAidRemark.FirstOrDefault(p => p.appUnitId.IndexOf(id) >= 0);
 
-                            string info = string.Empty + Environment.NewLine;
-                            info += "0:无[0.00-0.34 IU/ml]				1:低[0.35-0.69 IU/ml]		2:增加[0.70-3.49 IU/ml]" + Environment.NewLine;
-                            info += "3:显著增加[3.50-17.49 IU/ml]		4:高[17.5-49.9 IU/ml]		5:较高[50.0-100.0 IU/ml]" + Environment.NewLine;
-                            info += "6:极高[>100 IU/ml]";
-                            this.CurrAppUnit.remarkInfo = info;
-                            return this.CurrAppUnit.remarkInfo;
+                            // 校验
+                            // 1. 是否已人工添加
+                            if (!string.IsNullOrEmpty(aidRemarkVO.keyWord))
+                            {
+                                if (contrastStr.IndexOf(aidRemarkVO.keyWord) >= 0) return "";    // 已存在
+                            }
+
+                            // 2. 男/女                            
+                            if (aidRemarkVO.sex == 1)  // 限男
+                            {
+                                if (contrastSex == "女") return "";
+                            }
+                            else if (aidRemarkVO.sex == 2)  // 限女
+                            {
+                                if (contrastSex == "男") return "";
+                            }
+                            // 3. 偏高(1) / 偏低(2)
+                            if (aidRemarkVO.highOrLow == 1 || aidRemarkVO.highOrLow == 2)
+                            {
+                                bool isPass = false;
+                                //List<clsDeviceReslutVO> lstResult = (new weCare.Proxy.ProxyLis02()).Service.GetOttomanCheckResult(barCode);
+                                List<clsDeviceReslutVO> lstResult = null;
+                                if (m_dtbResult != null)
+                                {
+                                    clsDeviceReslutVO vo = null;
+                                    lstResult = new List<clsDeviceReslutVO>();
+                                    foreach (DataRow dr in m_dtbResult.Rows)
+                                    {
+                                        vo = new clsDeviceReslutVO();
+                                        vo.m_strAbnormalFlag = dr["abnormal_flag_chr"].ToString();  
+                                        vo.m_strDeviceCheckItemName = dr["device_check_item_name_vchr"].ToString();
+                                        vo.m_strResult = dr["result_vchr"].ToString();
+                                        lstResult.Add(vo);
+                                        
+                                    }
+                                }
+                                if (lstResult != null)
+                                {
+                                    foreach (clsDeviceReslutVO item in lstResult)
+                                    {
+                                        if (aidRemarkVO.highOrLow == 1)
+                                        {
+                                            if (item.m_strAbnormalFlag == "H")    
+                                            { 
+                                                isPass = true;
+                                                break;
+                                            }
+                                        }
+                                        else if (aidRemarkVO.highOrLow == 2)
+                                        {
+                                            if (item.m_strAbnormalFlag == "L")     
+                                            {
+                                                isPass = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                if (isPass == false) return "";
+
+                            }
+                            if(!remarkInfoStr.Contains("项目") && aidRemarkVO.appunitgroup == 1)
+                            {
+                                remarkInfoStr += "项目    卵泡期      排卵期     黄体期     绝经期      妊娠期    未妊娠    单位" + Environment.NewLine;
+                            }
+
+                            remarkInfoStr += aidRemarkVO.remarkInfo + Environment.NewLine;
                         }
+                       
+                        //if (this.lstAppUnitID.IndexOf(id) >= 0)
+                        //{
+                        //    this.CurrAppUnit = new EntityAppUnit();
+                        //    this.CurrAppUnit.appId = appId;
+
+                        //    string info = string.Empty + Environment.NewLine;
+                        //    info += "0:无[0.00-0.34 IU/ml]				1:低[0.35-0.69 IU/ml]		2:增加[0.70-3.49 IU/ml]" + Environment.NewLine;
+                        //    info += "3:显著增加[3.50-17.49 IU/ml]		4:高[17.5-49.9 IU/ml]		5:较高[50.0-100.0 IU/ml]" + Environment.NewLine;
+                        //    info += "6:极高[>100 IU/ml]";
+                        //    this.CurrAppUnit.remarkInfo = info;
+                        //    return this.CurrAppUnit.remarkInfo;
+                        //}
+                    }
+                    if (!string.IsNullOrEmpty(remarkInfoStr))
+                    {
+                        this.CurrAppUnit = new EntityAppUnit()
+                        {
+                            appId = appId,
+                            remarkInfo = remarkInfoStr
+                        };
+
+                        return this.CurrAppUnit.remarkInfo;
                     }
                 }
                 return "";
@@ -219,7 +315,6 @@ namespace com.digitalwave.iCare.gui.LIS
         }
 
         #endregion
-
 
         #region 打印接口初始化方法
         private void m_mthInitalPrintTool(PrintDocument p_printDoc)
@@ -463,7 +558,7 @@ namespace com.digitalwave.iCare.gui.LIS
         #region 打印报告单实验室提示
         private float m_fltPrintSummary(float p_fltX, float p_fltY, float p_fltPrintWidth)
         {
-            string summaryInfo = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim() + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString());
+            string summaryInfo = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim() + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
 
             if (!m_blnSummaryEmptyVisible && summaryInfo == "")
                 return p_fltY;
@@ -724,7 +819,7 @@ namespace com.digitalwave.iCare.gui.LIS
         #region 打印页信息
         private void m_mthPrintDetail()
         {
-            string strSummary = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim() + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString());
+            string strSummary = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim() + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
             SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, strSummary, m_fltPrintWidth, m_fltTitleSpace,
                 m_fltItemSpace);
             if (m_objPrintPage == null)
@@ -768,7 +863,7 @@ namespace com.digitalwave.iCare.gui.LIS
         //茶山式检验报告样式
         private void m_mthPrintDetail_DGCS()
         {
-            string strSummary = m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim() + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString());
+            string strSummary = m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim() + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
             SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, strSummary, m_fltPrintWidth, m_fltTitleSpace,
                 m_fltItemSpace);
             if (m_objPrintPage == null)
@@ -1401,7 +1496,7 @@ namespace com.digitalwave.iCare.gui.LIS
             #endregion
 
             //实验室提示
-            string strSummary = m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim() + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString());
+            string strSummary = m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim() + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
             SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, strSummary, m_fltPrintWidth, m_fltTitleSpace, m_fltItemSpace);
             if (sf.Height > 0 && sf.Height > p_fltMaxHeight - fltY)
             {
@@ -1565,6 +1660,27 @@ namespace com.digitalwave.iCare.gui.LIS
                 lstAppUnitID.AddRange(appUnitId.Split(';'));
             }
 
+            string Sql = @"select appunitid, appunitname, sex, highorlow, remarkinfo, keyword,appunitGroup from t_aid_lis_report_remark";
+            DataTable dt = null;
+            (new weCare.Proxy.ProxyBase()).Service.GetDataTable(Sql, out dt);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                lstAidRemark = new List<EntityAidRemark>();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    lstAidRemark.Add(new EntityAidRemark()
+                    {
+                        appUnitId = dr["appunitid"].ToString(),
+                        appUnitName = dr["appunitname"].ToString(),
+                        sex = Function.Int(dr["sex"].ToString()),
+                        highOrLow = Function.Int(dr["highorlow"].ToString()),
+                        remarkInfo = dr["remarkinfo"].ToString(),
+                        keyWord = dr["keyword"].ToString(),
+                        appunitgroup = Function.Int(dr["appunitGroup"].ToString())
+
+                    });
+                }
+            }
             m_mthPrintBseInfo();
 
             #region 自定义报告说明 -加入7006参数 mobaojian 2007.09.04
@@ -1646,6 +1762,16 @@ namespace com.digitalwave.iCare.gui.LIS
         public string remarkInfo { get; set; }
     }
 
+    class EntityAidRemark
+    {
+        public string appUnitId { get; set; }
+        public string appUnitName { get; set; }
+        public int sex { get; set; }
+        public int highOrLow { get; set; }
+        public string remarkInfo { get; set; }
+        public string keyWord { get; set; }
+        public int appunitgroup { get; set; }
+    }
 
     #region 封装打印相关的方法
     public class clsCommonPrintMethod

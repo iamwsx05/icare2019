@@ -534,6 +534,7 @@ namespace com.digitalwave.iCare.gui.LIS
                     }
                 }
                 #endregion
+
                 #region 比值2
                 // 001899  胃蛋白酶原I(PGI)     001900 胃蛋白酶原II(PGII)      001901  PGI/PGII
                 else if (checkItemId == "001899" || checkItemId == "001900")
@@ -570,6 +571,43 @@ namespace com.digitalwave.iCare.gui.LIS
                     }
                 }
                 #endregion
+                #region 比值3
+                // 002234  胃蛋白酶原I(PGI)     002235 胃蛋白酶原II(PGII)      002236  PGI/PGII
+                else if (checkItemId == "002234" || checkItemId == "002235")
+                {
+                    decimal decResult = 0;
+                    decimal.TryParse(e.Row["result_vchr"].ToString(), out decResult);
+                    if (decResult > 0)
+                    {
+                        decimal decResult1 = 0;
+                        decimal decResult2 = 0;
+                        DataTable dtbResult = ((DataView)this.m_objViewer.m_dtgResultList.DataSource).Table;
+                        foreach (DataRow dr2 in dtbResult.Rows)
+                        {
+                            if (dr2["check_item_id_chr"].ToString().Trim() == "002234")
+                            {
+                                decimal.TryParse(dr2["result_vchr"].ToString(), out decResult1);
+                            }
+                            else if (dr2["check_item_id_chr"].ToString().Trim() == "002235")
+                            {
+                                decimal.TryParse(dr2["result_vchr"].ToString(), out decResult2);
+                            }
+                        }
+                        if (decResult2 > 0)
+                        {
+                            foreach (DataRow dr3 in dtbResult.Rows)
+                            {
+                                if (dr3["check_item_id_chr"].ToString().Trim() == "002236")
+                                {
+                                    dr3["result_vchr"] = com.digitalwave.iCare.gui.HIS.clsPublic.Round(decResult1 / decResult2, 2).ToString();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
+
                 #region Rh血型与历史不一致时能提示
                 // 000311 RH血型;   001368  RH血型 c
                 else if (checkItemId == "000311" || checkItemId == "001368")
@@ -1054,6 +1092,14 @@ namespace com.digitalwave.iCare.gui.LIS
                          where (a.状态 = '完成' or a.状态 = '打印')
                            and a.条码标识 = '{0}'";
 
+                // 2020-05-20
+                Sql = @"select a.ID, a.检测时间, b.*
+                          from JianCe a
+                         inner join JianChaJieGuo b
+                            on a.文件路径 = b.文件路径
+                         where (a.状态 = '完成' or a.状态 = '打印')
+                           and a.条码标识 = '{0}'";
+
                 Sql = string.Format(Sql, barCode);
                 DataTable dt = this.GetDataTable(Sql);
                 if (dt != null && dt.Rows.Count > 0)
@@ -1103,7 +1149,7 @@ namespace com.digitalwave.iCare.gui.LIS
                                 vo.m_strCheckDat = Convert.ToDateTime(drData["检测时间"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
                                 vo.m_strDeviceCheckItemName = dicField[fieldName];
                                 vo.m_strDeviceID = "000048";
-                                vo.m_strDeviceSampleID = drData["自定序号"].ToString();
+                                vo.m_strDeviceSampleID = drData["ID"].ToString();     //drData["自定序号"].ToString();      2020-05-20
                                 vo.m_strIdx = Convert.ToString(++idx);
                                 vo.m_strMaxVal = string.Empty;    //dtbResult.Rows[i]["MAX_VAL_DEC"].ToString().Trim();
                                 vo.m_strMinVal = string.Empty;    //dtbResult.Rows[i]["MIN_VAL_DEC"].ToString().Trim();

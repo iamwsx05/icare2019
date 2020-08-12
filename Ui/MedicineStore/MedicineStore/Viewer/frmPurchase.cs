@@ -260,8 +260,8 @@ namespace com.digitalwave.iCare.gui.MedicineStore
         private void m_bgwGetData_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             m_dtvMainView = new DataView(m_dtbMainData);
-            if (m_dtbMainData != null && m_dtbMainData.Rows.Count > 0)
-                m_dtvMainView.Sort = "instoragedate_dat asc";
+            //if (m_dtbMainData != null && m_dtbMainData.Rows.Count > 0)
+            //    m_dtvMainView.Sort = "instoragedate_dat asc";
             //m_dgvMainInfo.DataSource = m_dtvMainView;
             ((clsCtl_Purchase)objController).m_mthFilterMainData();
 

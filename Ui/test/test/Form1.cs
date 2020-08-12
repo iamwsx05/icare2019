@@ -122,10 +122,11 @@ namespace test
             this.gridControl2.DataSource = lstOprecipeout;
             this.gridControl2.RefreshDataSource();
         }
-
+        DataTable dtConfig { get; set; }
         private void btnQuery_Click(object sender, EventArgs e)
         {
             this.Query();
+            
         }
 
         private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)

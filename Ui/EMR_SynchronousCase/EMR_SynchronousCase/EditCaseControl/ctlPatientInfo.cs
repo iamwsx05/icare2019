@@ -790,14 +790,14 @@ namespace com.digitalwave.emr.EMR_SynchronousCase.EditCaseControl
             if (DateTime.TryParse(m_lblInDate.Text.Replace("入院日期:", string.Empty), out dtmTemp))
             {
                 drBA1["FRYDATE"] = dtmTemp.Date;
-                drBA1["FRYTIME"] = dtmTemp.Hour;
+                drBA1["FRYTIME"] = dtmTemp.ToString("HH:mm");
             }
             else
             {
                 //时间只有小时部分，补齐后再格式化
                 dtmTemp = Convert.ToDateTime(m_lblInDate.Text.Replace("入院日期:", string.Empty) + ":00:00");
                 drBA1["FRYDATE"] = dtmTemp.Date;
-                drBA1["FRYTIME"] = dtmTemp.Hour;
+                drBA1["FRYTIME"] = dtmTemp.ToString("HH:mm");
             }
             
 
@@ -806,14 +806,14 @@ namespace com.digitalwave.emr.EMR_SynchronousCase.EditCaseControl
             if (DateTime.TryParse(m_lblOutDate.Text.Replace("出院日期:", string.Empty),out dtmTemp))
             {
                 drBA1["FCYDATE"] = dtmTemp.Date;
-                drBA1["FCYTIME"] = dtmTemp.Hour;
+                drBA1["FCYTIME"] = dtmTemp.ToString("HH:mm");
             }
             else
             {
                 //时间只有小时部分，补齐后再格式化
                 dtmTemp = Convert.ToDateTime(m_lblOutDate.Text.Replace("出院日期:", string.Empty) + ":00:00");
                 drBA1["FCYDATE"] = dtmTemp.Date;
-                drBA1["FCYTIME"] = dtmTemp.Hour;
+                drBA1["FCYTIME"] = dtmTemp.ToString("HH:mm");
             }
 
             drBA1["FCYTYKH"] = m_lblOutDept.Tag != null ? m_lblOutDept.Tag.ToString() : string.Empty;

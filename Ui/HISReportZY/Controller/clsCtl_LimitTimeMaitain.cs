@@ -46,6 +46,22 @@ namespace com.digitalwave.iCare.gui.HIS
         public void m_mthInit()
         {
             DataTable dtbResult;
+             
+            m_objViewer.cboAceepHPre_2.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            m_objViewer.cboAceepHPre_3.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            m_objViewer.cboAceepHPre_5.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }; 
+            m_objViewer.cboAceepHPre_6.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }; 
+            m_objViewer.cboAceepH_1.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            m_objViewer.cboAceepH_2.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            m_objViewer.cboAceepH_3.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            m_objViewer.cboAceepH_4.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            m_objViewer.cboAceepH_5.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            m_objViewer.cboAceepH_6.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            m_objViewer.cboConfirEndH.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            m_objViewer.cboConfirH_1.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            m_objViewer.cboConfirH_2.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            m_objViewer.cboConfirH_3.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+            m_objViewer.cboConfirH_4.DataSource = new List<string> { " ", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
             dicGroup = new Dictionary<string, string>();
             m_objManage.lngGetAllCheckSpec(out dtbResult);
 
@@ -118,7 +134,7 @@ namespace com.digitalwave.iCare.gui.HIS
             long lngRes = 0;
             string applyunitid = string.Empty;
             DataTable dt = null;
-
+            
             if (m_objViewer.dgvItem.Rows.Count > 0)
             {
                 applyunitid = m_objViewer.dgvItem.CurrentRow.Cells["项目编码"].Value.ToString();
@@ -128,7 +144,6 @@ namespace com.digitalwave.iCare.gui.HIS
 
             if (string.IsNullOrEmpty(applyunitid))
                 return;
-
             clear();
 
             lngRes = m_objManage.lngGetLimitTime(out dt, applyunitid);
@@ -154,21 +169,30 @@ namespace com.digitalwave.iCare.gui.HIS
                 }
                 if (!string.IsNullOrEmpty(dr["acceptTime2"].ToString()))
                 {
-                    string acceptTimePre2 = dr["acceptTime2"].ToString().Split('~')[0];
-                    string acceptTime2 = dr["acceptTime2"].ToString().Split('~')[1];
-                    m_objViewer.cboAceepHPre_2.Text = acceptTimePre2.Split(':')[0];
-                    m_objViewer.cboAceepMPre_2.Text = acceptTimePre2.Split(':')[1];
-                    m_objViewer.cboAceepH_2.Text = acceptTime2.Split(':')[0];
-                    m_objViewer.cboAceepM_2.Text = acceptTime2.Split(':')[1];
+                    string timeTmp = dr["acceptTime2"].ToString();
+                    if (timeTmp.Contains("~"))
+                    {
+                        string acceptTimePre2 = dr["acceptTime2"].ToString().Split('~')[0];
+                        string acceptTime2 = dr["acceptTime2"].ToString().Split('~')[1];
+                        m_objViewer.cboAceepHPre_2.Text = acceptTimePre2.Split(':')[0];
+                        m_objViewer.cboAceepMPre_2.Text = acceptTimePre2.Split(':')[1];
+                        m_objViewer.cboAceepH_2.Text = acceptTime2.Split(':')[0];
+                        m_objViewer.cboAceepM_2.Text = acceptTime2.Split(':')[1];
+                    }
+                    
                 }
                 if (!string.IsNullOrEmpty(dr["acceptTime3"].ToString()))
                 {
-                    string acceptTimePre3 = dr["acceptTime3"].ToString().Split('~')[0];
-                    string acceptTime3 = dr["acceptTime3"].ToString().Split('~')[1];
-                    m_objViewer.cboAceepHPre_3.Text = acceptTimePre3.Split(':')[0];
-                    m_objViewer.cboAceepMPre_3.Text = acceptTimePre3.Split(':')[1];
-                    m_objViewer.cboAceepH_3.Text = acceptTime3.Split(':')[0];
-                    m_objViewer.cboAceepM_3.Text = acceptTime3.Split(':')[1];
+                    string timeTmp = dr["acceptTime3"].ToString();
+                    if (timeTmp.Contains("~"))
+                    {
+                        string acceptTimePre3 = timeTmp.Split('~')[0];
+                        string acceptTime3 = timeTmp.Split('~')[1];
+                        m_objViewer.cboAceepHPre_3.Text = acceptTimePre3.Split(':')[0];
+                        m_objViewer.cboAceepMPre_3.Text = acceptTimePre3.Split(':')[1];
+                        m_objViewer.cboAceepH_3.Text = acceptTime3.Split(':')[0];
+                        m_objViewer.cboAceepM_3.Text = acceptTime3.Split(':')[1];
+                    }
                 }
                 if (!string.IsNullOrEmpty(dr["acceptTime4"].ToString()))
                 {
@@ -178,21 +202,29 @@ namespace com.digitalwave.iCare.gui.HIS
 
                 if (!string.IsNullOrEmpty(dr["acceptTime5"].ToString()))
                 {
-                    string acceptTimePre5 = dr["acceptTime5"].ToString().Split('~')[0];
-                    string acceptTime5 = dr["acceptTime5"].ToString().Split('~')[1];
-                    m_objViewer.cboAceepHPre_5.Text = acceptTimePre5.Split(':')[0];
-                    m_objViewer.cboAceepMPre_5.Text = acceptTimePre5.Split(':')[1];
-                    m_objViewer.cboAceepH_5.Text = acceptTime5.Split(':')[0];
-                    m_objViewer.cboAceepM_5.Text = acceptTime5.Split(':')[1];
+                    string timeTmp = dr["acceptTime5"].ToString();
+                    if (timeTmp.Contains("~"))
+                    {
+                        string acceptTimePre5 = timeTmp.Split('~')[0];
+                        string acceptTime5 = timeTmp.Split('~')[1];
+                        m_objViewer.cboAceepHPre_5.Text = acceptTimePre5.Split(':')[0];
+                        m_objViewer.cboAceepMPre_5.Text = acceptTimePre5.Split(':')[1];
+                        m_objViewer.cboAceepH_5.Text = acceptTime5.Split(':')[0];
+                        m_objViewer.cboAceepM_5.Text = acceptTime5.Split(':')[1];
+                    }
                 }
                 if (!string.IsNullOrEmpty(dr["acceptTime6"].ToString()))
                 {
-                    string acceptTimePre6 = dr["acceptTime6"].ToString().Split('~')[0];
-                    string acceptTime6 = dr["acceptTime6"].ToString().Split('~')[1];
-                    m_objViewer.cboAceepHPre_6.Text = acceptTimePre6.Split(':')[0];
-                    m_objViewer.cboAceepMPre_6.Text = acceptTimePre6.Split(':')[1];
-                    m_objViewer.cboAceepH_6.Text = acceptTime6.Split(':')[0];
-                    m_objViewer.cboAceepM_6.Text = acceptTime6.Split(':')[1];
+                    string timeTmp = dr["acceptTime6"].ToString();
+                    if (timeTmp.Contains("~"))
+                    {
+                        string acceptTimePre6 = timeTmp.Split('~')[0];
+                        string acceptTime6 = timeTmp.Split('~')[1];
+                        m_objViewer.cboAceepHPre_6.Text = acceptTimePre6.Split(':')[0];
+                        m_objViewer.cboAceepMPre_6.Text = acceptTimePre6.Split(':')[1];
+                        m_objViewer.cboAceepH_6.Text = acceptTime6.Split(':')[0];
+                        m_objViewer.cboAceepM_6.Text = acceptTime6.Split(':')[1];
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(dr["confirmendtime"].ToString()))

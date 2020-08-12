@@ -65,18 +65,11 @@ namespace com.digitalwave.iCare.gui.HIS
                     #region  复检
                     if (rdgSelect.SelectedIndex == 1)
                     {
-                        if (vo.result.Contains("\\"))
+                        if (vo.result.Contains("\\") && string.IsNullOrEmpty(vo.summary.Trim()))
                             continue;
                     }
                     #endregion
 
-                    #region  备注
-                    if (rdgSelect.SelectedIndex == 2)
-                    {
-                        if (string.IsNullOrEmpty(vo.summary.Trim()))
-                            continue;
-                    }
-                    #endregion
                     if (data.Exists(r => r.application == vo.application))
                         continue;
                     data.Add(vo);

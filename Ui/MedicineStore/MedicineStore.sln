@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedicineStore", "MedicineSt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "his.com", "..\..\service\his.com\his.com.csproj", "{1E5214EF-3386-4901-B4BB-A8184E737926}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medicine", "..\Medicine\Medicine.csproj", "{446A0356-6CBE-4AEE-B60D-C70ED2710C86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1E5214EF-3386-4901-B4BB-A8184E737926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E5214EF-3386-4901-B4BB-A8184E737926}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E5214EF-3386-4901-B4BB-A8184E737926}.Release|Any CPU.Build.0 = Release|Any CPU
+		{446A0356-6CBE-4AEE-B60D-C70ED2710C86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{446A0356-6CBE-4AEE-B60D-C70ED2710C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{446A0356-6CBE-4AEE-B60D-C70ED2710C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{446A0356-6CBE-4AEE-B60D-C70ED2710C86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

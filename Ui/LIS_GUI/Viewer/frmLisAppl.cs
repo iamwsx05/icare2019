@@ -9,11 +9,11 @@ using weCare.Core.Entity;
 
 namespace com.digitalwave.iCare.gui.LIS
 {
-	/// <summary>
-	/// 检验申请单
-	/// </summary>
-	public class frmLisAppl :com.digitalwave.GUI_Base.frmMDI_Child_Base //GUI_Base.dll
-	{
+    /// <summary>
+    /// 检验申请单
+    /// </summary>
+    public class frmLisAppl : com.digitalwave.GUI_Base.frmMDI_Child_Base //GUI_Base.dll
+    {
         #region 属性
         private clsController_Appl m_objController;
         public static string c_strMessageBoxTitle = "iCare-检验申请";
@@ -29,149 +29,149 @@ namespace com.digitalwave.iCare.gui.LIS
         private clsDomainController_ApplyUnitManage m_objAppUnitManage = new clsDomainController_ApplyUnitManage();
         #endregion
 
-		#region FormControl
+        #region FormControl
 
-		internal System.Windows.Forms.TextBox m_txtPatCardID;
-		internal System.Windows.Forms.Label lblPatCardID;
-		internal System.Windows.Forms.ListView m_lsvAppl;
-		internal System.Windows.Forms.ColumnHeader m_chdApplID;
-		internal System.Windows.Forms.ColumnHeader m_chdPatName;
-		internal System.Windows.Forms.ListView m_lsvPatFussQuery;
-		internal System.Windows.Forms.ColumnHeader m_chdPatNO;
-		internal System.Windows.Forms.ColumnHeader m_chdPatCardID;
-		internal System.Windows.Forms.ColumnHeader m_chdPatientName;
-		internal System.Windows.Forms.Label label1;
-		internal System.Windows.Forms.DateTimePicker m_dtpApplBegin;
-		internal System.Windows.Forms.DateTimePicker m_dtpApplEnd;
-		internal System.Windows.Forms.RadioButton m_rdbNotSend;
-		internal System.Windows.Forms.RadioButton m_rdbHaveSended;
-		internal System.Windows.Forms.RadioButton m_rdbAll;
-		internal System.Windows.Forms.Label lblApplDate;
-		internal System.Windows.Forms.ColumnHeader m_chdSendStatus;
-		internal System.Windows.Forms.ContextMenu m_ctmSendAppl;
-		internal System.Windows.Forms.MenuItem m_miSend;
-		internal System.Windows.Forms.GroupBox m_grpPatientInfo;
-		internal System.Windows.Forms.TextBox m_txtInhospNO;
-		internal System.Windows.Forms.CheckBox m_chkSpecial;
-		internal System.Windows.Forms.CheckBox m_chkEmergency;
-		internal System.Windows.Forms.Label label17;
-		internal ctlLISPatientTypeComboBox m_cboPatientType;
-		internal System.Windows.Forms.ComboBox m_cboAgeUnit;
-		internal System.Windows.Forms.RichTextBox m_rtbDiagnose;
-		internal System.Windows.Forms.TextBox m_txtBedNO;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Label label4;
-		internal System.Windows.Forms.Label lbDiagnose;
-		internal System.Windows.Forms.TextBox m_txtAge;
-		internal System.Windows.Forms.ComboBox m_cboSex;
-		internal System.Windows.Forms.Label m_lblAgeTitle;
-		internal System.Windows.Forms.Label lbSex;
-		internal System.Windows.Forms.Label m_lblPatientName;
-		internal System.Windows.Forms.Label lbApplDept;
-		internal System.Windows.Forms.Label lbApplEmp;
-		internal System.Windows.Forms.Label label20;
-		internal System.Windows.Forms.RichTextBox m_rtbAppSummary;
-		internal System.Windows.Forms.TextBox m_txtAppNO;
-		private System.Windows.Forms.Label label11;
-		internal System.Windows.Forms.TextBox m_txtPatName;
-		internal com.digitalwave.Utility.ctlDeptTextBox m_txtAppDept;
-		internal com.digitalwave.Utility.ctlEmpTextBox m_txtAppDoct;
-		internal PinkieControls.ButtonXP m_btnNew;
-		internal PinkieControls.ButtonXP m_btnModify;
-		internal PinkieControls.ButtonXP m_btnSave;
-		internal PinkieControls.ButtonXP m_btnDelete;
-		internal PinkieControls.ButtonXP m_btnSend;
-		internal System.Windows.Forms.GroupBox m_gpbQuery;
-		private System.Windows.Forms.Panel m_palButtons;
-		private System.Windows.Forms.Panel m_palHead;
-		private System.Windows.Forms.Panel m_palBottom;
-		private System.Windows.Forms.Panel m_palMiddle;
-		private System.Windows.Forms.Panel m_palMiddleLeft;
-		internal System.Windows.Forms.DateTimePicker m_dtpAppDate;
-		internal System.Windows.Forms.Label label3;
-		private System.Windows.Forms.ListView m_lsvCheckInfo;
-		internal PinkieControls.ButtonXP m_btnQuery;
-		private System.Windows.Forms.ColumnHeader columnHeader1;
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.ColumnHeader columnHeader2;
-		private System.Windows.Forms.ColumnHeader columnHeader3;
-		private System.Windows.Forms.ColumnHeader columnHeader4;
-		internal PinkieControls.ButtonXP m_btnNewItem;
-		internal PinkieControls.ButtonXP m_btnDeleteItem;
-		private System.Windows.Forms.ColumnHeader m_chdInPatientID;
-		private System.Windows.Forms.MenuItem menuItem1;
-		internal com.digitalwave.iCare.gui.LIS.ctlLISSampleTypeComboBox m_cboSampleType;
-		internal System.Windows.Forms.TextBox m_txtPatientID;
-		internal System.Windows.Forms.Label label7;
-		internal PinkieControls.ButtonXP m_btnPint;
-		internal PinkieControls.ButtonXP m_btnPreview;
-		private System.Windows.Forms.GroupBox groupBox1;
-		internal System.Windows.Forms.ListView m_lsvChargeInfo;
-		private System.Windows.Forms.TextBox m_txtCheckContent;
-		private System.Windows.Forms.GroupBox groupBox2;
-		internal PinkieControls.ButtonXP m_btnEsc;
-		internal System.Windows.Forms.ColumnHeader chName;
-		internal System.Windows.Forms.ColumnHeader chPrice;
-		private System.Windows.Forms.ColumnHeader cnSpec;
-		private System.Windows.Forms.ColumnHeader chNum;
-		private System.Windows.Forms.ColumnHeader chPercent;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label m_lblChargeState;//需要修改的申请单的ID
+        internal System.Windows.Forms.TextBox m_txtPatCardID;
+        internal System.Windows.Forms.Label lblPatCardID;
+        internal System.Windows.Forms.ListView m_lsvAppl;
+        internal System.Windows.Forms.ColumnHeader m_chdApplID;
+        internal System.Windows.Forms.ColumnHeader m_chdPatName;
+        internal System.Windows.Forms.ListView m_lsvPatFussQuery;
+        internal System.Windows.Forms.ColumnHeader m_chdPatNO;
+        internal System.Windows.Forms.ColumnHeader m_chdPatCardID;
+        internal System.Windows.Forms.ColumnHeader m_chdPatientName;
+        internal System.Windows.Forms.Label label1;
+        internal System.Windows.Forms.DateTimePicker m_dtpApplBegin;
+        internal System.Windows.Forms.DateTimePicker m_dtpApplEnd;
+        internal System.Windows.Forms.RadioButton m_rdbNotSend;
+        internal System.Windows.Forms.RadioButton m_rdbHaveSended;
+        internal System.Windows.Forms.RadioButton m_rdbAll;
+        internal System.Windows.Forms.Label lblApplDate;
+        internal System.Windows.Forms.ColumnHeader m_chdSendStatus;
+        internal System.Windows.Forms.ContextMenu m_ctmSendAppl;
+        internal System.Windows.Forms.MenuItem m_miSend;
+        internal System.Windows.Forms.GroupBox m_grpPatientInfo;
+        internal System.Windows.Forms.TextBox m_txtInhospNO;
+        internal System.Windows.Forms.CheckBox m_chkSpecial;
+        internal System.Windows.Forms.CheckBox m_chkEmergency;
+        internal System.Windows.Forms.Label label17;
+        internal ctlLISPatientTypeComboBox m_cboPatientType;
+        internal System.Windows.Forms.ComboBox m_cboAgeUnit;
+        internal System.Windows.Forms.RichTextBox m_rtbDiagnose;
+        internal System.Windows.Forms.TextBox m_txtBedNO;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        internal System.Windows.Forms.Label lbDiagnose;
+        internal System.Windows.Forms.TextBox m_txtAge;
+        internal System.Windows.Forms.ComboBox m_cboSex;
+        internal System.Windows.Forms.Label m_lblAgeTitle;
+        internal System.Windows.Forms.Label lbSex;
+        internal System.Windows.Forms.Label m_lblPatientName;
+        internal System.Windows.Forms.Label lbApplDept;
+        internal System.Windows.Forms.Label lbApplEmp;
+        internal System.Windows.Forms.Label label20;
+        internal System.Windows.Forms.RichTextBox m_rtbAppSummary;
+        internal System.Windows.Forms.TextBox m_txtAppNO;
+        private System.Windows.Forms.Label label11;
+        internal System.Windows.Forms.TextBox m_txtPatName;
+        internal com.digitalwave.Utility.ctlDeptTextBox m_txtAppDept;
+        internal com.digitalwave.Utility.ctlEmpTextBox m_txtAppDoct;
+        internal PinkieControls.ButtonXP m_btnNew;
+        internal PinkieControls.ButtonXP m_btnModify;
+        internal PinkieControls.ButtonXP m_btnSave;
+        internal PinkieControls.ButtonXP m_btnDelete;
+        internal PinkieControls.ButtonXP m_btnSend;
+        internal System.Windows.Forms.GroupBox m_gpbQuery;
+        private System.Windows.Forms.Panel m_palButtons;
+        private System.Windows.Forms.Panel m_palHead;
+        private System.Windows.Forms.Panel m_palBottom;
+        private System.Windows.Forms.Panel m_palMiddle;
+        private System.Windows.Forms.Panel m_palMiddleLeft;
+        internal System.Windows.Forms.DateTimePicker m_dtpAppDate;
+        internal System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListView m_lsvCheckInfo;
+        internal PinkieControls.ButtonXP m_btnQuery;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        internal PinkieControls.ButtonXP m_btnNewItem;
+        internal PinkieControls.ButtonXP m_btnDeleteItem;
+        private System.Windows.Forms.ColumnHeader m_chdInPatientID;
+        private System.Windows.Forms.MenuItem menuItem1;
+        internal com.digitalwave.iCare.gui.LIS.ctlLISSampleTypeComboBox m_cboSampleType;
+        internal System.Windows.Forms.TextBox m_txtPatientID;
+        internal System.Windows.Forms.Label label7;
+        internal PinkieControls.ButtonXP m_btnPint;
+        internal PinkieControls.ButtonXP m_btnPreview;
+        private System.Windows.Forms.GroupBox groupBox1;
+        internal System.Windows.Forms.ListView m_lsvChargeInfo;
+        private System.Windows.Forms.TextBox m_txtCheckContent;
+        private System.Windows.Forms.GroupBox groupBox2;
+        internal PinkieControls.ButtonXP m_btnEsc;
+        internal System.Windows.Forms.ColumnHeader chName;
+        internal System.Windows.Forms.ColumnHeader chPrice;
+        private System.Windows.Forms.ColumnHeader cnSpec;
+        private System.Windows.Forms.ColumnHeader chNum;
+        private System.Windows.Forms.ColumnHeader chPercent;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label m_lblChargeState;//需要修改的申请单的ID
 
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.Container components = null;
-		#endregion
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.Container components = null;
+        #endregion
 
-		#region 构造函数
-		public frmLisAppl()
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
-			//
-			// TODO: Add any constructor code after InitializeComponent call
-			//
+        #region 构造函数
+        public frmLisAppl()
+        {
+            //
+            // Required for Windows Form Designer support
+            //
+            InitializeComponent();
+            //
+            // TODO: Add any constructor code after InitializeComponent call
+            //
 
-		}
+        }
 
-		#endregion
+        #endregion
 
-		#region override
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if (components != null) 
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        #region override
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		public override void CreateController()
-		{
-			this.objController= new com.digitalwave.iCare.gui.LIS.clsController_Appl();
-			m_objController = (clsController_Appl)objController;
-			this.objController.Set_GUI_Apperance(this);
-		}
+        public override void CreateController()
+        {
+            this.objController = new com.digitalwave.iCare.gui.LIS.clsController_Appl();
+            m_objController = (clsController_Appl)objController;
+            this.objController.Set_GUI_Apperance(this);
+        }
 
-		#endregion
+        #endregion
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.m_txtPatCardID = new System.Windows.Forms.TextBox();
             this.lblPatCardID = new System.Windows.Forms.Label();
             this.m_lsvAppl = new System.Windows.Forms.ListView();
@@ -1283,242 +1283,242 @@ namespace com.digitalwave.iCare.gui.LIS
             this.m_palMiddleLeft.ResumeLayout(false);
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region 一般设置
-		#region 快捷键设置		
-		private void m_mthShortCutKey(Keys p_eumKeyCode)
-		{
-			if(p_eumKeyCode==Keys.F1)
-			{
-				
-			}
-			else if(p_eumKeyCode==Keys.F2 && this.m_btnQuery.Enabled && m_btnQuery.Visible)//
-			{
-				this.m_btnQuery_Click(null,null);
-			}
-			else if(p_eumKeyCode==Keys.F3 && this.m_btnPreview.Enabled && m_btnPreview.Visible)//
-			{
-				this.m_btnPreview_Click(null,null);
-			}
-			else if(p_eumKeyCode==Keys.F4 && this.m_btnPint.Enabled && m_btnPint.Visible)//
-			{
-				this.m_btnPint_Click(null,null);
-			}
-			else if(p_eumKeyCode==Keys.F5 && this.m_btnNew.Enabled && m_btnNew.Visible)//
-			{
-				this.m_btnNew_Click(null,null);
-			}
-			else if(p_eumKeyCode==Keys.F6 && this.m_btnDelete.Enabled && m_btnDelete.Visible)//
-			{
-				this.m_btnDelete_Click(null,null);
-			}
-			else if(p_eumKeyCode==Keys.F7 && this.m_btnModify.Enabled && m_btnModify.Visible)//
-			{
-				this.m_btnModify_Click(null,null);
-			}
-			else if(p_eumKeyCode==Keys.F8 && this.m_btnSave.Enabled && m_btnSave.Visible)//
-			{
-				this.m_btnSave_Click(null,null);
-			}
-			else if(p_eumKeyCode==Keys.F9 && this.m_btnSend.Enabled && m_btnSend.Visible)//
-			{
-				this.m_btnSend_Click(null,null);
-			}
-			else if(p_eumKeyCode==Keys.Escape && this.m_btnEsc.Enabled && m_btnEsc.Visible)//
-			{
-				this.m_btnEsc_Click(null,null);
-			}
-			else if(p_eumKeyCode==Keys.F12 && this.m_btnNewItem.Enabled && m_btnNewItem.Visible)//
-			{
-				this.m_btnNewItem_Click(null,null);
-			}
-		}
-		#endregion
+        #region 一般设置
+        #region 快捷键设置		
+        private void m_mthShortCutKey(Keys p_eumKeyCode)
+        {
+            if (p_eumKeyCode == Keys.F1)
+            {
 
-		#region Enter 键选择下一个
-		private void m_mthEnterHandler(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
-		}
-		private void frmLisAppl_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-		{	
-			m_mthShortCutKey(e.KeyCode);			
-			m_mthSetKeyTab(e);
-			HideLsvFussQueryResult();	
-		}
+            }
+            else if (p_eumKeyCode == Keys.F2 && this.m_btnQuery.Enabled && m_btnQuery.Visible)//
+            {
+                this.m_btnQuery_Click(null, null);
+            }
+            else if (p_eumKeyCode == Keys.F3 && this.m_btnPreview.Enabled && m_btnPreview.Visible)//
+            {
+                this.m_btnPreview_Click(null, null);
+            }
+            else if (p_eumKeyCode == Keys.F4 && this.m_btnPint.Enabled && m_btnPint.Visible)//
+            {
+                this.m_btnPint_Click(null, null);
+            }
+            else if (p_eumKeyCode == Keys.F5 && this.m_btnNew.Enabled && m_btnNew.Visible)//
+            {
+                this.m_btnNew_Click(null, null);
+            }
+            else if (p_eumKeyCode == Keys.F6 && this.m_btnDelete.Enabled && m_btnDelete.Visible)//
+            {
+                this.m_btnDelete_Click(null, null);
+            }
+            else if (p_eumKeyCode == Keys.F7 && this.m_btnModify.Enabled && m_btnModify.Visible)//
+            {
+                this.m_btnModify_Click(null, null);
+            }
+            else if (p_eumKeyCode == Keys.F8 && this.m_btnSave.Enabled && m_btnSave.Visible)//
+            {
+                this.m_btnSave_Click(null, null);
+            }
+            else if (p_eumKeyCode == Keys.F9 && this.m_btnSend.Enabled && m_btnSend.Visible)//
+            {
+                this.m_btnSend_Click(null, null);
+            }
+            else if (p_eumKeyCode == Keys.Escape && this.m_btnEsc.Enabled && m_btnEsc.Visible)//
+            {
+                this.m_btnEsc_Click(null, null);
+            }
+            else if (p_eumKeyCode == Keys.F12 && this.m_btnNewItem.Enabled && m_btnNewItem.Visible)//
+            {
+                this.m_btnNewItem_Click(null, null);
+            }
+        }
+        #endregion
+
+        #region Enter 键选择下一个
+        private void m_mthEnterHandler(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+        }
+        private void frmLisAppl_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            m_mthShortCutKey(e.KeyCode);
+            m_mthSetKeyTab(e);
+            HideLsvFussQueryResult();
+        }
 
 
-		#endregion
-		#endregion
+        #endregion
+        #endregion
 
-		#region 初始化
-		private void m_mthInit()
-		{
-			this.m_mthSetFormControlCanBeNull(this);
-			this.m_mthSetEnter2Tab(new Control[]{this.m_txtInhospNO,this.m_txtAppDoct,this.m_txtPatName,
-													this.m_txtAppDept,this.m_rtbAppSummary,this.m_rtbDiagnose,
-													this.m_lsvPatFussQuery});
-			m_mthEnterInitStatus();
-		}
-		#endregion
+        #region 初始化
+        private void m_mthInit()
+        {
+            this.m_mthSetFormControlCanBeNull(this);
+            this.m_mthSetEnter2Tab(new Control[]{this.m_txtInhospNO,this.m_txtAppDoct,this.m_txtPatName,
+                                                    this.m_txtAppDept,this.m_rtbAppSummary,this.m_rtbDiagnose,
+                                                    this.m_lsvPatFussQuery});
+            m_mthEnterInitStatus();
+        }
+        #endregion
 
-		private void frmLisAppl_Load(object sender, System.EventArgs e)
-		{
+        private void frmLisAppl_Load(object sender, System.EventArgs e)
+        {
             //设置窗体的控件可以为null
-			m_mthSetFormControlCanBeNull(this);
+            m_mthSetFormControlCanBeNull(this);
             //Tab键顺序
-			m_mthSetEnter2Tab(new System.Windows.Forms.Control[]
-					{
-						m_dtpApplBegin,m_dtpApplEnd,m_rdbNotSend,m_rdbHaveSended,m_rdbAll,m_btnQuery,
-						m_lsvAppl,m_lsvPatFussQuery,m_lsvCheckInfo,m_btnNewItem,m_btnDeleteItem,m_btnNew,this.m_txtAppDept,this.m_txtAppDoct,
-						m_btnModify,m_btnDelete,m_btnSave,m_btnSend,m_txtPatName,m_txtPatientID,m_txtPatCardID,m_txtInhospNO});
-			if(!this.m_blnIsDialog)
-			{
-				m_mthInit();
-			}
-		}
+            m_mthSetEnter2Tab(new System.Windows.Forms.Control[]
+                    {
+                        m_dtpApplBegin,m_dtpApplEnd,m_rdbNotSend,m_rdbHaveSended,m_rdbAll,m_btnQuery,
+                        m_lsvAppl,m_lsvPatFussQuery,m_lsvCheckInfo,m_btnNewItem,m_btnDeleteItem,m_btnNew,this.m_txtAppDept,this.m_txtAppDoct,
+                        m_btnModify,m_btnDelete,m_btnSave,m_btnSend,m_txtPatName,m_txtPatientID,m_txtPatCardID,m_txtInhospNO});
+            if (!this.m_blnIsDialog)
+            {
+                m_mthInit();
+            }
+        }
 
 
-		#region 患者查询
-		private void HideLsvFussQueryResult()
-		{
-			if(this.ActiveControl != this.m_lsvPatFussQuery)
-			{
-				if(this.m_lsvPatFussQuery.Visible == true)
-				{
-					this.m_lsvPatFussQuery.Visible = false;
-					this.m_lsvPatFussQuery.Items.Clear();
-					//					this.txtBedNo.Focus();
-					//					this.cboPatientType.Focus();
-				}
-			}
-		}
+        #region 患者查询
+        private void HideLsvFussQueryResult()
+        {
+            if (this.ActiveControl != this.m_lsvPatFussQuery)
+            {
+                if (this.m_lsvPatFussQuery.Visible == true)
+                {
+                    this.m_lsvPatFussQuery.Visible = false;
+                    this.m_lsvPatFussQuery.Items.Clear();
+                    //					this.txtBedNo.Focus();
+                    //					this.cboPatientType.Focus();
+                }
+            }
+        }
 
-		private void m_lsvPatFussQuery_Leave(object sender, System.EventArgs e)
-		{
-			HideLsvFussQueryResult();
-		}
+        private void m_lsvPatFussQuery_Leave(object sender, System.EventArgs e)
+        {
+            HideLsvFussQueryResult();
+        }
 
-		private void m_lsvPatFussQuery_DoubleClick(object sender, System.EventArgs e)
-		{
-			m_objController.m_mthPickPatInfo(this);			
+        private void m_lsvPatFussQuery_DoubleClick(object sender, System.EventArgs e)
+        {
+            m_objController.m_mthPickPatInfo(this);
 
-			this.m_lsvPatFussQuery.Visible=false;
-			this.m_lsvPatFussQuery.Items.Clear();
-		}
+            this.m_lsvPatFussQuery.Visible = false;
+            this.m_lsvPatFussQuery.Items.Clear();
+        }
 
-		private void m_lsvPatFussQuery_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
-			if(e.KeyCode==Keys.Enter)
-			{
-				com.digitalwave.iCare.gui.LIS.clsController_Appl m_objController=(clsController_Appl)this.m_objController;
-				m_objController.m_mthPickPatInfo(this);
-	
-				m_lsvPatFussQuery.Visible=false;
-				this.m_lsvPatFussQuery.Items.Clear();
-			}
-		}
+        private void m_lsvPatFussQuery_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                com.digitalwave.iCare.gui.LIS.clsController_Appl m_objController = (clsController_Appl)this.m_objController;
+                m_objController.m_mthPickPatInfo(this);
 
-		private void m_txtPatNO_Leave(object sender, System.EventArgs e)
-		{
-			HideLsvFussQueryResult();
-		}
+                m_lsvPatFussQuery.Visible = false;
+                this.m_lsvPatFussQuery.Items.Clear();
+            }
+        }
 
-		private void m_txtPatNO_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
-		{
-			bool m_blnIfOK=true;
-			for(int i1=0;i1<=9;i1++)
-			{
-				if (e.KeyChar.ToString()==i1.ToString())
-				{
-					m_blnIfOK=false;
-					break;
-				}
-			}
-			if(e.KeyChar==Convert.ToChar(8))return;
-			if (e.KeyChar.ToString()!=Keys.Back.ToString())
-				e.Handled=m_blnIfOK;         
-		}
-			
-		private void m_txtPatCardID_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
-			if(e.KeyCode == Keys.Enter)
-			{
-				for(int i=0;i<m_txtPatCardID.Text.Length;i++)
-				{
-					if(m_txtPatCardID.Text[i]>255)                    
-						return;
-				}
+        private void m_txtPatNO_Leave(object sender, System.EventArgs e)
+        {
+            HideLsvFussQueryResult();
+        }
 
-				com.digitalwave.iCare.gui.LIS.clsController_Appl m_objController = (clsController_Appl)this.m_objController;
-				m_objController.m_mthFussQueryPat(this,(System.Windows.Forms.Control)sender);
+        private void m_txtPatNO_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            bool m_blnIfOK = true;
+            for (int i1 = 0; i1 <= 9; i1++)
+            {
+                if (e.KeyChar.ToString() == i1.ToString())
+                {
+                    m_blnIfOK = false;
+                    break;
+                }
+            }
+            if (e.KeyChar == Convert.ToChar(8)) return;
+            if (e.KeyChar.ToString() != Keys.Back.ToString())
+                e.Handled = m_blnIfOK;
+        }
 
-			}
-			else if(e.KeyCode == Keys.Escape)
-			{
-				HideLsvFussQueryResult();											
-			}		
-		}
+        private void m_txtPatCardID_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                for (int i = 0; i < m_txtPatCardID.Text.Length; i++)
+                {
+                    if (m_txtPatCardID.Text[i] > 255)
+                        return;
+                }
 
-		private void m_txtPatCardID_Leave(object sender, System.EventArgs e)
-		{
-			if(this.m_lsvPatFussQuery.Focused)
-			{
-			}
-			else
-			{
-				HideLsvFussQueryResult();
-			}
-		}
+                com.digitalwave.iCare.gui.LIS.clsController_Appl m_objController = (clsController_Appl)this.m_objController;
+                m_objController.m_mthFussQueryPat(this, (System.Windows.Forms.Control)sender);
 
-		private void m_txtPatName_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
-			if(e.KeyCode == Keys.Enter)
-			{
-				com.digitalwave.iCare.gui.LIS.clsController_Appl m_objController = (clsController_Appl)this.m_objController;
-				m_objController.m_mthFussQueryPat(this,(System.Windows.Forms.Control)sender);
-			}
-			else if(e.KeyCode == Keys.Escape)
-			{
-				HideLsvFussQueryResult();											
-			}
-		}
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                HideLsvFussQueryResult();
+            }
+        }
 
-		private void m_txtPatName_Leave(object sender, System.EventArgs e)
-		{
-			HideLsvFussQueryResult();		
-		}
+        private void m_txtPatCardID_Leave(object sender, System.EventArgs e)
+        {
+            if (this.m_lsvPatFussQuery.Focused)
+            {
+            }
+            else
+            {
+                HideLsvFussQueryResult();
+            }
+        }
 
-		private void m_txtInhospNO_Leave(object sender, System.EventArgs e)
-		{
-			HideLsvFussQueryResult();		
-			
-		}
+        private void m_txtPatName_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                com.digitalwave.iCare.gui.LIS.clsController_Appl m_objController = (clsController_Appl)this.m_objController;
+                m_objController.m_mthFussQueryPat(this, (System.Windows.Forms.Control)sender);
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                HideLsvFussQueryResult();
+            }
+        }
 
-		private void m_txtInhospNO_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
-			if(e.KeyCode == Keys.Enter)
-			{
-				com.digitalwave.iCare.gui.LIS.clsController_Appl m_objController = (clsController_Appl)this.m_objController;
-				m_objController.m_mthFussQueryPat(this,(System.Windows.Forms.Control)sender);
-			}
-			else if(e.KeyCode == Keys.Escape)
-			{
-				HideLsvFussQueryResult();											
-			}		
-		}
-		#endregion
+        private void m_txtPatName_Leave(object sender, System.EventArgs e)
+        {
+            HideLsvFussQueryResult();
+        }
 
-		private void m_txtAppDept_evtValueChanged(object sender, com.digitalwave.Utility.clsExValueChangedEventArgs e)
-		{
-			this.m_txtAppDoct.m_StrDeptID = this.m_txtAppDept.m_StrDeptID;
-		}
+        private void m_txtInhospNO_Leave(object sender, System.EventArgs e)
+        {
+            HideLsvFussQueryResult();
 
-		private void m_lsvAppl_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(this.m_blnIsDialog)
-				return;
+        }
+
+        private void m_txtInhospNO_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                com.digitalwave.iCare.gui.LIS.clsController_Appl m_objController = (clsController_Appl)this.m_objController;
+                m_objController.m_mthFussQueryPat(this, (System.Windows.Forms.Control)sender);
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                HideLsvFussQueryResult();
+            }
+        }
+        #endregion
+
+        private void m_txtAppDept_evtValueChanged(object sender, com.digitalwave.Utility.clsExValueChangedEventArgs e)
+        {
+            this.m_txtAppDoct.m_StrDeptID = this.m_txtAppDept.m_StrDeptID;
+        }
+
+        private void m_lsvAppl_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (this.m_blnIsDialog)
+                return;
             if (m_lsvAppl.SelectedItems.Count > 0)
             {
 
@@ -1585,105 +1585,105 @@ namespace com.digitalwave.iCare.gui.LIS
                 m_mthEnterInitStatus();//清空数据
 
             }
-		}
+        }
 
-		private void m_lsvAppl_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
-		{
-			if(this.m_lsvAppl.FocusedItem != null)
-			{
-				this.m_lsvAppl.FocusedItem.Selected = true;
-			}
-		}
-		private void m_btnDelete_Click(object sender, System.EventArgs e)
-		{
-			string strMessage;
-			this.m_objCurrApp.m_mthDelete();
-			this.m_objCurrApp.m_StrOperatorID = m_strGetOp();
-			if(this.m_objController.m_blnDeleteApp(out strMessage))
-			{
-				this.m_blnIsModified = false;
-				this.m_objCurrApp = null;
-				this.m_lvtCurrApp.Remove();
-				this.m_lvtCurrApp = null;
+        private void m_lsvAppl_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (this.m_lsvAppl.FocusedItem != null)
+            {
+                this.m_lsvAppl.FocusedItem.Selected = true;
+            }
+        }
+        private void m_btnDelete_Click(object sender, System.EventArgs e)
+        {
+            string strMessage;
+            this.m_objCurrApp.m_mthDelete();
+            this.m_objCurrApp.m_StrOperatorID = m_strGetOp();
+            if (this.m_objController.m_blnDeleteApp(out strMessage))
+            {
+                this.m_blnIsModified = false;
+                this.m_objCurrApp = null;
+                this.m_lvtCurrApp.Remove();
+                this.m_lvtCurrApp = null;
 
-				if(this.m_lsvAppl.Items.Count != 0)
-				{
-					this.m_lsvAppl.Items[0].Selected = true;
-				}
-				else
-				{
-					m_mthEnterInitStatus();
-				}
-			}
-			else
-			{
-				MessageBox.Show(this,strMessage,c_strMessageBoxTitle);
-			}
-		}
-		private void m_btnSave_Click(object sender, System.EventArgs e)
-		{
-			m_blnSaveApp();
-		}
+                if (this.m_lsvAppl.Items.Count != 0)
+                {
+                    this.m_lsvAppl.Items[0].Selected = true;
+                }
+                else
+                {
+                    m_mthEnterInitStatus();
+                }
+            }
+            else
+            {
+                MessageBox.Show(this, strMessage, c_strMessageBoxTitle);
+            }
+        }
+        private void m_btnSave_Click(object sender, System.EventArgs e)
+        {
+            m_blnSaveApp();
+        }
 
-		private void m_btnSend_Click(object sender, System.EventArgs e)
-		{
-			string strMessage = null;
-			if(this.m_objController.m_blnSendApp(out strMessage))
-			{
-				this.m_lvtCurrApp.SubItems[2].Text = "已发送";
-				this.m_btnSend.Enabled = false;
-				this.m_btnSave.Enabled = false;
-				this.m_btnDelete.Enabled = false;
-				this.m_btnModify.Enabled = false;
-				this.m_btnNew.Enabled = true;
-				this.m_btnNew.Focus();
-				if(this.m_blnIsDialog)
-				{
-					this.DialogResult = DialogResult.OK;
-					this.Close();
-				}				
-			}
-			else
-			{
-				this.m_btnSend.Focus();
-				MessageBox.Show(this,strMessage,c_strMessageBoxTitle);
-			}
-		}
-		private void m_btnModify_Click(object sender, System.EventArgs e)
-		{
-			m_mthSetUIControl(true);
+        private void m_btnSend_Click(object sender, System.EventArgs e)
+        {
+            string strMessage = null;
+            if (this.m_objController.m_blnSendApp(out strMessage))
+            {
+                this.m_lvtCurrApp.SubItems[2].Text = "已发送";
+                this.m_btnSend.Enabled = false;
+                this.m_btnSave.Enabled = false;
+                this.m_btnDelete.Enabled = false;
+                this.m_btnModify.Enabled = false;
+                this.m_btnNew.Enabled = true;
+                this.m_btnNew.Focus();
+                if (this.m_blnIsDialog)
+                {
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+            }
+            else
+            {
+                this.m_btnSend.Focus();
+                MessageBox.Show(this, strMessage, c_strMessageBoxTitle);
+            }
+        }
+        private void m_btnModify_Click(object sender, System.EventArgs e)
+        {
+            m_mthSetUIControl(true);
 
-			this.m_blnIsModified = true;
-			this.m_btnSend.Enabled = false;
-			this.m_btnSave.Enabled = true;
-			this.m_btnDelete.Enabled = true;
-			this.m_btnModify.Enabled = false;
-			this.m_btnNew.Enabled = true;
-		}
-		private void m_btnNew_Click(object sender, System.EventArgs e)
-		{
-			m_mthResetAll();
-			if(!this.m_blnIsDialog)
-			{
-				this.m_txtAppDoct.m_StrEmployeeID = this.LoginInfo.m_strEmpID;
-			}
-			m_mthSetUIControl(true);
-			this.m_btnSend.Enabled = false;
-			this.m_btnSave.Enabled = true;
-			this.m_btnModify.Enabled = false;
-			this.m_btnDelete.Enabled = false;
-			this.m_btnNew.Enabled = true;
+            this.m_blnIsModified = true;
+            this.m_btnSend.Enabled = false;
+            this.m_btnSave.Enabled = true;
+            this.m_btnDelete.Enabled = true;
+            this.m_btnModify.Enabled = false;
+            this.m_btnNew.Enabled = true;
+        }
+        private void m_btnNew_Click(object sender, System.EventArgs e)
+        {
+            m_mthResetAll();
+            if (!this.m_blnIsDialog)
+            {
+                this.m_txtAppDoct.m_StrEmployeeID = this.LoginInfo.m_strEmpID;
+            }
+            m_mthSetUIControl(true);
+            this.m_btnSend.Enabled = false;
+            this.m_btnSave.Enabled = true;
+            this.m_btnModify.Enabled = false;
+            this.m_btnDelete.Enabled = false;
+            this.m_btnNew.Enabled = true;
 
-			clsLisApplMainVO objAppVO = new clsLisApplMainVO();
-			this.m_objCurrApp = new clsLIS_App(objAppVO);
+            clsLisApplMainVO objAppVO = new clsLisApplMainVO();
+            this.m_objCurrApp = new clsLIS_App(objAppVO);
 
-			objAppVO.m_intPStatus_int = 1;
-			objAppVO.m_intForm_int = 1;//等演示过后要改成 1 
+            objAppVO.m_intPStatus_int = 1;
+            objAppVO.m_intForm_int = 1;//等演示过后要改成 1 
 
-			this.m_lvtCurrApp = null;
-			this.m_blnIsModified = true;
-			this.m_txtInhospNO.Focus();
-		}
+            this.m_lvtCurrApp = null;
+            this.m_blnIsModified = true;
+            this.m_txtInhospNO.Focus();
+        }
 
         private void m_btnQuery_Click(object sender, System.EventArgs e)
         {
@@ -1699,261 +1699,261 @@ namespace com.digitalwave.iCare.gui.LIS
             this.Cursor = Cursors.Default;
         }
 
-		private void m_btnNewItem_Click(object sender, System.EventArgs e)
-		{
-			frmAppCheckContent frm = new frmAppCheckContent();
-			if(frm.ShowDialog() == DialogResult.OK)
-			{
-				if(frm.m_objController.m_objApps.Count == 0)
-					return ;
-				if(frm.m_objController.m_objApps.Count > 1)
-				{
-					MessageBox.Show(this,"您所选择的内容包含在不同的报告内,请重新选择!",c_strMessageBoxTitle);
-					return ;
-				}
-				this.m_lsvCheckInfo.Items.Clear();
-				m_objCurrApp.m_ObjAppApplyUnits.Clear();
-				m_objCurrApp.m_ObjAppReports.Clear();
-				m_objCurrApp.m_ObjAppApplyUnits.AddRange(frm.m_objController.m_objAppApplyUnits);
-				m_objCurrApp.m_ObjAppReports.AddRange(frm.m_objController.m_objAppReports);
+        private void m_btnNewItem_Click(object sender, System.EventArgs e)
+        {
+            frmAppCheckContent frm = new frmAppCheckContent();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                if (frm.m_objController.m_objApps.Count == 0)
+                    return;
+                if (frm.m_objController.m_objApps.Count > 1)
+                {
+                    MessageBox.Show(this, "您所选择的内容包含在不同的报告内,请重新选择!", c_strMessageBoxTitle);
+                    return;
+                }
+                this.m_lsvCheckInfo.Items.Clear();
+                m_objCurrApp.m_ObjAppApplyUnits.Clear();
+                m_objCurrApp.m_ObjAppReports.Clear();
+                m_objCurrApp.m_ObjAppApplyUnits.AddRange(frm.m_objController.m_objAppApplyUnits);
+                m_objCurrApp.m_ObjAppReports.AddRange(frm.m_objController.m_objAppReports);
 
-				m_mthSetSampleTypeFromAppUnitID();
+                m_mthSetSampleTypeFromAppUnitID();
 
-				m_mthShowCheckInfo();
+                m_mthShowCheckInfo();
 
-				#region 加入请求收费信息 2005.0716 刘彬
-				this.m_lsvChargeInfo.Items.Clear();
-				if(this.evnRequestChargeInfo != null && this.m_objCurrApp.m_ObjAppApplyUnits.Count > 0)
-				{
-					string[] objApplyUnitIDArr = new string[this.m_objCurrApp.m_ObjAppApplyUnits.Count];
-					for(int i=0;i<objApplyUnitIDArr.Length;i++)
-					{
-						objApplyUnitIDArr[i] = this.m_objCurrApp.m_ObjAppApplyUnits[i].m_StrApplyUnitID;
-					}
-					clsRequestChargeInfoEventArgs ee = new clsRequestChargeInfoEventArgs(objApplyUnitIDArr);
-					evnRequestChargeInfo(ee);
-					if(ee.ChargeInfoArr != null && ee.ChargeInfoArr.Length != 0)
-					{
-						//TODO: 再此加入处理收费信息的逻辑
-						this.m_mthShowChargeInfo(ee.ChargeInfoArr,false);
-					}
-				}
-				#endregion
-			}
-			this.m_btnSave.Focus();
-		}
-		private void m_mthShowChargeInfo(clsTestApplyItme_VO[] p_objChargeInfoArr,bool p_blnAppend)
-		{
-			if(p_objChargeInfoArr != null)
-			{
-				this.m_lsvChargeInfo.BeginUpdate();
-				if(!p_blnAppend)
-					this.m_lsvChargeInfo.Items.Clear();
-				foreach(clsTestApplyItme_VO objCharge in p_objChargeInfoArr)
-				{
-					ListViewItem lvi = new ListViewItem(objCharge.m_strItemName);
-					lvi.SubItems.Add(objCharge.m_strSpec);
-					lvi.SubItems.Add(objCharge.m_decQty.ToString()+ "" + objCharge.m_strUnit);
-					lvi.SubItems.Add(objCharge.m_decTolPrice.ToString());
-					lvi.SubItems.Add(objCharge.m_decDiscount.ToString()+"%");
-					lvi.Tag = objCharge;
-					this.m_lsvChargeInfo.Items.Add(lvi);
-				}
-				this.m_lsvChargeInfo.EndUpdate();
-			}
-		}
-		private void m_mthShowCheckInfo()
-		{
-			ArrayList arlObj = new ArrayList();
-			foreach(clsLIS_AppApplyUnit obj in m_objCurrApp.m_ObjAppApplyUnits)
-			{
-				clsLISAppCheckInfoItem objInfoItem = new clsLISAppCheckInfoItem();
-				#region 赋值
-				if(obj.m_ObjApplyUnit != null && obj.m_ObjApplyUnit.m_ObjDataVO != null)
-				{
-					objInfoItem.m_StrAppGroupName = obj.m_ObjApplyUnit.m_ObjDataVO.strApplUnitName;
-					if(obj.m_ObjApplyUnit.m_ObjDataVO.strIsNoFoodRequired == "1")
-					{
-						objInfoItem.m_StrFood = "需要";
-						
-					}
-					else
-					{
-						objInfoItem.m_StrFood = "不需要";
-					}
-					if(obj.m_ObjApplyUnit.m_ObjDataVO.strIsPhysicsExamRequired == "1")
-					{
-						objInfoItem.m_StrMedicalExam = "需要";
-						
-					}
-					else
-					{
-						objInfoItem.m_StrMedicalExam = "不需要";
-					}
-					if(obj.m_ObjApplyUnit.m_ObjDataVO.strIsReservationRequired == "1")
-					{
-						objInfoItem.m_StrReservation = "需要";
-					}
-					else
-					{
-						objInfoItem.m_StrReservation = "不需要";
-					}
-				}
-				#endregion
-				arlObj.Add(objInfoItem);
-			}
-			clsLISAppCheckInfoItem[] objInfoItemArr = (clsLISAppCheckInfoItem[])arlObj.ToArray(typeof(clsLISAppCheckInfoItem));
-			this.m_mthShowAppCheckInfo(objInfoItemArr);
-			this.m_txtCheckContent.Text = this.m_objController.m_strSetCheckContent(m_objCurrApp);
-		}
+                #region 加入请求收费信息 2005.0716 刘彬
+                this.m_lsvChargeInfo.Items.Clear();
+                if (this.evnRequestChargeInfo != null && this.m_objCurrApp.m_ObjAppApplyUnits.Count > 0)
+                {
+                    string[] objApplyUnitIDArr = new string[this.m_objCurrApp.m_ObjAppApplyUnits.Count];
+                    for (int i = 0; i < objApplyUnitIDArr.Length; i++)
+                    {
+                        objApplyUnitIDArr[i] = this.m_objCurrApp.m_ObjAppApplyUnits[i].m_StrApplyUnitID;
+                    }
+                    clsRequestChargeInfoEventArgs ee = new clsRequestChargeInfoEventArgs(objApplyUnitIDArr);
+                    evnRequestChargeInfo(ee);
+                    if (ee.ChargeInfoArr != null && ee.ChargeInfoArr.Length != 0)
+                    {
+                        //TODO: 再此加入处理收费信息的逻辑
+                        this.m_mthShowChargeInfo(ee.ChargeInfoArr, false);
+                    }
+                }
+                #endregion
+            }
+            this.m_btnSave.Focus();
+        }
+        private void m_mthShowChargeInfo(clsTestApplyItme_VO[] p_objChargeInfoArr, bool p_blnAppend)
+        {
+            if (p_objChargeInfoArr != null)
+            {
+                this.m_lsvChargeInfo.BeginUpdate();
+                if (!p_blnAppend)
+                    this.m_lsvChargeInfo.Items.Clear();
+                foreach (clsTestApplyItme_VO objCharge in p_objChargeInfoArr)
+                {
+                    ListViewItem lvi = new ListViewItem(objCharge.m_strItemName);
+                    lvi.SubItems.Add(objCharge.m_strSpec);
+                    lvi.SubItems.Add(objCharge.m_decQty.ToString() + "" + objCharge.m_strUnit);
+                    lvi.SubItems.Add(objCharge.m_decTolPrice.ToString());
+                    lvi.SubItems.Add(objCharge.m_decDiscount.ToString() + "%");
+                    lvi.Tag = objCharge;
+                    this.m_lsvChargeInfo.Items.Add(lvi);
+                }
+                this.m_lsvChargeInfo.EndUpdate();
+            }
+        }
+        private void m_mthShowCheckInfo()
+        {
+            ArrayList arlObj = new ArrayList();
+            foreach (clsLIS_AppApplyUnit obj in m_objCurrApp.m_ObjAppApplyUnits)
+            {
+                clsLISAppCheckInfoItem objInfoItem = new clsLISAppCheckInfoItem();
+                #region 赋值
+                if (obj.m_ObjApplyUnit != null && obj.m_ObjApplyUnit.m_ObjDataVO != null)
+                {
+                    objInfoItem.m_StrAppGroupName = obj.m_ObjApplyUnit.m_ObjDataVO.strApplUnitName;
+                    if (obj.m_ObjApplyUnit.m_ObjDataVO.strIsNoFoodRequired == "1")
+                    {
+                        objInfoItem.m_StrFood = "需要";
 
-		private void m_btnEsc_Click(object sender, System.EventArgs e)
-		{
-			this.Close();
-		}
+                    }
+                    else
+                    {
+                        objInfoItem.m_StrFood = "不需要";
+                    }
+                    if (obj.m_ObjApplyUnit.m_ObjDataVO.strIsPhysicsExamRequired == "1")
+                    {
+                        objInfoItem.m_StrMedicalExam = "需要";
+
+                    }
+                    else
+                    {
+                        objInfoItem.m_StrMedicalExam = "不需要";
+                    }
+                    if (obj.m_ObjApplyUnit.m_ObjDataVO.strIsReservationRequired == "1")
+                    {
+                        objInfoItem.m_StrReservation = "需要";
+                    }
+                    else
+                    {
+                        objInfoItem.m_StrReservation = "不需要";
+                    }
+                }
+                #endregion
+                arlObj.Add(objInfoItem);
+            }
+            clsLISAppCheckInfoItem[] objInfoItemArr = (clsLISAppCheckInfoItem[])arlObj.ToArray(typeof(clsLISAppCheckInfoItem));
+            this.m_mthShowAppCheckInfo(objInfoItemArr);
+            this.m_txtCheckContent.Text = this.m_objController.m_strSetCheckContent(m_objCurrApp);
+        }
+
+        private void m_btnEsc_Click(object sender, System.EventArgs e)
+        {
+            this.Close();
+        }
 
 
-		private void m_btnPint_Click(object sender, System.EventArgs e)
-		{
-			this.m_objPrint.m_mthGetPrintContent(m_objCurrApp.m_StrAppID);
-			this.m_objPrint.m_mthPrint();
-		}
-		private void m_btnPreview_Click(object sender, System.EventArgs e)
-		{
-			this.m_objPrint.m_mthGetPrintContent(m_objCurrApp.m_StrAppID);
-			this.m_objPrint.m_mthPrintPreview();
-		}
+        private void m_btnPint_Click(object sender, System.EventArgs e)
+        {
+            this.m_objPrint.m_mthGetPrintContent(m_objCurrApp.m_StrAppID);
+            this.m_objPrint.m_mthPrint();
+        }
+        private void m_btnPreview_Click(object sender, System.EventArgs e)
+        {
+            this.m_objPrint.m_mthGetPrintContent(m_objCurrApp.m_StrAppID);
+            this.m_objPrint.m_mthPrintPreview();
+        }
 
-		private bool m_blnSaveApp()
-		{
-			if(!m_blnCheckValidate())
-				return false;
+        private bool m_blnSaveApp()
+        {
+            if (!m_blnCheckValidate())
+                return false;
 
-			this.m_mthCollectData();
-			
-			string strMessage = null;
-			if(this.m_objController.m_blnSaveApp(out strMessage))
-			{
-				m_mthSetSaveOK();
-				
-				this.m_btnSend.Focus();
-				return true;
-			}
-			else
-			{
-				MessageBox.Show(this,strMessage,"iCare-检验申请");
-			}
-			return false;
-		}
+            this.m_mthCollectData();
 
-		private bool m_blnCheckValidate()
-		{
-			if(m_txtPatName.Text=="")
-			{
-				MessageBox.Show("病人姓名不能为空!",c_strMessageBoxTitle,MessageBoxButtons.OK);
-				return false;
-			}
-			if(m_cboSampleType.SelectedValue == null)
-			{
-				MessageBox.Show("样本类型不能为空!",c_strMessageBoxTitle,MessageBoxButtons.OK);
-				return false;
-			}
-			//			if(this.m_txtApplDep.Text == "")
-			//			{
-			//				MessageBox.Show("申请科室不能为空!",c_strMessageBoxTitle,MessageBoxButtons.OK);
-			//				return;
-			//			}
-			//			if(this.m_txtApplDoc.Text == "")
-			//			{
-			//				MessageBox.Show("申请医生不能为空!",c_strMessageBoxTitle,MessageBoxButtons.OK);
-			//				return;
-			//			}
-			if(this.m_lsvCheckInfo.Items.Count == 0)
-			{
-				MessageBox.Show("检验内容不能为空!",c_strMessageBoxTitle,MessageBoxButtons.OK);
-				return false;
-			}			
-			return true;
-		}
+            string strMessage = null;
+            if (this.m_objController.m_blnSaveApp(out strMessage))
+            {
+                m_mthSetSaveOK();
 
-		private void m_mthCollectData()
-		{
-			this.m_objCurrApp.m_StrPatientCardID = this.m_txtPatCardID.Text.Trim();
-			if(this.m_txtPatientID.Text.Trim() == "")
-			{
-				this.m_objCurrApp.m_StrPatientID = "-1";
-			}
-			else
-			{
-				this.m_objCurrApp.m_StrPatientID = this.m_txtPatientID.Text.Trim();
-			}
-			this.m_objCurrApp.m_StrPatientInhospNO = this.m_txtInhospNO.Text.Trim();
-			this.m_objCurrApp.m_StrPatientName = this.m_txtPatName.Text.Trim();
-			this.m_objCurrApp.m_StrSex = this.m_cboSex.Text.Trim();
-			if(this.m_txtAge.Text.Trim() != null)
-			{
-				this.m_objCurrApp.m_StrAge = this.m_txtAge.Text.Trim() + " " + this.m_cboAgeUnit.Text.Trim();
-			}
-			else
-			{
-				this.m_objCurrApp.m_StrAge = null;
-			}
-			this.m_objCurrApp.m_StrApplEmpID = this.m_txtAppDoct.m_StrEmployeeID;
-			this.m_objCurrApp.m_StrApplDeptID = this.m_txtAppDept.m_StrDeptID;
-			this.m_objCurrApp.m_StrBedNO = this.m_txtBedNO.Text.Trim();
-			this.m_objCurrApp.m_StrPatientType = this.m_cboPatientType.SelectedValue.ToString().Trim();
-			if(this.m_chkEmergency.Checked)
-			{
-				this.m_objCurrApp.m_IntEmergency = 1;
-			}
-			else
-			{
-				this.m_objCurrApp.m_IntEmergency = 0;
-			}
-			if(this.m_chkSpecial.Checked)
-			{
-				this.m_objCurrApp.m_IntSpecial = 1;
-			}
-			else
-			{
-				this.m_objCurrApp.m_IntSpecial = 0;
-			}
-			this.m_objCurrApp.m_StrDiagnose = this.m_rtbDiagnose.Text.Trim();
-			this.m_objCurrApp.m_StrSummary = this.m_rtbAppSummary.Text.Trim();
-			this.m_objCurrApp.m_StrOperatorID = m_strGetOp();
-			
-			this.m_objCurrApp.m_StrAppDat = this.m_dtpAppDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
-			if(this.m_cboSampleType.SelectedValue != null)
-			{
-				this.m_objCurrApp.m_ObjDataVO.m_strSampleTypeID = this.m_cboSampleType.SelectedValue.ToString();
-				this.m_objCurrApp.m_ObjDataVO.m_strSampleType = this.m_cboSampleType.Text;
-			}
-			this.m_objCurrApp.m_ObjDataVO.m_strCheckContent = this.m_txtCheckContent.Text;
-			System.Text.StringBuilder sb = new System.Text.StringBuilder();
-			foreach(ListViewItem lvi in this.m_lsvChargeInfo.Items)
-			{
-				for(int i=0;i<lvi.SubItems.Count;i++)
-				{
-					sb.Append(lvi.SubItems[i].Text);
-					sb.Append(">");
-				}
-				if(sb.Length >0)
-				{
-					sb.Remove(sb.Length-1,1);
-				}
-				sb.Append("|");
-			}
-			if(sb.Length >0)
-			{
-				sb.Remove(sb.Length-1,1);
-			}
-			this.m_objCurrApp.m_ObjDataVO.m_strChargeInfo = sb.ToString();
-		}
+                this.m_btnSend.Focus();
+                return true;
+            }
+            else
+            {
+                MessageBox.Show(this, strMessage, "iCare-检验申请");
+            }
+            return false;
+        }
 
-		private void m_mthSetSaveOK()
-		{
+        private bool m_blnCheckValidate()
+        {
+            if (m_txtPatName.Text == "")
+            {
+                MessageBox.Show("病人姓名不能为空!", c_strMessageBoxTitle, MessageBoxButtons.OK);
+                return false;
+            }
+            if (m_cboSampleType.SelectedValue == null)
+            {
+                MessageBox.Show("样本类型不能为空!", c_strMessageBoxTitle, MessageBoxButtons.OK);
+                return false;
+            }
+            //			if(this.m_txtApplDep.Text == "")
+            //			{
+            //				MessageBox.Show("申请科室不能为空!",c_strMessageBoxTitle,MessageBoxButtons.OK);
+            //				return;
+            //			}
+            //			if(this.m_txtApplDoc.Text == "")
+            //			{
+            //				MessageBox.Show("申请医生不能为空!",c_strMessageBoxTitle,MessageBoxButtons.OK);
+            //				return;
+            //			}
+            if (this.m_lsvCheckInfo.Items.Count == 0)
+            {
+                MessageBox.Show("检验内容不能为空!", c_strMessageBoxTitle, MessageBoxButtons.OK);
+                return false;
+            }
+            return true;
+        }
+
+        private void m_mthCollectData()
+        {
+            this.m_objCurrApp.m_StrPatientCardID = this.m_txtPatCardID.Text.Trim();
+            if (this.m_txtPatientID.Text.Trim() == "")
+            {
+                this.m_objCurrApp.m_StrPatientID = "-1";
+            }
+            else
+            {
+                this.m_objCurrApp.m_StrPatientID = this.m_txtPatientID.Text.Trim();
+            }
+            this.m_objCurrApp.m_StrPatientInhospNO = this.m_txtInhospNO.Text.Trim();
+            this.m_objCurrApp.m_StrPatientName = this.m_txtPatName.Text.Trim();
+            this.m_objCurrApp.m_StrSex = this.m_cboSex.Text.Trim();
+            if (this.m_txtAge.Text.Trim() != null)
+            {
+                this.m_objCurrApp.m_StrAge = this.m_txtAge.Text.Trim() + " " + this.m_cboAgeUnit.Text.Trim();
+            }
+            else
+            {
+                this.m_objCurrApp.m_StrAge = null;
+            }
+            this.m_objCurrApp.m_StrApplEmpID = this.m_txtAppDoct.m_StrEmployeeID;
+            this.m_objCurrApp.m_StrApplDeptID = this.m_txtAppDept.m_StrDeptID;
+            this.m_objCurrApp.m_StrBedNO = this.m_txtBedNO.Text.Trim();
+            this.m_objCurrApp.m_StrPatientType = this.m_cboPatientType.SelectedValue.ToString().Trim();
+            if (this.m_chkEmergency.Checked)
+            {
+                this.m_objCurrApp.m_IntEmergency = 1;
+            }
+            else
+            {
+                this.m_objCurrApp.m_IntEmergency = 0;
+            }
+            if (this.m_chkSpecial.Checked)
+            {
+                this.m_objCurrApp.m_IntSpecial = 1;
+            }
+            else
+            {
+                this.m_objCurrApp.m_IntSpecial = 0;
+            }
+            this.m_objCurrApp.m_StrDiagnose = this.m_rtbDiagnose.Text.Trim();
+            this.m_objCurrApp.m_StrSummary = this.m_rtbAppSummary.Text.Trim();
+            this.m_objCurrApp.m_StrOperatorID = m_strGetOp();
+
+            this.m_objCurrApp.m_StrAppDat = this.m_dtpAppDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            if (this.m_cboSampleType.SelectedValue != null)
+            {
+                this.m_objCurrApp.m_ObjDataVO.m_strSampleTypeID = this.m_cboSampleType.SelectedValue.ToString();
+                this.m_objCurrApp.m_ObjDataVO.m_strSampleType = this.m_cboSampleType.Text;
+            }
+            this.m_objCurrApp.m_ObjDataVO.m_strCheckContent = this.m_txtCheckContent.Text;
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            foreach (ListViewItem lvi in this.m_lsvChargeInfo.Items)
+            {
+                for (int i = 0; i < lvi.SubItems.Count; i++)
+                {
+                    sb.Append(lvi.SubItems[i].Text);
+                    sb.Append(">");
+                }
+                if (sb.Length > 0)
+                {
+                    sb.Remove(sb.Length - 1, 1);
+                }
+                sb.Append("|");
+            }
+            if (sb.Length > 0)
+            {
+                sb.Remove(sb.Length - 1, 1);
+            }
+            this.m_objCurrApp.m_ObjDataVO.m_strChargeInfo = sb.ToString();
+        }
+
+        private void m_mthSetSaveOK()
+        {
             string strConfig = "";
-            try 
+            try
             {
                 long lngRes = new clsDomainController_ApplicationManage().m_lngGetCollocate(out strConfig, "4002");
                 switch (strConfig)
@@ -1975,381 +1975,381 @@ namespace com.digitalwave.iCare.gui.LIS
             catch (Exception)
             {
                 throw;
-            } 
+            }
 
-			if(this.m_lvtCurrApp == null)
-			{
-				ListViewItem lvtItem = new ListViewItem(this.m_objCurrApp.m_StrAppID.Substring(8,10));
-				lvtItem.SubItems.Add(this.m_objCurrApp.m_StrPatientName);
+            if (this.m_lvtCurrApp == null)
+            {
+                ListViewItem lvtItem = new ListViewItem(this.m_objCurrApp.m_StrAppID.Substring(8, 10));
+                lvtItem.SubItems.Add(this.m_objCurrApp.m_StrPatientName);
                 lvtItem.SubItems.Add(strConfig);
-				lvtItem.Tag = this.m_objCurrApp.m_ObjDataVO;
-				m_lsvAppl.Items.Add(lvtItem);
-				this.m_lvtCurrApp = lvtItem;
-			}
-			this.m_lvtCurrApp.SubItems[0].Text = this.m_objCurrApp.m_StrAppID.Substring(8,10);
-			this.m_lvtCurrApp.SubItems[1].Text = this.m_objCurrApp.m_StrPatientName;
+                lvtItem.Tag = this.m_objCurrApp.m_ObjDataVO;
+                m_lsvAppl.Items.Add(lvtItem);
+                this.m_lvtCurrApp = lvtItem;
+            }
+            this.m_lvtCurrApp.SubItems[0].Text = this.m_objCurrApp.m_StrAppID.Substring(8, 10);
+            this.m_lvtCurrApp.SubItems[1].Text = this.m_objCurrApp.m_StrPatientName;
             this.m_lvtCurrApp.SubItems[2].Text = strConfig;
-			this.m_txtAppNO.Text = m_objCurrApp.m_StrAppID.Substring(8,10);
-			
-			m_mthSetUIControl(false);
+            this.m_txtAppNO.Text = m_objCurrApp.m_StrAppID.Substring(8, 10);
 
-			this.m_blnIsModified = false;
-			this.m_btnSend.Enabled = true;
-			this.m_btnSave.Enabled = false;
-			this.m_btnDelete.Enabled = true;
-			this.m_btnModify.Enabled = true;
-			this.m_btnNew.Enabled = true;
-			this.m_btnPint.Enabled = true;
-			this.m_btnPreview.Enabled = true;
-			if(!this.m_lvtCurrApp.Selected)
-			{
-				this.m_lvtCurrApp.Selected = true;
-			}
-		}
+            m_mthSetUIControl(false);
 
-
-
-		private void m_mthResetAll()
-		{
-			m_mthResetAppInfo();
-			m_mthResetCheckInfo();
-		}
-		private void m_mthResetAppInfo()
-		{
-
-			m_txtPatientID.Clear();
-			m_txtPatCardID.Clear();
-			m_txtInhospNO.Clear();
-			m_txtPatName.Clear();
-			m_cboSex.Text = null;
-			m_txtAge.Clear();
-			m_cboAgeUnit.Text = "年";
-			m_cboSampleType.SelectedItem = null;
-			m_cboSampleType.SelectedItem = null;
-
-			m_txtAppDept.m_StrDeptID = null;
-			m_txtBedNO.Text = null;
-			m_txtAppDoct.m_StrEmployeeID =null;
-			m_dtpAppDate.Value =DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-			if(m_cboPatientType.Items.Count > 0)
-			{
-				m_cboPatientType.SelectedIndex = 0;
-			}
-			this.m_chkEmergency.Checked = false;			
-			this.m_chkSpecial.Checked = false;
-			
-			this.m_rtbDiagnose.Clear();
-			this.m_rtbAppSummary.Clear();
-			this.m_txtAppNO.Clear();
-			this.m_lblChargeState.Text = "";
-
-			this.m_txtCheckContent.Clear();
-		}
-		private void m_mthResetCheckInfo()
-		{
-			this.m_lsvCheckInfo.Items.Clear();
-			this.m_lsvChargeInfo.Items.Clear();
-		}
-
-		public void m_mthEnterInitStatus()
-		{
-			m_mthResetAll();
-			m_mthSetUIControl(false);
-
-			this.m_objCurrApp = null;
-			this.m_lvtCurrApp = null;
-			this.m_blnIsModified = false;
-
-			this.m_btnSend.Enabled = false;
-			this.m_btnSave.Enabled = false;
-			this.m_btnDelete.Enabled = false;
-			this.m_btnModify.Enabled = false;
-			this.m_btnNew.Enabled = true;
-			this.m_btnPreview.Enabled = false;
-			this.m_btnPint.Enabled = false;
-		}
+            this.m_blnIsModified = false;
+            this.m_btnSend.Enabled = true;
+            this.m_btnSave.Enabled = false;
+            this.m_btnDelete.Enabled = true;
+            this.m_btnModify.Enabled = true;
+            this.m_btnNew.Enabled = true;
+            this.m_btnPint.Enabled = true;
+            this.m_btnPreview.Enabled = true;
+            if (!this.m_lvtCurrApp.Selected)
+            {
+                this.m_lvtCurrApp.Selected = true;
+            }
+        }
 
 
-		private void m_mthShowAppCheckInfo(clsLISAppCheckInfoItem[] p_objItemArr)
-		{
-			if(p_objItemArr != null)
-			{
-				for(int i=0;i<p_objItemArr.Length;i++)
-				{
-					if(p_objItemArr[i] != null)
-					{
-						ListViewItem objItem = new ListViewItem(p_objItemArr[i].m_StrAppGroupName);
-						objItem.SubItems.Add(p_objItemArr[i].m_StrFood);
-						objItem.SubItems.Add(p_objItemArr[i].m_StrMedicalExam);
-						objItem.SubItems.Add(p_objItemArr[i].m_StrReservation);
-						this.m_lsvCheckInfo.Items.Add(objItem);
-					}
-				}
-			}
-		}
 
-		private void m_mthShowAppBaseInfo(clsLisApplMainVO p_objAppVO)
-		{
-			if(p_objAppVO != null)
-			{
-				m_txtPatientID.Text = p_objAppVO.m_strPatientID;
-				m_txtPatCardID.Text = p_objAppVO.m_strPatientcardID;
-				m_txtInhospNO.Text = p_objAppVO.m_strPatient_inhospitalno_chr;
-				m_txtPatName.Text = p_objAppVO.m_strPatient_Name;
-				m_cboSex.Text = p_objAppVO.m_strSex;
-				m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(p_objAppVO.m_strAge);
-				m_cboAgeUnit.Text = clsAgeConverter.m_strGetAgeUnit(p_objAppVO.m_strAge);
+        private void m_mthResetAll()
+        {
+            m_mthResetAppInfo();
+            m_mthResetCheckInfo();
+        }
+        private void m_mthResetAppInfo()
+        {
 
-				m_txtAppDept.m_StrDeptID = p_objAppVO.m_strAppl_DeptID;
-				m_txtBedNO.Text = p_objAppVO.m_strBedNO;
-				m_txtAppDoct.m_StrDeptID = p_objAppVO.m_strAppl_DeptID;
-				m_txtAppDoct.m_StrEmployeeID = p_objAppVO.m_strAppl_EmpID;
-				if(Microsoft.VisualBasic.Information.IsDate(p_objAppVO.m_strAppl_Dat))
-				{
-					m_dtpAppDate.Value = DateTime.Parse(p_objAppVO.m_strAppl_Dat);
-				}
-				else
-				{
-					m_dtpAppDate.Value = DateTime.Now;
-				}
-				if(p_objAppVO.m_strPatientType == null || p_objAppVO.m_strPatientType.Trim() == "")
-				{
-					m_cboPatientType.SelectedItem = null;
-					m_cboPatientType.SelectedItem = null;
-					m_cboPatientType.SelectedItem = null;
-					m_cboPatientType.Refresh();
-				}
-				else
-				{
-					try
-					{
-						m_cboPatientType.SelectedValue = p_objAppVO.m_strPatientType;
-						m_cboPatientType.SelectedValue = p_objAppVO.m_strPatientType;
-						m_cboPatientType.SelectedValue = p_objAppVO.m_strPatientType;
-						m_cboPatientType.Refresh();
-					}
-					catch
-					{
-						m_cboPatientType.SelectedItem = null;
-						m_cboPatientType.SelectedItem = null;
-						m_cboPatientType.SelectedItem = null;
-						m_cboPatientType.Refresh();
-					}
-				}
+            m_txtPatientID.Clear();
+            m_txtPatCardID.Clear();
+            m_txtInhospNO.Clear();
+            m_txtPatName.Clear();
+            m_cboSex.Text = null;
+            m_txtAge.Clear();
+            m_cboAgeUnit.Text = "年";
+            m_cboSampleType.SelectedItem = null;
+            m_cboSampleType.SelectedItem = null;
 
-				if(p_objAppVO.m_intEmergency == 1)
-				{
-					this.m_chkEmergency.Checked = true;
-				}
-				else
-				{
-					this.m_chkEmergency.Checked = false;
-				}
+            m_txtAppDept.m_StrDeptID = null;
+            m_txtBedNO.Text = null;
+            m_txtAppDoct.m_StrEmployeeID = null;
+            m_dtpAppDate.Value = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            if (m_cboPatientType.Items.Count > 0)
+            {
+                m_cboPatientType.SelectedIndex = 0;
+            }
+            this.m_chkEmergency.Checked = false;
+            this.m_chkSpecial.Checked = false;
 
-				if(p_objAppVO.m_intSpecial == 1)
-				{
-					this.m_chkSpecial.Checked = true;
-				}
-				else
-				{
-					this.m_chkSpecial.Checked = false;
-				}
+            this.m_rtbDiagnose.Clear();
+            this.m_rtbAppSummary.Clear();
+            this.m_txtAppNO.Clear();
+            this.m_lblChargeState.Text = "";
 
-				this.m_rtbDiagnose.Text = p_objAppVO.m_strDiagnose;
-				this.m_rtbAppSummary.Text = p_objAppVO.m_strSummary;
-				try
-				{
-					this.m_txtAppNO.Text = p_objAppVO.m_strAPPLICATION_ID.Substring(8,10);
-				}
-				catch{};
-	
-				this.m_txtCheckContent.Text = p_objAppVO.m_strCheckContent;
-				if(p_objAppVO.m_strChargeInfo != null)
-				{
-					string[] strChargeInfos = p_objAppVO.m_strChargeInfo.Split(new char[]{'|'});
-					foreach(string str in strChargeInfos)
-					{
-						if(str != null && str.Trim() != "")
-						{
-							ListViewItem lvi = new ListViewItem();
-							string[] strItems = str.Split(new char[]{'>'});
-							lvi.Text = strItems[0];
-							for(int j=1;j<strItems.Length;j++)
-							{
-								lvi.SubItems.Add(strItems[j]);
-							}
-							this.m_lsvChargeInfo.Items.Add(lvi);
-						}						
-					}
-				}
-				try
-				{
-					this.m_cboSampleType.SelectedValue = p_objAppVO.m_strSampleTypeID;
-					this.m_cboSampleType.SelectedValue = p_objAppVO.m_strSampleTypeID;
-					this.m_cboSampleType.Refresh();
-				}
-				catch
-				{
-					this.m_cboSampleType.SelectedItem = null;
-					this.m_cboSampleType.SelectedItem = null;
-					this.m_cboSampleType.Refresh();
-				}
-				switch(p_objAppVO.m_intChargeState)
-				{
-					case 0:
-						this.m_lblChargeState.Text = "";
-						break;
-					case 1:
-						this.m_lblChargeState.Text = "未收费";
-						this.m_lblChargeState.ForeColor = System.Drawing.Color.Red;
-						break;
-					case 2:
-						this.m_lblChargeState.Text = "已收费";
-						this.m_lblChargeState.ForeColor = System.Drawing.Color.Black;
-						break;
-					default:
-						this.m_lblChargeState.Text = "";
-						break;
-				}
-			}
-		}
+            this.m_txtCheckContent.Clear();
+        }
+        private void m_mthResetCheckInfo()
+        {
+            this.m_lsvCheckInfo.Items.Clear();
+            this.m_lsvChargeInfo.Items.Clear();
+        }
+
+        public void m_mthEnterInitStatus()
+        {
+            m_mthResetAll();
+            m_mthSetUIControl(false);
+
+            this.m_objCurrApp = null;
+            this.m_lvtCurrApp = null;
+            this.m_blnIsModified = false;
+
+            this.m_btnSend.Enabled = false;
+            this.m_btnSave.Enabled = false;
+            this.m_btnDelete.Enabled = false;
+            this.m_btnModify.Enabled = false;
+            this.m_btnNew.Enabled = true;
+            this.m_btnPreview.Enabled = false;
+            this.m_btnPint.Enabled = false;
+        }
 
 
-		private void m_mthSetUIControl(bool p_blnModify)
-		{
-			this.m_grpPatientInfo.Enabled = p_blnModify;
-			this.m_btnNewItem.Enabled = p_blnModify;
-			this.m_btnDeleteItem.Enabled = p_blnModify;
-		}
+        private void m_mthShowAppCheckInfo(clsLISAppCheckInfoItem[] p_objItemArr)
+        {
+            if (p_objItemArr != null)
+            {
+                for (int i = 0; i < p_objItemArr.Length; i++)
+                {
+                    if (p_objItemArr[i] != null)
+                    {
+                        ListViewItem objItem = new ListViewItem(p_objItemArr[i].m_StrAppGroupName);
+                        objItem.SubItems.Add(p_objItemArr[i].m_StrFood);
+                        objItem.SubItems.Add(p_objItemArr[i].m_StrMedicalExam);
+                        objItem.SubItems.Add(p_objItemArr[i].m_StrReservation);
+                        this.m_lsvCheckInfo.Items.Add(objItem);
+                    }
+                }
+            }
+        }
 
-		private bool m_blnAppUnSave()
-		{
-			return m_blnIsModified;
-		}
+        private void m_mthShowAppBaseInfo(clsLisApplMainVO p_objAppVO)
+        {
+            if (p_objAppVO != null)
+            {
+                m_txtPatientID.Text = p_objAppVO.m_strPatientID;
+                m_txtPatCardID.Text = p_objAppVO.m_strPatientcardID;
+                m_txtInhospNO.Text = p_objAppVO.m_strPatient_inhospitalno_chr;
+                m_txtPatName.Text = p_objAppVO.m_strPatient_Name;
+                m_cboSex.Text = p_objAppVO.m_strSex;
+                m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(Convert.ToDateTime(p_objAppVO.m_strBirthDay));            // clsAgeConverter.m_strGetAgeNum(p_objAppVO.m_strAge);
+                m_cboAgeUnit.Text = clsAgeConverter.m_strGetAgeUnit(p_objAppVO.m_strAge);
+
+                m_txtAppDept.m_StrDeptID = p_objAppVO.m_strAppl_DeptID;
+                m_txtBedNO.Text = p_objAppVO.m_strBedNO;
+                m_txtAppDoct.m_StrDeptID = p_objAppVO.m_strAppl_DeptID;
+                m_txtAppDoct.m_StrEmployeeID = p_objAppVO.m_strAppl_EmpID;
+                if (Microsoft.VisualBasic.Information.IsDate(p_objAppVO.m_strAppl_Dat))
+                {
+                    m_dtpAppDate.Value = DateTime.Parse(p_objAppVO.m_strAppl_Dat);
+                }
+                else
+                {
+                    m_dtpAppDate.Value = DateTime.Now;
+                }
+                if (p_objAppVO.m_strPatientType == null || p_objAppVO.m_strPatientType.Trim() == "")
+                {
+                    m_cboPatientType.SelectedItem = null;
+                    m_cboPatientType.SelectedItem = null;
+                    m_cboPatientType.SelectedItem = null;
+                    m_cboPatientType.Refresh();
+                }
+                else
+                {
+                    try
+                    {
+                        m_cboPatientType.SelectedValue = p_objAppVO.m_strPatientType;
+                        m_cboPatientType.SelectedValue = p_objAppVO.m_strPatientType;
+                        m_cboPatientType.SelectedValue = p_objAppVO.m_strPatientType;
+                        m_cboPatientType.Refresh();
+                    }
+                    catch
+                    {
+                        m_cboPatientType.SelectedItem = null;
+                        m_cboPatientType.SelectedItem = null;
+                        m_cboPatientType.SelectedItem = null;
+                        m_cboPatientType.Refresh();
+                    }
+                }
+
+                if (p_objAppVO.m_intEmergency == 1)
+                {
+                    this.m_chkEmergency.Checked = true;
+                }
+                else
+                {
+                    this.m_chkEmergency.Checked = false;
+                }
+
+                if (p_objAppVO.m_intSpecial == 1)
+                {
+                    this.m_chkSpecial.Checked = true;
+                }
+                else
+                {
+                    this.m_chkSpecial.Checked = false;
+                }
+
+                this.m_rtbDiagnose.Text = p_objAppVO.m_strDiagnose;
+                this.m_rtbAppSummary.Text = p_objAppVO.m_strSummary;
+                try
+                {
+                    this.m_txtAppNO.Text = p_objAppVO.m_strAPPLICATION_ID.Substring(8, 10);
+                }
+                catch { };
+
+                this.m_txtCheckContent.Text = p_objAppVO.m_strCheckContent;
+                if (p_objAppVO.m_strChargeInfo != null)
+                {
+                    string[] strChargeInfos = p_objAppVO.m_strChargeInfo.Split(new char[] { '|' });
+                    foreach (string str in strChargeInfos)
+                    {
+                        if (str != null && str.Trim() != "")
+                        {
+                            ListViewItem lvi = new ListViewItem();
+                            string[] strItems = str.Split(new char[] { '>' });
+                            lvi.Text = strItems[0];
+                            for (int j = 1; j < strItems.Length; j++)
+                            {
+                                lvi.SubItems.Add(strItems[j]);
+                            }
+                            this.m_lsvChargeInfo.Items.Add(lvi);
+                        }
+                    }
+                }
+                try
+                {
+                    this.m_cboSampleType.SelectedValue = p_objAppVO.m_strSampleTypeID;
+                    this.m_cboSampleType.SelectedValue = p_objAppVO.m_strSampleTypeID;
+                    this.m_cboSampleType.Refresh();
+                }
+                catch
+                {
+                    this.m_cboSampleType.SelectedItem = null;
+                    this.m_cboSampleType.SelectedItem = null;
+                    this.m_cboSampleType.Refresh();
+                }
+                switch (p_objAppVO.m_intChargeState)
+                {
+                    case 0:
+                        this.m_lblChargeState.Text = "";
+                        break;
+                    case 1:
+                        this.m_lblChargeState.Text = "未收费";
+                        this.m_lblChargeState.ForeColor = System.Drawing.Color.Red;
+                        break;
+                    case 2:
+                        this.m_lblChargeState.Text = "已收费";
+                        this.m_lblChargeState.ForeColor = System.Drawing.Color.Black;
+                        break;
+                    default:
+                        this.m_lblChargeState.Text = "";
+                        break;
+                }
+            }
+        }
+
+
+        private void m_mthSetUIControl(bool p_blnModify)
+        {
+            this.m_grpPatientInfo.Enabled = p_blnModify;
+            this.m_btnNewItem.Enabled = p_blnModify;
+            this.m_btnDeleteItem.Enabled = p_blnModify;
+        }
+
+        private bool m_blnAppUnSave()
+        {
+            return m_blnIsModified;
+        }
 
         //操作人员ID
-		public string m_strGetOp()
-		{
-			return this.LoginInfo.m_strEmpID;
-		}
+        public string m_strGetOp()
+        {
+            return this.LoginInfo.m_strEmpID;
+        }
 
-		private void m_miSend_Click(object sender, System.EventArgs e)
-		{
-			//			if(m_lsvAppl.SelectedItems.Count>0)
-			//			{
-			//				com.digitalwave.iCare.gui.LIS.clsController_Appl m_objController = (clsController_Appl)this.m_objController;
-			//				System.Data.DataRow dtRow=(System.Data.DataRow)m_lsvAppl.SelectedItems[0].Tag;
-			//				long lngRes=0;
-			//				lngRes=m_objController.m_lngSetApplSendStatus(dtRow["APPLICATION_ID_CHR"].ToString().Trim());	
-			//				if(lngRes>0)
-			//				{
-			//					m_lsvAppl.SelectedItems[0].SubItems[3].Text="已发送";
-			//				}
-			//			}
-			this.DialogResult = DialogResult.OK;
-		}
-
-
-		#region 接口
-		#region 查看接口
-		public frmLisAppl(string p_strAppID)
-		{
-			InitializeComponent();
-			this.m_palHead.Visible = false;
-			this.m_btnQuery.Visible = false;
-			this.m_btnDelete.Visible = false;
-			this.m_btnNew.Visible = false;
-			m_blnIsDialog = true;
-			this.StartPosition = FormStartPosition.CenterScreen;
-
-			clsLisApplMainVO[] objAppVOarr= null;
-			clsLisApplMainVO objAppVO = null;
-			long lngRes = new clsDomainController_ApplicationManage().m_lngGetApplicationInfoByApplicationID(p_strAppID,out objAppVOarr);
-			if(lngRes <= 0)
-			{
-				this.Enabled = false;
-				return;
-			}
-			if(objAppVOarr == null || objAppVOarr.Length == 0)
-			{
-				m_mthNewAppNoShow(objAppVO);
-				return;
-			}
-			objAppVO = objAppVOarr[0];
-			m_objDialogPatientInfo = objAppVO;
-			this.VisibleChanged += new EventHandler(frmLisAppl_VisibleChangedShowInfo);
-			this.m_objCurrApp = new clsLIS_App(objAppVO,true);
+        private void m_miSend_Click(object sender, System.EventArgs e)
+        {
+            //			if(m_lsvAppl.SelectedItems.Count>0)
+            //			{
+            //				com.digitalwave.iCare.gui.LIS.clsController_Appl m_objController = (clsController_Appl)this.m_objController;
+            //				System.Data.DataRow dtRow=(System.Data.DataRow)m_lsvAppl.SelectedItems[0].Tag;
+            //				long lngRes=0;
+            //				lngRes=m_objController.m_lngSetApplSendStatus(dtRow["APPLICATION_ID_CHR"].ToString().Trim());	
+            //				if(lngRes>0)
+            //				{
+            //					m_lsvAppl.SelectedItems[0].SubItems[3].Text="已发送";
+            //				}
+            //			}
+            this.DialogResult = DialogResult.OK;
+        }
 
 
-			this.m_mthSetUIControl(false);
-			if(objAppVO.m_intPStatus_int == 1)
-			{
-				this.m_btnSend.Enabled = true;
-				this.m_btnSave.Enabled = false;
-				this.m_btnModify.Enabled = true;
-				this.m_btnDelete.Enabled = true;
-				this.m_btnNew.Enabled = true;
-			}
-			else if(objAppVO.m_intPStatus_int == 2)
-			{
-				this.m_btnSend.Enabled = false;
-				this.m_btnSave.Enabled = false;
-				this.m_btnModify.Enabled = false;
-				this.m_btnDelete.Enabled = false;
-				this.m_btnNew.Enabled = true;
-			}
-			this.m_btnPint.Enabled = true;
-			this.m_btnPreview.Enabled = true;
-		}
-		private void frmLisAppl_VisibleChangedShowInfo(object sender, EventArgs e)
-		{
-			this.m_mthShowAppBaseInfo(this.m_objDialogPatientInfo);
+        #region 接口
+        #region 查看接口
+        public frmLisAppl(string p_strAppID)
+        {
+            InitializeComponent();
+            this.m_palHead.Visible = false;
+            this.m_btnQuery.Visible = false;
+            this.m_btnDelete.Visible = false;
+            this.m_btnNew.Visible = false;
+            m_blnIsDialog = true;
+            this.StartPosition = FormStartPosition.CenterScreen;
 
-			clsLISAppCheckInfoItem[] objItemArr = null;
-			this.m_objController.m_mthGetAppCheckInfo(m_objDialogPatientInfo.m_strAPPLICATION_ID,out objItemArr);
-			if(objItemArr != null)
-			{
-				m_mthShowAppCheckInfo(objItemArr);
-			}
-		}
-		#endregion
-		
-		#region 住院接口[BIH]
+            clsLisApplMainVO[] objAppVOarr = null;
+            clsLisApplMainVO objAppVO = null;
+            long lngRes = new clsDomainController_ApplicationManage().m_lngGetApplicationInfoByApplicationID(p_strAppID, out objAppVOarr);
+            if (lngRes <= 0)
+            {
+                this.Enabled = false;
+                return;
+            }
+            if (objAppVOarr == null || objAppVOarr.Length == 0)
+            {
+                m_mthNewAppNoShow(objAppVO);
+                return;
+            }
+            objAppVO = objAppVOarr[0];
+            m_objDialogPatientInfo = objAppVO;
+            this.VisibleChanged += new EventHandler(frmLisAppl_VisibleChangedShowInfo);
+            this.m_objCurrApp = new clsLIS_App(objAppVO, true);
+
+
+            this.m_mthSetUIControl(false);
+            if (objAppVO.m_intPStatus_int == 1)
+            {
+                this.m_btnSend.Enabled = true;
+                this.m_btnSave.Enabled = false;
+                this.m_btnModify.Enabled = true;
+                this.m_btnDelete.Enabled = true;
+                this.m_btnNew.Enabled = true;
+            }
+            else if (objAppVO.m_intPStatus_int == 2)
+            {
+                this.m_btnSend.Enabled = false;
+                this.m_btnSave.Enabled = false;
+                this.m_btnModify.Enabled = false;
+                this.m_btnDelete.Enabled = false;
+                this.m_btnNew.Enabled = true;
+            }
+            this.m_btnPint.Enabled = true;
+            this.m_btnPreview.Enabled = true;
+        }
+        private void frmLisAppl_VisibleChangedShowInfo(object sender, EventArgs e)
+        {
+            this.m_mthShowAppBaseInfo(this.m_objDialogPatientInfo);
+
+            clsLISAppCheckInfoItem[] objItemArr = null;
+            this.m_objController.m_mthGetAppCheckInfo(m_objDialogPatientInfo.m_strAPPLICATION_ID, out objItemArr);
+            if (objItemArr != null)
+            {
+                m_mthShowAppCheckInfo(objItemArr);
+            }
+        }
+        #endregion
+
+        #region 住院接口[BIH]
         #region old
-        public frmLisAppl( clsApplyReport_T_VO p_objReportVO)
-		{
-			InitializeComponent();
-			clsLisApplMainVO objPatientInfo = new clsLisApplMainVO();
-			objPatientInfo.m_intForm_int = 0;
-			objPatientInfo.m_intPStatus_int = 1;
-			objPatientInfo.m_strPatientType = "1";
-			objPatientInfo.m_strAppl_Dat = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-			objPatientInfo.m_strPatient_Name = p_objReportVO.m_StrPatientName;
-			objPatientInfo.m_strAge = p_objReportVO.m_StrPatientAge;
-			objPatientInfo.m_strSex = p_objReportVO.m_StrPatientSex;
-			objPatientInfo.m_strPatientID = p_objReportVO.m_StrPatientID;
-			objPatientInfo.m_strPatient_inhospitalno_chr = p_objReportVO.m_StrInPatientID;
-			objPatientInfo.m_strPatientcardID = p_objReportVO.m_StrPatientCardID;
-			objPatientInfo.m_strPatient_SubNO = p_objReportVO.m_StrOutPatientID;
-			objPatientInfo.m_strAppl_EmpID = p_objReportVO.m_StrDeliverDoctorID;
-			objPatientInfo.m_strAppl_DeptID = p_objReportVO.m_StrDeptID;
-			objPatientInfo.m_strOperator_ID = p_objReportVO.m_StrDeliverDoctorID;
-			objPatientInfo.m_strDiagnose = p_objReportVO.m_StrClinicDiagnose;
-			objPatientInfo.m_strBedNO = p_objReportVO.m_StrBedName;
-			objPatientInfo.m_strICD = null;
-			m_mthNewAppNoShow(objPatientInfo);
-		}
-		public void m_mthNewAppNoShow(clsLisApplMainVO p_objPatientInfo)
-		{
-			this.m_palHead.Visible = false;
-			this.m_btnQuery.Visible = false;
-			this.m_btnDelete.Visible = false;
-			this.m_btnNew.Visible = false;
-			m_blnIsDialog = true;
-			m_objDialogPatientInfo = p_objPatientInfo;
-			this.m_btnNew_Click(null,null);	
-			this.VisibleChanged += new EventHandler(frmLisAppl_VisibleChanged);
-			this.StartPosition = FormStartPosition.CenterScreen;
+        public frmLisAppl(clsApplyReport_T_VO p_objReportVO)
+        {
+            InitializeComponent();
+            clsLisApplMainVO objPatientInfo = new clsLisApplMainVO();
+            objPatientInfo.m_intForm_int = 0;
+            objPatientInfo.m_intPStatus_int = 1;
+            objPatientInfo.m_strPatientType = "1";
+            objPatientInfo.m_strAppl_Dat = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            objPatientInfo.m_strPatient_Name = p_objReportVO.m_StrPatientName;
+            objPatientInfo.m_strAge = p_objReportVO.m_StrPatientAge;
+            objPatientInfo.m_strSex = p_objReportVO.m_StrPatientSex;
+            objPatientInfo.m_strPatientID = p_objReportVO.m_StrPatientID;
+            objPatientInfo.m_strPatient_inhospitalno_chr = p_objReportVO.m_StrInPatientID;
+            objPatientInfo.m_strPatientcardID = p_objReportVO.m_StrPatientCardID;
+            objPatientInfo.m_strPatient_SubNO = p_objReportVO.m_StrOutPatientID;
+            objPatientInfo.m_strAppl_EmpID = p_objReportVO.m_StrDeliverDoctorID;
+            objPatientInfo.m_strAppl_DeptID = p_objReportVO.m_StrDeptID;
+            objPatientInfo.m_strOperator_ID = p_objReportVO.m_StrDeliverDoctorID;
+            objPatientInfo.m_strDiagnose = p_objReportVO.m_StrClinicDiagnose;
+            objPatientInfo.m_strBedNO = p_objReportVO.m_StrBedName;
+            objPatientInfo.m_strICD = null;
+            m_mthNewAppNoShow(objPatientInfo);
+        }
+        public void m_mthNewAppNoShow(clsLisApplMainVO p_objPatientInfo)
+        {
+            this.m_palHead.Visible = false;
+            this.m_btnQuery.Visible = false;
+            this.m_btnDelete.Visible = false;
+            this.m_btnNew.Visible = false;
+            m_blnIsDialog = true;
+            m_objDialogPatientInfo = p_objPatientInfo;
+            this.m_btnNew_Click(null, null);
+            this.VisibleChanged += new EventHandler(frmLisAppl_VisibleChanged);
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
         #endregion
         /// <summary>
@@ -2367,32 +2367,32 @@ namespace com.digitalwave.iCare.gui.LIS
 
         #region 门诊接口
         public event dlgRequestChargeInfoEventHandler evnRequestChargeInfo;
-		public string m_StrRecordID
-		{
-			get
-			{
-				return this.m_objCurrApp.m_StrAppID;
-			}
-		}
+        public string m_StrRecordID
+        {
+            get
+            {
+                return this.m_objCurrApp.m_StrAppID;
+            }
+        }
 
-		/// <summary>
-		/// 门诊接口：直接打开
-		/// </summary>
-		/// <param name="p_objPatientInfo">患者基本信息</param>
-		/// <returns></returns>
-		public DialogResult m_mthNewApp(clsLisApplMainVO p_objPatientInfo)
-		{
-			this.m_palHead.Visible = false;
-			this.m_btnQuery.Visible = false;
-			this.m_btnDelete.Visible = false;
-			this.m_btnNew.Visible = false;
-			m_blnIsDialog = true;
-			this.m_btnNew_Click(null,null);	
-			m_objDialogPatientInfo = p_objPatientInfo;
-			this.VisibleChanged += new EventHandler(frmLisAppl_VisibleChanged);
-			this.StartPosition = FormStartPosition.CenterScreen;
-			return this.ShowDialog();
-		}
+        /// <summary>
+        /// 门诊接口：直接打开
+        /// </summary>
+        /// <param name="p_objPatientInfo">患者基本信息</param>
+        /// <returns></returns>
+        public DialogResult m_mthNewApp(clsLisApplMainVO p_objPatientInfo)
+        {
+            this.m_palHead.Visible = false;
+            this.m_btnQuery.Visible = false;
+            this.m_btnDelete.Visible = false;
+            this.m_btnNew.Visible = false;
+            m_blnIsDialog = true;
+            this.m_btnNew_Click(null, null);
+            m_objDialogPatientInfo = p_objPatientInfo;
+            this.VisibleChanged += new EventHandler(frmLisAppl_VisibleChanged);
+            this.StartPosition = FormStartPosition.CenterScreen;
+            return this.ShowDialog();
+        }
         /// <summary>
 		/// 门诊接口：传入收费项目;
 		/// 收费信息 和 申请单元 为空时功能和接口“ 门诊接口：直接打开”功能相同;
@@ -2443,115 +2443,115 @@ namespace com.digitalwave.iCare.gui.LIS
                     intAgeNum = Convert.ToInt32(strAge.Substring(0, idx).Trim());
                     p_objPatientInfo.m_strAge = intAgeNum.ToString() + " " + "小时";
                 }
-      
+
             }
             catch
             {
- 
+
             }
-           
+
             return this.m_mthNewApp(p_objPatientInfo, p_objChargeInfoArr, p_blnShow, true);
         }
-		#endregion
+        #endregion
 
 
-		/// <summary>
-		/// 接口：传入收费项目;
-		/// 收费信息 和 申请单元 为空时功能和接口“ 门诊接口：直接打开”功能相同;
-		/// </summary>
-		/// <param name="p_objPatientInfo">患者基本信息</param>
-		/// <param name="p_objChargeInfoArr">收费信息</param>
-		/// <param name="p_strApplyUnitIDArr">申请单元ID</param>
-		/// <returns></returns>
-		private DialogResult m_mthNewApp(clsLisApplMainVO p_objPatientInfo,clsTestApplyItme_VO[] p_objChargeInfoArr,string[] p_strApplyUnitIDArr,bool p_blnShow,bool p_blnSend)
-		{
+        /// <summary>
+        /// 接口：传入收费项目;
+        /// 收费信息 和 申请单元 为空时功能和接口“ 门诊接口：直接打开”功能相同;
+        /// </summary>
+        /// <param name="p_objPatientInfo">患者基本信息</param>
+        /// <param name="p_objChargeInfoArr">收费信息</param>
+        /// <param name="p_strApplyUnitIDArr">申请单元ID</param>
+        /// <returns></returns>
+        private DialogResult m_mthNewApp(clsLisApplMainVO p_objPatientInfo, clsTestApplyItme_VO[] p_objChargeInfoArr, string[] p_strApplyUnitIDArr, bool p_blnShow, bool p_blnSend)
+        {
             if (p_objPatientInfo != null)
             {
                 p_objPatientInfo.m_strAge = clsAgeConverter.m_strAgeToAge(p_objPatientInfo.m_strAge);
             }
-			if(p_strApplyUnitIDArr != null)
-			{//去除重复项
-				Hashtable has = new Hashtable();
-				foreach(string str in p_strApplyUnitIDArr)
-				{
-					if(str != null)
-					{
-						if(!has.ContainsKey(str))
-							has.Add(str,str);
-					}
-				}
-				ArrayList arl = new ArrayList();
-				arl.AddRange(has.Values);
-				p_strApplyUnitIDArr = (string[])arl.ToArray(typeof(string));
-			}
-			if(!p_blnShow)
-			{
-				this.m_blnIsNoShow = true;
-				return this.m_mthNoShow(p_objPatientInfo,p_objChargeInfoArr,p_strApplyUnitIDArr,p_blnSend);
-			}
-			this.m_blnIsNoShow = false;
+            if (p_strApplyUnitIDArr != null)
+            {//去除重复项
+                Hashtable has = new Hashtable();
+                foreach (string str in p_strApplyUnitIDArr)
+                {
+                    if (str != null)
+                    {
+                        if (!has.ContainsKey(str))
+                            has.Add(str, str);
+                    }
+                }
+                ArrayList arl = new ArrayList();
+                arl.AddRange(has.Values);
+                p_strApplyUnitIDArr = (string[])arl.ToArray(typeof(string));
+            }
+            if (!p_blnShow)
+            {
+                this.m_blnIsNoShow = true;
+                return this.m_mthNoShow(p_objPatientInfo, p_objChargeInfoArr, p_strApplyUnitIDArr, p_blnSend);
+            }
+            this.m_blnIsNoShow = false;
 
-			this.m_palHead.Visible = false;
-			this.m_btnQuery.Visible = false;
-			this.m_btnDelete.Visible = false;
-			this.m_btnNew.Visible = false;
-			m_blnIsDialog = true;
-			this.m_btnNew_Click(null,null);	
-			m_objDialogPatientInfo = p_objPatientInfo;
-			this.VisibleChanged += new EventHandler(frmLisAppl_VisibleChanged);
-			this.StartPosition = FormStartPosition.CenterScreen;
-			
-			this.m_mthShowChargeInfo(p_objChargeInfoArr,false);
+            this.m_palHead.Visible = false;
+            this.m_btnQuery.Visible = false;
+            this.m_btnDelete.Visible = false;
+            this.m_btnNew.Visible = false;
+            m_blnIsDialog = true;
+            this.m_btnNew_Click(null, null);
+            m_objDialogPatientInfo = p_objPatientInfo;
+            this.VisibleChanged += new EventHandler(frmLisAppl_VisibleChanged);
+            this.StartPosition = FormStartPosition.CenterScreen;
 
-			if(p_strApplyUnitIDArr != null)
-			{
-				clsController_AppCheckContent objControllerCheckContent = new clsController_AppCheckContent(null);
-				objControllerCheckContent.m_mthGenerateAppContent(p_strApplyUnitIDArr);
+            this.m_mthShowChargeInfo(p_objChargeInfoArr, false);
 
-				if(objControllerCheckContent.m_objApps.Count == 0)
-				{
-					MessageBox.Show(this,"无法根据您所选择的内容生成检验申请单,请与管理员联系!",c_strMessageBoxTitle);
-					this.DialogResult = DialogResult.Cancel;
-					return DialogResult.Cancel;
-				}
-				if(objControllerCheckContent.m_objApps.Count > 1)
-				{
-					MessageBox.Show(this,"您所选择的内容包含在不同的报告内,请重新选择!",c_strMessageBoxTitle);
-					this.DialogResult = DialogResult.Cancel;
-					return DialogResult.Cancel;
-				}
-				this.m_lsvCheckInfo.Items.Clear();
-				m_objCurrApp.m_ObjAppApplyUnits.Clear();
-				m_objCurrApp.m_ObjAppReports.Clear();
-				m_objCurrApp.m_ObjAppApplyUnits.AddRange(objControllerCheckContent.m_objAppApplyUnits);
-				m_objCurrApp.m_ObjAppReports.AddRange(objControllerCheckContent.m_objAppReports);
+            if (p_strApplyUnitIDArr != null)
+            {
+                clsController_AppCheckContent objControllerCheckContent = new clsController_AppCheckContent(null);
+                objControllerCheckContent.m_mthGenerateAppContent(p_strApplyUnitIDArr);
 
-				if(p_objPatientInfo.m_strSampleTypeID == null || p_objPatientInfo.m_strSampleTypeID.Trim()=="")
-				{
-					m_mthSetSampleTypeFromAppUnitID();
-				}
-				else
-				{
-					m_objCurrApp.m_ObjDataVO.m_strSampleTypeID = p_objPatientInfo.m_strSampleTypeID;
-				}
-				
-				m_mthShowCheckInfo();
-				m_objDialogPatientInfo.m_strCheckContent = m_objCurrApp.m_ObjDataVO.m_strCheckContent;
-			}
-	
-			if(p_blnShow || m_objCurrApp == null || m_objCurrApp.m_ObjDataVO.m_strSampleTypeID == null || m_objCurrApp.m_ObjDataVO.m_strSampleTypeID.Trim() == "")
-			{
-				return this.ShowDialog();
-			}
-			this.WindowState = FormWindowState.Minimized;
-			this.ShowInTaskbar = false;
-			this.Show();
-			this.Visible = false;
-			if(!this.m_blnSaveApp())
-			{
-				return DialogResult.Cancel;
-			}
-			string strMessage = null;
+                if (objControllerCheckContent.m_objApps.Count == 0)
+                {
+                    MessageBox.Show(this, "无法根据您所选择的内容生成检验申请单,请与管理员联系!", c_strMessageBoxTitle);
+                    this.DialogResult = DialogResult.Cancel;
+                    return DialogResult.Cancel;
+                }
+                if (objControllerCheckContent.m_objApps.Count > 1)
+                {
+                    MessageBox.Show(this, "您所选择的内容包含在不同的报告内,请重新选择!", c_strMessageBoxTitle);
+                    this.DialogResult = DialogResult.Cancel;
+                    return DialogResult.Cancel;
+                }
+                this.m_lsvCheckInfo.Items.Clear();
+                m_objCurrApp.m_ObjAppApplyUnits.Clear();
+                m_objCurrApp.m_ObjAppReports.Clear();
+                m_objCurrApp.m_ObjAppApplyUnits.AddRange(objControllerCheckContent.m_objAppApplyUnits);
+                m_objCurrApp.m_ObjAppReports.AddRange(objControllerCheckContent.m_objAppReports);
+
+                if (p_objPatientInfo.m_strSampleTypeID == null || p_objPatientInfo.m_strSampleTypeID.Trim() == "")
+                {
+                    m_mthSetSampleTypeFromAppUnitID();
+                }
+                else
+                {
+                    m_objCurrApp.m_ObjDataVO.m_strSampleTypeID = p_objPatientInfo.m_strSampleTypeID;
+                }
+
+                m_mthShowCheckInfo();
+                m_objDialogPatientInfo.m_strCheckContent = m_objCurrApp.m_ObjDataVO.m_strCheckContent;
+            }
+
+            if (p_blnShow || m_objCurrApp == null || m_objCurrApp.m_ObjDataVO.m_strSampleTypeID == null || m_objCurrApp.m_ObjDataVO.m_strSampleTypeID.Trim() == "")
+            {
+                return this.ShowDialog();
+            }
+            this.WindowState = FormWindowState.Minimized;
+            this.ShowInTaskbar = false;
+            this.Show();
+            this.Visible = false;
+            if (!this.m_blnSaveApp())
+            {
+                return DialogResult.Cancel;
+            }
+            string strMessage = null;
             if (p_blnSend)
             {
                 if (!this.m_objController.m_blnSendApp(out strMessage))
@@ -2561,89 +2561,89 @@ namespace com.digitalwave.iCare.gui.LIS
                     return DialogResult.Cancel;
                 }
             }
-			this.Close();
-			return DialogResult.OK;
-		}
+            this.Close();
+            return DialogResult.OK;
+        }
 
-		/// <summary>
-		/// 接口：传入收费项目;
-		/// 申请单元ID放入clsTestApplyItme_VO的 m_strItemID 成员中
-		/// </summary>
-		/// <param name="p_objPatientInfo">患者基本信息</param>
-		/// <param name="p_objChargeInfoArr">收费信息(ItemID成员用来承载申请单元ID);为空则和接口“ 门诊接口：直接打开”功能相同</param>
-		/// <returns></returns>
-		private DialogResult m_mthNewApp(clsLisApplMainVO p_objPatientInfo,clsTestApplyItme_VO[] p_objChargeInfoArr,bool p_blnShow,bool p_blnSend)
-		{
-			ArrayList arlApplyUnit = new ArrayList();
-			if(p_objChargeInfoArr != null)
-			{
-				foreach(clsTestApplyItme_VO objCharge in p_objChargeInfoArr)
-				{
-					if(objCharge.m_strItemID != null && objCharge.m_strItemID.Trim() != "")
-					{
-						arlApplyUnit.Add(objCharge.m_strItemID);
-					}
-				}
-			}
-			string[] strApplyUnitIDArr = null;
-			if(arlApplyUnit.Count >0)
-				strApplyUnitIDArr = (string[])arlApplyUnit.ToArray(typeof(string));
+        /// <summary>
+        /// 接口：传入收费项目;
+        /// 申请单元ID放入clsTestApplyItme_VO的 m_strItemID 成员中
+        /// </summary>
+        /// <param name="p_objPatientInfo">患者基本信息</param>
+        /// <param name="p_objChargeInfoArr">收费信息(ItemID成员用来承载申请单元ID);为空则和接口“ 门诊接口：直接打开”功能相同</param>
+        /// <returns></returns>
+        private DialogResult m_mthNewApp(clsLisApplMainVO p_objPatientInfo, clsTestApplyItme_VO[] p_objChargeInfoArr, bool p_blnShow, bool p_blnSend)
+        {
+            ArrayList arlApplyUnit = new ArrayList();
+            if (p_objChargeInfoArr != null)
+            {
+                foreach (clsTestApplyItme_VO objCharge in p_objChargeInfoArr)
+                {
+                    if (objCharge.m_strItemID != null && objCharge.m_strItemID.Trim() != "")
+                    {
+                        arlApplyUnit.Add(objCharge.m_strItemID);
+                    }
+                }
+            }
+            string[] strApplyUnitIDArr = null;
+            if (arlApplyUnit.Count > 0)
+                strApplyUnitIDArr = (string[])arlApplyUnit.ToArray(typeof(string));
 
             return this.m_mthNewApp(p_objPatientInfo, p_objChargeInfoArr, strApplyUnitIDArr, p_blnShow, p_blnSend);
-			
-		}
-		public clsLISAppResults m_objGetAppResults()
-		{
-			clsLISAppResults objResult = new clsLISAppResults();
-			objResult.m_StrApplicationID = this.m_objCurrApp.m_StrAppID;
-			objResult.m_StrAppCheckContentDesc = this.m_objCurrApp.m_ObjDataVO.m_strCheckContent;
-			objResult.m_ObjApplyUnitIDArr = new string[this.m_objCurrApp.m_ObjAppApplyUnits.Count];
-			objResult.m_strSampleTypeID = this.m_objCurrApp.m_ObjDataVO.m_strSampleTypeID;
-			objResult.m_strSampleTypeName = this.m_objCurrApp.m_ObjDataVO.m_strSampleType;
-			for(int i=0;i<objResult.m_ObjApplyUnitIDArr.Length;i++)
-			{
-				objResult.m_ObjApplyUnitIDArr[i] = this.m_objCurrApp.m_ObjAppApplyUnits[i].m_StrApplyUnitID;
-			}
-			return objResult;
-		}
-		private void frmLisAppl_VisibleChanged(object sender, EventArgs e)
-		{
-			if(this.m_objDialogPatientInfo != null)
-			{
-				this.m_mthShowAppBaseInfo(this.m_objDialogPatientInfo);		
-			}
-			else
-			{
-				this.m_btnNew.Focus();
-			}
-			if(this.m_blnIsDialog && this.Visible)
-			{
-				this.m_grpPatientInfo.SelectNextControl(this.m_cboAgeUnit,true,true,false,false);
-			}
-			if(this.m_blnIsDialog)
-			{
-				try
-				{	
-					if(m_objCurrApp != null && m_objCurrApp.m_ObjDataVO != null && m_objCurrApp.m_ObjDataVO.m_strSampleTypeID != null)
-						this.m_cboSampleType.SelectedValue = m_objCurrApp.m_ObjDataVO.m_strSampleTypeID;
-				}
-				catch{}
-			}
-		}
 
-		#region NoShow 接口***********************************************************************
+        }
+        public clsLISAppResults m_objGetAppResults()
+        {
+            clsLISAppResults objResult = new clsLISAppResults();
+            objResult.m_StrApplicationID = this.m_objCurrApp.m_StrAppID;
+            objResult.m_StrAppCheckContentDesc = this.m_objCurrApp.m_ObjDataVO.m_strCheckContent;
+            objResult.m_ObjApplyUnitIDArr = new string[this.m_objCurrApp.m_ObjAppApplyUnits.Count];
+            objResult.m_strSampleTypeID = this.m_objCurrApp.m_ObjDataVO.m_strSampleTypeID;
+            objResult.m_strSampleTypeName = this.m_objCurrApp.m_ObjDataVO.m_strSampleType;
+            for (int i = 0; i < objResult.m_ObjApplyUnitIDArr.Length; i++)
+            {
+                objResult.m_ObjApplyUnitIDArr[i] = this.m_objCurrApp.m_ObjAppApplyUnits[i].m_StrApplyUnitID;
+            }
+            return objResult;
+        }
+        private void frmLisAppl_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.m_objDialogPatientInfo != null)
+            {
+                this.m_mthShowAppBaseInfo(this.m_objDialogPatientInfo);
+            }
+            else
+            {
+                this.m_btnNew.Focus();
+            }
+            if (this.m_blnIsDialog && this.Visible)
+            {
+                this.m_grpPatientInfo.SelectNextControl(this.m_cboAgeUnit, true, true, false, false);
+            }
+            if (this.m_blnIsDialog)
+            {
+                try
+                {
+                    if (m_objCurrApp != null && m_objCurrApp.m_ObjDataVO != null && m_objCurrApp.m_ObjDataVO.m_strSampleTypeID != null)
+                        this.m_cboSampleType.SelectedValue = m_objCurrApp.m_ObjDataVO.m_strSampleTypeID;
+                }
+                catch { }
+            }
+        }
 
-		bool m_blnIsNoShow = false;
-		ArrayList arlMutiResults = new ArrayList();
+        #region NoShow 接口***********************************************************************
+
+        bool m_blnIsNoShow = false;
+        ArrayList arlMutiResults = new ArrayList();
 
         private DialogResult m_mthNoShow(clsLisApplMainVO p_objPatientInfo, clsTestApplyItme_VO[] p_objChargeInfoArr, string[] p_strApplyUnitIDArr, bool p_blnSend)
         {
             this.arlMutiResults.Clear();
 
-            bool isValid = p_objPatientInfo == null || p_objChargeInfoArr == null  || p_objChargeInfoArr.Length == 0
+            bool isValid = p_objPatientInfo == null || p_objChargeInfoArr == null || p_objChargeInfoArr.Length == 0
                                                     || p_strApplyUnitIDArr == null || p_strApplyUnitIDArr.Length == 0;
 
-            if (isValid)  return DialogResult.Cancel;
+            if (isValid) return DialogResult.Cancel;
 
             p_objPatientInfo.m_intPStatus_int = 1;
             p_objPatientInfo.m_intForm_int = 1;
@@ -2668,13 +2668,13 @@ namespace com.digitalwave.iCare.gui.LIS
             foreach (string[] strArr in arl)
             {
                 clsSeparateCheckApplication objSep = new clsSeparateCheckApplication();
-                clsSeparatedApp[]       objSepApps = objSep.m_mthSeparateCheckApplication(strArr);
+                clsSeparatedApp[] objSepApps = objSep.m_mthSeparateCheckApplication(strArr);
                 foreach (clsSeparatedApp obj in objSepApps)
                 {
                     arlUnits.Add(obj.m_strApplyUnits);
                 }
-            }    
-        
+            }
+
             foreach (string[] strUnits in arlUnits)
             {
                 clsController_AppCheckContent objContent = new clsController_AppCheckContent(null);
@@ -2690,7 +2690,7 @@ namespace com.digitalwave.iCare.gui.LIS
                     objContent.m_mthGenerateAppContent(strUnits);
 
                 }
-                
+
                 if (objContent.m_objApps == null) return DialogResult.Cancel;
 
                 clsLisApplMainVO objMainVO = new clsLisApplMainVO();
@@ -2718,9 +2718,9 @@ namespace com.digitalwave.iCare.gui.LIS
                 else
                 {
                     objApp.m_ObjDataVO.m_strSampleTypeID = m_mthGetSampleType(strUnits);
-                }                
-                objApp.m_ObjDataVO.m_strAppl_Dat     = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                objApp.m_ObjDataVO.m_strSampleType   = this.m_cboSampleType.m_strGetTypeName(objApp.m_ObjDataVO.m_strSampleTypeID);
+                }
+                objApp.m_ObjDataVO.m_strAppl_Dat = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                objApp.m_ObjDataVO.m_strSampleType = this.m_cboSampleType.m_strGetTypeName(objApp.m_ObjDataVO.m_strSampleTypeID);
 
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 ArrayList arlChargeIDs = new ArrayList();
@@ -2764,8 +2764,8 @@ namespace com.digitalwave.iCare.gui.LIS
                     }
                 }
                 clsLISAppResults objResult = new clsLISAppResults();
-                objResult.m_StrApplicationID  = objApp.m_ObjDataVO.m_strAPPLICATION_ID;
-                objResult.m_strSampleTypeID   = objApp.m_ObjDataVO.m_strSampleTypeID;
+                objResult.m_StrApplicationID = objApp.m_ObjDataVO.m_strAPPLICATION_ID;
+                objResult.m_strSampleTypeID = objApp.m_ObjDataVO.m_strSampleTypeID;
                 objResult.m_strSampleTypeName = objApp.m_ObjDataVO.m_strSampleType;
                 objResult.m_StrAppCheckContentDesc = objApp.m_ObjDataVO.m_strCheckContent;
                 objResult.m_ObjApplyUnitIDArr = new string[objApp.m_ObjAppApplyUnits.Count];
@@ -2779,86 +2779,86 @@ namespace com.digitalwave.iCare.gui.LIS
             return DialogResult.OK;
         }
 
-		private string m_mthGetSampleType(string[] p_strAppUnitIDs)
-		{
+        private string m_mthGetSampleType(string[] p_strAppUnitIDs)
+        {
 
-			string[] strSampleTypeIDArr = null;
-			new clsDomainController_ApplyUnitManage().m_lngGetSampleTypeIDList(p_strAppUnitIDs,out strSampleTypeIDArr);
-			if(strSampleTypeIDArr != null && strSampleTypeIDArr.Length >0)
-			{
-				return strSampleTypeIDArr[0];
-			}
-			return null;
-		}
-		public clsLISAppResults[] m_objGetMutiResults()
-		{
-			return (clsLISAppResults[])arlMutiResults.ToArray(typeof(clsLISAppResults));
-		}
-	
-		#endregion********************************************************************************
+            string[] strSampleTypeIDArr = null;
+            new clsDomainController_ApplyUnitManage().m_lngGetSampleTypeIDList(p_strAppUnitIDs, out strSampleTypeIDArr);
+            if (strSampleTypeIDArr != null && strSampleTypeIDArr.Length > 0)
+            {
+                return strSampleTypeIDArr[0];
+            }
+            return null;
+        }
+        public clsLISAppResults[] m_objGetMutiResults()
+        {
+            return (clsLISAppResults[])arlMutiResults.ToArray(typeof(clsLISAppResults));
+        }
 
-        
+        #endregion********************************************************************************
 
-		#endregion
 
-		private void m_mthSetSampleTypeFromAppUnitID()
-		{
-			#region 加入样本类型逻辑
-			string[] strSampleTypeIDArr;
-			string[] strApplyUnitIDArr = new string[m_objCurrApp.m_ObjAppApplyUnits.Count];
-			for(int i=0;i<m_objCurrApp.m_ObjAppApplyUnits.Count;i++)
-			{
-				strApplyUnitIDArr[i] = m_objCurrApp.m_ObjAppApplyUnits[i].m_StrApplyUnitID;
-			}
-			new clsDomainController_ApplyUnitManage().m_lngGetSampleTypeIDList(strApplyUnitIDArr,out strSampleTypeIDArr);
-			if(strSampleTypeIDArr != null && strSampleTypeIDArr.Length >0)
-			{
-				m_objCurrApp.m_ObjDataVO.m_strSampleTypeID = strSampleTypeIDArr[0];
-				try
-				{
-					this.m_cboSampleType.SelectedValue = m_objCurrApp.m_ObjDataVO.m_strSampleTypeID;
-				}
-				catch{}
-			}
-			#endregion
-		}
 
-		
-	}
-	public class clsRequestChargeInfoEventArgs : System.EventArgs
-	{
-		private string[] m_objApplyUnitIDArr;
-		private clsTestApplyItme_VO[] m_objChargeInfoArr;
-		/// <summary>
-		/// [获取]需要生成收费信息的申请单元ID数组
-		/// </summary>
-		public string[] ApplyUnitIDArr
-		{
-			get
-			{
-				return m_objApplyUnitIDArr;
-			}
-		}
-		/// <summary>
-		/// [获取][设置]根据申请单元ID数组生成的收费信息请放入此数组
-		/// </summary>
-		public clsTestApplyItme_VO[] ChargeInfoArr
-		{
-			get
-			{
-				return m_objChargeInfoArr;
-			}
-			set
-			{
-				m_objChargeInfoArr = value;
-			}
-		}
-		public clsRequestChargeInfoEventArgs(string[] p_objApplyUnitIDArr)
-		{
-			this.m_objApplyUnitIDArr = p_objApplyUnitIDArr;
-		}
-	}
-	public delegate void dlgRequestChargeInfoEventHandler(clsRequestChargeInfoEventArgs e);
+        #endregion
+
+        private void m_mthSetSampleTypeFromAppUnitID()
+        {
+            #region 加入样本类型逻辑
+            string[] strSampleTypeIDArr;
+            string[] strApplyUnitIDArr = new string[m_objCurrApp.m_ObjAppApplyUnits.Count];
+            for (int i = 0; i < m_objCurrApp.m_ObjAppApplyUnits.Count; i++)
+            {
+                strApplyUnitIDArr[i] = m_objCurrApp.m_ObjAppApplyUnits[i].m_StrApplyUnitID;
+            }
+            new clsDomainController_ApplyUnitManage().m_lngGetSampleTypeIDList(strApplyUnitIDArr, out strSampleTypeIDArr);
+            if (strSampleTypeIDArr != null && strSampleTypeIDArr.Length > 0)
+            {
+                m_objCurrApp.m_ObjDataVO.m_strSampleTypeID = strSampleTypeIDArr[0];
+                try
+                {
+                    this.m_cboSampleType.SelectedValue = m_objCurrApp.m_ObjDataVO.m_strSampleTypeID;
+                }
+                catch { }
+            }
+            #endregion
+        }
+
+
+    }
+    public class clsRequestChargeInfoEventArgs : System.EventArgs
+    {
+        private string[] m_objApplyUnitIDArr;
+        private clsTestApplyItme_VO[] m_objChargeInfoArr;
+        /// <summary>
+        /// [获取]需要生成收费信息的申请单元ID数组
+        /// </summary>
+        public string[] ApplyUnitIDArr
+        {
+            get
+            {
+                return m_objApplyUnitIDArr;
+            }
+        }
+        /// <summary>
+        /// [获取][设置]根据申请单元ID数组生成的收费信息请放入此数组
+        /// </summary>
+        public clsTestApplyItme_VO[] ChargeInfoArr
+        {
+            get
+            {
+                return m_objChargeInfoArr;
+            }
+            set
+            {
+                m_objChargeInfoArr = value;
+            }
+        }
+        public clsRequestChargeInfoEventArgs(string[] p_objApplyUnitIDArr)
+        {
+            this.m_objApplyUnitIDArr = p_objApplyUnitIDArr;
+        }
+    }
+    public delegate void dlgRequestChargeInfoEventHandler(clsRequestChargeInfoEventArgs e);
     public class clsLISAppResults
     {
         /// <summary>
@@ -2892,8 +2892,8 @@ namespace com.digitalwave.iCare.gui.LIS
     }
     #region 分单接口
     public class clsLIS_ApplyUnitsCarver
-	{
-		/// <summary>
+    {
+        /// <summary>
         /// 根据传入的申请单元ID数组进行分单。
         /// </summary>
         /// <param name="strApplyUnitIDArr"></param>
@@ -2934,6 +2934,6 @@ namespace com.digitalwave.iCare.gui.LIS
             return arlUnits;
         }
         #endregion
-	}
+    }
 
 }

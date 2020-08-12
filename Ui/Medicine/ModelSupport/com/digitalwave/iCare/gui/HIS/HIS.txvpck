@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet>
+  <view uin="0mcgkvagdn1125k_v">
+    <property name="$name" value="HIS" />
+    <property name="$defaultDiagram" value="True" />
+    <property name="$metaclass" value="Package Diagram" />
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStorageInit">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="csharp:e_method:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStorageInit.m_lsvDetail_SelectedIndexChanged(System.Object,System.EventArgs)" />
+    </reference>
+    <reference referencedUin="design:view:::76fkee65fnbvudj_v">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="design:view:::exc524cd3n3zhxl_v">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.FrmView.frmShowPrint" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmCompoundReport">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="csharp:e_method:src:Medicine:com.digitalwave.iCare.gui.HIS.frmCompoundReport.InitializeComponent()" />
+      <reference referencedUin="csharp:e_method:src:Medicine:com.digitalwave.iCare.gui.HIS.frmCompoundReport.Dispose(System.Boolean)" />
+      <reference referencedUin="csharp:e_field:src:Medicine:com.digitalwave.iCare.gui.HIS.frmCompoundReport.components" />
+      <reference referencedUin="csharp:e_method:src:Medicine:com.digitalwave.iCare.gui.HIS.frmCompoundReport.frmCompoundReport()" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedPriceList">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStorageOrdType">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlStorageInit">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="design:view:::52grfus0hgi78vh_v">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmPeriod">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedicineInfo">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControlStorageQuery">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlChangPrice">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedPriceList">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMetStorageSetup">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedicinePriceChg">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControlStorageCheck">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedAddStorageMene">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedWatch">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStorageAcct">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedicineStorageCheck">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlUnitAndType">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlPeriod">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControlReport">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlInitStorageMedicine">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlStorageApplMed">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMetStorageSetup">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlStorageSetupStar">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmInitStorageMedicine">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainConrolStorageSetupStar">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStanMedReport">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlStorageInOrd">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedAndUnit">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedAndStorageMana">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlStorageOutOrd">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControl_MedStoLimit">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStorageInOrd">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmChangPrice">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmChangPriceReport">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.ctlStorageMedTextBox">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.DomainControlMedReport">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmVendorReport">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmReturnTicket">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlChengePriceRpt">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainConrolChangPrice">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControlMedicinePriceChg">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedUseful">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedStorageOutOrd">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStorageLimitMgr">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedicineStorageCheck">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedWatchRpt">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStorageCheckReport">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlStorageCheck">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmShowWarning">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmOrdInPriceCheck">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedStorageCheck">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControlMedicineStorageCheck">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedPriceInfo">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmCenterMetStorageSetup">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedPriceInfo">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStorageApplMed">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControlStorageOrd">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStorageSetup">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clscontrolMetInfo">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControlMedUseful">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStorageCheck">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStoragePreView">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStockMedAppl">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.ctlUnit">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedAndStorage">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlStorageOrdType">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedAndStorageMene">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedAddStorageMana">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainConrolCheck">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlStorageAcct">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlStanMedReport">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMetInfo">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMonthBalance">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedicine">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsPublicParm">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlStockMedAppl">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmShowReport">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStorageQuery">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedStorageInOrd">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControlStockMedAppl">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlApplStorage">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlStorageLimitMgr">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedAndStorage">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedAndUnit">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedStorageOutOrd">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControlStorageFin">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmChangePriceRpt">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmUnitAndType">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmApplStorage">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedicine">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlReturnTicket">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedStorageAcct">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlCenterMetStorageSetup">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControlInitStorageMedicine">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedStorageAcct">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlStorageQuery">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedStorageInOrd">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStroageSet">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainConrol_Medicne">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmOrdDeReportOfMonth">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedicinePriceChg">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsControlMedStorageCheck">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmMedUsefulSearch">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.ctlProductor">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.frmStorageOutOrd">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControlReturnTicket">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.StorageCheckDataset">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsStorageOrd">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsPrintClass">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.clsDomainControlStorageAidInfo">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+    <reference referencedUin="design:view:::7x3kduyvl_v">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.DomainControl.clsDomainControlCompoundReport" />
+    </reference>
+  </view>
+</nodeSet>

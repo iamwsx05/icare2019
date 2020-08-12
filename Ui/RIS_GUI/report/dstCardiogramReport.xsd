@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="dstCardiogramReport" targetNamespace="http://tempuri.org/dstCardiogramReport.xsd"
+	elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://tempuri.org/dstCardiogramReport.xsd"
+	xmlns:mstns="http://tempuri.org/dstCardiogramReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="dstCardiogramReport" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="element1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="REPORT_DAT" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="REPORT_NO_CHR" type="xs:string" minOccurs="0" />
+							<xs:element name="PATIENT_NAME_VCHR" type="xs:string" minOccurs="0" />
+							<xs:element name="SEX_CHR" type="xs:string" minOccurs="0" />
+							<xs:element name="AGE_FLT" type="xs:string" minOccurs="0" />
+							<xs:element name="INPATIENT_NO_CHR" type="xs:string" minOccurs="0" />
+							<xs:element name="PATIENT_NO_CHR" type="xs:string" minOccurs="0" />
+							<xs:element name="CLINICAL_DIAGNOSE_VCHR" type="xs:string" minOccurs="0" />
+							<xs:element name="SUMMARY1_VCHR" type="xs:string" minOccurs="0" />
+							<xs:element name="SUMMARY2_VCHR" type="xs:string" minOccurs="0" />
+							<xs:element name="SPECIALFLAG_INT" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

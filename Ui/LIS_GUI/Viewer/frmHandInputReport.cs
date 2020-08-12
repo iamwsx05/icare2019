@@ -1847,7 +1847,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // m_lsvSampleGroupQuery
             // 
-            this.m_lsvSampleGroupQuery.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.m_lsvSampleGroupQuery.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.m_lsvSampleGroupQuery.BackColor = System.Drawing.SystemColors.Info;
             this.m_lsvSampleGroupQuery.CheckBoxes = true;
@@ -2100,7 +2100,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // m_pal_SampleInfo
             // 
-            this.m_pal_SampleInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.m_pal_SampleInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.m_pal_SampleInfo.Controls.Add(this.m_grbRelation);
             this.m_pal_SampleInfo.Location = new System.Drawing.Point(0, 0);
@@ -2110,7 +2110,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // m_grbRelation
             // 
-            this.m_grbRelation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.m_grbRelation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.m_grbRelation.Controls.Add(this.m_btnImportNewResult);
             this.m_grbRelation.Controls.Add(this.m_palBindInput);
@@ -4726,7 +4726,15 @@ namespace com.digitalwave.iCare.gui.LIS
             this.m_txtInhospNO.Text = p_objApp.m_strPatient_inhospitalno_chr;
             this.m_txtPatientName.Text = p_objApp.m_strPatient_Name;
             this.m_cboSex.Text = p_objApp.m_strSex;
-            this.m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(p_objApp.m_strAge);
+            if (!string.IsNullOrEmpty(p_objApp.m_strBirthDay))
+            {
+                this.m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(Convert.ToDateTime(p_objApp.m_strBirthDay));
+            }
+            else
+            {
+                this.m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(p_objApp.m_strAge);
+            }
+
             this.m_cboAgeUnit.Text = clsAgeConverter.m_strGetAgeUnit(p_objApp.m_strAge);
             this.m_txtPatientCard.Text = p_objApp.m_strPatientcardID;
             try
@@ -4866,7 +4874,7 @@ namespace com.digitalwave.iCare.gui.LIS
                     isAU680 = true;
                 }
                 if ((formNo.StartsWith("59") || formNo.StartsWith("51")) && formNo.IndexOf('+') > 0)
-                {                    
+                {
                     int pos1 = formNo.IndexOf('+');
                     formNo = formNo.Substring(pos1 + 1);
                 }
@@ -5280,7 +5288,12 @@ namespace com.digitalwave.iCare.gui.LIS
                     this.m_chkSpecial.Checked = false;
                 }
 
-                this.m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(dtrPatient.strAge);
+                clsPatient_VO[] voArr = null;
+                (new weCare.Proxy.ProxyPatient()).Service.m_lngGetPatientInfoByInpatientID(dtrPatient.strInpatientNo, out voArr);
+                if (voArr != null && voArr.Length > 0 && !string.IsNullOrEmpty(voArr[0].m_strBIRTH_DAT))
+                    this.m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(Convert.ToDateTime(voArr[0].m_strBIRTH_DAT));             // clsAgeConverter.m_strGetAgeNum(dtrPatient.strAge);
+                else
+                    this.m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(dtrPatient.strAge);
                 this.m_cboAgeUnit.Text = clsAgeConverter.m_strGetAgeUnit(dtrPatient.strAge);
                 this.m_txtBedNO.Text = dtrPatient.strPatientBedNO;
                 this.m_rtbDiagnose.Text = dtrPatient.strDiagnose;
@@ -6324,7 +6337,7 @@ namespace com.digitalwave.iCare.gui.LIS
             {
                 // 危急值检查 
                 (new weCare.Proxy.ProxyLis01()).Service.DelCriticalValue(p_strAppID);
-           
+
                 MessageBox.Show("取消审核成功", "取消审核申请单信息提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 //m_dtgReportList.Rows.Remove(m_dtgReportList.CurrentRow);
@@ -6355,7 +6368,7 @@ namespace com.digitalwave.iCare.gui.LIS
                 return;
             }
             this.m_txtPatientCard.Text = m_strPatientCard.PadLeft(10, '0');
-             clsPatient_VO objPatientVO = (new weCare.Proxy.ProxyPatient()).Service.GetPatientInfoByCardID(this.m_txtPatientCard.Text.Trim());
+            clsPatient_VO objPatientVO = (new weCare.Proxy.ProxyPatient()).Service.GetPatientInfoByCardID(this.m_txtPatientCard.Text.Trim());
             if (objPatientVO != null)
             {
                 this.m_txtPatientName.Text = objPatientVO.m_strLASTNAME_VCHR;
@@ -6364,7 +6377,7 @@ namespace com.digitalwave.iCare.gui.LIS
                 {
                     string strAge = m_mthGetAge(objPatientVO.m_strBIRTH_DAT);
                     //string strAge = clsAgeConverter.s_strToAge(DateTime.Parse(objPatientVO.m_strBIRTH_DAT), " 岁| 月| 天");
-                    this.m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(strAge);
+                    this.m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(Convert.ToDateTime(objPatientVO.m_strBIRTH_DAT));                // clsAgeConverter.m_strGetAgeNum(strAge);
                     this.m_cboAgeUnit.Text = clsAgeConverter.m_strGetAgeUnit(strAge);
                 }
                 catch { }
@@ -6408,8 +6421,8 @@ namespace com.digitalwave.iCare.gui.LIS
             EntityCriMonitorType criMonitorTypeVo = new EntityCriMonitorType();
             criMonitorTypeVo.empId = LoginInfo.m_strEmpID;
             criMonitorTypeVo.empNo = LoginInfo.m_strEmpNo;
-             
-            List<EntityCriticalMain> lstMain = (new weCare.Proxy.ProxyLis01()).Service.GetCriListByPid(pid); 
+
+            List<EntityCriticalMain> lstMain = (new weCare.Proxy.ProxyLis01()).Service.GetCriListByPid(pid);
             if (lstMain != null && lstMain.Count > 0)
             {
                 frmCancelCritalVal frm = new frmCancelCritalVal(criMonitorTypeVo, lstMain);

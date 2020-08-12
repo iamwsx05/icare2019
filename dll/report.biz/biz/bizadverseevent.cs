@@ -267,6 +267,8 @@ namespace Report.Biz
         {
             string Sql = string.Empty;
             string Sql1 = string.Empty;
+            Dictionary<string, string> dicXml = null;
+            string xmlData = string.Empty;
             List<EntityEventDisplay> data = new List<EntityEventDisplay>();
             SqlHelper svc = null;
             try
@@ -289,6 +291,7 @@ namespace Report.Biz
                                t.birthday,
                                t.contacttel,
                                t.deptcode,
+                               d.xmldata,
                                extractvalue(d.xmldata, '/FormData/X236') as XZQM,
                                extractvalue(d.xmldata, '/FormData/X223') as HCQM,
                                extractvalue(d.xmldata, '/FormData/X238') as HLQM,
@@ -321,6 +324,7 @@ namespace Report.Biz
                                t.contacttel,
                                t.deptcode,
                                b.deptname_vchr as deptName,
+                               d.xmldata,
                                extractvalue(d.xmldata, '/FormData/X236') as XZQM,
                                extractvalue(d.xmldata, '/FormData/X223') as HCQM,
                                extractvalue(d.xmldata, '/FormData/X238') as HLQM
@@ -348,8 +352,8 @@ namespace Report.Biz
                 IDataParameter parm = svc.CreateParm();
                 parm.Value = dicParm.FirstOrDefault(t => t.key == "eventId").value;
                 lstParm.Add(parm);
-                DateTime? startTime = null;
-                DateTime? endTime = null;
+                //DateTime? startTime = null;
+                //DateTime? endTime = null;
 
                 foreach (EntityParm po in dicParm)
                 {
@@ -359,16 +363,16 @@ namespace Report.Biz
                     switch (po.key)
                     {
                         case "reportDate":
-                            //IDataParameter parm1 = svc.CreateParm();
-                            //parm1.Value = keyValue.Split('|')[0] + " 00:00:00";
-                            //lstParm.Add(parm1);
-                            //IDataParameter parm2 = svc.CreateParm();
-                            //parm2.Value = keyValue.Split('|')[1] + " 23:59:59";
-                            //lstParm.Add(parm2);
-                            //strSub += " and (t.reportTime between ? and ?)";
+                            IDataParameter parm1 = svc.CreateParm();
+                            parm1.Value = keyValue.Split('|')[0] + " 00:00:00";
+                            lstParm.Add(parm1);
+                            IDataParameter parm2 = svc.CreateParm();
+                            parm2.Value = keyValue.Split('|')[1] + " 23:59:59";
+                            lstParm.Add(parm2);
+                            strSub += " and (t.reportTime2 between to_date(?,'yyyy-mm-dd hh24:mi:ss') and to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
 
-                            startTime = Function.Datetime(keyValue.Split('|')[0] + " 00:00:00");
-                            endTime = Function.Datetime(keyValue.Split('|')[1] + " 23:59:59");
+                            //startTime = Function.Datetime(keyValue.Split('|')[0] + " 00:00:00");
+                            //endTime = Function.Datetime(keyValue.Split('|')[1] + " 23:59:59");
                             break;
                         case "deptCode":
                             if (keyValue.IndexOf("','") > 0)
@@ -423,16 +427,16 @@ namespace Report.Biz
                         vo.rptId = dr["rptId"].ToString();
                         vo.reportTime = dr["reportTime"].ToString();
 
-                        if (!string.IsNullOrEmpty(vo.reportTime))
-                        {
-                            DateTime reportime = Function.Datetime(vo.reportTime);
-                            if (reportime >= startTime && reportime <= endTime)
-                            {
-                                vo.reportTime = dr["reportTime"].ToString();
-                            }
-                            else
-                                continue;
-                        }
+                        //if (!string.IsNullOrEmpty(vo.reportTime))
+                        //{
+                        //    DateTime reportime = Function.Datetime(vo.reportTime);
+                        //    if (reportime >= startTime && reportime <= endTime)
+                        //    {
+                        //        vo.reportTime = dr["reportTime"].ToString();
+                        //    }
+                        //    else
+                        //        continue;
+                        //}
                         vo.reportOperCode = dr["reportOperCode"].ToString();
                         vo.reportOperName = dr["reportOperName"].ToString();
                         vo.reportDeptName = dr["reportDeptName"].ToString();
@@ -459,9 +463,215 @@ namespace Report.Biz
                         vo.HCQM = dr["HCQM"].ToString();
                         vo.HLQM = dr["HLQM"].ToString();
                         vo.XZQM = dr["XZQM"].ToString();
+                        vo.eventId = dr["eventId"].ToString();
+                        xmlData = dr["xmldata"].ToString();
+                        if (!string.IsNullOrEmpty(xmlData) && vo.eventId == "19")
+                        {
 
+                            dicXml = Function.ReadXmlNodes(xmlData, "FormData");
+                            #region 安全事件类型
+                            //查对不合格
+                            if (dicXml.ContainsKey("X017"))
+                                if (dicXml["X017"].ToString() == "1")
+                                    vo.AQSJLX += "查对不合格";
 
+                            if (dicXml.ContainsKey("A017"))
+                            {
+                                if (!string.IsNullOrEmpty(vo.AQSJLX))
+                                {
+                                    if (!string.IsNullOrEmpty(dicXml["A017"].ToString()))
+                                    {
+                                        if (!string.IsNullOrEmpty(vo.AQSJLX))
+                                        {
+                                            if (vo.AQSJLX.Contains("查对不合格"))
+                                                vo.AQSJLX += "(" + dicXml["A017"].ToString() + ")；";
+                                        }
+                                        else
+                                            vo.AQSJLX += "查对不合格" + "(" + dicXml["A017"].ToString() + ")；";
+                                    }
+                                }
+                                else if (!string.IsNullOrEmpty(vo.AQSJLX))
+                                {
+                                    if (vo.AQSJLX.Contains("查对不合格"))
+                                        vo.AQSJLX += "；";
+                                }
+                            }
 
+                            //身份识别错误（患者身份查对）
+                            if (dicXml.ContainsKey("X020"))
+                                if (dicXml["X020"].ToString() == "1")
+                                    vo.AQSJLX += "身份识别错误（患者身份查对）；";
+                            //使用药物错误（发生在患者身上）
+                            if (dicXml.ContainsKey("X021"))
+                                if (dicXml["X021"].ToString() == "1")
+                                    vo.AQSJLX += "使用药物错误（发生在患者身上）；";
+                            //标本丢失、损毁 
+                            if (dicXml.ContainsKey("X019"))
+                                if (dicXml["X019"].ToString() == "1")
+                                    vo.AQSJLX += "标本丢失、损毁； ";
+                            //急救设备器材药品不合格
+                            if (dicXml.ContainsKey("X018"))
+                                if (dicXml["X018"].ToString() == "1")
+                                    vo.AQSJLX += "急救设备器材药品不合格；";
+                            //无菌物品不合格
+                            if (dicXml.ContainsKey("X022"))
+                                if (dicXml["X022"].ToString() == "1")
+                                    vo.AQSJLX += "无菌物品不合格；";
+                            //发放不合格的消毒或灭菌物品
+                            if (dicXml.ContainsKey("X023"))
+                                if (dicXml["X023"].ToString() == "1")
+                                    vo.AQSJLX += "发放不合格的消毒或灭菌物品；";
+                            //贵重医疗器材损毁或丢失
+                            if (dicXml.ContainsKey("X026"))
+                                if (dicXml["X026"].ToString() == "1")
+                                    vo.AQSJLX += "贵重医疗器材损毁或丢失；";
+                            //发生召回灭菌物品事件
+                            if (dicXml.ContainsKey("X024"))
+                                if (dicXml["X024"].ToString() == "1")
+                                    vo.AQSJLX += "发生召回灭菌物品事件；";
+                            //包内器械物品配置错误影响手术进程
+                            if (dicXml.ContainsKey("X027"))
+                                if (dicXml["X027"].ToString() == "1")
+                                    vo.AQSJLX += "包内器械物品配置错误影响手术进程；";
+                            //发生与灭菌器械相关的感染事件
+                            if (dicXml.ContainsKey("X025"))
+                                if (dicXml["X025"].ToString() == "1")
+                                    vo.AQSJLX += "发生与灭菌器械相关的感染事件；";
+                            //药物外渗
+                            if (dicXml.ContainsKey("X029"))
+                                if (dicXml["X029"].ToString() == "1")
+                                    vo.AQSJLX += "药物外渗；";
+                            //药物渗出
+                            if (dicXml.ContainsKey("X035"))
+                                if (dicXml["X035"].ToString() == "1")
+                                    vo.AQSJLX += "药物渗出；";
+                            //输液反应
+                            if (dicXml.ContainsKey("B002") && dicXml.ContainsKey("B001"))
+                                if (dicXml["B002"].ToString() == "1" || dicXml["B001"].ToString() != "")
+                                    vo.AQSJLX += "输液反应；";
+                            //非计划性拔管
+                            if (dicXml.ContainsKey("X031") && dicXml.ContainsKey("X032"))
+                                if (dicXml["X031"].ToString() == "1" || dicXml["X032"].ToString() != "")
+                                    vo.AQSJLX += "非计划性拔管；";
+                            //跌倒
+                            if (dicXml.ContainsKey("X041"))
+                                if (dicXml["X041"].ToString() == "1")
+                                    vo.AQSJLX += "跌倒；";
+                            //坠床 
+                            if (dicXml.ContainsKey("X042"))
+                                if (dicXml["X042"].ToString() == "1")
+                                    vo.AQSJLX += "坠床；";
+                            //走失
+                            if (dicXml.ContainsKey("X043"))
+                                if (dicXml["X043"].ToString() == "1")
+                                    vo.AQSJLX += "走失；";
+                            //误吸
+                            if (dicXml.ContainsKey("X037") && dicXml.ContainsKey("X038"))
+                                if (dicXml["X037"].ToString() == "1" || dicXml["X038"].ToString() != "")
+                                    vo.AQSJLX += "误吸；";
+                            //足下垂/关节僵硬/肌肉萎缩
+                            if (dicXml.ContainsKey("X044"))
+                                if (dicXml["X044"].ToString() == "1")
+                                    vo.AQSJLX += "足下垂/关节僵硬/肌肉萎缩；";
+                            //DVT/PET 
+                            if (dicXml.ContainsKey("X046"))
+                                if (dicXml["X046"].ToString() == "1")
+                                    vo.AQSJLX += "DVT/PET；";
+                            //新生儿烧伤、烫伤
+                            if (dicXml.ContainsKey("X048"))
+                                if (dicXml["X048"].ToString() == "1")
+                                    vo.AQSJLX += "新生儿烧伤、烫伤；";
+                            //新生儿鼻中隔压伤
+                            if (dicXml.ContainsKey("X051") && dicXml.ContainsKey("X052"))
+                                if (dicXml["X051"].ToString() == "1" || dicXml["X052"].ToString() != "")
+                                    vo.AQSJLX += "新生儿鼻中隔压伤；";
+                            //阴道分娩新生儿产伤
+                            if (dicXml.ContainsKey("X053") && dicXml.ContainsKey("X054"))
+                                if (dicXml["X053"].ToString() == "1" || dicXml["X054"].ToString() != "")
+                                    vo.AQSJLX += "阴道分娩新生儿产伤；";
+                            //阴道分娩产妇尿潴留
+                            if (dicXml.ContainsKey("X055"))
+                                if (dicXml["X055"].ToString() == "1")
+                                    vo.AQSJLX += "阴道分娩产妇尿潴留；";
+                            //使用催产素并发症
+                            if (dicXml.ContainsKey("X056"))
+                                if (dicXml["X056"].ToString() == "1")
+                                    vo.AQSJLX += "使用催产素并发症；";
+                            //会阴裂伤
+                            if (dicXml.ContainsKey("X050"))
+                                if (dicXml["X050"].ToString() == "1")
+                                    vo.AQSJLX += "会阴裂伤；";
+                            //手术查对不合格
+                            if (dicXml.ContainsKey("X059") && dicXml.ContainsKey("X060"))
+                                if (dicXml["X059"].ToString() == "1" || dicXml["X060"].ToString() != "")
+                                    vo.AQSJLX += "手术查对不合格；";
+                            //手术过程异物遗留
+                            if (dicXml.ContainsKey("X061"))
+                                if (dicXml["X061"].ToString() == "1")
+                                    vo.AQSJLX += "手术过程异物遗留；";
+                            //手术标本处理不合格
+                            if (dicXml.ContainsKey("X063") && dicXml.ContainsKey("X243"))
+                                if (dicXml["X063"].ToString() == "1" || dicXml["X243"].ToString() != "")
+                                    vo.AQSJLX += "手术标本处理不合格；";
+                            //中心静脉导管相关血流感染
+                            if (dicXml.ContainsKey("X057"))
+                                if (dicXml["X057"].ToString() == "1")
+                                    vo.AQSJLX += "中心静脉导管相关血流感染；";
+                            //使用呼吸机卧位不正确
+                            if (dicXml.ContainsKey("X058"))
+                                if (dicXml["X058"].ToString() == "1")
+                                    vo.AQSJLX += "使用呼吸机卧位不正确；";
+                            //急诊分诊不合格
+                            if (dicXml.ContainsKey("X064"))
+                                if (dicXml["X064"].ToString() == "1")
+                                    vo.AQSJLX += "急诊分诊不合格；";
+                            //运送中病情变化    
+                            if (dicXml.ContainsKey("X066"))
+                                if (dicXml["X066"].ToString() == "1")
+                                    vo.AQSJLX += "运送中病情变化；";
+                            //擅自离院 
+                            if (dicXml.ContainsKey("X067"))
+                                if (dicXml["X067"].ToString() == "1")
+                                    vo.AQSJLX += "擅自离院 ；";
+                            //自残   
+                            if (dicXml.ContainsKey("X068"))
+                                if (dicXml["X068"].ToString() == "1")
+                                    vo.AQSJLX += "自残 ；";
+                            //自杀   
+                            if (dicXml.ContainsKey("X069"))
+                                if (dicXml["X069"].ToString() == "1")
+                                    vo.AQSJLX += "自杀；";
+                            //猝死  
+                            if (dicXml.ContainsKey("X070"))
+                                if (dicXml["X070"].ToString() == "1")
+                                    vo.AQSJLX += "猝死；";
+                            //失窃    
+                            if (dicXml.ContainsKey("X071"))
+                                if (dicXml["X071"].ToString() == "1")
+                                    vo.AQSJLX += "失窃；";
+                            //投诉纠纷 
+                            if (dicXml.ContainsKey("X072"))
+                                if (dicXml["X072"].ToString() == "1")
+                                    vo.AQSJLX += "投诉纠纷；";
+                            //暴力行为   
+                            if (dicXml.ContainsKey("X073"))
+                                if (dicXml["X073"].ToString() == "1")
+                                    vo.AQSJLX += "暴力行为；";
+                            //意外伤害   
+                            if (dicXml.ContainsKey("B003"))
+                                if (dicXml["B003"].ToString() == "1")
+                                    vo.AQSJLX += "意外伤害";
+                            //意外伤害 
+                            if (dicXml.ContainsKey("C001"))
+                                if (dicXml["C001"].ToString() == "1")
+                                    vo.AQSJLX += "并发症";
+                            //其他事件
+                            if (dicXml.ContainsKey("X080"))
+                                if (dicXml["X080"].ToString() == "1")
+                                    vo.AQSJLX += "其他事件";
+                            
+                        }
+                        #endregion
                         data.Add(vo);
                     }
                 }
@@ -485,15 +695,15 @@ namespace Report.Biz
         /// </summary>
         /// <param name="rptId"></param>
         /// <returns></returns>
-        internal EntityRptEvent GetEvent(decimal rptId)
+        internal EntityRptEvent2 GetEvent(decimal rptId)
         {
-            EntityRptEvent vo = new EntityRptEvent();
+            EntityRptEvent2 vo = new EntityRptEvent2();
             SqlHelper svc = null;
             try
             {
                 svc = new SqlHelper(EnumBiz.onlineDB);
                 vo.rptId = rptId;
-                vo = EntityTools.ConvertToEntity<EntityRptEvent>(svc.SelectPk(vo));
+                vo = EntityTools.ConvertToEntity<EntityRptEvent2>(svc.SelectPk(vo));
 
                 EntityRptEventData dataVo = new EntityRptEventData();
                 dataVo.rptId = rptId;
@@ -646,7 +856,7 @@ namespace Report.Biz
                             IDataParameter parm2 = svc.CreateParm();
                             parm2.Value = keyValue.Split('|')[1] + " 23:59:59";
                             lstParm.Add(parm2);
-                            strSub += " and (t.reportTime between ? and ? )";
+                            strSub += " and (t.reportTime2 between to_date(?,'yyyy-mm-dd hh24:mi:ss') and to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
                             break;
                         case "deptCode":
                             if (keyValue.IndexOf("','") > 0)
@@ -833,7 +1043,7 @@ namespace Report.Biz
         /// <param name="vo"></param>
         /// <param name="rptId"></param>
         /// <returns></returns>
-        internal int SaveEvent(EntityRptEvent vo, out decimal rptId)
+        internal int SaveEvent(EntityRptEvent2 vo, out decimal rptId)
         {
             int affectRows = 0;
             rptId = 0;
@@ -845,7 +1055,7 @@ namespace Report.Biz
                 EntityRptEventData voData = new EntityRptEventData();
                 if (vo.rptId <= 0)  // new
                 {
-                    rptId = svc.GetNextID(EntityTools.GetTableName(vo), EntityTools.GetFieldName(vo, EntityRptEvent.Columns.rptId));
+                    rptId = svc.GetNextID(EntityTools.GetTableName(vo), EntityTools.GetFieldName(vo, EntityRptEvent2.Columns.rptId));
                     vo.rptId = rptId;
                     lstParm.Add(svc.GetInsertParm(vo));
 
@@ -855,12 +1065,12 @@ namespace Report.Biz
                 }
                 else                // edit
                 {
-                    lstParm.Add(svc.GetUpdateParm(vo, new List<string>() {EntityRptEvent.Columns.reportTime, EntityRptEvent.Columns.reportOperCode, EntityRptEvent.Columns.reportOperName,
-                                                                          EntityRptEvent.Columns.eventCode, EntityRptEvent.Columns.eventName, EntityRptEvent.Columns.patType, EntityRptEvent.Columns.patNo,
-                                                                          EntityRptEvent.Columns.patName, EntityRptEvent.Columns.patSex, EntityRptEvent.Columns.birthday, EntityRptEvent.Columns.idCard,
-                                                                          EntityRptEvent.Columns.contactAddr, EntityRptEvent.Columns.contactTel, EntityRptEvent.Columns.deptCode, EntityRptEvent.Columns.formId,
-                                                                          EntityRptEvent.Columns.operCode, EntityRptEvent.Columns.recordDate, EntityRptEvent.Columns.status,EntityRptEvent.Columns.reportDeptCode},
-                                                      new List<string>() { EntityRptEvent.Columns.rptId }));
+                    lstParm.Add(svc.GetUpdateParm(vo, new List<string>() {EntityRptEvent2.Columns.reportTime, EntityRptEvent2.Columns.reportOperCode, EntityRptEvent2.Columns.reportOperName,
+                                                                          EntityRptEvent2.Columns.eventCode, EntityRptEvent2.Columns.eventName, EntityRptEvent2.Columns.patType, EntityRptEvent2.Columns.patNo,
+                                                                          EntityRptEvent2.Columns.patName, EntityRptEvent2.Columns.patSex, EntityRptEvent2.Columns.birthday, EntityRptEvent2.Columns.idCard,
+                                                                          EntityRptEvent2.Columns.contactAddr, EntityRptEvent2.Columns.contactTel, EntityRptEvent2.Columns.deptCode, EntityRptEvent2.Columns.formId,
+                                                                          EntityRptEvent2.Columns.operCode, EntityRptEvent2.Columns.recordDate, EntityRptEvent2.Columns.status,EntityRptEvent2.Columns.reportDeptCode,EntityRptEvent2.Columns.reportTime2},
+                                                      new List<string>() { EntityRptEvent2.Columns.rptId }));
 
                     voData.rptId = vo.rptId;
                     voData.xmlData = vo.xmlData;
@@ -896,10 +1106,10 @@ namespace Report.Biz
             try
             {
                 svc = new SqlHelper(EnumBiz.onlineDB);
-                EntityRptEvent vo = new EntityRptEvent();
+                EntityRptEvent2 vo = new EntityRptEvent2();
                 vo.rptId = rptId;
                 vo.status = 0;
-                affectRows = svc.Commit(svc.GetUpdateParm(vo, new List<string>() { EntityRptEvent.Columns.status }, new List<string>() { EntityRptEvent.Columns.rptId }));
+                affectRows = svc.Commit(svc.GetUpdateParm(vo, new List<string>() { EntityRptEvent2.Columns.status }, new List<string>() { EntityRptEvent2.Columns.rptId }));
             }
             catch (Exception e)
             {
@@ -945,7 +1155,7 @@ namespace Report.Biz
                             on a.deptcode = d.deptid_chr
                          where a.eventid = 12
                            and a.status = 1 
-                           and (a.reportTime between ? and ?) 
+                           and (a.reportTime2 between ? and ?) 
                            {0}
                          order by a.deptcode, a.reporttime";
 
@@ -1068,7 +1278,7 @@ namespace Report.Biz
                         on a.rptid = b.rptid
                         where a.formid = 12
                         and a.status = 1
-                        and a.reporttime between ? and ?
+                        and a.reporttime2 between ? and ?
                         order by a.rptid ";
 
                 svc = new SqlHelper(EnumBiz.onlineDB);
@@ -1199,7 +1409,7 @@ namespace Report.Biz
                         on a.rptid = b.rptid
                         where a.formid = 12
                         and a.status = 1
-                        and a.reporttime between ? and ?
+                        and a.reporttime2 between ? and ?
                         order by a.rptid ";
 
                 svc = new SqlHelper(EnumBiz.onlineDB);
@@ -1410,7 +1620,7 @@ namespace Report.Biz
                         on a.reportdeptcode = d.code_vchr
                         where a.formid = 12
                         and a.status = 1
-                        and a.reporttime between ? and ?
+                        and a.reporttime2 between ? and ?
                         order by a.rptid ";// 
 
                 svc = new SqlHelper(EnumBiz.onlineDB);
@@ -1822,7 +2032,7 @@ namespace Report.Biz
                         on a.rptid = b.rptid
                         where a.formid = 26      
                         and a.status = 1
-                        and a.reporttime between ? and ?
+                        and a.reporttime2 between to_date(?,'yyyy-mm-dd hh24:mi:ss') and to_date(?,'yyyy-mm-dd hh24:mi:ss')
                         order by a.rptid ";
 
                 svc = new SqlHelper(EnumBiz.onlineDB);
@@ -2231,7 +2441,7 @@ namespace Report.Biz
                         on a.rptid = b.rptid
                         where a.formid = 26      
                         and a.status = 1
-                        and a.reporttime between ? and ?
+                        and a.reporttime2 between to_date(?,'yyyy-mm-dd hh24:mi:ss') and to_date(?,'yyyy-mm-dd hh24:mi:ss')
                         order by a.rptid  ";
 
                 svc = new SqlHelper(EnumBiz.onlineDB);
@@ -2444,7 +2654,7 @@ namespace Report.Biz
                         on a.rptid = b.rptid
                         where a.formid = 26
                         and a.status = 1
-                        and a.reporttime between ? and ?
+                        and a.reporttime2 between to_date(?,'yyyy-mm-dd hh24:mi:ss') and to_date(?,'yyyy-mm-dd hh24:mi:ss')
                         order by a.rptid ";
 
                 svc = new SqlHelper(EnumBiz.onlineDB);
@@ -2555,7 +2765,7 @@ namespace Report.Biz
                         on a.reportdeptcode = d.code_vchr
                         where a.formid = 26
                         and a.status = 1
-                        and a.reporttime between ? and ?
+                        and a.reporttime2 between to_date(?,'yyyy-mm-dd hh24:mi:ss') and to_date(?,'yyyy-mm-dd hh24:mi:ss')
                         order by a.rptid ";// 
 
                 svc = new SqlHelper(EnumBiz.onlineDB);
@@ -2883,8 +3093,8 @@ namespace Report.Biz
             List<EntityNursEventStrument> data = new List<EntityNursEventStrument>();
             string startTime = string.Empty;
             string endTime = string.Empty;
-            DateTime? startTime1 = null;
-            DateTime? endTime1 = null;
+            //DateTime? startTime1 = null;
+            //DateTime? endTime1 = null;
             string ShcdFlg = string.Empty;
             SqlHelper svc = null;
             XmlDocument xmlDoc = new XmlDocument();
@@ -3007,15 +3217,13 @@ namespace Report.Biz
                     switch (po.key)
                     {
                         case "reportDate":
-                            //IDataParameter parm1 = svc.CreateParm();
-                            //parm1.Value = keyValue.Split('|')[0] + " 00:00:00";
-                            //lstParm.Add(parm1);
-                            //IDataParameter parm2 = svc.CreateParm();
-                            //parm2.Value = keyValue.Split('|')[1] + " 23:59:59";
-                            //lstParm.Add(parm2);
-                            //strSub += " and (a.reporttime between ? and ?)";
-                            startTime1 = Function.Datetime(keyValue.Split('|')[0] + " 00:00:00");
-                            endTime1 = Function.Datetime(keyValue.Split('|')[1] + " 23:59:59");
+                            IDataParameter parm1 = svc.CreateParm();
+                            parm1.Value = keyValue.Split('|')[0] + " 00:00:00";
+                            lstParm.Add(parm1);
+                            IDataParameter parm2 = svc.CreateParm();
+                            parm2.Value = keyValue.Split('|')[1] + " 23:59:59";
+                            lstParm.Add(parm2);
+                            strSub += " and (a.reportTime2 between to_date(?,'yyyy-mm-dd hh24:mi:ss') and to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
                             break;
                         case "deptCode":
                             strSub += " and (a.reportdeptcode = '" + keyValue + "')";
@@ -3067,16 +3275,16 @@ namespace Report.Biz
 
                         voClone.reportTime = dr["reportTime"].ToString();
 
-                        if (!string.IsNullOrEmpty(voClone.reportTime))
-                        {
-                            DateTime reportime = Function.Datetime(voClone.reportTime);
-                            if (reportime >= startTime1 && reportime <= endTime1)
-                            {
-                                voClone.reportTime = dr["reportTime"].ToString();
-                            }
-                            else
-                                continue;
-                        }
+                        //if (!string.IsNullOrEmpty(voClone.reportTime))
+                        //{
+                        //    DateTime reportime = Function.Datetime(voClone.reportTime);
+                        //    if (reportime >= startTime1 && reportime <= endTime1)
+                        //    {
+                        //        voClone.reportTime = dr["reportTime"].ToString();
+                        //    }
+                        //    else
+                        //        continue;
+                        //}
 
                         voClone.XH = i;
                         i++;
@@ -3494,7 +3702,7 @@ namespace Report.Biz
                         on a.deptcode = c.code_vchr
                      where a.eventid = 20
                        and a.status = 1 
-                       and (a.reporttime between ? and ? ) ";
+                      and (a.reporttime2 between to_date( ?,'yyyy-mm-dd hh24:mi:ss') and to_date( ?,'yyyy-mm-dd hh24:mi:ss') ";
 
                 Sql2 = @"select a.rptid,
                            a.reporttime,
@@ -3552,7 +3760,7 @@ namespace Report.Biz
                         on a.deptcode = c.code_vchr
                      where a.eventid = 21
                        and a.status = 1 
-                       and (a.reporttime between ? and ? )";
+                       and (a.reporttime2 between to_date( ?,'yyyy-mm-dd hh24:mi:ss') and to_date( ?,'yyyy-mm-dd hh24:mi:ss') )";
                 #endregion
 
                 IDataParameter[] parm = svc.CreateParm(4);
@@ -4573,7 +4781,7 @@ namespace Report.Biz
                             IDataParameter parm4 = svc.CreateParm();
                             parm4.Value = keyValue.Split('|')[1] + " 23:59:59";
                             lstParm.Add(parm4);
-                            strSub += " and (a.reporttime between ? and ?)";
+                            strSub += " and (a.reporttime2 between to_date(?,'yyyy-mm-dd hh24:mi:ss') and to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
                             break;
                         case "deptCode":
                             strSub += " and (a.reportdeptcode = '" + keyValue + "')";
@@ -4940,7 +5148,7 @@ namespace Report.Biz
                             IDataParameter parm2 = svc.CreateParm();
                             parm2.Value = keyValue.Split('|')[1] + " 23:59:59";
                             lstParm.Add(parm2);
-                            strSub += " and (a.reporttime between ? and ?)";
+                            strSub += " and (a.reporttime2  between to_date(?,'yyyy-mm-dd hh24:mi:ss') and to_date(?,'yyyy-mm-dd hh24:mi:ss'))";
                             break;
                         case "deptCode":
                             strSub += " and (a.reportdeptcode = '" + keyValue + "')";

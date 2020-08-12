@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet>
+  <view uin="exc524cd3n3zhxl_v">
+    <property name="$name" value="FrmView" />
+    <property name="$defaultDiagram" value="True" />
+    <property name="$metaclass" value="Package Diagram" />
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.FrmView.frmShowPrint">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+  </view>
+</nodeSet>

@@ -1,0 +1,436 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AC19232E-11CD-4CFF-BF5A-FEF4ABFF30FC}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>RIS_GUI</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>RIS_GUI</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\..\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\..\..\bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="comm.control, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\debug\comm.control.dll</HintPath>
+    </Reference>
+    <Reference Include="comm.entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\debug\comm.entity.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonInfo">
+      <Name>CommonInfo</Name>
+      <HintPath>..\..\..\bin\DEBUG\CommonInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="CustomForm">
+      <Name>CustomForm</Name>
+      <HintPath>..\..\..\bin\Debug\CustomForm.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DigitalWaveControls">
+      <Name>DigitalWaveControls</Name>
+      <HintPath>..\..\..\bin\Debug\DigitalWaveControls.dll</HintPath>
+    </Reference>
+    <Reference Include="emr.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\emr.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="Emr.StaticObject, Version=3.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\Emr.StaticObject.dll</HintPath>
+    </Reference>
+    <Reference Include="EMR_BEDExplorer_GUI, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="EMR_iCareComponent, Version=1.0.1000.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="EMR_PrintTool">
+      <Name>EMR_PrintTool</Name>
+      <HintPath>..\..\..\BIN\Debug\EMR_PrintTool.dll</HintPath>
+    </Reference>
+    <Reference Include="exDataGrid, Version=2.0.0.1, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="GLS_WorkStation">
+      <Name>GLS_WorkStation</Name>
+      <HintPath>..\..\..\BIN\Debug\GLS_WorkStation.dll</HintPath>
+    </Reference>
+    <Reference Include="GLS_WS_CommonApply, Version=2.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\GLS_WS_CommonApply.dll</HintPath>
+    </Reference>
+    <Reference Include="GUI_Base">
+      <Name>GUI_Base</Name>
+      <HintPath>..\..\..\bin\Debug\GUI_Base.dll</HintPath>
+    </Reference>
+    <Reference Include="his.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\his.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="HISControl, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="PinkieControls">
+      <Name>PinkieControls</Name>
+      <HintPath>..\..\..\bin\Debug\PinkieControls.dll</HintPath>
+    </Reference>
+    <Reference Include="RIS_Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Name>System.EnterpriseServices</Name>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Name>System.Web.Services</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="TemplateLib">
+      <Name>TemplateLib</Name>
+      <HintPath>..\..\..\bin\debug\TemplateLib.dll</HintPath>
+    </Reference>
+    <Reference Include="TemplateMaintenance">
+      <Name>TemplateMaintenance</Name>
+      <HintPath>..\..\..\bin\Debug\TemplateMaintenance.dll</HintPath>
+    </Reference>
+    <Reference Include="TemplateUtility">
+      <Name>TemplateUtility</Name>
+      <HintPath>..\..\..\bin\Debug\TemplateUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="unityproxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\unityproxy.dll</HintPath>
+    </Reference>
+    <Reference Include="utility, Version=2.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\utility.dll</HintPath>
+    </Reference>
+    <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\wecare.core.dll</HintPath>
+    </Reference>
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\wecaredata.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="report\frmCardiogramReportrptNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="report\frmCardiogramReportrptNew.Designer.cs">
+      <DependentUpon>frmCardiogramReportrptNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\ListViewBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Content Include="App.ico" />
+    <Content Include="report\dstCardiogramReport.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dstCardiogramReport.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="report\dstDnmCardiogramReport.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dstDnmCardiogramReport.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="report\dstEEGreport.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dstEEGreport.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="report\dstTCDreport.xsd" />
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsPrintPrev.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controller\ListViewHelper.cs" />
+    <Compile Include="Controller\clsControllerFlatAndSportReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controller\clsController_RISCardiogramManage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controller\clsController_RISCardiogramReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controller\clsController_RISDnmCardiogramReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controller\clsController_RISEEGManage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controller\clsController_RISEEGReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controller\clsController_RISRPT.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controller\clsController_RISTCDReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainController\clsDomainController_RISCardiogramManage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainController\clsDomainController_RISEEGManage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Print\clsPrint_RISCardiogramReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Print\clsPrint_RISDCardiogramReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Print\clsPrint_RISEEGReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Print\clsPrint_RISSportReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Print\clsPrint_RISTCDReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Print\infPrintRecord.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="report\dstCardiogramReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dstCardiogramReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report\dstDnmCardiogramReport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dstDnmCardiogramReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report\dstEEGreport.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dstEEGreport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report\frmCardiogramReportrpt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="report\frmRISrepot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmCardiogramReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmCardiogramReportManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmDnmCardiogramReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmFlatAndSportReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmQueryCardiogramReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmQueryEEGReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmRISEEGReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmRISEEGReportMamage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmRISTCDReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <None Include="report\dstCardiogramReport.xsx">
+      <DependentUpon>dstCardiogramReport.xsd</DependentUpon>
+    </None>
+    <None Include="report\dstDnmCardiogramReport.xsx">
+      <DependentUpon>dstDnmCardiogramReport.xsd</DependentUpon>
+    </None>
+    <None Include="report\dstEEGreport.xsx">
+      <DependentUpon>dstEEGreport.xsd</DependentUpon>
+    </None>
+    <None Include="report\dstTCDreport.xsx">
+      <DependentUpon>dstTCDreport.xsd</DependentUpon>
+    </None>
+    <EmbeddedResource Include="report\frmCardiogramReportrptNew.resx">
+      <DependentUpon>frmCardiogramReportrptNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="report\frmCardiogramReportrpt.resx">
+      <DependentUpon>frmCardiogramReportrpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\frmRISrepot.resx">
+      <DependentUpon>frmRISrepot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmCardiogramReport.resx">
+      <DependentUpon>frmCardiogramReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmCardiogramReportManage.resx">
+      <DependentUpon>frmCardiogramReportManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmDnmCardiogramReport.resx">
+      <DependentUpon>frmDnmCardiogramReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmFlatAndSportReport.resx">
+      <DependentUpon>frmFlatAndSportReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmQueryCardiogramReport.resx">
+      <DependentUpon>frmQueryCardiogramReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmQueryEEGReport.resx">
+      <DependentUpon>frmQueryEEGReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmRISEEGReport.resx">
+      <DependentUpon>frmRISEEGReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmRISEEGReportMamage.resx">
+      <DependentUpon>frmRISEEGReportMamage.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmRISTCDReport.resx">
+      <DependentUpon>frmRISTCDReport.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

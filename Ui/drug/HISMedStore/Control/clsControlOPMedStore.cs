@@ -1867,10 +1867,8 @@ namespace com.digitalwave.iCare.gui.HIS
         /// </summary>
         public long m_mthSend(string employee, string employeeName, clsOutpatientRecipe_VO objRecipe)
         {
-            return 0L;
             try
             {
-               
                 if (this.m_objViewer.m_lsvOpRecDetail.Items.Count != 0 && this.m_objViewer.m_lsvMedicineDetail.Items.Count != 0)
                 {
                     clsMedRecipeSend_VO objItem = new clsMedRecipeSend_VO();
@@ -1945,8 +1943,6 @@ namespace com.digitalwave.iCare.gui.HIS
                         // 发药成功，自动下屏
                         this.LedSocketMsg(0, objRecipe.m_strOutpatRecipeID);
                         /////
-                        ///
-                         
 
                         publiClass.m_mthShowWarning(this.m_objViewer.m_lsvMedicineDetail, "已成功发药！");
                         ClearDe();
@@ -3024,18 +3020,21 @@ namespace com.digitalwave.iCare.gui.HIS
 
                 if (objItems.Rows[i1]["TYPENAME_VCHR"].ToString().IndexOf("中草", 0) == 0)
                 {
-                    medMoney += Convert.ToDouble(objItems.Rows[i1]["tolprice_mny"].ToString().Trim());
+                    //medMoney += Convert.ToDouble(objItems.Rows[i1]["tolprice_mny"].ToString().Trim());
+                    medMoney += Convert.ToDouble(objItems.Rows[i1]["facttotal"].ToString());
                     ReportSendMed[i1].m_strMedType = "3";
                 }
                 if (objItems.Rows[i1]["TYPENAME_VCHR"].ToString().IndexOf("中成", 0) == 0)
                 {
-                    medMoney += Convert.ToDouble(objItems.Rows[i1]["tolprice_mny"].ToString().Trim());
+                    //medMoney += Convert.ToDouble(objItems.Rows[i1]["tolprice_mny"].ToString().Trim());
+                    medMoney += Convert.ToDouble(objItems.Rows[i1]["facttotal"].ToString());
                     //中成药也是以西药的格式打印
                     ReportSendMed[i1].m_strMedType = "2";
                 }
                 if (objItems.Rows[i1]["TYPENAME_VCHR"].ToString().IndexOf("西药", 0) == 0 || objItems.Rows[i1]["TYPENAME_VCHR"].ToString().IndexOf("材料", 0) == 0)
                 {
-                    medMoney += Convert.ToDouble(objItems.Rows[i1]["tolprice_mny"].ToString().Trim());
+                    //medMoney += Convert.ToDouble(objItems.Rows[i1]["tolprice_mny"].ToString().Trim());
+                    medMoney += Convert.ToDouble(objItems.Rows[i1]["facttotal"].ToString());
                     ReportSendMed[i1].m_strMedType = "1";
                 }
                 if (ReportSendMed[i1].m_strMedType == "1" || ReportSendMed[i1].m_strMedType == "2")

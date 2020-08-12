@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet>
+  <view uin="7x3kduyvl_v">
+    <property name="$name" value="DomainControl" />
+    <property name="$defaultDiagram" value="True" />
+    <property name="$metaclass" value="Package Diagram" />
+    <reference referencedUin="csharp:e_class:src:Medicine:com.digitalwave.iCare.gui.HIS.DomainControl.clsDomainControlCompoundReport">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="csharp:e_method:src:Medicine:com.digitalwave.iCare.gui.HIS.DomainControl.clsDomainControlCompoundReport.clsDomainControlCompoundReport()" />
+      <reference referencedUin="csharp:e_method:src:Medicine:com.digitalwave.iCare.gui.HIS.DomainControl.clsDomainControlCompoundReport.m_lngGetStorageList(out@out DataTable)" />
+      <reference referencedUin="csharp:e_method:src:Medicine:com.digitalwave.iCare.gui.HIS.DomainControl.clsDomainControlCompoundReport.m_lngGetStorageList(out@System.Data.DataTable)" />
+    </reference>
+  </view>
+</nodeSet>

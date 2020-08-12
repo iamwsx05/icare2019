@@ -11,7 +11,7 @@ namespace PATHFAST
         /// <summary>
         /// 起始字符
         /// </summary>
-        public const string StartCode = "";
+        public const string StartCode = "";
         /// <summary>
         /// 结束字符
         /// </summary>
@@ -20,6 +20,13 @@ namespace PATHFAST
         /// 发送命令
         /// </summary>
         public const string AckCode = "";
+
+        /// <summary>
+        /// 请求应答符
+        /// </summary>
+        public const string ReqCode = "";
+
+        public const string ReqCode2 = "";
 
         /// <summary>
         /// 每项两位

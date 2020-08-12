@@ -203,13 +203,13 @@ namespace ThermoFC
                 FileInfo[] files = dir.GetFiles();
                 List<string> lstSampleId = new List<string>();
 
-                string today1 = DateTime.Now.ToString("yyyy-MM-dd");   //DateTime.Now.ToString("yyyy-MM-dd");
+                string today1 = DateTime.Now.ToString("yyyy-MM-dd");//DateTime.Now.ToString("yyyy-MM-dd");   //DateTime.Now.ToString("yyyy-MM-dd");
                 if (this.Today.Equals(today1) == false)
                 {
                     this.Today = today1;
                     this.CheckDataSoure.Clear();
                 }
-                string today2 = DateTime.Now.ToString("yyMMdd");   //DateTime.Now.ToString("yyMMdd");
+                string today2 = DateTime.Now.ToString("yyMMdd");//DateTime.Now.ToString("yyMMdd");   //DateTime.Now.ToString("yyMMdd");
                 foreach (FileInfo file in files)
                 {
                     if (file.Name != today2 + ".txt")
@@ -308,11 +308,11 @@ namespace ThermoFC
                     {
                         data2 = data.FindAll(t => t.strDevice_Sample_ID == sampleId);
                         if (data2 != null && data2.Count > 0)
-                        { 
-                            //clsLIS_Svc svc = new clsLIS_Svc();
+                        {
+                            clsLIS_Svc svc = new clsLIS_Svc();
+                            res = svc.lngAddLabResult(data2.ToArray(), out reultArr);
+                            //res = (new weCare.Proxy.ProxyLis()).Service.lngAddLabResult(data2.ToArray(), out reultArr);
 
-                            res = (new weCare.Proxy.ProxyLis()).Service.lngAddLabResult(data2.ToArray(), out reultArr);
-                                  
                             if (res > 0)
                             {
                                 if (ShowResult != null)

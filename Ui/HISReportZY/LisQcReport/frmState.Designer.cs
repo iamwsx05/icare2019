@@ -45,13 +45,13 @@
             this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.repositoryItemMemoEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.rdgSelect = new DevExpress.XtraEditors.RadioGroup();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.dteEnd = new System.Windows.Forms.DateTimePicker();
             this.dteStart = new System.Windows.Forms.DateTimePicker();
             this.btnQuery = new DevExpress.XtraEditors.SimpleButton();
             this.navigationPane1 = new DevExpress.XtraBars.Navigation.NavigationPane();
-            this.btnExport = new DevExpress.XtraEditors.SimpleButton();
             this.navPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -357,14 +357,22 @@
             this.panelControl2.Size = new System.Drawing.Size(983, 54);
             this.panelControl2.TabIndex = 0;
             // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(706, 15);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(75, 28);
+            this.btnExport.TabIndex = 13;
+            this.btnExport.Text = "导出";
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // rdgSelect
             // 
             this.rdgSelect.Location = new System.Drawing.Point(346, 12);
             this.rdgSelect.Name = "rdgSelect";
             this.rdgSelect.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "全部"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "复检"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "备注")});
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "复检")});
             this.rdgSelect.Size = new System.Drawing.Size(232, 32);
             this.rdgSelect.TabIndex = 12;
             // 
@@ -420,15 +428,6 @@
             this.navigationPane1.Size = new System.Drawing.Size(1105, 638);
             this.navigationPane1.TabIndex = 0;
             this.navigationPane1.Text = "尿沉渣复检统计";
-            // 
-            // btnExport
-            // 
-            this.btnExport.Location = new System.Drawing.Point(706, 15);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 28);
-            this.btnExport.TabIndex = 13;
-            this.btnExport.Text = "导出";
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // frmState
             // 

@@ -1,0 +1,847 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{446A0356-6CBE-4AEE-B60D-C70ED2710C86}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>MedicineManage</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>com.digitalwave.iCare.gui.HIS</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\..\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\..\bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalcPatientCharge">
+      <Name>CalcPatientCharge</Name>
+      <HintPath>..\..\..\bin\Debug\CalcPatientCharge.dll</HintPath>
+    </Reference>
+    <Reference Include="comm.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\comm.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonInfo">
+      <Name>CommonInfo</Name>
+      <HintPath>..\..\..\bin\Debug\CommonInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="ControlLibrary, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="DataWindow, Version=2.0.4600.0, Culture=neutral, PublicKeyToken=cc0f66dd9541b3da, processorArchitecture=MSIL" />
+    <Reference Include="DigitalWaveControls">
+      <Name>DigitalWaveControls</Name>
+      <HintPath>..\..\..\bin\Debug\DigitalWaveControls.dll</HintPath>
+    </Reference>
+    <Reference Include="EMR_HRPControl">
+      <Name>EMR_HRPControl</Name>
+      <HintPath>..\..\..\bin\Debug\EMR_HRPControl.dll</HintPath>
+    </Reference>
+    <Reference Include="EMR_iCareControl">
+      <Name>emr_icarecontrol</Name>
+      <HintPath>..\..\..\bin\debug\emr_icarecontrol.dll</HintPath>
+    </Reference>
+    <Reference Include="exDataGrid">
+      <Name>exDataGrid</Name>
+      <HintPath>..\..\..\bin\Debug\exDataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="ExtendPrintTool">
+      <Name>ExtendPrintTool</Name>
+      <HintPath>..\..\..\bin\Debug\ExtendPrintTool.dll</HintPath>
+    </Reference>
+    <Reference Include="GUI_Base">
+      <Name>GUI_Base</Name>
+      <HintPath>..\..\..\bin\Debug\GUI_Base.dll</HintPath>
+    </Reference>
+    <Reference Include="his.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\his.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="HISControl">
+      <Name>HISControl</Name>
+      <HintPath>..\..\..\bin\Debug\HISControl.dll</HintPath>
+    </Reference>
+    <Reference Include="HISRegister">
+      <Name>HISRegister</Name>
+      <HintPath>..\..\..\bin\Debug\HISRegister.dll</HintPath>
+    </Reference>
+    <Reference Include="PinkieControls, Version=1.0.1362.15156, Culture=neutral" />
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Name>System.EnterpriseServices</Name>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Name>System.Web.Services</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="TemplateLib">
+      <Name>TemplateLib</Name>
+      <HintPath>..\..\..\bin\Debug\TemplateLib.dll</HintPath>
+    </Reference>
+    <Reference Include="unityproxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\unityproxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Utility">
+      <Name>Utility</Name>
+      <HintPath>..\..\..\bin\Debug\Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\wecare.core.dll</HintPath>
+    </Reference>
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=90ad5968fbc6e760, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\wecaredata.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+    <None Include="Resources\DeleteHS.png" />
+    <None Include="Resources\DeleteFolderHS.png" />
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsPublicParm.cs" />
+    <Compile Include="Control\clsCenterMetStorageSetup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlApplStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlCenterMetStorageSetup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlChangPrice.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlChengePriceRpt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlImpExpType.cs" />
+    <Compile Include="Control\clsControlMedAddStorageMana.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedAddStorageMene.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedAndStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedAndUnit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedicine.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedicineInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedicineStorageCheck.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedPriceInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedPriceList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedStorageAcct.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedStorageInOrd.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedStorageOutOrd.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedUseful.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedWatch.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clscontrolMetInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlPeriod.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlReturnTicket.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlStanMedReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlStorageApplMed.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlStorageInit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlStorageLimitMgr.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlStorageMedLimit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlStorageOrdType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlStorageQuery.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlStorageSetup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlStorageSetupStar.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlUnitAndType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsControlMedicineReport.cs" />
+    <Compile Include="Control\clsPianDianNew.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Control\clsPrintClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ctlControl\ctlProductor.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ctlControl\ctlStorageMedTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ctlControl\ctlUnit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainConrolChangPrice.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainConrolCheck.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainConrolStorageSetupStar.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainConrol_Medicne.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlCompoundReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlImpExpType.cs" />
+    <Compile Include="DomainControl\clsDomainControlInitStorageMedicine.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlMedicinePriceChg.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlMedicineReport.cs" />
+    <Compile Include="DomainControl\clsDomainControlMedicineStorageCheck.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlMedUseful.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlReturnTicket.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlStockMedAppl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlStorageAidInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlStorageCheck.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlStorageFin.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlStorageOrd.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControlStorageQuery.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainControl_MedStoLimit.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\clsDomainPianDianNew.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DomainControl\DomainControlMedReport.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmApplStorage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmCenterMetStorageSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmChangePriceRpt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmChangPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmChangPriceReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmCheckCondition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmCompoundReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmDifPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmDifPrice.Designer.cs">
+      <DependentUpon>frmDifPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmView\frmFinancial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmFinancial.Designer.cs">
+      <DependentUpon>frmFinancial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmView\frmImpExpType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmImpExpType.Designer.cs">
+      <DependentUpon>frmImpExpType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmView\frmLoseReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmLoseReport.Designer.cs">
+      <DependentUpon>frmLoseReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmView\frmMedAndStorage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedAndStorageMana.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedAndStorageMene.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedAndUnit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedDeIOCCReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedDeIOCCReport.Designer.cs">
+      <DependentUpon>frmMedDeIOCCReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmView\frmMedFinanceReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedFinanceReport.Designer.cs">
+      <DependentUpon>frmMedFinanceReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmView\frmMedicine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedicineInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedicineReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedicineReport.Designer.cs">
+      <DependentUpon>frmMedicineReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmView\frmMedicineStandardYear.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedicineStandardYear.Designer.cs">
+      <DependentUpon>frmMedicineStandardYear.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmView\frmMedicineStorageCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedPriceInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedPriceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedQuery.Designer.cs">
+      <DependentUpon>frmMedQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmView\frmMedStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedStatus.Designer.cs">
+      <DependentUpon>frmMedStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmView\frmMedStorageAcct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedStorageInOrd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedStorageOutOrd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedUsefulSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMedWatchRpt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMetInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMetStorageSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmMonthBalance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmOrdDeReportOfMonth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmOrdInPriceCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmOverStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmPeriod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmPeriodTotailReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmPeriodTotailReport.Designer.cs">
+      <DependentUpon>frmPeriodTotailReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmView\frmPeriodTotailReportYear.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmPeriodTotailReportYear.Designer.cs">
+      <DependentUpon>frmPeriodTotailReportYear.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmView\frmPianDianNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmReturnTicket.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmShowPrint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmShowSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmShowWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmStanMedReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmStorageApplMed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmStorageCheckReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmStorageInit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmStorageLimitMgr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmStorageMedLimitMgr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmStorageOrdType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmStoragePreView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmStorageQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmStorageSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmStroageSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmUnitAndType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmView\frmVendorReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Control\clsPrintClass.resx">
+      <DependentUpon>clsPrintClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlControl\ctlProductor.resx">
+      <DependentUpon>ctlProductor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlControl\ctlStorageMedTextBox.resx">
+      <DependentUpon>ctlStorageMedTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlControl\ctlUnit.resx">
+      <DependentUpon>ctlUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmApplStorage.resx">
+      <DependentUpon>frmApplStorage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmCenterMetStorageSetup.resx">
+      <DependentUpon>frmCenterMetStorageSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmChangePriceRpt.resx">
+      <DependentUpon>frmChangePriceRpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmChangPrice.resx">
+      <DependentUpon>frmChangPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmChangPriceReport.resx">
+      <DependentUpon>frmChangPriceReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmCheckCondition.resx">
+      <DependentUpon>frmCheckCondition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmCompoundReport.resx">
+      <DependentUpon>frmCompoundReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmDifPrice.resx">
+      <DependentUpon>frmDifPrice.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmFinancial.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmFinancial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmImpExpType.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmImpExpType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmLoseReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmLoseReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedAndStorage.resx">
+      <DependentUpon>frmMedAndStorage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedAndStorageMana.resx">
+      <DependentUpon>frmMedAndStorageMana.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedAndStorageMene.resx">
+      <DependentUpon>frmMedAndStorageMene.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedAndUnit.resx">
+      <DependentUpon>frmMedAndUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedDeIOCCReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmMedDeIOCCReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedFinanceReport.resx">
+      <DependentUpon>frmMedFinanceReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedicine.resx">
+      <DependentUpon>frmMedicine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedicineInfo.resx">
+      <DependentUpon>frmMedicineInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedicineReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmMedicineReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedicineStandardYear.resx">
+      <DependentUpon>frmMedicineStandardYear.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedicineStorageCheck.resx">
+      <DependentUpon>frmMedicineStorageCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedPriceInfo.resx">
+      <DependentUpon>frmMedPriceInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedPriceList.resx">
+      <DependentUpon>frmMedPriceList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedQuery.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmMedQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedStatus.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmMedStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedStorageAcct.resx">
+      <DependentUpon>frmMedStorageAcct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedStorageInOrd.resx">
+      <DependentUpon>frmMedStorageInOrd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedStorageOutOrd.resx">
+      <DependentUpon>frmMedStorageOutOrd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedUsefulSearch.resx">
+      <DependentUpon>frmMedUsefulSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMedWatchRpt.resx">
+      <DependentUpon>frmMedWatchRpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMetInfo.resx">
+      <DependentUpon>frmMetInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMetStorageSetup.resx">
+      <DependentUpon>frmMetStorageSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmMonthBalance.resx">
+      <DependentUpon>frmMonthBalance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmOrdDeReportOfMonth.resx">
+      <DependentUpon>frmOrdDeReportOfMonth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmOrdInPriceCheck.resx">
+      <DependentUpon>frmOrdInPriceCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmOverStock.resx">
+      <DependentUpon>frmOverStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmPeriod.resx">
+      <DependentUpon>frmPeriod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmPeriodTotailReport.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmPeriodTotailReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmPeriodTotailReportYear.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>frmPeriodTotailReportYear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmPianDianNew.resx">
+      <DependentUpon>frmPianDianNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmReturnTicket.resx">
+      <DependentUpon>frmReturnTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmShowPrint.resx">
+      <DependentUpon>frmShowPrint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmShowSelect.resx">
+      <DependentUpon>frmShowSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmShowWarning.resx">
+      <DependentUpon>frmShowWarning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmStanMedReport.resx">
+      <DependentUpon>frmStanMedReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmStorageApplMed.resx">
+      <DependentUpon>frmStorageApplMed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmStorageCheckReport.resx">
+      <DependentUpon>frmStorageCheckReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmStorageInit.resx">
+      <DependentUpon>frmStorageInit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmStorageLimitMgr.resx">
+      <DependentUpon>frmStorageLimitMgr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmStorageMedLimitMgr.resx">
+      <DependentUpon>frmStorageMedLimitMgr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmStorageOrdType.resx">
+      <DependentUpon>frmStorageOrdType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmStoragePreView.resx">
+      <DependentUpon>frmStoragePreView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmStorageQuery.resx">
+      <DependentUpon>frmStorageQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmStorageSetup.resx">
+      <DependentUpon>frmStorageSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmStroageSet.resx">
+      <DependentUpon>frmStroageSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmUnitAndType.resx">
+      <DependentUpon>frmUnitAndType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmView\frmVendorReport.resx">
+      <DependentUpon>frmVendorReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Medicine_Model.tgs" />
+    <None Include="ModelSupport\com\com.txvpck" />
+    <None Include="ModelSupport\com\digitalwave\digitalwave.txvpck" />
+    <None Include="ModelSupport\com\digitalwave\iCare\gui\gui.txvpck" />
+    <None Include="ModelSupport\com\digitalwave\iCare\gui\HIS\baotable\baotable.txvpck" />
+    <None Include="ModelSupport\com\digitalwave\iCare\gui\HIS\Control\Control.txvpck" />
+    <None Include="ModelSupport\com\digitalwave\iCare\gui\HIS\DomainControl\DomainControl.txvpck" />
+    <None Include="ModelSupport\com\digitalwave\iCare\gui\HIS\FrmView\FrmView.txvpck" />
+    <None Include="ModelSupport\com\digitalwave\iCare\gui\HIS\HIS.txvpck" />
+    <None Include="ModelSupport\com\digitalwave\iCare\iCare.txvpck" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

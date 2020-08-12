@@ -5,6 +5,8 @@ using Sybase.DataWindow;
 using System.Data;
 using System.Windows.Forms;
 using System.IO;
+using weCare.Core.Utils;
+using System.Drawing;
 
 namespace com.digitalwave.iCare.gui.HIS.Reports
 {
@@ -59,6 +61,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             public string acceptFlg { get; set; }
             public string HsWeek { get; set; }
             public string isemergency { get; set; }
+            public string isGt { get; set; }
         }
 
         #endregion
@@ -390,7 +393,8 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                 clsPublic.PlayAvi("findFILE.avi", "正在查询项目信息，请稍候...");
 
                 long lngRes = m_objManage.lngGetSampleAcceptable(out dtbResult, dteStart, dteEnd, applyUnitIdStr, strDept, enmergencyFlg, patType);
-
+                string acceptDate = string.Empty;
+                string confirmDate = string.Empty;
                 if (lngRes > 0 && dtbResult.Rows.Count > 0)
                 {
                     foreach (DataRow dr in dtbResult.Rows)
@@ -406,29 +410,32 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                         {
                             if (listime >= 0)
                             {
-                                vo.acceptFlg = "F";
+                                vo.acceptFlg = "否";
                                 // 急诊项目
                                 if (dr["emergency_int"].ToString().Trim() == "1")
                                 {
                                     if (energencyLimit >= listime)
-                                        vo.acceptFlg = "T";
+                                        vo.acceptFlg = "是";
                                 }
                                 else     //非急诊
                                 {
                                     bool isAccept = IsAccept(dr);
 
                                     if (isAccept)
-                                        vo.acceptFlg = "T";
+                                        vo.acceptFlg = "是";
                                 }
 
                                 vo.HZXM = dr["HZXM"].ToString();
                                 vo.DEPTNAME = dr["DEPTNAME"].ToString();
-
                                 vo.BARCODE = dr["BARCODE"].ToString();
                                 vo.CARDNO = string.IsNullOrEmpty(dr["CARDNO"].ToString()) ? dr["patInNo"].ToString() : dr["CARDNO"].ToString();
-                                vo.ApplyTime = dr["applyTime"].ToString();
-                                vo.AcceptTime = dr["accepttime"].ToString();  
-                                vo.ConfirmTime = dr["confirmtime"].ToString();
+                                vo.ApplyTime =Function.Datetime(dr["applyTime"]).ToString("yyyy-MM-dd HH:mm");
+                                vo.AcceptTime = Function.Datetime(dr["accepttime"]).ToString("yyyy-MM-dd HH:mm");  
+                                vo.ConfirmTime = Function.Datetime(dr["confirmtime"]).ToString("yyyy-MM-dd HH:mm");
+                                acceptDate = Function.Datetime(vo.AcceptTime).ToString("yyyy-MM-dd");
+                                confirmDate = Function.Datetime(vo.ConfirmTime).ToString("yyyy-MM-dd");
+                                if (acceptDate != confirmDate)
+                                    vo.isGt = "是";
                                 vo.HsWeek = calWeek(Convert.ToDateTime(vo.ConfirmTime));
                                 vo.Checker = dr["lastname_vchr"].ToString();
                                 vo.item = dr["checkContent"].ToString();
@@ -445,12 +452,12 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                     MessageBox.Show("没有相关数据。");
                 }
 
-                m_objViewer.dgvStat.DataSource = data;
+                m_objViewer.gcStat.DataSource = data;
 
             }
             catch (Exception ex)
             {
-                
+                ExceptionLog.OutPutException(ex);
             }
             finally
             {
@@ -609,103 +616,6 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
         }
         #endregion
 
-        #region 导出EXCEL
-        /// <summary>
-        /// 
-        /// </summary>
-        public void m_mthExportToExcel2()
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Excel files (*.xls)|*.xls";
-            saveFileDialog.FilterIndex = 0;
-            saveFileDialog.RestoreDirectory = true;
-            saveFileDialog.CreatePrompt = true;
-            saveFileDialog.Title = "导出Excel文件到";
-            string dteStart = m_objViewer.dteStart.Text;
-            string dteEnd = m_objViewer.dteEnd.Text;
-            string applyUnitName = string.Empty;
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                Stream stream = saveFileDialog.OpenFile();
-                StreamWriter streamWriter = new StreamWriter(stream, Encoding.GetEncoding("gb2312"));
-                string text = "";
-
-                try
-                {
-                    for (int i = 0; i < this.m_objViewer.dgvCheckItem.ColumnCount / 2; i++)
-                    {
-                        if (this.m_objViewer.dgvStat.Columns[i].Visible)
-                        {
-                            if (i > 0)
-                            {
-                                text += "\t";
-                            }
-                        }
-                    }
-
-                    if (m_objViewer.dgvCheckItem.Rows.Count >= 2)
-                    {
-                        for (int i = 0; i < m_objViewer.dgvCheckItem.Rows.Count - 1; i++)
-                        {
-                            applyUnitName += m_objViewer.dgvCheckItem.Rows[i].Cells[1].Value.ToString() + ",";
-                        }
-
-                        applyUnitName = applyUnitName.TrimEnd(',');
-                    }
-
-                    text += "检验报告发放时限明细报表";
-                    streamWriter.WriteLine(text);
-                    text = dteStart + "~" + dteEnd + "              检验项目：" + applyUnitName;
-                    streamWriter.WriteLine(text);
-                    text = "";
-
-                    for (int i = 0; i < this.m_objViewer.dgvStat.ColumnCount; i++)
-                    {
-                        if (this.m_objViewer.dgvStat.Columns[i].Visible)
-                        {
-                            if (i > 0)
-                            {
-                                text += "\t";
-                            }
-                            text += this.m_objViewer.dgvStat.Columns[i].HeaderText.Replace("\n", "");
-                        }
-                    }
-                    streamWriter.WriteLine(text);
-                    for (int i = 0; i < this.m_objViewer.dgvStat.Rows.Count; i++)
-                    {
-                        StringBuilder stringBuilder = new StringBuilder();
-                        for (int j = 0; j < this.m_objViewer.dgvStat.Columns.Count; j++)
-                        {
-                            if (this.m_objViewer.dgvStat.Columns[j].Visible)
-                            {
-                                if (j > 0)
-                                {
-                                    stringBuilder.Append("\t");
-                                }
-                                stringBuilder.Append((this.m_objViewer.dgvStat.Rows[i].Cells[j].Value == null) ? "" : this.m_objViewer.dgvStat.Rows[i].Cells[j].Value.ToString());
-                            }
-                        }
-                        streamWriter.WriteLine(stringBuilder);
-                    }
-                    MessageBox.Show("导出成功！", "检验报告发放时限明细报表", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    streamWriter.Close();
-                    stream.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    streamWriter.Close();
-                    stream.Close();
-                }
-            }
-        }
-
-        #endregion
-
         #region 关闭
         /// <summary>
         /// 
@@ -766,6 +676,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
         }
         #endregion
 
+        #region isAccept
         private bool IsAccept(DataRow dr)
         {
             bool IsAccept = false;
@@ -865,6 +776,9 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             if (!string.IsNullOrEmpty(confirmEndTime))
                 tsConfirmEndTime = DateTime.Parse(confirmEndTime).TimeOfDay;
 
+            string acceptDate = Function.Datetime(acceptTime).ToString("yyyy-MM-dd");
+            string confirmDate = Function.Datetime(confirmTime).ToString("yyyy-MM-dd");
+
             #region  指定星期
             if ((!string.IsNullOrEmpty(confirmTime.ToString()) && (!string.IsNullOrEmpty(week1) || !string.IsNullOrEmpty(week2) ||
                     !string.IsNullOrEmpty(week3) || !string.IsNullOrEmpty(week4) || !string.IsNullOrEmpty(week5) || !string.IsNullOrEmpty(week6))))
@@ -881,6 +795,20 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                         IsAccept = true;
                     }
                 }
+            }
+            #endregion
+
+            #region 隔天出报告
+            if(acceptDate != confirmDate && listime > 0)
+            {
+                DateTime dt1 = Convert.ToDateTime(confirmTimeTmp);
+                DateTime dt2 = Convert.ToDateTime(confirmEndTime);
+                if (DateTime.Compare(dt1, dt2) > 0)
+                    IsAccept = false;
+                else
+                    IsAccept = true;
+
+                return IsAccept;
             }
             #endregion
 
@@ -970,6 +898,25 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
 
             return IsAccept;
         }
+        #endregion
+
+
+        #region RowCellStyle
+        /// <summary>
+        /// RowCellStyle
+        /// </summary>
+        /// <param name="e"></param>
+        public void RowCellStyle(DevExpress.XtraGrid.Views.Grid.GridView gv, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            int hand = e.RowHandle;
+            if (hand < 0) return;
+            EntitySamepleDetail vo = gv.GetRow(hand) as EntitySamepleDetail;
+            //护理安全表单审核
+            if (vo.acceptFlg == "否")
+                e.Appearance.ForeColor = Color.Red;
+            gv.Invalidate();
+        }
+        #endregion
 
     }
 }

@@ -226,7 +226,10 @@ namespace com.digitalwave.iCare.gui.HIS
                     DataTable dtBl2 = dvBl.ToTable();
                     foreach (DataRow dr in dtBl2.Rows)
                     {
-                        dicGroupName.Add(groupName, new List<DataRow>() { dr });
+                        if (dicGroupName.ContainsKey(groupName))
+                            dicGroupName[groupName].Add(dr);
+                        else
+                            dicGroupName.Add(groupName, new List<DataRow>() { dr });
                     }
                     tnParent = new TreeNode("≤°¿Ì±®∏Ê");
                     foreach (DataRow dr1 in dicGroupName[groupName])

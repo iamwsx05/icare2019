@@ -65,6 +65,7 @@
     <Compile Include="entityoutpatientinterview.cs" />
     <Compile Include="entityqueryparm.cs" />
     <Compile Include="entityriskana.cs" />
+    <Compile Include="entityrptevent.cs" />
     <Compile Include="entitystatinstrument.cs" />
     <Compile Include="entityuploadsb.cs" />
     <Compile Include="entityygreport.cs" />

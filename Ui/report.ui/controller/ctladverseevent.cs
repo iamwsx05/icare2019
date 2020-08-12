@@ -111,6 +111,11 @@ namespace Report.Ui
             Viewer.dteDateStart.DateTime = new DateTime(dtmNow.Year, dtmNow.Month, 1);
             Viewer.dteDateEnd.DateTime = dtmNow;
 
+            if(Viewer.EventId == "19")
+            {
+                Viewer.gdAqsjlx.Visible = true;
+            }
+
             #region 参数
             using (ProxyEntityFactory proxy = new ProxyEntityFactory())
             {
@@ -381,7 +386,7 @@ namespace Report.Ui
         /// <returns></returns>
         XtraReport GetXR(decimal rptId)
         {
-            EntityRptEvent eventVo = null;
+            EntityRptEvent2 eventVo = null;
             using (ProxyAdverseEvent proxy = new ProxyAdverseEvent())
             {
                 eventVo = proxy.Service.GetEvent(rptId);

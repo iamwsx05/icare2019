@@ -1487,7 +1487,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
                 DateTime m_dtDate;
                 DateTime.TryParse(p_strCheckDate, out m_dtDate);
-                strSQL = @"select idx_int,
+                strSQL = @"select idx_int,--22222222
        device_check_item_name_vchr,
        device_sampleid_chr,
        abnormal_flag_vchr,
@@ -1517,8 +1517,10 @@ namespace com.digitalwave.iCare.middletier.LIS
                 objDPArr[0].Value = p_strDeviceID.PadRight(6, ' ');
                 objDPArr[1].Value = p_strDeviceSampleID.Trim();
                 objDPArr[2].Value = m_dtDate;
-                objDPArr[3].Value = p_intBeginIndex;
-                objDPArr[4].Value = p_intEndIndex;
+                objDPArr[3].Value = Math.Min(p_intBeginIndex, p_intEndIndex);
+                objDPArr[4].Value = Math.Max(p_intBeginIndex, p_intEndIndex);
+                //objDPArr[3].Value = p_intBeginIndex;
+                //objDPArr[4].Value = p_intEndIndex;
 
                 lngRes = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref dtbResult, objDPArr);
 

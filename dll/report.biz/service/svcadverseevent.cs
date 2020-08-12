@@ -52,7 +52,7 @@ namespace Report.Svc
         /// </summary>
         /// <param name="serNo"></param>
         /// <returns></returns>
-        public EntityRptEvent GetEvent(decimal rptId)
+        public EntityRptEvent2 GetEvent(decimal rptId)
         {
             using (bizAdverseEvent biz = new bizAdverseEvent())
             {
@@ -68,7 +68,7 @@ namespace Report.Svc
         /// <param name="eventVo"></param>
         /// <param name="rptId"></param>
         /// <returns></returns>
-        public int SaveEvent(EntityRptEvent eventVo, out decimal rptId)
+        public int SaveEvent(EntityRptEvent2 eventVo, out decimal rptId)
         {
             using (bizAdverseEvent biz = new bizAdverseEvent())
             {

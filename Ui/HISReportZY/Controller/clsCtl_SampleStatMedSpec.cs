@@ -648,6 +648,6 @@ namespace com.digitalwave.iCare.gui.HIS
         {
             m_objViewer.dgvCheckItem.Rows.Clear();
         }
-        #endregion
+        #endregion 
     }
 }

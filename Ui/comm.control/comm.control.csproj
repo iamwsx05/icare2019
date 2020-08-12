@@ -1,0 +1,1813 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{415A6157-FFBE-40BA-B933-70151E1F04AE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Common.Controls</RootNamespace>
+    <AssemblyName>comm.control</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="comm.entity">
+      <HintPath>..\..\..\Debug\comm.entity.dll</HintPath>
+    </Reference>
+    <Reference Include="comm.itf">
+      <HintPath>..\..\..\Debug\comm.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="comm.utils">
+      <HintPath>..\..\..\Debug\comm.utils.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.BonusSkins.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.BonusSkins.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Charts.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.CodeConverter.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.CodeConverter.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.CodeParser.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.CodeParser.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Data.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Images.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Images.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Office.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Office.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Pdf.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v16.2.Drawing, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Pdf.v16.2.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Printing.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.RichEdit.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Snap.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Snap.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Snap.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Snap.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Sparkline.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Sparkline.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Tutorials.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Tutorials.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Utils.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v16.2.UI, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.Utils.v16.2.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraBars.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraCharts.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v16.2.Extensions, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraCharts.v16.2.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v16.2.UI, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraCharts.v16.2.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraEditors.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraGrid.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraLayout.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraNavBar.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPdfViewer.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraPdfViewer.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraPivotGrid.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraPrinting.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraReports.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v16.2.Extensions, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraReports.v16.2.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraRichEdit.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraScheduler.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraSpreadsheet.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraSpreadsheet.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraTreeList.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraVerticalGrid.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\debug\DevExpress.XtraVerticalGrid.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Design">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing.Design">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="wecare.core">
+      <HintPath>..\..\..\Debug\wecare.core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="base\BaseController.cs" />
+    <Compile Include="base\frmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="base\frmBase.Designer.cs">
+      <DependentUpon>frmBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="base\frmBaseMdi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="base\frmBaseMdi.Designer.cs">
+      <DependentUpon>frmBaseMdi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="base\frmBaseNormal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="base\frmBaseNormal.Designer.cs">
+      <DependentUpon>frmBaseNormal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="base\frmBasePopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="base\frmBasePopup.Designer.cs">
+      <DependentUpon>frmBasePopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="base\frmUCcontainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="base\frmUCcontainer.Designer.cs">
+      <DependentUpon>frmUCcontainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="base\ucBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="base\ucBase.Designer.cs">
+      <DependentUpon>ucBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="base\uiHelper.cs" />
+    <Compile Include="cp\cptools.cs" />
+    <Compile Include="cp\ctlLabelCp.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cp\ctlLindDU.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cp\ctlLineBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cp\ctlLineLR.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cp\ctlLineLRD.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cp\ctlLineLRU.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cp\ctlLineRL.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cp\ctlLineRLD.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cp\ctlLineRLU.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cp\ctlLineUD.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cp\ctlPicBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="cp\DesignPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cp\frmPathNodes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cp\frmPathNodes.Designer.cs">
+      <DependentUpon>frmPathNodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cp\ucNode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cp\ucNode.designer.cs">
+      <DependentUpon>ucNode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cp\ucToolBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="cp\ucToolBox.designer.cs">
+      <DependentUpon>ucToolBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\ctlLookUpEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="custom\ctlMovePage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="custom\ctlPicbutton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="custom\ctlSelectGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="custom\ctlSelectGrid.Designer.cs">
+      <DependentUpon>ctlSelectGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\ctlSelectTree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="custom\ctlSelectTree.Designer.cs">
+      <DependentUpon>ctlSelectTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\frmAnimation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\frmAnimation.designer.cs">
+      <DependentUpon>frmAnimation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\frmConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\frmConfirm.Designer.cs">
+      <DependentUpon>frmConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\frmDeptSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\frmDeptSelect.designer.cs">
+      <DependentUpon>frmDeptSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\frmDoctSignByPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\frmDoctSignByPwd.designer.cs">
+      <DependentUpon>frmDoctSignByPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\frmImageEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\frmImageEdit.designer.cs">
+      <DependentUpon>frmImageEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\frmMsg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\frmMsg.designer.cs">
+      <DependentUpon>frmMsg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\frmNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\frmNew.Designer.cs">
+      <DependentUpon>frmNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\ucDept.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="custom\ucDept.Designer.cs">
+      <DependentUpon>ucDept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\ucDepts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="custom\ucDepts.Designer.cs">
+      <DependentUpon>ucDepts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\ucDoct.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="custom\ucDoct.Designer.cs">
+      <DependentUpon>ucDoct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\controller\ctlformlist.cs" />
+    <Compile Include="designer\controller\ctlformdesign.cs" />
+    <Compile Include="designer\controller\ctlformmanage.cs" />
+    <Compile Include="designer\controller\ctlprinttemplate.cs" />
+    <Compile Include="designer\controller\ctlReportDesigner.cs" />
+    <Compile Include="designer\controller\ctltablemanage.cs" />
+    <Compile Include="designer\viewer\frmcontent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmcontent.Designer.cs">
+      <DependentUpon>frmcontent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\viewer\frmformdesign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmformdesign.designer.cs">
+      <DependentUpon>frmformdesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\viewer\frmformlist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmformlist.Designer.cs">
+      <DependentUpon>frmformlist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\viewer\frmformmanage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmformmanage.Designer.cs">
+      <DependentUpon>frmformmanage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\viewer\frmPrintDocument.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmPrintDocument.Designer.cs">
+      <DependentUpon>frmPrintDocument.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\viewer\frmprintdocumentsimple.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmprintdocumentsimple.Designer.cs">
+      <DependentUpon>frmprintdocumentsimple.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\viewer\frmPrintPageSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmPrintPageSetting.Designer.cs">
+      <DependentUpon>frmPrintPageSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\frmSignature.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\frmSignature.Designer.cs">
+      <DependentUpon>frmSignature.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\frmSignaturePwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\frmSignaturePwd.Designer.cs">
+      <DependentUpon>frmSignaturePwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\ICSharpCode\Src\Actions\BookmarkActions.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Actions\CaretActions.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Actions\ClipBoardActions.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Actions\FoldActions.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Actions\FormatActions.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Actions\HomeEndActions.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Actions\IEditAction.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Actions\MiscActions.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Actions\SelectionActions.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\AbstractSegment.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\BookmarkManager\Bookmark.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\BookmarkManager\BookmarkEventHandler.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\BookmarkManager\BookmarkManager.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\BookmarkManager\BookmarkManagerMemento.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\CustomLineManager\CustomLineManager.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\CustomLineManager\ICustomLineManager.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\DefaultDocument.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\DefaultTextEditorProperties.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\DocumentEventArgs.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\DocumentFactory.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\FoldingStrategy\FoldingManager.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\FoldingStrategy\FoldMarker.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\FoldingStrategy\IFoldingStrategy.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\FoldingStrategy\IndentFoldingStrategy.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\FormattingStrategy\DefaultFormattingStrategy.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\FormattingStrategy\IFormattingStrategy.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\DefaultHighlightingStrategy.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\FontContainer.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\HighlightBackground.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\HighlightColor.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\HighlightInfo.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\HighlightingColorNotFoundException.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\HighlightingDefinitionParser.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\HighlightingManager.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\HighlightingStrategyFactory.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\HighlightRuleSet.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\IHighlightingStrategy.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\NextMarker.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\PrevMarker.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\Span.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\SyntaxModes\FileSyntaxModeProvider.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\SyntaxModes\ISyntaxModeFileProvider.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\SyntaxModes\ResourceSyntaxModeProvider.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\SyntaxModes\SyntaxMode.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\HighlightingStrategy\TextWord.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\IDocument.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\ISegment.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\ITextEditorProperties.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\LineManager\DefaultLineManager.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\LineManager\ILineManager.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\LineManager\LineManagerEventArgs.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\LineManager\LineSegment.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\MarkerStrategy\MarkerStrategy.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\MarkerStrategy\TextMarker.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\Selection\ColumnRange.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\Selection\DefaultSelection.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\Selection\ISelection.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\Selection\SelectionManager.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\TextBufferStrategy\GapTextBufferStrategy.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\TextBufferStrategy\ITextBufferStrategy.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\TextBufferStrategy\PieceTableTextBufferStrategy.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\TextBufferStrategy\StringTextBufferStrategy.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Document\TextUtilities.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\AbstractMargin.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\BracketHighlighter.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\BrushRegistry.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\Caret.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\CompletionWindow\AbstractCompletionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\ICSharpCode\Src\Gui\CompletionWindow\CodeCompletionListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="custom\ICSharpCode\Src\Gui\CompletionWindow\CodeCompletionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\ICSharpCode\Src\Gui\CompletionWindow\DeclarationViewWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\ICSharpCode\Src\Gui\CompletionWindow\ICompletionData.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\CompletionWindow\ICompletionDataProvider.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\DrawableLine.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\FoldMargin.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\GutterMargin.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\HRuler.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="custom\ICSharpCode\Src\Gui\IconBarMargin.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\Ime.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\InsightWindow\IInsightDataProvider.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\InsightWindow\InsightWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="custom\ICSharpCode\Src\Gui\TextArea.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="custom\ICSharpCode\Src\Gui\TextAreaClipboardHandler.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\TextAreaControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="custom\ICSharpCode\Src\Gui\TextAreaDragDropHandler.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\TextAreaMouseHandler.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\TextAreaUpdate.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\TextEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="custom\ICSharpCode\Src\Gui\TextEditorControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="custom\ICSharpCode\Src\Gui\TextView.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Gui\ToolTipRequestEventArgs.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Undo\IUndoableOperation.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Undo\UndoableDelete.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Undo\UndoableInsert.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Undo\UndoableReplace.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Undo\UndoQueue.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Undo\UndoStack.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Util\FileReader.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Util\LookupTable.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Util\RtfWriter.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Util\TextUtility.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Util\TipPainter.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Util\TipPainterTools.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Util\TipSection.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Util\TipSpacer.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Util\TipSplitter.cs" />
+    <Compile Include="custom\ICSharpCode\Src\Util\TipText.cs" />
+    <Compile Include="custom\ucDepartment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="custom\ucDepartment.Designer.cs">
+      <DependentUpon>ucDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\ucEmployee.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="custom\ucEmployee.Designer.cs">
+      <DependentUpon>ucEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\ucPrintControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="custom\ucPrintControl.Designer.cs">
+      <DependentUpon>ucPrintControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="custom\ucPrintPreviewControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmprinttemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmprinttemplate.Designer.cs">
+      <DependentUpon>frmprinttemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\viewer\frmPrintXtraReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmPrintXtraReport.Designer.cs">
+      <DependentUpon>frmPrintXtraReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\viewer\frmreportdesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmreportdesigner.Designer.cs">
+      <DependentUpon>frmreportdesigner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\viewer\frmselectfields.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmselectfields.Designer.cs">
+      <DependentUpon>frmselectfields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\viewer\frmtablemanage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\frmtablemanage.Designer.cs">
+      <DependentUpon>frmtablemanage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\viewer\showpanelform.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\showpanelform.designer.cs">
+      <DependentUpon>showpanelform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="designer\viewer\ucnote.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="designer\viewer\ucnote.Designer.cs">
+      <DependentUpon>ucnote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="editors\ctlCheckedListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\ctlDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\ctlDateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\ctlFlowLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\ctlGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\ctlLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\ctlLinkLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\ctlListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\ctlListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\ctlPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\ctlRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\ctlTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraButtonEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraCheckButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraCheckComboBoxEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraCheckEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraCheckedListBoxControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraComboBoxEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraDateEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraDropDownButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraGridControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraGridControl.Designer.cs">
+      <DependentUpon>xtraGridControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="editors\xtraGroupControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraImageEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraImageListBoxControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraLabelControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraListBoxControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraLookUpEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraMemoEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraMemoExEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraPanelControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraPictureEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraPopupContainerControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraPopupContainerEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraRadioGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraRichEditControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraRichEditControl.Designer.cs">
+      <DependentUpon>xtraRichEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="editors\xtraScrollableControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraSimpleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraSpinEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraSplitterControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraTextEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="editors\xtraTreeList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\clsEfData.cs" />
+    <Compile Include="emr\controlsbase\ctlBasePatientInfoControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlCombox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlDatetime.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlHospitalName.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlLine.designer.cs">
+      <DependentUpon>ctlLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlMemoEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientAge.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientArea.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientBedNo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientBirthDay.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientBirthPlace.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientBloodPressure.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientBloodType.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientBreath.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientCompany.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientContactPerson.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientContactRelation.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientContactTel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientCulture.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientDept.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientHeight.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientHkadr.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientHomeAddr.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientIdNumber.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientInDate.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientInDays.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientIpNo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientIpTimes.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientMarriage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientName.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientNation.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientNativePlace.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientOpIpNo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientOpNo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientOutDate.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientProfession.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientPulse.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientSex.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientTel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientTemperature.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPatientWeight.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlVertLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ctlVertLine.designer.cs">
+      <DependentUpon>ctlVertLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controlsbase\ucToolBoxEf.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ucToolBoxEf.Designer.cs">
+      <DependentUpon>ucToolBoxEf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controlsbase\ucToolBoxItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="emr\controlsbase\ucToolBoxItem.Designer.cs">
+      <DependentUpon>ucToolBoxItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\autocompletemenu\AutocompleteItem.cs" />
+    <Compile Include="emr\autocompletemenu\AutocompleteItems.cs" />
+    <Compile Include="emr\autocompletemenu\AutocompleteListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="emr\autocompletemenu\AutocompleteMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\autocompletemenu\AutocompleteMenuHost.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\autocompletemenu\EventArgs.cs" />
+    <Compile Include="emr\autocompletemenu\IAutocompleteListView.cs" />
+    <Compile Include="emr\autocompletemenu\ITextBoxWrapper.cs" />
+    <Compile Include="emr\autocompletemenu\Range.cs" />
+    <Compile Include="emr\autocompletemenu\TextBoxWrapper.cs" />
+    <Compile Include="emr\controls\ctlpopupselect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="emr\controls\ctlpopupselect.designer.cs">
+      <DependentUpon>ctlpopupselect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\ctlrichtextbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controls\ctlsignature.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="emr\controls\ctlsignature.Designer.cs">
+      <DependentUpon>ctlsignature.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\ctltabcontrol.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controls\ctltablecase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="emr\controls\ctltablecase.designer.cs">
+      <DependentUpon>ctltablecase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\ctltablelayout4design.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controls\ctltablelayout4design.Designer.cs">
+      <DependentUpon>ctltablelayout4design.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\ctltreeselect.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controls\ctltreeselect.designer.cs">
+      <DependentUpon>ctltreeselect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\ctltreeselectdept.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controls\ctltreeselectdept.designer.cs">
+      <DependentUpon>ctltreeselectdept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\ctltreeselectemployee.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controls\ctltreeselectemployee.designer.cs">
+      <DependentUpon>ctltreeselectemployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\ctltreeselecticd.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controls\ctltreeselecticd.designer.cs">
+      <DependentUpon>ctltreeselecticd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\ctltreeselectpart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\controls\ctltreeselectpart.designer.cs">
+      <DependentUpon>ctltreeselectpart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\frmLoadElement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="emr\controls\frmLoadElement.designer.cs">
+      <DependentUpon>frmLoadElement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\frmModifyPatBasicInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="emr\controls\frmModifyPatBasicInfo.designer.cs">
+      <DependentUpon>frmModifyPatBasicInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\frmSetSelfDefineColumn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="emr\controls\frmSetSelfDefineColumn.Designer.cs">
+      <DependentUpon>frmSetSelfDefineColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\frmSetSumRowScopes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="emr\controls\frmSetSumRowScopes.Designer.cs">
+      <DependentUpon>frmSetSumRowScopes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\frmTableBatchSign.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="emr\controls\frmTableBatchSign.Designer.cs">
+      <DependentUpon>frmTableBatchSign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\controls\ucEmr.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="emr\controls\ucEmr.Designer.cs">
+      <DependentUpon>ucEmr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\emrtools.cs" />
+    <Compile Include="emr\itf\ctllinestyle.cs" />
+    <Compile Include="emr\itf\icalhost.cs" />
+    <Compile Include="emr\itf\icheckbox.cs" />
+    <Compile Include="emr\itf\icontainerctrl.cs" />
+    <Compile Include="emr\itf\ictlbutton.cs" />
+    <Compile Include="emr\itf\ictlline.cs" />
+    <Compile Include="emr\itf\idbcolproperty.cs" />
+    <Compile Include="emr\itf\idesignerpanel.cs" />
+    <Compile Include="emr\itf\ieventcontrol.cs" />
+    <Compile Include="emr\itf\ilayoutcontrol.cs" />
+    <Compile Include="emr\itf\ipanel.cs" />
+    <Compile Include="emr\itf\ipatientcontrol.cs" />
+    <Compile Include="emr\itf\iplugineventcontrol.cs" />
+    <Compile Include="emr\itf\ipopupselect.cs" />
+    <Compile Include="emr\itf\irtfeditor.cs" />
+    <Compile Include="emr\itf\iruntimedesigncontrol.cs" />
+    <Compile Include="emr\itf\iscriptablecontrol.cs" />
+    <Compile Include="emr\itf\isignaturecontrol.cs" />
+    <Compile Include="emr\itf\itabcontrol.cs" />
+    <Compile Include="emr\itf\ixtracombox.cs" />
+    <Compile Include="emr\itf\ixtradatetime.cs" />
+    <Compile Include="emr\itf\ixtralistbox.cs" />
+    <Compile Include="emr\itf\ixtraradiogroup.cs" />
+    <Compile Include="emr\misc\booltypeconverter.cs" />
+    <Compile Include="emr\misc\datetimemaskconverter.cs" />
+    <Compile Include="emr\misc\dbfielddatatypeconverter.cs" />
+    <Compile Include="emr\misc\filtercontrol.cs" />
+    <Compile Include="emr\misc\ilabelinfo.cs" />
+    <Compile Include="emr\misc\model.cs" />
+    <Compile Include="emr\misc\patientinfohelper.cs" />
+    <Compile Include="emr\misc\radiogroupcolumn.cs" />
+    <Compile Include="emr\new\CellBorderProperty.cs" />
+    <Compile Include="emr\new\ColumnBase.cs" />
+    <Compile Include="emr\new\ColumnCollection.cs" />
+    <Compile Include="emr\new\PartogramDrawer.cs" />
+    <Compile Include="emr\new\ctlPartogramControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="emr\new\ctlPartogramControl.designer.cs">
+      <DependentUpon>ctlPartogramControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\new\ctlThreeItemsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="emr\new\ctlThreeItemsControl.designer.cs">
+      <DependentUpon>ctlThreeItemsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\new\DrawingDataColumn.cs" />
+    <Compile Include="emr\new\DrawingGrid.cs" />
+    <Compile Include="emr\new\DrawingGridColumnCell.cs" />
+    <Compile Include="emr\new\EventPoint.cs" />
+    <Compile Include="emr\new\GridCaption.cs" />
+    <Compile Include="emr\new\RowHeaderColumn.cs" />
+    <Compile Include="emr\new\TextProperty.cs" />
+    <Compile Include="emr\new\ThreeItemConstValue.cs" />
+    <Compile Include="emr\new\ThreeItemsData.cs" />
+    <Compile Include="emr\new\ThreeItemTimePeriodGenerator.cs" />
+    <Compile Include="emr\new\ValuePoint.cs" />
+    <Compile Include="emr\propgrid\BaseControlWarpper.cs" />
+    <Compile Include="emr\propgrid\BaseObjectPropertyWrapper.cs" />
+    <Compile Include="emr\propgrid\ControlPropertyGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\propgrid\CustomFormControlCreatorCP.cs" />
+    <Compile Include="emr\propgrid\CustomFormControlCreatorEAF.cs" />
+    <Compile Include="emr\propgrid\DesignPanelWrapper.cs" />
+    <Compile Include="emr\propgrid\IObjectPropertyWrapper.cs" />
+    <Compile Include="emr\propgrid\PopSelectColumnCollection.cs" />
+    <Compile Include="emr\propgrid\PopSelectColumnCollection4Designer.cs" />
+    <Compile Include="emr\propgrid\PopupSelectColumn.cs" />
+    <Compile Include="emr\propgrid\PopupSelectColumn4Designer.cs" />
+    <Compile Include="emr\propgrid\PopupSelectSource.cs" />
+    <Compile Include="emr\service\AnchorStyleSerializationService.cs" />
+    <Compile Include="emr\service\ComponentSerializationServiceImpl.cs" />
+    <Compile Include="emr\service\DesignerSerializationServiceCP.cs" />
+    <Compile Include="emr\service\DesignerSerializationServiceForm.cs" />
+    <Compile Include="emr\service\DesignLoaderCP.cs" />
+    <Compile Include="emr\service\DesignLoaderForm.cs" />
+    <Compile Include="emr\service\DragDropBehavoir.cs" />
+    <Compile Include="emr\service\ExportService.cs" />
+    <Compile Include="emr\service\FontSerializationService.cs" />
+    <Compile Include="emr\service\KeystrokMessageFilter.cs" />
+    <Compile Include="emr\service\MenuCommandService.cs" />
+    <Compile Include="emr\service\NameCreationService.cs" />
+    <Compile Include="emr\service\SelectionService.cs" />
+    <Compile Include="emr\service\ToolboxServiceXtraTree.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="emr\service\UIService.cs" />
+    <Compile Include="emr\service\UndoEngineImpl.cs" />
+    <Compile Include="emr\service\XmlHostLoader.cs" />
+    <Compile Include="emr\typeconverters\BodyExamStyleEnumConverter.cs" />
+    <Compile Include="emr\typeconverters\BoolToStringConverter.cs" />
+    <Compile Include="emr\typeconverters\clsMaskTypeConverter.cs" />
+    <Compile Include="emr\typeconverters\clsTypeCalcAge.cs" />
+    <Compile Include="emr\typeconverters\CpNodeTypeConverter.cs" />
+    <Compile Include="emr\typeconverters\EventTypeConverter.cs" />
+    <Compile Include="emr\typeconverters\ItemTypeConverter.cs" />
+    <Compile Include="emr\typeconverters\LineStyleEnumConverter.cs" />
+    <Compile Include="emr\typeconverters\ObjectToStringConverter.cs" />
+    <Compile Include="emr\typeconverters\PresentationModeConverter.cs" />
+    <Compile Include="emr\typeconverters\SpecialDateTimeConverter.cs" />
+    <Compile Include="emr\typeconverters\StringArrayEditor.cs" />
+    <Compile Include="emr\typeconverters\tabpagelocationconverter.cs" />
+    <Compile Include="emr\typeeditor\EventTypeEditor.cs" />
+    <Compile Include="emr\typeeditor\EventTypeUIEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="emr\typeeditor\EventTypeUIEditor.designer.cs">
+      <DependentUpon>EventTypeUIEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="emr\typeeditor\XtraTabCollectionEditor.cs" />
+    <Compile Include="PrintRibbonControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrintRibbonControllerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="XRDesignRibbonControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XRDesignRibbonControllerResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="cp\frmPathNodes.resx">
+      <DependentUpon>frmPathNodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cp\ucNode.resx">
+      <DependentUpon>ucNode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cp\ucToolBox.resx">
+      <DependentUpon>ucToolBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\ucDept.resx">
+      <DependentUpon>ucDept.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\ucDepts.resx">
+      <DependentUpon>ucDepts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\ucDoct.resx">
+      <DependentUpon>ucDoct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\frmformlist.resx">
+      <DependentUpon>frmformlist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\frmprintdocumentsimple.resx">
+      <DependentUpon>frmprintdocumentsimple.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\frmPrintXtraReport.resx">
+      <DependentUpon>frmPrintXtraReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\frmselectfields.resx">
+      <DependentUpon>frmselectfields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\ucnote.resx">
+      <DependentUpon>ucnote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controls\ctlrichtextbox.resx">
+      <DependentUpon>ctlrichtextbox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\new\ctlPartogramControl.resx">
+      <DependentUpon>ctlPartogramControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\new\ctlThreeItemsControl.resx">
+      <DependentUpon>ctlThreeItemsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintRibbonControllerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrintRibbonControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XRDesignRibbonControllerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>XRDesignRibbonControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="custom\ICSharpCode\Resources\ASPX.xshd" />
+    <None Include="custom\ICSharpCode\Resources\BAT-Mode.xshd" />
+    <None Include="custom\ICSharpCode\Resources\Boo.xshd" />
+    <None Include="custom\ICSharpCode\Resources\Coco-Mode.xshd" />
+    <None Include="custom\ICSharpCode\Resources\CPP-Mode.xshd" />
+    <EmbeddedResource Include="custom\ICSharpCode\Resources\CSharp-Mode.xshd" />
+    <None Include="custom\ICSharpCode\Resources\HTML-Mode.xshd" />
+    <None Include="custom\ICSharpCode\Resources\ICSharpCode.TextEditor.snk" />
+    <None Include="custom\ICSharpCode\Resources\Java-Mode.xshd" />
+    <None Include="custom\ICSharpCode\Resources\JavaScript-Mode.xshd" />
+    <EmbeddedResource Include="custom\ICSharpCode\Resources\Mode.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="custom\ICSharpCode\Resources\PHP-Mode.xshd" />
+    <None Include="custom\ICSharpCode\Resources\Tex-Mode.xshd" />
+    <EmbeddedResource Include="custom\ICSharpCode\Resources\TSQL-Mode.xshd" />
+    <None Include="custom\ICSharpCode\Resources\VBNET-Mode.xshd" />
+    <None Include="custom\ICSharpCode\Resources\XML-Mode.xshd" />
+    <None Include="Resources\New_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="base\frmBase.resx">
+      <DependentUpon>frmBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="base\frmBaseMdi.resx">
+      <DependentUpon>frmBaseMdi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="base\frmBaseNormal.resx">
+      <DependentUpon>frmBaseNormal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="base\frmBasePopup.resx">
+      <DependentUpon>frmBasePopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="base\frmUCcontainer.resx">
+      <DependentUpon>frmUCcontainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="base\ucBase.resx">
+      <DependentUpon>ucBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cp\DesignPanel.resx">
+      <DependentUpon>DesignPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\ctlSelectGrid.resx">
+      <DependentUpon>ctlSelectGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\ctlSelectTree.resx">
+      <DependentUpon>ctlSelectTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\frmAnimation.resx">
+      <DependentUpon>frmAnimation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\frmConfirm.resx">
+      <DependentUpon>frmConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\frmDeptSelect.resx">
+      <DependentUpon>frmDeptSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\frmDoctSignByPwd.resx">
+      <DependentUpon>frmDoctSignByPwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\frmImageEdit.resx">
+      <DependentUpon>frmImageEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\frmMsg.resx">
+      <DependentUpon>frmMsg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\frmNew.resx">
+      <DependentUpon>frmNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\frmcontent.resx">
+      <DependentUpon>frmcontent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\frmformdesign.resx">
+      <DependentUpon>frmformdesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\frmformmanage.resx">
+      <DependentUpon>frmformmanage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\frmPrintDocument.resx">
+      <DependentUpon>frmPrintDocument.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\frmPrintPageSetting.resx">
+      <DependentUpon>frmPrintPageSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\frmSignature.resx">
+      <DependentUpon>frmSignature.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\frmSignaturePwd.resx">
+      <DependentUpon>frmSignaturePwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\ucDepartment.resx">
+      <DependentUpon>ucDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\ucEmployee.resx">
+      <DependentUpon>ucEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="custom\ucPrintControl.resx">
+      <DependentUpon>ucPrintControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\frmprinttemplate.resx">
+      <DependentUpon>frmprinttemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\frmreportdesigner.resx">
+      <DependentUpon>frmreportdesigner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\frmtablemanage.resx">
+      <DependentUpon>frmtablemanage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="designer\viewer\showpanelform.resx">
+      <DependentUpon>showpanelform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controlsbase\ctlLine.resx">
+      <DependentUpon>ctlLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controlsbase\ctlVertLine.resx">
+      <DependentUpon>ctlVertLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controlsbase\ucToolBoxEf.resx">
+      <DependentUpon>ucToolBoxEf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controlsbase\ucToolBoxItem.resx">
+      <DependentUpon>ucToolBoxItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\autocompletemenu\AutocompleteMenu.resx">
+      <DependentUpon>AutocompleteMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controls\ctlpopupselect.resx">
+      <DependentUpon>ctlpopupselect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controls\ctlsignature.resx">
+      <DependentUpon>ctlsignature.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controls\ctltablecase.resx">
+      <DependentUpon>ctltablecase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controls\ctltreeselect.resx">
+      <DependentUpon>ctltreeselect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controls\frmLoadElement.resx">
+      <DependentUpon>frmLoadElement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controls\frmModifyPatBasicInfo.resx">
+      <DependentUpon>frmModifyPatBasicInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controls\frmSetSelfDefineColumn.resx">
+      <DependentUpon>frmSetSelfDefineColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controls\frmSetSumRowScopes.resx">
+      <DependentUpon>frmSetSumRowScopes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controls\frmTableBatchSign.resx">
+      <DependentUpon>frmTableBatchSign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\controls\ucEmr.resx">
+      <DependentUpon>ucEmr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\service\ToolboxServiceXtraTree.resx">
+      <DependentUpon>ToolboxServiceXtraTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="emr\typeeditor\EventTypeUIEditor.resx">
+      <DependentUpon>EventTypeUIEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1-入.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2-住.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5-走.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6-出.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddItem_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddNewDataSource_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Apply_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Article_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calendar_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancel_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cards_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CellsAutoHeight-_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chart_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\completeH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\completeL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Convert_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copy_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CrossDataSourceFiltering_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Customer_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Customization_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CustomizeGrid_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cut_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DoubleFirst_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DoubleLast_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DoubleNext_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DoublePrev_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Edit_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EditDataSource_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EmptyTableRowSeparator_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExportToDOC_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Filter_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Find_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\First_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ForceTesting_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FullStackedLine_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Grid_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HistoryItem_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IDE_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Index_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\InsertPageBreak_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KnowledgeBaseArticle_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Last_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lockH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lockL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MonthView_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NavigationBar_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Next_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\None_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PageMargins_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paste_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pie_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Prev_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Preview_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Print_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Properties_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RangeBar_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Recurrence_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Redo_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Remove_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RemoveItem_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Save_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveAll_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveAs_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SelectTableCell_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Separator_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShowWorkTimeOnly_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SideBySideRangeBar_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\signL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StackedBar_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Status_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stopH.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stopL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwitchTimeScalesTo_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Today_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\touX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Undo_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Up_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom2_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Zoom100_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomIn_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ZoomOut_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\标签.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\病区.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\出生日期.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\床号.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\垂直线.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\多行编辑器.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\勾选.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\勾选框.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\科室.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\年龄.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\入院次数.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\入院时间.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\水平线.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\图片框.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\文本框.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\性别.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\姓名.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\医院名称.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\指针.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\住院号.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\住院天数.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Grid_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Edit_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Properties_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\None_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pivot_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Separator_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Summary_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AddGroupFooter_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EmptyTableRowSeparator_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="custom\ICSharpCode\Resources\RightArrow.cur" />
+    <None Include="Resources\3-31.png" />
+    <EmbeddedResource Include="custom\ICSharpCode\Resources\SyntaxModes.xml" />
+    <Content Include="custom\ICSharpCode\Resources\TextEditorControl.bmp" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

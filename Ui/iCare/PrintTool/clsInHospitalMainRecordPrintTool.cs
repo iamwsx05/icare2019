@@ -2367,7 +2367,7 @@ namespace iCare
                     //身份证号
                     p_objGrp.DrawString(m_objPeople.m_StrIDCard, m_fotPrintFont, Brushes.Black, (int)enmRectangleInfo.LeftX + 22, p_intPosY + 12);
                     //职业m_StrOccupation
-                    if (m_objPeople.m_StrOccupation.Length > 4)
+                    if (m_objPeople.m_StrOccupation.Length > 8)
                     {
                         fotNow = new Font("SimSun", 8f);
                         rtgf = new RectangleF((int)enmRectangleInfo.LeftX + 100, p_intPosY + 12 - 2, 18, 35);

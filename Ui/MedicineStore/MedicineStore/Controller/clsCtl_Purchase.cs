@@ -260,8 +260,8 @@ namespace com.digitalwave.iCare.gui.MedicineStore
 
             m_objViewer.m_dtvMainView = new DataView(m_objViewer.m_dtbMainData);
             m_objViewer.m_dtvMainView.RowFilter = strFilterMain;
-            if (m_objViewer.m_dtbMainData != null && m_objViewer.m_dtbMainData.Rows.Count > 0)
-                m_objViewer.m_dtvMainView.Sort = "instoragedate_dat asc";
+            //if (m_objViewer.m_dtbMainData != null && m_objViewer.m_dtbMainData.Rows.Count > 0)
+            //    m_objViewer.m_dtvMainView.Sort = "instoragedate_dat asc";
             m_objViewer.m_dgvMainInfo.DataSource = m_objViewer.m_dtvMainView;
 
             m_objViewer.m_dgvMainInfo.Refresh();
@@ -1536,7 +1536,7 @@ namespace com.digitalwave.iCare.gui.MedicineStore
                 Dictionary<int, string> dicMedicine = new Dictionary<int, string>();
                 for (int iRow = 0; iRow < intRowsCount; iRow++)
                 {
-                    if (dicMedicine.ContainsKey(Convert.ToInt32(m_objViewer.m_dtvMainView[iRow]["SERIESID_INT"])))
+                    if (!dicMedicine.ContainsKey(Convert.ToInt32(m_objViewer.m_dtvMainView[iRow]["SERIESID_INT"])))
                     {
                         dicMedicine.Add(Convert.ToInt32(m_objViewer.m_dtvMainView[iRow]["SERIESID_INT"]), m_objViewer.m_dtvMainView[iRow]["instorageid_vchr"].ToString());
                     }
@@ -1613,6 +1613,7 @@ namespace com.digitalwave.iCare.gui.MedicineStore
                         {
                             continue;
                         }
+
                         dcmBuyIn += Convert.ToDecimal(drAllMoney[iM]["BuyInMoney"]);
                         dcmWholeSale += Convert.ToDecimal(drAllMoney[iM]["WholeSaleMoney"]);
                         dcmRetailSale += Convert.ToDecimal(drAllMoney[iM]["RetailPrice"]);

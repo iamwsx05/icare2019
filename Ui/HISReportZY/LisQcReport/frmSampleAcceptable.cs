@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using com.digitalwave.iCare.gui.HIS.Reports;
+using Common.Controls;
 
 namespace com.digitalwave.iCare.gui.HIS
 {
@@ -111,11 +112,11 @@ namespace com.digitalwave.iCare.gui.HIS
 
             if (intTem == 0)
             {
-                m_objController.m_mthExportToExcel();
+                uiHelper.ExportToXls(this.gvStat);
             }
             if (intTem == 1)
             {
-                m_objController.m_mthExportToExcel2();
+                m_objController.m_mthExportToExcel();  
             }
         }
 
@@ -138,12 +139,12 @@ namespace com.digitalwave.iCare.gui.HIS
             if (intTem == 0)
             {
                 this.dgvdata.Visible = true;
-                this.dgvStat.Visible = false;
+                this.gcStat.Visible = false;
             }
             if (intTem == 1)
             {
                 this.dgvdata.Visible = false;
-                this.dgvStat.Visible = true;
+                this.gcStat.Visible = true;
             }
         }
 
@@ -152,32 +153,19 @@ namespace com.digitalwave.iCare.gui.HIS
             this.tabContorl.Visible = false;
         }
 
-        private void dgvStat_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        private void gvStat_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
-            try
-            {
-                if (dgvStat.Rows.Count > 0)
-                {
-                    if (e.RowIndex <= dgvStat.Rows.Count - 1)
-                    {
-                        DataGridViewRow dgrSingle = dgvStat.Rows[e.RowIndex];
-
-                        if (dgrSingle.Cells["acceptFlg"].Value.ToString().Contains("F"))
-                        {
-                            dgrSingle.DefaultCellStyle.ForeColor = Color.Red;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            m_objController.RowCellStyle(this.gvStat, e);
         }
 
-        private void dgvStat_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        private void gvStat_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
         {
-            e.Row.HeaderCell.Value = (e.Row.Index + 1).ToString();  
+            if (e.Info.IsRowIndicator && e.RowHandle >= 0)
+            {
+                e.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+                e.Appearance.ForeColor = Color.Gray;
+                e.Info.DisplayText = Convert.ToString(e.RowHandle + 1);
+            }
         }
     }
 }

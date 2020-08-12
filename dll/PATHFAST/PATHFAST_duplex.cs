@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Xml;
+using weCare.Core.Utils;
 
 namespace PATHFAST
 {
@@ -59,7 +60,7 @@ namespace PATHFAST
         frmMSComm frmMS = null;
 
         clsLIS_Equip_ConfigVO configVo = null;
-         
+        System.Timers.Timer timer;
 
         #endregion
 
@@ -75,7 +76,18 @@ namespace PATHFAST
             DateAnalysis = new DataAnalysis_PATHFAST();
             Logger = new com.digitalwave.Utility.clsLogText();
 
+            timer = new System.Timers.Timer(2000);
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(Timeout);
+            timer.AutoReset = true;
+            timer.Enabled = false;
+
             DateAnalysis.dicField = this.ReadXmlNodes(System.Windows.Forms.Application.StartupPath + "\\rp500.xml", "Items");
+        }
+
+        public void Timeout(object source, System.Timers.ElapsedEventArgs e)
+        {
+            //axMSComm.Output = PATHFAST_ControlCode.AckCode;
+
         }
 
         /// <summary>
@@ -134,7 +146,6 @@ namespace PATHFAST
                 axMSComm.PortOpen = true;
                 axMSComm.OnComm -= new System.EventHandler(this.axMSComm_OnComm);
                 axMSComm.OnComm += new System.EventHandler(this.axMSComm_OnComm);
-
             }
             catch (Exception ex)
             {
@@ -163,33 +174,34 @@ namespace PATHFAST
         /// <param name="e"></param>
         private void axMSComm_OnComm(object sender, EventArgs e)
         {
-//            1H |@^\||| PATHFAST01 ^ 1007A1012 ^ 01.00.00.00 ||||||| P | 1 | 20200515110437
-//            5F
-//            2P | 1 ||||||| U ||||||||||||||||||||||||||
-//            90
-//            3O | 1 | 6666 ^ 1 ^||^^^ 01 ^ cTn I ^ 1012102287 ||||||||||| 2 |||||||||| F |||||
-//            45
-//            4R | 1 |^^^ 01 ^ cTn I ^ 1012102287 | 0.032 ^ F | ng / mL || N || F || System || 20200513090758 |
-//            07
-//            5C | 1 | I |^^^^ 20200705090716 | I
-//            7A
-//            6L | 1 | N
-//            09
-
+            //            1H |@^\||| PATHFAST01 ^ 1007A1012 ^ 01.00.00.00 ||||||| P | 1 | 20200515110437
+            //            5F
+            //            2P | 1 ||||||| U ||||||||||||||||||||||||||
+            //            90
+            //            3O | 1 | 6666 ^ 1 ^||^^^ 01 ^ cTn I ^ 1012102287 ||||||||||| 2 |||||||||| F |||||
+            //            45
+            //            4R | 1 |^^^ 01 ^ cTn I ^ 1012102287 | 0.032 ^ F | ng / mL || N || F || System || 20200513090758 |
+            //            07
+            //            5C | 1 | I |^^^^ 20200705090716 | I
+            //            7A
+            //            6L | 1 | N
+            //            09
             LastReceive = axMSComm.Input.ToString();
             ReceiveBuf.Append(LastReceive);
-            Logger.Log2File(@"D:\code\pathfast.txt", LastReceive);
+            Log.Output(ReceiveBuf.ToString());
 
             string recData = ReceiveBuf.ToString();
             if (recData.Length < 0) return;
-             
-            // 握手
-            if (recData.Contains(PATHFAST_ControlCode.StartCode) || recData.Contains(""))
+
+            //握手
+            if (LastReceive.Contains(PATHFAST_ControlCode.ReqCode) || LastReceive.Contains("\u0003"))
             {
-                axMSComm.Output = PATHFAST_ControlCode.AckCode; 
+                Log.Output("发送应答....");
+                axMSComm.Output = PATHFAST_ControlCode.AckCode;
             }
             int idxStart = recData.IndexOf(PATHFAST_ControlCode.StartCode);
             int idxEnd = recData.IndexOf(PATHFAST_ControlCode.EndCode);
+            Log.Output("idxEnd - idxStart - 10-->" + (idxEnd - idxStart - 10).ToString());
             if (idxStart < 0 || idxEnd < 0) return;
 
             if (idxEnd - idxStart - 10 < 0)
@@ -197,6 +209,9 @@ namespace PATHFAST
                 ReceiveBuf.Remove(0, idxEnd + 1);
                 return;
             }
+
+            Log.Output("接收到数据....");
+            Log.Output(ReceiveBuf.ToString());
             List<string> lstResultData = new List<string>();
             do
             {
@@ -216,8 +231,10 @@ namespace PATHFAST
             {
                 AddResult(lstResultData);
             }
+
         }
         #endregion
+
 
         #region AddResult
         /// <summary>
@@ -238,7 +255,6 @@ namespace PATHFAST
                         foreach (clsLIS_Device_Test_ResultVO vo in resultVo)
                         {
                             vo.strDevice_ID = DeviceID;
-                            //vo.strDevice_Sample_ID = this.sampleNo;
                         }
                         clsLIS_Device_Test_ResultVO[] reultArr = null;
                         lngRes = (new weCare.Proxy.ProxyLis()).Service.lngAddLabResult(resultVo.ToArray(), out reultArr);

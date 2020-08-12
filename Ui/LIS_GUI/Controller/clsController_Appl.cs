@@ -269,7 +269,7 @@ namespace com.digitalwave.iCare.gui.LIS
                     {
                         string strAge = clsAgeConverter.s_strToAge(DateTime.Parse(objPatList[0].strBirthDate), " 岁| 月| 天");
 
-                        p_frmLisAppl.m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(strAge);
+                        p_frmLisAppl.m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(DateTime.Parse(objPatList[0].strBirthDate));        // clsAgeConverter.m_strGetAgeNum(strAge);
                         p_frmLisAppl.m_cboAgeUnit.Text = clsAgeConverter.m_strGetAgeUnit(strAge);
                     }
 
@@ -294,7 +294,7 @@ namespace com.digitalwave.iCare.gui.LIS
             {
                 string strAge = clsAgeConverter.s_strToAge(DateTime.Parse(objPatientVO.strBirthDate), " 岁| 月| 天");
 
-                p_frmLisApp_In.m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(strAge);
+                p_frmLisApp_In.m_txtAge.Text = clsAgeConverter.m_strGetAgeNum(DateTime.Parse(objPatientVO.strBirthDate));          // clsAgeConverter.m_strGetAgeNum(strAge);
                 p_frmLisApp_In.m_cboAgeUnit.Text = clsAgeConverter.m_strGetAgeUnit(strAge);
 
             }

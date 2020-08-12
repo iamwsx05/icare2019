@@ -40,7 +40,7 @@ namespace Report.Itf
         /// <param name="rptId"></param>
         /// <returns></returns>
         [OperationContract(Name = "GetAdverseEvent")]
-        EntityRptEvent GetEvent(decimal rptId);
+        EntityRptEvent2 GetEvent(decimal rptId);
 
         /// <summary>
         /// 保存不良事件
@@ -49,7 +49,7 @@ namespace Report.Itf
         /// <param name="reportId"></param>
         /// <returns></returns>
         [OperationContract(Name = "SaveEvent")]
-        int SaveEvent(EntityRptEvent eventVo, out decimal rptId);
+        int SaveEvent(EntityRptEvent2 eventVo, out decimal rptId);
 
         /// <summary>
         ///  删除不良事件(伪删)

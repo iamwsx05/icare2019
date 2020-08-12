@@ -40,6 +40,10 @@
   <ItemGroup>
     <Reference Include="AxInterop.MSCommLib, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="clsLISDataAnalysisBase, Version=2.0.0.1, Culture=neutral, PublicKeyToken=286e4b4465bcc72f" />
+    <Reference Include="comm.utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\comm.utils.dll</HintPath>
+    </Reference>
     <Reference Include="ILISDataAnalysis, Version=2.0.0.1, Culture=neutral, PublicKeyToken=e9910d2d0695c98e" />
     <Reference Include="Interop.MSCommLib, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="lis.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">

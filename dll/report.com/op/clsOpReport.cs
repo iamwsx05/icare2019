@@ -3291,7 +3291,7 @@ namespace Report.Com
             m_dtCheckOutData = null;
             dtTemp = new DataTable();
             com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
-            string strSQL = @"select   a.invoiceno_vchr, a.recorddate_dat, a.opremp_chr, a.status_int,
+            string strSQL = @"select a.seqid_chr,  a.invoiceno_vchr, a.recorddate_dat, a.opremp_chr, a.status_int,
          a.seqid_chr, a.balanceemp_chr, a.paytypeid_chr, a.acctsum_mny,
          a.sbsum_mny, a.totalsum_mny, a.paytype_int, f.internalflag_int,
          b.itemcatid_chr, b.tolfee_mny, e.groupid_chr, e.groupname_chr,a.totaldiffcost_mny
@@ -3350,7 +3350,7 @@ order by a.invoiceno_vchr, a.seqid_chr";
             }
             else if (m_strCheckManID.Trim() == "1000" && m_strBalanceDeptID.Trim() != "1000")
             {
-                strSQL = @"select a.invoiceno_vchr,
+                strSQL = @"select a.seqid_chr,a.invoiceno_vchr,
        a.recorddate_dat,
        a.opremp_chr,
        a.status_int,
@@ -3411,7 +3411,7 @@ order by a.invoiceno_vchr, a.seqid_chr";
 
                 if (m_strCheckManID.Trim() == "2000")
                 {
-                    strSQL = @"select   a.invoiceno_vchr, a.recorddate_dat, a.opremp_chr, a.status_int,
+                    strSQL = @"select a.seqid_chr,  a.invoiceno_vchr, a.recorddate_dat, a.opremp_chr, a.status_int,
          a.seqid_chr, a.balanceemp_chr, a.paytypeid_chr, a.acctsum_mny,
          a.sbsum_mny, a.totalsum_mny, a.paytype_int, f.internalflag_int,
          b.itemcatid_chr, b.tolfee_mny, e.groupid_chr, e.groupname_chr,a.totaldiffcost_mny
@@ -3458,7 +3458,7 @@ order by a.invoiceno_vchr, a.seqid_chr";
                 }
                 else
                 {
-                    strSQL = @"select   a.invoiceno_vchr, a.recorddate_dat, a.opremp_chr, a.status_int,
+                    strSQL = @"select  a.seqid_chr, a.invoiceno_vchr, a.recorddate_dat, a.opremp_chr, a.status_int,
              a.seqid_chr, a.balanceemp_chr, a.paytypeid_chr, a.acctsum_mny,
              a.sbsum_mny, a.totalsum_mny, a.paytype_int, f.internalflag_int,
              b.itemcatid_chr, b.tolfee_mny, e.groupid_chr, e.groupname_chr,a.totaldiffcost_mny
@@ -3509,7 +3509,7 @@ order by a.invoiceno_vchr, a.seqid_chr";
 
                 if (m_strCheckManID.Trim() == "2000")
                 {
-                    strSQL = @"select a.invoiceno_vchr,a.recorddate_dat,a.opremp_chr,a.status_int,
+                    strSQL = @"select a.seqid_chr,a.invoiceno_vchr,a.recorddate_dat,a.opremp_chr,a.status_int,
         a.seqid_chr,a.balanceemp_chr,a.paytypeid_chr,a.acctsum_mny, a.sbsum_mny,
          a.totalsum_mny,a.paytype_int, f.internalflag_int,
         b.itemcatid_chr, b.tolfee_mny, e.groupid_chr, e.groupname_chr,a.totaldiffcost_mny
@@ -3561,7 +3561,7 @@ order by a.invoiceno_vchr, a.seqid_chr";
                 }
                 else
                 {
-                    strSQL = @"select a.invoiceno_vchr,a.recorddate_dat,a.opremp_chr,a.status_int,
+                    strSQL = @"select a.seqid_chr,a.invoiceno_vchr,a.recorddate_dat,a.opremp_chr,a.status_int,
         a.seqid_chr,a.balanceemp_chr,a.paytypeid_chr,a.acctsum_mny, a.sbsum_mny,
          a.totalsum_mny,a.paytype_int, f.internalflag_int,
         b.itemcatid_chr, b.tolfee_mny, e.groupid_chr, e.groupname_chr,a.totaldiffcost_mny
@@ -3614,7 +3614,7 @@ order by a.invoiceno_vchr, a.seqid_chr";
             if (m_dtCheckOutData != null && m_dtCheckOutData.Rows.Count > 0)
             {
                 DataView dv = m_dtCheckOutData.DefaultView;
-                dtTemp = dv.ToTable(true, new string[] { "invoiceno_vchr", "totaldiffcost_mny" });
+                dtTemp = dv.ToTable(true, new string[] { "seqid_chr", "invoiceno_vchr", "totaldiffcost_mny" });
                 // dtTemp = dtSource.DefaultView.ToTable(true, new string[] { "invoiceno_vchr", "totaldiffcost_mny" });
                 //                DataTable dtSSS = new DataTable();
                 //                DataSet ds = this.SplitDataTable(dtSourceTwo, 900);

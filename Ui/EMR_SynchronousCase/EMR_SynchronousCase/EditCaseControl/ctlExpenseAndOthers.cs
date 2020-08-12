@@ -177,18 +177,6 @@ namespace com.digitalwave.emr.EMR_SynchronousCase.EditCaseControl
                 }
                 m_txtTotalAMT.Text = sumMoney.ToString(); //dblSum.ToString();
                 m_txtSelfAMT.Text = p_objRecordcontent.m_strSelfamt.ToString();
-                #region 判断病人身份 全自费 自付金额=总金额
-                DataTable dtbInInfo = null;
-                clsEMR_SynchronousCaseDomain_2009 objDomainTmp = new clsEMR_SynchronousCaseDomain_2009();
-                lngRes = objDomainTmp.m_lngGetPatientInInfo(p_strRegisterID, out dtbInInfo);
-                if (dtbInInfo != null && dtbInInfo.Rows.Count > 0)
-                {
-                    if (dtbInInfo.Rows[0]["MODEOFPAYMENT"].ToString() == "全自费" && (m_txtSelfAMT.Text == "0" || string.IsNullOrEmpty(m_txtSelfAMT.Text)))
-                    {
-                        m_txtSelfAMT.Text = m_txtTotalAMT.Text;
-                    }
-                }
-                #endregion
             }
 
             clsEMR_SynchronousCaseDomain_2009 objDomain = new clsEMR_SynchronousCaseDomain_2009();

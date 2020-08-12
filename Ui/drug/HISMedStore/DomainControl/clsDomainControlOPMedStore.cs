@@ -382,9 +382,10 @@ namespace com.digitalwave.iCare.gui.HIS
 
             //clsOPMedStoreSvc objSvc =
             //    (clsOPMedStoreSvc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsOPMedStoreSvc));
+            
+            lngRes = (new weCare.Proxy.ProxyOP01()).Service.m_lngGetPatientList(p_intStatus, p_strStorageID, p_strWinID, p_strCardID, p_strPatient,
+               p_strRegNo, p_strRegDate, p_endDate, isShowReturn, out p_dtbResult);
 
-            lngRes = (new weCare.Proxy.ProxyMedStore()).Service.m_lngGetPatientList(p_intStatus, p_strStorageID, p_strWinID, p_strCardID, p_strPatient,
-                p_strRegNo, p_strRegDate, p_endDate, isShowReturn, out p_dtbResult);
             return lngRes;
         }
         #endregion
@@ -405,7 +406,7 @@ namespace com.digitalwave.iCare.gui.HIS
         {
             long lngRes = 0;
 
-            //clsMedStoreSvc objSvc =
+            //clsMedStoreSvc objSvc = ProxyMedStore
             //    (clsMedStoreSvc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsMedStoreSvc));
             lngRes = (new weCare.Proxy.ProxyMedStore()).Service.m_lngDosageRecipe(p_objRecord, m_strWindowid, m_strSendwindowid, m_intSID, p_objDetail, ref m_objOutStorageDetail, m_strSubtractMode, m_strSecondLevelMode, p_strMedStoreID);
             return lngRes;
@@ -907,8 +908,7 @@ namespace com.digitalwave.iCare.gui.HIS
             p_dtItemDe = null;
             //clsOPMedStoreSvc objSvc =
             //    (clsOPMedStoreSvc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsOPMedStoreSvc));
-            lngRes = (new weCare.Proxy.ProxyOP01()).Service.m_lngGetPrintItem(m_intSID,
-                p_strWinID, out p_dtOutPatrecIp, out p_dtItemDe, flag);
+            lngRes = (new weCare.Proxy.ProxyOP01()).Service.m_lngGetPrintItem(m_intSID, p_strWinID, out p_dtOutPatrecIp, out p_dtItemDe, flag);
             return lngRes;
         }
         #endregion
@@ -1568,9 +1568,9 @@ namespace com.digitalwave.iCare.gui.HIS
             DataTable dtKFUsageID = new DataTable();
             //clsHisMedStoreSelect objServ = null;
             try
-            { 
-                   //objServ = (clsHisMedStoreSelect)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsHisMedStoreSelect));
-                   (new weCare.Proxy.ProxyMedStore()).Service.m_lngGetMedUsageID(strMedUsageID, out dtKFUsageID);
+            {
+                //objServ = (clsHisMedStoreSelect)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsHisMedStoreSelect));
+                (new weCare.Proxy.ProxyMedStore()).Service.m_lngGetMedUsageID(strMedUsageID, out dtKFUsageID);
             }
             catch (Exception exp)
             {

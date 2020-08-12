@@ -48,6 +48,7 @@
             this.gridColumn44 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gdAqsjlx = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn42 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -128,6 +129,7 @@
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Location = new System.Drawing.Point(637, 11);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(30, 12);
@@ -238,6 +240,7 @@
             this.gridColumn44,
             this.gridColumn17,
             this.gridColumn21,
+            this.gdAqsjlx,
             this.gridColumn24,
             this.gridColumn42,
             this.gridColumn29,
@@ -311,7 +314,7 @@
             this.gridColumn43.OptionsFilter.AllowFilter = false;
             this.gridColumn43.Visible = true;
             this.gridColumn43.VisibleIndex = 1;
-            this.gridColumn43.Width = 117;
+            this.gridColumn43.Width = 101;
             // 
             // gridColumn44
             // 
@@ -321,7 +324,7 @@
             this.gridColumn44.OptionsColumn.AllowEdit = false;
             this.gridColumn44.Visible = true;
             this.gridColumn44.VisibleIndex = 2;
-            this.gridColumn44.Width = 115;
+            this.gridColumn44.Width = 103;
             // 
             // gridColumn17
             // 
@@ -352,7 +355,22 @@
             this.gridColumn21.OptionsFilter.AllowFilter = false;
             this.gridColumn21.Visible = true;
             this.gridColumn21.VisibleIndex = 4;
-            this.gridColumn21.Width = 197;
+            this.gridColumn21.Width = 183;
+            // 
+            // gdAqsjlx
+            // 
+            this.gdAqsjlx.AppearanceCell.Options.UseTextOptions = true;
+            this.gdAqsjlx.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gdAqsjlx.AppearanceHeader.Options.UseTextOptions = true;
+            this.gdAqsjlx.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gdAqsjlx.Caption = "事件类型";
+            this.gdAqsjlx.FieldName = "AQSJLX";
+            this.gdAqsjlx.Name = "gdAqsjlx";
+            this.gdAqsjlx.OptionsColumn.AllowEdit = false;
+            this.gdAqsjlx.OptionsColumn.AllowFocus = false;
+            this.gdAqsjlx.OptionsFilter.AllowAutoFilter = false;
+            this.gdAqsjlx.OptionsFilter.AllowFilter = false;
+            this.gdAqsjlx.Width = 191;
             // 
             // gridColumn24
             // 
@@ -368,7 +386,7 @@
             this.gridColumn24.OptionsFilter.AllowFilter = false;
             this.gridColumn24.Visible = true;
             this.gridColumn24.VisibleIndex = 5;
-            this.gridColumn24.Width = 93;
+            this.gridColumn24.Width = 135;
             // 
             // gridColumn42
             // 
@@ -381,7 +399,6 @@
             this.gridColumn42.OptionsColumn.AllowEdit = false;
             this.gridColumn42.Visible = true;
             this.gridColumn42.VisibleIndex = 6;
-            this.gridColumn42.Width = 84;
             // 
             // gridColumn29
             // 
@@ -396,7 +413,7 @@
             this.gridColumn29.OptionsFilter.AllowFilter = false;
             this.gridColumn29.Visible = true;
             this.gridColumn29.VisibleIndex = 7;
-            this.gridColumn29.Width = 48;
+            this.gridColumn29.Width = 39;
             // 
             // gridColumn25
             // 
@@ -411,7 +428,7 @@
             this.gridColumn25.OptionsFilter.AllowFilter = false;
             this.gridColumn25.Visible = true;
             this.gridColumn25.VisibleIndex = 8;
-            this.gridColumn25.Width = 54;
+            this.gridColumn25.Width = 45;
             // 
             // gridColumn26
             // 
@@ -436,7 +453,7 @@
             this.gridColumn41.OptionsColumn.AllowEdit = false;
             this.gridColumn41.Visible = true;
             this.gridColumn41.VisibleIndex = 9;
-            this.gridColumn41.Width = 117;
+            this.gridColumn41.Width = 120;
             // 
             // timer
             // 
@@ -470,6 +487,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvReport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.colCheck)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -500,5 +518,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn41;
         private System.Windows.Forms.Timer timer;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn44;
+        public DevExpress.XtraGrid.Columns.GridColumn gdAqsjlx;
     }
 }

@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using weCare.Core.Entity;
+using weCare.Core.Utils;
 
 namespace com.digitalwave.iCare.gui.HIS
 {

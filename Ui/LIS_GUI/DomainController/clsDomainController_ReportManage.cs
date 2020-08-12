@@ -76,7 +76,7 @@ namespace com.digitalwave.iCare.gui.LIS
         public long m_lngAddReportGroupAndDetail(ref clsReportGroup_VO objReportGroupVO, ref clsReportGroupDetail_VO[] objReportGroupDetailVOList)
         {
             long lngRes = 0;
-            lngRes = (new weCare.Proxy.ProxyLis01()).Service.m_lngAddReportGroupAndDetail(ref objReportGroupVO, ref objReportGroupDetailVOList);
+            lngRes = (new weCare.Proxy.ProxyLis02()).Service.clsReportGroupSvc_m_lngAddReportGroupAndDetail(ref objReportGroupVO, ref objReportGroupDetailVOList);
             //			objReportGroupSvc.Dispose();
             return lngRes;
         }

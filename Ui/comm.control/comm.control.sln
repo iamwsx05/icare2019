@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.489
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comm.control", "comm.control.csproj", "{415A6157-FFBE-40BA-B933-70151E1F04AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Debug|x86.ActiveCfg = Debug|x86
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Debug|x86.Build.0 = Debug|x86
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Release|x86.ActiveCfg = Release|x86
+		{415A6157-FFBE-40BA-B933-70151E1F04AE}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B2073743-2030-4B38-9ED7-BBD1F7E5E567}
+	EndGlobalSection
+EndGlobal

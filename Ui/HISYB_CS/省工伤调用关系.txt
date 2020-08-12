@@ -1,0 +1,14 @@
+﻿
+读社保卡 ReadCardBase
+
+
+获取业务信息 bizh110102          -->   bizh110103
+
+
+门诊试算 bizh110105
+
+
+卡消费交易 iDoDebit
+
+
+费用结算 bizh110105

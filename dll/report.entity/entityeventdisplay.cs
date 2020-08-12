@@ -93,6 +93,9 @@ namespace Report.Entity
         [DataMember]
         public string eventTime { get; set; }
 
+        [DataMember]
+        public string AQSJLX { get; set; }
+
 
         /// <summary>
         /// Columns

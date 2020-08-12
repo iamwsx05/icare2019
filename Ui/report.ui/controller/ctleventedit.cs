@@ -105,7 +105,7 @@ namespace Report.Ui
                 {
                     using (ProxyAdverseEvent proxy = new ProxyAdverseEvent())
                     {
-                        EntityRptEvent vo = proxy.Service.GetEvent(Function.Dec(this.EventDisplayVo.rptId));
+                        EntityRptEvent2 vo = proxy.Service.GetEvent(Function.Dec(this.EventDisplayVo.rptId));
 
                         #region patientInfo
                         Viewer.rdoFlag.SelectedIndex = vo.patType - 1;
@@ -293,10 +293,12 @@ namespace Report.Ui
                 uiHelper.BeginLoading(Viewer);
                 string fieldName = string.Empty;
                 DateTime dtmNow = Utils.ServerTime();
-                EntityRptEvent vo = new EntityRptEvent();
+                EntityRptEvent2 vo = new EntityRptEvent2();
                 vo.rptId = Function.Dec(this.EventDisplayVo.rptId);
                 vo.eventId = this.EventDisplayVo.eventId;
                 vo.reportTime = this.EventDisplayVo.reportTime;
+                if(!string.IsNullOrEmpty(vo.reportTime))
+                     vo.reportTime2 = Function.Datetime(vo.reportTime);
                 // 报告时间
                 if (EventParmData.Any(t => t.eventId == vo.eventId && t.keyId == "reportTime"))
                 {
@@ -304,13 +306,23 @@ namespace Report.Ui
                     fieldName = EventParmData.FirstOrDefault(t => t.eventId == vo.eventId && t.keyId == "reportTime").keyValue;
                     reportTime = Viewer.showPanelForm.GetItemInfo(fieldName);
                     if (string.IsNullOrEmpty(reportTime) && string.IsNullOrEmpty(vo.reportTime))
+                    {
                         vo.reportTime = dtmNow.ToString("yyyy-MM-dd HH:mm:ss");
+                        if (!string.IsNullOrEmpty(vo.reportTime))
+                            vo.reportTime2 = Function.Datetime(vo.reportTime);
+                    }
                     else if (!string.IsNullOrEmpty(reportTime))
+                    {
                         vo.reportTime = reportTime;
+                        if (!string.IsNullOrEmpty(vo.reportTime))
+                            vo.reportTime2 = Function.Datetime(vo.reportTime);
+                    }
                 }
                 else if(string.IsNullOrEmpty(vo.reportTime))
                 {
                     vo.reportTime = dtmNow.ToString("yyyy-MM-dd HH:mm:ss");
+                    if (!string.IsNullOrEmpty(vo.reportTime))
+                        vo.reportTime2 = Function.Datetime(vo.reportTime);
                 }
 
                 // 报告人
