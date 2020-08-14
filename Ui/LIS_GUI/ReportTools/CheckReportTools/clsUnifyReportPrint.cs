@@ -211,89 +211,79 @@ namespace com.digitalwave.iCare.gui.LIS
                         // 2020-07-15
                         if (lstAidRemark.Any(p => p.appUnitId.IndexOf(id) >= 0))
                         {
-                            EntityAidRemark aidRemarkVO = lstAidRemark.FirstOrDefault(p => p.appUnitId.IndexOf(id) >= 0);
-
-                            // 校验
-                            // 1. 是否已人工添加
-                            if (!string.IsNullOrEmpty(aidRemarkVO.keyWord))
+                            List<EntityAidRemark>  lstAidRemarkVO = lstAidRemark.FindAll(p => p.appUnitId.IndexOf(id) >= 0);
+                            
+                            foreach (EntityAidRemark aidRemarkVO in lstAidRemarkVO)
                             {
-                                if (contrastStr.IndexOf(aidRemarkVO.keyWord) >= 0) return "";    // 已存在
-                            }
-
-                            // 2. 男/女                            
-                            if (aidRemarkVO.sex == 1)  // 限男
-                            {
-                                if (contrastSex == "女") return "";
-                            }
-                            else if (aidRemarkVO.sex == 2)  // 限女
-                            {
-                                if (contrastSex == "男") return "";
-                            }
-                            // 3. 偏高(1) / 偏低(2)
-                            if (aidRemarkVO.highOrLow == 1 || aidRemarkVO.highOrLow == 2)
-                            {
-                                bool isPass = false;
-                                //List<clsDeviceReslutVO> lstResult = (new weCare.Proxy.ProxyLis02()).Service.GetOttomanCheckResult(barCode);
-                                List<clsDeviceReslutVO> lstResult = null;
-                                if (m_dtbResult != null)
+                                // 校验
+                                // 1. 是否已人工添加
+                                if (!string.IsNullOrEmpty(aidRemarkVO.keyWord))
                                 {
-                                    clsDeviceReslutVO vo = null;
-                                    lstResult = new List<clsDeviceReslutVO>();
-                                    foreach (DataRow dr in m_dtbResult.Rows)
-                                    {
-                                        vo = new clsDeviceReslutVO();
-                                        vo.m_strAbnormalFlag = dr["abnormal_flag_chr"].ToString();  
-                                        vo.m_strDeviceCheckItemName = dr["device_check_item_name_vchr"].ToString();
-                                        vo.m_strResult = dr["result_vchr"].ToString();
-                                        lstResult.Add(vo);
-                                        
-                                    }
+                                    if (contrastStr.IndexOf(aidRemarkVO.keyWord) >= 0) continue;    // 已存在
                                 }
-                                if (lstResult != null)
+
+                                // 2. 男/女                            
+                                if (aidRemarkVO.sex == 1)  // 限男
                                 {
-                                    foreach (clsDeviceReslutVO item in lstResult)
+                                    if (contrastSex == "女") continue;
+                                }
+                                else if (aidRemarkVO.sex == 2)  // 限女
+                                {
+                                    if (contrastSex == "男") continue;
+                                }
+                                // 3. 偏高(1) / 偏低(2)
+                                if (aidRemarkVO.highOrLow == 1 || aidRemarkVO.highOrLow == 2)
+                                {
+                                    bool isPass = false;
+                                    //List<clsDeviceReslutVO> lstResult = (new weCare.Proxy.ProxyLis02()).Service.GetOttomanCheckResult(barCode);
+                                    List<clsDeviceReslutVO> lstResult = null;
+                                    if (m_dtbResult != null)
                                     {
-                                        if (aidRemarkVO.highOrLow == 1)
+                                        clsDeviceReslutVO vo = null;
+                                        lstResult = new List<clsDeviceReslutVO>();
+                                        foreach (DataRow dr in m_dtbResult.Rows)
                                         {
-                                            if (item.m_strAbnormalFlag == "H")    
-                                            { 
-                                                isPass = true;
-                                                break;
-                                            }
+                                            vo = new clsDeviceReslutVO();
+                                            vo.m_strAbnormalFlag = dr["abnormal_flag_chr"].ToString();
+                                            vo.m_strDeviceCheckItemName = dr["device_check_item_name_vchr"].ToString();
+                                            vo.m_strResult = dr["result_vchr"].ToString();
+                                            lstResult.Add(vo);
+
                                         }
-                                        else if (aidRemarkVO.highOrLow == 2)
+                                    }
+                                    if (lstResult != null)
+                                    {
+                                        foreach (clsDeviceReslutVO item in lstResult)
                                         {
-                                            if (item.m_strAbnormalFlag == "L")     
+                                            if (aidRemarkVO.highOrLow == 1)
                                             {
-                                                isPass = true;
-                                                break;
+                                                if (item.m_strAbnormalFlag == "H")
+                                                {
+                                                    isPass = true;
+                                                    break;
+                                                }
+                                            }
+                                            else if (aidRemarkVO.highOrLow == 2)
+                                            {
+                                                if (item.m_strAbnormalFlag == "L")
+                                                {
+                                                    isPass = true;
+                                                    break;
+                                                }
                                             }
                                         }
                                     }
+                                    if (isPass == false) continue;
+
                                 }
-                                if (isPass == false) return "";
+                                if (!remarkInfoStr.Contains("项目") && aidRemarkVO.appunitgroup == 1)
+                                {
+                                    remarkInfoStr += "项目    卵泡期      排卵期     黄体期     绝经期      妊娠期    未妊娠    单位" + Environment.NewLine;
+                                }
 
-                            }
-                            if(!remarkInfoStr.Contains("项目") && aidRemarkVO.appunitgroup == 1)
-                            {
-                                remarkInfoStr += "项目    卵泡期      排卵期     黄体期     绝经期      妊娠期    未妊娠    单位" + Environment.NewLine;
-                            }
-
-                            remarkInfoStr += aidRemarkVO.remarkInfo + Environment.NewLine;
+                                remarkInfoStr += aidRemarkVO.remarkInfo + Environment.NewLine;
+                            }  
                         }
-                       
-                        //if (this.lstAppUnitID.IndexOf(id) >= 0)
-                        //{
-                        //    this.CurrAppUnit = new EntityAppUnit();
-                        //    this.CurrAppUnit.appId = appId;
-
-                        //    string info = string.Empty + Environment.NewLine;
-                        //    info += "0:无[0.00-0.34 IU/ml]				1:低[0.35-0.69 IU/ml]		2:增加[0.70-3.49 IU/ml]" + Environment.NewLine;
-                        //    info += "3:显著增加[3.50-17.49 IU/ml]		4:高[17.5-49.9 IU/ml]		5:较高[50.0-100.0 IU/ml]" + Environment.NewLine;
-                        //    info += "6:极高[>100 IU/ml]";
-                        //    this.CurrAppUnit.remarkInfo = info;
-                        //    return this.CurrAppUnit.remarkInfo;
-                        //}
                     }
                     if (!string.IsNullOrEmpty(remarkInfoStr))
                     {
