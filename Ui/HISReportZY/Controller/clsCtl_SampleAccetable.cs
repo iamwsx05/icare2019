@@ -187,7 +187,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                         {
                             DataRow[] drr = dtLimit.Select("applyunitid = '" + applyUnitId + "'");
                             if (drr != null && drr.Length > 0)
-                                applyUnitIdStr += "'" + drr[0]["applyunitid"].ToString() + "'," ;
+                                applyUnitIdStr += "'" + drr[0]["applyunitid"].ToString() + "',";
                         }
                     }
 
@@ -195,7 +195,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                         applyUnitIdStr = applyUnitIdStr.TrimEnd(',');
                 }
 
-                if(!string.IsNullOrEmpty(applyUnitIdStr))
+                if (!string.IsNullOrEmpty(applyUnitIdStr))
                     applyUnitIdStr = "(" + applyUnitIdStr.TrimEnd(',') + ")";
 
                 clsPublic.PlayAvi("findFILE.avi", "正在查询项目信息，请稍候...");
@@ -362,7 +362,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                             if (dtLimit != null && dtLimit.Rows.Count > 0)
                             {
                                 DataRow[] drr = dtLimit.Select("applyunitid = '" + applyUnitId + "'");
-                                if(drr != null && drr.Length > 0)
+                                if (drr != null && drr.Length > 0)
                                     applyUnitIdStr += "'" + drr[0]["applyunitid"].ToString() + "',";
                             }
                         }
@@ -384,7 +384,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                             if (drr != null && drr.Length > 0)
                                 applyUnitIdStr += "'" + drr[0]["applyunitid"].ToString() + "',";
                         }
-                    }  
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(applyUnitIdStr))
@@ -429,8 +429,8 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                                 vo.DEPTNAME = dr["DEPTNAME"].ToString();
                                 vo.BARCODE = dr["BARCODE"].ToString();
                                 vo.CARDNO = string.IsNullOrEmpty(dr["CARDNO"].ToString()) ? dr["patInNo"].ToString() : dr["CARDNO"].ToString();
-                                vo.ApplyTime =Function.Datetime(dr["applyTime"]).ToString("yyyy-MM-dd HH:mm");
-                                vo.AcceptTime = Function.Datetime(dr["accepttime"]).ToString("yyyy-MM-dd HH:mm");  
+                                vo.ApplyTime = Function.Datetime(dr["applyTime"]).ToString("yyyy-MM-dd HH:mm");
+                                vo.AcceptTime = Function.Datetime(dr["accepttime"]).ToString("yyyy-MM-dd HH:mm");
                                 vo.ConfirmTime = Function.Datetime(dr["confirmtime"]).ToString("yyyy-MM-dd HH:mm");
                                 acceptDate = Function.Datetime(vo.AcceptTime).ToString("yyyy-MM-dd");
                                 confirmDate = Function.Datetime(vo.ConfirmTime).ToString("yyyy-MM-dd");
@@ -778,28 +778,207 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
 
             string acceptDate = Function.Datetime(acceptTime).ToString("yyyy-MM-dd");
             string confirmDate = Function.Datetime(confirmTime).ToString("yyyy-MM-dd");
+            Dictionary<string, int> dicWeek = new Dictionary<string, int> { { "日", 0 }, { "一", 1 }, { "二", 2 }, { "三", 3 }, { "四", 4 }, { "五", 5 }, { "六", 6 } };
 
-            #region  指定星期
+            #region  指定星期出报告
             if ((!string.IsNullOrEmpty(confirmTime.ToString()) && (!string.IsNullOrEmpty(week1) || !string.IsNullOrEmpty(week2) ||
                     !string.IsNullOrEmpty(week3) || !string.IsNullOrEmpty(week4) || !string.IsNullOrEmpty(week5) || !string.IsNullOrEmpty(week6))))
             {
                 string week = calWeek(Convert.ToDateTime(confirmTime));
-                if (week == week1 || week == week2 || week == week3 || week == week4 || week == week5 || week == week6)
+                int acceptWeek = (int)Function.Datetime(acceptTime).DayOfWeek;
+                int confirmWeek = (int)Function.Datetime(acceptTime).DayOfWeek;
+                List<int> lstConfirmWeek = new List<int>();
+
+                if (!string.IsNullOrEmpty(week1))
+                    lstConfirmWeek.Add(dicWeek[week1]);
+                if (!string.IsNullOrEmpty(week2))
+                    lstConfirmWeek.Add(dicWeek[week2]);
+                if (!string.IsNullOrEmpty(week3))
+                    lstConfirmWeek.Add(dicWeek[week3]);
+                if (!string.IsNullOrEmpty(week4))
+                    lstConfirmWeek.Add(dicWeek[week4]);
+                if (!string.IsNullOrEmpty(week5))
+                    lstConfirmWeek.Add(dicWeek[week5]);
+                if (!string.IsNullOrEmpty(week6))
+                    lstConfirmWeek.Add(dicWeek[week6]);
+
+                tsAcceptTime1 = DateTime.Parse(acceptTime1).TimeOfDay;
+                tsConfirTime1 = DateTime.Parse(confirTime1).TimeOfDay;
+
+                if (lstConfirmWeek.Count == 2)
                 {
-                    IsAccept = false;
-                }
-                else
-                {
-                    if (tsConfirTime <= tsConfirmEndTime)
+                    if (acceptWeek < lstConfirmWeek[0])
                     {
-                        IsAccept = true;
+                        if (confirmWeek < lstConfirmWeek[0])
+                            return true;
+                        else if (confirmWeek == lstConfirmWeek[0])
+                        {
+                            if (tsConfirTime1 >= tsConfirTime)
+                                return true;
+                        }
+
+                        return false;
+                    }
+
+                    if (acceptWeek == lstConfirmWeek[0])
+                    {
+                        if (tsAcceptTime1 <= tsAcceptTime)
+                        {
+                            if (tsConfirTime1 >= tsConfirTime)
+                                return true;
+                        }
+                        else
+                        {
+                            if (confirmWeek < lstConfirmWeek[1] && confirmWeek != 0)
+                                return true;
+                            else if (confirmWeek == lstConfirmWeek[1])
+                            {
+                                if (tsConfirTime1 >= tsConfirTime)
+                                    return true;
+                            }
+                            return false;
+                        }
+                    }
+
+                    if(acceptWeek > lstConfirmWeek[0] && acceptWeek < lstConfirmWeek[1])
+                    {
+                        if (confirmWeek < lstConfirmWeek[1])
+                            return true;
+                        else if (confirmWeek == lstConfirmWeek[1])
+                        {
+                            if (tsConfirTime1 >= tsConfirTime)
+                                return true;
+                        }
+
+                        return false;
+                    }
+
+                    if (acceptWeek >= lstConfirmWeek[1])
+                    {
+                        if (tsAcceptTime1 <= tsAcceptTime)
+                        {
+                            if (tsConfirTime1 >= tsConfirTime)
+                                return true;
+                        }
+                        else
+                        {
+                            if (confirmWeek < lstConfirmWeek[0] || confirmWeek >= lstConfirmWeek[1])
+                                return true;
+                            else if (confirmWeek == lstConfirmWeek[0])
+                            {
+                                if (tsConfirTime1 >= tsConfirTime)
+                                    return true;
+                            }
+                            return false;
+                        }
+                    }
+                }
+                if (lstConfirmWeek.Count == 3)
+                {
+                    if (acceptWeek < lstConfirmWeek[0])
+                    {
+                        if (confirmWeek < lstConfirmWeek[0])
+                            return true;
+                        else if (confirmWeek == lstConfirmWeek[0])
+                        {
+                            if (tsConfirTime1 >= tsConfirTime)
+                                return true;
+                        }
+
+                        return false;
+                    }
+
+                    if (acceptWeek == lstConfirmWeek[0])
+                    {
+                        if (tsAcceptTime1 <= tsAcceptTime)
+                        {
+                            if (tsConfirTime1 >= tsConfirTime)
+                                return true;
+                        }
+                        else
+                        {
+                            if (confirmWeek < lstConfirmWeek[1] && confirmWeek != 0)
+                                return true;
+                            else if (confirmWeek == lstConfirmWeek[1])
+                            {
+                                if (tsConfirTime1 >= tsConfirTime)
+                                    return true;
+                            }
+                            return false;
+                        }
+                    }
+
+                    if (acceptWeek > lstConfirmWeek[0] && acceptWeek < lstConfirmWeek[1])
+                    {
+                        if (confirmWeek > lstConfirmWeek[0] && confirmWeek < lstConfirmWeek[1])
+                            return true;
+                        else if (confirmWeek == lstConfirmWeek[1])
+                        {
+                            if (tsConfirTime1 >= tsConfirTime)
+                                return true;
+                        }
+
+                        return false;
+                    }
+
+                    if (acceptWeek == lstConfirmWeek[1] )
+                    {
+                        if (tsAcceptTime1 <= tsAcceptTime)
+                        {
+                            if (tsConfirTime1 >= tsConfirTime)
+                                return true;
+                        }
+                        else
+                        {
+                            if (confirmWeek < lstConfirmWeek[2] && confirmWeek != 0)
+                                return true;
+                            else if (confirmWeek == lstConfirmWeek[2])
+                            {
+                                if (tsConfirTime1 >= tsConfirTime)
+                                    return true;
+                            }
+                            return false;
+                        }
+                    }
+
+                    if (acceptWeek > lstConfirmWeek[1]  && acceptWeek < lstConfirmWeek[2])
+                    {
+                        if (confirmWeek > lstConfirmWeek[1] && confirmWeek < lstConfirmWeek[2])
+                            return true;
+                        else if (confirmWeek == lstConfirmWeek[2])
+                        {
+                            if (tsConfirTime1 >= tsConfirTime)
+                                return true;
+                        }
+
+                        return false;
+                    }
+
+                    if (acceptWeek >= lstConfirmWeek[2])
+                    {
+                        if (tsAcceptTime1 <= tsAcceptTime)
+                        {
+                            if (tsConfirTime1 >= tsConfirTime)
+                                return true;
+                        }
+                        else
+                        {
+                            if (confirmWeek < lstConfirmWeek[0] || confirmWeek >= lstConfirmWeek[2])
+                                return true;
+                            else if (confirmWeek == lstConfirmWeek[0])
+                            {
+                                if (tsConfirTime1 >= tsConfirTime)
+                                    return true;
+                            }
+                            return false;
+                        }
                     }
                 }
             }
             #endregion
 
             #region 隔天出报告
-            if(acceptDate != confirmDate && listime > 0)
+            if (acceptDate != confirmDate && listime > 0)
             {
                 DateTime dt1 = Convert.ToDateTime(confirmTimeTmp);
                 DateTime dt2 = Convert.ToDateTime(confirmEndTime);

@@ -359,9 +359,9 @@ values
             {
                 DataTable dtbResult = new DataTable();
                 com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
-                lngRes = objHRPSvc.lngGetDataTableWithoutParameters(strSQL, ref dtbResult);
+                objHRPSvc.lngGetDataTableWithoutParameters(strSQL, ref dtbResult);
                 objHRPSvc.Dispose();
-                if (lngRes > 0 && dtbResult.Rows.Count > 0)
+                if (dtbResult != null && dtbResult.Rows.Count > 0)
                 {
                     p_objCheckItemDeviceCheckItem = new clsLisCheckItemDeviceCheckItem_VO[dtbResult.Rows.Count];
                     for (int i = 0; i < dtbResult.Rows.Count; i++)
@@ -379,6 +379,7 @@ values
                         p_objCheckItemDeviceCheckItem[i].m_strSHORTNAME_CHR = dtbResult.Rows[i]["SHORTNAME_CHR"].ToString().Trim();
                         p_objCheckItemDeviceCheckItem[i].m_strDEVICE_MODEL_DESC_VCHR = dtbResult.Rows[i]["device_model_desc_vchr"].ToString().Trim();
                     }
+                    return dtbResult.Rows.Count;
                 }
             }
             catch (Exception objEx)
@@ -403,7 +404,7 @@ values
                 com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
                 lngRes = objHRPSvc.lngGetDataTableWithoutParameters(strSQL, ref dtbItem);
                 objHRPSvc.Dispose();
-                if (lngRes > 0 && dtbItem != null)
+                if (dtbItem != null && dtbItem != null)
                 {
                     if (dtbItem.Rows.Count > 0)
                     {
@@ -419,6 +420,7 @@ values
                             p_objCheckItemDeviceCheckItem[i].m_strOPERATORID_CHR = dtbItem.Rows[i]["OPERATORID_CHR"].ToString().Trim();
                         }
                     }
+                    return dtbItem.Rows.Count;
                 }
             }
             catch (Exception objEx)

@@ -3259,7 +3259,7 @@
             this.groupBox1.Size = new System.Drawing.Size(692, 96);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "指定星期不出报告";
+            this.groupBox1.Text = "指定星期出报告";
             // 
             // label25
             // 

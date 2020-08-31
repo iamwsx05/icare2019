@@ -923,7 +923,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             {
                 //1.±£´æµ½t_aid_lis_sample_group
                 lngRes = m_lngAddSampleGroup(ref objSampleGroup);
-                if (lngRes > 0)
+                if (lngRes >= 0)
                 {
                     lngRes = m_lngAddNewSampleGroupModelArr(objSampleGroup.strSampleGroupID, p_arlAdd);
                     lngRes = m_lngAddNewGroupSampleTypeArr(objSampleGroup.strSampleGroupID, p_arlAddSampleType);
@@ -933,10 +933,10 @@ namespace com.digitalwave.iCare.middletier.LIS
             {
                 //				lngRes = m_lngDelSampleGroupDetail(objSampleGroup.strSampleGroupID);
                 lngRes = m_lngDelSampleGroupUnitBySampleGroupID(objSampleGroup.strSampleGroupID);
-                if (lngRes > 0)
+                if (lngRes >= 0)
                 {
                     lngRes = m_lngSetSampleGroupInfo(ref objSampleGroup);
-                    if (lngRes > 0)
+                    if (lngRes >= 0)
                     {
                         lngRes = m_lngSetSampleGroupModelArr(p_arlAdd, p_arlRemove);
                         lngRes = m_lngModifyGroupSampleTypeArr(p_arlAddSampleType, p_arlRemoveSampleType);
@@ -946,7 +946,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             if (lngRes >= 0)
             {
                 lngRes = m_lngSetApplUnitItemPrintSeqArr(p_objApplUnitDetailArr);
-                if (lngRes > 0)
+                if (lngRes >= 0)
                 {
                     lngRes = m_lngAddNewSampleGroupUnitArr(objSampleGroup.strSampleGroupID, objSampleGroupUnitList);
                 }

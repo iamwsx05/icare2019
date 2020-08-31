@@ -410,6 +410,16 @@ namespace com.digitalwave.iCare.middletier.LIS
                     applMainVO.m_strAppl_Dat = null;
                 }
 
+
+                if (!string.IsNullOrEmpty(applMainVO.m_strBirthDay))
+                {
+                    try
+                    {
+                        applMainVO.m_strAge = (new clsBrithdayToAge()).m_strGetAge(applMainVO.m_strBirthDay);
+                    }
+                    catch { }
+                }
+
                 arrLisAppl[4].Value = applMainVO.m_strSex;
                 arrLisAppl[5].Value = applMainVO.m_strPatient_Name;
                 arrLisAppl[6].Value = applMainVO.m_strPatient_SubNO;

@@ -820,10 +820,13 @@ namespace com.digitalwave.iCare.middletier.LIS
        sample_back_reason   = ''
  where sample_id_chr = '" + p_strSampleID + @"'
 ";
-            string strSql1 = @"select a.outpatrecipeid_chr, a.orderid_int, d.barcode_vchr
-                                  from t_opr_outpatient_orderdic a, t_opr_lis_sample d
+            string strSql1 = @"select t.outpatrecipeid_chr,a.sourceitemid_vchr, d.barcode_vchr,t.orderid_int
+                                  from t_opr_attachrelation a, 
+                                  t_opr_lis_sample d,
+                                  t_opr_outpatient_orderdic t
                                  where a.attachid_vchr = d.application_id_chr
                                    and d.status_int > 0
+                                   and a.sourceitemid_vchr = t.outpatrecipeid_chr
                                    and d.sample_id_chr = ?";
             IDataParameter[] objParas = null;
 
@@ -1702,9 +1705,9 @@ namespace com.digitalwave.iCare.middletier.LIS
                                 confirm_dat,confirmer_id_chr,collector_id_chr,checker_id_chr,sendsample_empid_chr) 
                             values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                             #endregion
-
+                             
                             IDataParameter[] objDPArr = null;
-
+                                                       
                             #region 构造参数
                             objHRPSvc.CreateDatabaseParameter(34, out objDPArr);
                             if (Microsoft.VisualBasic.Information.IsDate(p_objRecordVOArr[i].m_strAPPL_DAT))

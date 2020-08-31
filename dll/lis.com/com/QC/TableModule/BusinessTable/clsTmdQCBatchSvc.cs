@@ -2433,12 +2433,12 @@ namespace com.digitalwave.iCare.middletier.LIS
                 try
                 {
                     string Sql = @"select t.device_check_item_id_chr, 
-                                              t.device_check_item_name_vchr
-                                              from t_bse_lis_device_check_item 
-                                              inner join t_bse_lis_device a 
-                                              on t.device_model_id_chr = a.device_model_id_chr
-                                              where t.is_qc_item_int = 1
-                                              and a.deviceid_chr = ? ";
+                                            t.device_check_item_name_vchr  
+                                            from t_bse_lis_device_check_item t
+                                             inner join t_bse_lis_device a 
+                                            on t.device_model_id_chr =  a.device_model_id_chr 
+                                            where t.is_qc_item_int = 1  
+                                            and a.deviceid_chr = ? ";
                     clsHRPTableService svc = new clsHRPTableService();
                     svc.CreateDatabaseParameter(1, out param);
                     param[0].Value = p_strDeviceID;

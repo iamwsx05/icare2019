@@ -6,7 +6,7 @@ using com.digitalwave.iCare.middletier.HRPService;//HRPService.dll
 using System.EnterpriseServices;
 using weCare.Core.Entity;
 using com.digitalwave.Utility; //Utility.dll
-using Microsoft.VisualBasic; 
+using Microsoft.VisualBasic;
 
 namespace com.digitalwave.iCare.middletier.LIS
 {
@@ -54,11 +54,11 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 根据条件查询T_OPR_LIS_RESULT_IMPORT_REQ表的信息
         [AutoComplete]
-        public long m_lngGetResultImportReqByCondition( string p_strDeviceID,
+        public long m_lngGetResultImportReqByCondition(string p_strDeviceID,
             string p_strCheckDatFrom, string p_strCheckDatTo, out clsLisResultImportReq_VO[] p_objResultArr)
         {
             long lngRes = 0;
-            p_objResultArr = null; 
+            p_objResultArr = null;
             #region SQL
             string strSQL = @"SELECT a.*
 								FROM t_opr_lis_result_import_req a 
@@ -156,7 +156,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             string p_strSampleID, string p_strCheckItemID, out clsCheckResult_VO p_objResultVO)
         {
             long lngRes = 0;
-            p_objResultVO = null; 
+            p_objResultVO = null;
             lngRes = 0;
 
             string strSQL = @"SELECT t1.*
@@ -208,7 +208,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             string p_strAppID, string p_strOringinDate, bool p_blnRealResult, out DataTable p_dtbResultList)
         {
             long lngRes = 0;
-            p_dtbResultList = null; 
+            p_dtbResultList = null;
             lngRes = 0;
 
             try
@@ -221,6 +221,8 @@ namespace com.digitalwave.iCare.middletier.LIS
             }
 
             string strSQL = "";
+            com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
+            IDataParameter[] objDPArr = null;
 
             #region SQL
             if (p_blnRealResult)
@@ -276,100 +278,126 @@ namespace com.digitalwave.iCare.middletier.LIS
             }//AND t7.device_model_id_chr = t8.device_model_id_chr
             else
             {
-                strSQL = @"select t1.sample_id_chr,
-       t3.check_item_id_chr,
-       t5.print_seq_int group_seq,
-       t7.item_print_seq_int item_seq,
-       t6.check_category_id_chr,
-       t6.sampletype_vchr,
-       t6.unit_chr item_unit_chr,
-       t6.rptno_chr,
-       t6.check_item_english_name_vchr item_english_name,
-       t6.formula_vchr,
-       t6.resulttype_chr,
-       t6.is_calculated_chr,
-       t6.alarm_low_val_vchr,
-       t6.alarm_up_val_vchr,
-       t6.alert_value_range_vchr,
-       null alert_flag,
-       f_getitemref_low(t3.check_item_id_chr,
-                        trim(t1.age_chr),
-                        trim(t1.sex_chr),
-                        'menses') min_val_dec,
-       f_getitemref_up(t3.check_item_id_chr,
-                       trim(t1.age_chr),
-                       trim(t1.sex_chr),
-                       'menses') max_val_dec,
-       f_getitemref_range(t3.check_item_id_chr,
-                          trim(t1.age_chr),
-                          trim(t1.sex_chr),
-                          'menses') refrange_vchr,
-       
-       t3.sample_group_id_chr         groupid_chr,
-       t8.value_vchr                  result_vchr,
-       t9.device_check_item_name_vchr device_item_name_vchr,
-       t4.*,
-       t1.status_int                  samplestatus,
-       1                              new_result,
-       0                              modify_flag,
-       null                           raw_result_vchr,
-       null                           eff_caculate_id_chr,
-       0                              invisible,
-       t1.appl_deptid_chr           as applyDeptId 
-  from t_opr_lis_sample t1
- inner join t_opr_lis_app_sample t2
-    on t1.sample_id_chr = t2.sample_id_chr
- inner join t_opr_lis_app_check_item t3
-    on t1.application_id_chr = t3.application_id_chr
-   and t2.sample_group_id_chr = t3.sample_group_id_chr
-   and t2.report_group_id_chr = t3.report_group_id_chr
-  left outer join t_opr_lis_check_result t4
-    on t1.sample_id_chr = t4.sample_id_chr
-    and t3.check_item_id_chr = t4.check_item_id_chr
- inner join t_aid_lis_report_group_detail t5
-    on t2.sample_group_id_chr = t5.sample_group_id_chr
-   and t2.report_group_id_chr = t5.report_group_id_chr
- inner join t_bse_lis_check_item t6
-    on t3.check_item_id_chr = t6.check_item_id_chr
-  left outer join v_lis_bse_sample_group_items t7
-    on t3.check_item_id_chr = t7.check_item_id_chr
-   and t7.sample_group_id_chr = t3.sample_group_id_chr
-  left outer join v_lis_aid_check_item_default t8
-    on t3.check_item_id_chr = t8.check_item_id_chr
-  left outer join (select t70.check_item_id_chr,
-                          t71.device_check_item_name_vchr
-                     from t_bse_lis_check_item_dev_item t70,
-                          t_bse_lis_device_check_item   t71
-                    where t71.device_model_id_chr = t70.device_model_id_chr
-                      and t71.device_check_item_id_chr =
-                          t70.device_check_item_id_chr) t9
-    on t9.check_item_id_chr = t3.check_item_id_chr
- where t1.application_id_chr = ?
-   and t1.status_int > 0";
+                strSQL = @"select distinct t3.device_model_id_chr
+                              from t_opr_lis_app_sample      t1,
+                                   t_opr_lis_device_relation t2,
+                                   t_bse_lis_device          t3
+                             where t1.sample_id_chr = t2.sample_id_chr
+                               and t2.deviceid_chr = t3.deviceid_chr
+                               and t2.status_int > 0
+                               and t1.application_id_chr = ?";
 
+                string deviceModelId = string.Empty;
+                // 2020-05-19 由于历史数据维护问题，暂时屏蔽
+                //DataTable dt = null;
+                //objHRPSvc.CreateDatabaseParameter(1, out objDPArr);
+                //objDPArr[0].Value = p_strAppID;
+                //lngRes = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref dt, objDPArr);
+                //if (dt != null && dt.Rows.Count > 0)
+                //{
+                //    foreach (DataRow dr in dt.Rows)
+                //    {
+                //        deviceModelId += "'" + dr[0].ToString() + "',";
+                //    }
+                //    deviceModelId = deviceModelId.TrimEnd(',');
+                //}
+
+                strSQL = @"select t1.sample_id_chr,
+                                   t3.check_item_id_chr,
+                                   t5.print_seq_int group_seq,
+                                   t7.item_print_seq_int item_seq,
+                                   t6.check_category_id_chr,
+                                   t6.sampletype_vchr,
+                                   t6.unit_chr item_unit_chr,
+                                   t6.rptno_chr,
+                                   t6.check_item_english_name_vchr item_english_name,
+                                   t6.formula_vchr,
+                                   t6.resulttype_chr,
+                                   t6.is_calculated_chr,
+                                   t6.alarm_low_val_vchr,
+                                   t6.alarm_up_val_vchr,
+                                   t6.alert_value_range_vchr,
+                                   null alert_flag,
+                                   f_getitemref_low(t3.check_item_id_chr,
+                                                    trim(t1.age_chr),
+                                                    trim(t1.sex_chr),
+                                                    'menses') min_val_dec,
+                                   f_getitemref_up(t3.check_item_id_chr,
+                                                   trim(t1.age_chr),
+                                                   trim(t1.sex_chr),
+                                                   'menses') max_val_dec,
+                                   f_getitemref_range(t3.check_item_id_chr,
+                                                      trim(t1.age_chr),
+                                                      trim(t1.sex_chr),
+                                                      'menses') refrange_vchr,
+       
+                                   t3.sample_group_id_chr         groupid_chr,
+                                   t8.value_vchr                  result_vchr,
+                                   t9.device_check_item_name_vchr device_item_name_vchr,
+                                   t4.*,
+                                   t1.status_int                  samplestatus,
+                                   1                              new_result,
+                                   0                              modify_flag,
+                                   null                           raw_result_vchr,
+                                   null                           eff_caculate_id_chr,
+                                   0                              invisible,
+                                   t1.appl_deptid_chr           as applyDeptId 
+                              from t_opr_lis_sample t1
+                             inner join t_opr_lis_app_sample t2
+                                on t1.sample_id_chr = t2.sample_id_chr
+                             inner join t_opr_lis_app_check_item t3
+                                on t1.application_id_chr = t3.application_id_chr
+                               and t2.sample_group_id_chr = t3.sample_group_id_chr
+                               and t2.report_group_id_chr = t3.report_group_id_chr
+                              left outer join t_opr_lis_check_result t4
+                                on t1.sample_id_chr = t4.sample_id_chr
+                                and t3.check_item_id_chr = t4.check_item_id_chr
+                             inner join t_aid_lis_report_group_detail t5
+                                on t2.sample_group_id_chr = t5.sample_group_id_chr
+                               and t2.report_group_id_chr = t5.report_group_id_chr
+                             inner join t_bse_lis_check_item t6
+                                on t3.check_item_id_chr = t6.check_item_id_chr
+                              left outer join v_lis_bse_sample_group_items t7
+                                on t3.check_item_id_chr = t7.check_item_id_chr
+                               and t7.sample_group_id_chr = t3.sample_group_id_chr
+                              left outer join v_lis_aid_check_item_default t8
+                                on t3.check_item_id_chr = t8.check_item_id_chr
+                              left outer join (select t70.check_item_id_chr,
+                                                      t71.device_check_item_name_vchr
+                                                 from t_bse_lis_check_item_dev_item t70,
+                                                      t_bse_lis_device_check_item   t71
+                                                where t71.device_model_id_chr = t70.device_model_id_chr
+                                                  and t71.device_check_item_id_chr = t70.device_check_item_id_chr 
+                                                  {0} ) t9
+                                on t9.check_item_id_chr = t3.check_item_id_chr
+                             where t1.application_id_chr = ?
+                               and t1.status_int > 0";
+
+                if (deviceModelId != string.Empty)
+                {
+                    strSQL = string.Format(strSQL, "and t70.device_model_id_chr in (" + deviceModelId + ")");
+                }
+                else
+                {
+                    strSQL = string.Format(strSQL, "");
+                }
             }
             #endregion
 
             try
             {
-                com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
                 if (p_blnRealResult)
                 {
-                    IDataParameter[] objDPArr = null;
                     objHRPSvc.CreateDatabaseParameter(1, out objDPArr);
-
                     objDPArr[0].Value = p_strAppID;
-
                     lngRes = 0;
                     lngRes = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref p_dtbResultList, objDPArr);
                     objHRPSvc.Dispose();
                 }
                 else
                 {
-                    IDataParameter[] objDPArr = null;
                     objHRPSvc.CreateDatabaseParameter(1, out objDPArr);
                     objDPArr[0].Value = p_strAppID;
-
                     lngRes = 0;
                     lngRes = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref p_dtbResultList, objDPArr);
                     objHRPSvc.Dispose();
@@ -388,11 +416,11 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 批量打印报告单
         [AutoComplete]
-        public long m_lngGetBatchReportDataByCondition( string p_strFromSampleID,
+        public long m_lngGetBatchReportDataByCondition(string p_strFromSampleID,
             string p_strToSampleID, string p_strFromConfirmDat, string p_strToConfirmDat, string p_strReportGroupID, out clsLisBatchReport_VO[] p_objResultArr)
         {
             long lngRes = 0;
-            p_objResultArr = null; 
+            p_objResultArr = null;
 
             #region SQL
             string strSQL = @"SELECT DISTINCT t1.sex_chr,t1.patient_name_vchr, t2.*, t4.deptname_vchr, 
@@ -575,11 +603,11 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 根据条件查询批量打印的报告单列表
         [AutoComplete]
-        public long m_lngGetLisBatchReportListByCondition( string p_strFromSampleID,
+        public long m_lngGetLisBatchReportListByCondition(string p_strFromSampleID,
             string p_strToSampleID, string p_strFromConfirmDat, string p_strToConfirmDat, string p_strReportGroupID, string p_strPatientType, out clsLisBatchReportList_VO[] p_objResultArr)
         {
             long lngRes = 0;
-            p_objResultArr = null; 
+            p_objResultArr = null;
 
             #region SQL
             string strSQL = @"select distinct t1.sex_chr, t1.patient_name_vchr, 
@@ -716,11 +744,11 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 根据申请单号和报告组号查询批量打印信息列表
         [AutoComplete]
-        public long m_lngGetLisBatchReportDetailByCondition( clsLisBatchReportList_VO[] p_objReportList,
+        public long m_lngGetLisBatchReportDetailByCondition(clsLisBatchReportList_VO[] p_objReportList,
             out clsLisBatchReportDetail_VO[] p_objResultArr)
         {
             long lngRes = 0;
-            p_objResultArr = null; 
+            p_objResultArr = null;
 
             try
             {
@@ -770,7 +798,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             string p_strReportGroupID, string p_strApplID, bool p_blnConfirmed, out DataTable p_dtbReportInfo)
         {
             long lngRes = 0;
-            p_dtbReportInfo = null; 
+            p_dtbReportInfo = null;
 
             string strConfirmed = "";
 
@@ -850,7 +878,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             string p_strApplicationID, string p_strReportGroupID, bool p_blnConfirmed, out DataTable p_dtbCheckResult)
         {
             long lngRes = 0;
-            p_dtbCheckResult = null; 
+            p_dtbCheckResult = null;
 
             string strConfirmed = "";
 
@@ -946,11 +974,11 @@ namespace com.digitalwave.iCare.middletier.LIS
         /// <param name="p_objResultArr"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long m_lngGetDeviceResultLogByCondition( string p_strCheckDatFrom,
+        public long m_lngGetDeviceResultLogByCondition(string p_strCheckDatFrom,
             string p_strCheckDatTo, string p_strDeviceID, out clsResultLogVO[] p_objResultArr)
         {
             long lngRes = 0;
-            p_objResultArr = null; 
+            p_objResultArr = null;
 
             string strSQL = @"SELECT *
 								FROM t_opr_Lis_result_log
@@ -1001,7 +1029,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             string p_strAppID, out clsT_LIS_DeviceRelationVO[] p_objDRVOArr)
         {
             long lngRes = 0;
-            p_objDRVOArr = null; 
+            p_objDRVOArr = null;
             lngRes = 0;
 
             if (p_strAppID == null)
@@ -1055,11 +1083,11 @@ namespace com.digitalwave.iCare.middletier.LIS
         /// <param name="p_objResultArr"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long m_lngGetDeviceSampleListByCondition( string p_strImpReq, string p_strDeviceID,
+        public long m_lngGetDeviceSampleListByCondition(string p_strImpReq, string p_strDeviceID,
             out clsResultLogVO[] p_objResultArr)
         {
             long lngRes = 0;
-            p_objResultArr = null; 
+            p_objResultArr = null;
 
             #region SQL
             string strSQL = @"SELECT a.*,d.devicesample_status_int, d.sample_status_int
@@ -1123,11 +1151,11 @@ namespace com.digitalwave.iCare.middletier.LIS
         /// <param name="p_objResultArr"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long m_lngGetDeviceSampleListByCondition( string p_strDeviceSampleID,
+        public long m_lngGetDeviceSampleListByCondition(string p_strDeviceSampleID,
             string p_strDeviceID, string p_strCheckDat, out clsResultLogVO[] p_objResultArr)
         {
             long lngRes = 0;
-            p_objResultArr = null; 
+            p_objResultArr = null;
 
             #region SQL
             string strSQL = @"SELECT a.*,d.devicesample_status_int, d.sample_status_int
@@ -1208,7 +1236,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             long lngRes = 0;
             p_objResultArr = null;
             DataTable dtbResult = null;
-            clsResultLogVO objResultLogVO = null; 
+            clsResultLogVO objResultLogVO = null;
 
             if (p_strDeviceID == null || p_strDeviceSampleID == null || !Microsoft.VisualBasic.Information.IsDate(p_strCheckDate))
                 return -1;
@@ -1216,7 +1244,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             try
             {
                 lngRes = 0;
-                lngRes = m_lngQueryBindByAppointment( p_strDeviceID, p_strDeviceSampleID, p_strCheckDate, out objResultLogVO);
+                lngRes = m_lngQueryBindByAppointment(p_strDeviceID, p_strDeviceSampleID, p_strCheckDate, out objResultLogVO);
                 if (lngRes == 100 || lngRes == 300 || lngRes == 400 || lngRes <= 0)
                 {
                     return lngRes;
@@ -1226,7 +1254,7 @@ namespace com.digitalwave.iCare.middletier.LIS
                     lngRes = 0;
                     int intBeginIndex = int.Parse(objResultLogVO.m_strBeginIndex);
                     int intEndIndex = int.Parse(objResultLogVO.m_strEndIndex);
-                    lngRes = m_lngGetDeviceData( p_strDeviceID, objResultLogVO.m_strDeviceSampleID, objResultLogVO.m_strCheckDat, intBeginIndex, intEndIndex, out p_objResultArr);
+                    lngRes = m_lngGetDeviceData(p_strDeviceID, objResultLogVO.m_strDeviceSampleID, objResultLogVO.m_strCheckDat, intBeginIndex, intEndIndex, out p_objResultArr);
                 }
 
             }
@@ -1238,7 +1266,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             return lngRes;
         }
         #endregion
-        
+
         #region 以指定编号方式,根据指定的仪器编号,检验日期(trunc),和仪器样本编号查询绑定
         /// <summary>
         /// 以指定编号方式,根据指定的仪器编号,检验日期(trunc),和仪器样本编号查询绑定 刘彬 2004.06.10
@@ -1262,7 +1290,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             long lngRes = 0;
             p_objResultLogVO = null;
             DataTable dtbImportReq = null;
-            string strSQL = null; 
+            string strSQL = null;
             if (p_strDeviceID == null || p_strDeviceSampleID == null || !Microsoft.VisualBasic.Information.IsDate(p_strCheckDate))
                 return -1;
             try
@@ -1321,7 +1349,7 @@ namespace com.digitalwave.iCare.middletier.LIS
                 string strCheckDate = dtrSample["check_dat"].ToString();
                 int intImportReq = int.Parse(dtrSample["import_req_int"].ToString().Trim());
                 lngRes = 0;
-                lngRes = m_lngQueryResultLog( p_strDeviceID, intImportReq, out p_objResultLogVO);
+                lngRes = m_lngQueryResultLog(p_strDeviceID, intImportReq, out p_objResultLogVO);
 
             }
             catch (Exception objEx)
@@ -1356,14 +1384,14 @@ namespace com.digitalwave.iCare.middletier.LIS
             long lngRes = 0;
             p_objDeviceResultList = null;
             DataTable dtbResult = null;
-            string strSQL = null; 
+            string strSQL = null;
             if (p_strDeviceID == null)
                 return -1;
             try
             {
                 clsResultLogVO objResultLogVO = null;
                 lngRes = 0;
-                lngRes = m_lngQueryResultLog( p_strDeviceID, p_intImportReq, out objResultLogVO);
+                lngRes = m_lngQueryResultLog(p_strDeviceID, p_intImportReq, out objResultLogVO);
                 if (lngRes <= 0)
                     return lngRes;
                 if (objResultLogVO == null)
@@ -1371,7 +1399,7 @@ namespace com.digitalwave.iCare.middletier.LIS
                     return 300;
                 }
                 lngRes = 0;
-                lngRes = this.m_lngGetDeviceData( p_strDeviceID,
+                lngRes = this.m_lngGetDeviceData(p_strDeviceID,
                     objResultLogVO.m_strDeviceSampleID, objResultLogVO.m_strCheckDat, int.Parse(objResultLogVO.m_strBeginIndex.Trim()), int.Parse(objResultLogVO.m_strEndIndex.Trim()), out p_objDeviceResultList);
             }
             catch (Exception objEx)
@@ -1405,7 +1433,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             long lngRes = 0;
             p_objResultLogVO = null;
             DataTable dtbResultLog = null;
-            string strSQL = null; 
+            string strSQL = null;
             if (p_strDeviceID == null)
                 return -1;
             try
@@ -1478,7 +1506,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             long lngRes = 0;
             p_objDeviceResultList = null;
             DataTable dtbResult = null;
-            string strSQL = null; 
+            string strSQL = null;
             if (p_strDeviceID == null || p_strDeviceSampleID == null || !Microsoft.VisualBasic.Information.IsDate(p_strCheckDate))
                 return -1;
             try
@@ -1487,7 +1515,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
                 DateTime m_dtDate;
                 DateTime.TryParse(p_strCheckDate, out m_dtDate);
-                strSQL = @"select idx_int,--22222222
+                strSQL = @"select idx_int,
        device_check_item_name_vchr,
        device_sampleid_chr,
        abnormal_flag_vchr,
@@ -1519,8 +1547,6 @@ namespace com.digitalwave.iCare.middletier.LIS
                 objDPArr[2].Value = m_dtDate;
                 objDPArr[3].Value = Math.Min(p_intBeginIndex, p_intEndIndex);
                 objDPArr[4].Value = Math.Max(p_intBeginIndex, p_intEndIndex);
-                //objDPArr[3].Value = p_intBeginIndex;
-                //objDPArr[4].Value = p_intEndIndex;
 
                 lngRes = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref dtbResult, objDPArr);
 
@@ -1595,14 +1621,14 @@ namespace com.digitalwave.iCare.middletier.LIS
             long lngRes = 0;
             p_objResultArr = null;
             DataTable dtbResult = null;
-            clsResultLogVO objResultLogVO = null; 
+            clsResultLogVO objResultLogVO = null;
 
             if (p_strDeviceID == null)
                 return -1;
             try
             {
                 lngRes = 0;
-                lngRes = m_lngQueryBindByAutoBind( p_strDeviceID, out objResultLogVO);
+                lngRes = m_lngQueryBindByAutoBind(p_strDeviceID, out objResultLogVO);
                 if (lngRes == 100 || lngRes == 300 || lngRes <= 0)
                 {
                     return lngRes;
@@ -1614,7 +1640,7 @@ namespace com.digitalwave.iCare.middletier.LIS
                     string strSid = objResultLogVO.m_strDeviceSampleID.Trim();
                     string strCheckDate = objResultLogVO.m_strCheckDat;
                     int intEndIndex = int.Parse(objResultLogVO.m_strEndIndex);
-                    lngRes = m_lngGetDeviceData( p_strDeviceID, strSid, strCheckDate, intBeginIndex, intEndIndex, out p_objResultArr);
+                    lngRes = m_lngGetDeviceData(p_strDeviceID, strSid, strCheckDate, intBeginIndex, intEndIndex, out p_objResultArr);
                 }
 
             }
@@ -1649,7 +1675,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             DataTable dtbResultLog = null;
             DataTable dtbImportReq = null;
             string strSQL = null;
-             
+
             if (p_strDeviceID == null)
             {
                 return -1;
@@ -1723,7 +1749,7 @@ namespace com.digitalwave.iCare.middletier.LIS
                 }
 
                 int intImportReq = int.Parse(dtbImportReq.Rows[0]["IMPORT_REQ_INT"].ToString().Trim());
-                lngRes = m_lngQueryResultLog( p_strDeviceID, intImportReq, out p_objResultLogVO);
+                lngRes = m_lngQueryResultLog(p_strDeviceID, intImportReq, out p_objResultLogVO);
 
             }
             catch (Exception objEx)
@@ -1746,14 +1772,14 @@ namespace com.digitalwave.iCare.middletier.LIS
         /// <param name="p_dtResult"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long m_lngQueryPatientExcItemResult( string p_strPatientID, string p_strExcItemID, out DataTable p_dtResult)
+        public long m_lngQueryPatientExcItemResult(string p_strPatientID, string p_strExcItemID, out DataTable p_dtResult)
         {
             p_dtResult = null;
             long lngRes = 0;
 
             if (string.IsNullOrEmpty(p_strPatientID) || string.IsNullOrEmpty(p_strExcItemID))
                 return lngRes;
-             
+
             lngRes = 0;
 
             string strSQL = @"select a.application_id_chr,
@@ -1911,7 +1937,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 根据申请单和检验大组查询检验结果
         [AutoComplete]
-        public long m_lngGetCheckResultByApplFormNoAndCheckGroupID( string strApplFormNo, string strGroupID, out DataTable dtbCheckResult)
+        public long m_lngGetCheckResultByApplFormNoAndCheckGroupID(string strApplFormNo, string strGroupID, out DataTable dtbCheckResult)
         {
             long lngRes = 0;
             string strSQL = @"SELECT t1.modify_dat, t1.groupid_chr, t1.check_item_id_chr, t1.sample_id_chr,											t1.result_vchr,t1.unit_vchr, t1.deviceid_chr,																	t1.device_check_item_name_vchr, t1.refrange_vchr AS ss,
@@ -1951,7 +1977,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 根据样品号查询表t_opr_lis_check_result的结果信息
         [AutoComplete]
-        public long m_lngGetManualCheckResultBySampleID( string strSampleID, out DataTable dtbManualCheckResult)
+        public long m_lngGetManualCheckResultBySampleID(string strSampleID, out DataTable dtbManualCheckResult)
         {
             long lngRes = 0;
             string strSQL = @"SELECT modify_dat, 
@@ -2002,7 +2028,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 根据申请日期查询手工录入的检验项目的标本资料
         [AutoComplete]
-        public long m_lngGetSampleListByApplDat( DateTime p_dtBegin, DateTime p_dtEnd, string flag, out System.Data.DataTable p_dtbSampleList)
+        public long m_lngGetSampleListByApplDat(DateTime p_dtBegin, DateTime p_dtEnd, string flag, out System.Data.DataTable p_dtbSampleList)
         {
             long lngRes = 0;
             p_dtbSampleList = null;
@@ -2041,7 +2067,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 根据SampleID和GroupID查询手工录入的具体检验项目
         [AutoComplete]
-        public long m_lngGetCheckItemBySampleIDAndGroupID( string strSampleID, string strGroupID, out System.Data.DataTable dtbManualCheckItemList)
+        public long m_lngGetCheckItemBySampleIDAndGroupID(string strSampleID, string strGroupID, out System.Data.DataTable dtbManualCheckItemList)
         {
             long lngRes = 0;
             string strSQL = @"SELECT t2.check_item_name_vchr, t1.check_item_id_chr, t2.unit_chr,t2.ref_value_range_vchr,  t2.unit_chr, t2.check_item_english_name_vchr 
@@ -2079,7 +2105,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         /// <param name="dtbDeviceSampleList"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long m_lngGetDeviceSampleList( string p_strDeviceID, string strBeginDate, string strEndDate, out System.Data.DataTable p_dtbDeviceSampleList)
+        public long m_lngGetDeviceSampleList(string p_strDeviceID, string strBeginDate, string strEndDate, out System.Data.DataTable p_dtbDeviceSampleList)
         {
             long lngRes = 0;
             string strSQL = null;
@@ -2127,7 +2153,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         /// <param name="dtbDeviceSampleList"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long m_lngGetDeviceSampleList( string p_strDeviceID, DateTime p_dtBegin, DateTime p_dtEnd, int p_intDeviceSampleObj, out System.Data.DataTable p_dtbDeviceSampleList)
+        public long m_lngGetDeviceSampleList(string p_strDeviceID, DateTime p_dtBegin, DateTime p_dtEnd, int p_intDeviceSampleObj, out System.Data.DataTable p_dtbDeviceSampleList)
         {
             long lngRes = 0;
             string strSQL = null;
@@ -2168,7 +2194,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         /// <param name="p_dtbDeviceSample"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long m_lngGetDeviceSampleList( string p_strDeviceID, DateTime p_dtBegin, DateTime p_dtEnd, string p_strCheckGroupID, int p_intDeviceSampleObj, out System.Data.DataTable p_dtbDeviceSample)
+        public long m_lngGetDeviceSampleList(string p_strDeviceID, DateTime p_dtBegin, DateTime p_dtEnd, string p_strCheckGroupID, int p_intDeviceSampleObj, out System.Data.DataTable p_dtbDeviceSample)
         {
             long lngRes = 0;
             p_dtbDeviceSample = null;
@@ -2197,7 +2223,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 根据仪器号（不是型号，是一台具体仪器的代号）和检验日期范围，再加上仪器标本号范围，查询出符合条件（该仪器在该段时间内所检验的标本范围内的）标本资料。
         [AutoComplete]
-        public long m_lngGetDeviceSampleList( string p_strDeviceId, DateTime p_dtBegin, DateTime p_dtEnd, string p_strDeviceSampleIDBegin, string p_strDeviceSampleIDEnd, int p_intDeviceSampleObj, out System.Data.DataTable p_dtbDeviceSampleList)
+        public long m_lngGetDeviceSampleList(string p_strDeviceId, DateTime p_dtBegin, DateTime p_dtEnd, string p_strDeviceSampleIDBegin, string p_strDeviceSampleIDEnd, int p_intDeviceSampleObj, out System.Data.DataTable p_dtbDeviceSampleList)
         {
             long lngRes = 0;
             p_dtbDeviceSampleList = null;
@@ -2233,7 +2259,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         /// <param name="p_dtbDeviceResultList"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long m_lngGetDeviceResultList( System.Data.DataTable p_dtbDeviceSampleList, out System.Data.DataTable p_dtbDeviceResultList)
+        public long m_lngGetDeviceResultList(System.Data.DataTable p_dtbDeviceSampleList, out System.Data.DataTable p_dtbDeviceResultList)
         {
             long lngRes = 0;
             p_dtbDeviceResultList = null;
@@ -2313,7 +2339,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         /// <param name="p_dtbResultList"></param>
         /// <returns></returns>
         [AutoComplete]
-        public long m_lngGetResultList( System.Data.DataTable p_dtbDeviceSample, out System.Data.DataTable p_dtbResultList)
+        public long m_lngGetResultList(System.Data.DataTable p_dtbDeviceSample, out System.Data.DataTable p_dtbResultList)
         {
             long lngRes = 0;
             p_dtbResultList = null;
@@ -2406,7 +2432,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 根据仪器标本号列表（即一个集合，放在DataTable中），查询出该标本的检验项目的已经有的结果详细内容。
         [AutoComplete]
-        public long m_lngGetCurrentResultList( System.Data.DataTable p_dtbDeviceSampleList, out System.Data.DataTable p_dtbCurrentResults)
+        public long m_lngGetCurrentResultList(System.Data.DataTable p_dtbDeviceSampleList, out System.Data.DataTable p_dtbCurrentResults)
         {
             long lngRes = 0;
             p_dtbCurrentResults = null;
@@ -2422,7 +2448,7 @@ namespace com.digitalwave.iCare.middletier.LIS
                     {
                         strSampleID = p_dtbDeviceSampleList.Rows[i]["SAMPLE_ID_CHR"].ToString().Trim();
                         strGroupId = p_dtbDeviceSampleList.Rows[i]["GROUPID_CHR"].ToString().Trim();
-                        lngRes = this.m_lngGetCheckResult( strSampleID, strGroupId, out objDT_ResultListTmp);
+                        lngRes = this.m_lngGetCheckResult(strSampleID, strGroupId, out objDT_ResultListTmp);
 
                         if (lngRes > 0)
                         {
@@ -2452,7 +2478,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 根据样本号、检验项目（不含子组），查询对应的检验结果（这里从t_opr_lis_check_result查询）
         [AutoComplete]
-        public long m_lngGetCheckResult( string p_strSampleID, string p_strCheckGroupID, out System.Data.DataTable p_dtbCheckResult)
+        public long m_lngGetCheckResult(string p_strSampleID, string p_strCheckGroupID, out System.Data.DataTable p_dtbCheckResult)
         {
             long lngRes = 0;
             p_dtbCheckResult = null;
@@ -2486,7 +2512,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 查询两个标本的检验结果
         [AutoComplete]
-        public long m_lngGetUnionCheckResult( string p_strSmapleIDFirst, string p_strGroupIDFirst, string p_strSampleIDSecond, string p_strGroupIDSecond, out System.Data.DataTable p_dtbResult)
+        public long m_lngGetUnionCheckResult(string p_strSmapleIDFirst, string p_strGroupIDFirst, string p_strSampleIDSecond, string p_strGroupIDSecond, out System.Data.DataTable p_dtbResult)
         {
             long lngRes = 0;
             p_dtbResult = null;
@@ -2520,7 +2546,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region 根据检验日期或者审核日期查询检验单号(不得重复)
         [AutoComplete]
-        public long m_lngGetApplFormNOByDateRange( string p_strDateFieldName, System.DateTime p_dtBegin, System.DateTime p_dtEnd, out System.Data.DataTable p_dtbAppl)
+        public long m_lngGetApplFormNOByDateRange(string p_strDateFieldName, System.DateTime p_dtBegin, System.DateTime p_dtEnd, out System.Data.DataTable p_dtbAppl)
         {
             long lngRes = 0;
             p_dtbAppl = null;
@@ -2585,7 +2611,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         /// print_ord_int
         /// </param>
         /// <returns></returns>
-        public long m_lngGetPrintResult( string p_strGroupID, string p_strSmapleID, out System.Data.DataTable p_dtbPrintResult)
+        public long m_lngGetPrintResult(string p_strGroupID, string p_strSmapleID, out System.Data.DataTable p_dtbPrintResult)
         {
             long lngRes = 0;
             p_dtbPrintResult = null;
@@ -2622,7 +2648,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         #region  根据仪器标本号, 仪器号，检验日期查询出该标本的所有结果项的代号、名称、值等详细内容。
         [AutoComplete]
-        public long m_lngGetDeviceSampleResultList( string strDeviceID, string strDeviceSampleID, string strCheckDate, out System.Data.DataTable dtbSampleResultList)
+        public long m_lngGetDeviceSampleResultList(string strDeviceID, string strDeviceSampleID, string strCheckDate, out System.Data.DataTable dtbSampleResultList)
         {
             long lngRes = 0;
             dtbSampleResultList = null;

@@ -96,7 +96,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Debug\his.itf.dll</HintPath>
     </Reference>
-    <Reference Include="HISZY, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="HISZY, Version=2.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\debug\HISZY.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.Excel, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PinkieControls, Version=1.0.1362.15156, Culture=neutral" />

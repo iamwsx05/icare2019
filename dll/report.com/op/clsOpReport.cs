@@ -5158,7 +5158,7 @@ order by a.invoiceno_vchr, a.seqid_chr";
             dtDiffSum = new DataTable();
             dtCheckOut = null;
             com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
-            string strSQL = @"SELECT a.invoiceno_vchr,
+            string strSQL = @"SELECT a.seqid_chr,a.invoiceno_vchr,
                                        a.recorddate_dat,
                                        a.opremp_chr,
                                        a.status_int,
@@ -5203,7 +5203,7 @@ order by a.invoiceno_vchr, a.seqid_chr";
                 if (dtCheckOut != null && dtCheckOut.Rows.Count > 0)
                 {
                     DataView dv = dtCheckOut.DefaultView;
-                    dtDiffSum = dv.ToTable(true, new string[] { "invoiceno_vchr", "diffPriceSum" });
+                    dtDiffSum = dv.ToTable(true, new string[] { "seqid_chr", "invoiceno_vchr", "diffPriceSum" });
                 }
             }
             catch (Exception objEx)
@@ -5318,7 +5318,7 @@ order by a.invoiceno_vchr, a.seqid_chr";
             com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
             string strSQL;
 
-            strSQL = @"SELECT a.invoiceno_vchr,
+            strSQL = @"SELECT a.seqid_chr, a.invoiceno_vchr,
                            a.recorddate_dat,
                            a.opremp_chr,
                            a.status_int,
@@ -5366,7 +5366,7 @@ order by a.invoiceno_vchr, a.seqid_chr";
                 if (dtCheckOut != null && dtCheckOut.Rows.Count > 0)
                 {
                     DataView dv = dtCheckOut.DefaultView;
-                    dtTemp = dv.ToTable(true, new string[] { "invoiceno_vchr", "diffPriceSum" });
+                    dtTemp = dv.ToTable(true, new string[] { "seqid_chr", "invoiceno_vchr", "diffPriceSum" });
                 }
             }
             catch (Exception objEx)

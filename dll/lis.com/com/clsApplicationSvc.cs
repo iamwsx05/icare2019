@@ -4099,31 +4099,34 @@ values
                     try
                     {
                         DateTime dtBirthDay = DateTime.Parse(p_objLisApplMainVO.m_strBirthDay);
-                        TimeSpan tspAge = CurTime - dtBirthDay;
-                        if (tspAge.Days < 30)
-                        {
-                            if (tspAge.Days == 0)
-                            {
-                                strAge = "1 天";
-                            }
-                            else
-                            {
-                                strAge = tspAge.Days.ToString() + " 天";
-                            }
-                        }
-                        else if (tspAge.Days <= 366)
-                        {
-                            strAge = ((int)(tspAge.Days / 30)).ToString() + " 月";
-                        }
-                        else
-                        {
-                            strAge = ((int)(CurTime.Year - dtBirthDay.Year)).ToString() + " 岁";
-                        }
+                        //TimeSpan tspAge = CurTime - dtBirthDay;
+                        //if (tspAge.Days < 30)
+                        //{
+                        //    if (tspAge.Days == 0)
+                        //    {
+                        //        strAge = "1 天";
+                        //    }
+                        //    else
+                        //    {
+                        //        strAge = tspAge.Days.ToString() + " 天";
+                        //    }
+                        //}
+                        //else if (tspAge.Days <= 366)
+                        //{
+                        //    strAge = ((int)(tspAge.Days / 30)).ToString() + " 月";
+                        //}
+                        //else
+                        //{
+                        //    strAge = ((int)(CurTime.Year - dtBirthDay.Year)).ToString() + " 岁";
+                        //}
 
-                        if (!string.IsNullOrEmpty(strAge))
-                        {
-                            p_objLisApplMainVO.m_strAge = strAge;
-                        }
+                        //if (!string.IsNullOrEmpty(strAge))
+                        //{
+                        //    p_objLisApplMainVO.m_strAge = strAge;
+                        //}
+
+                        p_objLisApplMainVO.m_strAge = (new clsBrithdayToAge()).m_strGetAge(DateTime.Parse(p_objLisApplMainVO.m_strBirthDay));
+
                     }
                     catch { }
                 }
@@ -5327,6 +5330,15 @@ values
                 objHRPSvc.CreateDatabaseParameter(21, out objLisApplArr);
 
                 DateTime CurTime = DateTime.Now;
+
+                if (!string.IsNullOrEmpty(p_objLisApplMainVO.m_strBirthDay))
+                {
+                    try
+                    {
+                        p_objLisApplMainVO.m_strAge = (new clsBrithdayToAge()).m_strGetAge(DateTime.Parse(p_objLisApplMainVO.m_strBirthDay));
+                    }
+                    catch { }
+                }
 
                 objLisApplArr[0].Value = p_objLisApplMainVO.m_strAPPLICATION_ID;
                 objLisApplArr[1].Value = CurTime;
@@ -6533,20 +6545,10 @@ values
                           t_opr_attachrelation t5
                     where t1.application_id_chr = t2.application_id_chr
                       and t1.application_id_chr = t5.attachid_vchr(+)
-                      and t2.pstatus_int + 0 = 2
+                      and t2.pstatus_int = 2
                       and t2.application_id_chr = t4.application_id_chr
                       and t4.status_int >= 3
                       and t4.status_int <= 6 ";
-            //            string strSQL = @"SELECT   
-            //											t2.application_form_no_chr, t2.patient_name_vchr,
-            //                                          t2.check_content_vchr, t2.patientcardid_chr,
-            //                                          1 status_int_report, t4.accept_dat
-            //								FROM 
-            //									t_opr_lis_application t2,
-            //									t_opr_lis_sample t4       
-            //								WHERE t2.pstatus_int  = 2
-            //								AND t2.application_id_chr = t4.application_id_chr
-            //								AND t4.status_int >= 3 AND t4.status_int <= 6 ";
 
             string strSQL_ConfirmState = " and t1.status_int = ? ";
             string strSQL_ConfirmStateAll = " and t1.status_int > ?";
@@ -6582,8 +6584,8 @@ values
                                                       b.apply_unit_id_chr
                  where a.application_id_chr = t1.application_id_chr
                    and b.check_category_id_chr = ?)";
-            string strSQL_FromModifyDate = " and t4.modify_dat >=to_date(?,'yyyy-mm-dd hh24:mi:ss') ";
-            string strSQL_ToModifyDate = " and t4.modify_dat <= to_date(?,'yyyy-mm-dd hh24:mi:ss') ";
+            string strSQL_FromModifyDate = " and t4.accept_dat >=to_date(?,'yyyy-mm-dd hh24:mi:ss') "; // " and t4.modify_dat >=to_date(?,'yyyy-mm-dd hh24:mi:ss') ";  2020-1-2
+            string strSQL_ToModifyDate = " and t4.accept_dat <= to_date(?,'yyyy-mm-dd hh24:mi:ss') "; // " and t4.modify_dat <= to_date(?,'yyyy-mm-dd hh24:mi:ss') "; 2020-1-2
             #endregion
 
             ArrayList arlSQL = new ArrayList();
@@ -6770,7 +6772,9 @@ values
                       and e.check_category_id_chr = f.check_category_id_chr
                       and t4.status_int = 2 ";
                 foreach (object obj in arlSQL)
-                { sql_sub2 += obj.ToString(); }
+                {
+                    sql_sub2 += obj.ToString();
+                }
                 sql_sub1 += sql_sub2.Replace("t4.accept_dat", "t4.sampling_date_dat");
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 sb.Append(@" and f.check_category_id_chr in (");

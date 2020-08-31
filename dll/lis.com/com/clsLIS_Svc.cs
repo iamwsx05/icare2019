@@ -951,8 +951,8 @@ values
                             //int intIdx = m_mthGetNewResultIndex(objResultList.Length, false) + 1;
 
                             int[] intIdxArr = null;
-                            // 2019-11-22: 由于9i/11g连接11g server异常，暂时用 seq_lis_result_11g 替代 seq_lis_result
-                            lngRes = m_lngGetSequenceArr("seq_lis_result_11g", objResultList.Length, out intIdxArr);
+                            // 2019-11-22: 由于9i/11g连接11g server异常，暂时用 seq_lis_result_11g 替代 seq_lis_result  --> 取消 2020-1-13
+                            lngRes = m_lngGetSequenceArr("seq_lis_result", objResultList.Length, out intIdxArr);
                             if (lngRes <= 0 || intIdxArr == null)
                             {
                                 return lngRes;
@@ -1064,8 +1064,8 @@ values
                         intImportReq = Convert.ToInt32(strConditionList[2]);
                         //int intIdx = m_mthGetNewResultIndex(objResultList.Length, false) + 1;
                         int[] intIdxArr = null;
-                        // 2019-11-22: 由于9i/11g连接11g server异常，暂时用 seq_lis_result_11g 替代 seq_lis_result
-                        lngRes = m_lngGetSequenceArr("seq_lis_result_11g", objResultList.Length, out intIdxArr);
+                        // 2019-11-22: 由于9i/11g连接11g server异常，暂时用 seq_lis_result_11g 替代 seq_lis_result -->取消 2020-1-13
+                        lngRes = m_lngGetSequenceArr("seq_lis_result", objResultList.Length, out intIdxArr);
                         if (lngRes <= 0 || intIdxArr == null)
                         {
                             return lngRes;
@@ -2999,6 +2999,7 @@ values
                                            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
                                            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                                         ";
+                
                 string checkContent = string.Empty;
                 List<string> lstContent = new List<string>();
                 n = -1;
@@ -3221,6 +3222,7 @@ values
                                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
                                    ?, ?, ?, ? )
                                 ";
+
                 n = -1;
                 svcLis.CreateDatabaseParameter(34, out parm);
                 parm[++n].Value = sampleVo.checkDate.Value;
@@ -3656,7 +3658,7 @@ values
             try
             {
                 #region Sql
-                Sql = @"select a.reg_no,
+                Sql = @"select distinct a.reg_no,
                                b.pat_code,
                                b.pat_name,
                                b.sex,
@@ -3753,7 +3755,7 @@ values
                                a.patient_inhospitalno_chr,
                                a.appl_dat,
                                a.accept_dat,
-                               a.confirm_dat,
+                               a.confirm_dat, 
                                b.check_content_vchr
                           from t_opr_lis_sample a
                           left join t_opr_lis_application b
