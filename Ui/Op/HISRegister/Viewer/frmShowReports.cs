@@ -175,11 +175,11 @@ namespace com.digitalwave.iCare.gui.HIS
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.m_picBadge = new System.Windows.Forms.PictureBox();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -190,8 +190,8 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.txtCardID);
             this.panel1.Controls.Add(this.m_txtInpatNo);
             this.panel1.Controls.Add(this.label5);
@@ -247,10 +247,10 @@ namespace com.digitalwave.iCare.gui.HIS
             this.btOpenImage.DefaultScheme = true;
             this.btOpenImage.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btOpenImage.Hint = "";
-            this.btOpenImage.Location = new System.Drawing.Point(705, 10);
+            this.btOpenImage.Location = new System.Drawing.Point(804, 10);
             this.btOpenImage.Name = "btOpenImage";
             this.btOpenImage.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
-            this.btOpenImage.Size = new System.Drawing.Size(88, 32);
+            this.btOpenImage.Size = new System.Drawing.Size(96, 32);
             this.btOpenImage.TabIndex = 12;
             this.btOpenImage.Text = "´ò¿ªÍ¼Ïñ";
             this.btOpenImage.Click += new System.EventHandler(this.btOpenImage_Click);
@@ -277,12 +277,13 @@ namespace com.digitalwave.iCare.gui.HIS
             this.btPrint.DefaultScheme = true;
             this.btPrint.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btPrint.Hint = "";
-            this.btPrint.Location = new System.Drawing.Point(811, 10);
+            this.btPrint.Location = new System.Drawing.Point(811, -36);
             this.btPrint.Name = "btPrint";
             this.btPrint.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
             this.btPrint.Size = new System.Drawing.Size(88, 32);
             this.btPrint.TabIndex = 8;
             this.btPrint.Text = "´òÓ¡(&P)";
+            this.btPrint.Visible = false;
             this.btPrint.Click += new System.EventHandler(this.btPrint_Click);
             // 
             // txtAge
@@ -350,8 +351,8 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel2.AutoSize = true;
             this.panel2.Controls.Add(this.treeView1);
             this.panel2.Location = new System.Drawing.Point(0, 48);
@@ -361,9 +362,9 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // treeView1
             // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.Location = new System.Drawing.Point(0, 1);
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(373, 578);
@@ -372,9 +373,9 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // panel3
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.AutoSize = true;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.lblPacsHint);
@@ -414,13 +415,13 @@ namespace com.digitalwave.iCare.gui.HIS
             this.printPreviewControl.strCheckName = "";
             this.printPreviewControl.strDeptName = "";
             this.printPreviewControl.TabIndex = 39;
-            this.printPreviewControl.Zoom = 1;
+            this.printPreviewControl.Zoom = 1D;
             this.printPreviewControl.Load += new System.EventHandler(this.printPreviewControl1_Load);
             // 
             // printDocument1
             // 
-            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             this.printDocument1.BeginPrint += new System.Drawing.Printing.PrintEventHandler(this.printDocument1_BeginPrint);
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
             // fpnlBL
             // 
@@ -471,6 +472,7 @@ namespace com.digitalwave.iCare.gui.HIS
             this.columnHeader5});
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
+            this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(64, -24);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
@@ -480,8 +482,8 @@ namespace com.digitalwave.iCare.gui.HIS
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.Visible = false;
             this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
-            this.listView1.Leave += new System.EventHandler(this.listView1_Leave);
             this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyDown);
+            this.listView1.Leave += new System.EventHandler(this.listView1_Leave);
             // 
             // columnHeader1
             // 

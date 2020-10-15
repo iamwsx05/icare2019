@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -46,6 +47,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="comm.control, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\debug\comm.control.dll</HintPath>
+    </Reference>
+    <Reference Include="comm.entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\comm.entity.dll</HintPath>
+    </Reference>
+    <Reference Include="comm.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\comm.itf.dll</HintPath>
+    </Reference>
+    <Reference Include="comm.utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\comm.utils.dll</HintPath>
+    </Reference>
     <Reference Include="ControlLibrary, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Bin\Debug\ControlLibrary.dll</HintPath>
@@ -59,10 +76,17 @@
     <Reference Include="DevExpress.Sparkline.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraBars.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraNavBar.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraReports.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v16.2.Extensions, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraRichEdit.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="GUI_Base, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Bin\Debug\GUI_Base.dll</HintPath>
@@ -87,11 +111,14 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="UIAutomationClient" />
@@ -141,6 +168,18 @@
     <Compile Include="Viewer\frmCheckPswUrl.Designer.cs">
       <DependentUpon>frmCheckPswUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Viewer\frmPopupTestPats.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmPopupTestPats.Designer.cs">
+      <DependentUpon>frmPopupTestPats.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmSGS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmSGS.Designer.cs">
+      <DependentUpon>frmSGS.cs</DependentUpon>
+    </Compile>
     <Compile Include="Viewer\frmItemsCorr.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,12 +203,6 @@
     </Compile>
     <Compile Include="Viewer\frmSgsMZSF.Designer.cs">
       <DependentUpon>frmSgsMZSF.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Viewer\frmSgsZYSF.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Viewer\frmSgsZYSF.Designer.cs">
-      <DependentUpon>frmSgsZYSF.cs</DependentUpon>
     </Compile>
     <Compile Include="Viewer\frmUri.cs">
       <SubType>Form</SubType>
@@ -260,6 +293,12 @@
       <SubType>Designer</SubType>
       <DependentUpon>frmCheckPswUrl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmPopupTestPats.resx">
+      <DependentUpon>frmPopupTestPats.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmSGS.resx">
+      <DependentUpon>frmSGS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Viewer\frmItemsCorr.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmItemsCorr.cs</DependentUpon>
@@ -269,9 +308,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Viewer\frmSgsMZSF.resx">
       <DependentUpon>frmSgsMZSF.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Viewer\frmSgsZYSF.resx">
-      <DependentUpon>frmSgsZYSF.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Viewer\frmUri.resx">
       <DependentUpon>frmUri.cs</DependentUpon>

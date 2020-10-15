@@ -3317,7 +3317,7 @@ values
                             on d.device_check_item_id_chr = c.device_check_item_id_chr
                            and d.device_model_id_chr = c.device_model_id_chr
                          where a.status_int >= 3
-                           and d.device_model_id_chr = '0000041'
+                           and d.device_model_id_chr in ( '0000041','0000046','0000055')
                            and a.barcode_vchr = ?
                            and a.status_int > 0
                          order by d.device_check_item_id_chr";
@@ -4290,7 +4290,7 @@ values
                             on d.device_check_item_id_chr = c.device_check_item_id_chr
                            and d.device_model_id_chr = c.device_model_id_chr
                          where a.status_int >= 3
-                           and d.device_model_id_chr = '0000041'
+                           and d.device_model_id_chr  in ( '0000041','0000046','0000055')
                            and a.barcode_vchr = ?
                            and a.status_int > 0
                          order by d.device_check_item_id_chr";

@@ -1,5 +1,4 @@
-﻿using Hisitf;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +10,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
 using weCare.Core.Entity;
-using weCare.Core.Utils;
 
 namespace com.digitalwave.iCare.gui.HIS
 {
@@ -66,6 +64,11 @@ namespace com.digitalwave.iCare.gui.HIS
         /// </summary>
         internal void Init()
         {
+            string uri = clsPublic.m_strGetSysparm("9018");
+            if (uri.Trim() != string.Empty)
+            {
+                ServerIp = "http://" + uri;
+            }
             Reset();
         }
         #endregion
@@ -186,8 +189,6 @@ namespace com.digitalwave.iCare.gui.HIS
                     objs[++n] = dr["homeaddress_vchr"].ToString();
                     clsPublic.PlayAvi("加载妇幼平台界面，请稍候...");
                     string uri = string.Format(this.ServerIp + "/W_Fubao/AspCode/JiBenXinXi/HIS/Default.aspx?INFOID={0}&AUTHORID={1}&PatientNo={2}&USER={3}&page=CreateArchive&HISID={4}&HDSB0101001={5}&HDSB0101004={6}&HDSB0101005={7}&HDSB0101002={8}ID&HDSB0101006={9}&HDSB0101008={10}&HDSB0101009={11}&HDSB0101022={12}&HDSB0101023={13}&HDSB0101010={14}&HDSB0101011={15}&HDSB0101012={16}&HDSB0101013={17}&BARCODE=&DEP=&HDSB0101020={18}&HDSB0101021={19}", objs);
-
-                    Log.Output(uri);
                     this.m_objViewer.webBrowser.Navigate(uri);
                 }
                 catch (Exception ex)
@@ -220,7 +221,7 @@ namespace com.digitalwave.iCare.gui.HIS
         internal void Query()
         {
             DataRow dr = this.GetPatObj();
-            
+
             if (dr != null)
             {
                 try

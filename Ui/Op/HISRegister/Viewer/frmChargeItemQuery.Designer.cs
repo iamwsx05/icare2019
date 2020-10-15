@@ -31,8 +31,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            com.digitalwave.controls.datagrid.clsColumnInfo clsColumnInfo1 = new com.digitalwave.controls.datagrid.clsColumnInfo();
-            com.digitalwave.controls.datagrid.clsColumnInfo clsColumnInfo2 = new com.digitalwave.controls.datagrid.clsColumnInfo();
+            com.digitalwave.controls.datagrid.clsColumnInfo clsColumnInfo3 = new com.digitalwave.controls.datagrid.clsColumnInfo();
+            com.digitalwave.controls.datagrid.clsColumnInfo clsColumnInfo4 = new com.digitalwave.controls.datagrid.clsColumnInfo();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.m_dtgChargeItem = new com.digitalwave.controls.datagrid.ctlDataGrid();
@@ -140,6 +140,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.m_txtDosage = new System.Windows.Forms.TextBox();
+            this.cboXb = new System.Windows.Forms.ComboBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.cboSfdw = new System.Windows.Forms.ComboBox();
+            this.label44 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_dtgChargeItem)).BeginInit();
@@ -162,9 +166,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.m_dtgChargeItem);
             this.groupBox1.Location = new System.Drawing.Point(6, 40);
             this.groupBox1.Name = "groupBox1";
@@ -182,30 +186,30 @@
             this.m_dtgChargeItem.CaptionText = "";
             this.m_dtgChargeItem.CaptionVisible = false;
             this.m_dtgChargeItem.ColumnHeadersVisible = true;
-            clsColumnInfo1.Alignment = System.Windows.Forms.HorizontalAlignment.Left;
-            clsColumnInfo1.BackColor = System.Drawing.SystemColors.Window;
-            clsColumnInfo1.Column_Type = com.digitalwave.controls.datagrid.enum_DataType.System_String;
-            clsColumnInfo1.ColumnIndex = 0;
-            clsColumnInfo1.ColumnName = "ITEMCODE_VCHR";
-            clsColumnInfo1.ColumnWidth = 120;
-            clsColumnInfo1.Enabled = false;
-            clsColumnInfo1.ForeColor = System.Drawing.Color.Black;
-            clsColumnInfo1.HeadText = "项目编号";
-            clsColumnInfo1.ReadOnly = true;
-            clsColumnInfo1.TextFont = new System.Drawing.Font("宋体", 11F);
-            clsColumnInfo2.Alignment = System.Windows.Forms.HorizontalAlignment.Left;
-            clsColumnInfo2.BackColor = System.Drawing.Color.White;
-            clsColumnInfo2.Column_Type = com.digitalwave.controls.datagrid.enum_DataType.System_String;
-            clsColumnInfo2.ColumnIndex = 1;
-            clsColumnInfo2.ColumnName = "ITEMNAME_VCHR";
-            clsColumnInfo2.ColumnWidth = 180;
-            clsColumnInfo2.Enabled = false;
-            clsColumnInfo2.ForeColor = System.Drawing.Color.Black;
-            clsColumnInfo2.HeadText = "项目名称";
-            clsColumnInfo2.ReadOnly = true;
-            clsColumnInfo2.TextFont = new System.Drawing.Font("宋体", 11F);
-            this.m_dtgChargeItem.Columns.Add(clsColumnInfo1);
-            this.m_dtgChargeItem.Columns.Add(clsColumnInfo2);
+            clsColumnInfo3.Alignment = System.Windows.Forms.HorizontalAlignment.Left;
+            clsColumnInfo3.BackColor = System.Drawing.SystemColors.Window;
+            clsColumnInfo3.Column_Type = com.digitalwave.controls.datagrid.enum_DataType.System_String;
+            clsColumnInfo3.ColumnIndex = 0;
+            clsColumnInfo3.ColumnName = "ITEMCODE_VCHR";
+            clsColumnInfo3.ColumnWidth = 120;
+            clsColumnInfo3.Enabled = false;
+            clsColumnInfo3.ForeColor = System.Drawing.Color.Black;
+            clsColumnInfo3.HeadText = "项目编号";
+            clsColumnInfo3.ReadOnly = true;
+            clsColumnInfo3.TextFont = new System.Drawing.Font("宋体", 11F);
+            clsColumnInfo4.Alignment = System.Windows.Forms.HorizontalAlignment.Left;
+            clsColumnInfo4.BackColor = System.Drawing.Color.White;
+            clsColumnInfo4.Column_Type = com.digitalwave.controls.datagrid.enum_DataType.System_String;
+            clsColumnInfo4.ColumnIndex = 1;
+            clsColumnInfo4.ColumnName = "ITEMNAME_VCHR";
+            clsColumnInfo4.ColumnWidth = 180;
+            clsColumnInfo4.Enabled = false;
+            clsColumnInfo4.ForeColor = System.Drawing.Color.Black;
+            clsColumnInfo4.HeadText = "项目名称";
+            clsColumnInfo4.ReadOnly = true;
+            clsColumnInfo4.TextFont = new System.Drawing.Font("宋体", 11F);
+            this.m_dtgChargeItem.Columns.Add(clsColumnInfo3);
+            this.m_dtgChargeItem.Columns.Add(clsColumnInfo4);
             this.m_dtgChargeItem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.m_dtgChargeItem.Font = new System.Drawing.Font("宋体", 11F);
             this.m_dtgChargeItem.FullRowSelect = true;
@@ -375,6 +379,10 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.cboXb);
+            this.panel4.Controls.Add(this.label42);
+            this.panel4.Controls.Add(this.cboSfdw);
+            this.panel4.Controls.Add(this.label44);
             this.panel4.Controls.Add(this.cboIsChildPrice);
             this.panel4.Controls.Add(this.label47);
             this.panel4.Controls.Add(this.txtRegular);
@@ -520,14 +528,7 @@
             // 
             // txtCityUnicode
             // 
-            //this.txtCityUnicode.EnableAutoValidation = false;
-            //this.txtCityUnicode.EnableEnterKeyValidate = false;
-            //this.txtCityUnicode.EnableEscapeKeyUndo = true;
-            //this.txtCityUnicode.EnableLastValidValue = true;
-            //this.txtCityUnicode.ErrorProvider = null;
-            //this.txtCityUnicode.ErrorProviderMessage = "Invalid value";
             this.txtCityUnicode.Font = new System.Drawing.Font("宋体", 11F);
-            //this.txtCityUnicode.ForceFormatText = true;
             this.txtCityUnicode.Location = new System.Drawing.Point(440, 533);
             this.txtCityUnicode.MaxLength = 20;
             this.txtCityUnicode.Name = "txtCityUnicode";
@@ -704,14 +705,7 @@
             // txtCommName
             // 
             this.txtCommName.BackColor = System.Drawing.Color.White;
-            //this.txtCommName.EnableAutoValidation = false;
-            //this.txtCommName.EnableEnterKeyValidate = false;
-            //this.txtCommName.EnableEscapeKeyUndo = true;
-            //this.txtCommName.EnableLastValidValue = true;
-            //this.txtCommName.ErrorProvider = null;
-            //this.txtCommName.ErrorProviderMessage = "Invalid value";
             this.txtCommName.Font = new System.Drawing.Font("宋体", 11F);
-            //this.txtCommName.ForceFormatText = true;
             this.txtCommName.Location = new System.Drawing.Point(144, 127);
             this.txtCommName.MaxLength = 40;
             this.txtCommName.Name = "txtCommName";
@@ -831,14 +825,7 @@
             // txtProduceing
             // 
             this.txtProduceing.BackColor = System.Drawing.Color.White;
-            //this.txtProduceing.EnableAutoValidation = false;
-            //this.txtProduceing.EnableEnterKeyValidate = false;
-            //this.txtProduceing.EnableEscapeKeyUndo = true;
-            //this.txtProduceing.EnableLastValidValue = true;
-            //this.txtProduceing.ErrorProvider = null;
-            //this.txtProduceing.ErrorProviderMessage = "Invalid value";
             this.txtProduceing.Font = new System.Drawing.Font("宋体", 11F);
-            //this.txtProduceing.ForceFormatText = true;
             this.txtProduceing.Location = new System.Drawing.Point(144, 239);
             this.txtProduceing.MaxLength = 25;
             this.txtProduceing.Name = "txtProduceing";
@@ -906,14 +893,7 @@
             // txtEnglishName
             // 
             this.txtEnglishName.BackColor = System.Drawing.Color.White;
-            //this.txtEnglishName.EnableAutoValidation = false;
-            //this.txtEnglishName.EnableEnterKeyValidate = false;
-            //this.txtEnglishName.EnableEscapeKeyUndo = true;
-            //this.txtEnglishName.EnableLastValidValue = true;
-            //this.txtEnglishName.ErrorProvider = null;
-            //this.txtEnglishName.ErrorProviderMessage = "Invalid value";
             this.txtEnglishName.Font = new System.Drawing.Font("宋体", 11F);
-            //this.txtEnglishName.ForceFormatText = true;
             this.txtEnglishName.Location = new System.Drawing.Point(144, 99);
             this.txtEnglishName.MaxLength = 40;
             this.txtEnglishName.Name = "txtEnglishName";
@@ -936,18 +916,10 @@
             // 
             this.m_txtTradePrice.BackColor = System.Drawing.Color.White;
             this.m_txtTradePrice.CausesValidation = false;
-            //this.m_txtTradePrice.EnableAutoValidation = false;
-            //this.m_txtTradePrice.EnableEnterKeyValidate = false;
-            //this.m_txtTradePrice.EnableEscapeKeyUndo = true;
-            //this.m_txtTradePrice.EnableLastValidValue = true;
-            //this.m_txtTradePrice.ErrorProvider = null;
-            //this.m_txtTradePrice.ErrorProviderMessage = "Invalid value";
             this.m_txtTradePrice.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtTradePrice.ForceFormatText = true;
             this.m_txtTradePrice.Location = new System.Drawing.Point(144, 384);
             this.m_txtTradePrice.MaxLength = 10;
             this.m_txtTradePrice.Name = "m_txtTradePrice";
-            //this.m_txtTradePrice.NumericCharStyle = SourceLibrary.Windows.Forms.NumericCharStyle.DecimalSeparator;
             this.m_txtTradePrice.ReadOnly = true;
             this.m_txtTradePrice.Size = new System.Drawing.Size(152, 24);
             this.m_txtTradePrice.TabIndex = 13;
@@ -1038,18 +1010,10 @@
             // 
             this.m_txtPacQ.BackColor = System.Drawing.Color.White;
             this.m_txtPacQ.CausesValidation = false;
-            //this.m_txtPacQ.EnableAutoValidation = false;
-            //this.m_txtPacQ.EnableEnterKeyValidate = false;
-            //this.m_txtPacQ.EnableEscapeKeyUndo = true;
-            //this.m_txtPacQ.EnableLastValidValue = true;
-            //this.m_txtPacQ.ErrorProvider = null;
-            //this.m_txtPacQ.ErrorProviderMessage = "Invalid value";
             this.m_txtPacQ.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtPacQ.ForceFormatText = true;
             this.m_txtPacQ.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.m_txtPacQ.Location = new System.Drawing.Point(440, 120);
             this.m_txtPacQ.Name = "m_txtPacQ";
-            //this.m_txtPacQ.NumericCharStyle = ((SourceLibrary.Windows.Forms.NumericCharStyle)((SourceLibrary.Windows.Forms.NumericCharStyle.DecimalSeparator | SourceLibrary.Windows.Forms.NumericCharStyle.NegativeSymbol)));
             this.m_txtPacQ.ReadOnly = true;
             this.m_txtPacQ.Size = new System.Drawing.Size(152, 24);
             this.m_txtPacQ.TabIndex = 21;
@@ -1114,14 +1078,7 @@
             // m_txtchargeNO
             // 
             this.m_txtchargeNO.BackColor = System.Drawing.Color.White;
-            //this.m_txtchargeNO.EnableAutoValidation = false;
-            //this.m_txtchargeNO.EnableEnterKeyValidate = false;
-            //this.m_txtchargeNO.EnableEscapeKeyUndo = true;
-            //this.m_txtchargeNO.EnableLastValidValue = true;
-            //this.m_txtchargeNO.ErrorProvider = null;
-            //this.m_txtchargeNO.ErrorProviderMessage = "Invalid value";
             this.m_txtchargeNO.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtchargeNO.ForceFormatText = true;
             this.m_txtchargeNO.Location = new System.Drawing.Point(144, 15);
             this.m_txtchargeNO.MaxLength = 20;
             this.m_txtchargeNO.Name = "m_txtchargeNO";
@@ -1373,18 +1330,10 @@
             // 
             this.m_txtPrice.BackColor = System.Drawing.Color.White;
             this.m_txtPrice.CausesValidation = false;
-            //this.m_txtPrice.EnableAutoValidation = false;
-            //this.m_txtPrice.EnableEnterKeyValidate = false;
-            //this.m_txtPrice.EnableEscapeKeyUndo = true;
-            //this.m_txtPrice.EnableLastValidValue = true;
-            //this.m_txtPrice.ErrorProvider = null;
-            //this.m_txtPrice.ErrorProviderMessage = "Invalid value";
             this.m_txtPrice.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtPrice.ForceFormatText = true;
             this.m_txtPrice.Location = new System.Drawing.Point(144, 354);
             this.m_txtPrice.MaxLength = 10;
             this.m_txtPrice.Name = "m_txtPrice";
-            //this.m_txtPrice.NumericCharStyle = SourceLibrary.Windows.Forms.NumericCharStyle.DecimalSeparator;
             this.m_txtPrice.ReadOnly = true;
             this.m_txtPrice.Size = new System.Drawing.Size(152, 24);
             this.m_txtPrice.TabIndex = 12;
@@ -1405,14 +1354,7 @@
             // m_txtSpec
             // 
             this.m_txtSpec.BackColor = System.Drawing.Color.White;
-            //this.m_txtSpec.EnableAutoValidation = false;
-            //this.m_txtSpec.EnableEnterKeyValidate = false;
-            //this.m_txtSpec.EnableEscapeKeyUndo = true;
-            //this.m_txtSpec.EnableLastValidValue = true;
-            //this.m_txtSpec.ErrorProvider = null;
-            //this.m_txtSpec.ErrorProviderMessage = "Invalid value";
             this.m_txtSpec.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtSpec.ForceFormatText = true;
             this.m_txtSpec.Location = new System.Drawing.Point(144, 211);
             this.m_txtSpec.MaxLength = 50;
             this.m_txtSpec.Name = "m_txtSpec";
@@ -1434,14 +1376,7 @@
             // m_txtWB
             // 
             this.m_txtWB.BackColor = System.Drawing.Color.White;
-            //this.m_txtWB.EnableAutoValidation = false;
-            //this.m_txtWB.EnableEnterKeyValidate = false;
-            //this.m_txtWB.EnableEscapeKeyUndo = true;
-            //this.m_txtWB.EnableLastValidValue = true;
-            //this.m_txtWB.ErrorProvider = null;
-            //this.m_txtWB.ErrorProviderMessage = "Invalid value";
             this.m_txtWB.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtWB.ForceFormatText = true;
             this.m_txtWB.Location = new System.Drawing.Point(144, 183);
             this.m_txtWB.MaxLength = 10;
             this.m_txtWB.Name = "m_txtWB";
@@ -1464,14 +1399,7 @@
             // 
             this.m_txtPY.BackColor = System.Drawing.Color.White;
             this.m_txtPY.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            //this.m_txtPY.EnableAutoValidation = false;
-            //this.m_txtPY.EnableEnterKeyValidate = false;
-            //this.m_txtPY.EnableEscapeKeyUndo = true;
-            //this.m_txtPY.EnableLastValidValue = true;
-            //this.m_txtPY.ErrorProvider = null;
-            //this.m_txtPY.ErrorProviderMessage = "Invalid value";
             this.m_txtPY.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtPY.ForceFormatText = true;
             this.m_txtPY.Location = new System.Drawing.Point(144, 155);
             this.m_txtPY.MaxLength = 10;
             this.m_txtPY.Name = "m_txtPY";
@@ -1493,14 +1421,7 @@
             // m_txtName
             // 
             this.m_txtName.BackColor = System.Drawing.Color.White;
-            //this.m_txtName.EnableAutoValidation = false;
-            //this.m_txtName.EnableEnterKeyValidate = false;
-            //this.m_txtName.EnableEscapeKeyUndo = true;
-            //this.m_txtName.EnableLastValidValue = true;
-            //this.m_txtName.ErrorProvider = null;
-            //this.m_txtName.ErrorProviderMessage = "Invalid value";
             this.m_txtName.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtName.ForceFormatText = true;
             this.m_txtName.Location = new System.Drawing.Point(144, 71);
             this.m_txtName.MaxLength = 24;
             this.m_txtName.Name = "m_txtName";
@@ -1511,14 +1432,7 @@
             // m_txtNo
             // 
             this.m_txtNo.BackColor = System.Drawing.Color.White;
-            //this.m_txtNo.EnableAutoValidation = false;
-            //this.m_txtNo.EnableEnterKeyValidate = false;
-            //this.m_txtNo.EnableEscapeKeyUndo = true;
-            //this.m_txtNo.EnableLastValidValue = true;
-            //this.m_txtNo.ErrorProvider = null;
-            //this.m_txtNo.ErrorProviderMessage = "Invalid value";
             this.m_txtNo.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtNo.ForceFormatText = true;
             this.m_txtNo.Location = new System.Drawing.Point(144, 43);
             this.m_txtNo.MaxLength = 20;
             this.m_txtNo.Name = "m_txtNo";
@@ -1552,23 +1466,63 @@
             // 
             this.m_txtDosage.BackColor = System.Drawing.Color.White;
             this.m_txtDosage.CausesValidation = false;
-            //this.m_txtDosage.EnableAutoValidation = true;
-            //this.m_txtDosage.EnableEnterKeyValidate = true;
-            //this.m_txtDosage.EnableEscapeKeyUndo = true;
-            //this.m_txtDosage.EnableLastValidValue = true;
-            //this.m_txtDosage.ErrorProvider = null;
-            //this.m_txtDosage.ErrorProviderMessage = "Invalid value";
             this.m_txtDosage.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtDosage.ForceFormatText = true;
             this.m_txtDosage.Location = new System.Drawing.Point(144, 297);
             this.m_txtDosage.MaxLength = 10;
             this.m_txtDosage.Name = "m_txtDosage";
-            //this.m_txtDosage.NumericCharStyle = SourceLibrary.Windows.Forms.NumericCharStyle.DecimalSeparator;
             this.m_txtDosage.ReadOnly = true;
             this.m_txtDosage.Size = new System.Drawing.Size(152, 24);
             this.m_txtDosage.TabIndex = 10;
             this.m_txtDosage.Text = "0";
             this.m_txtDosage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // cboXb
+            // 
+            this.cboXb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboXb.Font = new System.Drawing.Font("宋体", 11F);
+            this.cboXb.Items.AddRange(new object[] {
+            " ",
+            "男性",
+            "女性"});
+            this.cboXb.Location = new System.Drawing.Point(205, 624);
+            this.cboXb.Name = "cboXb";
+            this.cboXb.Size = new System.Drawing.Size(91, 23);
+            this.cboXb.TabIndex = 370;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.label42.Location = new System.Drawing.Point(161, 627);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(42, 14);
+            this.label42.TabIndex = 372;
+            this.label42.Text = "性别:";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cboSfdw
+            // 
+            this.cboSfdw.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSfdw.Font = new System.Drawing.Font("宋体", 11F);
+            this.cboSfdw.Items.AddRange(new object[] {
+            " ",
+            "小时",
+            "天"});
+            this.cboSfdw.Location = new System.Drawing.Point(100, 624);
+            this.cboSfdw.Name = "cboSfdw";
+            this.cboSfdw.Size = new System.Drawing.Size(56, 23);
+            this.cboSfdw.TabIndex = 369;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.label44.Location = new System.Drawing.Point(24, 627);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(70, 14);
+            this.label44.TabIndex = 371;
+            this.label44.Text = "收费单位:";
+            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // frmChargeItemQuery
             // 
@@ -1701,5 +1655,9 @@
         private System.Windows.Forms.Label label46;
         internal System.Windows.Forms.ComboBox cboIsChildPrice;
         private System.Windows.Forms.Label label47;
+        internal System.Windows.Forms.ComboBox cboXb;
+        private System.Windows.Forms.Label label42;
+        internal System.Windows.Forms.ComboBox cboSfdw;
+        private System.Windows.Forms.Label label44;
     }
 }

@@ -1306,6 +1306,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     dwRep.Modify("t_sum_tk.text = ''");
                     dwRep.Modify("t_sum_qt2.text = ''");
                     dwRep.Modify("t_sum_yprl.text = ''");
+                    dwRep.Modify("t_sum_ajhj.text = ''");
 
                     //½áÕÊÈÕÆÚ
                     dwRep.Modify("t_jzrq.text = '" + BeginDate + "¡«" + EndDate + "'");
@@ -1502,9 +1503,9 @@ namespace com.digitalwave.iCare.gui.HIS
                                 }
                                 else if (drv["paytype"].ToString() == "#999")
                                 {
-                                    ajhj = clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                    sum_ajhj += ajhj;
-                                    dwRep.SetItemString(row, "ajhj", "£¤" + ajhj.ToString("###,##0.00"));
+                                    //ajhj = clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //sum_ajhj += ajhj;
+                                    //dwRep.SetItemString(row, "ajhj", "£¤" + ajhj.ToString("###,##0.00"));
                                 }
                                 else
                                 {
@@ -1611,10 +1612,10 @@ namespace com.digitalwave.iCare.gui.HIS
                         {
                             dwRep.Modify("t_sum_qt2.text = '£¤" + sum_qt2.ToString("###,##0.00") + "'");
                         }
-                        if (sum_ajhj != 0)
-                        {
-                            dwRep.Modify("t_sum_ajhj.text='£¤" + sum_ajhj.ToString("###,##0.00") + "'");
-                        }
+                        //if (sum_ajhj != 0)
+                        //{
+                        //    dwRep.Modify("t_sum_ajhj.text='£¤" + sum_ajhj.ToString("###,##0.00") + "'");
+                        //}
                         if (sum_rlje != 0)
                         {
                             dwRep.Modify("t_sum_yprl.text='£¤" + sum_rlje.ToString("###,##0.00") + "'");

@@ -30,6 +30,10 @@ namespace com.digitalwave.iCare.gui.LIS
         private string m_strPatientName = "姓名:";
         private string m_strSex = "性别:";
         private string m_strAge = "年龄:";
+
+        private string m_cardType = "证件类型";
+        private string m_cardNo = "证件号码";
+
         private string m_strInPatientNo = "住院号:";
         private string m_strDepartment = "科室:";
         private string m_strBedNo = "床号:";
@@ -249,7 +253,6 @@ namespace com.digitalwave.iCare.gui.LIS
             //姓名
             m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntHeadNotBold, m_strPatientName,
                 m_dtbSample.Rows[0]["patient_name_vchr"].ToString().Trim(), fltColumn1, m_fltY);
-
 
             //性别
             m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallNotBold,

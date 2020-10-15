@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.IO;
 using weCare.Core.Utils;
 using System.Drawing;
+using System.Linq;
 
 namespace com.digitalwave.iCare.gui.HIS.Reports
 {
@@ -29,6 +30,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
         internal bool IsEnglish = false;
         private clsDcl_SampleAcceptable m_objManage;
         Dictionary<string, string> dicGroup;
+        List<string> lstLimitApp = new List<string>();
 
         #region Entity
         /// <summary>
@@ -84,6 +86,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
         public void m_mthInti()
         {
             DataTable dtbResult;
+            DataTable dtbLimit;
             dicGroup = new Dictionary<string, string>();
             m_objViewer.tabContorl.Visible = false;
             m_objViewer.dgvdata.Visible = true;
@@ -104,6 +107,16 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
 
                 m_objViewer.cbxGroup.Items.Add(dtbResult.Rows[i]["check_category_desc_vchr"].ToString());
                 dicGroup.Add(dtbResult.Rows[i]["check_category_id_chr"].ToString(), dtbResult.Rows[i]["check_category_desc_vchr"].ToString());
+            }
+
+            long ret = (new weCare.Proxy.ProxyReport()).Service.GetAllLimitTime(out dtbLimit);
+            if(dtbLimit != null && dtbLimit.Rows.Count > 0)
+            {
+                foreach(DataRow dr in dtbLimit.Rows)
+                {
+                    if(lstLimitApp.IndexOf(dr["APPLYUNITID"].ToString()) < 0)
+                        lstLimitApp.Add(dr["APPLYUNITID"].ToString());
+                }
             }
         }
         #endregion
@@ -187,7 +200,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                         {
                             DataRow[] drr = dtLimit.Select("applyunitid = '" + applyUnitId + "'");
                             if (drr != null && drr.Length > 0)
-                                applyUnitIdStr += "'" + drr[0]["applyunitid"].ToString() + "',";
+                                applyUnitIdStr += "'" + drr[0]["applyunitid"].ToString() + "'," ;
                         }
                     }
 
@@ -195,7 +208,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                         applyUnitIdStr = applyUnitIdStr.TrimEnd(',');
                 }
 
-                if (!string.IsNullOrEmpty(applyUnitIdStr))
+                if(!string.IsNullOrEmpty(applyUnitIdStr))
                     applyUnitIdStr = "(" + applyUnitIdStr.TrimEnd(',') + ")";
 
                 clsPublic.PlayAvi("findFILE.avi", "正在查询项目信息，请稍候...");
@@ -323,6 +336,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             string applyName = string.Empty;
             DataTable dtLimit = null;
             string groupId = string.Empty;
+            string barcode = m_objViewer.textEdit1.Text;
 
             try
             {
@@ -362,7 +376,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                             if (dtLimit != null && dtLimit.Rows.Count > 0)
                             {
                                 DataRow[] drr = dtLimit.Select("applyunitid = '" + applyUnitId + "'");
-                                if (drr != null && drr.Length > 0)
+                                if(drr != null && drr.Length > 0)
                                     applyUnitIdStr += "'" + drr[0]["applyunitid"].ToString() + "',";
                             }
                         }
@@ -384,7 +398,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                             if (drr != null && drr.Length > 0)
                                 applyUnitIdStr += "'" + drr[0]["applyunitid"].ToString() + "',";
                         }
-                    }
+                    }  
                 }
 
                 if (!string.IsNullOrEmpty(applyUnitIdStr))
@@ -402,6 +416,12 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                         decimal listime = Convert.ToDecimal(dr["listime"]);           // 审核-核收（时间）
                         decimal energencyLimit = 0;
 
+                        if(!string.IsNullOrEmpty(barcode))
+                        {
+                            if (dr["BARCODE"].ToString() != barcode)
+                                continue;
+                        }
+
                         if (dr["emergencylimit"] != DBNull.Value)
                             energencyLimit = Convert.ToDecimal(dr["emergencylimit"].ToString().Trim());
 
@@ -416,6 +436,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                                 {
                                     if (energencyLimit >= listime)
                                         vo.acceptFlg = "是";
+                                    vo.isemergency = "是";
                                 }
                                 else     //非急诊
                                 {
@@ -424,13 +445,13 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                                     if (isAccept)
                                         vo.acceptFlg = "是";
                                 }
-
+                                
                                 vo.HZXM = dr["HZXM"].ToString();
                                 vo.DEPTNAME = dr["DEPTNAME"].ToString();
                                 vo.BARCODE = dr["BARCODE"].ToString();
                                 vo.CARDNO = string.IsNullOrEmpty(dr["CARDNO"].ToString()) ? dr["patInNo"].ToString() : dr["CARDNO"].ToString();
-                                vo.ApplyTime = Function.Datetime(dr["applyTime"]).ToString("yyyy-MM-dd HH:mm");
-                                vo.AcceptTime = Function.Datetime(dr["accepttime"]).ToString("yyyy-MM-dd HH:mm");
+                                vo.ApplyTime =Function.Datetime(dr["applyTime"]).ToString("yyyy-MM-dd HH:mm");
+                                vo.AcceptTime = Function.Datetime(dr["accepttime"]).ToString("yyyy-MM-dd HH:mm");  
                                 vo.ConfirmTime = Function.Datetime(dr["confirmtime"]).ToString("yyyy-MM-dd HH:mm");
                                 acceptDate = Function.Datetime(vo.AcceptTime).ToString("yyyy-MM-dd");
                                 confirmDate = Function.Datetime(vo.ConfirmTime).ToString("yyyy-MM-dd");
@@ -441,6 +462,17 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                                 vo.item = dr["checkContent"].ToString();
                                 if (dr["lisTime"] != DBNull.Value)
                                     vo.lisTime = Convert.ToDecimal(dr["lisTime"]) > 0 ? Convert.ToDecimal(dr["lisTime"]) : 0;
+
+                                if (data.Any(r=>r.BARCODE == vo.BARCODE))
+                                {
+                                    if(vo.acceptFlg == "是")
+                                    {
+                                        EntitySamepleDetail voClone = data.Find(r=>r.BARCODE == vo.BARCODE);
+                                        voClone.acceptFlg = "是";
+                                    }
+
+                                    continue;
+                                }
 
                                 data.Add(vo);
                             }
@@ -680,7 +712,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
         private bool IsAccept(DataRow dr)
         {
             bool IsAccept = false;
-
+            bool IsAppoint = false;
             decimal listime = Convert.ToDecimal(dr["listime"]);           // 审核-核收（时间）
             DateTime? acceptTime = null;
             DateTime? confirmTime = null;
@@ -717,6 +749,11 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             decimal energencyLimit = 0;
             decimal timelimit5 = 0;
             decimal timelimit6 = 0;
+
+            if(lstLimitApp.IndexOf(dr["apply_unit_id_chr"].ToString()) < 0)
+            {
+                return false;
+            }
 
             if (dr["accepttime"] != DBNull.Value)
                 acceptTime = Convert.ToDateTime(dr["acceptTime"]);     //核收时间
@@ -778,200 +815,22 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
 
             string acceptDate = Function.Datetime(acceptTime).ToString("yyyy-MM-dd");
             string confirmDate = Function.Datetime(confirmTime).ToString("yyyy-MM-dd");
-            Dictionary<string, int> dicWeek = new Dictionary<string, int> { { "日", 0 }, { "一", 1 }, { "二", 2 }, { "三", 3 }, { "四", 4 }, { "五", 5 }, { "六", 6 } };
 
-            #region  指定星期出报告
+
+            #region  指定星期
             if ((!string.IsNullOrEmpty(confirmTime.ToString()) && (!string.IsNullOrEmpty(week1) || !string.IsNullOrEmpty(week2) ||
                     !string.IsNullOrEmpty(week3) || !string.IsNullOrEmpty(week4) || !string.IsNullOrEmpty(week5) || !string.IsNullOrEmpty(week6))))
             {
                 string week = calWeek(Convert.ToDateTime(confirmTime));
-                int acceptWeek = (int)Function.Datetime(acceptTime).DayOfWeek;
-                int confirmWeek = (int)Function.Datetime(acceptTime).DayOfWeek;
-                List<int> lstConfirmWeek = new List<int>();
-
-                if (!string.IsNullOrEmpty(week1))
-                    lstConfirmWeek.Add(dicWeek[week1]);
-                if (!string.IsNullOrEmpty(week2))
-                    lstConfirmWeek.Add(dicWeek[week2]);
-                if (!string.IsNullOrEmpty(week3))
-                    lstConfirmWeek.Add(dicWeek[week3]);
-                if (!string.IsNullOrEmpty(week4))
-                    lstConfirmWeek.Add(dicWeek[week4]);
-                if (!string.IsNullOrEmpty(week5))
-                    lstConfirmWeek.Add(dicWeek[week5]);
-                if (!string.IsNullOrEmpty(week6))
-                    lstConfirmWeek.Add(dicWeek[week6]);
-
-                tsAcceptTime1 = DateTime.Parse(acceptTime1).TimeOfDay;
-                tsConfirTime1 = DateTime.Parse(confirTime1).TimeOfDay;
-
-                if (lstConfirmWeek.Count == 2)
+                if (week == week1 || week == week2 || week == week3 || week == week4 || week == week5 || week == week6)
                 {
-                    if (acceptWeek < lstConfirmWeek[0])
-                    {
-                        if (confirmWeek < lstConfirmWeek[0])
-                            return true;
-                        else if (confirmWeek == lstConfirmWeek[0])
-                        {
-                            if (tsConfirTime1 >= tsConfirTime)
-                                return true;
-                        }
-
-                        return false;
-                    }
-
-                    if (acceptWeek == lstConfirmWeek[0])
-                    {
-                        if (tsAcceptTime1 <= tsAcceptTime)
-                        {
-                            if (tsConfirTime1 >= tsConfirTime)
-                                return true;
-                        }
-                        else
-                        {
-                            if (confirmWeek < lstConfirmWeek[1] && confirmWeek != 0)
-                                return true;
-                            else if (confirmWeek == lstConfirmWeek[1])
-                            {
-                                if (tsConfirTime1 >= tsConfirTime)
-                                    return true;
-                            }
-                            return false;
-                        }
-                    }
-
-                    if(acceptWeek > lstConfirmWeek[0] && acceptWeek < lstConfirmWeek[1])
-                    {
-                        if (confirmWeek < lstConfirmWeek[1])
-                            return true;
-                        else if (confirmWeek == lstConfirmWeek[1])
-                        {
-                            if (tsConfirTime1 >= tsConfirTime)
-                                return true;
-                        }
-
-                        return false;
-                    }
-
-                    if (acceptWeek >= lstConfirmWeek[1])
-                    {
-                        if (tsAcceptTime1 <= tsAcceptTime)
-                        {
-                            if (tsConfirTime1 >= tsConfirTime)
-                                return true;
-                        }
-                        else
-                        {
-                            if (confirmWeek < lstConfirmWeek[0] || confirmWeek >= lstConfirmWeek[1])
-                                return true;
-                            else if (confirmWeek == lstConfirmWeek[0])
-                            {
-                                if (tsConfirTime1 >= tsConfirTime)
-                                    return true;
-                            }
-                            return false;
-                        }
-                    }
+                    IsAccept = false;
                 }
-                if (lstConfirmWeek.Count == 3)
+                else
                 {
-                    if (acceptWeek < lstConfirmWeek[0])
+                    if (tsConfirTime <= tsConfirmEndTime)
                     {
-                        if (confirmWeek < lstConfirmWeek[0])
-                            return true;
-                        else if (confirmWeek == lstConfirmWeek[0])
-                        {
-                            if (tsConfirTime1 >= tsConfirTime)
-                                return true;
-                        }
-
-                        return false;
-                    }
-
-                    if (acceptWeek == lstConfirmWeek[0])
-                    {
-                        if (tsAcceptTime1 <= tsAcceptTime)
-                        {
-                            if (tsConfirTime1 >= tsConfirTime)
-                                return true;
-                        }
-                        else
-                        {
-                            if (confirmWeek < lstConfirmWeek[1] && confirmWeek != 0)
-                                return true;
-                            else if (confirmWeek == lstConfirmWeek[1])
-                            {
-                                if (tsConfirTime1 >= tsConfirTime)
-                                    return true;
-                            }
-                            return false;
-                        }
-                    }
-
-                    if (acceptWeek > lstConfirmWeek[0] && acceptWeek < lstConfirmWeek[1])
-                    {
-                        if (confirmWeek > lstConfirmWeek[0] && confirmWeek < lstConfirmWeek[1])
-                            return true;
-                        else if (confirmWeek == lstConfirmWeek[1])
-                        {
-                            if (tsConfirTime1 >= tsConfirTime)
-                                return true;
-                        }
-
-                        return false;
-                    }
-
-                    if (acceptWeek == lstConfirmWeek[1] )
-                    {
-                        if (tsAcceptTime1 <= tsAcceptTime)
-                        {
-                            if (tsConfirTime1 >= tsConfirTime)
-                                return true;
-                        }
-                        else
-                        {
-                            if (confirmWeek < lstConfirmWeek[2] && confirmWeek != 0)
-                                return true;
-                            else if (confirmWeek == lstConfirmWeek[2])
-                            {
-                                if (tsConfirTime1 >= tsConfirTime)
-                                    return true;
-                            }
-                            return false;
-                        }
-                    }
-
-                    if (acceptWeek > lstConfirmWeek[1]  && acceptWeek < lstConfirmWeek[2])
-                    {
-                        if (confirmWeek > lstConfirmWeek[1] && confirmWeek < lstConfirmWeek[2])
-                            return true;
-                        else if (confirmWeek == lstConfirmWeek[2])
-                        {
-                            if (tsConfirTime1 >= tsConfirTime)
-                                return true;
-                        }
-
-                        return false;
-                    }
-
-                    if (acceptWeek >= lstConfirmWeek[2])
-                    {
-                        if (tsAcceptTime1 <= tsAcceptTime)
-                        {
-                            if (tsConfirTime1 >= tsConfirTime)
-                                return true;
-                        }
-                        else
-                        {
-                            if (confirmWeek < lstConfirmWeek[0] || confirmWeek >= lstConfirmWeek[2])
-                                return true;
-                            else if (confirmWeek == lstConfirmWeek[0])
-                            {
-                                if (tsConfirTime1 >= tsConfirTime)
-                                    return true;
-                            }
-                            return false;
-                        }
+                        IsAccept = true;
                     }
                 }
             }
@@ -998,6 +857,9 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                 tsAcceptTime1 = DateTime.Parse(acceptTime1).TimeOfDay;
                 tsConfirTime1 = DateTime.Parse(confirTime1).TimeOfDay;
 
+                if (tsAcceptTime1 >= tsAcceptTime)
+                    IsAppoint = true;
+
                 if (tsAcceptTime1 >= tsAcceptTime && tsConfirTime1 >= tsConfirTime)
                 {
                     IsAccept = true;
@@ -1009,6 +871,9 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                 tsAcceptTimeBegin2 = DateTime.Parse(acceptTime2.Split('~')[0]).TimeOfDay;
                 tsAcceptTimeEnd2 = DateTime.Parse(acceptTime2.Split('~')[1]).TimeOfDay;
                 tsConfirTime2 = DateTime.Parse(confirTime2).TimeOfDay;
+
+                if (tsAcceptTime >= tsAcceptTimeBegin2 && tsAcceptTime <= tsAcceptTimeEnd2)
+                    IsAppoint = true;
 
                 if (tsAcceptTime >= tsAcceptTimeBegin2 && tsAcceptTime <= tsAcceptTimeEnd2 && tsConfirTime2 >= tsConfirTime)
                 {
@@ -1022,6 +887,9 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                 tsAcceptTimeEnd3 = DateTime.Parse(acceptTime3.Split('~')[1]).TimeOfDay;
                 tsConfirTime3 = DateTime.Parse(confirTime3).TimeOfDay;
 
+                if(tsAcceptTime >= tsAcceptTimeBegin3 && tsAcceptTime <= tsAcceptTimeEnd3)
+                    IsAppoint = true;
+
                 if (tsAcceptTime >= tsAcceptTimeBegin3 && tsAcceptTime <= tsAcceptTimeEnd3 && tsConfirTime3 >= tsConfirTime)
                 {
                     IsAccept = true;
@@ -1032,6 +900,9 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             {
                 tsAcceptTime4 = DateTime.Parse(acceptTime4).TimeOfDay;
                 tsConfirTime4 = DateTime.Parse(confirTime4).TimeOfDay;
+
+                if (tsAcceptTime4 <= tsAcceptTime)
+                    IsAppoint = true;
 
                 if (tsAcceptTime4 <= tsAcceptTime && tsConfirTime4 >= tsConfirTime)
                 {
@@ -1046,6 +917,8 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             {
                 tsAcceptTimeEnd5 = DateTime.Parse(acceptTime5.Split('~')[1]).TimeOfDay;
                 tsAcceptTimeBegin5 = DateTime.Parse(acceptTime5.Split('~')[0]).TimeOfDay;
+                if (tsAcceptTime >= tsAcceptTimeBegin5 && tsAcceptTime <= tsAcceptTimeEnd5)
+                    IsAppoint = true;
 
                 if (tsAcceptTime >= tsAcceptTimeBegin5 && tsAcceptTime <= tsAcceptTimeEnd5 && timelimit5 > 0)
                 {
@@ -1058,6 +931,8 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             {
                 tsAcceptTimeEnd6 = DateTime.Parse(acceptTime6.Split('~')[1]).TimeOfDay;
                 tsAcceptTimeBegin6 = DateTime.Parse(acceptTime6.Split('~')[0]).TimeOfDay;
+                if (tsAcceptTime >= tsAcceptTimeBegin6 && tsAcceptTime <= tsAcceptTimeEnd6)
+                    IsAppoint = true;
 
                 if (tsAcceptTime >= tsAcceptTimeBegin6 && tsAcceptTime <= tsAcceptTimeEnd6 && timelimit6 > 0)
                 {
@@ -1074,6 +949,16 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                 IsAccept = true;
             }
             #endregion
+
+            //都不在指定时间，当天提前出报告
+            if(!IsAppoint)
+            {
+                if (acceptDate == confirmDate && listime > 0)
+                {
+                    IsAccept = true;
+                    return IsAccept;
+                }
+            }
 
             return IsAccept;
         }

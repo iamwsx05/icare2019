@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.IO;
 using System.ComponentModel;
+using System.Data;
 
 namespace MAGLUMI_4000_plus
 {
@@ -202,7 +203,7 @@ namespace MAGLUMI_4000_plus
             string strTemp = ReceiveBuf.ToString();
             if (strTemp.Length < 0) return;
 
-            if (strTemp.Contains(MAGLUMI_4000_plus_ControlCode.ReqCode))
+            if (LastReceive.Contains(MAGLUMI_4000_plus_ControlCode.ReqCode) || LastReceive.Contains(MAGLUMI_4000_plus_ControlCode.EndCode))
             {
                 axMSComm.Output = MAGLUMI_4000_plus_ControlCode.AckCode;
             }
@@ -215,38 +216,44 @@ namespace MAGLUMI_4000_plus
                 ReceiveBuf.Remove(0, idxEnd + 1);
                 return;
             }
+            // 双向应答
+            int idxQ = strTemp.IndexOf("Q|1|^");
+            if(strTemp.Contains("Q|1|^") && strTemp.Contains("ALL"))
+            {
+                string barCode = strTemp.Substring(idxQ + 5, 7);
+                List<string> lstItem = new List<string>();
+                string Sql = @"select itemid   as device_check_item_id_chr,
+                               itemname as device_check_item_name_vchr
+                          from t_opr_lis_barcode2item
+                         where barcode = '" + barCode + "'order by itemid" ;
+                DataTable dt = null;
+                (new weCare.Proxy.ProxyBase()).Service.GetDataTable(Sql, out dt);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach(DataRow dr in dt.Rows)
+                        lstItem.Add(dr["device_check_item_id_chr"].ToString());
+                }
+                string sbRes = string.Empty;
+                string start = strTemp.Substring(idxStart, idxQ - idxStart).Trim();
+                sbRes += start + Environment.NewLine;
+                sbRes += "P|1" + Environment.NewLine;
+                if (lstItem != null)
+                {
+                    foreach (var str in lstItem)
+                    {
+                        string strItem = "O|1|" + barCode + "||^^^" + str + "|R";
+                        sbRes += strItem + Environment.NewLine;
+                    }
+                }
+                sbRes += "L|1|N" + Environment.NewLine;
+                sbRes += "";
+                axMSComm.Output = sbRes;
+                ReceiveBuf.Remove(0, idxEnd + 1);
+                return;
+            }
 
             if (this.backgroundWorker.IsBusy == false)
                 this.backgroundWorker.RunWorkerAsync();
-
-            //if (isDoing)
-            //{
-            //    return;
-            //}
-            //int idxStart2 = idxStart;
-            //int idxEnd2 = idxEnd;
-            //string currData = ReceiveBuf.ToString();
-            //List<string> lstResultData = new List<string>();
-            //do
-            //{
-            //    isDoing = true;
-            //    if (idxEnd2 - idxStart2 - 10 > 0)
-            //    {
-            //        string data = currData.Substring(idxStart2 + 1, idxEnd2 - idxStart2 - 1);
-            //        if (lstResultData.IndexOf(data) < 0) lstResultData.Add(data);
-            //    }
-            //    ReceiveBuf.Remove(0, idxEnd2 + 1);
-            //    currData = currData.Substring(idxEnd2 + 1);
-            //    idxStart2 = currData.IndexOf(MAGLUMI_4000_plus_ControlCode.StartCode);
-            //    idxEnd2 = currData.IndexOf(MAGLUMI_4000_plus_ControlCode.EndCode);
-            //} while (idxStart2 > 0 && idxEnd2 > 0);
-            //ReceiveBuf.Remove(0, idxEnd2 + 1);
-            //isDoing = false;
-
-            //if (lstResultData != null && lstResultData.Count > 0)
-            //{
-            //    AddResult(lstResultData);
-            //}
         }
         #endregion
 

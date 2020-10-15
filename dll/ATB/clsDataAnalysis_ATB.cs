@@ -6,7 +6,8 @@ using com.digitalwave.iCare.middletier.LIS;
 using weCare.Core.Entity;
 using com.digitalwave.iCare.LIS;
 using LIS.SpecialDataInteface;
-using com.digitalwave.Utility;
+using weCare.Core.Utils;
+//using com.digitalwave.Utility;
 
 namespace com.digitalwave.iCare.gui.LIS
 {
@@ -38,24 +39,26 @@ namespace com.digitalwave.iCare.gui.LIS
 ";
          * */
         string strAutoSQL = @"select a.reqno,
-       a.exeno,
-       a.germid,
-       a.antiid,
-       a.test,
-       a.antiname,
-       a.micexplain,
-       a.antidate,
-       a.resshow,
-       c.samno,
-       b.micnum,
-       b.micname,
-       b.Express
-  from ((resultmic as a
-left join resultexe as b on (a.reqno = b.reqno
-                       and b.exeno='1'))
-left join antiresultbill as c on(a.reqno=c.reqno))
- where a.exeno='1' and a.istran <>1
-";
+               a.exeno,
+               a.germid,
+               a.antiid,
+               a.test,
+               a.antiname,
+               a.micexplain,
+               a.antidate,
+               a.resshow,
+               c.samno,
+               b.micnum,
+               b.micname,
+               b.Express
+          from ((resultmic as a
+        left join resultexe as b on (a.reqno = b.reqno
+                               and b.exeno='1'))
+        left join antiresultbill as c on(a.reqno=c.reqno))
+         where a.exeno='1' and a.istran <>1
+        ";
+
+
         string strAutoUpdateSQL = @"update micresult as a
    set a.istran = 1
  where a.reqno = ?
@@ -229,10 +232,10 @@ left join antiresultbill as c on(a.reqno=c.reqno))
             if (m_lstResult.Count > 0)
             {
                 int j = 0;
-                for (int intTemp = 0; intTemp < m_lstResult.Count; intTemp += 10)
+                for (int intTemp = 0; intTemp < m_lstResult.Count; intTemp += 30)
                 {
                     List<clsLIS_Device_Test_ResultVO> m_lstTempResult = new List<clsLIS_Device_Test_ResultVO>();
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 30; i++)
                     {
                         clsLIS_Device_Test_ResultVO tempLis_result=new clsLIS_Device_Test_ResultVO();
                         tempLis_result = m_lstResult[j];
@@ -257,11 +260,7 @@ left join antiresultbill as c on(a.reqno=c.reqno))
    and a.antiid = '" + m_lstUpdate[i].m_strAntiid + @"'
                          * */
 
-                        strAutoUpdateSQL = @"update resultmic as a
-set a.istran = 1
-where a.reqno = " + m_lstUpdate[i].m_lngReqno + @"
-
-and a.istran = 0";
+                        strAutoUpdateSQL = @"update resultmic as a set a.istran = 1 where a.reqno = " + m_lstUpdate[i].m_lngReqno + @" and a.istran = 0";
                         Log.Output("strAutoUpdateSQL");
                         lngRes = m_objService.lngExecuteSQL(strAutoUpdateSQL);
                     }

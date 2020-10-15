@@ -405,6 +405,12 @@ namespace com.digitalwave.iCare.gui.HIS
                                     case "72":
                                         this.m_objViewer.dgvZJZYXX["JZLB", Index].Value = "生育剖腹产待遇";
                                         break;
+                                    case "78":
+                                        this.m_objViewer.dgvZJZYXX["JZLB", Index].Value = "计划生育住院";
+                                        break;
+                                    case "79":
+                                        this.m_objViewer.dgvZJZYXX["JZLB", Index].Value = "计划生育门诊";
+                                        break;
                                     case "81":
                                         this.m_objViewer.dgvZJZYXX["JZLB", Index].Value = "公务员体检";
                                         break;

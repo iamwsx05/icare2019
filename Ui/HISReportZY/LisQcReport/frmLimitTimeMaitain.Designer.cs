@@ -3498,7 +3498,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         internal System.Windows.Forms.ComboBox cbxGroup;
-        private System.Windows.Forms.GroupBox groupBox2;
+        internal System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
@@ -3563,7 +3563,7 @@
         private System.Windows.Forms.Label label34;
         internal System.Windows.Forms.ComboBox cboConfirH_1;
         private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.GroupBox groupBox3;
+        internal System.Windows.Forms.GroupBox groupBox3;
         internal System.Windows.Forms.ComboBox cboAceepM_6;
         internal System.Windows.Forms.ComboBox cboAceepH_6;
         private System.Windows.Forms.Label label38;

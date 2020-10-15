@@ -2775,7 +2775,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                     on d.appl_empid_chr = f.empid_chr
                                     left join t_bse_employee g
                                     on a.operator_id_chr = g.empid_chr
-                                 where a.check_item_id_chr in ('000194','000195', '000196', '001448', '000199','001069')
+                                 where a.check_item_id_chr in ('000194','000195', '000196', '001448', '000199','001069','002133')
                                    and c.modify_dat between
                                        to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
                                        to_date(?, 'yyyy-mm-dd hh24:mi:ss')
@@ -2856,7 +2856,7 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                         on c.application_id_chr = t.application_id_chr
                                       left join t_aid_lis_apply_unit t1
                                         on t.apply_unit_id_chr = t1.apply_unit_id_chr
-                                 where  a.check_item_id_chr in ('000194','000195','000196','001448','000199','001069')
+                                 where  a.check_item_id_chr in ('000194','000195','000196','001448','000199','001069','002133')
                                    and c.modify_dat between
                                        to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
                                        to_date(?, 'yyyy-mm-dd hh24:mi:ss')
@@ -3395,13 +3395,14 @@ namespace com.digitalwave.iCare.middletier.HIS.Report
                                            t_bse_lis_check_category     t2,
                                            t_aid_lis_sampletype         t3
                                      where t1.check_category_id_chr = t2.check_category_id_chr(+)
-                                       and t1.sampletype_vchr = t3.sample_type_id_chr
-                                     order by t1.check_item_id_chr ";
+                                       and t1.sampletype_vchr = t3.sample_type_id_chr ";
 
                 if (!string.IsNullOrEmpty(groupId))
                 {
-                    strSQL += "where t1.check_category_id_chr = '" + groupId + "'";
+                    strSQL += " and t1.check_category_id_chr = '" + groupId + "'";
                 }
+
+                strSQL += " order by t1.check_item_id_chr";
 
                 lngRes = objHRPServ.lngGetDataTableWithoutParameters(strSQL, ref dtbResult);
             }
@@ -4479,7 +4480,7 @@ from t_atb_germ t where instr(t.cname,?)> 0 order by germid ";
 
                 if (!string.IsNullOrEmpty(applicationStr))
                 {
-                    strSQL += " and d.application_id_chr in " + applicationStr;
+                    strSQL += " and a.application_id_chr in " + applicationStr;
                 }
 
                 if (!string.IsNullOrEmpty(Sex))
@@ -4726,7 +4727,7 @@ from t_atb_germ t where instr(t.cname,?)> 0 order by germid ";
                                                           left join t_opr_lis_check_result r1
                                                             on d.sample_id_chr = r1.sample_id_chr
                                                          where d.status_int > 5
-                                                           and d.accept_dat between
+                                                           and d.confirm_dat between
                                                                to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
                                                                to_date(?, 'yyyy-mm-dd hh24:mi:ss')
                                                            and r1.result_vchr <> '\'

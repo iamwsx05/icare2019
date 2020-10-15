@@ -4330,6 +4330,7 @@ namespace com.digitalwave.iCare.gui.HIS
             this.YBIsShowSelfItem = (objSvc.m_mthIsCanDo("0066") == 1);
             this.YBPayTypeArr = this.m_ArrGettoken(objDoct.m_strGetSysparm("0031"), ";");
             this.m_objViewer.BirthInsuranceCode = objDoct.m_strGetSysparm("0084");
+            this.m_objViewer.Covi19Code = objDoct.m_strGetSysparm("0085");
             objDoct = null;
 
             #region 获取连接医保前置数据库参数

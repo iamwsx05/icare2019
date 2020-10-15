@@ -280,7 +280,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.cmbHopital);
             this.panel1.Controls.Add(this.label7);
@@ -1519,6 +1519,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 frmDgcsyb.strPatientName = this.objfrm.m_PatientBasicInfo.txtPatient.Text;
                 frmDgcsyb.strIDCardNo = this.objfrm.txtIDcard.Text;
                 frmDgcsyb.IsBirthInsurance = (this.objfrm.m_PatientBasicInfo.PayTypeID == this.objfrm.BirthInsuranceCode ? true : false);
+                frmDgcsyb.IsCovi19 = (this.objfrm.m_PatientBasicInfo.PayTypeID == this.objfrm.Covi19Code ? true : false);
                 this.objfrm.RowNum = -1;
                 this.objfrm.YBnewFlag = -1;
                 #region 处方明细赋值clsDGMzxmcs_VO

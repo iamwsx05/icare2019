@@ -200,6 +200,12 @@ namespace com.digitalwave.iCare.gui.HIS
                         case "72":
                             strJZLB = "生育剖腹产待遇";
                             break;
+                        case "78":
+                            strJZLB = "计划生育住院";
+                            break;
+                        case "79":
+                            strJZLB = "计划生育门诊";
+                            break;
                         case "81":
                             strJZLB = "公务员体检";
                             break;

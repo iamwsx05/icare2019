@@ -550,51 +550,94 @@ namespace com.digitalwave.iCare.gui.HIS
 
         public void clear()
         {
-            m_objViewer.cboWeek_1.Text = "";
-            m_objViewer.cboWeek_2.Text = "";
-            m_objViewer.cboWeek_3.Text = "";
-            m_objViewer.cboWeek_4.Text = "";
-            m_objViewer.cboWeek_5.Text = "";
-            m_objViewer.cboWeek_6.Text = "";
+            
+            m_objViewer.cboWeek_1.SelectedIndex = 0;
+            m_objViewer.cboWeek_2.SelectedIndex = 0;
+            m_objViewer.cboWeek_3.SelectedIndex = 0;
+            m_objViewer.cboWeek_4.SelectedIndex = 0;
+            m_objViewer.cboWeek_5.SelectedIndex = 0;
+            m_objViewer.cboWeek_6.SelectedIndex = 0;
             m_objViewer.txtNormal.Text = "";
             m_objViewer.txtEmergency.Text = "";
-            m_objViewer.cboAceepH_1.Text = "";
-            m_objViewer.cboAceepM_1.Text = "";
-            m_objViewer.cboAceepH_2.Text = "";
-            m_objViewer.cboAceepM_2.Text = "";
-            m_objViewer.cboAceepHPre_2.Text = "";
-            m_objViewer.cboAceepMPre_2.Text = "";
-            m_objViewer.cboAceepH_3.Text = "";
-            m_objViewer.cboAceepM_3.Text = "";
-            m_objViewer.cboAceepHPre_3.Text = "";
-            m_objViewer.cboAceepMPre_3.Text = "";
-            m_objViewer.cboAceepH_4.Text = "";
-            m_objViewer.cboAceepM_4.Text = "";
-            m_objViewer.cboConfirH_1.Text = "";
-            m_objViewer.cboConfirM_1.Text = "";
-            m_objViewer.cboConfirH_2.Text = "";
-            m_objViewer.cboConfirM_2.Text = "";
-            m_objViewer.cboConfirH_3.Text = "";
-            m_objViewer.cboConfirM_3.Text = "";
-            m_objViewer.cboConfirH_4.Text = "";
-            m_objViewer.cboConfirM_4.Text = "";
-            m_objViewer.cboConfirEndH.Text = "";
-            m_objViewer.cboConfirEndM.Text = "";
+            m_objViewer.cboAceepH_1.SelectedIndex = 0;
+            m_objViewer.cboAceepM_1.SelectedIndex = 0;
+            m_objViewer.cboAceepH_2.SelectedIndex = 0;
+            m_objViewer.cboAceepM_2.SelectedIndex = 0;
+            m_objViewer.cboAceepHPre_2.SelectedIndex = 0;
+            m_objViewer.cboAceepMPre_2.SelectedIndex = 0;
+            m_objViewer.cboAceepH_3.SelectedIndex = 0;
+            m_objViewer.cboAceepM_3.SelectedIndex = 0;
+            m_objViewer.cboAceepHPre_3.SelectedIndex = 0;
+            m_objViewer.cboAceepMPre_3.SelectedIndex = 0;
+            m_objViewer.cboAceepH_4.SelectedIndex = 0;
+            m_objViewer.cboAceepM_4.SelectedIndex = 0;
+            m_objViewer.cboConfirH_1.SelectedIndex = 0;
+            m_objViewer.cboConfirM_1.SelectedIndex = 0;
+            m_objViewer.cboConfirH_2.SelectedIndex = 0;
+            m_objViewer.cboConfirM_2.SelectedIndex = 0;
+            m_objViewer.cboConfirH_3.SelectedIndex = 0;
+            m_objViewer.cboConfirM_3.SelectedIndex = 0;
+            m_objViewer.cboConfirH_4.SelectedIndex = 0;
+            m_objViewer.cboConfirM_4.SelectedIndex = 0;
+            m_objViewer.cboConfirEndH.SelectedIndex = 0;
+            m_objViewer.cboConfirEndM.SelectedIndex = 0;
 
-            m_objViewer.cboAceepHPre_5.Text = "";
-            m_objViewer.cboAceepMPre_5.Text = "";
-            m_objViewer.cboAceepH_5.Text = "";
-            m_objViewer.cboAceepM_5.Text = "";
-            m_objViewer.cboAceepHPre_6.Text = "";
-            m_objViewer.cboAceepMPre_6.Text = "";
-            m_objViewer.cboAceepH_6.Text = "";
-            m_objViewer.cboAceepM_6.Text = "";
+            m_objViewer.cboAceepHPre_5.SelectedIndex = 0;
+            m_objViewer.cboAceepMPre_5.SelectedIndex = 0;
+            m_objViewer.cboAceepH_5.SelectedIndex = 0;
+            m_objViewer.cboAceepM_5.SelectedIndex = 0;
+            m_objViewer.cboAceepHPre_6.SelectedIndex = 0;
+            m_objViewer.cboAceepMPre_6.SelectedIndex = 0;
+            m_objViewer.cboAceepH_6.SelectedIndex = 0;
+            m_objViewer.cboAceepM_6.SelectedIndex = 0;
             m_objViewer.txtTimeLimit5.Text = "";
             m_objViewer.txtTimeLimit6.Text = "";
             m_objViewer.cboConfirEndH.Text = "";
             m_objViewer.cboConfirEndM.Text = "";
+
+
+
+            m_objViewer.cboConfirM_4.Text = "";
+            m_objViewer.cboConfirH_4.Text = "";
+            m_objViewer.cboConfirM_3.Text = "";
+            m_objViewer.cboConfirM_2.Text = "";
+            m_objViewer.cboConfirH_3.Text = "";
+            m_objViewer.cboConfirH_2.Text = "";
+            m_objViewer.cboConfirM_1.Text = "";
+            m_objViewer.cboConfirH_1.Text = "";
+            m_objViewer.cboAceepM_4.Text = "";
+            m_objViewer.cboAceepH_4.Text = "";
+            m_objViewer.cboAceepM_3.Text = "";
+            m_objViewer.cboAceepH_3.Text = "";
+            m_objViewer.cboAceepMPre_3.Text = "";
+            m_objViewer.cboAceepHPre_3.Text = "";
+            m_objViewer.cboAceepM_2.Text = "";
+            m_objViewer.cboAceepH_2.Text = "";
+            m_objViewer.cboAceepMPre_2.Text = "";
+            m_objViewer.cboAceepHPre_2.Text = "";
+            m_objViewer.cboAceepM_1.Text = "";
+            m_objViewer.cboAceepH_1.Text = "";
+
+            m_objViewer.cboAceepM_6.Text = "";
+            m_objViewer.cboAceepH_6.Text = "";
+            m_objViewer.cboAceepMPre_6.Text = "";
+            m_objViewer.cboAceepHPre_6.Text = "";
+            m_objViewer.cboAceepM_5.Text = "";
+            m_objViewer.cboAceepH_5.Text = "";
+            m_objViewer.cboAceepMPre_5.Text = "";
+            m_objViewer.cboAceepHPre_5.Text = "";
+
+            m_objViewer.cboWeek_6.Text = "";
+            m_objViewer.cboWeek_3.Text = "";
+            m_objViewer.cboWeek_5.Text = "";
+            m_objViewer.cboWeek_4.Text = "";
+            m_objViewer.cboWeek_2.Text = "";
+            m_objViewer.cboWeek_1.Text = "";
+
+            m_objViewer.cboConfirEndH.Text = "";
+            m_objViewer.cboConfirEndM.Text = "";
+
         }
 
-        
     }
 }

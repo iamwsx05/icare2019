@@ -297,8 +297,9 @@ namespace BoneMarrow
                                         {
                                             itemCode = "F" + arr[0].Replace("pcode=", "").Trim() + arr[1].Replace("code=", "").Trim();
                                             result = arr[4].Replace("value=", "").Trim();
-                                            if (result.Trim() == "个")
-                                                result = "";
+                                            if (result.Trim() == "个" || string.IsNullOrEmpty(result.Trim()))
+                                                result = "\\";
+
                                             // 剔除无效项目
                                             //if (itemCode.StartsWith("Fl04"))
                                             //{

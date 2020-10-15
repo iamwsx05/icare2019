@@ -36,6 +36,9 @@ namespace com.digitalwave.iCare.gui.LIS
         private string m_strPatientName = "姓名:";
         private string m_strSex = "性别:";
         private string m_strAge = "年龄:";
+        private string m_cardType = "证件类型:";
+        private string m_cardNo = "证件号码:";
+        private bool isCov2019 = false;
         /// <summary>
         /// 当PatientType = 1时，== "住院号:"
         ///   PatientType = 2时，== "门诊号:"
@@ -127,6 +130,7 @@ namespace com.digitalwave.iCare.gui.LIS
         List<string> lstAppUnitID { get; set; }
 
         List<EntityAidRemark> lstAidRemark { get; set; }
+        List<string> lstCov2019 { get; set; }
 
         private Image objImage;  //医院图标
 
@@ -211,8 +215,8 @@ namespace com.digitalwave.iCare.gui.LIS
                         // 2020-07-15
                         if (lstAidRemark.Any(p => p.appUnitId.IndexOf(id) >= 0))
                         {
-                            List<EntityAidRemark>  lstAidRemarkVO = lstAidRemark.FindAll(p => p.appUnitId.IndexOf(id) >= 0);
-                            
+                            List<EntityAidRemark> lstAidRemarkVO = lstAidRemark.FindAll(p => p.appUnitId.IndexOf(id) >= 0);
+
                             foreach (EntityAidRemark aidRemarkVO in lstAidRemarkVO)
                             {
                                 // 校验
@@ -232,7 +236,7 @@ namespace com.digitalwave.iCare.gui.LIS
                                     if (contrastSex == "男") continue;
                                 }
                                 // 3. 偏高(1) / 偏低(2)
-                                if (aidRemarkVO.highOrLow == 1 || aidRemarkVO.highOrLow == 2)
+                                if (aidRemarkVO.highOrLow == 1 || aidRemarkVO.highOrLow == 2 || aidRemarkVO.highOrLow == 3)
                                 {
                                     bool isPass = false;
                                     //List<clsDeviceReslutVO> lstResult = (new weCare.Proxy.ProxyLis02()).Service.GetOttomanCheckResult(barCode);
@@ -271,6 +275,14 @@ namespace com.digitalwave.iCare.gui.LIS
                                                     break;
                                                 }
                                             }
+                                            else  if(aidRemarkVO.highOrLow == 3)
+                                            {
+                                                if (item.m_strResult.Contains("阳"))
+                                                {
+                                                    isPass = true;
+                                                    break;
+                                                }
+                                            }
                                         }
                                     }
                                     if (isPass == false) continue;
@@ -282,7 +294,7 @@ namespace com.digitalwave.iCare.gui.LIS
                                 }
 
                                 remarkInfoStr += aidRemarkVO.remarkInfo + Environment.NewLine;
-                            }  
+                            }
                         }
                     }
                     if (!string.IsNullOrEmpty(remarkInfoStr))
@@ -374,7 +386,6 @@ namespace com.digitalwave.iCare.gui.LIS
             return img;
         }
         #endregion
-
 
         #region 打印报告单基本信息
         private void m_mthPrintBseInfo()
@@ -481,6 +492,51 @@ namespace com.digitalwave.iCare.gui.LIS
             //Locate Y
             m_fltY += 5 + m_printMethodTool.m_fltGetStringHeight(m_strSampleID, m_fntSmallBold);
 
+            #region 新冠基本信息
+            List<string> lstTempId = (new weCare.Proxy.ProxyLis()).Service.GetAppUnitIdByAppId(m_dtbSample.Rows[0]["application_id_chr"].ToString().Trim());
+
+            if (lstTempId != null && lstTempId.Count > 0)
+            {
+                foreach (string id in lstTempId)
+                {
+                    if (lstCov2019.IndexOf(id) >= 0)
+                    {
+                        isCov2019 = true;
+
+                        string Sql = @"select idcard_chr from t_bse_patient a where a.patientid_chr = '" + m_dtbSample.Rows[0]["patientid_chr"].ToString().Trim() + "'";
+                        DataTable dt = null;
+                        string cardNo = string.Empty;
+                        (new weCare.Proxy.ProxyBase()).Service.GetDataTable(Sql, out dt);
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            cardNo = dt.Rows[0]["idcard_chr"].ToString().Trim();
+                        }
+                            
+                        if (!string.IsNullOrEmpty(cardNo))
+                        {
+                            //证件类型
+                            m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallNotBold,
+                               m_cardType, "身份证", fltColumn1, m_fltY);
+                        }
+                        else
+                        {
+                            //证件类型
+                            m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallNotBold,
+                               m_cardType, "".Trim(), fltColumn1, m_fltY);
+                        }
+
+                        //证件号码
+                        m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallNotBold,
+                            m_cardNo, cardNo, fltColumn2, m_fltY);
+
+                        //Locate Y
+                        m_fltY += 5 + m_printMethodTool.m_fltGetStringHeight(m_strSampleID, m_fntSmallBold);
+                        break;
+                    }
+
+                }
+            }
+            #endregion
 
             //科  室
             m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallNotBold, m_strDepartment,
@@ -738,15 +794,32 @@ namespace com.digitalwave.iCare.gui.LIS
             //检验医生
             if (m_dtbSample.Columns.IndexOf("reportorSign") >= 0)
             {
-                if (m_dtbSample.Rows[0]["reportorSign"] == DBNull.Value)
+
+                if (isCov2019)
                 {
-                    m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, m_strCheckDoc, m_dtbSample.Rows[0]["reportor"].ToString().Trim(), fltColumn2, m_fltEnd);
+                    if (m_dtbSample.Rows[0]["reportorSign"] == DBNull.Value)
+                    {
+                        m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, m_strCheckDoc, m_dtbSample.Rows[0]["reportor"].ToString().Trim(), fltColumn2-102, m_fltEnd);
+                    }
+                    else
+                    {
+                        MemoryStream ms = new MemoryStream((byte[])m_dtbSample.Rows[0]["reportorSign"]);
+                        m_printMethodTool.DrawImage(m_strCheckDoc, m_fntSmallBold, Image.FromStream(ms), fltColumn2-102, m_fltEnd, isUseA4);
+                    }
                 }
                 else
                 {
-                    MemoryStream ms = new MemoryStream((byte[])m_dtbSample.Rows[0]["reportorSign"]);
-                    m_printMethodTool.DrawImage(m_strCheckDoc, m_fntSmallBold, Image.FromStream(ms), fltColumn2, m_fltEnd, isUseA4);
+                    if (m_dtbSample.Rows[0]["reportorSign"] == DBNull.Value)
+                    {
+                        m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, m_strCheckDoc, m_dtbSample.Rows[0]["reportor"].ToString().Trim(), fltColumn2, m_fltEnd);
+                    }
+                    else
+                    {
+                        MemoryStream ms = new MemoryStream((byte[])m_dtbSample.Rows[0]["reportorSign"]);
+                        m_printMethodTool.DrawImage(m_strCheckDoc, m_fntSmallBold, Image.FromStream(ms), fltColumn2, m_fltEnd, isUseA4);
+                    }
                 }
+               
             }
             else
             {
@@ -756,21 +829,42 @@ namespace com.digitalwave.iCare.gui.LIS
             //审核者
             if (m_dtbSample.Columns.IndexOf("confirmerSign") >= 0)
             {
-                if (m_dtbSample.Rows[0]["confirmerSign"] == DBNull.Value)
+                if (isCov2019)
                 {
-                    m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, m_strConfirmEmp, m_dtbSample.Rows[0]["confirmer"].ToString().Trim(), fltColumn3, m_fltEnd);
+                    if (m_dtbSample.Rows[0]["confirmerSign"] == DBNull.Value)
+                    {
+                        m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, m_strConfirmEmp, m_dtbSample.Rows[0]["confirmer"].ToString().Trim(), fltColumn3-140, m_fltEnd);
+                    }
+                    else
+                    {
+                        MemoryStream ms = new MemoryStream((byte[])m_dtbSample.Rows[0]["confirmerSign"]);
+                        m_printMethodTool.DrawImage(m_strConfirmEmp, m_fntSmallBold, Image.FromStream(ms), fltColumn3-140, m_fltEnd, isUseA4);
+                    }
                 }
                 else
                 {
-                    MemoryStream ms = new MemoryStream((byte[])m_dtbSample.Rows[0]["confirmerSign"]);
-                    m_printMethodTool.DrawImage(m_strConfirmEmp, m_fntSmallBold, Image.FromStream(ms), fltColumn3, m_fltEnd, isUseA4);
+                    if (m_dtbSample.Rows[0]["confirmerSign"] == DBNull.Value)
+                    {
+                        m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, m_strConfirmEmp, m_dtbSample.Rows[0]["confirmer"].ToString().Trim(), fltColumn3, m_fltEnd);
+                    }
+                    else
+                    {
+                        MemoryStream ms = new MemoryStream((byte[])m_dtbSample.Rows[0]["confirmerSign"]);
+                        m_printMethodTool.DrawImage(m_strConfirmEmp, m_fntSmallBold, Image.FromStream(ms), fltColumn3, m_fltEnd, isUseA4);
+                    }
                 }
+                
             }
             else
             {
                 m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, m_strConfirmEmp, m_dtbSample.Rows[0]["confirmer"].ToString().Trim(), fltColumn3, m_fltEnd);
             }
-            m_fltEnd += m_printMethodTool.m_fltGetStringHeight(m_strReportDate, m_fntSmallBold) + 6;
+            if (isCov2019)
+            {
+                m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, "检测机构：机构名称（盖章）", "", fltColumn3+10, m_fltEnd);
+            }
+
+           m_fltEnd += m_printMethodTool.m_fltGetStringHeight(m_strReportDate, m_fntSmallBold) + 6;
 
             ////画线
             //m_printMethodTool.m_mthDrawLine(m_fltStartX - 5, m_fltEnd, m_fltPaperWidth * 0.9f, m_fltEnd);
@@ -788,9 +882,19 @@ namespace com.digitalwave.iCare.gui.LIS
                 m_printMethodTool.m_mthDrawString(str, m_fntSmallBold, m_fltStartX + diff + 5, m_fltEnd);
                 diff += m_printMethodTool.m_fltGetStringWidth(str, m_fntSmallBold) + 65;
             }
-            //Notice
-            m_printMethodTool.m_printEventArg.Graphics.DrawString(m_strNotice, new Font("SimSun", 11f, FontStyle.Regular), Brushes.Red, m_fltStartX + diff, m_fltEnd);
-            //m_printMethodTool.m_mthDrawString(m_strNotice, m_fntSmallNotBold, m_fltStartX, m_fltY);
+            if(isCov2019)
+            {
+                //Notice
+                m_printMethodTool.m_printEventArg.Graphics.DrawString(m_strNotice, new Font("SimSun", 11f, FontStyle.Regular), Brushes.Red, fltColumn2 - 102, m_fltEnd);
+                //m_printMethodTool.m_mthDrawString(m_strNotice, m_fntSmallNotBold, m_fltStartX, m_fltY);
+            }
+            else
+            {
+                //Notice
+                m_printMethodTool.m_printEventArg.Graphics.DrawString(m_strNotice, new Font("SimSun", 11f, FontStyle.Regular), Brushes.Red, m_fltStartX + diff, m_fltEnd);
+                //m_printMethodTool.m_mthDrawString(m_strNotice, m_fntSmallNotBold, m_fltStartX, m_fltY);
+            }
+
             float fltNoticeWidth = m_printMethodTool.m_fltGetStringWidth(m_strNotice, new Font("SimSun", 11f, FontStyle.Regular));
             //附注
             bool blnPrintAnnotation = false;
@@ -799,9 +903,9 @@ namespace com.digitalwave.iCare.gui.LIS
                 blnPrintAnnotation = true;
             }
             if (blnPrintAnnotation)
-            {
+            { 
                 m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallNotBold, m_fntSmallNotBold, m_strAnnotation, m_dtbSample.Rows[0]["annotation_vchr"].ToString().Trim(),
-                    m_fltStartX + fltNoticeWidth, m_fltEnd);
+                                m_fltStartX + fltNoticeWidth, m_fltEnd);   
             }
         }
         #endregion
@@ -1671,6 +1775,16 @@ namespace com.digitalwave.iCare.gui.LIS
                     });
                 }
             }
+
+            //新冠报告参数
+            string appUnitIdCov2019 = clsPublic.m_strGetSysparm("7012");
+
+            if (!string.IsNullOrEmpty(appUnitIdCov2019))
+            {
+                lstCov2019 = new List<string>(appUnitIdCov2019.Split(';'));
+            }
+            else
+                lstCov2019 = new List<string>();
             m_mthPrintBseInfo();
 
             #region 自定义报告说明 -加入7006参数 mobaojian 2007.09.04
@@ -2114,6 +2228,10 @@ namespace com.digitalwave.iCare.gui.LIS
         private string m_strPatientName = "姓名:";
         private string m_strSex = "性别:";
         private string m_strAge = "年龄:";
+
+        private string m_strCardType = "证件类型:";
+        private string m_strCardNo = "证件号码:";
+
         private string m_strInPatientNo = "住院号:";
         private string m_strDepartment = "科  室:";
         private string m_strBedNo = "床  号:";

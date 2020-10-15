@@ -132,7 +132,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 string strYY = "";
                 string strDYXSBZ = "";
                 List<string> lstJzlb = new List<string>();
-                long lngRes = clsYBPublic_cs.m_lngFunSP1002(intPtr, objDGMzdyxsVo, objDgextraVo, ref strJZLB, ref strYY, ref strDYXSBZ, ref lstJzlb, this.m_objViewer.IsBirthInsurance, this.m_objViewer.IsCovi19);
+                long lngRes = clsYBPublic_cs.m_lngFunSP1002(intPtr, objDGMzdyxsVo, objDgextraVo, ref strJZLB, ref strYY, ref strDYXSBZ, ref lstJzlb, this.m_objViewer.IsBirthInsurance, this.m_objViewer.IsCovi19,this.m_objViewer.IsFp);
                 if (lngRes > 0)
                 {
                     // 就诊类别-------------------------------------
@@ -170,6 +170,11 @@ namespace com.digitalwave.iCare.gui.HIS
                         {
                             this.m_objViewer.lbldyxsdz.Text = "不能享受重流门诊保险报销";
                             MessageBox.Show("社保系统提示：该病人目前不能享受重流门诊待遇，请注意！", "系统提示");
+                        }
+                        else if(this.m_objViewer.IsFp)
+                        {
+                            this.m_objViewer.lbldyxsdz.Text = "不能享受计划生育门诊保险报销";
+                            MessageBox.Show("社保系统提示：该病人目前不能享受计划生育门诊待遇，请注意！", "系统提示");
                         }
                         else
                         {
@@ -279,6 +284,8 @@ namespace com.digitalwave.iCare.gui.HIS
                         lstDGMzxmcsVo[i].JZLB = "73";
                     else if (this.m_objViewer.IsCovi19 && jzlb != "57") // 57 重流门诊
                         lstDGMzxmcsVo[i].JZLB = "57";
+                    else if(this.m_objViewer.IsFp && jzlb != "79")  //计划生育门诊
+                        lstDGMzxmcsVo[i].JZLB = "79";
                     else
                         lstDGMzxmcsVo[i].JZLB = jzlb; //this.m_objViewer.lbljzlb.Tag.ToString();
                 }
@@ -441,7 +448,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 objDGMzdyxsVo.YYBH = clsYBPublic_cs.m_strReadXML("DGCSMZYB", "YYBHMZ", "AnyOne");
                 objDGMzdyxsVo.JZYYBH = clsYBPublic_cs.m_strReadXML("DGCSMZYB", "YYBHMZ", "AnyOne");
                 objDgextraVo.JBR = "001";
-                lngRes = clsYBPublic_cs.m_lngFunSP1002(intPtr, objDGMzdyxsVo, objDgextraVo, ref strJZLB, ref strYY, ref strDYXSBZ, ref lstJzlb, this.m_objViewer.IsBirthInsurance, this.m_objViewer.IsCovi19);
+                lngRes = clsYBPublic_cs.m_lngFunSP1002(intPtr, objDGMzdyxsVo, objDgextraVo, ref strJZLB, ref strYY, ref strDYXSBZ, ref lstJzlb, this.m_objViewer.IsBirthInsurance, this.m_objViewer.IsCovi19, this.m_objViewer.IsFp);
                 if (lngRes > 0)
                 {
                     if (strDYXSBZ == "0")
@@ -509,6 +516,10 @@ namespace com.digitalwave.iCare.gui.HIS
                     {
                         clsPatient.strPatType = "社区二类特定门诊";
                     }
+                    else if(strJZLB == "79")
+                    {
+                        clsPatient.strPatType = "计划生育门诊";
+                    }
                     else if (strJZLB == "81")
                     {
                         clsPatient.strPatType = "公务员体检";
@@ -551,6 +562,10 @@ namespace com.digitalwave.iCare.gui.HIS
                         objDgextraVo.JZLB = "73";
                     else if (this.m_objViewer.IsCovi19 && jzlb != "57") // 57 重流门诊
                         objDgextraVo.JZLB = "57";
+                    else if(this.m_objViewer.IsFp && jzlb != "79")     // 79 计划生育门诊
+                    {
+                        objDgextraVo.JZLB = "79";
+                    }
                     else
                         objDgextraVo.JZLB = jzlb;
                 }

@@ -11,7 +11,7 @@ namespace com.digitalwave.iCare.gui.HIS
     /// <summary>
     /// 选择医生
     /// </summary>
-    public partial class frmAidChooseDoct : Form
+    public partial class frmAidChooseDoct : com.digitalwave.GUI_Base.frmMDI_Child_Base
     {
         #region 变量
         /// <summary>
@@ -30,9 +30,24 @@ namespace com.digitalwave.iCare.gui.HIS
         }
 
         /// <summary>
+        /// 医生名称串(格式 张三,李四,王五)
+        /// </summary>
+        public string DoctNameArr { get; set; }
+
+        /// <summary>
         /// 0 全部; 1 医生; 3 抗菌药会诊专家
         /// </summary>
         public int EmpTypeId { get; set; }
+
+        /// <summary>
+        /// 职工Table
+        /// </summary>
+        DataTable dtEmployee { get; set; }
+
+        /// <summary>
+        /// 是否显示本科室员工
+        /// </summary>
+        public bool IsFilterMyDept { get; set; }
 
         #endregion
 
@@ -58,24 +73,32 @@ namespace com.digitalwave.iCare.gui.HIS
             {
                 l = objCharge.m_lngGetEmployee(out dt);
             }
-            if (l > 0)
+            this.dtEmployee = dt;
+            if (this.IsFilterMyDept == false)
+                this.SetDataSource(dt);
+            this.timer.Enabled = true;
+        }
+
+        void SetDataSource(DataTable dt)
+        {
+            this.dtDoct.Rows.Clear();
+            if (dt == null || dt.Rows.Count == 0)
+                return;
+
+            int n = 0;
+            string[] sarr = null;
+            foreach (DataRow dr in dt.Rows)
             {
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    DataRow dr = dt.Rows[i];
-                    string[] sarr = new string[4];
+                sarr = new string[5];
+                sarr[0] = "F";
+                sarr[1] = Convert.ToString(++n);
+                sarr[2] = dr["empno_chr"].ToString().Trim();
+                sarr[3] = dr["lastname_vchr"].ToString().Trim();
+                sarr[4] = weCare.Core.Utils.SpellCodeHelper.GetPyCode(dr["lastname_vchr"].ToString().Trim());
 
-                    sarr[0] = "F";
-                    sarr[1] = Convert.ToString(i + 1);
-                    sarr[2] = dr["empno_chr"].ToString().Trim();
-                    sarr[3] = dr["lastname_vchr"].ToString().Trim();
-
-                    int row = this.dtDoct.Rows.Add(sarr);
-                    this.dtDoct.Rows[row].Tag = dr;
-                }
+                int row = this.dtDoct.Rows.Add(sarr);
+                this.dtDoct.Rows[row].Tag = dr;
             }
-
-            this.txtVal.Focus();
         }
 
         private void frmAidChooseDoct_KeyDown(object sender, KeyEventArgs e)
@@ -100,7 +123,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 {
                     for (int i = 0; i < this.dtDoct.Rows.Count; i++)
                     {
-                        if (this.dtDoct.Rows[i].Cells["colGh"].Value.ToString().Contains(val) || this.dtDoct.Rows[i].Cells["colXm"].Value.ToString().Contains(val))
+                        if (this.dtDoct.Rows[i].Cells["colGh"].Value.ToString().Contains(val) || this.dtDoct.Rows[i].Cells["colXm"].Value.ToString().Contains(val) || this.dtDoct.Rows[i].Cells["colPyCode"].Value.ToString().Contains(val))
                         {
                             this.dtDoct.CurrentCell = this.dtDoct.Rows[i].Cells[0];
                             break;
@@ -113,6 +136,7 @@ namespace com.digitalwave.iCare.gui.HIS
         private void btnOk_Click(object sender, EventArgs e)
         {
             doctidarr = "";
+            DoctNameArr = string.Empty;
 
             if (this.chkAll.Checked)
             {
@@ -126,6 +150,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     {
                         DataRow dr = this.dtDoct.Rows[i].Tag as DataRow;
                         doctidarr += "'" + dr["empid_chr"].ToString() + "',";
+                        DoctNameArr += dr["lastname_vchr"].ToString() + ",";
                     }
                 }
 
@@ -136,6 +161,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 else
                 {
                     doctidarr = doctidarr.Substring(0, doctidarr.Length - 1);
+                    DoctNameArr = DoctNameArr.Substring(0, DoctNameArr.Length - 1);
                     this.DialogResult = DialogResult.OK;
                 }
             }
@@ -161,6 +187,35 @@ namespace com.digitalwave.iCare.gui.HIS
                 {
                     this.dtDoct.Rows[i].Cells["colZt"].Value = "F";
                 }
+            }
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            this.timer.Enabled = false;
+            this.txtVal.Focus();
+            this.chkMyDept.Checked = this.IsFilterMyDept;
+
+        }
+
+        private void chkMyDept_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkMyDept.Checked)
+            {
+                DataTable dt = this.dtEmployee.Clone();
+                DataRow[] drr = this.dtEmployee.Select(string.Format("deptid_chr = '{0}'", string.IsNullOrEmpty(this.LoginInfo.m_strInpatientAreaID) ? this.LoginInfo.m_strDepartmentID : this.LoginInfo.m_strInpatientAreaID));
+                if (drr != null && drr.Length > 0)
+                {
+                    foreach (DataRow dr in drr)
+                    {
+                        dt.LoadDataRow(dr.ItemArray, true);
+                    }
+                }
+                this.SetDataSource(dt);
+            }
+            else
+            {
+                this.SetDataSource(this.dtEmployee);
             }
         }
     }

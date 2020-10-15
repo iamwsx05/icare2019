@@ -53,7 +53,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\..\..\Debug\</OutputPath>
+    <OutputPath>..\..\..\Debug\</OutputPath>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <BaseAddress>285212672</BaseAddress>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
@@ -237,19 +237,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Debug\unityproxy.dll</HintPath>
     </Reference>
-    <Reference Include="UserControls">
-      <Name>UserControls</Name>
-      <HintPath>..\..\..\bin\Debug\UserControls.dll</HintPath>
-    </Reference>
     <Reference Include="Utility">
       <Name>Utility</Name>
       <HintPath>..\..\..\bin\Debug\Utility.dll</HintPath>
     </Reference>
     <Reference Include="UtilityLibrary, Version=1.0.4.0, Culture=neutral, PublicKeyToken=fe06e967d3cf723d" />
-    <Reference Include="UtilityLibrary.Win32.WindowsAPI">
-      <Name>UtilityLibrary.Win32.WindowsAPI</Name>
-      <HintPath>..\..\..\bin\Debug\UtilityLibrary.Win32.WindowsAPI.dll</HintPath>
-    </Reference>
     <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Debug\wecare.core.dll</HintPath>
@@ -287,6 +279,7 @@
     <Compile Include="Controller\clsCheckOuthistoryDay.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\clsControlConcertreCipe1.cs" />
     <Compile Include="Controller\clsCtl_OPSelectChargeItem.cs" />
     <Compile Include="Controller\clsControlAddPlan.cs">
       <SubType>Code</SubType>
@@ -693,6 +686,9 @@
     </Compile>
     <Compile Include="Viewer\frmCodexRemark.Designer.cs">
       <DependentUpon>frmCodexRemark.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmConcertrecipe1.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Viewer\frmDebtMessage.cs">
       <SubType>Form</SubType>
@@ -1287,6 +1283,12 @@
     <Compile Include="Viewer\frmSystemSeting.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Viewer\frmSyzHint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmSyzHint.Designer.cs">
+      <DependentUpon>frmSyzHint.cs</DependentUpon>
+    </Compile>
     <Compile Include="Viewer\frmtest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1332,6 +1334,12 @@
     <Compile Include="Viewer\frmWeekPlan.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Viewer\frmCovid19Msg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmCovid19Msg.Designer.cs">
+      <DependentUpon>frmCovid19Msg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Viewer\frmYbdeaDefChargeitem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1362,6 +1370,7 @@
     <Compile Include="Viewer\txtLoadRecipeNo.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Content Include="Viewer\医生站中药处方列说明.txt" />
     <Content Include="Viewer\医生站检验列说明.txt" />
     <Content Include="Viewer\医生站西药处方列说明.txt" />
     <None Include="ModelSupport\com\com.txvpck" />
@@ -1414,6 +1423,9 @@
     <EmbeddedResource Include="Viewer\frmCodexRemark.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmCodexRemark.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmConcertrecipe1.resx">
+      <DependentUpon>frmConcertrecipe1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Viewer\frmDebtMessage.resx">
       <DependentUpon>frmDebtMessage.cs</DependentUpon>
@@ -1895,6 +1907,9 @@
     <EmbeddedResource Include="Viewer\frmSystemSeting.resx">
       <DependentUpon>frmSystemSeting.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmSyzHint.resx">
+      <DependentUpon>frmSyzHint.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Viewer\frmtest.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmtest.cs</DependentUpon>
@@ -1931,6 +1946,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Viewer\frmWeekPlan.resx">
       <DependentUpon>frmWeekPlan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmCovid19Msg.resx">
+      <DependentUpon>frmCovid19Msg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Viewer\frmYbdeaDefChargeitem.resx">
       <SubType>Designer</SubType>

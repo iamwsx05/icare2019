@@ -97,6 +97,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
         private void dgvItem_Click(object sender, EventArgs e)
         {
+            m_objController.clear();
             m_objController.m_mthGetLimitTime();
         }
 
@@ -123,6 +124,6 @@ namespace com.digitalwave.iCare.gui.HIS
                 MessageBox.Show("请选择一个项目 ！");
             }
         }
-
+ 
     }
 }

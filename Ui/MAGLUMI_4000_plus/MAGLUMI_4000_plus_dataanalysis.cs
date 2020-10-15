@@ -40,6 +40,7 @@ namespace MAGLUMI_4000_plus
             p_arlResult = new List<clsLIS_Device_Test_ResultVO>();
             clsLIS_Device_Test_ResultVO vo = null;
             string sampleID = string.Empty;
+            string barCode = string.Empty;
             string checkDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string[] tmpData = null;
             foreach (string item in data)
@@ -51,6 +52,12 @@ namespace MAGLUMI_4000_plus
                     if (tmpData != null && tmpData.Length > 3)
                     {
                         sampleID = tmpData[2];
+                        if(sampleID.Length == 7)
+                        {
+                            barCode = sampleID;
+                            sampleID = ""; 
+                        }
+
                         int no = 0;
                         int.TryParse(sampleID, out no);
                         if (no > 0)
@@ -70,6 +77,7 @@ namespace MAGLUMI_4000_plus
 
                 vo = new clsLIS_Device_Test_ResultVO();
                 vo.strDevice_Sample_ID = sampleID;
+                vo.barCode = barCode;
                 Log.Output("sampleID--》" + sampleID);
                 vo.strCheck_Date = checkDate;
                 vo.strDevice_Check_Item_Name = tmpData[2].Replace("^", "").Trim();  // 名称

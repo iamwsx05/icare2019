@@ -29,7 +29,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Debug\</OutputPath>
+    <OutputPath>..\..\..\Debug\LIS_DataAnalyse\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -60,9 +60,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="utility, Version=2.0.0.1, Culture=neutral, PublicKeyToken=55813ad8fa3e5102, processorArchitecture=x86">
+    <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\debug\utility.dll</HintPath>
+      <HintPath>..\..\..\Debug\wecare.core.dll</HintPath>
     </Reference>
     <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=4bdb6de9b3ca5966, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>

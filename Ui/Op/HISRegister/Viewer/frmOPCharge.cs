@@ -206,6 +206,11 @@ namespace com.digitalwave.iCare.gui.HIS
         /// </summary>
         public string BirthInsuranceCode { get; set; }
 
+        /// <summary>
+        /// 重流门诊编码
+        /// </summary>
+        public string Covi19Code { get; set; }
+
         #region 门诊收费导引屏
         /// <summary>
         /// 门诊收费导引屏
@@ -2548,7 +2553,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         if (((clsCtl_OPCharge)this.objController).intDiffPriceOn == 0)
                             this.m_objOPChargeRight.label3.Text = "请交： " + obj.lbeSelfPay.Text.Trim() + " 元";
                         else
-                            this.m_objOPChargeRight.label3.Text = "请交： " + obj.lbeSelfPay.Text.Trim() + " 元,药品已让利 " + objPC.m_decTotalDiffCost.ToString() + " 元";// 提示总让利金额
+                            this.m_objOPChargeRight.label3.Text = "请交： " + obj.lbeSelfPay.Text.Trim() + " 元"; //,药品已让利 " + objPC.m_decTotalDiffCost.ToString() + " 元";// 提示总让利金额
                     this.m_objOPChargeRight.label4.Text = string.Empty;
                     this.m_objOPChargeRight.label1.Text = string.Empty;
                     m_objOPChargeRight.IsShowAmount = false;

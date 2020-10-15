@@ -46,6 +46,8 @@ namespace com.digitalwave.iCare.gui.HIS
             m_mthSelectItem((ComboBox)this.m_objViewer.m_cboApplyType);
             m_mthSelectItem(this.m_objViewer.m_cmbIsExpensive);
             m_mthSelectItem(this.m_objViewer.cboIsChildPrice);
+            m_mthSelectItem(this.m_objViewer.cboXb);
+            m_mthSelectItem(this.m_objViewer.cboSfdw);
             this.m_objViewer.m_cmbIsInDocAdv.SelectedIndex = 1;
             this.m_objViewer.m_cboKeepUse.SelectedIndex = 1;
             m_objViewer.m_cmbFind.SelectedIndex = 2;
@@ -509,6 +511,8 @@ namespace com.digitalwave.iCare.gui.HIS
             m_objViewer.cboSfcl.SelectedIndex = 0;
             m_objViewer.cboItemScope.SelectedIndex = 0;
             m_objViewer.cboIsChildPrice.SelectedIndex = 0;
+            m_objViewer.cboXb.SelectedIndex = 0;
+            m_objViewer.cboSfdw.SelectedIndex = 0;
             m_objViewer.txtOriPrice.Clear();
         }
         #endregion
@@ -620,6 +624,23 @@ namespace com.digitalwave.iCare.gui.HIS
             this.m_objViewer.txtCityUnicode.Text = dt.Rows[index]["cityUnicode"].ToString();
             this.m_objViewer.txtRegular.Text = dt.Rows[index]["checkRegular"].ToString();
             this.m_objViewer.txtOriPrice.Text = dt.Rows[index]["itemOriPrice"].ToString();
+
+            if (dt.Rows[index]["itemsex"] == DBNull.Value)
+            {
+                this.m_objViewer.cboXb.SelectedIndex = 0;
+            }
+            else
+            {
+                this.m_objViewer.cboXb.SelectedIndex = Convert.ToInt32(dt.Rows[index]["itemsex"]);
+            }
+            if (dt.Rows[index]["itemunit2"] == DBNull.Value)
+            {
+                this.m_objViewer.cboSfdw.SelectedIndex = 0;
+            }
+            else
+            {
+                this.m_objViewer.cboSfdw.SelectedIndex = Convert.ToInt32(dt.Rows[index]["itemunit2"]);
+            }
         }
         private int m_mthGetIndex(object str)
         {
@@ -777,10 +798,22 @@ namespace com.digitalwave.iCare.gui.HIS
                 return;
             }
             #endregion
+
+            if (weCare.Core.Utils.Function.Dec(this.m_objViewer.m_txtTradePrice.Text) > weCare.Core.Utils.Function.Dec(this.m_objViewer.m_txtPrice.Text))
+            {
+                if (MessageBox.Show("零售单价不能小于批发单价。\r\n\r\n是否继续保存？", "警告", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
             clsChargeItem_VO clsVO;
             long lngRes = 0;
             string strID;
             this.m_mthGetData(out clsVO);
+            clsVO.operId = this.m_objViewer.LoginInfo.m_strEmpID;
+            clsVO.operName = this.m_objViewer.LoginInfo.m_strEmpName;
+            clsVO.ipAddr = weCare.Core.Utils.Function.LocalIP();
             if (this.m_objViewer.btSave.Tag != null)//修改
             {
                 if (objSvc.m_mthItemIsUsed(this.m_objViewer.m_txtNo.Text, this.m_objViewer.btSave.Tag.ToString()) > 0)
@@ -791,6 +824,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         return;
                     }
                 }
+
                 lngRes = objSvc.m_mthDoUpdChargeItem(clsVO, this.m_objViewer.LoginInfo.m_strEmpID);
                 if (lngRes > 0)
                 {
@@ -963,6 +997,8 @@ namespace com.digitalwave.iCare.gui.HIS
             clsVO.operId = this.m_objViewer.LoginInfo.m_strEmpID;
             clsVO.itemOriPrice = this.m_objViewer.txtOriPrice.Text.Trim() == "" ? 0 : Convert.ToDecimal(this.m_objViewer.txtOriPrice.Text);
             clsVO.isChildPrice = this.m_objViewer.cboIsChildPrice.SelectedIndex;
+            clsVO.itemSex = this.m_objViewer.cboXb.SelectedIndex;
+            clsVO.itemUnit2 = this.m_objViewer.cboSfdw.SelectedIndex;
         }
 
         private void m_mthUpdateDataTable(int index)
@@ -1047,6 +1083,8 @@ namespace com.digitalwave.iCare.gui.HIS
             dt.Rows[index]["checkRegular"] = this.m_objViewer.txtRegular.Text;
             dt.Rows[index]["itemOriPrice"] = this.m_objViewer.txtOriPrice.Text.Trim() == "" ? 0 : Convert.ToDecimal(this.m_objViewer.txtOriPrice.Text);
             dt.Rows[index]["ischildprice"] = this.m_objViewer.cboIsChildPrice.SelectedIndex;
+            dt.Rows[index]["itemsex"] = this.m_objViewer.cboXb.SelectedIndex;
+            dt.Rows[index]["itemunit2"] = this.m_objViewer.cboSfdw.SelectedIndex;
         }
         private void m_mthAddNewRowToDataTable(clsChargeItem_VO clsVO)
         {

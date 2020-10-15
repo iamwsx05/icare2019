@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmYBChargeMZ));
             this.llblReadQRcode = new System.Windows.Forms.LinkLabel();
             this.rdoEk = new System.Windows.Forms.RadioButton();
@@ -63,7 +64,9 @@
             this.btnCharge = new DevExpress.XtraEditors.SimpleButton();
             this.btnCheckPsw = new DevExpress.XtraEditors.SimpleButton();
             this.btnUpload = new DevExpress.XtraEditors.SimpleButton();
+            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
+            this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbJzlb.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReason.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSub.Properties)).BeginInit();
@@ -335,9 +338,6 @@
             // 
             this.cmbJzlb.Location = new System.Drawing.Point(161, 100);
             this.cmbJzlb.Name = "cmbJzlb";
-            // 
-            // 
-            // 
             this.cmbJzlb.Properties.Appearance.Font = new System.Drawing.Font("宋体", 10.5F);
             this.cmbJzlb.Properties.Appearance.Options.UseFont = true;
             this.cmbJzlb.Properties.AppearanceDropDown.Font = new System.Drawing.Font("宋体", 10.5F);
@@ -354,9 +354,6 @@
             // 
             this.txtReason.Location = new System.Drawing.Point(161, 145);
             this.txtReason.Name = "txtReason";
-            // 
-            // 
-            // 
             this.txtReason.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.txtReason.Properties.Appearance.Font = new System.Drawing.Font("宋体", 10.5F);
             this.txtReason.Properties.Appearance.ForeColor = System.Drawing.Color.Red;
@@ -371,9 +368,6 @@
             // 
             this.lblSub.Location = new System.Drawing.Point(483, 300);
             this.lblSub.Name = "lblSub";
-            // 
-            // 
-            // 
             this.lblSub.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.lblSub.Properties.Appearance.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSub.Properties.Appearance.ForeColor = System.Drawing.Color.Red;
@@ -389,9 +383,6 @@
             // 
             this.lblAcc.Location = new System.Drawing.Point(161, 300);
             this.lblAcc.Name = "lblAcc";
-            // 
-            // 
-            // 
             this.lblAcc.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.lblAcc.Properties.Appearance.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAcc.Properties.Appearance.ForeColor = System.Drawing.Color.Red;
@@ -407,9 +398,6 @@
             // 
             this.lblJsxh.Location = new System.Drawing.Point(483, 256);
             this.lblJsxh.Name = "lblJsxh";
-            // 
-            // 
-            // 
             this.lblJsxh.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.lblJsxh.Properties.Appearance.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblJsxh.Properties.Appearance.Options.UseBackColor = true;
@@ -423,9 +411,6 @@
             // 
             this.lblTotal.Location = new System.Drawing.Point(161, 256);
             this.lblTotal.Name = "lblTotal";
-            // 
-            // 
-            // 
             this.lblTotal.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.lblTotal.Properties.Appearance.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.Properties.Appearance.Options.UseBackColor = true;
@@ -439,9 +424,6 @@
             // 
             this.lbldyxsdz.Location = new System.Drawing.Point(483, 100);
             this.lbldyxsdz.Name = "lbldyxsdz";
-            // 
-            // 
-            // 
             this.lbldyxsdz.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.lbldyxsdz.Properties.Appearance.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbldyxsdz.Properties.Appearance.Options.UseBackColor = true;
@@ -455,9 +437,6 @@
             // 
             this.lblName.Location = new System.Drawing.Point(483, 61);
             this.lblName.Name = "lblName";
-            // 
-            // 
-            // 
             this.lblName.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.lblName.Properties.Appearance.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.Properties.Appearance.Options.UseBackColor = true;
@@ -471,9 +450,6 @@
             // 
             this.lblZyh.Location = new System.Drawing.Point(161, 61);
             this.lblZyh.Name = "lblZyh";
-            // 
-            // 
-            // 
             this.lblZyh.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.lblZyh.Properties.Appearance.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblZyh.Properties.Appearance.Options.UseBackColor = true;
@@ -540,6 +516,10 @@
             this.btnUpload.Text = "数据上传 »";
             this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
+            // defaultLookAndFeel
+            // 
+            this.defaultLookAndFeel.LookAndFeel.SkinName = "Office 2010 Blue";
+            // 
             // frmYBChargeMZ
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -554,6 +534,8 @@
             this.Text = "门诊医保结算";
             this.Load += new System.EventHandler(this.frmYBChargeMZ_Load);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
+            this.groupControl1.ResumeLayout(false);
+            this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbJzlb.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtReason.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblSub.Properties)).EndInit();
@@ -603,5 +585,6 @@
         internal DevExpress.XtraEditors.SimpleButton btnCharge;
         internal DevExpress.XtraEditors.SimpleButton btnCheckPsw;
         internal DevExpress.XtraEditors.SimpleButton btnUpload;
+        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
     }
 }

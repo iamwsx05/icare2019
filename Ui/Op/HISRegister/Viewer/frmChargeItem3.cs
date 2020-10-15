@@ -154,6 +154,11 @@ namespace com.digitalwave.iCare.gui.HIS
         private Label label44;
         private Label label48;
         internal ComboBox cboIsChildPrice;
+        internal ComboBox cboSfdw;
+        internal ComboBox cboXb;
+        private Label label50;
+        private Label label49;
+
         /// <summary>
         /// 分类权限
         /// </summary>
@@ -220,6 +225,10 @@ namespace com.digitalwave.iCare.gui.HIS
             this.btEditDiscount = new PinkieControls.ButtonXP();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.cboSfdw = new System.Windows.Forms.ComboBox();
+            this.cboXb = new System.Windows.Forms.ComboBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
             this.cboIsChildPrice = new System.Windows.Forms.ComboBox();
             this.label48 = new System.Windows.Forms.Label();
             this.txtOriPrice = new System.Windows.Forms.TextBox();
@@ -235,16 +244,16 @@ namespace com.digitalwave.iCare.gui.HIS
             this.label43 = new System.Windows.Forms.Label();
             this.m_txtOrderCateType = new System.Windows.Forms.TextBox();
             this.m_lsvOrderType = new System.Windows.Forms.ListView();
-            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.m_lsvExeType = new System.Windows.Forms.ListView();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.m_txtExeType = new System.Windows.Forms.TextBox();
             this.m_lsvExcType = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.m_txtCaseCal = new System.Windows.Forms.TextBox();
             this.m_txtOPInvoice = new System.Windows.Forms.TextBox();
             this.m_txtIPInvoice = new System.Windows.Forms.TextBox();
@@ -261,9 +270,9 @@ namespace com.digitalwave.iCare.gui.HIS
             this.label41 = new System.Windows.Forms.Label();
             this.m_txtDefaultFreq = new System.Windows.Forms.TextBox();
             this.lsvDefaultFreq = new System.Windows.Forms.ListView();
-            this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader15 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader16 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label39 = new System.Windows.Forms.Label();
             this.cboInpInsuranceType = new com.digitalwave.iCare.gui.HIS.exComboBox();
             this.label38 = new System.Windows.Forms.Label();
@@ -351,8 +360,8 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // panel3
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.buttonXP1);
             this.panel3.Controls.Add(this.btPrice);
@@ -571,9 +580,9 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Location = new System.Drawing.Point(352, 8);
@@ -583,10 +592,14 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // panel4
             // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.AutoScroll = true;
+            this.panel4.Controls.Add(this.cboSfdw);
+            this.panel4.Controls.Add(this.cboXb);
+            this.panel4.Controls.Add(this.label50);
+            this.panel4.Controls.Add(this.label49);
             this.panel4.Controls.Add(this.cboIsChildPrice);
             this.panel4.Controls.Add(this.label48);
             this.panel4.Controls.Add(this.txtOriPrice);
@@ -694,15 +707,64 @@ namespace com.digitalwave.iCare.gui.HIS
             this.panel4.Size = new System.Drawing.Size(672, 627);
             this.panel4.TabIndex = 0;
             // 
+            // cboSfdw
+            // 
+            this.cboSfdw.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSfdw.Font = new System.Drawing.Font("宋体", 11F);
+            this.cboSfdw.Items.AddRange(new object[] {
+            " ",
+            "小时",
+            "天"});
+            this.cboSfdw.Location = new System.Drawing.Point(377, 576);
+            this.cboSfdw.Name = "cboSfdw";
+            this.cboSfdw.Size = new System.Drawing.Size(68, 23);
+            this.cboSfdw.TabIndex = 895;
+            // 
+            // cboXb
+            // 
+            this.cboXb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboXb.Font = new System.Drawing.Font("宋体", 11F);
+            this.cboXb.Items.AddRange(new object[] {
+            " ",
+            "男性",
+            "女性"});
+            this.cboXb.Location = new System.Drawing.Point(212, 575);
+            this.cboXb.Name = "cboXb";
+            this.cboXb.Size = new System.Drawing.Size(84, 23);
+            this.cboXb.TabIndex = 894;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.label50.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label50.Location = new System.Drawing.Point(306, 579);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(70, 14);
+            this.label50.TabIndex = 893;
+            this.label50.Text = "收费单位:";
+            this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.label49.Location = new System.Drawing.Point(166, 579);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(42, 14);
+            this.label49.TabIndex = 892;
+            this.label49.Text = "性别:";
+            this.label49.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // cboIsChildPrice
             // 
             this.cboIsChildPrice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboIsChildPrice.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cboIsChildPrice.Font = new System.Drawing.Font("宋体", 11F);
             this.cboIsChildPrice.ForeColor = System.Drawing.Color.BlueViolet;
             this.cboIsChildPrice.Items.AddRange(new object[] {
             "否",
             "是"});
-            this.cboIsChildPrice.Location = new System.Drawing.Point(303, 575);
+            this.cboIsChildPrice.Location = new System.Drawing.Point(544, 576);
             this.cboIsChildPrice.Name = "cboIsChildPrice";
             this.cboIsChildPrice.Size = new System.Drawing.Size(48, 23);
             this.cboIsChildPrice.TabIndex = 891;
@@ -710,30 +772,22 @@ namespace com.digitalwave.iCare.gui.HIS
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label48.Font = new System.Drawing.Font("宋体", 9.5F, System.Drawing.FontStyle.Bold);
             this.label48.ForeColor = System.Drawing.Color.BlueViolet;
-            this.label48.Location = new System.Drawing.Point(166, 577);
+            this.label48.Location = new System.Drawing.Point(444, 580);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(135, 14);
+            this.label48.Size = new System.Drawing.Size(99, 13);
             this.label48.TabIndex = 890;
-            this.label48.Text = "是否儿童加收项目:";
+            this.label48.Text = "儿童加收项目:";
             this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtOriPrice
             // 
             this.txtOriPrice.CausesValidation = false;
-            //this.txtOriPrice.EnableAutoValidation = false;
-            //this.txtOriPrice.EnableEnterKeyValidate = false;
-            //this.txtOriPrice.EnableEscapeKeyUndo = true;
-            //this.txtOriPrice.EnableLastValidValue = true;
-            //this.txtOriPrice.ErrorProvider = null;
-            //this.txtOriPrice.ErrorProviderMessage = "Invalid value";
             this.txtOriPrice.Font = new System.Drawing.Font("宋体", 11F);
-            //this.txtOriPrice.ForceFormatText = true;
             this.txtOriPrice.Location = new System.Drawing.Point(144, 492);
             this.txtOriPrice.MaxLength = 10;
             this.txtOriPrice.Name = "txtOriPrice";
-            //this.txtOriPrice.NumericCharStyle = SourceLibrary.Windows.Forms.NumericCharStyle.DecimalSeparator;
             this.txtOriPrice.Size = new System.Drawing.Size(152, 24);
             this.txtOriPrice.TabIndex = 18;
             this.txtOriPrice.Text = "0";
@@ -815,14 +869,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // txtCityUnicode
             // 
-            //this.txtCityUnicode.EnableAutoValidation = false;
-            //this.txtCityUnicode.EnableEnterKeyValidate = false;
-            //this.txtCityUnicode.EnableEscapeKeyUndo = true;
-            //this.txtCityUnicode.EnableLastValidValue = true;
-            //this.txtCityUnicode.ErrorProvider = null;
-            //this.txtCityUnicode.ErrorProviderMessage = "Invalid value";
             this.txtCityUnicode.Font = new System.Drawing.Font("宋体", 11F);
-            //this.txtCityUnicode.ForceFormatText = true;
             this.txtCityUnicode.Location = new System.Drawing.Point(440, 493);
             this.txtCityUnicode.MaxLength = 20;
             this.txtCityUnicode.Name = "txtCityUnicode";
@@ -857,7 +904,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             this.label43.AutoSize = true;
             this.label43.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.label43.Location = new System.Drawing.Point(23, 577);
+            this.label43.Location = new System.Drawing.Point(23, 579);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(70, 14);
             this.label43.TabIndex = 354;
@@ -882,6 +929,7 @@ namespace com.digitalwave.iCare.gui.HIS
             this.m_lsvOrderType.FullRowSelect = true;
             this.m_lsvOrderType.GridLines = true;
             this.m_lsvOrderType.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.m_lsvOrderType.HideSelection = false;
             this.m_lsvOrderType.Location = new System.Drawing.Point(144, 331);
             this.m_lsvOrderType.MultiSelect = false;
             this.m_lsvOrderType.Name = "m_lsvOrderType";
@@ -890,8 +938,8 @@ namespace com.digitalwave.iCare.gui.HIS
             this.m_lsvOrderType.UseCompatibleStateImageBehavior = false;
             this.m_lsvOrderType.View = System.Windows.Forms.View.Details;
             this.m_lsvOrderType.Visible = false;
-            this.m_lsvOrderType.Leave += new System.EventHandler(this.m_lsvOrderType_Leave);
             this.m_lsvOrderType.KeyDown += new System.Windows.Forms.KeyEventHandler(this.m_lsvOrderType_KeyDown);
+            this.m_lsvOrderType.Leave += new System.EventHandler(this.m_lsvOrderType_Leave);
             // 
             // columnHeader6
             // 
@@ -913,6 +961,7 @@ namespace com.digitalwave.iCare.gui.HIS
             this.m_lsvExeType.FullRowSelect = true;
             this.m_lsvExeType.GridLines = true;
             this.m_lsvExeType.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.m_lsvExeType.HideSelection = false;
             this.m_lsvExeType.Location = new System.Drawing.Point(144, 331);
             this.m_lsvExeType.MultiSelect = false;
             this.m_lsvExeType.Name = "m_lsvExeType";
@@ -921,8 +970,8 @@ namespace com.digitalwave.iCare.gui.HIS
             this.m_lsvExeType.UseCompatibleStateImageBehavior = false;
             this.m_lsvExeType.View = System.Windows.Forms.View.Details;
             this.m_lsvExeType.Visible = false;
-            this.m_lsvExeType.Leave += new System.EventHandler(this.m_lsvExeType_Leave);
             this.m_lsvExeType.KeyDown += new System.Windows.Forms.KeyEventHandler(this.m_lsvExeType_KeyDown);
+            this.m_lsvExeType.Leave += new System.EventHandler(this.m_lsvExeType_Leave);
             // 
             // columnHeader4
             // 
@@ -954,6 +1003,7 @@ namespace com.digitalwave.iCare.gui.HIS
             this.m_lsvExcType.FullRowSelect = true;
             this.m_lsvExcType.GridLines = true;
             this.m_lsvExcType.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.m_lsvExcType.HideSelection = false;
             this.m_lsvExcType.Location = new System.Drawing.Point(144, 333);
             this.m_lsvExcType.MultiSelect = false;
             this.m_lsvExcType.Name = "m_lsvExcType";
@@ -962,8 +1012,8 @@ namespace com.digitalwave.iCare.gui.HIS
             this.m_lsvExcType.UseCompatibleStateImageBehavior = false;
             this.m_lsvExcType.View = System.Windows.Forms.View.Details;
             this.m_lsvExcType.Visible = false;
-            this.m_lsvExcType.Leave += new System.EventHandler(this.m_lsvExcType_Leave);
             this.m_lsvExcType.KeyDown += new System.Windows.Forms.KeyEventHandler(this.m_lsvExcType_KeyDown);
+            this.m_lsvExcType.Leave += new System.EventHandler(this.m_lsvExcType_Leave);
             // 
             // columnHeader1
             // 
@@ -1030,7 +1080,7 @@ namespace com.digitalwave.iCare.gui.HIS
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("宋体", 10.5F);
             this.label42.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label42.Location = new System.Drawing.Point(323, 552);
+            this.label42.Location = new System.Drawing.Point(306, 552);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(70, 14);
             this.label42.TabIndex = 348;
@@ -1044,7 +1094,7 @@ namespace com.digitalwave.iCare.gui.HIS
             this.m_cboKeepUse.Items.AddRange(new object[] {
             "分钟",
             "小时"});
-            this.m_cboKeepUse.Location = new System.Drawing.Point(394, 548);
+            this.m_cboKeepUse.Location = new System.Drawing.Point(377, 548);
             this.m_cboKeepUse.Name = "m_cboKeepUse";
             this.m_cboKeepUse.Size = new System.Drawing.Size(68, 23);
             this.m_cboKeepUse.TabIndex = 43;
@@ -1155,6 +1205,7 @@ namespace com.digitalwave.iCare.gui.HIS
             this.lsvDefaultFreq.FullRowSelect = true;
             this.lsvDefaultFreq.GridLines = true;
             this.lsvDefaultFreq.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lsvDefaultFreq.HideSelection = false;
             this.lsvDefaultFreq.Location = new System.Drawing.Point(144, 331);
             this.lsvDefaultFreq.MultiSelect = false;
             this.lsvDefaultFreq.Name = "lsvDefaultFreq";
@@ -1163,8 +1214,8 @@ namespace com.digitalwave.iCare.gui.HIS
             this.lsvDefaultFreq.UseCompatibleStateImageBehavior = false;
             this.lsvDefaultFreq.View = System.Windows.Forms.View.Details;
             this.lsvDefaultFreq.Visible = false;
-            this.lsvDefaultFreq.Leave += new System.EventHandler(this.lsvDefaultFreq_Leave);
             this.lsvDefaultFreq.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lsvDefaultFreq_KeyDown);
+            this.lsvDefaultFreq.Leave += new System.EventHandler(this.lsvDefaultFreq_Leave);
             // 
             // columnHeader14
             // 
@@ -1239,14 +1290,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // txtCommName
             // 
-            //this.txtCommName.EnableAutoValidation = false;
-            //this.txtCommName.EnableEnterKeyValidate = false;
-            //this.txtCommName.EnableEscapeKeyUndo = true;
-            //this.txtCommName.EnableLastValidValue = true;
-            //this.txtCommName.ErrorProvider = null;
-            //this.txtCommName.ErrorProviderMessage = "Invalid value";
             this.txtCommName.Font = new System.Drawing.Font("宋体", 11F);
-            //this.txtCommName.ForceFormatText = true;
             this.txtCommName.Location = new System.Drawing.Point(144, 117);
             this.txtCommName.MaxLength = 40;
             this.txtCommName.Name = "txtCommName";
@@ -1361,14 +1405,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // txtProduceing
             // 
-            //this.txtProduceing.EnableAutoValidation = false;
-            //this.txtProduceing.EnableEnterKeyValidate = false;
-            //this.txtProduceing.EnableEscapeKeyUndo = true;
-            //this.txtProduceing.EnableLastValidValue = true;
-            //this.txtProduceing.ErrorProvider = null;
-            //this.txtProduceing.ErrorProviderMessage = "Invalid value";
             this.txtProduceing.Font = new System.Drawing.Font("宋体", 11F);
-            //this.txtProduceing.ForceFormatText = true;
             this.txtProduceing.Location = new System.Drawing.Point(144, 225);
             this.txtProduceing.MaxLength = 25;
             this.txtProduceing.Name = "txtProduceing";
@@ -1412,14 +1449,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // txtEnglishName
             // 
-            //this.txtEnglishName.EnableAutoValidation = false;
-            //this.txtEnglishName.EnableEnterKeyValidate = false;
-            //this.txtEnglishName.EnableEscapeKeyUndo = true;
-            //this.txtEnglishName.EnableLastValidValue = true;
-            //this.txtEnglishName.ErrorProvider = null;
-            //this.txtEnglishName.ErrorProviderMessage = "Invalid value";
             this.txtEnglishName.Font = new System.Drawing.Font("宋体", 11F);
-            //this.txtEnglishName.ForceFormatText = true;
             this.txtEnglishName.Location = new System.Drawing.Point(144, 90);
             this.txtEnglishName.MaxLength = 40;
             this.txtEnglishName.Name = "txtEnglishName";
@@ -1440,18 +1470,10 @@ namespace com.digitalwave.iCare.gui.HIS
             // m_txtTradePrice
             // 
             this.m_txtTradePrice.CausesValidation = false;
-            //this.m_txtTradePrice.EnableAutoValidation = false;
-            //this.m_txtTradePrice.EnableEnterKeyValidate = false;
-            //this.m_txtTradePrice.EnableEscapeKeyUndo = true;
-            //this.m_txtTradePrice.EnableLastValidValue = true;
-            //this.m_txtTradePrice.ErrorProvider = null;
-            //this.m_txtTradePrice.ErrorProviderMessage = "Invalid value";
             this.m_txtTradePrice.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtTradePrice.ForceFormatText = true;
             this.m_txtTradePrice.Location = new System.Drawing.Point(144, 358);
             this.m_txtTradePrice.MaxLength = 10;
             this.m_txtTradePrice.Name = "m_txtTradePrice";
-            //this.m_txtTradePrice.NumericCharStyle = SourceLibrary.Windows.Forms.NumericCharStyle.DecimalSeparator;
             this.m_txtTradePrice.Size = new System.Drawing.Size(152, 24);
             this.m_txtTradePrice.TabIndex = 13;
             this.m_txtTradePrice.Text = "0";
@@ -1520,18 +1542,10 @@ namespace com.digitalwave.iCare.gui.HIS
             // m_txtPacQ
             // 
             this.m_txtPacQ.CausesValidation = false;
-            //this.m_txtPacQ.EnableAutoValidation = false;
-            //this.m_txtPacQ.EnableEnterKeyValidate = false;
-            //this.m_txtPacQ.EnableEscapeKeyUndo = true;
-            //this.m_txtPacQ.EnableLastValidValue = true;
-            //this.m_txtPacQ.ErrorProvider = null;
-            //this.m_txtPacQ.ErrorProviderMessage = "Invalid value";
             this.m_txtPacQ.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtPacQ.ForceFormatText = true;
             this.m_txtPacQ.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.m_txtPacQ.Location = new System.Drawing.Point(440, 103);
             this.m_txtPacQ.Name = "m_txtPacQ";
-            //this.m_txtPacQ.NumericCharStyle = ((SourceLibrary.Windows.Forms.NumericCharStyle)((SourceLibrary.Windows.Forms.NumericCharStyle.DecimalSeparator | SourceLibrary.Windows.Forms.NumericCharStyle.NegativeSymbol)));
             this.m_txtPacQ.Size = new System.Drawing.Size(152, 24);
             this.m_txtPacQ.TabIndex = 23;
             this.m_txtPacQ.Text = "0";
@@ -1595,14 +1609,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // m_txtchargeNO
             // 
-            //this.m_txtchargeNO.EnableAutoValidation = false;
-            //this.m_txtchargeNO.EnableEnterKeyValidate = false;
-            //this.m_txtchargeNO.EnableEscapeKeyUndo = true;
-            //this.m_txtchargeNO.EnableLastValidValue = true;
-            //this.m_txtchargeNO.ErrorProvider = null;
-            //this.m_txtchargeNO.ErrorProviderMessage = "Invalid value";
             this.m_txtchargeNO.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtchargeNO.ForceFormatText = true;
             this.m_txtchargeNO.Location = new System.Drawing.Point(144, 9);
             this.m_txtchargeNO.MaxLength = 20;
             this.m_txtchargeNO.Name = "m_txtchargeNO";
@@ -1821,18 +1828,10 @@ namespace com.digitalwave.iCare.gui.HIS
             // m_txtPrice
             // 
             this.m_txtPrice.CausesValidation = false;
-            //this.m_txtPrice.EnableAutoValidation = false;
-            //this.m_txtPrice.EnableEnterKeyValidate = false;
-            //this.m_txtPrice.EnableEscapeKeyUndo = true;
-            //this.m_txtPrice.EnableLastValidValue = true;
-            //this.m_txtPrice.ErrorProvider = null;
-            //this.m_txtPrice.ErrorProviderMessage = "Invalid value";
             this.m_txtPrice.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtPrice.ForceFormatText = true;
             this.m_txtPrice.Location = new System.Drawing.Point(144, 331);
             this.m_txtPrice.MaxLength = 10;
             this.m_txtPrice.Name = "m_txtPrice";
-            //this.m_txtPrice.NumericCharStyle = SourceLibrary.Windows.Forms.NumericCharStyle.DecimalSeparator;
             this.m_txtPrice.Size = new System.Drawing.Size(152, 24);
             this.m_txtPrice.TabIndex = 12;
             this.m_txtPrice.Text = "0";
@@ -1853,14 +1852,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // m_txtSpec
             // 
-            //this.m_txtSpec.EnableAutoValidation = false;
-            //this.m_txtSpec.EnableEnterKeyValidate = false;
-            //this.m_txtSpec.EnableEscapeKeyUndo = true;
-            //this.m_txtSpec.EnableLastValidValue = true;
-            //this.m_txtSpec.ErrorProvider = null;
-            //this.m_txtSpec.ErrorProviderMessage = "Invalid value";
             this.m_txtSpec.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtSpec.ForceFormatText = true;
             this.m_txtSpec.Location = new System.Drawing.Point(144, 198);
             this.m_txtSpec.MaxLength = 50;
             this.m_txtSpec.Name = "m_txtSpec";
@@ -1880,14 +1872,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // m_txtWB
             // 
-            //this.m_txtWB.EnableAutoValidation = false;
-            //this.m_txtWB.EnableEnterKeyValidate = false;
-            //this.m_txtWB.EnableEscapeKeyUndo = true;
-            //this.m_txtWB.EnableLastValidValue = true;
-            //this.m_txtWB.ErrorProvider = null;
-            //this.m_txtWB.ErrorProviderMessage = "Invalid value";
             this.m_txtWB.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtWB.ForceFormatText = true;
             this.m_txtWB.Location = new System.Drawing.Point(144, 171);
             this.m_txtWB.MaxLength = 10;
             this.m_txtWB.Name = "m_txtWB";
@@ -1908,14 +1893,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // m_txtPY
             // 
             this.m_txtPY.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            //this.m_txtPY.EnableAutoValidation = false;
-            //this.m_txtPY.EnableEnterKeyValidate = false;
-            //this.m_txtPY.EnableEscapeKeyUndo = true;
-            //this.m_txtPY.EnableLastValidValue = true;
-            //this.m_txtPY.ErrorProvider = null;
-            //this.m_txtPY.ErrorProviderMessage = "Invalid value";
             this.m_txtPY.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtPY.ForceFormatText = true;
             this.m_txtPY.Location = new System.Drawing.Point(144, 144);
             this.m_txtPY.MaxLength = 10;
             this.m_txtPY.Name = "m_txtPY";
@@ -1935,14 +1913,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // m_txtName
             // 
-            //this.m_txtName.EnableAutoValidation = false;
-            //this.m_txtName.EnableEnterKeyValidate = false;
-            //this.m_txtName.EnableEscapeKeyUndo = true;
-            //this.m_txtName.EnableLastValidValue = true;
-            //this.m_txtName.ErrorProvider = null;
-            //this.m_txtName.ErrorProviderMessage = "Invalid value";
             this.m_txtName.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtName.ForceFormatText = true;
             this.m_txtName.Location = new System.Drawing.Point(144, 63);
             this.m_txtName.MaxLength = 24;
             this.m_txtName.Name = "m_txtName";
@@ -1952,14 +1923,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // m_txtNo
             // 
-            //this.m_txtNo.EnableAutoValidation = false;
-            //this.m_txtNo.EnableEnterKeyValidate = false;
-            //this.m_txtNo.EnableEscapeKeyUndo = true;
-            //this.m_txtNo.EnableLastValidValue = true;
-            //this.m_txtNo.ErrorProvider = null;
-            //this.m_txtNo.ErrorProviderMessage = "Invalid value";
             this.m_txtNo.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtNo.ForceFormatText = true;
             this.m_txtNo.Location = new System.Drawing.Point(144, 36);
             this.m_txtNo.MaxLength = 20;
             this.m_txtNo.Name = "m_txtNo";
@@ -1991,18 +1955,10 @@ namespace com.digitalwave.iCare.gui.HIS
             // m_txtDosage
             // 
             this.m_txtDosage.CausesValidation = false;
-            //this.m_txtDosage.EnableAutoValidation = true;
-            //this.m_txtDosage.EnableEnterKeyValidate = true;
-            //this.m_txtDosage.EnableEscapeKeyUndo = true;
-            //this.m_txtDosage.EnableLastValidValue = true;
-            //this.m_txtDosage.ErrorProvider = null;
-            //this.m_txtDosage.ErrorProviderMessage = "Invalid value";
             this.m_txtDosage.Font = new System.Drawing.Font("宋体", 11F);
-            //this.m_txtDosage.ForceFormatText = true;
             this.m_txtDosage.Location = new System.Drawing.Point(144, 279);
             this.m_txtDosage.MaxLength = 10;
             this.m_txtDosage.Name = "m_txtDosage";
-            //this.m_txtDosage.NumericCharStyle = SourceLibrary.Windows.Forms.NumericCharStyle.DecimalSeparator;
             this.m_txtDosage.Size = new System.Drawing.Size(152, 24);
             this.m_txtDosage.TabIndex = 10;
             this.m_txtDosage.Text = "0";
@@ -2011,8 +1967,8 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.bt_Refresh);
@@ -2025,9 +1981,9 @@ namespace com.digitalwave.iCare.gui.HIS
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.dataGrid1);
             this.groupBox1.Location = new System.Drawing.Point(6, 44);
             this.groupBox1.Name = "groupBox1";
@@ -2041,13 +1997,14 @@ namespace com.digitalwave.iCare.gui.HIS
             this.dataGrid1.BackgroundColor = System.Drawing.Color.White;
             this.dataGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGrid1.CaptionBackColor = System.Drawing.Color.DarkGray;
-            this.dataGrid1.CaptionFont = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Bold);
             this.dataGrid1.CaptionVisible = false;
             this.dataGrid1.DataMember = "";
             this.dataGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGrid1.Font = new System.Drawing.Font("宋体", 10.5F);
             this.dataGrid1.HeaderForeColor = System.Drawing.SystemColors.ControlText;
             this.dataGrid1.Location = new System.Drawing.Point(3, 22);
             this.dataGrid1.Name = "dataGrid1";
+            this.dataGrid1.PreferredRowHeight = 23;
             this.dataGrid1.ReadOnly = true;
             this.dataGrid1.RowHeaderWidth = 20;
             this.dataGrid1.SelectionBackColor = System.Drawing.Color.DarkGray;
@@ -2094,7 +2051,7 @@ namespace com.digitalwave.iCare.gui.HIS
             this.bt_Refresh.DialogResult = System.Windows.Forms.DialogResult.None;
             this.bt_Refresh.Font = new System.Drawing.Font("宋体", 10.5F);
             this.bt_Refresh.Hint = "";
-            this.bt_Refresh.Location = new System.Drawing.Point(260, 9);
+            this.bt_Refresh.Location = new System.Drawing.Point(260, 7);
             this.bt_Refresh.Name = "bt_Refresh";
             this.bt_Refresh.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
             this.bt_Refresh.Size = new System.Drawing.Size(76, 32);
@@ -2105,9 +2062,10 @@ namespace com.digitalwave.iCare.gui.HIS
             // m_cmbType
             // 
             this.m_cmbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.m_cmbType.Location = new System.Drawing.Point(87, 14);
+            this.m_cmbType.Font = new System.Drawing.Font("宋体", 11F);
+            this.m_cmbType.Location = new System.Drawing.Point(87, 11);
             this.m_cmbType.Name = "m_cmbType";
-            this.m_cmbType.Size = new System.Drawing.Size(170, 24);
+            this.m_cmbType.Size = new System.Drawing.Size(170, 23);
             this.m_cmbType.TabIndex = 4;
             this.m_cmbType.SelectedIndexChanged += new System.EventHandler(this.m_cmbType_SelectedIndexChanged);
             // 
@@ -2133,10 +2091,10 @@ namespace com.digitalwave.iCare.gui.HIS
             this.KeyPreview = true;
             this.Name = "frmChargeItem3";
             this.Text = "收费项目维护";
-            this.Load += new System.EventHandler(this.frmChargeItem3_Load);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.frmChargeItem3_Closing);
-            this.Resize += new System.EventHandler(this.frmChargeItem3_Resize);
+            this.Load += new System.EventHandler(this.frmChargeItem3_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmChargeItem3_KeyDown);
+            this.Resize += new System.EventHandler(this.frmChargeItem3_Resize);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);

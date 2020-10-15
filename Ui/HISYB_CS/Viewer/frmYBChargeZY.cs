@@ -54,7 +54,7 @@ namespace com.digitalwave.iCare.gui.HIS
         /// 结算终止日期
         /// </summary>
         public string strJSZZRQ = string.Empty;
-        #region 获取药品让利开关 Add by 吴汉明 2014-12-25
+        #region 获取药品让利开关 2014-12-25
         public bool m_blnDiffCostOn = false;
         #endregion
 

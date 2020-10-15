@@ -15,6 +15,15 @@ namespace com.digitalwave.iCare.gui.HIS
         public frmYBChargeMZ()
         {
             InitializeComponent();
+            if (!DesignMode)
+            {
+                //Common.Entity.GlobalLogin.SkinName = "Visual Studio 2013 Blue";
+                Common.Entity.GlobalLogin.SkinMaskColorValue = "ff05fff9|255|5|255|249";
+                this.defaultLookAndFeel.LookAndFeel.SkinName = Common.Entity.GlobalLogin.SkinName;
+                DevExpress.LookAndFeel.UserLookAndFeel.Default.SetSkinStyle(Common.Entity.GlobalLogin.SkinName);
+                this.defaultLookAndFeel.LookAndFeel.SkinMaskColor = Common.Entity.GlobalLogin.SkinMaskColor;
+                DevExpress.LookAndFeel.UserLookAndFeel.Default.SetSkinMaskColors(Common.Entity.GlobalLogin.SkinMaskColor, Common.Entity.GlobalLogin.SkinMaskColor2);
+            }
         }
 
         public override void CreateController()
@@ -113,6 +122,11 @@ namespace com.digitalwave.iCare.gui.HIS
         /// 是否重流门诊
         /// </summary>
         public bool IsCovi19 = false;
+
+        /// <summary>
+        /// 计划生育门诊
+        /// </summary>
+        public bool IsFp = false;
 
         private void frmYBChargeMZ_Load(object sender, EventArgs e)
         {

@@ -18,27 +18,49 @@ namespace AnalsysTest
         }
 
         clsSerialPortIO m_objSerialPort;
+        BackgroundWorker backgroundWorker;
+        bool isDoing { get; set; }
+        /// <summary>
+        /// 接收数据缓冲区
+        /// </summary>
+        StringBuilder ReceiveBuf = null;
+
+        /// <summary>
+        /// 请求应答符
+        /// </summary>
+        public const string ReqCode = "";
+
+        /// <summary>
+        /// 包起始字符
+        /// </summary>
+        public const string StartCode = "";
+
+        /// <summary>
+        /// 包结束字符
+        /// </summary>
+        public const string EndCode = "";
+
+        /// <summary>
+        /// 发送命令字符
+        /// </summary>
+        public const string AckCode = "";
+
 
         private void frmConsole_Load(object sender, EventArgs e)
         {
             this.cboPort.SelectedIndex = 0;
             this.cboDataType.SelectedIndex = 0;
-            this.lblTip.Text = "";
-            this.lblPortName.Text = "";
-            this.lblBit.Text = "";
-            this.lblStop.Text = "";
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
             int port = this.cboPort.SelectedIndex + 1;
-
+            ReceiveBuf = new StringBuilder();
             m_objSerialPort = new clsSerialPortIO(port);
-            //m_objSerialPort.BaudRate = 1200;
-            //m_objSerialPort.DataBits = 8;
-            //m_objSerialPort.StopBits = "1";
-            //m_objSerialPort.Parity = "0";
             m_objSerialPort.InitSeri(1);
+
+            backgroundWorker = new BackgroundWorker();
+            backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
 
             if (m_objSerialPort.IsOpen)
             {
@@ -68,10 +90,6 @@ namespace AnalsysTest
             if (m_objSerialPort.IsOpen)
             {
                 this.lblTip.Text = "串口已打开！";
-                this.lblPortName.Text = m_objSerialPort.PortName;
-                this.lblB.Text = m_objSerialPort.BaudRate.ToString();
-                this.lblBit.Text = m_objSerialPort.DataBits.ToString();
-                this.lblStop.Text = m_objSerialPort.StopBits.ToString();
             }
                 
             else
@@ -93,8 +111,7 @@ namespace AnalsysTest
             if (this.cboDataType.SelectedIndex == 0)
             {
                 objData_Received = objSP.Read();
-
-                sb.AppendLine(objData_Received.ToString());
+                ReceiveBuf.AppendLine(objData_Received.ToString());
             }
             else
             {
@@ -102,11 +119,64 @@ namespace AnalsysTest
                 objSP.Read(out byteReceived);
                 objData_Received = byteReceived;
                 Log.Output("byteReceived-->" + byteReceived.Length.ToString());
-                sb.AppendLine(Encoding.Default.GetString((byte[])objData_Received));
+                
+                string rec = Encoding.Default.GetString((byte[])objData_Received);
+                ReceiveBuf.AppendLine(rec);
+                if (rec == StartCode || rec == ReqCode || rec == EndCode)
+                {
+                    objSP.Send(AckCode);
+                }
+               
+            }
+            //this.richTextBox1.Text = sb.ToString();
+        }
+
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (isDoing)
+            {
+                return;
             }
 
-            this.richTextBox1.Text = sb.ToString();
+          
+            string currData = ReceiveBuf.ToString();
+            if (!string.IsNullOrEmpty(currData))
+                Log.Output(currData);
+
+            int idxStart2 = currData.IndexOf(StartCode);
+            int idxEnd2 = currData.IndexOf(EndCode);
+
+            List<string> lstResultData = new List<string>();
+            do
+            {
+                isDoing = true;
+                if (idxEnd2 - idxStart2 - 10 > 0)
+                {
+                    string data = currData.Substring(idxStart2 + 1, idxEnd2 - idxStart2 - 1);
+                    if (lstResultData.IndexOf(data) < 0) lstResultData.Add(data);
+                }
+                else if()
+                {
+
+                }
+                ReceiveBuf.Remove(0, idxEnd2 + 1);
+
+                currData = currData.Substring(idxEnd2 + 1);
+                idxStart2 = currData.IndexOf(StartCode);
+                idxEnd2 = currData.IndexOf(EndCode);
+
+            } while (idxStart2 > 0 && idxEnd2 > 0);
+            ReceiveBuf.Remove(0, idxEnd2 + 1);
+
+            if (lstResultData != null && lstResultData.Count > 0)
+            {
+                //AddResult(lstResultData);
+            }
+
+            isDoing = false;
         }
+
 
         private void btnClose_Click(object sender, EventArgs e)
         {

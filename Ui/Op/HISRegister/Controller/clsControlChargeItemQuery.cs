@@ -207,6 +207,23 @@ namespace com.digitalwave.iCare.gui.HIS
             }
             this.m_objViewer.txtCityUnicode.Text = dt.Rows[index]["cityUnicode"].ToString();
             this.m_objViewer.txtRegular.Text = dt.Rows[index]["checkRegular"].ToString();
+
+            if (dt.Rows[index]["itemsex"] == DBNull.Value)
+            {
+                this.m_objViewer.cboXb.SelectedIndex = 0;
+            }
+            else
+            {
+                this.m_objViewer.cboXb.SelectedIndex = Convert.ToInt32(dt.Rows[index]["itemsex"]);
+            }
+            if (dt.Rows[index]["itemunit2"] == DBNull.Value)
+            {
+                this.m_objViewer.cboSfdw.SelectedIndex = 0;
+            }
+            else
+            {
+                this.m_objViewer.cboSfdw.SelectedIndex = Convert.ToInt32(dt.Rows[index]["itemunit2"]);
+            }
         }
         private int m_mthGetIndex(object str)
         {

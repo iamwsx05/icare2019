@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using weCare.Core.Entity;
 using weCare.Core.Utils;
 using System.Data;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml;
+using System.Net;
+using System.Runtime.Serialization;
 
 namespace GSSB
 {
@@ -48,22 +51,22 @@ namespace GSSB
         /// <summary>
         /// 用户编码
         /// </summary>
-        static string userId = "441900103000";
+        static string userId = "ss0028";
+
+        /// <summary>
+        /// 用户密码
+        /// </summary>
+        static string password = "EApYVLxl";
 
         /// <summary>
         /// 机构唯一码
         /// </summary>
-        static string orgId = "4419001030020000000";
+        static string orgId = "ss0028";
 
         /// <summary>
-        /// 用户信息
+        /// URI
         /// </summary>
-        static string userInfo = "4419001030020000888|e10adc3949ba59abbe56e057f20f883e";
-
-        /// <summary>
-        /// 服务商ID号
-        /// </summary>
-        static string providerId = "4419001030020000009";
+        static string Uri = @"http://19.15.232.15:8080/hygeia_esb_sj/api/call.action";
 
         #endregion
 
@@ -72,11 +75,207 @@ namespace GSSB
         /// 统一入口
         /// </summary>
         /// <param name="transNo"></param>
-        /// <param name="xmlIn"></param>
+        /// <param name="request"></param>
+        /// <param name="dtResult"></param>
         /// <returns></returns>
-        public EntitySbRes Access(string transNo, string request)
+        public static bool Access(string transNo, string request, out DataTable dtResult, out string error)
         {
-            return null;
+            EntitySbRes res = null;
+            dtResult = null;
+            error = string.Empty;
+            string req = string.Empty;
+            try
+            {
+                switch (transNo)
+                {
+                    case "biz120001":       // 4.2.1 入院登记时取人员信息
+                        req = Biz120001(request);
+                        res = Proxy(req);
+                        break;
+                    case "bizh120102":       // 4.2.2 入院登记后取业务信息
+                        req = Biz120102(request);
+                        res = Proxy(req);
+                        break;
+                    //case "biz120002":       // 4.2.3 校验并保存费用信息
+                    //    res = Proxy(transNo, Biz120002(request, dtIn));
+                    //    break;
+                    case "biz120003":       // 4.2.4 校验并计算费用信息
+                        req = Biz120003(request);
+                        res = Proxy(req);
+                        break;
+                    case "biz120004":       // 4.2.10 删除住院业务费用明细
+                        req = Biz120004(request);
+                        res = Proxy(req);
+                        break;
+                    case "biz120103":       // 4.2.2 入院登记
+                        req = Biz120103(request);
+                        res = Proxy(req);
+                        break;
+                    case "biz120104":       // 4.2.7 入院登记信息修改
+                        req = Biz120104(request);
+                        res = Proxy(req);
+                        break;
+                    case "biz120105":       // 4.2.5 出院登记
+                        req = Biz120105(request);
+                        res = Proxy(req);
+                        break;
+                    case "biz120106":       // 4.2.6 出院结算
+                        req = Biz120106(request);
+                        res = Proxy(req);
+                        break;
+                    case "bizh120107":       // 4.2.11 取消出院结算
+                        req = Biz120107(request);
+                        res = Proxy(req);
+                        break;
+                    case "biz120108":       // 4.2.9 取消出院登记
+                        req = Biz120108(request);
+                        res = Proxy(req);
+                        break;
+                    case "biz120109":       // 4.2.8 取消入院登记
+                        req = Biz120109(request);
+                        res = Proxy(req);
+                        break;
+                    default:
+                        break;
+                }
+                error = req + Environment.NewLine + res.response;
+                if (res != null && res.resultCode >= 0)
+                {
+                    DataSet ds = Function.ReadXml(res.response);
+                    if (transNo == "biz120001" || transNo == "bizh120102")
+                    {
+                        if (ds != null && ds.Tables.Contains("row"))
+                        {
+                            dtResult = ds.Tables["row"];
+                        }
+                    }
+                    else if (transNo == "biz120003" || transNo == "biz120103" || transNo == "biz120105" || transNo == "biz120106")
+                    {
+                        if (ds != null && ds.Tables.Contains("program"))
+                        {
+                            dtResult = ds.Tables["program"];
+                            // biz120103
+                            string jydjh = ds.Tables["program"].Rows[0]["aaz218"].ToString(); // *******
+                        }
+                    }
+                    // 返回值>0,执行成功
+                    if (ds != null && ds.Tables.Contains("program"))
+                        return Function.Int(ds.Tables["program"].Rows[0]["return_code"].ToString()) >= 0 ? true : false;
+                    else
+                        return false;
+
+                }
+                else
+                {
+                    Common.Controls.DialogBox.Msg(res.response);
+                }
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+                Log.Output(error);
+            }
+            return false;
+        }
+        /// <summary>
+        /// 校验并保存费用信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public static bool Access120002(string request, List<EntitySGSFeeItem> lstFeeItems, out string error)
+        {
+            error = string.Empty;
+            try
+            {
+                // 4.2.3 校验并保存费用信息
+                EntitySbRes res = Proxy(Biz120002(request, lstFeeItems));
+                if (res != null && res.resultCode >= 0)
+                {
+                    DataSet ds = Function.ReadXml(res.response);
+                    // 返回值>0,执行成功
+                    if (ds != null && ds.Tables.Contains("program"))
+                        return Function.Int(ds.Tables["program"].Rows[0]["return_code"].ToString()) >= 0 ? true : false;
+                    else
+                        return false;
+                }
+                else
+                {
+                    error = res.response;
+                }
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+                Log.Output(error);
+            }
+            return false;
+        }
+        #endregion
+
+        #region Proxy
+        /// <summary>
+        /// Proxy
+        /// </summary>
+        /// <param name="transNo"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        static EntitySbRes Proxy(/*string transNo,*/ string request)
+        {
+            string tmpUri = Function.ReadConfigXml("uri");
+            if (!string.IsNullOrEmpty(tmpUri))
+            {
+                Uri = tmpUri;
+            }
+
+            // Log.request 
+            Log.Output(Uri + Environment.NewLine + request);
+            // 返回实体 
+            EntitySbRes res = new EntitySbRes();
+            Encoding encoding = Encoding.GetEncoding("utf-8");
+            byte[] dataArray = encoding.GetBytes(request);
+            // 创建请求
+            HttpWebRequest httpWeb = (HttpWebRequest)HttpWebRequest.Create(Uri);
+            httpWeb.Method = "POST";
+            httpWeb.ContentLength = dataArray.Length;
+            httpWeb.ContentType = "application/x-www-form-urlencoded";       // "application/json"; 
+            // 创建输入流
+            Stream dataStream = null;
+            try
+            {
+                dataStream = httpWeb.GetRequestStream();
+            }
+            catch (WebException ex)
+            {
+                res.resultCode = -1;
+                res.message = ex.Message;
+                Log.Output(res.message);
+                return res;//连接服务器失败
+            }
+            // 发送请求
+            dataStream.Write(dataArray, 0, dataArray.Length);
+            dataStream.Close();
+            // 获取返回值
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)httpWeb.GetResponse();
+                StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                string resp = reader.ReadToEnd();
+                reader.Close();
+                // log.response
+                Log.Output(resp);
+                if (resp.Contains("服务执行发生异常"))
+                    res.resultCode = -2;
+                res.response = resp;
+                //res = JsonConvert.DeserializeObject<EntityRes>(resp);
+            }
+            catch (WebException ex)
+            {
+                res.resultCode = -2;
+                res.message = ex.Message;
+                Log.Output(res.message);
+            }
+            return res;
         }
         #endregion
 
@@ -97,16 +296,32 @@ namespace GSSB
         {
             string request = string.Empty;
             string today = Function.ReadConfigXml("today");
+            userId = Function.ReadConfigXml("userId");
+            password = Function.ReadConfigXml("password");
             if (today != DateTime.Now.ToString("yyyy-MM-dd"))
             {
                 request = "<program>" + Environment.NewLine;
                 request += string.Format("<function_id>{0}</function_id>", "sys0001") + Environment.NewLine;
                 request += string.Format("<userid>{0}</userid>", userId) + Environment.NewLine;
-                request += string.Format("<password>{0}</password>", "24jfnaf9fwijfirn") + Environment.NewLine;
+                request += string.Format("<password>{0}</password>", password) + Environment.NewLine;
                 request += "</program>" + Environment.NewLine;
                 request = xmlTitle + request;
                 // call service
                 sessionId = "";
+                EntitySbRes res = Proxy(request);
+                if (res != null && res.resultCode >= 0)
+                {
+                    DataSet ds = Function.ReadXml(res.response);
+                    // 返回值>0,执行成功
+                    if (ds != null && ds.Tables.Contains("program"))
+                    {
+                        if (Function.Int(ds.Tables["program"].Rows[0]["return_code"].ToString()) >= 0)
+                        {
+                            sessionId = ds.Tables["program"].Rows[0]["session_id"].ToString();
+                        }
+                        Log.Output(ds.Tables["program"].Rows[0]["return_code_message"].ToString());
+                    }
+                }
                 if (!string.IsNullOrEmpty(sessionId))
                 {
                     Function.SaveConfigXml("today", DateTime.Now.ToString("yyyy-MM-dd"));
@@ -123,11 +338,25 @@ namespace GSSB
                 request = "<program>" + Environment.NewLine;
                 request += string.Format("<function_id>{0}</function_id>", "sys0001") + Environment.NewLine;
                 request += string.Format("<userid>{0}</userid>", userId) + Environment.NewLine;
-                request += string.Format("<password>{0}</password>", "24jfnaf9fwijfirn") + Environment.NewLine;
+                request += string.Format("<password>{0}</password>", password) + Environment.NewLine;
                 request += "</program>" + Environment.NewLine;
                 request = xmlTitle + request;
                 // call service
                 sessionId = "";
+                EntitySbRes res = Proxy(request);
+                if (res != null && res.resultCode >= 0)
+                {
+                    DataSet ds = Function.ReadXml(res.response);
+                    // 返回值>0,执行成功
+                    if (ds != null && ds.Tables.Contains("program"))
+                    {
+                        if (Function.Int(ds.Tables["program"].Rows[0]["return_code"].ToString()) >= 0)
+                        {
+                            sessionId = ds.Tables["program"].Rows[0]["session_id"].ToString();
+                        }
+                        Log.Output(ds.Tables["program"].Rows[0]["return_code_message"].ToString());
+                    }
+                }
                 if (!string.IsNullOrEmpty(sessionId))
                 {
                     Function.SaveConfigXml("today", DateTime.Now.ToString("yyyy-MM-dd"));
@@ -155,7 +384,7 @@ namespace GSSB
             request += string.Format("<bka895>{0}</bka895>", "aac002") + Environment.NewLine;               // 入参类型    aac001电脑号；aac002社会保障号码；bka100社保卡号
             request += string.Format("<bka896>{0}</bka896>", "513901198311295323") + Environment.NewLine;   // 入参值
             request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<bka006>{0}</bka006>", "110") + Environment.NewLine;                  // 医疗待遇类型 (根据服务获取)
+            request += string.Format("<bka006>{0}</bka006>", "420") + Environment.NewLine;                  // 医疗待遇类型 (根据服务获取)
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
         }
@@ -177,7 +406,7 @@ namespace GSSB
             request += string.Format("<bka895>{0}</bka895>", dicKey["NoType"] /*"aac002"*/) + Environment.NewLine;               // 入参类型    aac001电脑号；aac002社会保障号码；bka100社保卡号
             request += string.Format("<bka896>{0}</bka896>", dicKey["NoVal"] /*"513901198311295323"*/) + Environment.NewLine;   // 入参值
             request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<bka006>{0}</bka006>", "110") + Environment.NewLine;                  // 医疗待遇类型 (根据服务获取)
+            request += string.Format("<bka006>{0}</bka006>", "420") + Environment.NewLine;                  // 医疗待遇类型 (根据服务获取)
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
         }
@@ -198,7 +427,7 @@ namespace GSSB
             request += string.Format("<bka895>{0}</bka895>", "aac002") + Environment.NewLine;               // 入参类型    aac001电脑号；aac002社会保障号码；bka100社保卡号
             request += string.Format("<bka896>{0}</bka896>", "513901198311295323") + Environment.NewLine;   // 入参值
             request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<bka006>{0}</bka006>", "110") + Environment.NewLine;                  // 医疗待遇类型 (根据服务获取)
+            request += string.Format("<bka006>{0}</bka006>", "420") + Environment.NewLine;                  // 医疗待遇类型 (根据服务获取)
             request += string.Format("<bka001>{0}</bka001>", "1") + Environment.NewLine;                    // 费用批次	取bka001对应批次的费用；收费一次为“1”
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
@@ -220,7 +449,7 @@ namespace GSSB
             request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 
             request += string.Format("<aac001>{0}</aac001>", "1057203460") + Environment.NewLine;                  // 
             request += string.Format("<aka130>{0}</aka130>", "11") + Environment.NewLine;                  // 
-            request += string.Format("<bka006>{0}</bka006>", "110") + Environment.NewLine;                  // 
+            request += string.Format("<bka006>{0}</bka006>", "420") + Environment.NewLine;                  // 
             request += string.Format("<bka017>{0}</bka017>", "20160601") + Environment.NewLine;                  // 
             request += string.Format("<bka014>{0}</bka014>", "t10") + Environment.NewLine;                  // 
             request += string.Format("<bka015>{0}</bka015>", "test001") + Environment.NewLine;                  // 
@@ -327,19 +556,21 @@ namespace GSSB
         /// <returns></returns>
         static string Biz120001(string request)
         {
+            Dictionary<string, string> dicKey = Function.ReadXmlNodes(request, "request");
             request = string.Empty;
             request += "<program>" + Environment.NewLine;
             request += string.Format("<session_id>{0}</session_id>", GetSessionId()) + Environment.NewLine;
             request += string.Format("<function_id>{0}</function_id>", "bizh120001") + Environment.NewLine;     // 交易号
-            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<bka895>{0}</bka895>", "aac002") + Environment.NewLine;               // 入参类型 aac001电脑号；aac002社会保障号码；bka100社保卡号
-            request += string.Format("<bka896>{0}</bka896>", "513901198311295323") + Environment.NewLine;   // 入参值
-            request += string.Format("<aka130>{0}</aka130>", "12") + Environment.NewLine;                  // 业务类型 见码表
-            request += string.Format("<bka017>{0}</bka017>", " ") + Environment.NewLine;                  // 住院时间 格式“yyyyMMdd”
-            request += string.Format("<amc050>{0}</amc050>", " ") + Environment.NewLine;                  // 生育业务类型 工伤业务不需要考虑此字段内容
-            request += string.Format("<bka912>{0}</bka912>", " ") + Environment.NewLine;                  // 生育类别 工伤业务不需要考虑此字段内容
-            request += string.Format("<amc029>{0}</amc029>", " ") + Environment.NewLine;                  // 生育手术类别 工伤业务不需要考虑此字段内容
-            request += string.Format("<bka006>{0}</bka006>", " ") + Environment.NewLine;                  // 工伤待遇类型 工伤业务必填
+            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;                      // 医疗机构编码
+            // 测试阶段用电脑号
+            request += string.Format("<bka895>{0}</bka895>", "aac001" /*"aac002"*/) + Environment.NewLine;                   // 入参类型 aac001电脑号；aac002社会保障号码；bka100社保卡号
+            request += string.Format("<bka896>{0}</bka896>", dicKey["socialNo"]) + Environment.NewLine;         // 入参值
+            request += string.Format("<aka130>{0}</aka130>", "42") + Environment.NewLine;                       // 业务类型 见码表 12？ 42 工伤住院
+            request += string.Format("<bka017>{0}</bka017>", dicKey["inDate"]) + Environment.NewLine;           // 住院时间 格式“yyyyMMdd”
+            request += string.Format("<amc050>{0}</amc050>", " ") + Environment.NewLine;                        // 生育业务类型 工伤业务不需要考虑此字段内容
+            request += string.Format("<bka912>{0}</bka912>", " ") + Environment.NewLine;                        // 生育类别 工伤业务不需要考虑此字段内容
+            request += string.Format("<amc029>{0}</amc029>", " ") + Environment.NewLine;                        // 生育手术类别 工伤业务不需要考虑此字段内容
+            request += string.Format("<bka006>{0}</bka006>", "420") + Environment.NewLine;                      // 工伤待遇类型 工伤业务必填
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
         }
@@ -353,16 +584,18 @@ namespace GSSB
         /// <returns></returns>
         static string Biz120102(string request)
         {
+            Dictionary<string, string> dicKey = Function.ReadXmlNodes(request, "request");
             request = string.Empty;
             request += "<program>" + Environment.NewLine;
             request += string.Format("<session_id>{0}</session_id>", GetSessionId()) + Environment.NewLine;
             request += string.Format("<function_id>{0}</function_id>", "bizh120102") + Environment.NewLine;     // 交易号
-            request += string.Format("<bka895>{0}</bka895>", "aac002") + Environment.NewLine;               // 入参类型 aac001电脑号；aac002社会保障号码；bka100社保卡号；aaz218就医登记号；bka025住院号
-            request += string.Format("<bka896>{0}</bka896>", "513901198311295323") + Environment.NewLine;   // 入参值
-            request += string.Format("<aka130>{0}</aka130>", "12") + Environment.NewLine;                  // 业务类型 见码表
-            request += string.Format("<bka891>{0}</bka891>", "0") + Environment.NewLine;                  // 结算标识 1已结算0未结算
-            request += string.Format("<aae030>{0}</aae030>", "20161016") + Environment.NewLine;                  // 开始时间 格式：yyyyMMdd
-            request += string.Format("<aae031>{0}</aae031>", "20161016") + Environment.NewLine;                  // 结束时间 格式：yyyyMMdd
+            request += string.Format("<bka895>{0}</bka895>", "aac001") + Environment.NewLine;                   // 入参类型 aac001电脑号；aac002社会保障号码；bka100社保卡号；aaz218就医登记号；bka025住院号
+            request += string.Format("<bka896>{0}</bka896>", dicKey["computerno"]) + Environment.NewLine;         // 入参值
+            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;         // 入参值
+            request += string.Format("<aka130>{0}</aka130>", "42") + Environment.NewLine;                       // 业务类型 见码表
+            request += string.Format("<bka891>{0}</bka891>", dicKey["isCharge"]) + Environment.NewLine;         // 结算标识 1已结算0未结算
+            request += string.Format("<aae030>{0}</aae030>", dicKey["beginDate"]) + Environment.NewLine;        // 开始时间 格式：yyyyMMdd
+            request += string.Format("<aae031>{0}</aae031>", dicKey["endDate"]) + Environment.NewLine;          // 结束时间 格式：yyyyMMdd
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
         }
@@ -375,37 +608,39 @@ namespace GSSB
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        static string Biz120002(string request, DataTable dt)
+        static string Biz120002(string request, List<EntitySGSFeeItem> lstFeeItems)
         {
+            // feeinfo（说明：每一次上传交易不能超过300 条费用明细） 可能需要拆分多次上传
+            Dictionary<string, string> dicKey = Function.ReadXmlNodes(request, "request");
             request = string.Empty;
             request += "<program>" + Environment.NewLine;
             request += string.Format("<session_id>{0}</session_id>", GetSessionId()) + Environment.NewLine;
-            request += string.Format("<function_id>{0}</function_id>", "bizh120002") + Environment.NewLine;     // 交易号
-            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<aaz218>{0}</aaz218>", "002002160910000002") + Environment.NewLine;               // 就医登记号
+            request += string.Format("<function_id>{0}</function_id>", "bizh120002") + Environment.NewLine;             // 交易号
+            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;                              // 医疗机构编码
+            request += string.Format("<aaz218>{0}</aaz218>", dicKey["jydjh"]) + Environment.NewLine;                    // 就医登记号    ? 来源于 4.2.2 返回值
             request += "<feeinfo>" + Environment.NewLine;
-            if (dt != null && dt.Rows.Count > 0)
+            if (lstFeeItems != null && lstFeeItems.Count > 0)
             {
-                foreach (DataRow dr in dt.Rows)
+                foreach (EntitySGSFeeItem item in lstFeeItems)
                 {
                     request += "<row>" + Environment.NewLine;
-                    request += string.Format("<ake005>{0}</ake005>", dr[""].ToString()) + Environment.NewLine;                  // 医院药品项目编码
-                    request += string.Format("<ake006>{0}</ake006>", dr[""].ToString()) + Environment.NewLine;                  // 医院药品项目名称
-                    request += string.Format("<bka056>{0}</bka056>", dr[""].ToString()) + Environment.NewLine;                  // 单价 精确到小数点后4位
-                    request += string.Format("<bka057>{0}</bka057>", dr[""].ToString()) + Environment.NewLine;                  // 用量 精确到小数点后2位
-                    request += string.Format("<bka058>{0}</bka058>", dr[""].ToString()) + Environment.NewLine;                  // 金额 精确到小数点后2位,负数时为退费
-                    request += string.Format("<bka051>{0}</bka051>", dr[""].ToString()) + Environment.NewLine;                  // 费用发生日期 格式：yyyyMMdd
-                    request += string.Format("<bka063>{0}</bka063>", dr[""].ToString()) + Environment.NewLine;                  // 录入人工号
-                    request += string.Format("<bka064>{0}</bka064>", dr[""].ToString()) + Environment.NewLine;                  // 录入人姓名
-                    request += string.Format("<bka052>{0}</bka052>", dr[""].ToString()) + Environment.NewLine;                  // 剂型
-                    request += string.Format("<bka053>{0}</bka053>", dr[""].ToString()) + Environment.NewLine;                  // 厂家
-                    request += string.Format("<bka054>{0}</bka054>", dr[""].ToString()) + Environment.NewLine;                  // 规格               
-                    request += string.Format("<bka055>{0}</bka055>", dr[""].ToString()) + Environment.NewLine;                  // 计量单位
-                    request += string.Format("<bka070>{0}</bka070>", dr[""].ToString()) + Environment.NewLine;                  // 处方号
-                    request += string.Format("<bka074>{0}</bka074>", dr[""].ToString()) + Environment.NewLine;                  // 处方医生编号
-                    request += string.Format("<bka075>{0}</bka075>", dr[""].ToString()) + Environment.NewLine;                  // 处方医生姓名
-                    request += string.Format("<aaz213>{0}</aaz213>", dr[""].ToString()) + Environment.NewLine;                  // 费用序列号
-                    request += string.Format("<aka063>{0}</aka063>", dr[""].ToString()) + Environment.NewLine;                  // 限制使用标志 0 否；1 是  或者是 ?aka036
+                    request += string.Format("<ake005>{0}</ake005>", item.itemCode) + Environment.NewLine;                  // 医院药品项目编码
+                    request += string.Format("<ake006>{0}</ake006>", item.itemName.Replace("<", "&lt;").Replace(">", "&gt;").Replace("'", "&aops;").Replace("\"", "&quot;")) + Environment.NewLine;                  // 医院药品项目名称
+                    request += string.Format("<bka056>{0}</bka056>", item.price) + Environment.NewLine;                     // 单价 精确到小数点后4位
+                    request += string.Format("<bka057>{0}</bka057>", item.amount) + Environment.NewLine;                    // 用量 精确到小数点后2位
+                    request += string.Format("<bka058>{0}</bka058>", item.total) + Environment.NewLine;                     // 金额 精确到小数点后2位,负数时为退费
+                    request += string.Format("<bka051>{0}</bka051>", item.feeDate) + Environment.NewLine;                   // 费用发生日期 格式：yyyyMMdd
+                    request += string.Format("<bka063>{0}</bka063>", item.operCode) + Environment.NewLine;                  // 录入人工号
+                    request += string.Format("<bka064>{0}</bka064>", item.operName) + Environment.NewLine;                  // 录入人姓名
+                    request += string.Format("<bka052>{0}</bka052>", item.dosageUnit) + Environment.NewLine;                // 剂型
+                    request += string.Format("<bka053>{0}</bka053>", item.factory) + Environment.NewLine;                   // 厂家
+                    request += string.Format("<bka054>{0}</bka054>", item.spec) + Environment.NewLine;                      // 规格               
+                    request += string.Format("<bka055>{0}</bka055>", item.unit) + Environment.NewLine;                      // 计量单位
+                    request += string.Format("<bka070>{0}</bka070>", item.recipeNo) + Environment.NewLine;                  // 处方号
+                    request += string.Format("<bka074>{0}</bka074>", item.doctCode) + Environment.NewLine;                  // 处方医生编号
+                    request += string.Format("<bka075>{0}</bka075>", item.doctName) + Environment.NewLine;                  // 处方医生姓名
+                    request += string.Format("<aaz213>{0}</aaz213>", item.sortNo /*item.sortNo*/) + Environment.NewLine;                    // 费用序列号
+                    request += string.Format("<aka036>{0}</aka036>", item.limitFlag) + Environment.NewLine;                 // 限制使用标志 0 否；1 是  或者是 ?aka036
                     request += "</row>" + Environment.NewLine;
                 }
             }
@@ -428,12 +663,13 @@ namespace GSSB
         /// <returns></returns>
         static string Biz120003(string request)
         {
+            Dictionary<string, string> dicKey = Function.ReadXmlNodes(request, "request");
             request = string.Empty;
             request += "<program>" + Environment.NewLine;
             request += string.Format("<session_id>{0}</session_id>", GetSessionId()) + Environment.NewLine;
             request += string.Format("<function_id>{0}</function_id>", "bizh120003") + Environment.NewLine;     // 交易号
             request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<aaz218>{0}</aaz218>", "00200220161016000004") + Environment.NewLine;               // 就医登记号
+            request += string.Format("<aaz218>{0}</aaz218>", dicKey["jydjh"]) + Environment.NewLine;               // 就医登记号
             request += string.Format("<bka438>{0}</bka438>", "1") + Environment.NewLine;   // 业务场景阶段 1：业务开始 2：业务结算 3：业务结束
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
@@ -449,12 +685,13 @@ namespace GSSB
         /// <returns></returns>
         static string Biz120004(string request)
         {
+            Dictionary<string, string> dicKey = Function.ReadXmlNodes(request, "request");
             request = string.Empty;
             request += "<program>" + Environment.NewLine;
             request += string.Format("<session_id>{0}</session_id>", GetSessionId()) + Environment.NewLine;
             request += string.Format("<function_id>{0}</function_id>", "bizh120004") + Environment.NewLine;     // 交易号
             request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<aaz218>{0}</aaz218>", "00200220161016000004") + Environment.NewLine;               // 就医登记号
+            request += string.Format("<aaz218>{0}</aaz218>", dicKey["jydjh"]) + Environment.NewLine;               // 就医登记号
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
         }
@@ -468,36 +705,39 @@ namespace GSSB
         /// <returns></returns>
         static string Biz120103(string request)
         {
+            Dictionary<string, string> dicKey = Function.ReadXmlNodes(request, "request");
             request = string.Empty;
             request += "<program>" + Environment.NewLine;
             request += string.Format("<session_id>{0}</session_id>", GetSessionId()) + Environment.NewLine;
-            request += string.Format("<function_id>{0}</function_id>", "bizh120103") + Environment.NewLine;     // 交易号
-            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<aka130>{0}</aka130>", " ") + Environment.NewLine;               // 医疗机构编码
-            request += string.Format("<bka006>{0}</bka006>", " ") + Environment.NewLine;               // 医疗待遇类型 见码表
-            request += string.Format("<aac001>{0}</aac001>", " ") + Environment.NewLine;               // 电脑号
-            request += string.Format("<bka017>{0}</bka017>", " ") + Environment.NewLine;               // 住院时间 格式：yyyyMMdd
-            request += string.Format("<bka014>{0}</bka014>", " ") + Environment.NewLine;               // 登记人员工号
-            request += string.Format("<bka015>{0}</bka015>", " ") + Environment.NewLine;               // 登记人姓名
-            request += string.Format("<bka021>{0}</bka021>", " ") + Environment.NewLine;               // 病区编码
-            request += string.Format("<bka022>{0}</bka022>", " ") + Environment.NewLine;               // 病区名称
-            request += string.Format("<bka019>{0}</bka019>", " ") + Environment.NewLine;               // 就诊科室
-            request += string.Format("<bka020>{0}</bka020>", " ") + Environment.NewLine;               // 就诊科室名称
-            request += string.Format("<bka026>{0}</bka026>", " ") + Environment.NewLine;               // 诊断 疾病ICD编码
-            request += string.Format("<bka025>{0}</bka025>", " ") + Environment.NewLine;               // 住院号
-            request += string.Format("<bka023>{0}</bka023>", " ") + Environment.NewLine;               // 床位号
-            request += string.Format("<bka024>{0}</bka024>", " ") + Environment.NewLine;               // 床位类型
-            request += string.Format("<bka043>{0}</bka043>", " ") + Environment.NewLine;               // 备注
-            request += string.Format("<bka503>{0}</bka503>", " ") + Environment.NewLine;               // 医师编码
-            request += string.Format("<bkc500>{0}</bkc500>", " ") + Environment.NewLine;               // 中途结算 工伤业务不需要考虑此字段内容
-            request += string.Format("<aaz218>{0}</aaz218>", " ") + Environment.NewLine;               // 就医登记号
-            request += string.Format("<ykc679>{0}</ykc679>", " ") + Environment.NewLine;               // 住院原因
-            request += string.Format("<ykc680>{0}</ykc680>", " ") + Environment.NewLine;               // 补助类型
-            request += string.Format("<aaz065>{0}</aaz065>", " ") + Environment.NewLine;               // 银行ID
-            request += string.Format("<aae009>{0}</aae009>", " ") + Environment.NewLine;               // 银行户名
-            request += string.Format("<aae010>{0}</aae010>", " ") + Environment.NewLine;               // 银行账号
+            request += string.Format("<function_id>{0}</function_id>", "bizh120103") + Environment.NewLine;         // 交易号
+            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;                          // 医疗机构编码
+            request += string.Format("<aka130>{0}</aka130>", "42") + Environment.NewLine;                           // 医疗机构编码
+            request += string.Format("<bka006>{0}</bka006>", "420") + Environment.NewLine;                          // 医疗待遇类型 见码表
+            request += string.Format("<aac001>{0}</aac001>", dicKey["computerno"]) + Environment.NewLine;           // 电脑号
+            request += string.Format("<bka017>{0}</bka017>", dicKey["inDate"]) + Environment.NewLine;               // 住院时间 格式：yyyyMMdd
+            request += string.Format("<bka014>{0}</bka014>", dicKey["operCode"]) + Environment.NewLine;             // 登记人员工号
+            request += string.Format("<bka015>{0}</bka015>", dicKey["operName"]) + Environment.NewLine;             // 登记人姓名
+            request += string.Format("<bka021>{0}</bka021>", dicKey["areaCode"]) + Environment.NewLine;             // 病区编码
+            request += string.Format("<bka022>{0}</bka022>", dicKey["areaName"]) + Environment.NewLine;             // 病区名称
+            request += string.Format("<bka019>{0}</bka019>", dicKey["deptCode"]) + Environment.NewLine;             // 就诊科室
+            request += string.Format("<bka020>{0}</bka020>", dicKey["deptName"]) + Environment.NewLine;             // 就诊科室名称
+            request += string.Format("<bka026>{0}</bka026>", dicKey["icdCode"]) + Environment.NewLine;              // 诊断 疾病ICD编码
+            request += string.Format("<bka025>{0}</bka025>", dicKey["ipNo"]) + Environment.NewLine;                 // 住院号
+            request += string.Format("<bka023>{0}</bka023>", dicKey["bedNo"]) + Environment.NewLine;                // 床位号
+            request += string.Format("<bka024>{0}</bka024>", "1") + Environment.NewLine;                            // 床位类型
+            request += string.Format("<bka043>{0}</bka043>", " ") + Environment.NewLine;                            // 备注
+            request += string.Format("<bka503>{0}</bka503>", dicKey["doctCode"]) + Environment.NewLine;             // 医师编码
+            request += string.Format("<bkc500>{0}</bkc500>", " ") + Environment.NewLine;                            // 中途结算 工伤业务不需要考虑此字段内容            
+            request += string.Format("<ykc679>{0}</ykc679>", " ") + Environment.NewLine;                            // 住院原因
+            request += string.Format("<ykc680>{0}</ykc680>", " ") + Environment.NewLine;                            // 补助类型
+            request += string.Format("<aaz065>{0}</aaz065>", " ") + Environment.NewLine;                            // 银行ID
+            request += string.Format("<aae009>{0}</aae009>", " ") + Environment.NewLine;                            // 银行户名
+            request += string.Format("<aae010>{0}</aae010>", " ") + Environment.NewLine;                            // 银行账号
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
+
+            // 返回字段
+            // request += string.Format("<aaz218>{0}</aaz218>", dicKey["jydjh"]) + Environment.NewLine;                // 就医登记号
         }
         #endregion
 
@@ -509,21 +749,22 @@ namespace GSSB
         /// <returns></returns>
         static string Biz120104(string request)
         {
+            Dictionary<string, string> dicKey = Function.ReadXmlNodes(request, "request");
             request = string.Empty;
             request += "<program>" + Environment.NewLine;
             request += string.Format("<session_id>{0}</session_id>", GetSessionId()) + Environment.NewLine;
-            request += string.Format("<function_id>{0}</function_id>", "bizh120104") + Environment.NewLine;     // 交易号
-            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<aaz218>{0}</aaz218>", "00200220161016000004") + Environment.NewLine;               // 就医登记号
-            request += string.Format("<bka021>{0}</bka021>", "") + Environment.NewLine;               // 病区编码
-            request += string.Format("<bka022>{0}</bka022>", "") + Environment.NewLine;               // 病区名称
-            request += string.Format("<bka019>{0}</bka019>", "") + Environment.NewLine;               // 就诊科室
-            request += string.Format("<bka020>{0}</bka020>", "") + Environment.NewLine;               // 就诊科室名称
-            request += string.Format("<bka025>{0}</bka025>", "") + Environment.NewLine;               // 住院号
-            request += string.Format("<bka023>{0}</bka023>", "") + Environment.NewLine;               // 入院床位号
-            request += string.Format("<bka503>{0}</bka503>", "") + Environment.NewLine;               // 医师编号
-            request += string.Format("<ykc679>{0}</ykc679>", "") + Environment.NewLine;               //
-            request += string.Format("<ykc680>{0}</ykc680>", "") + Environment.NewLine;               //
+            request += string.Format("<function_id>{0}</function_id>", "bizh120104") + Environment.NewLine;             // 交易号
+            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;                              // 医疗机构编码
+            request += string.Format("<aaz218>{0}</aaz218>", dicKey["jydjh"]) + Environment.NewLine;                    // 就医登记号
+            request += string.Format("<bka021>{0}</bka021>", dicKey["areaCode"]) + Environment.NewLine;                 // 病区编码
+            request += string.Format("<bka022>{0}</bka022>", dicKey["areaName"]) + Environment.NewLine;                 // 病区名称
+            request += string.Format("<bka019>{0}</bka019>", dicKey["deptCode"]) + Environment.NewLine;                 // 就诊科室
+            request += string.Format("<bka020>{0}</bka020>", dicKey["deptName"]) + Environment.NewLine;                 // 就诊科室名称
+            request += string.Format("<bka025>{0}</bka025>", dicKey["ipNo"]) + Environment.NewLine;                     // 住院号
+            request += string.Format("<bka023>{0}</bka023>", dicKey["bedNo"]) + Environment.NewLine;                    // 入院床位号
+            request += string.Format("<bka503>{0}</bka503>", dicKey["doctCode"]) + Environment.NewLine;                 // 医师编号
+            request += string.Format("<ykc679>{0}</ykc679>", " ") + Environment.NewLine;                                 //
+            request += string.Format("<ykc680>{0}</ykc680>", " ") + Environment.NewLine;                                 //
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
         }
@@ -537,37 +778,38 @@ namespace GSSB
         /// <returns></returns>
         static string Biz120105(string request)
         {
+            Dictionary<string, string> dicKey = Function.ReadXmlNodes(request, "request");
             request = string.Empty;
             request += "<program>" + Environment.NewLine;
             request += string.Format("<session_id>{0}</session_id>", GetSessionId()) + Environment.NewLine;
-            request += string.Format("<function_id>{0}</function_id>", "bizh120105") + Environment.NewLine;     // 交易号
-            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<aaz218>{0}</aaz218>", "00200220161016000004") + Environment.NewLine;               // 就医登记号
-            request += string.Format("<bka033>{0}</bka033>", "") + Environment.NewLine;               // 登记人员工号
-            request += string.Format("<bka034>{0}</bka034>", "") + Environment.NewLine;               // 登记人姓名
-            request += string.Format("<bka032>{0}</bka032>", "") + Environment.NewLine;               // 出院日期 格式：yyyyMMdd
-            request += string.Format("<bka031>{0}</bka031>", "") + Environment.NewLine;               // 出院诊断
-            request += string.Format("<bkf001>{0}</bkf001>", "") + Environment.NewLine;               // 血型
-            request += string.Format("<bkf002>{0}</bkf002>", "") + Environment.NewLine;               // 入院方式
-            request += string.Format("<bkf003>{0}</bkf003>", "") + Environment.NewLine;               // 入院情况
-            request += string.Format("<bkf004>{0}</bkf004>", "") + Environment.NewLine;               // 出院转归情况
-            request += string.Format("<bkf005>{0}</bkf005>", "") + Environment.NewLine;               // 抢救次数
-            request += string.Format("<bkf006>{0}</bkf006>", "") + Environment.NewLine;               // 抢救成功次数
-            request += string.Format("<bka043>{0}</bka043>", "") + Environment.NewLine;               //  出院说明
-            request += string.Format("<amc050>{0}</amc050>", "") + Environment.NewLine;               // 生育业务类型
-            request += string.Format("<amc029>{0}</amc029>", "") + Environment.NewLine;               // 生育手术类别
-            request += string.Format("<amc031>{0}</amc031>", "") + Environment.NewLine;               // 胎次
-            request += string.Format("<bka911>{0}</bka911>", "") + Environment.NewLine;               // 手术日期
-            request += string.Format("<bka912>{0}</bka912>", "") + Environment.NewLine;               // 生育类别
-            request += string.Format("<bka913>{0}</bka913>", "") + Environment.NewLine;               // 胎儿数
-            request += string.Format("<bka914>{0}</bka914>", "") + Environment.NewLine;               // 母亲情况
-            request += string.Format("<bka915>{0}</bka915>", "") + Environment.NewLine;               // 母亲死亡时间
-            request += string.Format("<bka916>{0}</bka916>", "") + Environment.NewLine;               // 婴儿情况
-            request += string.Format("<bka917>{0}</bka917>", "") + Environment.NewLine;               // 婴儿死亡时间
-            request += string.Format("<ykc195>{0}</ykc195>", "") + Environment.NewLine;               // 出院原因
-            request += string.Format("<akb063>{0}</akb063>", "") + Environment.NewLine;               // 住院天数
-            request += string.Format("<bka856>{0}</bka856>", "") + Environment.NewLine;               // 血透次数
-            request += string.Format("<bka006>{0}</bka006>", "") + Environment.NewLine;               // 待遇类型
+            request += string.Format("<function_id>{0}</function_id>", "bizh120105") + Environment.NewLine;             // 交易号
+            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;                              // 医疗机构编码
+            request += string.Format("<aaz218>{0}</aaz218>", dicKey["jydjh"]) + Environment.NewLine;                    // 就医登记号
+            request += string.Format("<bka032>{0}</bka032>", dicKey["outDate"]) + Environment.NewLine;                  // 出院日期 格式：yyyyMMdd
+            request += string.Format("<bka033>{0}</bka033>", dicKey["operCode"]) + Environment.NewLine;                 // 登记人员工号
+            request += string.Format("<bka034>{0}</bka034>", dicKey["operName"]) + Environment.NewLine;                 // 登记人姓名
+            request += string.Format("<bkf001>{0}</bkf001>", dicKey["bloodType"]) + Environment.NewLine;                // 血型
+            request += string.Format("<bkf002>{0}</bkf002>", dicKey["inWay"]) + Environment.NewLine;                    // 入院方式
+            request += string.Format("<bkf003>{0}</bkf003>", dicKey["inStatus"]) + Environment.NewLine;                 // 入院情况
+            request += string.Format("<bkf004>{0}</bkf004>", dicKey["zgqk"]) + Environment.NewLine;                     // 出院转归情况
+            request += string.Format("<bkf005>{0}</bkf005>", dicKey["qjcs"]) + Environment.NewLine;                     // 抢救次数
+            request += string.Format("<bkf006>{0}</bkf006>", dicKey["qjcgcs"]) + Environment.NewLine;                   // 抢救成功次数
+            request += string.Format("<bka031>{0}</bka031>", dicKey["outdiagicd10Code"]) + Environment.NewLine;                  // 出院诊断
+            request += string.Format("<bka043>{0}</bka043>", dicKey["outDesc"]) + Environment.NewLine;                  // 出院说明
+            request += string.Format("<amc050>{0}</amc050>", " ") + Environment.NewLine;                                // 生育业务类型
+            request += string.Format("<amc029>{0}</amc029>", " ") + Environment.NewLine;                                // 生育手术类别
+            request += string.Format("<amc031>{0}</amc031>", " ") + Environment.NewLine;                                // 胎次
+            request += string.Format("<bka911>{0}</bka911>", " ") + Environment.NewLine;                                // 手术日期
+            request += string.Format("<bka912>{0}</bka912>", " ") + Environment.NewLine;                                // 生育类别
+            request += string.Format("<bka913>{0}</bka913>", " ") + Environment.NewLine;                                // 胎儿数
+            request += string.Format("<bka914>{0}</bka914>", " ") + Environment.NewLine;                                // 母亲情况
+            request += string.Format("<bka915>{0}</bka915>", " ") + Environment.NewLine;                                // 母亲死亡时间
+            request += string.Format("<bka916>{0}</bka916>", " ") + Environment.NewLine;                                // 婴儿情况
+            request += string.Format("<bka917>{0}</bka917>", " ") + Environment.NewLine;                                // 婴儿死亡时间
+            request += string.Format("<ykc195>{0}</ykc195>", " ") + Environment.NewLine;                                // 出院原因
+            request += string.Format("<akb063>{0}</akb063>", " ") + Environment.NewLine;                                // 住院天数
+            request += string.Format("<bka856>{0}</bka856>", " ") + Environment.NewLine;                                // 血透次数
+            request += string.Format("<bka006>{0}</bka006>", "420") + Environment.NewLine;                              // 待遇类型
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
         }
@@ -581,14 +823,15 @@ namespace GSSB
         /// <returns></returns>
         static string Biz120106(string request)
         {
+            Dictionary<string, string> dicKey = Function.ReadXmlNodes(request, "request");
             request = string.Empty;
             request += "<program>" + Environment.NewLine;
             request += string.Format("<session_id>{0}</session_id>", GetSessionId()) + Environment.NewLine;
-            request += string.Format("<function_id>{0}</function_id>", "bizh120106") + Environment.NewLine;     // 交易号
-            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<aaz218>{0}</aaz218>", "00200220161016000004") + Environment.NewLine;               // 就医登记号
-            request += string.Format("<bka046>{0}</bka046>", "") + Environment.NewLine;               // 完成人工号
-            request += string.Format("<bka047>{0}</bka047>", "") + Environment.NewLine;               // 完成人
+            request += string.Format("<function_id>{0}</function_id>", "bizh120106") + Environment.NewLine;             // 交易号
+            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;                              // 医疗机构编码
+            request += string.Format("<aaz218>{0}</aaz218>", dicKey["jydjh"]) + Environment.NewLine;                    // 就医登记号
+            request += string.Format("<bka046>{0}</bka046>", dicKey["operCode"]) + Environment.NewLine;                 // 完成人工号
+            request += string.Format("<bka047>{0}</bka047>", dicKey["operName"]) + Environment.NewLine;                 // 完成人
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
         }
@@ -602,12 +845,13 @@ namespace GSSB
         /// <returns></returns>
         static string Biz120107(string request)
         {
+            Dictionary<string, string> dicKey = Function.ReadXmlNodes(request, "request");
             request = string.Empty;
             request += "<program>" + Environment.NewLine;
             request += string.Format("<session_id>{0}</session_id>", GetSessionId()) + Environment.NewLine;
-            request += string.Format("<function_id>{0}</function_id>", "bizh120107") + Environment.NewLine;     // 交易号
-            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<aaz218>{0}</aaz218>", "00200220161016000004") + Environment.NewLine;               // 就医登记号
+            request += string.Format("<function_id>{0}</function_id>", "bizh120107") + Environment.NewLine;             // 交易号
+            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;                              // 医疗机构编码
+            request += string.Format("<aaz218>{0}</aaz218>", dicKey["jydjh"]) + Environment.NewLine;                    // 就医登记号
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
         }
@@ -621,12 +865,13 @@ namespace GSSB
         /// <returns></returns>
         static string Biz120108(string request)
         {
+            Dictionary<string, string> dicKey = Function.ReadXmlNodes(request, "request");
             request = string.Empty;
             request += "<program>" + Environment.NewLine;
             request += string.Format("<session_id>{0}</session_id>", GetSessionId()) + Environment.NewLine;
-            request += string.Format("<function_id>{0}</function_id>", "bizh120108") + Environment.NewLine;     // 交易号
-            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<aaz218>{0}</aaz218>", "00200220161016000004") + Environment.NewLine;               // 就医登记号
+            request += string.Format("<function_id>{0}</function_id>", "bizh120108") + Environment.NewLine;             // 交易号
+            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;                              // 医疗机构编码
+            request += string.Format("<aaz218>{0}</aaz218>", dicKey["jydjh"]) + Environment.NewLine;                    // 就医登记号
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
         }
@@ -641,12 +886,13 @@ namespace GSSB
         /// <returns></returns>
         static string Biz120109(string request)
         {
+            Dictionary<string, string> dicKey = Function.ReadXmlNodes(request, "request");
             request = string.Empty;
             request += "<program>" + Environment.NewLine;
             request += string.Format("<session_id>{0}</session_id>", GetSessionId()) + Environment.NewLine;
-            request += string.Format("<function_id>{0}</function_id>", "bizh120109") + Environment.NewLine;     // 交易号
-            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;             // 医疗机构编码
-            request += string.Format("<aaz218>{0}</aaz218>", "00200220161016000004") + Environment.NewLine;               // 就医登记号
+            request += string.Format("<function_id>{0}</function_id>", "bizh120109") + Environment.NewLine;         // 交易号
+            request += string.Format("<akb020>{0}</akb020>", orgId) + Environment.NewLine;                          // 医疗机构编码
+            request += string.Format("<aaz218>{0}</aaz218>", dicKey["jydjh"]) + Environment.NewLine;                // 就医登记号
             request += "</program>" + Environment.NewLine;
             return xmlTitle + request;
         }
@@ -1225,11 +1471,6 @@ namespace GSSB
 
         #endregion
 
-        #region CallService
-
-
-        #endregion
-
     }
 
     #region 返回实体
@@ -1241,7 +1482,7 @@ namespace GSSB
         /// <summary>
         /// 返回值
         /// </summary>
-        public string resultCode { get; set; }
+        public int resultCode { get; set; }
         /// <summary>
         /// 返回信息
         /// </summary>
@@ -1469,8 +1710,6 @@ namespace GSSB
 
     }
     #endregion
-    
-
 
     #region EntityFK
     /// <summary>
@@ -1486,4 +1725,117 @@ namespace GSSB
     }
     #endregion
 
+    #region EntityDict
+    /// <summary>
+    /// EntityDict
+    /// </summary>
+    public class EntityDict : weCare.Core.Entity.BaseDataContract
+    {
+        public string Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string PyCode { get; set; }
+
+        public static EnumCols Columns = new EnumCols();
+
+        public class EnumCols
+        {
+            public string Id = "Id";
+            public string Name = "Name";
+            public string PyCode = "PyCode";
+        }
+    }
+    #endregion
+
+    public class Dictionary
+    {
+        /// <summary>
+        /// 血型
+        /// </summary>
+        /// <returns></returns>
+        public List<EntityDict> GetXX()
+        {
+            List<EntityDict> data = new List<EntityDict>();
+            data.Add(new EntityDict() { Id = "1", Name = "A 型", PyCode = "" });
+            data.Add(new EntityDict() { Id = "2", Name = "B 型", PyCode = "" });
+            data.Add(new EntityDict() { Id = "3", Name = "AB 型", PyCode = "" });
+            data.Add(new EntityDict() { Id = "4", Name = "O 型", PyCode = "" });
+            data.Add(new EntityDict() { Id = "5", Name = "Rh 阳性", PyCode = "" });
+            data.Add(new EntityDict() { Id = "6", Name = "Rh 阴性", PyCode = "" });
+            return data;
+        }
+        /// <summary>
+        /// 入院方式
+        /// </summary>
+        /// <returns></returns>
+        public List<EntityDict> GetRYFS()
+        {
+            List<EntityDict> data = new List<EntityDict>();
+            data.Add(new EntityDict() { Id = "1", Name = "门诊入院", PyCode = "" });
+            data.Add(new EntityDict() { Id = "2", Name = "急诊入院", PyCode = "" });
+            return data;
+        }
+        /// <summary>
+        /// 入院情况
+        /// </summary>
+        /// <returns></returns>
+        public List<EntityDict> GetRYQK()
+        {
+            List<EntityDict> data = new List<EntityDict>();
+            data.Add(new EntityDict() { Id = "1", Name = "危", PyCode = "" });
+            data.Add(new EntityDict() { Id = "2", Name = "急", PyCode = "" });
+            data.Add(new EntityDict() { Id = "3", Name = "一般", PyCode = "" });
+            return data;
+        }
+        /// <summary>
+        /// 出院转归
+        /// </summary>
+        /// <returns></returns>
+        public List<EntityDict> GetCYZG()
+        {
+            List<EntityDict> data = new List<EntityDict>();
+            data.Add(new EntityDict() { Id = "01", Name = "治愈", PyCode = "" });
+            data.Add(new EntityDict() { Id = "02", Name = "好转", PyCode = "" });
+            data.Add(new EntityDict() { Id = "03", Name = "无效", PyCode = "" });
+            data.Add(new EntityDict() { Id = "04", Name = "未愈", PyCode = "" });
+            data.Add(new EntityDict() { Id = "05", Name = "死亡", PyCode = "" });
+            data.Add(new EntityDict() { Id = "99", Name = "其它", PyCode = "" });
+            return data;
+        }
+        /// <summary>
+        /// 人员类别
+        /// </summary>
+        /// <returns></returns>
+        public List<EntityDict> GetRYLB()
+        {
+            List<EntityDict> data = new List<EntityDict>();
+            data.Add(new EntityDict() { Id = "1", Name = "在职", PyCode = "" });
+            data.Add(new EntityDict() { Id = "2", Name = "退休", PyCode = "" });
+            return data;
+        }
+        /// <summary>
+        /// 住院原因
+        /// </summary>
+        /// <returns></returns>
+        public List<EntityDict> GetZYYY()
+        {
+            List<EntityDict> data = new List<EntityDict>();
+            data.Add(new EntityDict() { Id = "0", Name = "普通原因住院", PyCode = "" });
+            data.Add(new EntityDict() { Id = "4", Name = "外伤住院", PyCode = "" });
+            return data;
+        }
+        /// <summary>
+        /// 补助类型
+        /// </summary>
+        /// <returns></returns>
+        public List<EntityDict> GetBZLX()
+        {
+            List<EntityDict> data = new List<EntityDict>();
+            data.Add(new EntityDict() { Id = "1", Name = "普通", PyCode = "" });
+            data.Add(new EntityDict() { Id = "2", Name = "抢救期间", PyCode = "" });
+            data.Add(new EntityDict() { Id = "3", Name = "非抢救期间", PyCode = "" });
+            return data;
+        }
+    }
 }

@@ -14,7 +14,7 @@ namespace com.digitalwave.iCare.gui.HIS
         /// <summary>
         /// 服务器IP
         /// </summary>
-        string ServerIp = "http://10.10.2.110";
+        string ServerIp = "http://10.10.2.109";
 
         /// <summary>
         /// PID
@@ -38,6 +38,12 @@ namespace com.digitalwave.iCare.gui.HIS
         {
             try
             {
+                string uri = clsPublic.m_strGetSysparm("9018");
+                if (uri.Trim() != string.Empty)
+                {
+                    ServerIp = "http://" + uri;
+                }
+
                 int n = -1;
                 object[] objs = new object[6];
                 objs[++n] = "763709818";
@@ -47,7 +53,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 objs[++n] = this.PatientName;
                 objs[++n] = DateTime.Now.ToString("yyyy-MM-dd");
                 clsPublic.PlayAvi("加载妇幼平台界面，请稍候...");
-                string uri = string.Format(this.ServerIp + @"/W_Fubao/AspCode/JiBenXinXi/HIS/Default.aspx?AUTHORID={0}&INFOID={1}&USER={2}&page=CreateArchive&HISID={3}&HDSB0101001={4}&DATE={5}&BARCODE=&HDSB0101005=&DEP=", objs);
+                uri = string.Format(this.ServerIp + @"/W_Fubao/AspCode/JiBenXinXi/HIS/Default.aspx?AUTHORID={0}&INFOID={1}&USER={2}&page=CreateArchive&HISID={3}&HDSB0101001={4}&DATE={5}&BARCODE=&HDSB0101005=&DEP=", objs);
                 this.webBrowser.Navigate(uri);
             }
             catch (Exception ex)

@@ -681,6 +681,11 @@ namespace com.digitalwave.iCare.gui.HIS
         /// </summary>
         bool isUseChildPrice { get; set; }
 
+        /// <summary>
+        /// (医保)费用类型
+        /// </summary>
+        ArrayList arrPaytype;
+
         #endregion
 
         #region 设置窗体对象
@@ -802,6 +807,9 @@ namespace com.digitalwave.iCare.gui.HIS
                     DataProduceDrugs.Add(dr["itemid_chr"].ToString());
                 }
             }
+
+            // 社保身份
+            arrPaytype = this.m_ArrGettoken(objSvc.m_strGetSysparm("0001"), ";");
         }
         #endregion
 
@@ -1715,7 +1723,7 @@ namespace com.digitalwave.iCare.gui.HIS
         #region listViewKeyDown处理
         public void m_mthListViewKeyDown(System.Windows.Forms.KeyEventArgs e)
         {
-            switch (this.m_objViewer.tabControl1.SelectedIndex)
+            switch (this.m_objViewer.tabControl.SelectedIndex)
             {
                 case 3:
                     m_mthKeyDown1(e);
@@ -1866,7 +1874,7 @@ namespace com.digitalwave.iCare.gui.HIS
         {
             if (m_objViewer.listView1.SelectedItems.Count > 0 || m_objViewer.listView1.SelectedItems[0].ForeColor != Color.Red)
             {
-                string TabPageName = this.m_objViewer.tabControl1.SelectedTab.Name.ToString();
+                string TabPageName = this.m_objViewer.tabControl.SelectedTab.Name.ToString();
 
                 if (TabPageName == "tabPage5")
                 {
@@ -1874,7 +1882,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     if (strChrgCode != null && strChrgCode != "")
                     {
                         int index = int.Parse(strChrgCode) + 2;
-                        this.m_objViewer.tabControl1.SelectedIndex = index;
+                        this.m_objViewer.tabControl.SelectedIndex = index;
                     }
                 }
                 switch (TabPageName)
@@ -1912,8 +1920,39 @@ namespace com.digitalwave.iCare.gui.HIS
             m_mthFillDataGridByRow(dr, row);
 
         }
+
+        #region 项目检测
+        /// <summary>
+        /// 项目检测
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <param name="itemFlag">1 诊疗项目； 2 收费项目</param>
+        /// <returns></returns>
+        bool InputItemCheck(string itemId, int itemFlag)
+        {
+            bool ret = true;
+            int sex = this.m_objViewer.m_PatInfo.PatientSex == "男" ? 1 : 2;
+            string error = string.Empty;
+            using (Hisitf.InputChargeItemCheckItf cls = new Hisitf.InputChargeItemCheckItf())
+            {
+                ret = cls.CheckItemSex(sex, itemId, itemFlag, out error);
+            }
+            if (ret == false && !string.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error, "系统提示");
+            }
+            return ret;
+        }
+        #endregion
+
         private void m_mthFillDataGridByRow(DataRow dr, int row)
         {
+            // 项目检测
+            if (this.InputItemCheck(dr["ITEMID_CHR"].ToString().Trim(), 2) == false)
+            {
+                return;
+            }
+
             #region 精神性、毒麻药处理
             if (Medpurview == 1)
             {
@@ -2110,14 +2149,19 @@ namespace com.digitalwave.iCare.gui.HIS
             {
                 string strRemark = string.Empty;
                 string strItemName = string.Empty;
-                bool blnRes = (new weCare.Proxy.ProxyOP()).Service.CheckIndiction(strItemID, out strRemark, out strItemName);
+                bool blnRes = (new weCare.Proxy.ProxyOP()).Service.CheckIndiction(strItemID, out strItemName, out strRemark);
                 if (blnRes)
                 {
+                    string strRemark2 = string.Empty;
                     // 限二级及二级以上医院
                     if (strRemark.Trim() == "限二级及二级以上医院" || strRemark.Trim() == "限二级以上医院")
-                        MessageBox.Show("该项目限【" + strRemark + "】使用。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        strRemark2 = "该项目限【" + strRemark + "】使用。";
+                    //MessageBox.Show("该项目限【" + strRemark + "】使用。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Question);
                     else
-                        MessageBox.Show("该项目限【" + strRemark + "】使用。" + Environment.NewLine + "判断本处方是否符合限制条件后，请在下拉框选择【符合】、【不符合】。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        strRemark2 = "该项目限【" + strRemark + "】使用。" + Environment.NewLine + "判断本处方是否符合限制条件后，请在下拉框选择【符合】、【不符合】。";
+                    //MessageBox.Show("该项目限【" + strRemark + "】使用。" + Environment.NewLine + "判断本处方是否符合限制条件后，请在下拉框选择【符合】、【不符合】。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                    frmSyzHint frmSyz = new frmSyzHint(strRemark2);
+                    frmSyz.ShowDialog();
                 }
             }
             #endregion
@@ -2131,6 +2175,12 @@ namespace com.digitalwave.iCare.gui.HIS
         }
         private void m_mthFillDataGridByRow2(DataRow dr, int row)
         {
+            // 项目检测
+            if (this.InputItemCheck(dr["ITEMID_CHR"].ToString().Trim(), 2) == false)
+            {
+                return;
+            }
+
             #region 精神性、毒麻药处理
             if (Medpurview == 1)
             {
@@ -2172,6 +2222,7 @@ namespace com.digitalwave.iCare.gui.HIS
             }
             #endregion
 
+            string strItemID = dr["ITEMID_CHR"].ToString().Trim();
             m_objViewer.ctlDataGrid2[row, 0] = dr["ITEMCODE_VCHR"].ToString().Trim();
             if (this.m_mthConvertObjToDecimal(this.m_objViewer.m_PatInfo.PatientAge) >= 12)
             {
@@ -2192,7 +2243,7 @@ namespace com.digitalwave.iCare.gui.HIS
             m_objViewer.ctlDataGrid2[row, 6] = dr["SubMoney"].ToString().Trim();
             m_objViewer.ctlDataGrid2[row, 31] = dr["SUBTRADEMONEY"].ToString().Trim();// 单位批发价
             m_objViewer.ctlDataGrid2[row, 32] = dr["TRADEPRICE_MNY"].ToString().Trim();// 大批发价
-            m_objViewer.ctlDataGrid2[row, 8] = dr["ITEMID_CHR"].ToString().Trim();
+            m_objViewer.ctlDataGrid2[row, 8] = strItemID;
             m_objViewer.ctlDataGrid2[row, 10] = dr["PRECENT_DEC"].ToString().Trim() + "%";//比例
             m_objViewer.ctlDataGrid2[row, 11] = dr["PRECENT_DEC"].ToString().Trim();
             m_objViewer.ctlDataGrid2[row, 13] = dr["MAXDOSAGE_DEC"].ToString().Trim();
@@ -2208,7 +2259,7 @@ namespace com.digitalwave.iCare.gui.HIS
             try
             {
                 //显示药典备注
-                this.m_mthCodexRemarkInfo(dr["ITEMID_CHR"].ToString().Trim(), 2);
+                this.m_mthCodexRemarkInfo(strItemID, 2);
 
                 m_objViewer.listView1.Height = 0;
                 m_objViewer.ctlDataGrid2.CurrentCell = new DataGridCell(row, 1);
@@ -2220,9 +2271,30 @@ namespace com.digitalwave.iCare.gui.HIS
                 }
                 this.m_objViewer.ctlDataGrid2[row, cm_Deptmed] = "";
                 this.m_objViewer.ctlDataGrid2[row, cm_DeptmedID] = "";
-                if (dr["DEPTPREP_INT"].ToString() != "1")
+                //if (dr["DEPTPREP_INT"].ToString() != "1")
+                //{
+                //    this.m_objViewer.ctlDataGrid2[row, cm_DeptmedID] = "*";  //不允许科室自备                   
+                //}
+
+                // 适应症判断 
+                if (IsDongGuanYBPatient)
                 {
-                    this.m_objViewer.ctlDataGrid2[row, cm_DeptmedID] = "*";  //不允许科室自备                   
+                    string strRemark = string.Empty;
+                    string strItemName = string.Empty;
+                    bool blnRes = (new weCare.Proxy.ProxyOP()).Service.CheckIndiction(strItemID, out strItemName, out strRemark);
+                    if (blnRes)
+                    {
+                        string strRemark2 = string.Empty;
+                        // 限二级及二级以上医院
+                        if (strRemark.Trim() == "限二级及二级以上医院" || strRemark.Trim() == "限二级以上医院")
+                            strRemark2 = "该项目限【" + strRemark + "】使用。";
+                        //MessageBox.Show("该项目限【" + strRemark + "】使用。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        else
+                            strRemark2 = "该项目限【" + strRemark + "】使用。" + Environment.NewLine + "判断本处方是否符合限制条件后，请在下拉框选择【符合】、【不符合】。";
+                        //MessageBox.Show("该项目限【" + strRemark + "】使用。" + Environment.NewLine + "判断本处方是否符合限制条件后，请在下拉框选择【符合】、【不符合】。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                        frmSyzHint frmSyz = new frmSyzHint(strRemark2);
+                        frmSyz.ShowDialog();
+                    }
                 }
             }
             catch
@@ -2245,6 +2317,12 @@ namespace com.digitalwave.iCare.gui.HIS
         }
         private void m_mthFillDataGridByRowLis(DataRow dr, int row)
         {
+            // 项目检测
+            if (this.InputItemCheck(dr["ORDERDICID_CHR"].ToString().Trim(), 1) == false)
+            {
+                return;
+            }
+
             string strCurrItem = m_objViewer.ctlDataGridLis[row, t_ItemID].ToString().Trim();
             m_objViewer.ctlDataGridLis[row, t_Find] = dr["USERCODE_CHR"].ToString().Trim();
             m_objViewer.ctlDataGridLis[row, t_Name] = dr["NAME_CHR"].ToString().Trim();
@@ -2441,6 +2519,12 @@ namespace com.digitalwave.iCare.gui.HIS
 
         private void m_mthFillDataGridByRowTest(DataRow dr, int row)
         {
+            // 项目检测
+            if (this.InputItemCheck(dr["ORDERDICID_CHR"].ToString().Trim(), 1) == false)
+            {
+                return;
+            }
+
             string strCurrItem = m_objViewer.ctlDataGridTest[row, t_ItemID].ToString().Trim();
             m_objViewer.ctlDataGridTest[row, t_Find] = dr["USERCODE_CHR"].ToString().Trim();
             m_objViewer.ctlDataGridTest[row, t_Name] = dr["NAME_CHR"].ToString().Trim();
@@ -2570,6 +2654,12 @@ namespace com.digitalwave.iCare.gui.HIS
 
         private void m_mthFillDataGridByRowOps(DataRow dr, int row)
         {
+            // 项目检测
+            if (this.InputItemCheck(dr["ORDERDICID_CHR"].ToString().Trim(), 1) == false)
+            {
+                return;
+            }
+
             decimal amount = isProxyBoilCM ? this.m_objViewer.numericUpDown1.Value : 1;
             string strCurrItem = m_objViewer.ctlDataGridOps[row, o_ItemID].ToString().Trim();
             m_objViewer.ctlDataGridOps[row, o_Find] = dr["USERCODE_CHR"].ToString().Trim();
@@ -2649,6 +2739,12 @@ namespace com.digitalwave.iCare.gui.HIS
 
         private void m_mthFillDataGridByRow6(DataRow dr, int row)
         {
+            // 项目检测
+            if (this.InputItemCheck(dr["ITEMID_CHR"].ToString().Trim(), 2) == false)
+            {
+                return;
+            }
+
             string strCurrItem = m_objViewer.ctlDataGrid6[row, o_ItemID].ToString().Trim();
             m_objViewer.ctlDataGrid6[row, o_Find] = dr["ITEMCODE_VCHR"].ToString().Trim();
             m_objViewer.ctlDataGrid6[row, o_Name] = dr["ITEMNAME_VCHR"].ToString().Trim();
@@ -3044,7 +3140,8 @@ namespace com.digitalwave.iCare.gui.HIS
             m_objViewer.ctlDataGrid2[row, 21] = m_objViewer.listView4.SelectedItems[0].SubItems[0].Text.Trim();
             m_objViewer.ctlDataGrid2[row, 5] = m_objViewer.listView4.SelectedItems[0].SubItems[2].Text.Trim();
             m_objViewer.listView4.Hide();
-            m_objViewer.ctlDataGrid2.CurrentCell = new DataGridCell(row + 1, 0);
+            //m_objViewer.ctlDataGrid2.CurrentCell = new DataGridCell(row + 1, 0);
+            m_objViewer.ctlDataGrid2.CurrentCell = new DataGridCell(row, cm_Deptmed);
         }
         public void m_mthListViewDoubleClick3()//频次
         {
@@ -3193,7 +3290,8 @@ namespace com.digitalwave.iCare.gui.HIS
             {
                 if (dt.Rows.Count == 1)
                 {
-                    m_objViewer.ctlDataGrid2.CurrentCell = new DataGridCell(row + 1, 0);
+                    //m_objViewer.ctlDataGrid2.CurrentCell = new DataGridCell(row + 1, 0);
+                    m_objViewer.ctlDataGrid2.CurrentCell = new DataGridCell(row, cm_Deptmed);
                     m_objViewer.ctlDataGrid2[row, 5] = dt.Rows[0]["USAGENAME_VCHR"].ToString().Trim();
                     m_objViewer.ctlDataGrid2[row, 21] = dt.Rows[0]["USAGEID_CHR"].ToString().Trim();
 
@@ -4920,14 +5018,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 CM_VO[i].m_strCMedicineUsage = this.m_objViewer.cmbCooking.Text;
                 CM_VO[i].m_strItemname = this.m_objViewer.ctlDataGrid2[i, 3].ToString();
                 CM_VO[i].m_strItemspec = this.m_objViewer.ctlDataGrid2[i, 4].ToString();
-                if (this.m_objViewer.ctlDataGrid2[i, cm_DeptmedID].ToString().Trim() == "1")
-                {
-                    CM_VO[i].m_intDeptmed = 1;
-                }
-                else
-                {
-                    CM_VO[i].m_intDeptmed = 0;
-                }
+                CM_VO[i].m_intDeptmed = Function.Int(this.m_objViewer.ctlDataGrid2[i, cm_DeptmedID].ToString());
                 CM_VO[i].m_strUsageDetail = this.m_objViewer.ctlDataGrid2[i, cm_UsageDetail].ToString();
 
                 //CM_VO[i].m_strExecDeptID = CMDrugStoreDeptID;
@@ -5521,7 +5612,7 @@ namespace com.digitalwave.iCare.gui.HIS
             // 外送代煎
             this.m_objViewer.cboProxyBoilMed.SelectedIndex = 0;
             this.m_mthCreatCalObj();
-            this.m_objViewer.tabControl1.SelectedIndex = 3;
+            this.m_objViewer.tabControl.SelectedIndex = 3;
             this.m_mthSetFocus();
         }
         private void m_mthClearCaseHistory()
@@ -5857,15 +5948,24 @@ namespace com.digitalwave.iCare.gui.HIS
                     this.m_objViewer.ctlDataGrid2[row, 9] = "-1";
                     this.m_objViewer.ctlDataGrid2[row, cm_UsageDetail] = dt.Rows[i]["UsageDetail_vchr"].ToString();
 
-                    if (Isdeptmed)
-                    {
-                        this.m_objViewer.ctlDataGrid2[row, cm_DeptmedID] = dt.Rows[i]["deptmed_int"].ToString();
-                        if (dt.Rows[i]["deptmed_int"].ToString() == "1")
-                        {
-                            this.m_objViewer.ctlDataGrid2[row, cm_Deptmed] = "是";
-                            this.m_objViewer.ctlDataGrid2.m_mthSetRowColor(row, dfc, dbc);
-                        }
-                    }
+                    int syzId = Function.Int(dt.Rows[i]["deptmed_int"].ToString());
+                    string syzName = "";
+                    if (syzId == 2)
+                        syzName = "符合";
+                    else if (syzId == 3)
+                        syzName = "不符合";
+                    this.m_objViewer.ctlDataGrid2[row, cm_Deptmed] = syzName;
+                    this.m_objViewer.ctlDataGrid2[row, cm_DeptmedID] = syzId.ToString();
+
+                    //if (Isdeptmed)
+                    //{
+                    //    this.m_objViewer.ctlDataGrid2[row, cm_DeptmedID] = dt.Rows[i]["deptmed_int"].ToString();
+                    //    if (dt.Rows[i]["deptmed_int"].ToString() == "1")
+                    //    {
+                    //        this.m_objViewer.ctlDataGrid2[row, cm_Deptmed] = "是";
+                    //        this.m_objViewer.ctlDataGrid2.m_mthSetRowColor(row, dfc, dbc);
+                    //    }
+                    //}
 
                     m_mthCalculateAmount2(i);
                     //					this.m_objViewer.ctlDataGrid2[i,8]=objCalPatientCharge.m_mthGetChargeIetmPrice(dt.Rows[i]["ITEMID"].ToString(),m_mthConvertObjToDecimal(dt.Rows[i]["PRICE"]),"",m_mthConvertObjToDecimal(dt.Rows[i]["MIN_QTY_DEC"])*m_mthConvertObjToDecimal(dt.Rows[i]["Times"]),3000,temp,"");
@@ -6333,7 +6433,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 else if (e.KeyCode == Keys.M)  //详细用法
                 {
                     #region 西药
-                    if (this.m_objViewer.tabControl1.SelectedIndex == 3 && this.m_objViewer.ctlDataGrid1[this.m_objViewer.ctlDataGrid1.CurrentCell.RowNumber, c_ItemID].ToString().Trim() != "")
+                    if (this.m_objViewer.tabControl.SelectedIndex == 3 && this.m_objViewer.ctlDataGrid1[this.m_objViewer.ctlDataGrid1.CurrentCell.RowNumber, c_ItemID].ToString().Trim() != "")
                     {
                         //皮试药标志
                         bool blnPsFlag = false;
@@ -6390,7 +6490,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     }
                     #endregion
                     #region 中药
-                    else if (this.m_objViewer.tabControl1.SelectedIndex == 4 && this.m_objViewer.ctlDataGrid2[this.m_objViewer.ctlDataGrid2.CurrentCell.RowNumber, 8].ToString().Trim() != "")
+                    else if (this.m_objViewer.tabControl.SelectedIndex == 4 && this.m_objViewer.ctlDataGrid2[this.m_objViewer.ctlDataGrid2.CurrentCell.RowNumber, 8].ToString().Trim() != "")
                     {
                         frmMedicineUsageDetail frmTemp = new frmMedicineUsageDetail(false);
                         frmTemp.MedicineName = this.m_objViewer.ctlDataGrid2[this.m_objViewer.ctlDataGrid2.CurrentCell.RowNumber, 3].ToString().Trim();
@@ -6404,7 +6504,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     }
                     #endregion
                     #region 检验
-                    else if (this.m_objViewer.tabControl1.SelectedIndex == 5 && this.m_objViewer.ctlDataGrid3[this.m_objViewer.ctlDataGrid3.CurrentCell.RowNumber, t_ItemID].ToString().Trim() != "")
+                    else if (this.m_objViewer.tabControl.SelectedIndex == 5 && this.m_objViewer.ctlDataGrid3[this.m_objViewer.ctlDataGrid3.CurrentCell.RowNumber, t_ItemID].ToString().Trim() != "")
                     {
                         frmMedicineUsageDetail frmTemp = new frmMedicineUsageDetail(false);
                         frmTemp.MedicineName = this.m_objViewer.ctlDataGrid3[this.m_objViewer.ctlDataGrid3.CurrentCell.RowNumber, t_Name].ToString().Trim();
@@ -6418,7 +6518,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     }
                     #endregion
                     #region 检查
-                    else if (this.m_objViewer.tabControl1.SelectedIndex == 6 && this.m_objViewer.ctlDataGrid4[this.m_objViewer.ctlDataGrid4.CurrentCell.RowNumber, t_ItemID].ToString().Trim() != "")
+                    else if (this.m_objViewer.tabControl.SelectedIndex == 6 && this.m_objViewer.ctlDataGrid4[this.m_objViewer.ctlDataGrid4.CurrentCell.RowNumber, t_ItemID].ToString().Trim() != "")
                     {
                         frmMedicineUsageDetail frmTemp = new frmMedicineUsageDetail(false);
                         frmTemp.MedicineName = this.m_objViewer.ctlDataGrid4[this.m_objViewer.ctlDataGrid4.CurrentCell.RowNumber, t_Name].ToString().Trim();
@@ -6432,7 +6532,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     }
                     #endregion
                     #region 手术治疗
-                    else if (this.m_objViewer.tabControl1.SelectedIndex == 7 && this.m_objViewer.ctlDataGrid5[this.m_objViewer.ctlDataGrid5.CurrentCell.RowNumber, o_ItemID].ToString().Trim() != "")
+                    else if (this.m_objViewer.tabControl.SelectedIndex == 7 && this.m_objViewer.ctlDataGrid5[this.m_objViewer.ctlDataGrid5.CurrentCell.RowNumber, o_ItemID].ToString().Trim() != "")
                     {
                         frmMedicineUsageDetail frmTemp = new frmMedicineUsageDetail(false);
                         frmTemp.MedicineName = this.m_objViewer.ctlDataGrid5[this.m_objViewer.ctlDataGrid5.CurrentCell.RowNumber, o_Name].ToString().Trim();
@@ -6446,7 +6546,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     }
                     #endregion
                     #region 其他
-                    else if (this.m_objViewer.tabControl1.SelectedIndex == 8 && this.m_objViewer.ctlDataGrid6[this.m_objViewer.ctlDataGrid6.CurrentCell.RowNumber, o_ItemID].ToString().Trim() != "")
+                    else if (this.m_objViewer.tabControl.SelectedIndex == 8 && this.m_objViewer.ctlDataGrid6[this.m_objViewer.ctlDataGrid6.CurrentCell.RowNumber, o_ItemID].ToString().Trim() != "")
                     {
                         frmMedicineUsageDetail frmTemp = new frmMedicineUsageDetail(false);
                         frmTemp.MedicineName = this.m_objViewer.ctlDataGrid6[this.m_objViewer.ctlDataGrid6.CurrentCell.RowNumber, o_Name].ToString().Trim();
@@ -6645,13 +6745,13 @@ namespace com.digitalwave.iCare.gui.HIS
         }
         private void m_mthChangePage()
         {
-            if (this.m_objViewer.tabControl1.SelectedIndex == this.m_objViewer.tabControl1.TabCount - 1)
+            if (this.m_objViewer.tabControl.SelectedIndex == this.m_objViewer.tabControl.TabCount - 1)
             {
-                this.m_objViewer.tabControl1.SelectedIndex = 0;
+                this.m_objViewer.tabControl.SelectedIndex = 0;
             }
             else
             {
-                this.m_objViewer.tabControl1.SelectedIndex += 1;
+                this.m_objViewer.tabControl.SelectedIndex += 1;
             }
         }
         /// <summary>
@@ -6662,7 +6762,7 @@ namespace com.digitalwave.iCare.gui.HIS
         {
             //			b_IndexChangeFlag =true;
             this.m_objViewer.btReGroup.Enabled = false;
-            switch (this.m_objViewer.tabControl1.SelectedIndex)
+            switch (this.m_objViewer.tabControl.SelectedIndex)
             {
                 case 0:
 
@@ -6954,7 +7054,7 @@ namespace com.digitalwave.iCare.gui.HIS
             string groupID = m_mthGetMaxGroupID().ToString();
             int location = 0;
 
-            if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage5))
+            if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage5))
             {
                 dt = objForm.GetTable1;
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -7112,7 +7212,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 }
             }
 
-            if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage6))
+            if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage6))
             {
                 dt = objForm.GetTable2;
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -7147,14 +7247,14 @@ namespace com.digitalwave.iCare.gui.HIS
                     this.m_mthCalculateAmount2(B);
                     //				this.m_objViewer.ctlDataGrid2[i,8]=objCalPatientCharge.m_mthGetChargeIetmPrice(dt.Rows[i][5].ToString(),m_mthConvertObjToDecimal(dt.Rows[i][4]),"",m_mthConvertObjToDecimal(dt.Rows[i][0]),3000,temp,"");                
 
-                    if (dt.Rows[i][17].ToString() != "1")
-                    {
-                        this.m_objViewer.ctlDataGrid2[B, cm_DeptmedID] = "*";
-                    }
+                    //if (dt.Rows[i][17].ToString() != "1")
+                    //{
+                    //    this.m_objViewer.ctlDataGrid2[B, cm_DeptmedID] = "*";
+                    //}
                 }
             }
 
-            if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage7))
+            if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage7))
             {
                 dt = objForm.GetTable3;
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -7198,7 +7298,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 }
             }
 
-            if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage8))
+            if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage8))
             {
                 dt = objForm.GetTable4;
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -7244,7 +7344,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 }
             }
 
-            if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage9))
+            if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage9))
             {
                 dt = objForm.GetTable5;
                 for (int i = 0; i < dt.Rows.Count; i++)
@@ -7344,17 +7444,17 @@ namespace com.digitalwave.iCare.gui.HIS
             // 1 西药 2 中药 3 检验
             int Flag = 0;
             string ID = "";
-            if (this.m_objViewer.tabControl1.SelectedIndex == 3)
+            if (this.m_objViewer.tabControl.SelectedIndex == 3)
             {
                 ID = this.m_objViewer.ctlDataGrid1[this.m_objViewer.ctlDataGrid1.CurrentCell.RowNumber, c_ItemID].ToString().Trim();
                 Flag = 1;
             }
-            else if (this.m_objViewer.tabControl1.SelectedIndex == 4)
+            else if (this.m_objViewer.tabControl.SelectedIndex == 4)
             {
                 ID = this.m_objViewer.ctlDataGrid2[this.m_objViewer.ctlDataGrid2.CurrentCell.RowNumber, 8].ToString().Trim();
                 Flag = 2;
             }
-            else if (this.m_objViewer.tabControl1.SelectedIndex == 5)
+            else if (this.m_objViewer.tabControl.SelectedIndex == 5)
             {
                 ID = this.m_objViewer.ctlDataGrid3[this.m_objViewer.ctlDataGrid3.CurrentCell.RowNumber, t_ItemID].ToString().Trim();
                 Flag = 3;
@@ -7833,11 +7933,11 @@ namespace com.digitalwave.iCare.gui.HIS
                         objtemp.m_strInvoiceCat = this.m_objViewer.ctlDataGrid2[d2, 20].ToString().Trim();
                         if (this.m_objViewer.ctlDataGrid2[d2, cm_DeptmedID].ToString().Trim() == "1")
                         {
-                            objtemp.m_strDeptmedInfo = "【KB】";
+                            //objtemp.m_strDeptmedInfo = "【KB】";
                         }
                         else
                         {
-                            objtemp.m_strDeptmedInfo = "";
+                            //objtemp.m_strDeptmedInfo = "";
                         }
                         objPRDArr2.Add(objtemp);
                     }
@@ -9109,7 +9209,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
                     this.m_objViewer.lblPersonTimes.Text = this.m_objViewer.m_dtgTake.RowCount.ToString();
                 }
-                this.m_objViewer.tabControl1.SelectedIndex = 2;
+                this.m_objViewer.tabControl.SelectedIndex = 2;
             }
             else if (intRet == 1)
             {
@@ -9127,7 +9227,7 @@ namespace com.digitalwave.iCare.gui.HIS
             else if (intRet == 2)
             {
                 this.m_mthClearAllData();
-                this.m_objViewer.tabControl1.SelectedIndex = 1;
+                this.m_objViewer.tabControl.SelectedIndex = 1;
                 this.m_objViewer.lbeTimes.Text = "0";
                 this.m_objViewer.m_PatInfo.Clear();
                 this.m_objViewer.m_PatInfo.Focus();
@@ -9185,7 +9285,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         this.m_objViewer.m_dtgTake[temp, 10] = 1;
                         this.m_objViewer.m_dtgTake[temp, 9] = "就诊中";
                         this.m_objViewer.m_dtgTake[temp, 8] = "";
-                        this.m_objViewer.tabControl1.SelectedIndex = 3;
+                        this.m_objViewer.tabControl.SelectedIndex = 3;
                         this.m_mthSetFocus();
 
                         this.m_objViewer.m_PatInfo.TakeDiagRecID = this.m_objViewer.m_dtgTake[temp, 0].ToString().Trim(); ;
@@ -9679,7 +9779,7 @@ namespace com.digitalwave.iCare.gui.HIS
         /// </summary>
         public void m_mthCancelGroup()
         {
-            switch (this.m_objViewer.tabControl1.SelectedIndex)
+            switch (this.m_objViewer.tabControl.SelectedIndex)
             {
                 case 3:
                     this.m_objViewer.ctlDataGrid1[this.m_objViewer.ctlDataGrid1.CurrentCell.RowNumber, 26] = 0;
@@ -12113,7 +12213,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     this.m_objViewer.ctlDataGrid4[i, t_RowNo] = objCalPatientCharge.m_mthGetChargeIetmPrice(objChargeItem.m_strItemID,
                     m_mthConvertObjToDecimal(objChargeItem.m_fltItemPrice), objChargeItem.m_ItemOPInvType.m_strTypeID.Trim(), 1, 3000, temp, "", false);
                 }
-                this.m_objViewer.tabControl1.TabIndex = 6;
+                this.m_objViewer.tabControl.TabIndex = 6;
                 this.m_mthSetFocus();
             }
         }
@@ -12413,7 +12513,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     this.m_mthFindChargeItemByApplyBillID(strArr[i].Trim(), out itemArr_VO[i]);
                 }
                 e.ChargeInfoArr = itemArr_VO;
-                this.m_objViewer.tabControl1.SelectedIndex = 5;
+                this.m_objViewer.tabControl.SelectedIndex = 5;
             }
         }
         #endregion
@@ -13477,7 +13577,7 @@ namespace com.digitalwave.iCare.gui.HIS
             string strName = "";
             string strPrice = "";
             string strItemCode = "";
-            switch (this.m_objViewer.tabControl1.SelectedIndex)
+            switch (this.m_objViewer.tabControl.SelectedIndex)
             {
 
                 case 3:
@@ -14022,7 +14122,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
                             if (dtRow["DEPTPREP_INT"].ToString() != "1")
                             {
-                                this.m_objViewer.ctlDataGrid2[tempRow, cm_DeptmedID] = "*";
+                                //this.m_objViewer.ctlDataGrid2[tempRow, cm_DeptmedID] = "*";
                             }
 
                             m_mthCalculateAmount2(tempRow);
@@ -14972,7 +15072,7 @@ namespace com.digitalwave.iCare.gui.HIS
                             this.m_objViewer.ctlDataGrid5[row5, o_appflag] = "T";
                             this.m_mthFillDataGridByRow5(dtRecord.Rows[0], row5);
                             this.m_mthCalculateTotalMoney();
-                            this.m_objViewer.tabControl1.SelectedIndex = 7;
+                            this.m_objViewer.tabControl.SelectedIndex = 7;
                             this.m_mthSetFocus();
                             rowNo = row5;
                         }
@@ -15079,9 +15179,9 @@ namespace com.digitalwave.iCare.gui.HIS
             }
 
             //强行转换到检验页面(Datagrid存在BUG, 以便带出手术治疗项目)
-            if (this.m_objViewer.tabControl1.SelectedIndex == 7 || this.m_objViewer.tabControl1.SelectedIndex == 8)
+            if (this.m_objViewer.tabControl.SelectedIndex == 7 || this.m_objViewer.tabControl.SelectedIndex == 8)
             {
-                this.m_objViewer.tabControl1.SelectedIndex = 5;
+                this.m_objViewer.tabControl.SelectedIndex = 5;
             }
 
             for (int i = 0; i < Itemidarr.Count; i++)
@@ -15145,7 +15245,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 }
             }
 
-            this.m_objViewer.tabControl1.SelectedIndex = 8;
+            this.m_objViewer.tabControl.SelectedIndex = 8;
         }
         #endregion
 
@@ -15903,7 +16003,7 @@ namespace com.digitalwave.iCare.gui.HIS
             string cmedStoreId = this.m_strGetDurgStoreID(this.m_strReadXML("register", "CMedicinestore", "AnyOne"));
 
             #region 西药
-            if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage5) && hasItem.ContainsKey("1"))
+            if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage5) && hasItem.ContainsKey("1"))
             {
                 ArrayList ItemArr = hasItem["1"] as ArrayList;
 
@@ -16036,7 +16136,7 @@ namespace com.digitalwave.iCare.gui.HIS
             #endregion
 
             #region 中药明细
-            if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage6) && hasItem.ContainsKey("2"))
+            if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage6) && hasItem.ContainsKey("2"))
             {
                 ArrayList ItemArr = hasItem["2"] as ArrayList;
 
@@ -16093,15 +16193,24 @@ namespace com.digitalwave.iCare.gui.HIS
                     this.m_objViewer.ctlDataGrid2[row, 9] = "-1";
                     this.m_objViewer.ctlDataGrid2[row, cm_UsageDetail] = dr["UsageDetail_vchr"].ToString();
 
-                    if (Isdeptmed)
-                    {
-                        this.m_objViewer.ctlDataGrid2[row, cm_DeptmedID] = dr["deptmed_int"].ToString();
-                        if (dr["deptmed_int"].ToString() == "1")
-                        {
-                            this.m_objViewer.ctlDataGrid2[row, cm_Deptmed] = "是";
-                            this.m_objViewer.ctlDataGrid2.m_mthSetRowColor(row, dfc, dbc);
-                        }
-                    }
+                    int syzId = Function.Int(dr["deptmed_int"].ToString());
+                    string syzName = "";
+                    if (syzId == 2)
+                        syzName = "符合";
+                    else if (syzId == 3)
+                        syzName = "不符合";
+                    this.m_objViewer.ctlDataGrid2[row, cm_Deptmed] = syzName;
+                    this.m_objViewer.ctlDataGrid2[row, cm_DeptmedID] = syzId.ToString();
+
+                    //if (Isdeptmed)
+                    //{
+                    //    this.m_objViewer.ctlDataGrid2[row, cm_DeptmedID] = dr["deptmed_int"].ToString();
+                    //    if (dr["deptmed_int"].ToString() == "1")
+                    //    {
+                    //        this.m_objViewer.ctlDataGrid2[row, cm_Deptmed] = "是";
+                    //        this.m_objViewer.ctlDataGrid2.m_mthSetRowColor(row, dfc, dbc);
+                    //    }
+                    //}
 
                     m_mthCalculateAmount2(i);
                     //this.m_objViewer.ctlDataGrid2[i,8]=objCalPatientCharge.m_mthGetChargeIetmPrice(dr["ITEMID"].ToString(),m_mthConvertObjToDecimal(dr["PRICE"]),"",m_mthConvertObjToDecimal(dr["MIN_QTY_DEC"])*m_mthConvertObjToDecimal(dr["Times"]),3000,temp,"");
@@ -16113,7 +16222,7 @@ namespace com.digitalwave.iCare.gui.HIS
             if (ItemInputMode == 0)
             {
                 #region 检验
-                if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage7) && hasItem.ContainsKey("3"))
+                if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage7) && hasItem.ContainsKey("3"))
                 {
                     ArrayList ItemArr = hasItem["3"] as ArrayList;
 
@@ -16169,7 +16278,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 #endregion
 
                 #region 检查
-                if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage8) && hasItem.ContainsKey("4"))
+                if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage8) && hasItem.ContainsKey("4"))
                 {
                     ArrayList ItemArr = hasItem["4"] as ArrayList;
 
@@ -16219,7 +16328,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 #endregion
 
                 #region 手术治疗
-                if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage9) && hasItem.ContainsKey("5"))
+                if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage9) && hasItem.ContainsKey("5"))
                 {
                     ArrayList ItemArr = hasItem["5"] as ArrayList;
 
@@ -16270,7 +16379,7 @@ namespace com.digitalwave.iCare.gui.HIS
             else if (ItemInputMode == 1)
             {
                 #region 检验
-                if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage7) && hasItem.ContainsKey("lis"))
+                if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage7) && hasItem.ContainsKey("lis"))
                 {
                     ArrayList ItemArr = hasItem["lis"] as ArrayList;
 
@@ -16372,7 +16481,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 #endregion
 
                 #region 检查
-                if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage8) && hasItem.ContainsKey("test"))
+                if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage8) && hasItem.ContainsKey("test"))
                 {
                     ArrayList ItemArr = hasItem["test"] as ArrayList;
 
@@ -16457,7 +16566,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 #endregion
 
                 #region 手术治疗
-                if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage9) && hasItem.ContainsKey("ops"))
+                if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage9) && hasItem.ContainsKey("ops"))
                 {
                     ArrayList ItemArr = hasItem["ops"] as ArrayList;
 
@@ -16649,15 +16758,15 @@ namespace com.digitalwave.iCare.gui.HIS
                 if (dt.Rows.Count == 0)
                 {
                     // 西药处方页                    
-                    this.m_objViewer.tabControl1.TabPages.Remove(this.m_objViewer.tabPage5);
+                    this.m_objViewer.tabControl.TabPages.Remove(this.m_objViewer.tabPage5);
                     // 中药处方页                    
-                    this.m_objViewer.tabControl1.TabPages.Remove(this.m_objViewer.tabPage6);
+                    this.m_objViewer.tabControl.TabPages.Remove(this.m_objViewer.tabPage6);
                     // 检验处方页                    
-                    this.m_objViewer.tabControl1.TabPages.Remove(this.m_objViewer.tabPage7);
+                    this.m_objViewer.tabControl.TabPages.Remove(this.m_objViewer.tabPage7);
                     // 检查处方页                    
-                    this.m_objViewer.tabControl1.TabPages.Remove(this.m_objViewer.tabPage8);
+                    this.m_objViewer.tabControl.TabPages.Remove(this.m_objViewer.tabPage8);
                     // 手术/治疗处方页                    
-                    this.m_objViewer.tabControl1.TabPages.Remove(this.m_objViewer.tabPage9);
+                    this.m_objViewer.tabControl.TabPages.Remove(this.m_objViewer.tabPage9);
                 }
                 else
                 {
@@ -16675,31 +16784,31 @@ namespace com.digitalwave.iCare.gui.HIS
                     index = IdArr.IndexOf("1");
                     if (index == -1)
                     {
-                        this.m_objViewer.tabControl1.TabPages.Remove(this.m_objViewer.tabPage5);
+                        this.m_objViewer.tabControl.TabPages.Remove(this.m_objViewer.tabPage5);
                     }
 
                     index = IdArr.IndexOf("2");
                     if (index == -1)
                     {
-                        this.m_objViewer.tabControl1.TabPages.Remove(this.m_objViewer.tabPage6);
+                        this.m_objViewer.tabControl.TabPages.Remove(this.m_objViewer.tabPage6);
                     }
 
                     index = IdArr.IndexOf("3");
                     if (index == -1)
                     {
-                        this.m_objViewer.tabControl1.TabPages.Remove(this.m_objViewer.tabPage7);
+                        this.m_objViewer.tabControl.TabPages.Remove(this.m_objViewer.tabPage7);
                     }
 
                     index = IdArr.IndexOf("4");
                     if (index == -1)
                     {
-                        this.m_objViewer.tabControl1.TabPages.Remove(this.m_objViewer.tabPage8);
+                        this.m_objViewer.tabControl.TabPages.Remove(this.m_objViewer.tabPage8);
                     }
 
                     index = IdArr.IndexOf("5");
                     if (index == -1)
                     {
-                        this.m_objViewer.tabControl1.TabPages.Remove(this.m_objViewer.tabPage9);
+                        this.m_objViewer.tabControl.TabPages.Remove(this.m_objViewer.tabPage9);
                     }
                 }
             }
@@ -17045,7 +17154,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
 
                 #region 西药
-                if (f.ItemArr1.Count > 0 && this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage5))
+                if (f.ItemArr1.Count > 0 && this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage5))
                 {
                     int MaxGroupNo = 0;
                     for (int i = 0; i < this.m_objViewer.ctlDataGrid1.RowCount; i++)
@@ -17239,7 +17348,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 #endregion
 
                 #region 中药
-                if (f.ItemArr2.Count > 0 && this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage6))
+                if (f.ItemArr2.Count > 0 && this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage6))
                 {
                     for (int i = 0; i < f.ItemArr2.Count; i++)
                     {
@@ -17275,7 +17384,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         m_objViewer.ctlDataGrid2[row, 11] = temp;
                         this.m_mthCalculateAmount2(row);
 
-                        this.m_objViewer.ctlDataGrid2[row, cm_DeptmedID] = "*";
+                        this.m_objViewer.ctlDataGrid2[row, cm_DeptmedID] = "0";//"*";
                     }
                 }
                 #endregion
@@ -17852,11 +17961,11 @@ namespace com.digitalwave.iCare.gui.HIS
         internal void GetDrugInfo()
         {
             string itemId = string.Empty;
-            if (this.m_objViewer.tabControl1.SelectedTab == this.m_objViewer.tabPage5)
+            if (this.m_objViewer.tabControl.SelectedTab == this.m_objViewer.tabPage5)
             {
                 itemId = this.m_objViewer.ctlDataGrid1[this.m_objViewer.ctlDataGrid1.CurrentCell.RowNumber, c_ItemID].ToString().Trim();
             }
-            else if (this.m_objViewer.tabControl1.SelectedTab == this.m_objViewer.tabPage6)
+            else if (this.m_objViewer.tabControl.SelectedTab == this.m_objViewer.tabPage6)
             {
                 itemId = this.m_objViewer.ctlDataGrid2[this.m_objViewer.ctlDataGrid2.CurrentCell.RowNumber, 8].ToString().Trim();
             }
@@ -17879,7 +17988,7 @@ namespace com.digitalwave.iCare.gui.HIS
             if (string.IsNullOrEmpty(this.m_objViewer.m_PatInfo.PatientCardID)) return;
             if (string.IsNullOrEmpty(this.WechatWebUrl)) return;
 
-            if (this.objSvc.IsWechatBanding(this.m_objViewer.m_PatInfo.PatientCardID))
+            if (this.objSvc.IsWechatBanding(this.m_objViewer.m_PatInfo.PatientCardID) && this.Isybcharge() == false)
             {
                 try
                 {
@@ -18136,7 +18245,7 @@ namespace com.digitalwave.iCare.gui.HIS
             {
                 isProxyBoilCM = false;
                 // 手术治疗 tabPage9
-                if (this.m_objViewer.tabControl1.TabPages.Contains(this.m_objViewer.tabPage9) == false) return;
+                if (this.m_objViewer.tabControl.TabPages.Contains(this.m_objViewer.tabPage9) == false) return;
                 if (string.IsNullOrEmpty(this.proxyBoilMedOrderCode)) return;
 
                 int proxyIdx = this.m_objViewer.cboProxyBoilMed.SelectedIndex;
@@ -18178,7 +18287,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         isProxyBoilCM = true;
                         this.m_objViewer.ctlDataGridOps.m_mthAppendRow();
                         this.m_mthFillDataGridByRowOps(dt.Rows[0], this.m_objViewer.ctlDataGridOps.RowCount - 1);
-                        this.m_objViewer.tabControl1.SelectedTab = this.m_objViewer.tabPage9;
+                        this.m_objViewer.tabControl.SelectedTab = this.m_objViewer.tabPage9;
                     }
                 }
                 else
@@ -18257,15 +18366,15 @@ namespace com.digitalwave.iCare.gui.HIS
                 request += string.Format("<patientId>{0}</patientId>", dr["patientid_chr"].ToString()) + Environment.NewLine;
                 request += string.Format("<patientName>{0}</patientName>", dr["lastname_vchr"].ToString()) + Environment.NewLine;
                 request += string.Format("<sex>{0}</sex>", dr["sex_chr"].ToString()) + Environment.NewLine;
-                request += string.Format("<birthday>{0}</birthday>", Convert.ToDateTime(dr["birth_dat"]).ToString("yyyy-MM-dd")) + Environment.NewLine;
+                request += string.Format("<birthday>{0}</birthday>", Convert.ToDateTime(dr["birth_dat"]).ToString("yyyy-MM-dd HH:mm:ss")) + Environment.NewLine;
                 request += string.Format("<cardNo>{0}</cardNo>", dr["patientcardid_chr"].ToString()) + Environment.NewLine;
                 request += string.Format("<ipNo>{0}</ipNo>", "") + Environment.NewLine;
                 request += string.Format("<bedNo>{0}</bedNo>", "") + Environment.NewLine;
-                request += string.Format("<homeTel>{0}</homeTel>", dr["homephone_vchr"].ToString()) + Environment.NewLine;
-                request += string.Format("<homeAddr>{0}</homeAddr>", dr["homeaddress_vchr"].ToString()) + Environment.NewLine;
-                request += string.Format("<marriage>{0}</marriage>", dr["married_chr"].ToString()) + Environment.NewLine;
+                request += string.Format("<homeTel>{0}</homeTel>", dr["homephone_vchr"] == DBNull.Value ? "" : dr["homephone_vchr"].ToString().Trim()) + Environment.NewLine;
+                request += string.Format("<homeAddr>{0}</homeAddr>", dr["homeaddress_vchr"] == DBNull.Value ? "" : dr["homeaddress_vchr"].ToString().Trim()) + Environment.NewLine;
+                request += string.Format("<marriage>{0}</marriage>", dr["married_chr"] == DBNull.Value ? "" : dr["married_chr"].ToString().Trim()) + Environment.NewLine;
                 request += string.Format("<occupation>{0}</occupation>", "") + Environment.NewLine;
-                request += string.Format("<nativeplace>{0}</nativeplace>", dr["nativeplace_vchr"].ToString()) + Environment.NewLine;
+                request += string.Format("<nativeplace>{0}</nativeplace>", dr["nativeplace_vchr"] == DBNull.Value ? "" : dr["nativeplace_vchr"].ToString().Trim()) + Environment.NewLine;
                 request += string.Format("<appDeptId>{0}</appDeptId>", this.m_objViewer.LoginInfo.m_strDepartmentID) + Environment.NewLine;
                 request += string.Format("<appDeptName>{0}</appDeptName>", this.m_objViewer.LoginInfo.m_strdepartmentName) + Environment.NewLine;
                 request += string.Format("<appDoctId>{0}</appDoctId>", this.m_objViewer.LoginInfo.m_strEmpID) + Environment.NewLine;
@@ -18283,7 +18392,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 object obj = Activator.CreateInstance(type);
                 System.Reflection.MethodInfo objMethodInfo = type.GetMethod("Invoke");
                 object[] objParamArr = new object[1];
-                objParamArr[0] = request.Replace(" ", "");
+                objParamArr[0] = request;
                 objMethodInfo.Invoke(obj, objParamArr);
             }
         }
@@ -18320,6 +18429,57 @@ namespace com.digitalwave.iCare.gui.HIS
             }
         }
         #endregion
+
+        #region 获取分隔字符串数值
+        /// <summary>
+        /// 获取分隔字符串数值
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="sign"></param>
+        /// <returns></returns>
+        ArrayList m_ArrGettoken(string str, string sign)
+        {
+            ArrayList val = new ArrayList();
+
+            if (str.Trim() == "")
+            {
+                return val;
+            }
+
+            int pos = 0;
+            do
+            {
+                pos = str.IndexOf(sign);
+                if (pos > 0)
+                {
+                    val.Add(str.Substring(0, pos));
+                    str = str.Substring(pos + 1);
+                }
+                else
+                {
+                    val.Add(str);
+                }
+            } while (pos > 0);
+
+            return val;
+        }
+        #endregion
+
+        #region 根据设置的费别判断是否使用医保结算
+        /// <summary>
+        /// 根据设置的费别判断是否使用医保结算
+        /// </summary>
+        /// <returns></returns>
+        bool Isybcharge()
+        {
+            if (this.arrPaytype == null)
+            {
+                return false;
+            }
+            return arrPaytype.Contains(this.m_objViewer.m_PatInfo.PayTypeID);
+        }
+        #endregion
+
     }
 
     #region 本地类

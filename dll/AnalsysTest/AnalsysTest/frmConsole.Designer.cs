@@ -36,10 +36,6 @@
             this.cboDataType = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTip = new System.Windows.Forms.Label();
-            this.lblPortName = new System.Windows.Forms.Label();
-            this.lblBit = new System.Windows.Forms.Label();
-            this.lblStop = new System.Windows.Forms.Label();
-            this.lblB = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -127,51 +123,11 @@
             this.lblTip.TabIndex = 7;
             this.lblTip.Text = "COM Port:";
             // 
-            // lblPortName
-            // 
-            this.lblPortName.AutoSize = true;
-            this.lblPortName.Location = new System.Drawing.Point(375, 37);
-            this.lblPortName.Name = "lblPortName";
-            this.lblPortName.Size = new System.Drawing.Size(59, 12);
-            this.lblPortName.TabIndex = 8;
-            this.lblPortName.Text = "COM Port:";
-            // 
-            // lblBit
-            // 
-            this.lblBit.AutoSize = true;
-            this.lblBit.Location = new System.Drawing.Point(550, 37);
-            this.lblBit.Name = "lblBit";
-            this.lblBit.Size = new System.Drawing.Size(59, 12);
-            this.lblBit.TabIndex = 9;
-            this.lblBit.Text = "COM Port:";
-            // 
-            // lblStop
-            // 
-            this.lblStop.AutoSize = true;
-            this.lblStop.Location = new System.Drawing.Point(626, 37);
-            this.lblStop.Name = "lblStop";
-            this.lblStop.Size = new System.Drawing.Size(59, 12);
-            this.lblStop.TabIndex = 10;
-            this.lblStop.Text = "COM Port:";
-            // 
-            // lblB
-            // 
-            this.lblB.AutoSize = true;
-            this.lblB.Location = new System.Drawing.Point(462, 37);
-            this.lblB.Name = "lblB";
-            this.lblB.Size = new System.Drawing.Size(59, 12);
-            this.lblB.TabIndex = 11;
-            this.lblB.Text = "COM Port:";
-            // 
             // frmConsole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(717, 408);
-            this.Controls.Add(this.lblB);
-            this.Controls.Add(this.lblStop);
-            this.Controls.Add(this.lblBit);
-            this.Controls.Add(this.lblPortName);
             this.Controls.Add(this.lblTip);
             this.Controls.Add(this.cboDataType);
             this.Controls.Add(this.label2);
@@ -202,10 +158,6 @@
         private System.Windows.Forms.ComboBox cboDataType;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTip;
-        private System.Windows.Forms.Label lblPortName;
-        private System.Windows.Forms.Label lblBit;
-        private System.Windows.Forms.Label lblStop;
-        private System.Windows.Forms.Label lblB;
     }
 }
 

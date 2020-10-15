@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAidChooseDoct));
             this.label1 = new System.Windows.Forms.Label();
             this.txtVal = new System.Windows.Forms.TextBox();
@@ -37,11 +38,14 @@
             this.colNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colXm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPyCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chkMyDept = new System.Windows.Forms.CheckBox();
+            this.chkAll = new System.Windows.Forms.CheckBox();
             this.btnCancel = new PinkieControls.ButtonXP();
             this.btnOk = new PinkieControls.ButtonXP();
-            this.chkAll = new System.Windows.Forms.CheckBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtDoct)).BeginInit();
             this.panel3.SuspendLayout();
@@ -52,17 +56,17 @@
             // 
             this.label1.Location = new System.Drawing.Point(6, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 20);
+            this.label1.Size = new System.Drawing.Size(166, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "查找(工号/姓名)：";
+            this.label1.Text = "查找(工号/姓名/拼音)：";
             // 
             // txtVal
             // 
             this.txtVal.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtVal.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtVal.Location = new System.Drawing.Point(126, 6);
+            this.txtVal.Location = new System.Drawing.Point(164, 6);
             this.txtVal.Name = "txtVal";
-            this.txtVal.Size = new System.Drawing.Size(186, 26);
+            this.txtVal.Size = new System.Drawing.Size(148, 26);
             this.txtVal.TabIndex = 0;
             this.txtVal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtVal_KeyDown);
             // 
@@ -89,7 +93,8 @@
             this.colZt,
             this.colNo,
             this.colGh,
-            this.colXm});
+            this.colXm,
+            this.colPyCode});
             this.dtDoct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtDoct.Location = new System.Drawing.Point(0, 36);
             this.dtDoct.MultiSelect = false;
@@ -131,6 +136,13 @@
             this.colXm.ReadOnly = true;
             this.colXm.Width = 120;
             // 
+            // colPyCode
+            // 
+            this.colPyCode.HeaderText = "拼音码";
+            this.colPyCode.Name = "colPyCode";
+            this.colPyCode.ReadOnly = true;
+            this.colPyCode.Visible = false;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.txtVal);
@@ -143,6 +155,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.chkMyDept);
             this.panel2.Controls.Add(this.chkAll);
             this.panel2.Controls.Add(this.btnCancel);
             this.panel2.Controls.Add(this.btnOk);
@@ -152,39 +165,17 @@
             this.panel2.Size = new System.Drawing.Size(316, 42);
             this.panel2.TabIndex = 0;
             // 
-            // btnCancel
+            // chkMyDept
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(212)))), ((int)(((byte)(208)))), ((int)(((byte)(200)))));
-            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.DefaultScheme = true;
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.btnCancel.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Hint = "";
-            this.btnCancel.Location = new System.Drawing.Point(219, 5);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
-            this.btnCancel.Size = new System.Drawing.Size(76, 32);
-            this.btnCancel.TabIndex = 8;
-            this.btnCancel.Text = "放弃(&C)";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // btnOk
-            // 
-            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(212)))), ((int)(((byte)(208)))), ((int)(((byte)(200)))));
-            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOk.DefaultScheme = true;
-            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.btnOk.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOk.Hint = "";
-            this.btnOk.Location = new System.Drawing.Point(129, 5);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
-            this.btnOk.Size = new System.Drawing.Size(76, 32);
-            this.btnOk.TabIndex = 7;
-            this.btnOk.Text = "确定(&O)";
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            this.chkMyDept.AutoSize = true;
+            this.chkMyDept.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.chkMyDept.Location = new System.Drawing.Point(68, 12);
+            this.chkMyDept.Name = "chkMyDept";
+            this.chkMyDept.Size = new System.Drawing.Size(68, 18);
+            this.chkMyDept.TabIndex = 10;
+            this.chkMyDept.Text = "本科室";
+            this.chkMyDept.UseVisualStyleBackColor = true;
+            this.chkMyDept.CheckedChanged += new System.EventHandler(this.chkMyDept_CheckedChanged);
             // 
             // chkAll
             // 
@@ -196,6 +187,44 @@
             this.chkAll.Text = "全选";
             this.chkAll.UseVisualStyleBackColor = true;
             this.chkAll.CheckedChanged += new System.EventHandler(this.chkAll_CheckedChanged);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.DefaultScheme = true;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnCancel.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.Hint = "";
+            this.btnCancel.Location = new System.Drawing.Point(237, 5);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
+            this.btnCancel.Size = new System.Drawing.Size(76, 32);
+            this.btnCancel.TabIndex = 8;
+            this.btnCancel.Text = "放弃(&C)";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnOk
+            // 
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOk.DefaultScheme = true;
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnOk.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOk.Hint = "";
+            this.btnOk.Location = new System.Drawing.Point(151, 5);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Scheme = PinkieControls.ButtonXP.Schemes.Blue;
+            this.btnOk.Size = new System.Drawing.Size(76, 32);
+            this.btnOk.TabIndex = 7;
+            this.btnOk.Text = "确定(&O)";
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // frmAidChooseDoct
             // 
@@ -213,8 +242,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "选择医生";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmAidChooseDoct_KeyDown);
             this.Load += new System.EventHandler(this.frmAidChooseDoct_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmAidChooseDoct_KeyDown);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtDoct)).EndInit();
             this.panel3.ResumeLayout(false);
@@ -235,10 +264,13 @@
         internal PinkieControls.ButtonXP btnCancel;
         internal PinkieControls.ButtonXP btnOk;
         private System.Windows.Forms.DataGridView dtDoct;
+        private System.Windows.Forms.CheckBox chkAll;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colZt;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGh;
         private System.Windows.Forms.DataGridViewTextBoxColumn colXm;
-        private System.Windows.Forms.CheckBox chkAll;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPyCode;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.CheckBox chkMyDept;
     }
 }

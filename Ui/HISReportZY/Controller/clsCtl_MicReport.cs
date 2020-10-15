@@ -2657,6 +2657,14 @@ namespace com.digitalwave.iCare.gui.HIS
                 foreach (DataRow dr in dtbResult.Rows)
                 {
                     string sampleType = dr["BBLX"].ToString().Trim();
+
+                    string XJMC = dr["RESULT"].ToString().Trim();
+                    if (!XJMC.Contains("无乳"))
+                    {
+                        if (XJMC.Contains("无") || XJMC.Contains("正常") || XJMC.Contains("?") || XJMC.Contains("？") || XJMC.Contains("疑"))
+                            continue;
+                    }
+
                     sampleSum++;
 
                     if (sampleType != sampleTypeLast)
@@ -2683,7 +2691,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 {
                     EnitySampleSum vo = new EnitySampleSum();
                     vo.sampleType = "合计";
-                    vo.count = sampleSum++;
+                    vo.count = sampleSum;
                     vo.countPer = "100.00";
                     data.Add(vo);
                 }
