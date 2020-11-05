@@ -43,6 +43,7 @@ namespace MAGLUMI_4000_plus
             string barCode = string.Empty;
             string checkDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string[] tmpData = null;
+            string strLog = string.Empty;
             foreach (string item in data)
             {
                 // 包含样本号
@@ -78,10 +79,14 @@ namespace MAGLUMI_4000_plus
                 vo = new clsLIS_Device_Test_ResultVO();
                 vo.strDevice_Sample_ID = sampleID;
                 vo.barCode = barCode;
-                Log.Output("sampleID--》" + sampleID);
+                //Log.Output("sampleID--》" + sampleID);
+                
                 vo.strCheck_Date = checkDate;
                 vo.strDevice_Check_Item_Name = tmpData[2].Replace("^", "").Trim();  // 名称
                 vo.strResult = tmpData[3].Trim();   // 检验结果
+                strLog += vo.barCode + Environment.NewLine;
+                strLog += vo.strDevice_Check_Item_Name + Environment.NewLine;
+                strLog += vo.strResult + Environment.NewLine ;
 
                 // 读取配置
                 if (this.dtConfig != null && this.dtConfig.Rows.Count > 0)
@@ -97,6 +102,8 @@ namespace MAGLUMI_4000_plus
                 }
                 p_arlResult.Add(vo);
             }
+
+            Log.Output(strLog);
             return 1;
         }
     }

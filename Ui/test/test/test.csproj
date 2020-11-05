@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="comm.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\comm.itf.dll</HintPath>
+    </Reference>
     <Reference Include="comm.utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\debug\comm.utils.dll</HintPath>
@@ -56,6 +60,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="unityproxy, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Debug\unityproxy.dll</HintPath>
+    </Reference>
     <Reference Include="utility">
       <HintPath>..\..\..\..\debug\utility.dll</HintPath>
     </Reference>
@@ -85,6 +93,13 @@
     <Compile Include="Form4.Designer.cs">
       <DependentUpon>Form4.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmLaboman.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLaboman.Designer.cs">
+      <DependentUpon>frmLaboman.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NetworkConnection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -96,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form4.resx">
       <DependentUpon>Form4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLaboman.resx">
+      <DependentUpon>frmLaboman.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

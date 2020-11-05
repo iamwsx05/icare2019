@@ -141,12 +141,12 @@ namespace com.digitalwave.iCare.gui.LIS
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("申请单元");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("自定义申请组");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("申请单元");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("自定义申请组");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("申请单元");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("自定义申请组");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("申请单元");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("自定义申请组");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("申请单元");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("自定义申请组");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("申请单元");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("自定义申请组");
             this.trvCheckGroup = new System.Windows.Forms.TreeView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblSummary = new System.Windows.Forms.Label();
@@ -170,13 +170,13 @@ namespace com.digitalwave.iCare.gui.LIS
             this.lbAddCheckItem = new System.Windows.Forms.Label();
             this.lbAllCheckItem = new System.Windows.Forms.Label();
             this.lsvAddCheckItem = new System.Windows.Forms.ListView();
-            this.chAddCheckItemID = new System.Windows.Forms.ColumnHeader();
-            this.chAddCheckItemEN = new System.Windows.Forms.ColumnHeader();
-            this.chAddCheckItemName = new System.Windows.Forms.ColumnHeader();
+            this.chAddCheckItemID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chAddCheckItemEN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chAddCheckItemName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lsvCheckItem = new System.Windows.Forms.ListView();
-            this.chCheckItemID = new System.Windows.Forms.ColumnHeader();
-            this.chCheckItemEn = new System.Windows.Forms.ColumnHeader();
-            this.chCheckItemName = new System.Windows.Forms.ColumnHeader();
+            this.chCheckItemID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chCheckItemEn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chCheckItemName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.cboCheckCategory = new System.Windows.Forms.ComboBox();
             this.btnDelCheckItem = new System.Windows.Forms.Button();
@@ -188,15 +188,17 @@ namespace com.digitalwave.iCare.gui.LIS
             this.btnDelSubGroup = new System.Windows.Forms.Button();
             this.btnNewSubGroup = new System.Windows.Forms.Button();
             this.lsvSubGroupCheckItem = new System.Windows.Forms.ListView();
-            this.chGroupCheckItemID = new System.Windows.Forms.ColumnHeader();
-            this.chGroupEN = new System.Windows.Forms.ColumnHeader();
-            this.chGroupCheckItemName = new System.Windows.Forms.ColumnHeader();
+            this.chGroupCheckItemID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chGroupEN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chGroupCheckItemName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnDelCheckGroup = new System.Windows.Forms.Button();
             this.btnSaveCheckGroup = new System.Windows.Forms.Button();
             this.btnNewCheckGroup = new System.Windows.Forms.Button();
             this.gbBaseInfo = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.txtSamplingInstr = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.txtReportHour = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.m_lbCostUnit = new System.Windows.Forms.Label();
             this.m_txtCost = new System.Windows.Forms.TextBox();
@@ -211,6 +213,7 @@ namespace com.digitalwave.iCare.gui.LIS
             this.chkNoFood = new System.Windows.Forms.CheckBox();
             this.m_lbPriceUnit = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.m_cboSampleType = new com.digitalwave.iCare.gui.LIS.ctlLISSampleTypeComboBox();
             this.chkOutCheckFlag = new System.Windows.Forms.CheckBox();
             this.m_pnlProperty = new System.Windows.Forms.Panel();
             this.m_pnlList = new System.Windows.Forms.Panel();
@@ -223,9 +226,6 @@ namespace com.digitalwave.iCare.gui.LIS
             this.m_tabCommon = new System.Windows.Forms.TabPage();
             this.m_tabProperty = new System.Windows.Forms.TabPage();
             this.btnExit0 = new System.Windows.Forms.Button();
-            this.txtSamplingInstr = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.m_cboSampleType = new com.digitalwave.iCare.gui.LIS.ctlLISSampleTypeComboBox();
             this.groupBox2.SuspendLayout();
             this.tbcCheckGroupDetail.SuspendLayout();
             this.tpCheckItem.SuspendLayout();
@@ -238,27 +238,27 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // trvCheckGroup
             // 
-            this.trvCheckGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.trvCheckGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.trvCheckGroup.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.trvCheckGroup.HideSelection = false;
             this.trvCheckGroup.Location = new System.Drawing.Point(4, 8);
             this.trvCheckGroup.Name = "trvCheckGroup";
-            treeNode1.Name = "";
-            treeNode1.Text = "申请单元";
-            treeNode2.Name = "";
-            treeNode2.Text = "自定义申请组";
+            treeNode7.Name = "";
+            treeNode7.Text = "申请单元";
+            treeNode8.Name = "";
+            treeNode8.Text = "自定义申请组";
             this.trvCheckGroup.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
+            treeNode7,
+            treeNode8});
             this.trvCheckGroup.Size = new System.Drawing.Size(228, 496);
             this.trvCheckGroup.TabIndex = 45;
             this.trvCheckGroup.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvCheckGroup_AfterSelect);
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.lblSummary);
             this.groupBox2.Controls.Add(this.txtAssist02);
             this.groupBox2.Controls.Add(this.lbAssist02);
@@ -412,14 +412,14 @@ namespace com.digitalwave.iCare.gui.LIS
             this.txtSummary.Name = "txtSummary";
             this.txtSummary.Size = new System.Drawing.Size(112, 23);
             this.txtSummary.TabIndex = 38;
-            this.txtSummary.Leave += new System.EventHandler(this.txtSummary_Leave);
             this.txtSummary.Enter += new System.EventHandler(this.txtSummary_Enter);
+            this.txtSummary.Leave += new System.EventHandler(this.txtSummary_Leave);
             // 
             // tbcCheckGroupDetail
             // 
-            this.tbcCheckGroupDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbcCheckGroupDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbcCheckGroupDetail.Controls.Add(this.tpCheckItem);
             this.tbcCheckGroupDetail.Controls.Add(this.tpSubGroup);
             this.tbcCheckGroupDetail.Cursor = System.Windows.Forms.Cursors.Arrow;
@@ -464,9 +464,9 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // lsvAddCheckItem
             // 
-            this.lsvAddCheckItem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lsvAddCheckItem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lsvAddCheckItem.CheckBoxes = true;
             this.lsvAddCheckItem.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chAddCheckItemID,
@@ -499,8 +499,8 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // lsvCheckItem
             // 
-            this.lsvCheckItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.lsvCheckItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lsvCheckItem.CheckBoxes = true;
             this.lsvCheckItem.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chCheckItemID,
@@ -588,19 +588,19 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // trvAddSubGroup
             // 
-            this.trvAddSubGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.trvAddSubGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.trvAddSubGroup.CheckBoxes = true;
             this.trvAddSubGroup.HideSelection = false;
             this.trvAddSubGroup.Location = new System.Drawing.Point(388, 16);
             this.trvAddSubGroup.Name = "trvAddSubGroup";
-            treeNode3.Name = "";
-            treeNode3.Text = "申请单元";
-            treeNode4.Name = "";
-            treeNode4.Text = "自定义申请组";
+            treeNode9.Name = "";
+            treeNode9.Text = "申请单元";
+            treeNode10.Name = "";
+            treeNode10.Text = "自定义申请组";
             this.trvAddSubGroup.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode4});
+            treeNode9,
+            treeNode10});
             this.trvAddSubGroup.Size = new System.Drawing.Size(360, 239);
             this.trvAddSubGroup.TabIndex = 39;
             this.trvAddSubGroup.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.trvAddSubGroup_AfterCheck);
@@ -617,20 +617,20 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // trvSubCheckGroup
             // 
-            this.trvSubCheckGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.trvSubCheckGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.trvSubCheckGroup.CheckBoxes = true;
             this.trvSubCheckGroup.HideSelection = false;
             this.trvSubCheckGroup.Location = new System.Drawing.Point(16, 16);
             this.trvSubCheckGroup.Name = "trvSubCheckGroup";
-            treeNode5.Name = "";
-            treeNode5.Text = "申请单元";
-            treeNode6.Name = "";
-            treeNode6.Text = "自定义申请组";
+            treeNode11.Name = "";
+            treeNode11.Text = "申请单元";
+            treeNode12.Name = "";
+            treeNode12.Text = "自定义申请组";
             this.trvSubCheckGroup.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6});
+            treeNode11,
+            treeNode12});
             this.trvSubCheckGroup.Size = new System.Drawing.Size(348, 239);
             this.trvSubCheckGroup.TabIndex = 35;
             this.trvSubCheckGroup.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.trvSubCheckGroup_AfterCheck);
@@ -660,8 +660,8 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // lsvSubGroupCheckItem
             // 
-            this.lsvSubGroupCheckItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lsvSubGroupCheckItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lsvSubGroupCheckItem.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chGroupCheckItemID,
             this.chGroupEN,
@@ -746,41 +746,49 @@ namespace com.digitalwave.iCare.gui.LIS
             this.gbBaseInfo.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.gbBaseInfo.Location = new System.Drawing.Point(648, 40);
             this.gbBaseInfo.Name = "gbBaseInfo";
-            this.gbBaseInfo.Size = new System.Drawing.Size(356, 152);
+            this.gbBaseInfo.Size = new System.Drawing.Size(356, 158);
             this.gbBaseInfo.TabIndex = 51;
             this.gbBaseInfo.TabStop = false;
             this.gbBaseInfo.Text = "其他信息";
             // 
-            // label5
+            // txtSamplingInstr
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(321, 104);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 14);
-            this.label5.TabIndex = 204;
-            this.label5.Text = "小时";
+            this.txtSamplingInstr.Location = new System.Drawing.Point(76, 126);
+            this.txtSamplingInstr.Name = "txtSamplingInstr";
+            this.txtSamplingInstr.Size = new System.Drawing.Size(252, 23);
+            this.txtSamplingInstr.TabIndex = 206;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 130);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(63, 14);
+            this.label7.TabIndex = 205;
+            this.label7.Text = "采样说明";
             // 
             // txtReportHour
             // 
-            //this.txtReportHour.EnableAutoValidation = true;
-            //this.txtReportHour.EnableEnterKeyValidate = true;
-            //this.txtReportHour.EnableEscapeKeyUndo = true;
-            //this.txtReportHour.EnableLastValidValue = true;
-            //this.txtReportHour.ErrorProvider = null;
-            //this.txtReportHour.ErrorProviderMessage = "Invalid value";
-            //this.txtReportHour.ForceFormatText = true;
-            this.txtReportHour.Location = new System.Drawing.Point(264, 100);
+            this.txtReportHour.Location = new System.Drawing.Point(268, 102);
             this.txtReportHour.Name = "txtReportHour";
-            //this.txtReportHour.NumericCharStyle = ((SourceLibrary.Windows.Forms.NumericCharStyle)((SourceLibrary.Windows.Forms.NumericCharStyle.DecimalSeparator | SourceLibrary.Windows.Forms.NumericCharStyle.NegativeSymbol)));
             this.txtReportHour.Size = new System.Drawing.Size(60, 23);
             this.txtReportHour.TabIndex = 203;
             this.txtReportHour.Text = "0";
             this.txtReportHour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(325, 106);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 14);
+            this.label5.TabIndex = 204;
+            this.label5.Text = "小时";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(184, 104);
+            this.label4.Location = new System.Drawing.Point(188, 106);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 14);
             this.label4.TabIndex = 202;
@@ -789,7 +797,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // m_lbCostUnit
             // 
             this.m_lbCostUnit.AutoSize = true;
-            this.m_lbCostUnit.Location = new System.Drawing.Point(324, 76);
+            this.m_lbCostUnit.Location = new System.Drawing.Point(328, 78);
             this.m_lbCostUnit.Name = "m_lbCostUnit";
             this.m_lbCostUnit.Size = new System.Drawing.Size(21, 14);
             this.m_lbCostUnit.TabIndex = 42;
@@ -797,16 +805,8 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // m_txtCost
             // 
-            //this.m_txtCost.EnableAutoValidation = true;
-            //this.m_txtCost.EnableEnterKeyValidate = true;
-            //this.m_txtCost.EnableEscapeKeyUndo = true;
-            //this.m_txtCost.EnableLastValidValue = true;
-            //this.m_txtCost.ErrorProvider = null;
-            //this.m_txtCost.ErrorProviderMessage = "Invalid value";
-            //this.m_txtCost.ForceFormatText = true;
-            this.m_txtCost.Location = new System.Drawing.Point(264, 76);
+            this.m_txtCost.Location = new System.Drawing.Point(268, 78);
             this.m_txtCost.Name = "m_txtCost";
-            //this.m_txtCost.NumericCharStyle = ((SourceLibrary.Windows.Forms.NumericCharStyle)((SourceLibrary.Windows.Forms.NumericCharStyle.DecimalSeparator | SourceLibrary.Windows.Forms.NumericCharStyle.NegativeSymbol)));
             this.m_txtCost.Size = new System.Drawing.Size(60, 23);
             this.m_txtCost.TabIndex = 200;
             this.m_txtCost.Text = "0";
@@ -814,17 +814,9 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // m_txtPrice
             // 
-            //this.m_txtPrice.EnableAutoValidation = true;
-            //this.m_txtPrice.EnableEnterKeyValidate = true;
-            //this.m_txtPrice.EnableEscapeKeyUndo = true;
-            //this.m_txtPrice.EnableLastValidValue = true;
-            //this.m_txtPrice.ErrorProvider = null;
-            //this.m_txtPrice.ErrorProviderMessage = "Invalid value";
-            //this.m_txtPrice.ForceFormatText = true;
-            this.m_txtPrice.Location = new System.Drawing.Point(264, 52);
+            this.m_txtPrice.Location = new System.Drawing.Point(268, 54);
             this.m_txtPrice.MaxLength = 5;
             this.m_txtPrice.Name = "m_txtPrice";
-            //this.m_txtPrice.NumericCharStyle = ((SourceLibrary.Windows.Forms.NumericCharStyle)((SourceLibrary.Windows.Forms.NumericCharStyle.DecimalSeparator | SourceLibrary.Windows.Forms.NumericCharStyle.NegativeSymbol)));
             this.m_txtPrice.Size = new System.Drawing.Size(60, 23);
             this.m_txtPrice.TabIndex = 40;
             this.m_txtPrice.Text = "0";
@@ -833,7 +825,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // m_lbCost
             // 
             this.m_lbCost.AutoSize = true;
-            this.m_lbCost.Location = new System.Drawing.Point(200, 80);
+            this.m_lbCost.Location = new System.Drawing.Point(204, 82);
             this.m_lbCost.Name = "m_lbCost";
             this.m_lbCost.Size = new System.Drawing.Size(63, 14);
             this.m_lbCost.TabIndex = 38;
@@ -842,7 +834,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // m_lbPrice
             // 
             this.m_lbPrice.AutoSize = true;
-            this.m_lbPrice.Location = new System.Drawing.Point(200, 56);
+            this.m_lbPrice.Location = new System.Drawing.Point(204, 58);
             this.m_lbPrice.Name = "m_lbPrice";
             this.m_lbPrice.Size = new System.Drawing.Size(63, 14);
             this.m_lbPrice.TabIndex = 36;
@@ -850,7 +842,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // txtApplUnitOtherName
             // 
-            this.txtApplUnitOtherName.Location = new System.Drawing.Point(72, 52);
+            this.txtApplUnitOtherName.Location = new System.Drawing.Point(76, 54);
             this.txtApplUnitOtherName.Name = "txtApplUnitOtherName";
             this.txtApplUnitOtherName.Size = new System.Drawing.Size(116, 23);
             this.txtApplUnitOtherName.TabIndex = 35;
@@ -858,7 +850,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // lbApplUnitOtherName
             // 
             this.lbApplUnitOtherName.AutoSize = true;
-            this.lbApplUnitOtherName.Location = new System.Drawing.Point(8, 56);
+            this.lbApplUnitOtherName.Location = new System.Drawing.Point(12, 58);
             this.lbApplUnitOtherName.Name = "lbApplUnitOtherName";
             this.lbApplUnitOtherName.Size = new System.Drawing.Size(63, 14);
             this.lbApplUnitOtherName.TabIndex = 34;
@@ -903,7 +895,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // m_lbPriceUnit
             // 
             this.m_lbPriceUnit.AutoSize = true;
-            this.m_lbPriceUnit.Location = new System.Drawing.Point(324, 52);
+            this.m_lbPriceUnit.Location = new System.Drawing.Point(328, 54);
             this.m_lbPriceUnit.Name = "m_lbPriceUnit";
             this.m_lbPriceUnit.Size = new System.Drawing.Size(21, 14);
             this.m_lbPriceUnit.TabIndex = 43;
@@ -912,16 +904,27 @@ namespace com.digitalwave.iCare.gui.LIS
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 80);
+            this.label6.Location = new System.Drawing.Point(12, 82);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 14);
             this.label6.TabIndex = 123;
             this.label6.Text = "样本类型";
             // 
+            // m_cboSampleType
+            // 
+            this.m_cboSampleType.DisplayMember = "SAMPLE_TYPE_DESC_VCHR";
+            this.m_cboSampleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.m_cboSampleType.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.m_cboSampleType.Location = new System.Drawing.Point(76, 78);
+            this.m_cboSampleType.Name = "m_cboSampleType";
+            this.m_cboSampleType.Size = new System.Drawing.Size(116, 22);
+            this.m_cboSampleType.TabIndex = 36;
+            this.m_cboSampleType.ValueMember = "SAMPLE_TYPE_ID_CHR";
+            // 
             // chkOutCheckFlag
             // 
             this.chkOutCheckFlag.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkOutCheckFlag.Location = new System.Drawing.Point(1, 103);
+            this.chkOutCheckFlag.Location = new System.Drawing.Point(5, 105);
             this.chkOutCheckFlag.Name = "chkOutCheckFlag";
             this.chkOutCheckFlag.Size = new System.Drawing.Size(84, 24);
             this.chkOutCheckFlag.TabIndex = 201;
@@ -1036,33 +1039,6 @@ namespace com.digitalwave.iCare.gui.LIS
             this.btnExit0.Text = "关闭(&C)";
             this.btnExit0.UseVisualStyleBackColor = true;
             this.btnExit0.Click += new System.EventHandler(this.btnExit0_Click);
-            // 
-            // txtSamplingInstr
-            // 
-            this.txtSamplingInstr.Location = new System.Drawing.Point(72, 124);
-            this.txtSamplingInstr.Name = "txtSamplingInstr";
-            this.txtSamplingInstr.Size = new System.Drawing.Size(252, 23);
-            this.txtSamplingInstr.TabIndex = 206;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 128);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 14);
-            this.label7.TabIndex = 205;
-            this.label7.Text = "采样说明";
-            // 
-            // m_cboSampleType
-            // 
-            this.m_cboSampleType.DisplayMember = "SAMPLE_TYPE_DESC_VCHR";
-            this.m_cboSampleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.m_cboSampleType.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.m_cboSampleType.Location = new System.Drawing.Point(72, 76);
-            this.m_cboSampleType.Name = "m_cboSampleType";
-            this.m_cboSampleType.Size = new System.Drawing.Size(116, 22);
-            this.m_cboSampleType.TabIndex = 36;
-            this.m_cboSampleType.ValueMember = "SAMPLE_TYPE_ID_CHR";
             // 
             // frmApplUserGroup
             // 

@@ -52,6 +52,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\debug\utility.dll</HintPath>
     </Reference>
+    <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\wecare.core.dll</HintPath>
+    </Reference>
     <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=4bdb6de9b3ca5966, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\debug\wecaredata.dll</HintPath>

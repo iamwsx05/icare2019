@@ -925,6 +925,24 @@ namespace com.digitalwave.iCare.gui.LIS_Data_Acquisition_Controller
                         if (lngRes > 0) this.ShowWaitInfo(objConfig_VO);
                         return;
                     }
+                    else if(!string.IsNullOrEmpty(objConfig_VO.strData_Analysis_Namespace) && objConfig_VO.strData_Analysis_Namespace.Contains("FB2000R"))
+                    {
+                        FB2000R.FB2000R_Duplex FB2000R = new FB2000R.FB2000R_Duplex(objConfig_VO);
+                        lngRes = FB2000R.Start();
+                        FB2000R.ShowResult += new FB2000R.LISResultSavedEvent(ShowResult);
+
+                        if (lngRes > 0) this.ShowWaitInfo(objConfig_VO);
+                        return;
+                    }
+                    else if (!string.IsNullOrEmpty(objConfig_VO.strData_Analysis_Namespace) && objConfig_VO.strData_Analysis_Namespace.Contains("Laboman"))
+                    {
+                        Laboman.Laboman_Duplex laboman = new Laboman.Laboman_Duplex(objConfig_VO);
+                        lngRes = laboman.Start();
+                        laboman.ShowResult += new Laboman.LISResultSavedEvent(ShowResult);
+
+                        if (lngRes > 0) this.ShowWaitInfo(objConfig_VO);
+                        return;
+                    }
 
                     if (!string.IsNullOrEmpty(objConfig_VO.strCOM_No))
                     {

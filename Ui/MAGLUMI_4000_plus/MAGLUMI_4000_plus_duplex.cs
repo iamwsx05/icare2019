@@ -279,6 +279,7 @@ namespace MAGLUMI_4000_plus
                 foreach (string data in p_lstResultData)
                 {
                     lngRes = DateAnalysis.lngDataAnalysis(data, out resultVo);
+                    
                     if (lngRes > 0 && resultVo != null && resultVo.Count > 0)
                     {
                         foreach (clsLIS_Device_Test_ResultVO vo in resultVo)

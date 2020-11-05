@@ -71,23 +71,24 @@ namespace test
         }
 
 
-        public long lngDataAnalysis(string recData)
+        public clsLIS_Device_Test_ResultVO lngDataAnalysis(string recData)
         {
-            List<clsLIS_Device_Test_ResultVO> p_arlResult = new List<clsLIS_Device_Test_ResultVO>();
-            p_arlResult = null;
+            //List<clsLIS_Device_Test_ResultVO> p_arlResult = new List<clsLIS_Device_Test_ResultVO>();
+            //p_arlResult = null;
+            clsLIS_Device_Test_ResultVO vo = null;
             if ((recData == "") || (recData == null))
             {
-                return 0;
+                return null;
             }
 
             string[] data = recData.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             if (data == null || data.Length <= 0)
             {
-                return -1;
+                return null;
             }
 
-            p_arlResult = new List<clsLIS_Device_Test_ResultVO>();
-            clsLIS_Device_Test_ResultVO vo = null;
+            //p_arlResult = new List<clsLIS_Device_Test_ResultVO>();
+            
             string sampleID = string.Empty;
             string barCode = string.Empty;
             string checkDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -124,22 +125,20 @@ namespace test
                 if (tmpData.Length < 3) continue;
 
                 vo = new clsLIS_Device_Test_ResultVO();
-                vo.strDevice_Sample_ID = sampleID;
+                //vo.strDevice_Sample_ID = sampleID;
                 vo.barCode = barCode;
                 Log.Output("sampleID--》" + sampleID);
-                vo.strCheck_Date = checkDate;
+                //vo.strCheck_Date = checkDate;
                 vo.strDevice_Check_Item_Name = tmpData[2].Replace("^", "").Trim();  // 名称
                 vo.strResult = tmpData[3].Trim();   // 检验结果
-
-                p_arlResult.Add(vo);
             }
-            if(p_arlResult != null)
-            {
-                this.gridControl1.DataSource = p_arlResult;
-                this.gridControl1.RefreshDataSource();
-            }
+            //if(p_arlResult != null)
+            //{
+            //    this.gridControl1.DataSource = p_arlResult;
+            //    this.gridControl1.RefreshDataSource();
+            //}
 
-            return 1;
+            return vo;
         }
 
         private void backgroundWorker_DoWork(string recData)
@@ -168,12 +167,21 @@ namespace test
 
             } while (idxStart2 > 0 && idxEnd2 > 0);
             recData.Remove(0, idxEnd2 + 1);
-
+            List<clsLIS_Device_Test_ResultVO> p_arlResult = new List<clsLIS_Device_Test_ResultVO>();
             if (lstResultData != null && lstResultData.Count > 0)
             {
                 foreach (string data in lstResultData)
                 {
-                    lngDataAnalysis(data);
+                    clsLIS_Device_Test_ResultVO vo = lngDataAnalysis(data);
+                    if(vo != null)
+                    {
+                        p_arlResult.Add(vo);
+                    }
+                }
+                if (p_arlResult != null)
+                {
+                    this.gridControl1.DataSource = p_arlResult;
+                    this.gridControl1.RefreshDataSource();
                 }
             }
         }
@@ -224,6 +232,13 @@ namespace test
             }
 
         }
+    }
+
+    public class clsLIS_Device_Test_ResultVO
+    {
+        public string barCode { get; set; }
+        public string strDevice_Check_Item_Name { get; set; }
+        public string strResult { get; set; }
     }
 }
 

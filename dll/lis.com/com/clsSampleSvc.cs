@@ -863,7 +863,7 @@ namespace com.digitalwave.iCare.middletier.LIS
                     IDataParameter[] parm = null;
                     foreach (string barCode in lstBarCode)
                     {
-                        Sql = @"select distinct d.device_check_item_id_chr, d.device_check_item_name_vchr
+                        Sql = @"select distinct c.check_item_id_chr, d.device_check_item_name_vchr
                                   from t_opr_lis_sample a
                                  inner join t_opr_lis_app_check_item b
                                     on b.application_id_chr = a.application_id_chr
@@ -873,10 +873,12 @@ namespace com.digitalwave.iCare.middletier.LIS
                                     on d.device_check_item_id_chr = c.device_check_item_id_chr
                                    and d.device_model_id_chr = c.device_model_id_chr
                                  where a.status_int >= 3
-                                   and d.device_model_id_chr  in ( '0000041','0000046','0000055')
+                                   --and d.device_model_id_chr  in ( '0000041','0000046','0000055')
+                                     and d.device_model_id_chr  in ( '0000041','0000046','0000055', '0000040',
+                                     '0000039', '0000034','0000021','0000031','0000026')
                                    and a.barcode_vchr = ?
                                    and a.status_int > 0
-                                 order by d.device_check_item_id_chr";
+                                 order by c.check_item_id_chr";
 
                         DataTable dtItem = null;
                         objHRPSvc.CreateDatabaseParameter(1, out parm);
@@ -898,7 +900,7 @@ namespace com.digitalwave.iCare.middletier.LIS
                             {
                                 objHRPSvc.CreateDatabaseParameter(4, out parm);
                                 parm[0].Value = barCode;
-                                parm[1].Value = dr["device_check_item_id_chr"].ToString();
+                                parm[1].Value = dr["check_item_id_chr"].ToString();
                                 parm[2].Value = dr["device_check_item_name_vchr"].ToString();
                                 parm[3].Value = dtmNow;
                                 objHRPSvc.lngExecuteParameterSQL(Sql, ref affectRows, parm);

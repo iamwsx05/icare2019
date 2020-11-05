@@ -4869,7 +4869,7 @@ namespace com.digitalwave.iCare.gui.LIS
             else if (!string.IsNullOrEmpty(objInfo.m_objAppMainVO.m_strApplication_Form_NO) && 
                 (objInfo.m_objAppMainVO.m_strApplication_Form_NO.StartsWith("59") || objInfo.m_objAppMainVO.m_strApplication_Form_NO.EndsWith("+59") ||
                 (this.isAU680TwoWay && (objInfo.m_objAppMainVO.m_strApplication_Form_NO.StartsWith("51") || objInfo.m_objAppMainVO.m_strApplication_Form_NO.EndsWith("+51"))) ||
-                (this.isMAGLUMITwoWay && (objInfo.m_objAppMainVO.m_strApplication_Form_NO.StartsWith("65") || objInfo.m_objAppMainVO.m_strApplication_Form_NO.EndsWith("+65"))) ) )    // Ottoman(59), AU680(51)
+                (this.isMAGLUMITwoWay && (objInfo.m_objAppMainVO.m_strApplication_Form_NO.StartsWith("65") || objInfo.m_objAppMainVO.m_strApplication_Form_NO.EndsWith("+65"))) ))    // Ottoman(59), AU680(51) MAGLUMI(65)
             {
                 data = this.m_objController.GetOttomanDeviceResult(p_objInfo.m_objAppMainVO.m_strBarcode, objInfo.m_objSampleVO.m_intSTATUS_INT, p_blnForceImportData, out isHaveData);
                 if (data != null && data.Count > 0) objDRVOArr = data.ToArray();

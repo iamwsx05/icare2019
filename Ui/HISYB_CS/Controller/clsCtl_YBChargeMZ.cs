@@ -569,6 +569,8 @@ namespace com.digitalwave.iCare.gui.HIS
                     else
                         objDgextraVo.JZLB = jzlb;
                 }
+                if(objDgextraVo.JZLB == "79")
+                    objDgextraVo.ZYLB = "4"; 
                 long lngRes = clsYBPublic_cs.m_lngFunSP5001(1, objDgextraVo, DateTime.Now, (this.m_objViewer.rdoEk.Checked ? this.QRCode : ""));
             }
             catch (Exception objEx)

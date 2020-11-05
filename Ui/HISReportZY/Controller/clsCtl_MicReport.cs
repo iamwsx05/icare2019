@@ -559,7 +559,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     lstAntiApp.Add(vo);
                 }
             }
-
+            
             lngRes = m_objManage.lngGetMicApplication("", dtDateFrom, dtDateTo, CriticalStr, DeptIdArr, out dtbMicAp);
             if (lngRes > 0 && dtbMicAp.Rows.Count > 0)
             {

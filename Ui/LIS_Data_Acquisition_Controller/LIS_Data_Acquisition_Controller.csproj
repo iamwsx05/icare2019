@@ -135,6 +135,10 @@
       <HintPath>..\..\..\bin\debug\digitalwavecontrols.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FB2000R, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\FB2000R.dll</HintPath>
+    </Reference>
     <Reference Include="GUI_Base">
       <Name>GUI_Base</Name>
       <HintPath>..\..\..\bin\Debug\GUI_Base.dll</HintPath>
@@ -148,6 +152,10 @@
     <Reference Include="Interop.DIGITALSERIALLib">
       <Name>Interop.DIGITALSERIALLib</Name>
       <HintPath>..\..\..\bin\Debug\Interop.DIGITALSERIALLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Laboman, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\Laboman.dll</HintPath>
     </Reference>
     <Reference Include="lis.itf, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
