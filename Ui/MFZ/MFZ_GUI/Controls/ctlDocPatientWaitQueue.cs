@@ -29,7 +29,7 @@ namespace com.digitalwave.iCare.gui.MFZ
         private int calledCount;
         private string deptId;
         private bool isYiJiArea; //是否是医技诊区
-        
+
         #endregion
 
         #region 属 性
@@ -50,7 +50,7 @@ namespace com.digitalwave.iCare.gui.MFZ
         {
             set
             {
-                calledCount=value;
+                calledCount = value;
                 this.doctor.calledCount = calledCount;
             }
         }
@@ -113,9 +113,9 @@ namespace com.digitalwave.iCare.gui.MFZ
         /// <summary>
         /// 设置是否是医技诊区
         /// </summary>
-        public bool IsYiJiArea 
+        public bool IsYiJiArea
         {
-            set 
+            set
             {
                 isYiJiArea = value;
             }
@@ -125,7 +125,7 @@ namespace com.digitalwave.iCare.gui.MFZ
 
         #region 辅助方法
 
-       
+
 
         #endregion
 
@@ -139,7 +139,7 @@ namespace com.digitalwave.iCare.gui.MFZ
         public void SetOffline()
         {
             this.m_lblDeptRoomDocName.Image = global::com.digitalwave.iCare.gui.MFZ.Properties.Resources.men_offline;
-        } 
+        }
 
         #endregion
 
@@ -173,9 +173,12 @@ namespace com.digitalwave.iCare.gui.MFZ
             {
                 manage.MovePatient(dragPatient, strQueueID, this.doctor.strDoctID, m_lsvPatientQueue.Items.Count);
             }
-            int dropIndex = dropItem.Index;
-            manage.MovePatient(dragPatient, strQueueID, doctor.strDoctID, dropIndex);
-        } 
+            if (dropItem != null)
+            {
+                int dropIndex = dropItem.Index;
+                manage.MovePatient(dragPatient, strQueueID, doctor.strDoctID, dropIndex);
+            }
+        }
 
         #endregion
 
@@ -236,7 +239,7 @@ namespace com.digitalwave.iCare.gui.MFZ
                 m_lblDeptRoomDocName.Text = string.Format("                   项目:{0}\n                   {1}【{2}】", projectName, doctor.strDoctName, this.calledCount);
                 m_lblRoomName.Text = this.roomName;
             }
-        } 
+        }
 
         #endregion
     }
@@ -244,9 +247,9 @@ namespace com.digitalwave.iCare.gui.MFZ
     /// <summary>
     /// 诊室的排序
     /// </summary>
-    public class PatientQueueComparer : IComparer<ctlDocPatientWaitQueue> 
+    public class PatientQueueComparer : IComparer<ctlDocPatientWaitQueue>
     {
-        public int Compare(ctlDocPatientWaitQueue patientQueue1,ctlDocPatientWaitQueue patientQueue2) 
+        public int Compare(ctlDocPatientWaitQueue patientQueue1, ctlDocPatientWaitQueue patientQueue2)
         {
             return string.Compare(patientQueue1.RoomName, patientQueue2.RoomName);
         }

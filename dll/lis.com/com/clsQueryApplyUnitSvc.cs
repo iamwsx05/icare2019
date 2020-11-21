@@ -94,7 +94,7 @@ namespace com.digitalwave.iCare.middletier.LIS
                                    assist_code01_chr, wb_code_chr, assist_code02_chr,
                                    check_category_id_chr, is_no_food_required_chr,
                                    is_physical_exam_required_chr, is_reservation_required_chr, price_num,
-                                   cost_num, sample_type_id_chr, summary_vchr, outer_check_flag_num, reporthour, SamplingInstr  
+                                   cost_num, sample_type_id_chr, summary_vchr, outer_check_flag_num, reporthour, SamplingInstr, jclx_jj, jclx_jtj   
                               from t_aid_lis_apply_unit
                               where CHECK_CATEGORY_ID_CHR = '" + p_strCheckCategory + @"' ORDER BY apply_unit_id_chr";
             DataTable dtbApplUnit = null;
@@ -138,7 +138,7 @@ namespace com.digitalwave.iCare.middletier.LIS
                                    assist_code01_chr, wb_code_chr, assist_code02_chr,
                                    check_category_id_chr, is_no_food_required_chr,
                                    is_physical_exam_required_chr, is_reservation_required_chr, price_num,
-                                   cost_num, sample_type_id_chr, summary_vchr, outer_check_flag_num, reporthour, SamplingInstr  
+                                   cost_num, sample_type_id_chr, summary_vchr, outer_check_flag_num, reporthour, SamplingInstr, jclx_jj, jclx_jtj   
                               from t_aid_lis_apply_unit
                              where apply_unit_id_chr = ?";
 
@@ -185,7 +185,7 @@ namespace com.digitalwave.iCare.middletier.LIS
                                    assist_code01_chr, wb_code_chr, assist_code02_chr,
                                    check_category_id_chr, is_no_food_required_chr,
                                    is_physical_exam_required_chr, is_reservation_required_chr, price_num,
-                                   cost_num, sample_type_id_chr, summary_vchr, outer_check_flag_num, reporthour, SamplingInstr  
+                                   cost_num, sample_type_id_chr, summary_vchr, outer_check_flag_num, reporthour, SamplingInstr, jclx_jj, jclx_jtj   
                               from t_aid_lis_apply_unit";
 
             DataTable dtbApplUnit = null;
@@ -284,6 +284,8 @@ namespace com.digitalwave.iCare.middletier.LIS
             objApplUnitVO.strOutCheckFlag = objRow["OUTER_CHECK_FLAG_NUM"].ToString().Trim();
             objApplUnitVO.ReportHour = objRow["REPORTHOUR"] == DBNull.Value ? 0 : Convert.ToDecimal(objRow["REPORTHOUR"].ToString());
             objApplUnitVO.SamplingInstr = objRow["SamplingInstr"].ToString();
+            objApplUnitVO.Jclx_jj = objRow["Jclx_jj"] == DBNull.Value ? 0 : Convert.ToInt32(objRow["Jclx_jj"].ToString());
+            objApplUnitVO.Jclx_jtj = objRow["Jclx_jtj"] == DBNull.Value ? 0 : Convert.ToInt32(objRow["Jclx_jtj"].ToString());
         }
         #endregion
 

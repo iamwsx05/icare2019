@@ -95,6 +95,9 @@ namespace com.digitalwave.iCare.gui.LIS
         private Label label4;
         internal TextBox txtSamplingInstr;
         private Label label7;
+        internal CheckBox chkJtj;
+        internal CheckBox chkJj;
+        private Label label8;
 
 
         /// <summary>
@@ -141,12 +144,12 @@ namespace com.digitalwave.iCare.gui.LIS
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("申请单元");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("自定义申请组");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("申请单元");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("自定义申请组");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("申请单元");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("自定义申请组");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("申请单元");
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("自定义申请组");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("申请单元");
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("自定义申请组");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("申请单元");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("自定义申请组");
             this.trvCheckGroup = new System.Windows.Forms.TreeView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblSummary = new System.Windows.Forms.Label();
@@ -226,6 +229,9 @@ namespace com.digitalwave.iCare.gui.LIS
             this.m_tabCommon = new System.Windows.Forms.TabPage();
             this.m_tabProperty = new System.Windows.Forms.TabPage();
             this.btnExit0 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.chkJtj = new System.Windows.Forms.CheckBox();
+            this.chkJj = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             this.tbcCheckGroupDetail.SuspendLayout();
             this.tpCheckItem.SuspendLayout();
@@ -244,13 +250,13 @@ namespace com.digitalwave.iCare.gui.LIS
             this.trvCheckGroup.HideSelection = false;
             this.trvCheckGroup.Location = new System.Drawing.Point(4, 8);
             this.trvCheckGroup.Name = "trvCheckGroup";
-            treeNode7.Name = "";
-            treeNode7.Text = "申请单元";
-            treeNode8.Name = "";
-            treeNode8.Text = "自定义申请组";
+            treeNode25.Name = "";
+            treeNode25.Text = "申请单元";
+            treeNode26.Name = "";
+            treeNode26.Text = "自定义申请组";
             this.trvCheckGroup.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8});
+            treeNode25,
+            treeNode26});
             this.trvCheckGroup.Size = new System.Drawing.Size(228, 496);
             this.trvCheckGroup.TabIndex = 45;
             this.trvCheckGroup.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvCheckGroup_AfterSelect);
@@ -594,13 +600,13 @@ namespace com.digitalwave.iCare.gui.LIS
             this.trvAddSubGroup.HideSelection = false;
             this.trvAddSubGroup.Location = new System.Drawing.Point(388, 16);
             this.trvAddSubGroup.Name = "trvAddSubGroup";
-            treeNode9.Name = "";
-            treeNode9.Text = "申请单元";
-            treeNode10.Name = "";
-            treeNode10.Text = "自定义申请组";
+            treeNode27.Name = "";
+            treeNode27.Text = "申请单元";
+            treeNode28.Name = "";
+            treeNode28.Text = "自定义申请组";
             this.trvAddSubGroup.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode10});
+            treeNode27,
+            treeNode28});
             this.trvAddSubGroup.Size = new System.Drawing.Size(360, 239);
             this.trvAddSubGroup.TabIndex = 39;
             this.trvAddSubGroup.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.trvAddSubGroup_AfterCheck);
@@ -624,13 +630,13 @@ namespace com.digitalwave.iCare.gui.LIS
             this.trvSubCheckGroup.HideSelection = false;
             this.trvSubCheckGroup.Location = new System.Drawing.Point(16, 16);
             this.trvSubCheckGroup.Name = "trvSubCheckGroup";
-            treeNode11.Name = "";
-            treeNode11.Text = "申请单元";
-            treeNode12.Name = "";
-            treeNode12.Text = "自定义申请组";
+            treeNode29.Name = "";
+            treeNode29.Text = "申请单元";
+            treeNode30.Name = "";
+            treeNode30.Text = "自定义申请组";
             this.trvSubCheckGroup.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode11,
-            treeNode12});
+            treeNode29,
+            treeNode30});
             this.trvSubCheckGroup.Size = new System.Drawing.Size(348, 239);
             this.trvSubCheckGroup.TabIndex = 35;
             this.trvSubCheckGroup.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.trvSubCheckGroup_AfterCheck);
@@ -723,6 +729,9 @@ namespace com.digitalwave.iCare.gui.LIS
             // gbBaseInfo
             // 
             this.gbBaseInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbBaseInfo.Controls.Add(this.chkJtj);
+            this.gbBaseInfo.Controls.Add(this.chkJj);
+            this.gbBaseInfo.Controls.Add(this.label8);
             this.gbBaseInfo.Controls.Add(this.txtSamplingInstr);
             this.gbBaseInfo.Controls.Add(this.label7);
             this.gbBaseInfo.Controls.Add(this.txtReportHour);
@@ -746,22 +755,22 @@ namespace com.digitalwave.iCare.gui.LIS
             this.gbBaseInfo.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.gbBaseInfo.Location = new System.Drawing.Point(648, 40);
             this.gbBaseInfo.Name = "gbBaseInfo";
-            this.gbBaseInfo.Size = new System.Drawing.Size(356, 158);
+            this.gbBaseInfo.Size = new System.Drawing.Size(354, 220);
             this.gbBaseInfo.TabIndex = 51;
             this.gbBaseInfo.TabStop = false;
             this.gbBaseInfo.Text = "其他信息";
             // 
             // txtSamplingInstr
             // 
-            this.txtSamplingInstr.Location = new System.Drawing.Point(76, 126);
+            this.txtSamplingInstr.Location = new System.Drawing.Point(72, 124);
             this.txtSamplingInstr.Name = "txtSamplingInstr";
-            this.txtSamplingInstr.Size = new System.Drawing.Size(252, 23);
+            this.txtSamplingInstr.Size = new System.Drawing.Size(248, 23);
             this.txtSamplingInstr.TabIndex = 206;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 130);
+            this.label7.Location = new System.Drawing.Point(8, 128);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(63, 14);
             this.label7.TabIndex = 205;
@@ -769,9 +778,9 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // txtReportHour
             // 
-            this.txtReportHour.Location = new System.Drawing.Point(268, 102);
+            this.txtReportHour.Location = new System.Drawing.Point(264, 100);
             this.txtReportHour.Name = "txtReportHour";
-            this.txtReportHour.Size = new System.Drawing.Size(60, 23);
+            this.txtReportHour.Size = new System.Drawing.Size(56, 23);
             this.txtReportHour.TabIndex = 203;
             this.txtReportHour.Text = "0";
             this.txtReportHour.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -779,7 +788,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(325, 106);
+            this.label5.Location = new System.Drawing.Point(320, 104);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 14);
             this.label5.TabIndex = 204;
@@ -788,7 +797,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(188, 106);
+            this.label4.Location = new System.Drawing.Point(184, 104);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 14);
             this.label4.TabIndex = 202;
@@ -797,7 +806,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // m_lbCostUnit
             // 
             this.m_lbCostUnit.AutoSize = true;
-            this.m_lbCostUnit.Location = new System.Drawing.Point(328, 78);
+            this.m_lbCostUnit.Location = new System.Drawing.Point(320, 76);
             this.m_lbCostUnit.Name = "m_lbCostUnit";
             this.m_lbCostUnit.Size = new System.Drawing.Size(21, 14);
             this.m_lbCostUnit.TabIndex = 42;
@@ -805,19 +814,19 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // m_txtCost
             // 
-            this.m_txtCost.Location = new System.Drawing.Point(268, 78);
+            this.m_txtCost.Location = new System.Drawing.Point(264, 76);
             this.m_txtCost.Name = "m_txtCost";
-            this.m_txtCost.Size = new System.Drawing.Size(60, 23);
+            this.m_txtCost.Size = new System.Drawing.Size(56, 23);
             this.m_txtCost.TabIndex = 200;
             this.m_txtCost.Text = "0";
             this.m_txtCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // m_txtPrice
             // 
-            this.m_txtPrice.Location = new System.Drawing.Point(268, 54);
+            this.m_txtPrice.Location = new System.Drawing.Point(264, 52);
             this.m_txtPrice.MaxLength = 5;
             this.m_txtPrice.Name = "m_txtPrice";
-            this.m_txtPrice.Size = new System.Drawing.Size(60, 23);
+            this.m_txtPrice.Size = new System.Drawing.Size(56, 23);
             this.m_txtPrice.TabIndex = 40;
             this.m_txtPrice.Text = "0";
             this.m_txtPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -825,7 +834,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // m_lbCost
             // 
             this.m_lbCost.AutoSize = true;
-            this.m_lbCost.Location = new System.Drawing.Point(204, 82);
+            this.m_lbCost.Location = new System.Drawing.Point(200, 80);
             this.m_lbCost.Name = "m_lbCost";
             this.m_lbCost.Size = new System.Drawing.Size(63, 14);
             this.m_lbCost.TabIndex = 38;
@@ -834,7 +843,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // m_lbPrice
             // 
             this.m_lbPrice.AutoSize = true;
-            this.m_lbPrice.Location = new System.Drawing.Point(204, 58);
+            this.m_lbPrice.Location = new System.Drawing.Point(200, 56);
             this.m_lbPrice.Name = "m_lbPrice";
             this.m_lbPrice.Size = new System.Drawing.Size(63, 14);
             this.m_lbPrice.TabIndex = 36;
@@ -842,7 +851,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // txtApplUnitOtherName
             // 
-            this.txtApplUnitOtherName.Location = new System.Drawing.Point(76, 54);
+            this.txtApplUnitOtherName.Location = new System.Drawing.Point(72, 52);
             this.txtApplUnitOtherName.Name = "txtApplUnitOtherName";
             this.txtApplUnitOtherName.Size = new System.Drawing.Size(116, 23);
             this.txtApplUnitOtherName.TabIndex = 35;
@@ -850,7 +859,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // lbApplUnitOtherName
             // 
             this.lbApplUnitOtherName.AutoSize = true;
-            this.lbApplUnitOtherName.Location = new System.Drawing.Point(12, 58);
+            this.lbApplUnitOtherName.Location = new System.Drawing.Point(8, 56);
             this.lbApplUnitOtherName.Name = "lbApplUnitOtherName";
             this.lbApplUnitOtherName.Size = new System.Drawing.Size(63, 14);
             this.lbApplUnitOtherName.TabIndex = 34;
@@ -895,7 +904,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // m_lbPriceUnit
             // 
             this.m_lbPriceUnit.AutoSize = true;
-            this.m_lbPriceUnit.Location = new System.Drawing.Point(328, 54);
+            this.m_lbPriceUnit.Location = new System.Drawing.Point(320, 52);
             this.m_lbPriceUnit.Name = "m_lbPriceUnit";
             this.m_lbPriceUnit.Size = new System.Drawing.Size(21, 14);
             this.m_lbPriceUnit.TabIndex = 43;
@@ -904,7 +913,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 82);
+            this.label6.Location = new System.Drawing.Point(8, 80);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 14);
             this.label6.TabIndex = 123;
@@ -915,7 +924,7 @@ namespace com.digitalwave.iCare.gui.LIS
             this.m_cboSampleType.DisplayMember = "SAMPLE_TYPE_DESC_VCHR";
             this.m_cboSampleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.m_cboSampleType.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.m_cboSampleType.Location = new System.Drawing.Point(76, 78);
+            this.m_cboSampleType.Location = new System.Drawing.Point(72, 76);
             this.m_cboSampleType.Name = "m_cboSampleType";
             this.m_cboSampleType.Size = new System.Drawing.Size(116, 22);
             this.m_cboSampleType.TabIndex = 36;
@@ -924,9 +933,9 @@ namespace com.digitalwave.iCare.gui.LIS
             // chkOutCheckFlag
             // 
             this.chkOutCheckFlag.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkOutCheckFlag.Location = new System.Drawing.Point(5, 105);
+            this.chkOutCheckFlag.Location = new System.Drawing.Point(8, 101);
             this.chkOutCheckFlag.Name = "chkOutCheckFlag";
-            this.chkOutCheckFlag.Size = new System.Drawing.Size(84, 24);
+            this.chkOutCheckFlag.Size = new System.Drawing.Size(83, 24);
             this.chkOutCheckFlag.TabIndex = 201;
             this.chkOutCheckFlag.Text = "是否外院";
             this.chkOutCheckFlag.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1039,6 +1048,33 @@ namespace com.digitalwave.iCare.gui.LIS
             this.btnExit0.Text = "关闭(&C)";
             this.btnExit0.UseVisualStyleBackColor = true;
             this.btnExit0.Click += new System.EventHandler(this.btnExit0_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(8, 152);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(63, 14);
+            this.label8.TabIndex = 207;
+            this.label8.Text = "检测类型";
+            // 
+            // chkJtjjc
+            // 
+            this.chkJtj.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chkJtj.Location = new System.Drawing.Point(140, 148);
+            this.chkJtj.Name = "chkJtjjc";
+            this.chkJtj.Size = new System.Drawing.Size(110, 24);
+            this.chkJtj.TabIndex = 209;
+            this.chkJtj.Text = "胶体金检测";
+            // 
+            // chkJj
+            // 
+            this.chkJj.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chkJj.Location = new System.Drawing.Point(76, 148);
+            this.chkJj.Name = "chkJj";
+            this.chkJj.Size = new System.Drawing.Size(56, 24);
+            this.chkJj.TabIndex = 208;
+            this.chkJj.Text = "镜检";
             // 
             // frmApplUserGroup
             // 

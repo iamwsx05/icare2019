@@ -11,7 +11,7 @@ namespace com.digitalwave.iCare.gui.MFZ
 {
     internal interface infMFZCommunicationSvc
     {
-        bool Running { get;}
+        bool Running { get; }
         bool Start(out string strMsg);
         void Stop();
         bool Send(string strClient, byte[] data, out string strMsg);
@@ -82,7 +82,7 @@ namespace com.digitalwave.iCare.gui.MFZ
             }
         }
 
-        public ConnectionErrorEventArgs(string errMsg,string strClient)
+        public ConnectionErrorEventArgs(string errMsg, string strClient)
         {
             errorMsg = errMsg;
             clientName = strClient;
@@ -146,10 +146,11 @@ namespace com.digitalwave.iCare.gui.MFZ
 
             try
             {
-                string strHostName = System.Net.Dns.GetHostName();
-                IPAddress[] ips = Dns.GetHostAddresses(strHostName);
-                IPAddress hostIP = ips[0];
-                listener = new TcpListener(hostIP, 5234);
+                //string strHostName = System.Net.Dns.GetHostName();
+                //IPAddress[] ips = Dns.GetHostAddresses(strHostName);
+                //IPAddress hostIP = ips[0];
+                IPEndPoint listenPort = new IPEndPoint(IPAddress.Any, 5234);
+                listener = new TcpListener(listenPort);
                 listener.Start();
                 blnRunning = true;
                 listener.BeginAcceptSocket(new AsyncCallback(ListenerCallBack), null);
@@ -209,7 +210,7 @@ namespace com.digitalwave.iCare.gui.MFZ
             //IPHostEntry ipe = System.Net.Dns.GetHostEntry(System.Net.IPAddress.Parse(strs[0]));
 
             //¥Ê∑≈IPµÿ÷∑
-            strClient =strs[0];
+            strClient = strs[0];
 
             if (this.hasClients.ContainsKey(strClient))
             {
@@ -262,7 +263,7 @@ namespace com.digitalwave.iCare.gui.MFZ
 
             try
             {
-                ns = new NetworkStream(socket,false);
+                ns = new NetworkStream(socket, false);
                 br = new System.IO.BinaryReader(ns);
                 while (true)
                 {
@@ -313,9 +314,9 @@ namespace com.digitalwave.iCare.gui.MFZ
                 else if (ns != null)
                 {
                     ns.Close();
-                }                
-            }            
-        }      
+                }
+            }
+        }
 
         private bool SocketSend(Socket socket, byte[] data, out string strMsg)
         {
@@ -414,12 +415,12 @@ namespace com.digitalwave.iCare.gui.MFZ
                         client.socket.Close();
                     }
                 }
-            }            
+            }
         }
         private class clsClient
         {
             public Socket socket;
             public string clientName;
-        }        
+        }
     }
 }

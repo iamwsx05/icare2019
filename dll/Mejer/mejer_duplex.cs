@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using weCare.Core.Dac;
@@ -26,10 +28,6 @@ namespace Mejer
         /// 仪器ID
         /// </summary>
         string DeviceID = null;
-        /// <summary>
-        /// 最近一次收到的数据
-        /// </summary>
-        string LastReceive = null;
         /// <summary>
         /// 接收数据缓冲区
         /// </summary>
@@ -75,7 +73,7 @@ namespace Mejer
             DateAnalysis = new DataAnalysis_Mejer();
 
             System.Data.DataSet ds = new System.Data.DataSet();
-            ds.ReadXml(System.Windows.Forms.Application.StartupPath + "\\pylon.xml");
+            ds.ReadXml(System.Windows.Forms.Application.StartupPath + "\\Mejer.xml");
             if (ds != null && ds.Tables != null && ds.Tables.Count > 0)
             {
                 DBConnStr = ds.Tables[0].Rows[0][0].ToString();
@@ -178,127 +176,81 @@ namespace Mejer
             try
             {
                 #region getResult
-                string Sql = @"select * from UrineResult";
-
-                int step = -1;
+                string Sql = @"select * from UrineResult where transed = '0'";
                 List<string> lstSampleId = new List<string>();
+                Dictionary<string, Byte[]> dicSampleGraph = new Dictionary<string, byte[]>();
+
                 DataTable dtSource = null;
                 List<clsLIS_Device_Test_ResultVO> data = new List<clsLIS_Device_Test_ResultVO>();
-                ODBCHelper svc = new ODBCHelper();
+                ODBCHelper svc = new ODBCHelper(DBConnStr);
                 dtSource = svc.GetDataTable(Sql);
                 if (dtSource != null && dtSource.Rows.Count > 0)
                 {
-                    string itemCode = string.Empty;
-                    string itemValue = string.Empty;
-                    string checkDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    string checkStr = string.Empty;
-                    DataView dvResult = new DataView(dtSource);
-                    dvResult.Sort = "samplid desc";
-                    dtSource = dvResult.ToTable();
                     clsLIS_Device_Test_ResultVO vo = null;
                     foreach (DataRow dr in dtSource.Rows)
                     {
+                        Byte[] bytGraph = null;
+                        string sampleId = dr["sampleid"].ToString();
+                        string barCode = dr["patientid"].ToString();
+                        if (lstSampleId.IndexOf(sampleId) < 0)
+                            lstSampleId.Add(sampleId);
 
+                        string path = dr["picturepath"].ToString() + "\\RedCellPhase.jpg";
+                        if (!string.IsNullOrEmpty(path))
+                        {
+                            Image img = ReadImageFile(path);
+                            bytGraph = Function.ConvertImageToByte(img, 3);
+                        }
 
-                        vo = new clsLIS_Device_Test_ResultVO();
-                        vo.strDevice_ID = DeviceID;
-                        vo.strDevice_Sample_ID = dr["sampleId"].ToString();
-                        vo.strCheck_Date = checkDate;
-                        itemCode = dr["item_code"].ToString().Trim();
+                        if (!dicSampleGraph.ContainsKey(sampleId))
+                        {
+                            dicSampleGraph.Add(sampleId, bytGraph);
+                        }
+
                         if (this.dtConfig != null && this.dtConfig.Rows.Count > 0)
                         {
                             for (int i2 = 0; i2 < this.dtConfig.Columns.Count; i2++)
                             {
-                                if (this.dtConfig.Columns[i2].ColumnName == itemCode)
-                                {
-                                    vo.strDevice_Check_Item_Name = this.dtConfig.Rows[0][itemCode].ToString().Trim();
-                                    break;
-                                }
+                                string itemName = this.dtConfig.Columns[i2].ColumnName;
+                                if (itemName == "Mejer_Id")
+                                    continue;
+                                vo = new clsLIS_Device_Test_ResultVO();
+                                vo.strDevice_Sample_ID = sampleId;
+                                vo.barCode = barCode;
+                                vo.strDevice_Check_Item_Name = this.dtConfig.Rows[0][itemName].ToString().Trim();
+                                vo.strResult = dr[itemName].ToString();
+                                if (string.IsNullOrEmpty(vo.strResult))
+                                    vo.strResult = "/";
+                                vo.strDevice_ID = DeviceID;
+                                //vo.strCheck_Date = Convert.ToDateTime(dr["result_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                                vo.strCheck_Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                                data.Add(vo);
                             }
-                            if (string.IsNullOrEmpty(vo.strDevice_Check_Item_Name))
-                                vo.strDevice_Check_Item_Name = itemCode;
-                        }
-                        else
-                        {
-                            vo.strDevice_Check_Item_Name = itemCode;
-                        }
-
-                        if (dr["value_text"] != DBNull.Value && dr["value_text"].ToString().Trim() != string.Empty)
-                        {
-                            vo.strResult = dr["value_text"].ToString().Trim() + dr["value_num"].ToString();
-                        }
-                        else
-                        {
-                            vo.strResult = dr["value_num"].ToString();
-                        }
-                       
-
-                        checkStr = vo.strDevice_Sample_ID + vo.strDevice_Check_Item_Name;
-                        if (lstCheckStr.IndexOf(checkStr) < 0)
-                        {
-                            if (lstSampleId.IndexOf(vo.strDevice_Sample_ID) < 0)
-                            {
-                                lstSampleId.Add(vo.strDevice_Sample_ID);
-                            }
-                            // 时间改用: result_time
-                            vo.strCheck_Date = Convert.ToDateTime(dr["result_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
-                            data.Add(vo);
-                            lstCheckStr.Add(checkStr);
-                        }
-                        else
-                        {
-                            //using (System.Transactions.TransactionScope trans = new System.Transactions.TransactionScope())
-                            //{
-                            //    Sql = @"update ut_result set check_flag = 0 where sampleno = ? and result_time = ?";
-                            //    IDataParameter[] parm = svc.CreateParm(2);
-                            //    parm[0].Value = vo.strDevice_Sample_ID;
-                            //    parm[1].Value = Convert.ToDateTime(dr["result_time"].ToString());
-                            //    svc.ExecSql(this.DBConnStr, Sql, ++step, parm);
-
-                            //    trans.Complete();
-                            //}
                         }
                     }
                 }
                 #endregion
 
                 #region addResult
-
                 if (data != null && data.Count > 0)
                 {
-                    //long res = 0;
-                    //clsLIS_Svc lisSvc = (clsLIS_Svc)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(clsLIS_Svc));
-                    //clsLIS_Device_Test_ResultVO[] reultArr = null;
-                    //List<clsLIS_Device_Test_ResultVO> data2 = null;
-                    //step = -1;
-                    //foreach (string sampleId in lstSampleId)
-                    //{
-                    //    data2 = data.FindAll(t => t.strDevice_Sample_ID == sampleId);
-                    //    if (data2 != null && data2.Count > 0)
-                    //    {
-                    //        res = lisSvc.lngAddLabResult(data2.ToArray(), out reultArr);
-                    //        if (res > 0)
-                    //        {
-                    //            if (ShowResult != null)
-                    //            {
-                    //                System.Windows.Forms.Application.DoEvents();
-                    //                ShowResult(reultArr, null);
-                    //                System.Windows.Forms.Application.DoEvents();
-                    //            }
-                    //        }
-                    //    }
-                    //    using (System.Transactions.TransactionScope trans = new System.Transactions.TransactionScope())
-                    //    {
-                    //        using (Sqlserver svc = new Sqlserver())
-                    //        {
-                    //            Sql = @"update ut_result set check_flag = 0 where sampleno = ?";
-                    //            IDataParameter[] parm = svc.CreateParm(1);
-                    //            parm[0].Value = sampleId;
-                    //            svc.ExecSql(this.DBConnStr, Sql, ++step, parm);
-                    //        }
-                    //        trans.Complete();
-                    //    }
-                    //}
+                    foreach (var id in lstSampleId)
+                    {
+                        clsLIS_Device_Test_ResultVO[] reultArr = null;
+                        weCare.Proxy.ProxyLis svcLis = new weCare.Proxy.ProxyLis();
+                        long lngRes = svcLis.Service.lngAddLabResultWithBytGraph((data.FindAll(r => r.strDevice_Sample_ID == id)).ToArray(),dicSampleGraph[id], out reultArr);
+                        if (lngRes > 0)
+                        {
+                            string sql = @"update UrineResult set transed  = '1' where sampleid = '" + id + "'";
+                            svc.ExecSql(sql);
+                        }
+
+                        if (ShowResult != null)
+                        {
+                            ShowResult(reultArr, null);
+                        }
+                    }
                 }
                 #endregion
             }
@@ -339,5 +291,28 @@ namespace Mejer
             }
         }
         #endregion
+
+        private Bitmap ReadImageFile(string path)
+        {
+            Bitmap bitmap = null;
+            try
+            {
+                if (!File.Exists(path))
+                    return null;
+                FileStream fileStream = File.OpenRead(path);
+                Int32 filelength = 0;
+                filelength = (int)fileStream.Length;
+                Byte[] image = new Byte[filelength];
+                fileStream.Read(image, 0, filelength);
+                System.Drawing.Image result = System.Drawing.Image.FromStream(fileStream);
+                fileStream.Close();
+                bitmap = new Bitmap(result);
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog.OutPutException(ex);
+            }
+            return bitmap;
+        }
     }
 }

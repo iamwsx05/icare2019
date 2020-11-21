@@ -175,7 +175,7 @@ namespace com.digitalwave.iCare.gui.MFZ
                 this.showThread.Abort();
                 this.showThread = null;
             }
-            ledManager.Unload();
+            //ledManager.Unload();
             //ledManager = null;
             //GC.Collect();
             //System.GC.WaitForPendingFinalizers();

@@ -461,6 +461,393 @@ values
             return lngRes;
         }
 
+        /// <summary>
+        /// 增加检验仪器结果 + 图片
+        /// </summary>
+        /// <param name="p_objResultArr"></param>
+        /// <param name="p_objOutResultArr"></param>
+        /// <returns></returns>
+        [AutoComplete]
+        public long lngAddLabResultWithBytGraph(clsLIS_Device_Test_ResultVO[] p_objResultArr, Byte[] bytGraph, out clsLIS_Device_Test_ResultVO[] p_objOutResultArr)
+        {
+            p_objOutResultArr = null;
+            Dictionary<string, string> has = new Dictionary<string, string>();
+            if (p_objResultArr == null || p_objResultArr.Length <= 0)
+            {
+                return -1;
+            }
+            //<-------------------------------------------------------- 
+            else
+            {
+                foreach (clsLIS_Device_Test_ResultVO objRes in p_objResultArr)
+                {
+                    has.Add(objRes.strDevice_Check_Item_Name, objRes.strResult);
+                }
+            }
+            //--------------------------------------------------------------------------------------->
+
+            long lngRes = 1;
+            long lngRecEff = -1;
+            string strSQL = null;
+
+            #region 判断是追加结果还是新增一次结果 用于Stago、CentaurCP等仪器
+            /* 原理：获取上次取得该样本结果的最大序列
+               根据序列，仪器和标本号查找log表得起始值
+               找到结果进行结果校对哈希比较，如果不一致立即跳过进行原操作
+               否则追加插入结果，修改req日期.log起始值和日期 */
+            //<--------------------------------------------------------  
+            string[] strConditionList = null; //当blnFlag为false时有值
+
+            clsLIS_QueryDataAcquisitionServ objQueryServ = new clsLIS_QueryDataAcquisitionServ();
+            bool blnFlag = objQueryServ.m_blnIsAppendResult(ref has, p_objResultArr, out strConditionList);
+            //--------------------------------------------------------------------------------------->
+            #endregion
+
+            clsHRPTableService objHRPSvc = new clsHRPTableService();
+            try
+            {
+                clsLIS_Device_Test_ResultVO[] objResultList = p_objResultArr;
+
+
+                DateTime dtmNow = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                DateTime dtmCheck = dtmNow;
+                string strCheckDateTime = null;
+                #region 检验时间
+                if (objResultList[0].strCheck_Date != null)
+                    objResultList[0].strCheck_Date = objResultList[0].strCheck_Date.Trim();
+
+                if (Microsoft.VisualBasic.Information.IsDate(objResultList[0].strCheck_Date))
+                {
+                    dtmCheck = System.DateTime.Parse(objResultList[0].strCheck_Date);
+                }
+                strCheckDateTime = dtmCheck.ToString("yyyy-MM-dd HH:mm:ss");
+                dtmCheck = Convert.ToDateTime(strCheckDateTime);
+                #endregion
+                string strDevice_ID = objResultList[0].strDevice_ID.Trim();
+                string strDevice_Sample_ID = objResultList[0].strDevice_Sample_ID.Trim();
+                string barCode = objResultList[0].barCode;
+                clsLogText objLogger = new clsLogText();
+
+                int intImportReq = -1;
+                if (blnFlag)
+                {
+                    //objLogger.Log2File("D:\\code\\logData.txt", "结果新增");
+
+                    lngRes = clsPublicSvc.m_lngGetSequence("seq_lis_device_result_log", out intImportReq);
+
+                    if (lngRes == 1)
+                    {
+                        #region 写 t_opr_lis_result_import_req 表
+                        System.Data.IDataParameter[] objDPArr5 = null;
+                        objHRPSvc.CreateDatabaseParameter(7, out objDPArr5);
+                        objDPArr5[0].Value = strDevice_ID;
+                        objDPArr5[1].Value = intImportReq;
+                        objDPArr5[2].Value = strDevice_Sample_ID;
+                        objDPArr5[3].DbType = DbType.DateTime;
+                        objDPArr5[3].Value = Convert.ToDateTime(strCheckDateTime);
+                        objDPArr5[4].Value = 1;
+                        objDPArr5[5].Value = 0;
+                        objDPArr5[6].Value = "0";
+                        lngRes = 0;
+                        lngRes = objHRPSvc.lngExecuteParameterSQL(c_strAddResultImportReq, ref lngRecEff, objDPArr5);
+                        #endregion
+                    }
+                    if (lngRes == 1)
+                    {
+                        int[] intIdxArr = null;
+                        lngRes = clsPublicSvc.m_lngGetSequenceArr("seq_lis_device_result", objResultList.Length, out intIdxArr);
+                        if (lngRes <= 0)
+                        {
+                            ContextUtil.SetAbort();
+                            return lngRes;
+                        }
+                        int intBEGIN_IDX_INT = intIdxArr[0];
+                        int intEND_IDX_INT = intIdxArr[intIdxArr.Length - 1];
+
+                        #region 写 t_opr_lis_result 表
+                        DbType[] m_dbType = new DbType[] { DbType.Int32, DbType.String, DbType.String, DbType.DateTime,
+                            DbType.String, DbType.String, DbType.String, DbType.String,
+                            DbType.Double, DbType.Double, DbType.String, DbType.Byte,
+                            DbType.String, DbType.Int32 };
+
+                        object[][] objValues = new object[14][];
+                        for (int i = 0; i < objValues.Length; i++)
+                        {
+                            objValues[i] = new object[objResultList.Length];
+                        }
+                        clsLIS_Device_Test_ResultVO objResultTemp = null;
+                        for (int iRow = 0; iRow < objResultList.Length; iRow++)
+                        {
+                            objResultTemp = objResultList[iRow];
+                            objResultTemp.intIndex = intIdxArr[iRow];
+
+                            objValues[0][iRow] = objResultTemp.intIndex;
+                            objValues[1][iRow] = strDevice_ID;
+                            objValues[2][iRow] = strDevice_Sample_ID;
+
+                            objResultTemp.strCheck_Date = strCheckDateTime;
+                            objValues[3][iRow] = Convert.ToDateTime(strCheckDateTime);
+                            objValues[4][iRow] = objResultTemp.strDevice_Check_Item_Name;
+
+                            objValues[5][iRow] = objResultTemp.strResult;
+                            objValues[6][iRow] = objResultTemp.strUnit;
+                            objValues[7][iRow] = objResultTemp.strRefRange;
+
+                            if (objResultTemp.strMinVal != null)
+                            {
+                                if (Microsoft.VisualBasic.Information.IsNumeric(objResultTemp.strMinVal.Trim()))
+                                {
+                                    objValues[8][iRow] = double.Parse(objResultTemp.strMinVal.Trim());
+                                }
+                            }
+                            if (objResultTemp.strMaxVal != null)
+                            {
+                                if (Microsoft.VisualBasic.Information.IsNumeric(objResultTemp.strMaxVal.Trim()))
+                                {
+                                    objValues[9][iRow] = double.Parse(objResultTemp.strMaxVal.Trim());
+                                }
+                            }
+
+                            objValues[10][iRow] = objResultTemp.strAbnormal_Flag;
+                            objValues[11][iRow] = objResultTemp.bytGraph;
+                            objValues[12][iRow] = objResultTemp.strGraphFormatName;
+                            objValues[13][iRow] = objResultTemp.intIsGraphResult;
+
+                        }
+                        lngRes = 0;
+                        lngRes = objHRPSvc.m_lngSaveArrayWithParameters(c_strAddLabResult, objValues, m_dbType);
+
+                        #endregion
+
+                        if (lngRes == 1)
+                        {
+                            #region 写 t_opr_lis_result_log 表
+
+                            if (intBEGIN_IDX_INT > intEND_IDX_INT)
+                            {
+                                int tmpIdx = intEND_IDX_INT;
+                                intEND_IDX_INT = intBEGIN_IDX_INT;
+                                intBEGIN_IDX_INT = tmpIdx;
+                            }
+
+                            System.Data.IDataParameter[] objDPArr1 = null;
+                            objHRPSvc.CreateDatabaseParameter(7, out objDPArr1);
+                            objDPArr1[0].Value = strDevice_ID;
+                            objDPArr1[1].Value = strDevice_Sample_ID;
+                            objDPArr1[2].DbType = DbType.DateTime;
+                            objDPArr1[2].Value = Convert.ToDateTime(strCheckDateTime);
+                            objDPArr1[3].Value = intBEGIN_IDX_INT;
+                            objDPArr1[4].Value = intEND_IDX_INT;
+                            objDPArr1[5].Value = "1";
+                            objDPArr1[6].Value = intImportReq;
+
+                            lngRes = 0;
+                            lngRes = objHRPSvc.lngExecuteParameterSQL(c_strAddLabResultLog, ref lngRecEff, objDPArr1);
+
+                            #endregion
+                        }
+                    }
+                }
+                else //追加结果AppendResult
+                {
+                    //objLogger.Log2File("D:\\code\\logData.txt", "结果追加");
+
+                    #region 写 t_opr_lis_result 表
+                    strCheckDateTime = strConditionList[3].Trim();
+                    dtmCheck = Convert.ToDateTime(strCheckDateTime);
+                    intImportReq = Convert.ToInt32(strConditionList[2]);
+
+                    //int intIdx = m_mthGetNewResultIndex(objResultList.Length, false) + 1;
+                    //int intBEGIN_IDX_INT = intIdx;
+                    //int intEND_IDX_INT = intBEGIN_IDX_INT + objResultList.Length - 1;
+
+
+                    int[] intIdxArr = null;
+                    lngRes = clsPublicSvc.m_lngGetSequenceArr("seq_lis_device_result", objResultList.Length, out intIdxArr);
+                    if (lngRes <= 0)
+                    {
+                        ContextUtil.SetAbort();
+                        return lngRes;
+                    }
+                    List<int> lstSeq = new List<int>();
+                    lstSeq.AddRange(intIdxArr);
+                    lstSeq.Sort();
+                    int intBEGIN_IDX_INT = lstSeq[0]; //intIdxArr[0];
+                    int intEND_IDX_INT = lstSeq[lstSeq.Count - 1]; //intIdxArr[intIdxArr.Length - 1];
+
+                    DbType[] m_dbType1 = new DbType[] { DbType.Int32, DbType.String, DbType.String, DbType.DateTime,
+                            DbType.String, DbType.String, DbType.String, DbType.String,
+                            DbType.Double, DbType.Double, DbType.String, DbType.Byte,
+                            DbType.String, DbType.Int32 };
+
+                    object[][] objValues1 = new object[14][];
+                    for (int i = 0; i < objValues1.Length; i++)
+                    {
+                        objValues1[i] = new object[objResultList.Length];
+                    }
+                    clsLIS_Device_Test_ResultVO objResultTemp = null;
+                    for (int iRow = 0; iRow < objResultList.Length; iRow++)
+                    {
+                        objResultTemp = objResultList[iRow];
+                        objResultTemp.intIndex = intIdxArr[iRow];
+
+                        objValues1[0][iRow] = objResultTemp.intIndex;
+                        objValues1[1][iRow] = strDevice_ID;
+                        objValues1[2][iRow] = strDevice_Sample_ID;
+
+                        objResultTemp.strCheck_Date = strCheckDateTime;
+                        objValues1[3][iRow] = Convert.ToDateTime(strCheckDateTime);
+                        objValues1[4][iRow] = objResultTemp.strDevice_Check_Item_Name;
+
+                        objValues1[5][iRow] = objResultTemp.strResult;
+                        objValues1[6][iRow] = objResultTemp.strUnit;
+                        objValues1[7][iRow] = objResultTemp.strRefRange;
+
+                        if (objResultTemp.strMinVal != null)
+                        {
+                            if (Microsoft.VisualBasic.Information.IsNumeric(objResultTemp.strMinVal.Trim()))
+                            {
+                                objValues1[8][iRow] = double.Parse(objResultTemp.strMinVal.Trim());
+                            }
+                        }
+                        if (objResultTemp.strMaxVal != null)
+                        {
+                            if (Microsoft.VisualBasic.Information.IsNumeric(objResultTemp.strMaxVal.Trim()))
+                            {
+                                objValues1[9][iRow] = double.Parse(objResultTemp.strMaxVal.Trim());
+                            }
+                        }
+
+                        objValues1[10][iRow] = objResultTemp.strAbnormal_Flag;
+                        objValues1[11][iRow] = objResultTemp.bytGraph;
+                        objValues1[12][iRow] = objResultTemp.strGraphFormatName;
+                        objValues1[13][iRow] = objResultTemp.intIsGraphResult;
+
+                    }
+                    lngRes = 0;
+                    lngRes = objHRPSvc.m_lngSaveArrayWithParameters(c_strAddLabResult, objValues1, m_dbType1);
+
+                    #endregion
+
+                    if (lngRes == 1)
+                    {
+                        #region 更新 t_opr_lis_result_log 表
+                        strSQL = @"update t_opr_lis_result_log
+   set end_idx_int = ?
+ where deviceid_chr = ?
+   and trim(device_sampleid_chr) = ?
+   and check_dat = ?
+   and import_req_int = ?";
+
+                        System.Data.IDataParameter[] objDPArr1 = null;
+                        objHRPSvc.CreateDatabaseParameter(5, out objDPArr1);
+                        objDPArr1[0].Value = intEND_IDX_INT;
+                        objDPArr1[1].Value = strConditionList[1]; //仪器ID
+                        objDPArr1[2].Value = strConditionList[0]; //仪器样本ID
+                        objDPArr1[3].DbType = DbType.DateTime;
+                        objDPArr1[3].Value = Convert.ToDateTime(strConditionList[3]); //检验日期
+                        objDPArr1[4].Value = Convert.ToInt32(strConditionList[2]); //系统内部结果序列
+
+                        lngRes = 0;
+                        lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngRecEff, objDPArr1);
+                        if (lngRecEff < 1)
+                        {
+                            System.EnterpriseServices.ContextUtil.SetAbort();
+                        }
+                        #endregion
+                    }
+                }
+                System.Data.DataTable dtbRelation = null;
+                if (lngRes == 1)//无论此步骤成功与否都不应影响原始数据的进入.
+                {
+                    #region  查找核收表（t_opr_lis_device_relation）表中要做关联的记录
+
+                    strSQL = @"select deviceid_chr, seq_id_device_chr, sample_id_chr
+  from t_opr_lis_device_relation
+ where status_int = 1
+   and deviceid_chr = ?
+   and device_sampleid_chr = ?
+   and check_dat between ? and ?";
+
+                    System.Data.IDataParameter[] objDPArrs3 = null;
+                    objHRPSvc.CreateDatabaseParameter(4, out objDPArrs3);
+                    objDPArrs3[0].Value = strDevice_ID;
+                    objDPArrs3[1].Value = strDevice_Sample_ID;
+                    objDPArrs3[2].DbType = DbType.DateTime;
+                    objDPArrs3[2].Value = (Convert.ToDateTime(strCheckDateTime)).Date;
+                    objDPArrs3[3].DbType = DbType.DateTime;
+                    objDPArrs3[3].Value = (Convert.ToDateTime(strCheckDateTime)).Date.AddHours(24);
+
+                    lngRes = 0;
+                    lngRes = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref dtbRelation, objDPArrs3);
+
+                    #endregion
+                    if (lngRes == 1)
+                    {
+                        #region 更新 t_opr_lis_device_relation 表
+
+                        if (dtbRelation != null && dtbRelation.Rows.Count != 0)
+                        {
+                            string strSeq = dtbRelation.Rows[0]["seq_id_device_chr"].ToString().Trim();
+
+                            strSQL = @"update t_opr_lis_device_relation
+   set device_sampleid_chr = ?,
+       check_dat           = ?,
+       import_req_int      = ?,
+       status_int          = 2
+ where seq_id_device_chr = ?
+   and deviceid_chr = ?";
+
+                            System.Data.IDataParameter[] objDPArrs2 = null;
+                            objHRPSvc.CreateDatabaseParameter(5, out objDPArrs2);
+                            objDPArrs2[0].Value = strDevice_Sample_ID;
+                            objDPArrs2[1].DbType = DbType.DateTime;
+                            objDPArrs2[1].Value = Convert.ToDateTime(strCheckDateTime);
+                            objDPArrs2[2].Value = intImportReq;
+                            objDPArrs2[3].Value = strSeq.Trim();
+                            objDPArrs2[4].Value = strDevice_ID.Trim();
+
+                            lngRecEff = 0;
+                            lngRes = 0;
+                            lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngRecEff, objDPArrs2);
+
+                        }
+                        #endregion
+                    }
+                }
+
+                if(bytGraph != null)
+                {
+                    strSQL = @"insert into T_CHECKRESULT_IMG values(?,?,?,?,?,?)";
+                    System.Data.IDataParameter[] parms = null;
+                    objHRPSvc.CreateDatabaseParameter(6, out parms);
+                    parms[0].Value = strDevice_ID;
+                    parms[1].Value = strDevice_Sample_ID;
+                    parms[2].Value = barCode;
+                    parms[3].Value = bytGraph;
+                    parms[4].Value = 0;
+                    parms[4].DbType = DbType.DateTime;
+                    parms[5].Value = Convert.ToDateTime(strCheckDateTime);
+                    lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngRecEff, parms);
+                }
+            }
+            catch (System.Exception objEx)
+            {
+                com.digitalwave.Utility.clsLogText objLogger = new clsLogText();
+                bool blnRes = objLogger.LogError(objEx);
+            }
+            finally
+            {
+                objHRPSvc.Dispose();
+            }
+            if (lngRes <= 0)
+            {
+                ContextUtil.SetAbort();
+            }
+            p_objOutResultArr = p_objResultArr;
+            return lngRes;
+        }
+
 
         /// <summary>
         /// 增加检验仪器结果, 多样本

@@ -7,7 +7,11 @@ namespace Mejer
 {
     public class ODBCHelper
     {
-        string conString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\debug\MejerResult.mdb"; //连接Access数据
+        public ODBCHelper(string filePath)
+        {
+            conString += filePath;
+        }
+        string conString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source="; //连接Access数据
         public DataTable GetDataTable(string sql)
         {
             DataTable dt = null;

@@ -281,13 +281,15 @@ namespace com.digitalwave.iCare.middletier.LIS
 									 SUMMARY_VCHR = ?,
 									 OUTER_CHECK_FLAG_NUM = ?,
                                      REPORTHOUR = ?,
-                                     SamplingInstr = ? 
+                                     SamplingInstr = ?,
+                                     Jclx_jj = ?,
+                                     Jclx_jtj = ? 
 						  	   WHERE apply_unit_id_chr = ? ";
             try
             {
                 com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
                 System.Data.IDataParameter[] objApplUnitArr = null;
-                objHRPSvc.CreateDatabaseParameter(18, out objApplUnitArr);
+                objHRPSvc.CreateDatabaseParameter(20, out objApplUnitArr);
 
                 objApplUnitArr[0].Value = objApplUnit.strApplUnitName;
                 objApplUnitArr[1].Value = objApplUnit.strOtherName;
@@ -306,7 +308,9 @@ namespace com.digitalwave.iCare.middletier.LIS
                 objApplUnitArr[14].Value = objApplUnit.strOutCheckFlag;
                 objApplUnitArr[15].Value = objApplUnit.ReportHour;
                 objApplUnitArr[16].Value = objApplUnit.SamplingInstr;
-                objApplUnitArr[17].Value = objApplUnit.strApplUnitID;
+                objApplUnitArr[17].Value = objApplUnit.Jclx_jj;
+                objApplUnitArr[18].Value = objApplUnit.Jclx_jtj;
+                objApplUnitArr[19].Value = objApplUnit.strApplUnitID;
 
                 long lngRecEff = -1;
                 lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngRecEff, objApplUnitArr);
@@ -456,14 +460,14 @@ namespace com.digitalwave.iCare.middletier.LIS
 										   py_code_chr, assist_code01_chr, wb_code_chr, assist_code02_chr,
 										   check_category_id_chr, is_no_food_required_chr,
 										   is_physical_exam_required_chr,is_reservation_required_chr,
-										   PRICE_NUM,COST_NUM,SAMPLE_TYPE_ID_CHR,SUMMARY_VCHR,OUTER_CHECK_FLAG_NUM, REPORTHOUR, SamplingInstr 
+										   PRICE_NUM,COST_NUM,SAMPLE_TYPE_ID_CHR,SUMMARY_VCHR,OUTER_CHECK_FLAG_NUM, REPORTHOUR, SamplingInstr, jclx_jj, jclx_jtj  
 										   )
-								    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?, ?, ?)";
+								    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try
             {
                 com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
                 System.Data.IDataParameter[] objApplUnitArr = null;
-                objHRPSvc.CreateDatabaseParameter(18, out objApplUnitArr);
+                objHRPSvc.CreateDatabaseParameter(20, out objApplUnitArr);
 
                 if (objApplUnitVO.strApplUnitID == null)
                 {
@@ -488,6 +492,8 @@ namespace com.digitalwave.iCare.middletier.LIS
                 objApplUnitArr[15].Value = objApplUnitVO.strOutCheckFlag;
                 objApplUnitArr[16].Value = objApplUnitVO.ReportHour;
                 objApplUnitArr[17].Value = objApplUnitVO.SamplingInstr;
+                objApplUnitArr[18].Value = objApplUnitVO.Jclx_jj;
+                objApplUnitArr[19].Value = objApplUnitVO.Jclx_jtj;
 
                 long lngRecEff = -1;
                 lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngRecEff, objApplUnitArr);

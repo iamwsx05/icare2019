@@ -100,6 +100,20 @@ namespace com.digitalwave.iCare.gui.DataExchangeSystem
             lngRes = objSvc.m_lngUploadInHospital(InHospital);
             return lngRes;
         }
+
+        /// <summary>
+        /// 上传住院收入删除
+        /// </summary>
+        /// <param name="InHospital"></param>
+        /// <returns></returns>
+        public long m_lngDelInHospital(DateTime dayTime)
+        {
+            long lngRes = -1;
+            com.digitalwave.iCare.middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC objSvc = new middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC();
+            //(com.digitalwave.iCare.middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(com.digitalwave.iCare.middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC));
+            lngRes = objSvc.m_lngDelInHospital(dayTime);
+            return lngRes;
+        }
         #endregion
 
         #region 门诊收入数据
@@ -132,6 +146,22 @@ namespace com.digitalwave.iCare.gui.DataExchangeSystem
             lngRes = objSvc.m_lngUploadOutpatient(Outpatient);
             return lngRes;
         }
+
+        /// <summary>
+        /// 门诊收入删除
+        /// </summary>
+        /// <param name="InHospital"></param>
+        /// <returns></returns>
+        public long m_lngDelOutpatient(DateTime dayTime)
+        {
+            long lngRes = -1;
+            com.digitalwave.iCare.middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC objSvc = new middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC();
+            //(com.digitalwave.iCare.middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(com.digitalwave.iCare.middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC));
+            lngRes = objSvc.m_lngDelOutpatient(dayTime);
+            return lngRes;
+        }
+
+
         #endregion
     }
 }

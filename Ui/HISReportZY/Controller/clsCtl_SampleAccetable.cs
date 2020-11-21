@@ -489,7 +489,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             }
             catch (Exception ex)
             {
-                ExceptionLog.OutPutException(ex);
+                ExceptionLog.OutPutException(barcode +"-->"+ ex);
             }
             finally
             {
@@ -815,12 +815,13 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
 
             string acceptDate = Function.Datetime(acceptTime).ToString("yyyy-MM-dd");
             string confirmDate = Function.Datetime(confirmTime).ToString("yyyy-MM-dd");
-
+            bool isZdxq = false;
 
             #region  指定星期
             if ((!string.IsNullOrEmpty(confirmTime.ToString()) && (!string.IsNullOrEmpty(week1) || !string.IsNullOrEmpty(week2) ||
                     !string.IsNullOrEmpty(week3) || !string.IsNullOrEmpty(week4) || !string.IsNullOrEmpty(week5) || !string.IsNullOrEmpty(week6))))
             {
+                isZdxq = true;
                 string week = calWeek(Convert.ToDateTime(confirmTime));
                 if (week == week1 || week == week2 || week == week3 || week == week4 || week == week5 || week == week6)
                 {
@@ -837,7 +838,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             #endregion
 
             #region 隔天出报告
-            if (acceptDate != confirmDate && listime > 0)
+            if (acceptDate != confirmDate && listime > 0 && !string.IsNullOrEmpty(confirmEndTime))
             {
                 DateTime dt1 = Convert.ToDateTime(confirmTimeTmp);
                 DateTime dt2 = Convert.ToDateTime(confirmEndTime);
@@ -951,7 +952,7 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             #endregion
 
             //都不在指定时间，当天提前出报告
-            if(!IsAppoint)
+            if(!IsAppoint && isZdxq)
             {
                 if (acceptDate == confirmDate && listime > 0)
                 {

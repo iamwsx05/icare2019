@@ -351,6 +351,8 @@ namespace com.digitalwave.iCare.gui.LIS
                     infrmApplUserGroup.chkOutCheckFlag.Checked = (((clsApplUnit_VO)objTreeNode.Tag).strOutCheckFlag == "1" ? true : false);
                     infrmApplUserGroup.txtReportHour.Text = ((clsApplUnit_VO)objTreeNode.Tag).ReportHour.ToString();
                     infrmApplUserGroup.txtSamplingInstr.Text = ((clsApplUnit_VO)objTreeNode.Tag).SamplingInstr;
+                    infrmApplUserGroup.chkJj.Checked = ((clsApplUnit_VO)objTreeNode.Tag).Jclx_jj == 1 ? true : false;
+                    infrmApplUserGroup.chkJtj.Checked = ((clsApplUnit_VO)objTreeNode.Tag).Jclx_jtj == 1 ? true : false;
 
                     try
                     {
@@ -380,6 +382,15 @@ namespace com.digitalwave.iCare.gui.LIS
                     {
                         infrmApplUserGroup.chkReservation.Checked = true;
                     }
+                    if (((clsApplUnit_VO)objTreeNode.Tag).Jclx_jj == 1)
+                    {
+                        infrmApplUserGroup.chkJj.Checked = true;
+                    }
+                    if (((clsApplUnit_VO)objTreeNode.Tag).Jclx_jtj == 1)
+                    {
+                        infrmApplUserGroup.chkJtj.Checked = true;
+                    }
+
                     DataTable dtbCheckItem = null;
                     infrmApplUserGroup.lsvAddCheckItem.Items.Clear();
                     lngRes = objDomainControllerCheckGroup.m_lngGetCheckItemByApplUnitID(((clsApplUnit_VO)objTreeNode.Tag).strApplUnitID, out dtbCheckItem);
@@ -880,6 +891,8 @@ namespace com.digitalwave.iCare.gui.LIS
                 objApplUnitVO.strOutCheckFlag = (infrmApplUserGroup.chkOutCheckFlag.Checked ? "1" : "0");
                 objApplUnitVO.ReportHour = Convert.ToDecimal(infrmApplUserGroup.txtReportHour.Text);
                 objApplUnitVO.SamplingInstr = infrmApplUserGroup.txtSamplingInstr.Text;
+                objApplUnitVO.Jclx_jj = (infrmApplUserGroup.chkJj.Checked ? 1 : 0);
+                objApplUnitVO.Jclx_jtj = (infrmApplUserGroup.chkJtj.Checked ? 1 : 0);
 
                 //¹¹ÔìclsApplUnitDetail_VO
                 clsApplUnitDetail_VO[] objApplUnitDetailVO = new clsApplUnitDetail_VO[infrmApplUserGroup.lsvAddCheckItem.Items.Count];
@@ -1207,6 +1220,8 @@ namespace com.digitalwave.iCare.gui.LIS
                 objApplUnitVO.strOutCheckFlag = (infrmApplUserGroup.chkOutCheckFlag.Checked ? "1" : "0");
                 objApplUnitVO.ReportHour = Convert.ToDecimal(infrmApplUserGroup.txtReportHour.Text);
                 objApplUnitVO.SamplingInstr = infrmApplUserGroup.txtSamplingInstr.Text;
+                objApplUnitVO.Jclx_jj = (infrmApplUserGroup.chkJj.Checked ? 1 : 0);
+                objApplUnitVO.Jclx_jtj = (infrmApplUserGroup.chkJtj.Checked ? 1 : 0);
 
                 lngRes = objDomainApplyUnit.m_lngSetApplyUnit(objApplUnitVO, this.m_arlAddDetail, this.m_arlRemoveDetail);
                 if (lngRes > 0)

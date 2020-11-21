@@ -56,7 +56,14 @@ namespace com.digitalwave.iCare.gui.LIS
         /// AU680是否启用双向
         /// </summary>
         bool isAU680TwoWay { get; set; }
+        /// <summary>
+        /// 发光MA X8 是否启用双向
+        /// </summary>
         bool isMAGLUMITwoWay { get; set; }
+        /// <summary>
+        /// 发光MA 4000 是否启用双向
+        /// </summary>
+        bool isMAGLU4000TwoWay { get; set; }
 
         #endregion
 
@@ -3080,6 +3087,9 @@ namespace com.digitalwave.iCare.gui.LIS
             this.isAU680TwoWay = clsPublic.ConvertObjToDecimal(parm6008) == 1 ? true : false;
             string parm6009 = clsPublic.m_strGetSysparm("6009");
             this.isMAGLUMITwoWay = clsPublic.ConvertObjToDecimal(parm6009) == 1 ? true : false;
+            string parm6010 = clsPublic.m_strGetSysparm("6010");
+            this.isMAGLU4000TwoWay = clsPublic.ConvertObjToDecimal(parm6010) == 1 ? true : false;
+
             try
             {
                 m_blnCanModifyAcceptDat = clsLisSetting.BlnCanModifyAcceptDat();
@@ -4859,6 +4869,7 @@ namespace com.digitalwave.iCare.gui.LIS
             bool isHaveData = true;
             bool isAU680 = false;
             bool isMAGLUMI = false;
+            bool isMA4000 = false;
             List<clsT_LIS_DeviceRelationVO> data = null;
             clsT_LIS_DeviceRelationVO[] objDRVOArr = null;
             if (!string.IsNullOrEmpty(objInfo.m_objAppMainVO.m_strApplication_Form_NO) && objInfo.m_objAppMainVO.m_strApplication_Form_NO.StartsWith("57"))     // HJ500  
@@ -4869,7 +4880,8 @@ namespace com.digitalwave.iCare.gui.LIS
             else if (!string.IsNullOrEmpty(objInfo.m_objAppMainVO.m_strApplication_Form_NO) && 
                 (objInfo.m_objAppMainVO.m_strApplication_Form_NO.StartsWith("59") || objInfo.m_objAppMainVO.m_strApplication_Form_NO.EndsWith("+59") ||
                 (this.isAU680TwoWay && (objInfo.m_objAppMainVO.m_strApplication_Form_NO.StartsWith("51") || objInfo.m_objAppMainVO.m_strApplication_Form_NO.EndsWith("+51"))) ||
-                (this.isMAGLUMITwoWay && (objInfo.m_objAppMainVO.m_strApplication_Form_NO.StartsWith("65") || objInfo.m_objAppMainVO.m_strApplication_Form_NO.EndsWith("+65"))) ))    // Ottoman(59), AU680(51) MAGLUMI(65)
+                (this.isMAGLUMITwoWay && (objInfo.m_objAppMainVO.m_strApplication_Form_NO.StartsWith("65") || objInfo.m_objAppMainVO.m_strApplication_Form_NO.EndsWith("+65"))) ||
+                (this.isMAGLU4000TwoWay && (objInfo.m_objAppMainVO.m_strApplication_Form_NO.StartsWith("56") || objInfo.m_objAppMainVO.m_strApplication_Form_NO.EndsWith("+56")))))    // Ottoman(59), AU680(51) MAGLUMI(65)
             {
                 data = this.m_objController.GetOttomanDeviceResult(p_objInfo.m_objAppMainVO.m_strBarcode, objInfo.m_objSampleVO.m_intSTATUS_INT, p_blnForceImportData, out isHaveData);
                 if (data != null && data.Count > 0) objDRVOArr = data.ToArray();
@@ -4883,7 +4895,11 @@ namespace com.digitalwave.iCare.gui.LIS
                 {
                     isMAGLUMI = true;
                 }
-                if ((formNo.StartsWith("59") || formNo.StartsWith("51") || formNo.StartsWith("65"))  && formNo.IndexOf('+') > 0)
+                if (formNo.StartsWith("56"))
+                {
+                    isMA4000 = true;
+                }
+                if ((formNo.StartsWith("59") || formNo.StartsWith("51") || formNo.StartsWith("65") || formNo.StartsWith("56"))  && formNo.IndexOf('+') > 0)
                 {
                     int pos1 = formNo.IndexOf('+');
                     formNo = formNo.Substring(pos1 + 1);
@@ -4901,6 +4917,11 @@ namespace com.digitalwave.iCare.gui.LIS
                 {
                     isMAGLUMI = true;
                     formNo = formNo.Replace("+65", "");
+                }
+                else if (formNo.EndsWith("+56"))
+                {
+                    isMAGLUMI = true;
+                    formNo = formNo.Replace("+56", "");
                 }
                 if (formNo != string.Empty)
                 {
@@ -4935,6 +4956,15 @@ namespace com.digitalwave.iCare.gui.LIS
             }
 
             if (isMAGLUMI && isMAGLUMITwoWay && isHaveData == false)
+            {
+                long lngRes = this.m_objController.m_lngGetDeviceRelationAndData(objInfo.m_objAppMainVO.m_strAPPLICATION_ID, objInfo.m_objSampleVO.m_intSTATUS_INT, p_blnForceImportData, out objDRVOArr);
+                if (lngRes <= 0)
+                {
+                    MessageBox.Show(this, c_strMessageDataErr, c_strMessageBoxTitle);
+                }
+            }
+
+            if (isMA4000 && isMAGLU4000TwoWay && isHaveData == false)
             {
                 long lngRes = this.m_objController.m_lngGetDeviceRelationAndData(objInfo.m_objAppMainVO.m_strAPPLICATION_ID, objInfo.m_objSampleVO.m_intSTATUS_INT, p_blnForceImportData, out objDRVOArr);
                 if (lngRes <= 0)

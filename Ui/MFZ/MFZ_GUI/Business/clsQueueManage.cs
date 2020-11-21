@@ -111,7 +111,7 @@ namespace com.digitalwave.iCare.gui.MFZ
                 {
                     voiceYy.Voice = obj.Item(i);
                 }
-            } 
+            }
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace com.digitalwave.iCare.gui.MFZ
                 {
                     FlagYy = i;
                 }
-            } 
+            }
         }
 
         private void clsQueueManage_ClientConnected(object sender, ClientConnectedEventArgs e)
@@ -205,9 +205,9 @@ namespace com.digitalwave.iCare.gui.MFZ
                     {
                         hasCalledPatient.Add(key, 1);
                     }
-                    else 
+                    else
                     {
-                        hasCalledPatient.Add(key,0);
+                        hasCalledPatient.Add(key, 0);
                     }
                 }
                 else
@@ -217,7 +217,7 @@ namespace com.digitalwave.iCare.gui.MFZ
                     {
                         tempCount += 1;
                     }
-                    else 
+                    else
                     {
                         tempCount -= 1;
                     }
@@ -242,40 +242,54 @@ namespace com.digitalwave.iCare.gui.MFZ
                 return;
             }
 
-            lock (dataModule)
+            int num = 0;
+            try
             {
-                if (doctCoputerDictionary.ContainsValue(e.Client))
+                lock (dataModule)
                 {
-                    string strDocID = GetDoctID(e.Client); // docID
-                    string strQueueName = GetQueueShareName(strDocID); //comQueue / expQueue 
-                    if (strDocID != string.Empty)
+                    if (doctCoputerDictionary.ContainsValue(e.Client))
                     {
-                        switch (comObj.option)
+                        string strDocID = GetDoctID(e.Client); // docID
+                        string strQueueName = GetQueueShareName(strDocID); //comQueue / expQueue 
+                        if (strDocID != string.Empty)
                         {
-                            case enmMFZCommunicationOption.CallNextPatient:
-                                ClientCallNextPatient(e, strDocID, strQueueName, comObj);
-                                break;
-                            case enmMFZCommunicationOption.CallSomePatient:
-                                ClientCallSomePatient(e, strDocID, strQueueName, comObj);
-                                break;
-                            case enmMFZCommunicationOption.GetQueueStatus:
-                                ClientGetQueueStatus(e, strDocID, strQueueName, comObj);
-                                break;
-                            case enmMFZCommunicationOption.GetSomeQueue:
-                                ClientGetSomeQueue(e, strDocID, strQueueName, comObj);
-                                break;
-                            case enmMFZCommunicationOption.RecallSomePatient:
-                                ClientRecallSomePatient(e, strDocID, strQueueName, comObj);
-                                break;
-                            case enmMFZCommunicationOption.MovePatientToLast:
-                                clsMFZPatientVO paitent= comObj.data as clsMFZPatientVO;
-                                ClientMovePatientToLast(strDocID, paitent);
-                                break;
-                            default:
-                                break;
+                            switch (comObj.option)
+                            {
+                                case enmMFZCommunicationOption.CallNextPatient:
+                                    num = 1;
+                                    ClientCallNextPatient(e, strDocID, strQueueName, comObj);
+                                    break;
+                                case enmMFZCommunicationOption.CallSomePatient:
+                                    num = 2;
+                                    ClientCallSomePatient(e, strDocID, strQueueName, comObj);
+                                    break;
+                                case enmMFZCommunicationOption.GetQueueStatus:
+                                    num = 3;
+                                    ClientGetQueueStatus(e, strDocID, strQueueName, comObj);
+                                    break;
+                                case enmMFZCommunicationOption.GetSomeQueue:
+                                    num = 4;
+                                    ClientGetSomeQueue(e, strDocID, strQueueName, comObj);
+                                    break;
+                                case enmMFZCommunicationOption.RecallSomePatient:
+                                    num = 5;
+                                    ClientRecallSomePatient(e, strDocID, strQueueName, comObj);
+                                    break;
+                                case enmMFZCommunicationOption.MovePatientToLast:
+                                    num = 6;
+                                    clsMFZPatientVO paitent = comObj.data as clsMFZPatientVO;
+                                    ClientMovePatientToLast(strDocID, paitent);
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(num.ToString() + "  " + ex.ToString());
             }
         }
         private void comSvc_ConnectionError(object sender, ConnectionErrorEventArgs e)
@@ -535,9 +549,9 @@ namespace com.digitalwave.iCare.gui.MFZ
             }
             return true;
         }
-        private bool ClientMovePatientToLast(string strDocID,clsMFZPatientVO patient)
+        private bool ClientMovePatientToLast(string strDocID, clsMFZPatientVO patient)
         {
-            bool isCalled=false;
+            bool isCalled = false;
             foreach (clsMFZPatientVO patientVO in queueDictionary[CALLEDQUEUE])
             {
                 if (patientVO.m_strPatientCardNO == patient.m_strPatientCardNO)
@@ -559,10 +573,10 @@ namespace com.digitalwave.iCare.gui.MFZ
                     }
                 }
 
-                if (!isContains) 
+                if (!isContains)
                 {
                     int len = queueDictionary[strDocID].Count;
-                    QueueModified(this,new QueueModifiedEventArgs(strDocID,true,patient,len));
+                    QueueModified(this, new QueueModifiedEventArgs(strDocID, true, patient, len));
                     PatientCountChanged(this, new PatientCountChangeEventArgs(strDocID, false));
                     queueDictionary[strDocID].Add(patient);
                     NotifyClientQueueStatus();
@@ -595,7 +609,7 @@ namespace com.digitalwave.iCare.gui.MFZ
                     MovePatient(lstPatients[0], strQueueName, CALLEDQUEUE, 0);
                     if (PatientCountChanged != null)
                     {
-                        PatientCountChangeEventArgs e = new PatientCountChangeEventArgs(strDoctID,true);
+                        PatientCountChangeEventArgs e = new PatientCountChangeEventArgs(strDoctID, true);
                         PatientCountChanged(this, e);
                     }
                 }
@@ -621,7 +635,7 @@ namespace com.digitalwave.iCare.gui.MFZ
                 MovePatient(queueDictionary[strDoctID][0], strDoctID, CALLEDQUEUE, 0);
                 if (PatientCountChanged != null)
                 {
-                    PatientCountChangeEventArgs e = new PatientCountChangeEventArgs(strDoctID,true);
+                    PatientCountChangeEventArgs e = new PatientCountChangeEventArgs(strDoctID, true);
                     PatientCountChanged(this, e);
                 }
             }
@@ -662,7 +676,7 @@ namespace com.digitalwave.iCare.gui.MFZ
             }
             if (PatientCountChanged != null)
             {
-                PatientCountChangeEventArgs e = new PatientCountChangeEventArgs(strDoctID,true);
+                PatientCountChangeEventArgs e = new PatientCountChangeEventArgs(strDoctID, true);
                 PatientCountChanged(this, e);
             }
         }
@@ -722,7 +736,7 @@ namespace com.digitalwave.iCare.gui.MFZ
             {
                 #region 处理3
                 char[] arrChrName = callName.ToCharArray();
-                for (int i3 = 0; i3< arrChrName.Length; i3++)
+                for (int i3 = 0; i3 < arrChrName.Length; i3++)
                 {
                     strTmpName += arrChrName[i3].ToString() + "  ";
                 }
@@ -1123,7 +1137,7 @@ namespace com.digitalwave.iCare.gui.MFZ
                                 clsMFZWorkStationVO station = null;
                                 clsTmdWorkStationSmp.s_object.m_lngFindByDoctorID(tempDoctor.strDoctID, schemeID, out station);
                                 queueDictionary.Add(tempDoctor.strDoctID, tempDoctor.firstQueue);
-                                hasCalledPatient.Add(tempDoctor.strDoctID,0);
+                                hasCalledPatient.Add(tempDoctor.strDoctID, 0);
                                 doctCoputerDictionary.Add(tempDoctor.strDoctID, station.m_strWorkStationName);
                             }
                         }
@@ -1392,7 +1406,7 @@ namespace com.digitalwave.iCare.gui.MFZ
             return string.Empty;
         }
 
-        private string GetDoctorName(string doctorId) 
+        private string GetDoctorName(string doctorId)
         {
             foreach (clsDept dept in dataModule.daigArea.depts)
             {
@@ -1641,21 +1655,21 @@ namespace com.digitalwave.iCare.gui.MFZ
             return doctorName;
         }
 
-        private List<string> ConstructDeptArrange(int rowNum,int colNum, List<string> lstRoomDoctor)
+        private List<string> ConstructDeptArrange(int rowNum, int colNum, List<string> lstRoomDoctor)
         {
             List<string> lstLeds = new List<string>();
             StringBuilder sb = new StringBuilder();
-            int screenNum =(int)Math.Ceiling((double)((lstRoomDoctor.Count+2) * 1.0 / (rowNum * 2.0)));
+            int screenNum = (int)Math.Ceiling((double)((lstRoomDoctor.Count + 2) * 1.0 / (rowNum * 2.0)));
             int startPos = 0;
 
             for (int i = 0; i < screenNum; i++)
             {
 
-                startPos = i == 0 ? 0 : colNum *rowNum* i - 2;
+                startPos = i == 0 ? 0 : colNum * rowNum * i - 2;
                 if (i == 0)
                 {
                     string head = clsConfig.CurrentConfig.ArrangeTitle + "\n";
-                    lstLeds.Add(head+GetPageString(startPos, rowNum - 1, colNum, lstRoomDoctor));
+                    lstLeds.Add(head + GetPageString(startPos, rowNum - 1, colNum, lstRoomDoctor));
                 }
                 else
                 {
@@ -1705,10 +1719,10 @@ namespace com.digitalwave.iCare.gui.MFZ
             //    lstLeds.Add(sb.ToString());
             //}
             //return lstLeds;
-           
+
             ////rowCount++;
-            
-            
+
+
             //foreach (KeyValuePair<string, List<clsDoctor>> pair in dicDeptDoctors)
             //{
             //    if (pair.Value.Count == 0) continue;
@@ -1767,7 +1781,7 @@ namespace com.digitalwave.iCare.gui.MFZ
             //            }
             //        }
 
-                   
+
             //    }
             //} 
             #endregion
@@ -1777,10 +1791,10 @@ namespace com.digitalwave.iCare.gui.MFZ
             //    lstLeds.Add(sb.ToString());
             //}
 
-           
+
         }
 
-        private string GetPageString(int startPos,int rowNum,int colNum,List<string> lstRoomDoctor)
+        private string GetPageString(int startPos, int rowNum, int colNum, List<string> lstRoomDoctor)
         {
             StringBuilder sb = new StringBuilder();
             int pos = startPos;
@@ -1788,13 +1802,13 @@ namespace com.digitalwave.iCare.gui.MFZ
             {
                 for (int j = 0; j < colNum; j++)
                 {
-                    
-                        pos = startPos + rowNum * j + i;
-                        if (pos < lstRoomDoctor.Count)
-                        {
-                            sb.Append(lstRoomDoctor[pos]);
-                            sb.Append("  ");
-                        }
+
+                    pos = startPos + rowNum * j + i;
+                    if (pos < lstRoomDoctor.Count)
+                    {
+                        sb.Append(lstRoomDoctor[pos]);
+                        sb.Append("  ");
+                    }
                 }
                 sb.AppendLine();
             }
@@ -1836,17 +1850,17 @@ namespace com.digitalwave.iCare.gui.MFZ
                             {
                                 strRowContent = string.Format("{0}:{1} ", room.strRoomName.PadRight(5, '　'), doctor.strDoctName.PadRight(5, '　'));
                             }
-                            else 
+                            else
                             {
                                 strRowContent = string.Format("{0}:{1}-{2}", room.strRoomName.PadRight(5, '　'), projectName, doctor.strDoctName);
                             }
                             lstRoomDoctor.Add(strRowContent.PadRight(15, '　'));
                         }
-                        else 
+                        else
                         {
                             if (projectName == string.Empty)
                             {
-                                strRowContent = string.Format("{0}:{1} ", room.strRoomName,doctor.strDoctName.PadLeft(5, '　'));
+                                strRowContent = string.Format("{0}:{1} ", room.strRoomName, doctor.strDoctName.PadLeft(5, '　'));
                             }
                             else
                             {
@@ -1855,7 +1869,7 @@ namespace com.digitalwave.iCare.gui.MFZ
 
                             lstRoomDoctor.Add(strRowContent.PadRight(15, '　'));
                         }
-                     
+
                     }
                     else
                     {
@@ -1865,7 +1879,7 @@ namespace com.digitalwave.iCare.gui.MFZ
                             strRowContent = string.Format("{0}:{2} {1}", room.strRoomName.PadRight(5, '　'), "　　　", "　　　　　");
                             lstRoomDoctor.Add(strRowContent.PadRight(15, '　'));
                         }
-                        else 
+                        else
                         {
                             strRowContent = string.Format("{0}:{2} {1}", room.strRoomName, "　　　", "　　　　　");
                             lstRoomDoctor.Add(strRowContent.PadRight(15, '　'));
@@ -1874,10 +1888,10 @@ namespace com.digitalwave.iCare.gui.MFZ
                 }
             }
 
-            lstRoomDoctor.Sort(delegate(string x, string y) { return x.CompareTo(y); });
+            lstRoomDoctor.Sort(delegate (string x, string y) { return x.CompareTo(y); });
             return lstRoomDoctor;
 
-           
+
             /*foreach (clsDept dept in dataModule.daigArea.depts)
             {
                 List<clsDoctor> lstDept = new List<clsDoctor>();
@@ -1911,7 +1925,7 @@ namespace com.digitalwave.iCare.gui.MFZ
         /// <summary>
         /// 生成LED屏的医生排班列表
         /// </summary>
-        private void GeneratorLEDImage() 
+        private void GeneratorLEDImage()
         {
             //生成医生值班安排图片
             List<string> deptDoctors = ConstructDeptArrange(clsConfig.CurrentConfig.ArrangeLineNum, clsConfig.CurrentConfig.ArrangeColumnNum, GetDeptList());
@@ -1928,8 +1942,8 @@ namespace com.digitalwave.iCare.gui.MFZ
             {
                 bool isDoctorQueue = !(pairPatient.Key == COMMONWAITQUEUE || pairPatient.Key == EXPWAITQUEUE
                                    || pairPatient.Key == CALLEDQUEUE);
-                string doctorId=pairPatient.Key;
-                if (pairPatient.Value.Count>0)
+                string doctorId = pairPatient.Key;
+                if (pairPatient.Value.Count > 0)
                 {
                     if (isDoctorQueue)
                     {
@@ -1938,8 +1952,8 @@ namespace com.digitalwave.iCare.gui.MFZ
                         {
                             lstPatientName.Add(patient.m_strPatientName);
                         }
-                        string headName = string.Format("{0}({1})", TidyDoctorName(GetDoctorName(doctorId)),GetDoctRoomName(doctorId));
-                        lstResult.Add(headName.PadRight(8,'　')+":", lstPatientName);
+                        string headName = string.Format("{0}({1})", TidyDoctorName(GetDoctorName(doctorId)), GetDoctRoomName(doctorId));
+                        lstResult.Add(headName.PadRight(8, '　') + ":", lstPatientName);
                     }
                 }
             }
@@ -2074,7 +2088,7 @@ namespace com.digitalwave.iCare.gui.MFZ
                             }
                         }
                     }
-                }                
+                }
             }
             catch (Exception objEx)
             {
@@ -2160,7 +2174,7 @@ namespace com.digitalwave.iCare.gui.MFZ
         #endregion
 
         #endregion
-    } 
+    }
 
     #endregion
 
@@ -2229,28 +2243,28 @@ namespace com.digitalwave.iCare.gui.MFZ
             currPosition = p_currPosition;
         }
     }
- 
-    public class PatientCountChangeEventArgs : System.EventArgs 
+
+    public class PatientCountChangeEventArgs : System.EventArgs
     {
         string strDoctId;
         int calledPatientCount;
         bool isAdded;
 
-        public bool IsAdded 
+        public bool IsAdded
         {
             get { return isAdded; }
         }
 
-        public int CalledPatientCount 
+        public int CalledPatientCount
         {
             get { return calledPatientCount; }
             set { calledPatientCount = value; }
         }
-        public string DoctId 
+        public string DoctId
         {
             get { return strDoctId; }
         }
-        public PatientCountChangeEventArgs(string strDoctId,bool isAdded)
+        public PatientCountChangeEventArgs(string strDoctId, bool isAdded)
         {
             this.strDoctId = strDoctId;
             this.isAdded = isAdded;
@@ -2297,12 +2311,12 @@ namespace com.digitalwave.iCare.gui.MFZ
         /// <summary>
         /// 项目名称
         /// </summary>
-        public string strSummary; 
+        public string strSummary;
         public int calledCount;
         public weCare.Core.Entity.enmMFZDoctorType doctorType;
 
         public List<clsMFZPatientVO> firstQueue = new List<clsMFZPatientVO>();
-    } 
+    }
 
     #endregion
 }

@@ -228,6 +228,7 @@ namespace FB2000R.lis
         /// <returns></returns>
         internal int Execpro(EntitySampleInfo sample)
         {
+            string sql = string.Empty;
             int affect = -1;
             if (sample == null)
                 return affect;
@@ -236,6 +237,8 @@ namespace FB2000R.lis
             try
             {
                 svc = new SqlHelper(EnumBiz.lisDB);
+
+
                 //EXEC proc_Receive_Sample 
                 //'wxh'(姓名), 
                 //'女'(性别),
@@ -260,8 +263,13 @@ namespace FB2000R.lis
                 //18(RV项目代码),
                 //59(ADV项目代码), 
                 //79(HP项目代码);
-                string sql = @"exec proc_Receive_Sample ?,?,'','','',?,?,'粪便',?,
-                                '','','',?,'',8,13,23,32,?,?,?,?,? ";
+                sql = @"select * from tb_sample_info where sample_no = " + sample.barCode;
+                DataTable dt = svc.GetDataTable(sql);
+                if(dt != null && dt.Rows.Count > 0)
+                {
+                    return 1;
+                }
+                sql = @"exec proc_Receive_Sample ?,?,'','','',?,?,'粪便',?,'','','',?,'',8,13,23,32,?,?,?,?,? ";
                 IDataParameter [] parm = svc.CreateParm(11);
                 parm[0].Value = sample.name;
                 parm[1].Value = sample.sex.Trim();
@@ -397,20 +405,6 @@ namespace FB2000R.lis
                     vo.m_strResult = drData["Hard"].ToString();
                     data.Add(vo);
 
-                    vo = new clsDeviceReslutVO();
-                    vo.m_strAbnormalFlag = "";
-                    if (drData["Jc_time"] != DBNull.Value)
-                        vo.m_strCheckDat = Convert.ToDateTime(drData["Jc_time"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
-                    else
-                        vo.m_strCheckDat = Convert.ToDateTime(DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss");
-                    vo.m_strDeviceCheckItemName = "Mucus";
-                    vo.m_strDeviceSampleID = drData["sn"].ToString();
-                    vo.m_strIdx = Convert.ToString(++idx);
-                    vo.m_strMaxVal = string.Empty;
-                    vo.m_strMinVal = string.Empty;
-                    vo.m_strRefRange = string.Empty;
-                    vo.m_strResult = drData["Mucus"].ToString();
-                    data.Add(vo);
 
                     vo = new clsDeviceReslutVO();
                     vo.m_strAbnormalFlag = "";
@@ -473,13 +467,13 @@ namespace FB2000R.lis
                     {
                         EntityBarCode vo = new EntityBarCode();
                         vo.barCode = barCode;
-                        //执行存储过程
-                        int affect = Execpro(sample);
-                        if(affect < 0)
-                        {
-                            DialogBox.Msg("条码添加失败！");
-                            return;
-                        }
+                        ////执行存储过程
+                        //int affect = Execpro(sample);
+                        //if(affect < 0)
+                        //{
+                        //    DialogBox.Msg("条码添加失败！");
+                        //    return;
+                        //}
                         lstBarCode.Insert(0, vo);
                     }
                     this.gcBarCode.DataSource = lstBarCode;
@@ -510,13 +504,13 @@ namespace FB2000R.lis
                         EntityBarCode vo = new EntityBarCode();
                         vo.barCode = barCode;
                         
-                        //执行存储过程
-                        int affect = Execpro(sample);
-                        if (affect < 0)
-                        {
-                            DialogBox.Msg("条码添加失败！");
-                            return;
-                        }
+                        ////执行存储过程
+                        //int affect = Execpro(sample);
+                        //if (affect < 0)
+                        //{
+                        //    DialogBox.Msg("条码添加失败！");
+                        //    return;
+                        //}
                         lstBarCode.Insert(0, vo);
                         this.gcBarCode.DataSource = lstBarCode;
                         this.gcBarCode.RefreshDataSource();
@@ -556,6 +550,9 @@ namespace FB2000R.lis
                 sample.RV = 0;
                 sample.ADV = 0;
                 sample.HP = 0;
+                SqlHelper svc = new SqlHelper(EnumBiz.lisDB);
+                string sql = "delete from tb_sample_info  where sample_no = " + vo.barCode;
+                svc.ExecSql(sql);
                 //执行存储过程
                 int affect = Execpro(sample);
                 if (affect < 0)
@@ -578,6 +575,9 @@ namespace FB2000R.lis
                 sample.RV = 18;
                 sample.ADV = 59;
                 sample.HP = 79;
+                SqlHelper svc = new SqlHelper(EnumBiz.lisDB);
+                string sql = "delete from tb_sample_info  where sample_no = " + vo.barCode;
+                svc.ExecSql(sql);
                 //执行存储过程
                 int affect = Execpro(sample);
                 if (affect < 0)
@@ -594,12 +594,18 @@ namespace FB2000R.lis
 
             if (vo != null)
             {
+                
                 EntitySampleInfo sample = QuerrySample(vo.barCode);
                 sample.microCheck = 1;
                 sample.OB = 15;
                 sample.RV = 18;
                 sample.ADV = 59;
                 sample.HP = 79;
+
+                SqlHelper svc = new SqlHelper(EnumBiz.lisDB);
+                string sql = "delete from tb_sample_info  where sample_no = " + vo.barCode;
+                svc.ExecSql(sql);
+
                 //执行存储过程
                 int affect = Execpro(sample);
                 if (affect < 0)

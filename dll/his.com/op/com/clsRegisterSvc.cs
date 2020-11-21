@@ -8786,7 +8786,7 @@ select a.recipeid_chr, a.recipename_chr, a.privilege_int, a.usercode_chr, a.wbco
                left join t_bse_chargeitem b
                  on a.itemid_chr = b.itemid_chr
              union all
-             select distinct a.outpatrecipeid_chr id,
+             select  a.outpatrecipeid_chr id,
                              a.itemname_vchr      name,
                              a.unitid_chr         uint,
                              a.itemspec_vchr      dec,

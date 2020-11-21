@@ -238,6 +238,8 @@ namespace com.digitalwave.iCare.middletier.LIS
             objApplUnitVO.strOutCheckFlag = objRow["OUTER_CHECK_FLAG_NUM"].ToString().Trim();
             objApplUnitVO.ReportHour = objRow["REPORTHOUR"] == DBNull.Value ? 0 : Convert.ToDecimal(objRow["REPORTHOUR"].ToString());
             objApplUnitVO.SamplingInstr = objRow["SamplingInstr"].ToString();
+            objApplUnitVO.Jclx_jj = objRow["Jclx_jj"] == DBNull.Value ? 0 : Convert.ToInt32(objRow["Jclx_jj"].ToString());
+            objApplUnitVO.Jclx_jtj = objRow["Jclx_jtj"] == DBNull.Value ? 0 : Convert.ToInt32(objRow["Jclx_jtj"].ToString());
         }
         #endregion
 

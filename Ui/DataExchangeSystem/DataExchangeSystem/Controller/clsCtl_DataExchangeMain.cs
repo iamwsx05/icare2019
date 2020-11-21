@@ -287,65 +287,78 @@ namespace com.digitalwave.iCare.gui.DataExchangeSystem
             clsInHospital_VO[] ArrInHospital = null;
             try
             {
-                long lngRes = objDomain.m_lngGetInHospital(Convert.ToDateTime(this.m_objViewer.dtmBegin.Value.ToString("yyyy-MM-dd 00:00:00")), Convert.ToDateTime(this.m_objViewer.dtmEnd.Value.ToString("yyyy-MM-dd 23:59:59")), out ArrInHospital);
-                if (ArrInHospital != null && ArrInHospital.Length > 0)
-                {
-                    lisInHospital.AddRange(ArrInHospital);
-                }
-                if (lngRes < 0)
-                {
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tsp_showProgress.Value = 100;
-                    this.m_objViewer.tslStat.Text = "下载住院收入数据失败,请核查!";
-                    this.m_objViewer.Update();
-                }
-                if (lisInHospital.Count > 0)
-                {
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tsp_showProgress.Value = 40;
-                    this.m_objViewer.tslStat.Text = "准备上传住院收入数据,请稍后...";
-                    this.m_objViewer.Update();
+                DateTime startTime = Convert.ToDateTime(this.m_objViewer.dtmBegin.Value.ToString("yyyy-MM-dd"));
+                DateTime endTime = Convert.ToDateTime(this.m_objViewer.dtmEnd.Value.ToString("yyyy-MM-dd"));
 
-                    for (int i = 0; i < lisInHospital.Count; i++)
+                for(var dayTime = startTime;dayTime<=endTime;dayTime = dayTime.AddDays(1) )
+                {
+                    lisInHospital = new List<clsInHospital_VO>();
+                    long lngRes = objDomain.m_lngGetInHospital(Convert.ToDateTime(dayTime.ToString("yyyy-MM-dd") + " 00:00:00"), Convert.ToDateTime(dayTime.ToString("yyyy-MM-dd") + " 23:59:59"), out ArrInHospital);
+                    if (ArrInHospital != null && ArrInHospital.Length > 0)
                     {
-                        System.Windows.Forms.Application.DoEvents();
-                        this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 正在上传住院收入数据共" + lisInHospital.Count.ToString() + "条,正在上传第" + (i + 1).ToString() + "条");
-                        this.m_objViewer.tslStat.Text = "正在上传第" + (i + 1).ToString() + "条数据";
-                        this.m_objViewer.Update();
-                        lngRes = objDomain.m_lngUploadInHospital(lisInHospital[i]);
-                        if (lngRes < 0)
-                        {
-                            this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传住院收入数据第" + (i + 1).ToString() + "条数据失败,请核查");
-                        }
-                        else
-                        {
-                            this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传住院收入数据第" + (i + 1).ToString() + "条数据成功");
-                        }
-
-                        this.m_objViewer.tsp_showProgress.Value = i % 100;
-
+                        lisInHospital.AddRange(ArrInHospital);
+                    }
+                    if (lngRes < 0)
+                    {
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tsp_showProgress.Value = 100;
+                        this.m_objViewer.tslStat.Text = "下载住院收入数据失败,请核查!";
                         this.m_objViewer.Update();
                     }
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tslStat.Text = "上传完成,请查看日志确认是否全部成功";
-                    this.m_objViewer.rtb_showLog.AppendText("\n 住院收入数据上传完成,请查看日志确认是否全部成功");
-                    com.digitalwave.Utility.clsLogText objLogErr = new clsLogText();
-                    objLogErr.LogError("["+DateTime.Now.ToString("yyyy-MM-dd hh24:mi:ss") + "]: " + "住院收入数据上传成功");
-                    this.m_objViewer.tsp_showProgress.Value = 100;
-                    this.m_objViewer.Update();
+                    if (lisInHospital.Count > 0)
+                    {
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tsp_showProgress.Value = 40;
+                        this.m_objViewer.tslStat.Text = "准备上传住院收入数据,请稍后...";
+                        this.m_objViewer.Update();
+                        lngRes = objDomain.m_lngDelInHospital(dayTime);
+                        if(lngRes < 0)
+                        {
+                            this.m_objViewer.rtb_showLog.AppendText("\n [" + dayTime.ToString("yyyy-MM-dd") + "] 删除数据失败！");
+                            continue;
+                        }
 
-                }
-                else
-                {
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tsp_showProgress.Value = 100;
-                    this.m_objViewer.tslStat.Text = "此时间段内没有住院收入数据,请核查!";
-                    this.m_objViewer.Update();
+                        for (int i = 0; i < lisInHospital.Count; i++)
+                        {
+                            System.Windows.Forms.Application.DoEvents();
+                            this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 正在上传住院收入数据共" + lisInHospital.Count.ToString() + "条,正在上传第" + (i + 1).ToString() + "条");
+                            this.m_objViewer.tslStat.Text = "正在上传"+ dayTime.ToString("yyyy-MM-dd") +"第" + (i + 1).ToString() + "条数据";
+                            this.m_objViewer.Update();
+                            lngRes = objDomain.m_lngUploadInHospital(lisInHospital[i]);
+                            if (lngRes < 0)
+                            {
+                                this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传住院收入数据第" + (i + 1).ToString() + "条数据失败,请核查");
+                            }
+                            else
+                            {
+                                this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传住院收入数据第" + (i + 1).ToString() + "条数据成功");
+                            }
+
+                            this.m_objViewer.tsp_showProgress.Value = i % 100;
+
+                            this.m_objViewer.Update();
+                        }
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tslStat.Text = "上传完成,请查看日志确认是否全部成功";
+                        this.m_objViewer.rtb_showLog.AppendText("\n 住院收入数据上传完成,请查看日志确认是否全部成功");
+                        com.digitalwave.Utility.clsLogText objLogErr = new clsLogText();
+                        objLogErr.LogError("[" + DateTime.Now.ToString("yyyy-MM-dd hh24:mi:ss") + "]: " + "住院收入数据上传成功");
+                        this.m_objViewer.tsp_showProgress.Value = 100;
+                        this.m_objViewer.Update();
+
+                    }
+                    else
+                    {
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tsp_showProgress.Value = 100;
+                        this.m_objViewer.tslStat.Text = "此时间段内没有住院收入数据,请核查!";
+                        this.m_objViewer.Update();
+                    }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                ExceptionLog.OutPutException(ex);
             }
             finally
             {
@@ -378,62 +391,75 @@ namespace com.digitalwave.iCare.gui.DataExchangeSystem
             clsOutpatient_VO[] ArrOutpatient = null;
             try
             {
-                long lngRes = objDomain.m_lngGetOutpatient(Convert.ToDateTime(this.m_objViewer.dtmBegin.Value.ToString("yyyy-MM-dd 00:00:00")), Convert.ToDateTime(this.m_objViewer.dtmEnd.Value.ToString("yyyy-MM-dd 23:59:59")), out ArrOutpatient);
-                if (ArrOutpatient != null && ArrOutpatient.Length > 0)
-                {
-                    lisOutpatient.AddRange(ArrOutpatient);
-                }
-                if (lngRes < 0)
-                {
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tsp_showProgress.Value = 100;
-                    this.m_objViewer.tslStat.Text = "下载门诊收入数据失败,请核查!";
-                    this.m_objViewer.Update();
-                }
-                if (lisOutpatient.Count > 0)
-                {
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tsp_showProgress.Value = 40;
-                    this.m_objViewer.tslStat.Text = "准备上传门诊收入数据,请稍后...";
-                    this.m_objViewer.Update();
+                DateTime startTime = Convert.ToDateTime(this.m_objViewer.dtmBegin.Value.ToString("yyyy-MM-dd"));
+                DateTime endTime = Convert.ToDateTime(this.m_objViewer.dtmEnd.Value.ToString("yyyy-MM-dd"));
 
-                    for (int i = 0; i < lisOutpatient.Count; i++)
+                for (var dayTime = startTime; dayTime <= endTime; dayTime = dayTime.AddDays(1))
+                {
+                    long lngRes = objDomain.m_lngGetOutpatient(Convert.ToDateTime(dayTime.ToString("yyyy-MM-dd") + " 00:00:00"), Convert.ToDateTime(dayTime.ToString("yyyy-MM-dd") + " 23:59:59"), out ArrOutpatient);
+                    if (ArrOutpatient != null && ArrOutpatient.Length > 0)
                     {
-                        System.Windows.Forms.Application.DoEvents();
-                        this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 正在上传门诊收入数据共" + lisOutpatient.Count.ToString() + "条,正在上传第" + (i + 1).ToString() + "条");
-                        this.m_objViewer.tslStat.Text = "正在上传第" + (i + 1).ToString() + "条数据";
-                        this.m_objViewer.Update();
-                        lngRes = objDomain.m_lngUploadOutpatient(lisOutpatient[i]);
-                        if (lngRes < 0)
-                        {
-                            this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传门诊收入数据第" + (i + 1).ToString() + "条数据失败,请核查");
-                            //this.m_objViewer.rtb_showLog.AppendText("\n [" +lisOutpatient[i].BMBH+lisOutpatient[i]. "");
-
-                        }
-                        else
-                        {
-                            this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传门诊收入数据第" + (i + 1).ToString() + "条数据成功");
-                        }
-
-                        this.m_objViewer.tsp_showProgress.Value = i % 100;
-
+                        lisOutpatient.AddRange(ArrOutpatient);
+                    }
+                    if (lngRes < 0)
+                    {
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tsp_showProgress.Value = 100;
+                        this.m_objViewer.tslStat.Text = "下载门诊收入数据失败,请核查!";
                         this.m_objViewer.Update();
                     }
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tslStat.Text = "上传完成,请查看日志确认是否全部成功";
-                    this.m_objViewer.rtb_showLog.AppendText("\n 门诊收入数据上传完成,请查看日志确认是否全部成功");
-                    com.digitalwave.Utility.clsLogText objLogErr = new clsLogText();
-                    objLogErr.LogError("[" + DateTime.Now.ToString("yyyy-MM-dd hh24:mi:ss") + "]: " + "门诊收入数据上传成功");
-                    this.m_objViewer.tsp_showProgress.Value = 100;
-                    this.m_objViewer.Update();
+                    if (lisOutpatient.Count > 0)
+                    {
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tsp_showProgress.Value = 40;
+                        this.m_objViewer.tslStat.Text = "准备上传门诊收入数据,请稍后...";
+                        this.m_objViewer.Update();
 
-                }
-                else
-                {
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tsp_showProgress.Value = 100;
-                    this.m_objViewer.tslStat.Text = "此时间段内没有门诊收入数据,请核查!";
-                    this.m_objViewer.Update();
+                        lngRes = objDomain.m_lngDelOutpatient(dayTime);
+                        if (lngRes < 0)
+                        {
+                            this.m_objViewer.rtb_showLog.AppendText("\n [" + dayTime.ToString("yyyy-MM-dd") + "] 删除数据失败！");
+                            continue;
+                        }
+
+                        for (int i = 0; i < lisOutpatient.Count; i++)
+                        {
+                            System.Windows.Forms.Application.DoEvents();
+                            this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 正在上传门诊收入数据共" + lisOutpatient.Count.ToString() + "条,正在上传第" + (i + 1).ToString() + "条");
+                            this.m_objViewer.tslStat.Text = "正在上传第" + (i + 1).ToString() + "条数据";
+                            this.m_objViewer.Update();
+                            lngRes = objDomain.m_lngUploadOutpatient(lisOutpatient[i]);
+                            if (lngRes < 0)
+                            {
+                                this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传门诊收入数据第" + (i + 1).ToString() + "条数据失败,请核查");
+                                //this.m_objViewer.rtb_showLog.AppendText("\n [" +lisOutpatient[i].BMBH+lisOutpatient[i]. "");
+
+                            }
+                            else
+                            {
+                                this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传门诊收入数据第" + (i + 1).ToString() + "条数据成功");
+                            }
+
+                            this.m_objViewer.tsp_showProgress.Value = i % 100;
+
+                            this.m_objViewer.Update();
+                        }
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tslStat.Text = "上传完成,请查看日志确认是否全部成功";
+                        this.m_objViewer.rtb_showLog.AppendText("\n 门诊收入数据上传完成,请查看日志确认是否全部成功");
+                        com.digitalwave.Utility.clsLogText objLogErr = new clsLogText();
+                        objLogErr.LogError("[" + DateTime.Now.ToString("yyyy-MM-dd hh24:mi:ss") + "]: " + "门诊收入数据上传成功");
+                        this.m_objViewer.tsp_showProgress.Value = 100;
+                        this.m_objViewer.Update();
+
+                    }
+                    else
+                    {
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tsp_showProgress.Value = 100;
+                        this.m_objViewer.tslStat.Text = "此时间段内没有门诊收入数据,请核查!";
+                        this.m_objViewer.Update();
+                    }
                 }
             }
             catch

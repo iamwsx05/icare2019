@@ -203,7 +203,6 @@ namespace DiagnoseClient
                 {
                     ConnectionError(this, new ConnectionErrorEventArgs("连接已关闭"));
                 }
-                
                 return;
             }
             catch (Exception ex)

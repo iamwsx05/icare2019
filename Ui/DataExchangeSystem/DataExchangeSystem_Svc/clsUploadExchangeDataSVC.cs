@@ -294,11 +294,14 @@ values
             long lngRes = -1;
             try
             {
+            
+                clsDatabaseSVC objSvc = new clsDatabaseSVC();
+
                 string strSQL = @"insert into 住院收入
 (单据编号 ,标识 ,日期,部门编号,部门名称,医生编号,医生名称,项目编号,项目名称,项目金额)
 values
 (@1,@2,@3,@4,@5,@6,@7,@8,@9,@10)";
-                clsDatabaseSVC objSvc = new clsDatabaseSVC();
+               
                 SqlParameter[] objParmArr = null;
                 if (InHospital != null)
                 {
@@ -388,6 +391,36 @@ values
 
                 }
                 lngRes = objSvc.ExecuteSQL(strSQL, objParmArr);
+                objSvc.Dispose();
+            }
+            catch (Exception objExt)
+            {
+                clsLogText logtxt = new clsLogText();
+                logtxt.LogError(objExt);
+            }
+            return lngRes;
+        }
+
+        #endregion
+
+
+        #region 住院收入删除
+        /// <summary>
+        /// 住院收入删除
+        /// </summary>
+        /// <returns></returns>
+        [AutoComplete]
+        public long m_lngDelInHospital(DateTime dayTime)
+        {
+            long lngRes = -1;
+            try
+            {
+                string p_dtmBegin = dayTime.ToString("yyyy-MM-dd") + " 00:00:00";
+                string p_dtmEnd = dayTime.ToString("yyyy-MM-dd") + " 23:59:59";
+                clsDatabaseSVC objSvc = new clsDatabaseSVC();
+                string strSQL = @"delete  住院收入 where 日期 between '{0}' and '{1}'";
+                strSQL = string.Format(strSQL, p_dtmBegin, p_dtmEnd);
+                lngRes = objSvc.ExecuteScalar(strSQL);
                 objSvc.Dispose();
             }
             catch (Exception objExt)
@@ -516,6 +549,35 @@ values
             }
             return lngRes;
         }
+        #endregion
+
+        #region 门诊收入删除
+        /// <summary>
+        /// 门诊收入删除
+        /// </summary>
+        /// <returns></returns>
+        [AutoComplete]
+        public long m_lngDelOutpatient(DateTime dayTime)
+        {
+            long lngRes = -1;
+            try
+            {
+                string p_dtmBegin = dayTime.ToString("yyyy-MM-dd") + " 00:00:00";
+                string p_dtmEnd = dayTime.ToString("yyyy-MM-dd") + " 23:59:59";
+                clsDatabaseSVC objSvc = new clsDatabaseSVC();
+                string strSQL = @"delete  门诊收入 where 日期 between '{0}' and '{1}'";
+                strSQL = string.Format(strSQL, p_dtmBegin, p_dtmEnd);
+                lngRes = objSvc.ExecuteScalar(strSQL);
+                objSvc.Dispose();
+            }
+            catch (Exception objExt)
+            {
+                clsLogText logtxt = new clsLogText();
+                logtxt.LogError(objExt);
+            }
+            return lngRes;
+        }
+
         #endregion
 
     }

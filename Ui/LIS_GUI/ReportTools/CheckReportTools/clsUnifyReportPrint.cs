@@ -130,7 +130,14 @@ namespace com.digitalwave.iCare.gui.LIS
         List<string> lstAppUnitID { get; set; }
 
         List<EntityAidRemark> lstAidRemark { get; set; }
+        /// <summary>
+        /// 新冠报告格式参数
+        /// </summary>
         List<string> lstCov2019 { get; set; }
+        /// <summary>
+        /// Mejer 尿沉渣带图片报告格式
+        /// </summary>
+        string mejerParm { get; set; }
 
         private Image objImage;  //医院图标
 
@@ -316,6 +323,51 @@ namespace com.digitalwave.iCare.gui.LIS
             }
         }
 
+        #endregion
+
+        #region Mejer 尿沉渣报告图片
+        /// <summary>
+        /// Mejer 尿沉渣报告图片
+        /// </summary>
+        /// <param name="appId"></param>
+        /// <returns></returns>
+        Image GetMejerImage(string appId)
+        {
+            Image img = null;
+            string Sql = @"SELECT DISTINCT  t2.deviceid_chr,t2.device_sampleid_chr,t2.check_dat
+                FROM t_opr_lis_app_sample t1
+                 left join t_opr_lis_device_relation t2
+                 on t1.sample_id_chr = t2.sample_id_chr
+                WHERE t2.status_int > 0
+                AND t1.application_id_chr = '{0}' and t2.deviceid_chr= '{1}'";
+            Sql = string.Format(Sql,appId,mejerParm);
+            DataTable dt = null;
+            (new weCare.Proxy.ProxyBase()).Service.GetDataTable(Sql, out dt);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                string deviceId = dt.Rows[0]["deviceid_chr"].ToString();
+                string devSampleId = dt.Rows[0]["device_sampleid_chr"].ToString().Trim();
+                string checkDate = Function.Datetime(dt.Rows[0]["check_dat"]).ToString("yyyy-MM-dd HH:mm:ss");
+
+                if(!string.IsNullOrEmpty(deviceId) && !string.IsNullOrEmpty(devSampleId) && !string.IsNullOrEmpty(checkDate))
+                {
+                    Sql = @"select a.sampleimg from t_checkresult_img a 
+                                    where a.deviceid = '{0}' 
+                                            and a.sampleid = '{1}' 
+                                            and a.checkdate = to_date('{2}','yyyy-mm-dd hh24:mi:ss') ";
+
+                    Sql = string.Format(Sql, deviceId, devSampleId, checkDate);
+
+                    (new weCare.Proxy.ProxyBase()).Service.GetDataTable(Sql, out dt);
+                    if(dt != null && dt.Rows.Count > 0)
+                    {
+                        byte [] bytGraph = (byte[])dt.Rows[0]["sampleimg"];
+                        img = Function.ConvertByteToImage(bytGraph);
+                    }
+                }
+            }
+            return img;
+        }
         #endregion
 
         #region 打印接口初始化方法
@@ -770,6 +822,19 @@ namespace com.digitalwave.iCare.gui.LIS
             {
                 isPrintCYSJ = true;
             }
+
+            if (!string.IsNullOrEmpty(mejerParm))
+            {
+                Image graph = GetMejerImage(m_dtbSample.Rows[0]["application_id_chr"].ToString());
+                if (graph != null)
+                {
+                    float m_fltWidth = 0.9f * graph.Width;
+                    float m_fltHeight = 0.9f * graph.Height;
+                    m_printMethodTool.m_printEventArg.Graphics.DrawImage(graph, fltColumn3 - 190,
+                        m_fltEnd-180, m_fltWidth, m_fltHeight);
+                }
+            }
+
             if (isUseA4)
             {
                 //m_fltEnd -= 3;
@@ -853,7 +918,6 @@ namespace com.digitalwave.iCare.gui.LIS
                         m_printMethodTool.DrawImage(m_strConfirmEmp, m_fntSmallBold, Image.FromStream(ms), fltColumn3, m_fltEnd, isUseA4);
                     }
                 }
-                
             }
             else
             {
@@ -948,6 +1012,7 @@ namespace com.digitalwave.iCare.gui.LIS
                         m_fltY = fltY;
                 }
             }
+
             if (m_printMethodTool.m_printEventArg.HasMorePages == false)
             {
                 m_fltY = m_fltPrintSummary(m_fltStartX, m_fltY, m_fltPrintWidth);
@@ -991,6 +1056,7 @@ namespace com.digitalwave.iCare.gui.LIS
                         m_fltY = fltY;
                 }
             }
+              
             if (m_printMethodTool.m_printEventArg.HasMorePages == false)
             {
                 m_fltY = m_fltPrintSummary(m_fltStartX, m_fltY, m_fltPrintWidth);
@@ -1780,11 +1846,12 @@ namespace com.digitalwave.iCare.gui.LIS
             string appUnitIdCov2019 = clsPublic.m_strGetSysparm("7012");
 
             if (!string.IsNullOrEmpty(appUnitIdCov2019))
-            {
                 lstCov2019 = new List<string>(appUnitIdCov2019.Split(';'));
-            }
             else
                 lstCov2019 = new List<string>();
+
+            mejerParm = clsPublic.m_strGetSysparm("7015");
+
             m_mthPrintBseInfo();
 
             #region 自定义报告说明 -加入7006参数 mobaojian 2007.09.04

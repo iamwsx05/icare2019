@@ -62,7 +62,7 @@ namespace MAGLUMI_4000_plus
         clsLIS_Equip_ConfigVO configVo = null;
 
         BackgroundWorker backgroundWorker;
-        System.Timers.Timer  timer;
+        System.Timers.Timer timer;
 
         #endregion
 
@@ -149,7 +149,7 @@ namespace MAGLUMI_4000_plus
             axMSComm.OutBufferSize = 1024;
             axMSComm.RThreshold = 1;
             axMSComm.SThreshold = 0;
-            if(axMSComm.PortOpen == false)
+            if (axMSComm.PortOpen == false)
                 axMSComm.PortOpen = true;
 
             axMSComm.OnComm -= new System.EventHandler(this.axMSComm_OnComm);
@@ -188,6 +188,7 @@ namespace MAGLUMI_4000_plus
         /// isDoing
         /// </summary>
         bool isDoing { get; set; }
+        List<string> lstDeviceModelId = new List<string>() { "0000026", "0000039", "0000046" };
 
         /// <summary>
         /// 接收数据
@@ -197,8 +198,6 @@ namespace MAGLUMI_4000_plus
         private void axMSComm_OnComm(object sender, EventArgs e)
         {
             LastReceive = axMSComm.Input.ToString();
-            //if (!string.IsNullOrEmpty(LastReceive.Trim()))
-            //    Log.Output("-->"+ LastReceive);
 
             ReceiveBuf.Append(LastReceive);           
             string strTemp = ReceiveBuf.ToString();
@@ -206,13 +205,11 @@ namespace MAGLUMI_4000_plus
 
             if (LastReceive.Contains(MAGLUMI_4000_plus_ControlCode.ReqCode) )
             {
-                //Log.Output("<--ack");
                 axMSComm.Output = MAGLUMI_4000_plus_ControlCode.AckCode;
             }
 
             int idxStart = strTemp.IndexOf(MAGLUMI_4000_plus_ControlCode.StartCode);
             int idxEnd = strTemp.IndexOf(MAGLUMI_4000_plus_ControlCode.EndCode);
-            Log.Output("strTemp->" +strTemp);
             if (idxStart < 0 || idxEnd < 0) return;
             if (idxEnd - idxStart - 10 < 0)
             {
@@ -234,6 +231,9 @@ namespace MAGLUMI_4000_plus
                 {
                     foreach(DataRow dr in dt.Rows)
                     {
+                        string devId = dr["deviceModelId"].ToString();
+                        if (devId != "0000055")
+                            continue;
                         lstItem.Add(dr["device_check_item_name_vchr"].ToString());
                     }
                 }

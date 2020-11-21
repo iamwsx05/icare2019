@@ -232,8 +232,7 @@ namespace DiagnoseClient
 
         private void ShowMessage(System.Windows.Forms.MessageBoxIcon icon, string msg)
         {
-            //this.m_lblNotifier.Text = msg;
-            MessageBox.Show(msg);
+            this.m_lblNotifier.Text = msg;
         }
 
         #endregion

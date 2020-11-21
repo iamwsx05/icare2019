@@ -112,11 +112,11 @@ namespace com.digitalwave.iCare.gui.HIS
 
             if (intTem == 0)
             {
-                uiHelper.ExportToXls(this.gvStat);
+                m_objController.m_mthExportToExcel();
             }
             if (intTem == 1)
             {
-                m_objController.m_mthExportToExcel();  
+                uiHelper.ExportToXls(this.gvStat);
             }
         }
 
