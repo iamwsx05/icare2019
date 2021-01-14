@@ -359,23 +359,23 @@ values
                                     throw new Exception();
                                 }
                             }
-                            Hashtable hstMedicineID = new Hashtable();
-                            Hashtable hstWholeSalePrice = new Hashtable();
-                            Hashtable hstReatPrice = new Hashtable();
+                            Dictionary<string, double> dicMedicineID = new Dictionary<string, double>();
+                            Dictionary<string, double> dicWholeSalePrice = new Dictionary<string, double>();
+                            Dictionary<string, double> dicReatPrice = new Dictionary<string, double>();
                             if (m_blnChangeMedStore)
                             {
                                 for (int iMe = 0; iMe < objAdjust.Length; iMe++)
                                 {
-                                    if (!hstMedicineID.Contains(objAdjust[iMe].m_strMedicineID))
+                                    if (!dicMedicineID.ContainsKey(objAdjust[iMe].m_strMedicineID))
                                     {
-                                        hstMedicineID.Add(objAdjust[iMe].m_strMedicineID, objAdjust[iMe].m_dblNewRetailPrice);
-                                        hstWholeSalePrice.Add(objAdjust[iMe].m_strMedicineID, objAdjust[iMe].m_dblNewWholeSalePrice);
+                                        dicMedicineID.Add(objAdjust[iMe].m_strMedicineID, objAdjust[iMe].m_dblNewRetailPrice);
+                                        dicWholeSalePrice.Add(objAdjust[iMe].m_strMedicineID, objAdjust[iMe].m_dblNewWholeSalePrice);
                                         // hstReatPrice.Add(objAdjust[iMe].m_strMedicineID,objAdjust[iMe].m_dblInPrice);
                                         //CS-542 (ID:14541)药库调价需求
-                                        hstReatPrice.Add(objAdjust[iMe].m_strMedicineID, objAdjust[iMe].m_dblINPUTCALLPRICE_INT);
+                                        dicReatPrice.Add(objAdjust[iMe].m_strMedicineID, objAdjust[iMe].m_dblINPUTCALLPRICE_INT);
                                     }
                                 }
-                                lngRes = m_lngSetMedicineBasePrice(p_objMain.m_strCREATORID_CHR, p_objMain.m_dtmADJUSTPRICEDATE_DAT, hstMedicineID, hstWholeSalePrice, hstReatPrice);
+                                lngRes = m_lngSetMedicineBasePrice(p_objMain.m_strCREATORID_CHR, p_objMain.m_dtmADJUSTPRICEDATE_DAT, dicMedicineID, dicWholeSalePrice, dicReatPrice, 4, p_objMain.operId, p_objMain.operName, p_objMain.ipAddr);
                             }
                         }
                         if (lngRes <= 0)
@@ -2580,6 +2580,18 @@ values
         public long m_lngCommitAdjustPrice(long[] p_lngMainSEQ, string p_strExamerID, DateTime p_dtmCommitDate,
         clsMS_MedicineInfoForAdjustPrice[] p_objAdjustMedicineArr, bool p_blnIsImmAccount, bool p_blnIsChangeBase)
         {
+            string operId = string.Empty;
+            string operName = string.Empty;
+            string ipAddr = string.Empty;
+            if (p_strExamerID.IndexOf('|') > 0)
+            {
+                string[] data = p_strExamerID.Split('|');
+                p_strExamerID = data[0];
+                operId = data[0];
+                operName = data[1];
+                ipAddr = data[2];
+            }
+
             long lngRes = 0;
             List<clsDS_MedicineInfoForAdjustPrice> objMedInfoList = new List<clsDS_MedicineInfoForAdjustPrice>();
             try
@@ -2649,21 +2661,21 @@ values
                             throw new Exception();
                         }
                     }
-                    Hashtable hstMedicineID = new Hashtable();
-                    Hashtable hstWholeSalePrice = new Hashtable();
-                    Hashtable hstTreatePrice = new Hashtable();
+                    Dictionary<string, double> dicMedicineID = new Dictionary<string, double>();
+                    Dictionary<string, double> dicWholeSalePrice = new Dictionary<string, double>();
+                    Dictionary<string, double> dicTreatePrice = new Dictionary<string, double>();
                     if (p_blnIsChangeBase)
                     {
                         for (int iMe = 0; iMe < p_objAdjustMedicineArr.Length; iMe++)
                         {
-                            if (!hstMedicineID.Contains(p_objAdjustMedicineArr[iMe].m_strMedicineID))
+                            if (!dicMedicineID.ContainsKey(p_objAdjustMedicineArr[iMe].m_strMedicineID))
                             {
-                                hstMedicineID.Add(p_objAdjustMedicineArr[iMe].m_strMedicineID, p_objAdjustMedicineArr[iMe].m_dblNewRetailPrice);
-                                hstWholeSalePrice.Add(p_objAdjustMedicineArr[iMe].m_strMedicineID, p_objAdjustMedicineArr[iMe].m_dblNewWholeSalePrice);
-                                hstTreatePrice.Add(p_objAdjustMedicineArr[iMe].m_strMedicineID, p_objAdjustMedicineArr[iMe].m_dblInPrice);
+                                dicMedicineID.Add(p_objAdjustMedicineArr[iMe].m_strMedicineID, p_objAdjustMedicineArr[iMe].m_dblNewRetailPrice);
+                                dicWholeSalePrice.Add(p_objAdjustMedicineArr[iMe].m_strMedicineID, p_objAdjustMedicineArr[iMe].m_dblNewWholeSalePrice);
+                                dicTreatePrice.Add(p_objAdjustMedicineArr[iMe].m_strMedicineID, p_objAdjustMedicineArr[iMe].m_dblInPrice);
                             }
                         }
-                        lngRes = m_lngSetMedicineBasePrice(p_strExamerID, p_dtmCommitDate, hstMedicineID, hstWholeSalePrice, hstTreatePrice);
+                        lngRes = m_lngSetMedicineBasePrice(p_strExamerID, p_dtmCommitDate, dicMedicineID, dicWholeSalePrice, dicTreatePrice, 5, operId, operName, ipAddr);
                     }
                 }
 
@@ -2701,9 +2713,9 @@ values
         /// <param name="p_hstWholeSalePrice">批发价</param>
         /// <returns></returns>
         [AutoComplete]
-        private long m_lngSetMedicineBasePrice(string p_strExamerID, DateTime p_dtmCommitDate, Hashtable p_hstMedicine, Hashtable p_hstWholeSalePrice, Hashtable p_hstTreatePrice)
+        long m_lngSetMedicineBasePrice(string p_strExamerID, DateTime p_dtmCommitDate, Dictionary<string, double> dicMedicine, Dictionary<string, double> dicWholeSalePrice, Dictionary<string, double> dicTreatePrice, int typeId, string operId, string operName, string ipAddr)
         {
-            if (p_hstMedicine == null)
+            if (dicMedicine == null)
             {
                 return -1;
             }
@@ -2744,13 +2756,13 @@ values
                 if (clsHRPTableService.bytDatabase_Selector != (byte)clsHRPTableService.enumDatabase_Selector.bytOracle)
                 {
                     IDataParameter[] objLisAddItemRefArr = null;
-                    foreach (object key in p_hstMedicine.Keys)
+                    foreach (KeyValuePair<string, double> p in dicMedicine)
                     {
                         objHRPServ.CreateDatabaseParameter(3, out objLisAddItemRefArr);
                         objLisAddItemRefArr[0].DbType = DbType.DateTime;
                         objLisAddItemRefArr[0].Value = p_dtmCommitDate;
                         objLisAddItemRefArr[1].Value = p_strExamerID;
-                        objLisAddItemRefArr[2].Value = key.ToString();
+                        objLisAddItemRefArr[2].Value = p.Key;
 
                         lngRes = objHRPServ.lngExecuteParameterSQL(strSQL, ref lngEff, objLisAddItemRefArr);
                         if (lngRes <= 0)
@@ -2767,7 +2779,7 @@ values
 
                     object[][] objValues = new object[3][];
 
-                    int intItemCount = p_hstMedicine.Count;
+                    int intItemCount = dicMedicine.Count;
                     for (int j = 0; j < objValues.Length; j++)
                     {
                         objValues[j] = new object[intItemCount];//初始化
@@ -2776,11 +2788,11 @@ values
                     }
 
                     int iRow = 0;
-                    foreach (object key in p_hstMedicine.Keys)
+                    foreach (KeyValuePair<string, double> p in dicMedicine)
                     {
                         objValues[0][iRow] = p_dtmCommitDate;
                         objValues[1][iRow] = p_strExamerID;
-                        objValues[2][iRow] = key.ToString();
+                        objValues[2][iRow] = p.Key;
                         iRow++;
                     }
                     lngRes = objHRPServ.m_lngSaveArrayWithParametersWithAffected(strSQL, objValues, ref lngEff, dbTypes);
@@ -2796,27 +2808,38 @@ values
                 string strSQL1 = @"select a.packqty_dec from t_bse_medicine a where a.medicineid_chr=?";
                 DataTable dtTemp = new DataTable();
                 double m_dblIpUnitPrice = 0d;
+                Dictionary<string, string> dicMU = new Dictionary<string, string>();
                 if (clsHRPTableService.bytDatabase_Selector == (byte)clsHRPTableService.enumDatabase_Selector.bytOracle)
                 {
                     IDataParameter[] objLisAddItemRefArr = null;
-                    foreach (object key in p_hstMedicine.Keys)
+                    foreach (KeyValuePair<string, double> p in dicMedicine)
                     {
                         m_dblIpUnitPrice = 0d;
                         objLisAddItemRefArr = null;
                         objHRPServ.CreateDatabaseParameter(1, out objLisAddItemRefArr);
-                        objLisAddItemRefArr[0].Value = key.ToString();
+                        objLisAddItemRefArr[0].Value = p.Key;
                         lngRes = objHRPServ.lngGetDataTableWithParameters(strSQL1, ref dtTemp, objLisAddItemRefArr);
                         if (lngRes > 0 && dtTemp.Rows.Count > 0)
                         {
-                            m_dblIpUnitPrice = Convert.ToDouble(Convert.ToDouble(((double)p_hstMedicine[key] / Convert.ToDouble(dtTemp.Rows[0][0]))).ToString("0.0000"));
+                            m_dblIpUnitPrice = Convert.ToDouble(Convert.ToDouble((p.Value / Convert.ToDouble(dtTemp.Rows[0][0]))).ToString("0.0000"));
                         }
                         objLisAddItemRefArr = null;
                         objHRPServ.CreateDatabaseParameter(5, out objLisAddItemRefArr);
-                        objLisAddItemRefArr[0].Value = (double)p_hstMedicine[key];
+                        objLisAddItemRefArr[0].Value = p.Value;
                         objLisAddItemRefArr[1].Value = m_dblIpUnitPrice;
-                        objLisAddItemRefArr[2].Value = (double)p_hstTreatePrice[key];
-                        objLisAddItemRefArr[3].Value = (double)p_hstWholeSalePrice[key];
-                        objLisAddItemRefArr[4].Value = key.ToString();
+                        objLisAddItemRefArr[2].Value = dicTreatePrice[p.Key];
+                        objLisAddItemRefArr[3].Value = dicWholeSalePrice[p.Key];
+                        objLisAddItemRefArr[4].Value = p.Key;
+
+                        #region Log
+
+                        if (!dicMU.ContainsKey(p.Key))
+                        {
+                            object[] objs = new object[5] { p.Value, m_dblIpUnitPrice, dicTreatePrice[p.Key], dicWholeSalePrice[p.Key], p.Key };
+                            dicMU.Add(p.Key, string.Format("update t_bse_medicine t set t.unitprice_mny = {0}, t.ipunitprice_mny = {1},t.tradeprice_mny = {2}, t.wholesaleprice_mny = {3} where t.medicineid_chr = {4}", objs));
+                        }
+
+                        #endregion
 
                         lngRes = objHRPServ.lngExecuteParameterSQL(strSQL, ref lngEff, objLisAddItemRefArr);
                         if (lngRes <= 0)
@@ -2833,12 +2856,12 @@ values
                 if (clsHRPTableService.bytDatabase_Selector != (byte)clsHRPTableService.enumDatabase_Selector.bytOracle)
                 {
                     IDataParameter[] objLisAddItemRefArr = null;
-                    foreach (object key in p_hstMedicine.Keys)
+                    foreach (KeyValuePair<string, double> p in dicMedicine)
                     {
                         objHRPServ.CreateDatabaseParameter(3, out objLisAddItemRefArr);
-                        objLisAddItemRefArr[0].Value = (double)p_hstMedicine[key];
-                        objLisAddItemRefArr[1].Value = (double)p_hstTreatePrice[key];
-                        objLisAddItemRefArr[2].Value = key.ToString();
+                        objLisAddItemRefArr[0].Value = p.Value;
+                        objLisAddItemRefArr[1].Value = dicTreatePrice[p.Key];
+                        objLisAddItemRefArr[2].Value = p.Key;
 
                         lngRes = objHRPServ.lngExecuteParameterSQL(strSQL, ref lngEff, objLisAddItemRefArr);
                         if (lngRes <= 0)
@@ -2854,17 +2877,17 @@ values
                     DbType[] dbTypes = new DbType[] { DbType.Double, DbType.Double, DbType.String };
                     object[][] objValues = new object[3][];
 
-                    int intItemCount = p_hstMedicine.Count;
+                    int intItemCount = dicMedicine.Count;
                     for (int j = 0; j < objValues.Length; j++)
                     {
                         objValues[j] = new object[intItemCount];//初始化
                     }
                     int iRow = 0;
-                    foreach (object key in p_hstMedicine.Keys)
+                    foreach (KeyValuePair<string, double> p in dicMedicine)
                     {
-                        objValues[0][iRow] = (double)p_hstMedicine[key];
-                        objValues[1][iRow] = (double)p_hstTreatePrice[key];
-                        objValues[2][iRow] = key.ToString();
+                        objValues[0][iRow] = p.Value;
+                        objValues[1][iRow] = dicTreatePrice[p.Key];
+                        objValues[2][iRow] = p.Key;
                         iRow++;
                     }
                     lngRes = objHRPServ.m_lngSaveArrayWithParametersWithAffected(strSQL, objValues, ref lngEff, dbTypes);
@@ -2874,49 +2897,39 @@ values
                         objHRPServ = null;
                         throw new Exception();
                     }
+
+                    #region save itemupdatelog
+
+                    string Sql = @"update t_bse_chargeitem t set t.itemprice_mny = {0}, t.tradeprice_mny = {1} where t.itemsrcid_vchr = {2}";
+
+                    if (!string.IsNullOrEmpty(ipAddr) && (typeId == 4 || typeId == 5))
+                    {
+                        string exp = string.Empty;
+                        foreach (KeyValuePair<string, double> p in dicMedicine)
+                        {
+                            if (dicMU.ContainsKey(p.Key))
+                            {
+                                exp = dicMU[p.Key] + Environment.NewLine + Environment.NewLine + string.Format(Sql, p.Value, dicTreatePrice[p.Key], p.Key);
+                            }
+                            else
+                            {
+                                exp = string.Format(Sql, p.Value, dicTreatePrice[p.Key], p.Key);
+                            }
+                            EntitySysItemUpdateLog updateLogVo = new EntitySysItemUpdateLog()
+                            {
+                                fTypeId = typeId,
+                                fOperId = operId,
+                                fOperName = operName,
+                                fIpAddr = ipAddr,
+                                fKeyword = p.Key,
+                                fUpdateSql = exp
+                            };
+                            (new com.digitalwave.iCare.middletier.HIS.clsChargeItemSvc()).SaveSysItemUpdateLog(updateLogVo);
+                        }
+                    }
+                    #endregion
                 }
-                //                strSQL = @"update  t_ds_storage_detail
-                //                               set opretailprice_int = ?,
-                //                                   adjustpriceman_chr = ?,
-                //                                   adjustpricedate_dat = ?
-                //                             where medicineid_chr = ?";
-                //                if (clsHRPTableService.bytDatabase_Selector != (byte)clsHRPTableService.enumDatabase_Selector.bytOracle)
-                //                {
-                //                    IDataParameter[] objLisAddItemRefArr = null;
-                //                    foreach (Object keys in p_hstMedicine)
-                //                    {
-                //                        objHRPServ.CreateDatabaseParameter(4, out objLisAddItemRefArr);
-                //                        objLisAddItemRefArr[0].DbType = DbType.Double;
-                //                        objLisAddItemRefArr[0].Value = (double)p_hstMedicine[keys];
-                //                        objLisAddItemRefArr[1].Value = p_strExamerID;
-                //                        objLisAddItemRefArr[2].Value = p_dtmCommitDate;
-                //                        objLisAddItemRefArr[3].Value = keys.ToString();
 
-                //                        lngRes = objHRPServ.lngExecuteParameterSQL(strSQL, ref lngEff, objLisAddItemRefArr);
-                //                    }
-                //                }
-                //                else
-                //                {
-                //                    DbType[] dbtypes = new DbType[] { DbType.Double, DbType.String, DbType.DateTime, DbType.String };
-
-                //                    object[][] objValues = new object[4][];
-                //                    for (int i1 = 0; i1 < objValues.Length; i1++)
-                //                    {
-                //                        objValues[i1] = new object[p_hstMedicine.Count];
-                //                    }
-
-                //                    int iRow = 0;
-                //                    foreach (Object keys in p_hstMedicine.Keys)
-                //                    {
-                //                        objValues[0][iRow] = (double)p_hstMedicine[keys];
-                //                        objValues[1][iRow] = p_strExamerID;
-                //                        objValues[2][iRow] = p_dtmCommitDate;
-                //                        objValues[3][iRow] = keys.ToString();
-                //                        iRow++;
-                //                    }
-
-                //                    lngRes = objHRPServ.m_lngSaveArrayWithParameters(strSQL, objValues, dbtypes);
-                //                }
                 objHRPServ.Dispose();
                 objHRPServ = null;
             }
@@ -2991,19 +3004,19 @@ values
 
                 if (p_blnIsChangeBase)
                 {
-                    Hashtable hstBase = new Hashtable();
-                    Hashtable hstWholeSalePrice = new Hashtable();
-                    Hashtable hstReatPrice = new Hashtable();
+                    Dictionary<string, double> dicBase = new Dictionary<string, double>();
+                    Dictionary<string, double> dicWholeSalePrice = new Dictionary<string, double>();
+                    Dictionary<string, double> dicReatPrice = new Dictionary<string, double>();
                     for (int iRow = 0; iRow < p_objAdjustMedicineArrWithLotNO.Length; iRow++)
                     {
-                        if (!hstBase.Contains(p_objAdjustMedicineArrWithLotNO[iRow].m_strMedicineID))
+                        if (!dicBase.ContainsKey(p_objAdjustMedicineArrWithLotNO[iRow].m_strMedicineID))
                         {
-                            hstBase.Add(p_objAdjustMedicineArrWithLotNO[iRow].m_strMedicineID, p_objAdjustMedicineArrWithLotNO[iRow].m_dblNewRetailPrice);
-                            hstWholeSalePrice.Add(p_objAdjustMedicineArrWithLotNO[iRow].m_strMedicineID, p_objAdjustMedicineArrWithLotNO[iRow].m_dblNewWholeSalePrice);
-                            hstReatPrice.Add(p_objAdjustMedicineArrWithLotNO[iRow].m_strMedicineID, p_objAdjustMedicineArrWithLotNO[iRow].m_dblInPrice);
+                            dicBase.Add(p_objAdjustMedicineArrWithLotNO[iRow].m_strMedicineID, p_objAdjustMedicineArrWithLotNO[iRow].m_dblNewRetailPrice);
+                            dicWholeSalePrice.Add(p_objAdjustMedicineArrWithLotNO[iRow].m_strMedicineID, p_objAdjustMedicineArrWithLotNO[iRow].m_dblNewWholeSalePrice);
+                            dicReatPrice.Add(p_objAdjustMedicineArrWithLotNO[iRow].m_strMedicineID, p_objAdjustMedicineArrWithLotNO[iRow].m_dblInPrice);
                         }
                     }
-                    lngRes = m_lngSetMedicineBasePrice(p_strUserID, p_dtmUnCommitDate, hstBase, hstWholeSalePrice, hstReatPrice);
+                    lngRes = m_lngSetMedicineBasePrice(p_strUserID, p_dtmUnCommitDate, dicBase, dicWholeSalePrice, dicReatPrice, 0, null, null, null);
                 }
             }
             catch (Exception objEx)

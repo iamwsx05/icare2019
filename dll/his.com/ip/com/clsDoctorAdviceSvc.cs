@@ -2095,7 +2095,7 @@ namespace com.digitalwave.iCare.middletier.HIS
 		[AutoComplete]
         public long m_lngDeleteOrderGroup(string p_strID)
         {
-            long lngRes = 0;
+            long lngRes = 1;
             if (lngRes > 0)
             {
                 lngRes = 0;
@@ -2111,7 +2111,7 @@ namespace com.digitalwave.iCare.middletier.HIS
                 throw (new Exception("删除失败!"));
             }
             return lngRes;
-        }
+        } 
         #endregion
 
         #region 保存医嘱排斥项目	[事务]

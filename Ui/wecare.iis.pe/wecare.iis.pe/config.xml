@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <Client text="本地参数">    
+    <!--开发者密钥-->
+    <appCode>415f9f80b40c139e1a1a8ccfa5a48076</appCode>  
+    <!--机构代码-->
+    <orgCode>JKZ44081205</orgCode>  
+	<!--用户-->
+    <user>JKZ44081205</user>  
+    <!--密码-->
+    <password>123456</password> 
+  </Client>
+</configuration>

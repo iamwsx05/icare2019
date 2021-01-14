@@ -8710,7 +8710,7 @@ select a.recipeid_chr, a.recipename_chr, a.privilege_int, a.usercode_chr, a.wbco
        d.toldiffprice_mny,
        d.buyprice
   from t_opr_outpatientrecipeinv c
-  left join (select distinct a.outpatrecipeid_chr id,
+  left join (select  a.outpatrecipeid_chr id,
                              a.itemname_vchr      name,
                              a.unitid_chr         uint,
                              a.itemspec_vchr      dec,

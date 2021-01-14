@@ -4,6 +4,8 @@ using com.digitalwave.iCare.middletier.HRPService;//HRPService.dll
 using weCare.Core.Entity;
 using System.EnterpriseServices;
 using System.Data;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace com.digitalwave.iCare.middletier.HIS
 {
@@ -66,16 +68,147 @@ namespace com.digitalwave.iCare.middletier.HIS
             lngRes = svc.lngGenerateID(10, "itemid_chr", "t_bse_chargeitem", out itemId);
             if (lngRes < 0)
                 return -1;
-            string Sql = @"Insert Into t_bse_chargeitem  
+            string Sql = string.Empty;
+
+            #region insert log sql 
+
+            Sql = @"insert into t_bse_chargeitem
+  (itemid_chr,
+   itemname_vchr,
+   itemcode_vchr,
+   itempycode_chr,
+   itemwbcode_chr,
+   itemspec_vchr,
+   itemprice_mny,
+   itemunit_chr,
+   itemopunit_chr,
+   itemipunit_chr,
+   itemopcalctype_chr,
+   itemipcalctype_chr,
+   itemopinvtype_chr,
+   itemipinvtype_chr,
+   dosage_dec,
+   dosageunit_chr,
+   itemcatid_chr,
+   usageid_chr,
+   itemopcode_chr,
+   insuranceid_chr,
+   selfdefine_int,
+   packqty_dec,
+   tradeprice_mny,
+   poflag_int,
+   isrich_int,
+   opchargeflg_int,
+   itemengname_vchr,
+   ifstop_int,
+   pdcarea_vchr,
+   ipchargeflg_int,
+   insurancetype_vchr,
+   apply_type_int,
+   itembihctype_chr,
+   itemchecktype_chr,
+   itemcommname_vchr,
+   ordercateid_chr,
+   freqid_chr,
+   inpinsurancetype_vchr,
+   ordercateid1_chr,
+   isselfpay_chr,
+   keepuse_int,
+   ischargemate,
+   itemscope,
+   cityunicode,
+   checkregular,
+   itemoriprice,
+   ischildprice,
+   itemsex,
+   itemunit2)
+Values
+  ({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9},
+   {10}, {11}, {12}, {13}, {14}, {15}, {16}, {17}, {18}, {19},
+   {20}, {21}, {22}, {23}, {24}, {25}, {26}, {27}, {28}, {29},
+   {30}, {31}, {32}, {33}, {34}, {35}, {36}, {37}, {38}, {39},
+   {40}, {41}, {42}, {43}, {44}, {45}, {46}, {47}, {48} )";
+
+            int n = -1;
+            object[] objs = new object[49];
+
+            objs[++n] = itemId;
+            objs[++n] = itemVo.m_strItemName;
+            objs[++n] = itemVo.m_strItemCode;
+            objs[++n] = itemVo.m_strItemPYCode;
+            objs[++n] = itemVo.m_strItemWBCode;
+            objs[++n] = itemVo.m_strItemSpec;
+            objs[++n] = itemVo.m_fltItemPrice;
+            objs[++n] = itemVo.m_ItemUnit.m_strUnitID;
+            objs[++n] = itemVo.m_ItemOPUnit.m_strUnitID;
+            objs[++n] = itemVo.m_ItemIPUnit.m_strUnitID;
+            objs[++n] = itemVo.m_ItemOPCalcType.m_strTypeID;
+            objs[++n] = itemVo.m_ItemIPCalcType.m_strTypeID;
+            objs[++n] = itemVo.m_ItemOPInvType.m_strTypeID;
+            objs[++n] = itemVo.m_ItemIPInvType.m_strTypeID;
+            objs[++n] = itemVo.m_strDosage;
+            objs[++n] = itemVo.m_DosageUnit.m_strUnitID;
+            objs[++n] = itemVo.m_ItemCat.m_strItemCatID;
+            objs[++n] = itemVo.m_Usage.m_strUsageID;
+            objs[++n] = itemVo.m_strITEMOPCODE_CHR;
+            objs[++n] = itemVo.m_strINSURANCEID_CHR;
+            objs[++n] = itemVo.m_intSELFDEFINE_INT;
+            objs[++n] = itemVo.m_decPACKQTY_DEC;
+            objs[++n] = itemVo.m_fltTradePrice;
+            objs[++n] = itemVo.m_intPOFLAG_INT;
+            objs[++n] = itemVo.m_intISRICH_INT;
+            objs[++n] = itemVo.m_intOPCHARGEFLG_INT;
+            objs[++n] = itemVo.m_strEnglishName;
+            objs[++n] = itemVo.m_intStopFlag;
+            objs[++n] = itemVo.m_strProducing;
+            objs[++n] = itemVo.m_intIPCHARGEFLG_INT;
+            objs[++n] = itemVo.m_strINSURANCETYPE;
+            objs[++n] = itemVo.m_strAPPLY_TYPE_INT;
+            objs[++n] = itemVo.m_strITEMBIHCTYPE_CHR;
+            objs[++n] = itemVo.strCheckPartID;
+            objs[++n] = itemVo.m_strCommName;
+            objs[++n] = itemVo.m_strORDERCATEID;
+            objs[++n] = itemVo.m_strDefaultFreq;
+            objs[++n] = itemVo.m_strINPINSURANCETYPE;
+            objs[++n] = itemVo.m_strOrderCateID;
+            objs[++n] = itemVo.m_strISSELFPAY_CHR;
+            objs[++n] = itemVo.m_intKeepUse;
+            objs[++n] = itemVo.isChargeMate;
+            objs[++n] = itemVo.itemScope;
+            objs[++n] = itemVo.cityUnicode;
+            objs[++n] = itemVo.checkRegular;
+            objs[++n] = itemVo.itemOriPrice;
+            objs[++n] = itemVo.isChildPrice;
+            objs[++n] = itemVo.itemSex;
+            objs[++n] = itemVo.itemUnit2;
+
+            EntitySysItemUpdateLog updateLogVo = new EntitySysItemUpdateLog()
+            {
+                fTypeId = 2,
+                fOperId = itemVo.operId,
+                fOperName = itemVo.operName,
+                fIpAddr = itemVo.ipAddr,
+                fKeyword = itemId,
+                fUpdateSql = string.Format(Sql, objs)
+            };
+            if (!string.IsNullOrEmpty(updateLogVo.fIpAddr))
+            {
+                this.SaveSysItemUpdateLog(updateLogVo);
+            }
+
+            #endregion
+
+            Sql = @"Insert Into t_bse_chargeitem  
 				(ITEMID_CHR,ITEMNAME_VCHR,ITEMCODE_VCHR,ITEMPYCODE_CHR,ITEMWBCODE_CHR, 
 				ITEMSPEC_VCHR,ITEMPRICE_MNY,ITEMUNIT_CHR,ITEMOPUNIT_CHR,ITEMIPUNIT_CHR, 
 				ITEMOPCALCTYPE_CHR,ITEMIPCALCTYPE_CHR,ITEMOPINVTYPE_CHR,ITEMIPINVTYPE_CHR,DOSAGE_DEC, 
 				DOSAGEUNIT_CHR,ITEMCATID_CHR,USAGEID_CHR,ITEMOPCODE_CHR,INSURANCEID_CHR,SELFDEFINE_INT,PACKQTY_DEC,TRADEPRICE_MNY,POFLAG_INT,ISRICH_INT,OPCHARGEFLG_INT,ITEMENGNAME_VCHR,IFSTOP_INT, 
-                PDCAREA_VCHR,IPCHARGEFLG_INT,INSURANCETYPE_VCHR,APPLY_TYPE_INT,ITEMBIHCTYPE_CHR,ITEMCHECKTYPE_CHR,ITEMCOMMNAME_VCHR,ORDERCATEID_CHR,FREQID_CHR,INPINSURANCETYPE_VCHR,ORDERCATEID1_CHR,ISSELFPAY_CHR,KEEPUSE_INT, ischargemate, itemScope, cityUnicode, checkRegular, itemOriPrice, ischildprice) Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?, ?, ?, ?, ?, ?)";
+                PDCAREA_VCHR,IPCHARGEFLG_INT,INSURANCETYPE_VCHR,APPLY_TYPE_INT,ITEMBIHCTYPE_CHR,ITEMCHECKTYPE_CHR,ITEMCOMMNAME_VCHR,ORDERCATEID_CHR,FREQID_CHR,INPINSURANCETYPE_VCHR,ORDERCATEID1_CHR,ISSELFPAY_CHR,KEEPUSE_INT, 
+                ischargemate, itemScope, cityUnicode, checkRegular, itemOriPrice, ischildprice, itemsex, itemunit2) Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try
             {
                 System.Data.IDataParameter[] parm = null;
-                svc.CreateDatabaseParameter(47, out parm);
+                svc.CreateDatabaseParameter(49, out parm);
                 parm[0].Value = itemId;
                 parm[1].Value = itemVo.m_strItemName;
                 parm[2].Value = itemVo.m_strItemCode;
@@ -123,6 +256,8 @@ namespace com.digitalwave.iCare.middletier.HIS
                 parm[44].Value = itemVo.checkRegular;
                 parm[45].Value = itemVo.itemOriPrice;
                 parm[46].Value = itemVo.isChildPrice;
+                parm[47].Value = itemVo.itemSex;
+                parm[48].Value = itemVo.itemUnit2;
                 long lngRecEff = -1;
                 //往表增加记录
                 lngRes = svc.lngExecuteParameterSQL(Sql, ref lngRecEff, parm);
@@ -292,53 +427,181 @@ namespace com.digitalwave.iCare.middletier.HIS
         public long m_lngDoUpdChargeItemByID(clsChargeItem_VO itemVo, string operId)
         {
             long lngRes = 0;
+            string Sql = string.Empty;
             clsHRPTableService svc = new clsHRPTableService();
-            string Sql = @"Update t_bse_chargeitem Set 
-				 ITEMNAME_VCHR=?,ITEMCODE_VCHR=?, 
-				ITEMPYCODE_CHR=?,itemwbcode_chr=?,
-				ITEMSPEC_VCHR=?,ITEMPRICE_MNY=?,
-				ITEMUNIT_CHR=?,ITEMOPUNIT_CHR=?,
-				ITEMIPUNIT_CHR=?,
-				ITEMOPCALCTYPE_CHR=?, 
-				ITEMIPCALCTYPE_CHR=?,
-				ITEMOPINVTYPE_CHR=?, 
-				ITEMIPINVTYPE_CHR=?,
-				DOSAGE_DEC=?, 
-				DOSAGEUNIT_CHR=?, 
-				ITEMCATID_CHR=?,
-				USAGEID_CHR=?, 
-				ITEMOPCODE_CHR=?, 
-				INSURANCEID_CHR=?, 
-				SELFDEFINE_INT=?, 
-				PACKQTY_DEC=?, 
-				TRADEPRICE_MNY=?,
-                POFLAG_INT=?, 
-				ISRICH_INT=?, 
-				ITEMENGNAME_VCHR=?, 
-				IFSTOP_INT=?, 
-				PDCAREA_VCHR=?, 
-				IPCHARGEFLG_INT=?, 
-				OPCHARGEFLG_INT=?,
-				INSURANCETYPE_VCHR=?, 
-				APPLY_TYPE_INT=?,
-				ITEMCHECKTYPE_CHR=?,
-				ITEMBIHCTYPE_CHR=?,
-                ITEMCOMMNAME_VCHR=? ,
-                ORDERCATEID_CHR=? ,
-                FREQID_CHR=?,
-                INPINSURANCETYPE_VCHR=?,
-                ORDERCATEID1_CHR=?,
-                ISSELFPAY_CHR=?,
-                KEEPUSE_INT=?, 
-                ischargemate = ?,
-                itemScope = ?,
-                cityUnicode = ?,
-                checkRegular = ?,
-                itemOriPrice = ?,
-                ischildprice = ?        
-		    Where itemid_chr = ? ";
+
+            #region update log sql 
+
+            Sql = @"update t_bse_chargeitem
+   set itemname_vchr         = {0},
+       itemcode_vchr         = {1},
+       itempycode_chr        = {2},
+       itemwbcode_chr        = {3},
+       itemspec_vchr         = {4},
+       itemprice_mny         = {5},
+       itemunit_chr          = {6},
+       itemopunit_chr        = {7},
+       itemipunit_chr        = {8},
+       itemopcalctype_chr    = {9},
+       itemipcalctype_chr    = {10},
+       itemopinvtype_chr     = {11},
+       itemipinvtype_chr     = {12},
+       dosage_dec            = {13},
+       dosageunit_chr        = {14},
+       itemcatid_chr         = {15},
+       usageid_chr           = {16},
+       itemopcode_chr        = {17},
+       insuranceid_chr       = {18},
+       selfdefine_int        = {19},
+       packqty_dec           = {20},
+       tradeprice_mny        = {21},
+       poflag_int            = {22},
+       isrich_int            = {23},
+       itemengname_vchr      = {24},
+       ifstop_int            = {25},
+       pdcarea_vchr          = {26},
+       ipchargeflg_int       = {27},
+       opchargeflg_int       = {28},
+       insurancetype_vchr    = {29},
+       apply_type_int        = {30},
+       itemchecktype_chr     = {31},
+       itembihctype_chr      = {32},
+       itemcommname_vchr     = {33},
+       ordercateid_chr       = {34},
+       freqid_chr            = {35},
+       inpinsurancetype_vchr = {36},
+       ordercateid1_chr      = {37},
+       isselfpay_chr         = {38},
+       keepuse_int           = {39},
+       ischargemate          = {40},
+       itemscope             = {41},
+       cityunicode           = {42},
+       checkregular          = {43},
+       itemoriprice          = {44},
+       ischildprice          = {45},
+       itemsex               = {46},
+       itemunit2             = {47}
+ where itemid_chr = {48}";
+
+            int n = -1;
+            object[] objs = new object[49];
+            objs[++n] = itemVo.m_strItemName;
+            objs[++n] = itemVo.m_strItemCode;
+            objs[++n] = itemVo.m_strItemPYCode;
+            objs[++n] = itemVo.m_strItemWBCode;
+            objs[++n] = itemVo.m_strItemSpec;
+            objs[++n] = itemVo.m_fltItemPrice;
+            objs[++n] = itemVo.m_ItemUnit.m_strUnitID;
+            objs[++n] = itemVo.m_ItemOPUnit.m_strUnitID;
+            objs[++n] = itemVo.m_ItemIPUnit.m_strUnitID;
+            objs[++n] = itemVo.m_ItemOPCalcType.m_strTypeID;
+            objs[++n] = itemVo.m_ItemIPCalcType.m_strTypeID;
+            objs[++n] = itemVo.m_ItemOPInvType.m_strTypeID;
+            objs[++n] = itemVo.m_ItemIPInvType.m_strTypeID;
+            objs[++n] = itemVo.m_strDosage;
+            objs[++n] = itemVo.m_DosageUnit.m_strUnitID;
+            objs[++n] = itemVo.m_ItemCat.m_strItemCatID;
+            objs[++n] = itemVo.m_Usage.m_strUsageID;
+            objs[++n] = itemVo.m_strITEMOPCODE_CHR;
+            objs[++n] = itemVo.m_strINSURANCEID_CHR;
+            objs[++n] = itemVo.m_intSELFDEFINE_INT;
+            objs[++n] = itemVo.m_decPACKQTY_DEC;
+            objs[++n] = itemVo.m_fltTradePrice;
+            objs[++n] = itemVo.m_intPOFLAG_INT;
+            objs[++n] = itemVo.m_intISRICH_INT;
+            objs[++n] = itemVo.m_strEnglishName;
+            objs[++n] = itemVo.m_intStopFlag;
+            objs[++n] = itemVo.m_strProducing;
+            objs[++n] = itemVo.m_intIPCHARGEFLG_INT;
+            objs[++n] = itemVo.m_intOPCHARGEFLG_INT;
+            objs[++n] = itemVo.m_strINSURANCETYPE;
+            objs[++n] = itemVo.m_strAPPLY_TYPE_INT;
+            objs[++n] = itemVo.strCheckPartID;
+            objs[++n] = itemVo.m_strITEMBIHCTYPE_CHR;
+            objs[++n] = itemVo.m_strCommName;
+            objs[++n] = itemVo.m_strORDERCATEID;
+            objs[++n] = itemVo.m_strDefaultFreq;
+            objs[++n] = itemVo.m_strINPINSURANCETYPE;
+            objs[++n] = itemVo.m_strOrderCateID;
+            objs[++n] = itemVo.m_strISSELFPAY_CHR;
+            objs[++n] = itemVo.m_intKeepUse;
+            objs[++n] = itemVo.isChargeMate;
+            objs[++n] = itemVo.itemScope;
+            objs[++n] = itemVo.cityUnicode;
+            objs[++n] = itemVo.checkRegular;
+            objs[++n] = itemVo.itemOriPrice;
+            objs[++n] = itemVo.isChildPrice;
+            objs[++n] = itemVo.itemSex;
+            objs[++n] = itemVo.itemUnit2;
+            objs[++n] = itemVo.m_strItemID;
+
+            EntitySysItemUpdateLog updateLogVo = new EntitySysItemUpdateLog()
+            {
+                fTypeId = 2,
+                fOperId = itemVo.operId,
+                fOperName = itemVo.operName,
+                fIpAddr = itemVo.ipAddr,
+                fKeyword = itemVo.m_strItemID,
+                fUpdateSql = string.Format(Sql, objs)
+            };
+            if (!string.IsNullOrEmpty(updateLogVo.fIpAddr))
+            {
+                this.SaveSysItemUpdateLog(updateLogVo);
+            }
+            #endregion
+
+            Sql = @"update t_bse_chargeitem
+   set itemname_vchr         = ?,
+       itemcode_vchr         = ?,
+       itempycode_chr        = ?,
+       itemwbcode_chr        = ?,
+       itemspec_vchr         = ?,
+       itemprice_mny         = ?,
+       itemunit_chr          = ?,
+       itemopunit_chr        = ?,
+       itemipunit_chr        = ?,
+       itemopcalctype_chr    = ?,
+       itemipcalctype_chr    = ?,
+       itemopinvtype_chr     = ?,
+       itemipinvtype_chr     = ?,
+       dosage_dec            = ?,
+       dosageunit_chr        = ?,
+       itemcatid_chr         = ?,
+       usageid_chr           = ?,
+       itemopcode_chr        = ?,
+       insuranceid_chr       = ?,
+       selfdefine_int        = ?,
+       packqty_dec           = ?,
+       tradeprice_mny        = ?,
+       poflag_int            = ?,
+       isrich_int            = ?,
+       itemengname_vchr      = ?,
+       ifstop_int            = ?,
+       pdcarea_vchr          = ?,
+       ipchargeflg_int       = ?,
+       opchargeflg_int       = ?,
+       insurancetype_vchr    = ?,
+       apply_type_int        = ?,
+       itemchecktype_chr     = ?,
+       itembihctype_chr      = ?,
+       itemcommname_vchr     = ?,
+       ordercateid_chr       = ?,
+       freqid_chr            = ?,
+       inpinsurancetype_vchr = ?,
+       ordercateid1_chr      = ?,
+       isselfpay_chr         = ?,
+       keepuse_int           = ?,
+       ischargemate          = ?,
+       itemscope             = ?,
+       cityunicode           = ?,
+       checkregular          = ?,
+       itemoriprice          = ?,
+       ischildprice          = ?,
+       itemsex               = ?,
+       itemunit2             = ?
+ where itemid_chr = ?";
             IDataParameter[] parm = null;
-            svc.CreateDatabaseParameter(47, out parm);
+            svc.CreateDatabaseParameter(49, out parm);
             parm[0].Value = itemVo.m_strItemName;
             parm[1].Value = itemVo.m_strItemCode;
             parm[2].Value = itemVo.m_strItemPYCode;
@@ -385,7 +648,9 @@ namespace com.digitalwave.iCare.middletier.HIS
             parm[43].Value = itemVo.checkRegular;
             parm[44].Value = itemVo.itemOriPrice;
             parm[45].Value = itemVo.isChildPrice;
-            parm[46].Value = itemVo.m_strItemID;
+            parm[46].Value = itemVo.itemSex;
+            parm[47].Value = itemVo.itemUnit2;
+            parm[48].Value = itemVo.m_strItemID;
             try
             {
                 long ret = 0;
@@ -3597,5 +3862,49 @@ ORDER BY a.itemcode_vchr";
             return dt;
         }
         #endregion
+
+        #region Save t_sys_itemupdatelog
+        /// <summary>
+        /// Save t_sys_itemupdatelog
+        /// </summary>
+        /// <param name="updateVo"></param>
+        /// <returns></returns>
+        [AutoComplete]
+        public int SaveSysItemUpdateLog(EntitySysItemUpdateLog updateVo)
+        {
+            long affectRows = 0;
+            string Sql = string.Empty;
+
+            Sql = @"insert into t_sys_itemupdatelog
+                      (fPkId, fTypeId, fModifyDate, fOperId, fOperName, fIpAddr, fKeyword, fUpdateSql)
+                    values
+                      (seq_sys_itemupdatelog.nextval, ?, sysdate, ?, ?, ?, ?, ?)";
+
+            try
+            {
+                clsHRPTableService svc = new clsHRPTableService();
+                IDataParameter[] parms = null;
+                svc.CreateDatabaseParameter(6, out parms);
+
+                parms[0].Value = updateVo.fTypeId;
+                parms[1].Value = updateVo.fOperId;
+                parms[2].Value = updateVo.fOperName;
+                parms[3].Value = updateVo.fIpAddr;
+                parms[4].Value = updateVo.fKeyword;
+                parms[5].Value = updateVo.fUpdateSql;
+
+                svc.lngExecuteParameterSQL(Sql, ref affectRows, parms);
+            }
+            catch (Exception objEx)
+            {
+                string strTmp = objEx.Message;
+                com.digitalwave.Utility.clsLogText objLogger = new clsLogText();
+                bool blnRes = objLogger.LogError(objEx);
+            }
+            return (int)affectRows;
+        }
+        #endregion
+
+
     }
 }

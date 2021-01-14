@@ -210,8 +210,22 @@ namespace com.digitalwave.iCare.middletier.HIS
         public long m_lngGetEmployee(out DataTable dt)
         {
             long lngRes = 0;
+            string SQL = string.Empty;
 
-            string SQL = @"select a.empid_chr, a.empno_chr, a.lastname_vchr, a.status_int from t_bse_employee a order by a.empno_chr";
+            SQL = @"select a.empid_chr,
+                           a.empno_chr,
+                           a.lastname_vchr,
+                           a.technicalrank_chr,
+                           a.status_int,
+                           c.deptid_chr
+                      from t_bse_employee a
+                     inner join t_bse_deptemp b
+                        on a.empid_chr = b.empid_chr
+                     inner join t_bse_deptdesc c
+                        on b.deptid_chr = c.deptid_chr
+                     where a.status_int >= 0
+                       and b.default_inpatient_dept_int = 1
+                     order by a.empno_chr";
 
             dt = new DataTable();
 
@@ -235,14 +249,14 @@ namespace com.digitalwave.iCare.middletier.HIS
         /// 获取员工代码表
         /// </summary>
         /// <param name="dt"></param>
-        /// <param name="empTypeId"></param>
+        /// <param name="empTypeId">0 全部; 1 医生; 3 抗菌药会诊专家</param>
         /// <returns></returns>
         [AutoComplete]
         public long m_lngGetEmployee(out DataTable dt, int empTypeId)
         {
             long lngRes = 0;
-
-            string SQL = @"select a.empid_chr, a.empno_chr, a.lastname_vchr, a.status_int from t_bse_employee a order by a.empno_chr";
+            string SQL = string.Empty;
+            dt = new DataTable();
 
             if (empTypeId == 1)
             {
@@ -250,7 +264,8 @@ namespace com.digitalwave.iCare.middletier.HIS
                                a.empno_chr,
                                a.lastname_vchr,
                                a.technicalrank_chr,
-                               a.status_int
+                               a.status_int,
+                               c.deptid_chr
                           from t_bse_employee a
                          inner join t_bse_deptemp b
                             on a.empid_chr = b.empid_chr
@@ -267,7 +282,8 @@ namespace com.digitalwave.iCare.middletier.HIS
                                a.empno_chr,
                                a.lastname_vchr,
                                a.technicalrank_chr,
-                               a.status_int
+                               a.status_int,
+                               c.deptid_chr
                           from t_bse_employee a
                          inner join t_bse_deptemp b
                             on a.empid_chr = b.empid_chr
@@ -278,13 +294,27 @@ namespace com.digitalwave.iCare.middletier.HIS
                            and b.default_inpatient_dept_int = 1
                          order by a.empno_chr";
             }
-
-            dt = new DataTable();
+            else
+            {
+                SQL = @"select a.empid_chr,
+                               a.empno_chr,
+                               a.lastname_vchr,
+                               a.technicalrank_chr,
+                               a.status_int,
+                               c.deptid_chr
+                          from t_bse_employee a
+                         inner join t_bse_deptemp b
+                            on a.empid_chr = b.empid_chr
+                         inner join t_bse_deptdesc c
+                            on b.deptid_chr = c.deptid_chr
+                         where a.status_int >= 0
+                           and b.default_inpatient_dept_int = 1
+                         order by a.empno_chr";
+            }
 
             try
             {
                 clsHRPTableService objHRPSvc = new clsHRPTableService();
-
                 lngRes = objHRPSvc.lngGetDataTableWithoutParameters(SQL, ref dt);
                 objHRPSvc.Dispose();
             }
@@ -1468,7 +1498,8 @@ namespace com.digitalwave.iCare.middletier.HIS
                     {
                         // 不计算让利金额
                         if (item.ItemCatID == "3026") continue;
-                        if (item.TotalSum > 0 && (item.TotalSum + diffMny > 0) && ((int)item.TotalSum != item.TotalSum))
+                        // 补到西药费 2020-06-22
+                        if (item.ItemCatID == "3008" && item.TotalSum > 0 && (item.TotalSum + diffMny > 0)) // && ((int)item.TotalSum != item.TotalSum))
                         {
                             item.TotalSum = item.TotalSum + diffMny;
                             isOk = true;
@@ -3338,10 +3369,24 @@ namespace com.digitalwave.iCare.middletier.HIS
                     }
                 }
 
-                DataTable dt = null;
+                List<clsBihPatientCharge_VO> lstCheckItem = new List<clsBihPatientCharge_VO>();
                 for (int i = 0; i < PatientChargeArr.Count; i++)
                 {
                     clsBihPatientCharge_VO PatientCharge_VO = PatientChargeArr[i];
+                    // 2020-11-17
+                    if (lstCheckItem.Any(t => t.AttachOrderID == PatientCharge_VO.AttachOrderID && t.ChargeItemID == PatientCharge_VO.ChargeItemID && t.Amount == PatientCharge_VO.Amount &&
+                                              t.UnitPrice == PatientCharge_VO.UnitPrice))
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("补记账出现同一诊疗项目重复收费项目：");
+                        sb.AppendLine("RegisterId:" + PatientCharge_VO.RegisterID + "  OrderId:" + OrderID + "  ChargeItemId:" + PatientCharge_VO.ChargeItemID + "  ChargeItemName:" + PatientCharge_VO.ChargeItemName + "  Amount:" + PatientCharge_VO.Amount.ToString());
+                        weCare.Core.Utils.Log.Output(sb.ToString());
+                        continue;
+                    }
+                    else
+                    {
+                        lstCheckItem.Add(PatientCharge_VO);
+                    }
 
                     SQL = @"insert into t_opr_bih_patientcharge (pchargeid_chr, patientid_chr, registerid_chr, active_dat, orderid_chr, orderexectype_int, orderexecid_chr,
                                                              clacarea_chr, createarea_chr, calccateid_chr, invcateid_chr, chargeitemid_chr, chargeitemname_chr, unit_vchr,
@@ -8130,7 +8175,8 @@ namespace com.digitalwave.iCare.middletier.HIS
                                       else c.precent_dec
                                     end
                                    ) as precent_dec, (a.amount_dec * a.unitprice_dec) as totalmony,
-                                  f.recipeno2_int as recno, e.itemopcode_chr, e.itempycode_chr, 0 as chargetotalsum,a.itemchargetype_vchr,a.totaldiffcostmoney_dec, a.buyprice_dec, 0 as rptStatus      
+                                  f.recipeno2_int as recno, e.itemopcode_chr, e.itempycode_chr, 0 as chargetotalsum,a.itemchargetype_vchr,
+                                  a.totaldiffcostmoney_dec, a.buyprice_dec, 0 as rptStatus, e.itemsex, e.itemunit2       
                              from t_opr_bih_patientcharge a,
                                   t_opr_bih_register b,
                                   t_aid_inschargeitem c,

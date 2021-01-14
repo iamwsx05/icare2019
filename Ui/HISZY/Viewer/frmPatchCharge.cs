@@ -87,6 +87,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     ((clsCtl_PatchCharge)this.objController).m_mthLoad();
                 }
             }
+            this.ucPatientInfo.inputHealthCode.MedStepCode = "สีทั";
             this.timer.Enabled = true;
         }
 

@@ -723,7 +723,7 @@ order by t.seriesid_int ";
    and a.instorageid_vchr like ?
    and h.medicinetypeid_chr like ?
    and a.state_int <> 0
- order by a.seriesid_int asc";
+ order by a.seriesid_int asc";  // desc"; 2020-06-12
                 // and a.formtype_int = 1
                 clsHRPTableService objHRPServ = new clsHRPTableService();
                 IDataParameter[] objDPArr = null;

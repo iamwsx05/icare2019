@@ -1305,5 +1305,22 @@ namespace com.digitalwave.iCare.gui.HIS
         {
             this.label14.ForeColor = Color.Black;
         }
+
+        private void inputHealthCode_HandleReadCard(object sender, EntityHealthCode healthCodeVo)
+        {
+            if (healthCodeVo != null)
+            {
+                this.m_mthFind(healthCodeVo.cardNo, 1);
+                if (CardNOChanged != null)
+                {
+                    CardNOChanged();
+                }
+            }
+        }
+
+        private void picHealthCode_Click(object sender, EventArgs e)
+        {
+            inputHealthCode.Read();
+        }
     }
 }

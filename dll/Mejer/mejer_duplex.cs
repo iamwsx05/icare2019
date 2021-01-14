@@ -190,7 +190,7 @@ namespace Mejer
                     foreach (DataRow dr in dtSource.Rows)
                     {
                         Byte[] bytGraph = null;
-                        string sampleId = dr["sampleid"].ToString();
+                        string sampleId = dr["orderid"].ToString();
                         string barCode = dr["patientid"].ToString();
                         if (lstSampleId.IndexOf(sampleId) < 0)
                             lstSampleId.Add(sampleId);
@@ -242,7 +242,7 @@ namespace Mejer
                         long lngRes = svcLis.Service.lngAddLabResultWithBytGraph((data.FindAll(r => r.strDevice_Sample_ID == id)).ToArray(),dicSampleGraph[id], out reultArr);
                         if (lngRes > 0)
                         {
-                            string sql = @"update UrineResult set transed  = '1' where sampleid = '" + id + "'";
+                            string sql = @"update UrineResult set transed  = '1' where orderid = '" + id + "'";
                             svc.ExecSql(sql);
                         }
 

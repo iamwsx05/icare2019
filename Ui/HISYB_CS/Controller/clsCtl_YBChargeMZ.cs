@@ -147,6 +147,8 @@ namespace com.digitalwave.iCare.gui.HIS
                         DataRow ADR = OutDatable.NewRow();
                         ADR[0] = clsYBPublic_cs.m_mthYBJzlbConvert(lstJzlb[i].ToString());
                         ADR[1] = lstJzlb[i].ToString();
+                        //if(ADR[1] == "73")
+
                         OutDatable.Rows.Add(ADR);
                         this.m_objViewer.cmbJzlb.Properties.Items.Add(ADR[0].ToString());
                         this.dicJzlb.Add(i, ADR[1].ToString());
@@ -516,6 +518,10 @@ namespace com.digitalwave.iCare.gui.HIS
                     {
                         clsPatient.strPatType = "社区二类特定门诊";
                     }
+                    else if (strJZLB == "73")
+                    {
+                        clsPatient.strPatType = "生育保险(产检)";
+                    }
                     else if(strJZLB == "79")
                     {
                         clsPatient.strPatType = "计划生育门诊";
@@ -569,7 +575,7 @@ namespace com.digitalwave.iCare.gui.HIS
                     else
                         objDgextraVo.JZLB = jzlb;
                 }
-                if(objDgextraVo.JZLB == "79")
+                if(objDgextraVo.JZLB == "79" || objDgextraVo.JZLB == "73")
                     objDgextraVo.ZYLB = "4"; 
                 long lngRes = clsYBPublic_cs.m_lngFunSP5001(1, objDgextraVo, DateTime.Now, (this.m_objViewer.rdoEk.Checked ? this.QRCode : ""));
             }

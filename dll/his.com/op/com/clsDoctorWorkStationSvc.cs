@@ -1182,15 +1182,39 @@ where a.itemid_chr = ? and a.ifstop_int =0 and a.itemopinvtype_chr=d.catid_chr(+
 
                 if (clsVO.m_strOutpatRecipeID == null || clsVO.m_strOutpatRecipeID.Trim() == "")
                 {
+                    IDataParameter[] ParamArr = null;
+
+                    if (string.IsNullOrEmpty(clsVO.ipAddr))
+                    { 
+                        DataTable tempdt = null;
+                        strSQL = @"select t.macname_vchr, t.mac_vchr
+                                  from t_sys_log t
+                                 where t.empid_chr = ?
+                                   and (t.logtime_dat between
+                                       to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
+                                       to_date(?, 'yyyy-mm-dd hh24:mi:ss'))
+                                 order by t.logtime_dat desc";
+
+                        objHRPSvc.CreateDatabaseParameter(3, out ParamArr);
+                        ParamArr[0].Value = clsVO.m_strDoctorID;
+                        ParamArr[1].Value = DateTime.Now.AddDays(-100).ToString("yyyy-MM-dd") + " 00:00:00";
+                        ParamArr[2].Value = DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59";
+                        lngRes = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref tempdt, ParamArr);
+                        if (tempdt != null && tempdt.Rows.Count > 0)//判断如果已经收费处方就返回
+                        {
+                            clsVO.ipAddr = tempdt.Rows[0]["mac_vchr"].ToString();
+                        }
+                    }
+
                     clsVO.m_strOutpatRecipeID = p_strID;
                     clsVO.m_intType = 0;
                     strSQL = @"insert into t_opr_outpatientrecipe(outpatrecipeid_chr,patientid_chr,createdate_dat,registerid_chr,diagdr_chr,diagdept_chr,recordemp_chr,recorddate_dat,
-																pstauts_int,paytypeid_chr,casehisid_chr,recipeflag_int,type_int, createtype_int, seculevel, isproxyboilmed) 
-                                                        values(?, ?, to_date(?, 'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, to_date(?, 'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, ?, ?, ?, ?)";
+																pstauts_int,paytypeid_chr,casehisid_chr,recipeflag_int,type_int, createtype_int, seculevel, isproxyboilmed, macAddr) 
+                                                        values(?, ?, to_date(?, 'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, to_date(?, 'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-                    IDataParameter[] ParamArr = null;
 
-                    objHRPSvc.CreateDatabaseParameter(16, out ParamArr);
+
+                    objHRPSvc.CreateDatabaseParameter(17, out ParamArr);
                     ParamArr[0].Value = clsVO.m_strOutpatRecipeID;
                     ParamArr[1].Value = clsVO.m_strPatientID;
                     ParamArr[2].Value = clsVO.m_strCreateDate;
@@ -1207,6 +1231,7 @@ where a.itemid_chr = ? and a.ifstop_int =0 and a.itemopinvtype_chr=d.catid_chr(+
                     ParamArr[13].Value = clsVO.intCreatetype;
                     ParamArr[14].Value = clsVO.SecuLevel;
                     ParamArr[15].Value = clsVO.IsProxyBoilMed;
+                    ParamArr[16].Value = clsVO.ipAddr;
 
                     lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngAffects, ParamArr);
                 }
@@ -4917,7 +4942,10 @@ where  A.ITEMSRCID_VCHR = ? AND a.ITEMOPINVTYPE_CHR=d.catid_chr(+) and d.groupid
 
             //是否挂号标志
             bool blnRegFlag = false;
-            if (this.m_blnIsAvailRegister(tempdt.Rows[0]["registerid_chr"].ToString().Trim(), tempdt.Rows[0]["diagdr_chr"].ToString().Trim()))
+            string registerId = tempdt.Rows[0]["registerid_chr"].ToString().Trim();
+            string doctId = tempdt.Rows[0]["diagdr_chr"].ToString().Trim();
+
+            if (this.m_blnIsAvailRegister(registerId, doctId))
             {
                 blnRegFlag = true;
             }
@@ -4926,12 +4954,12 @@ where  A.ITEMSRCID_VCHR = ? AND a.ITEMOPINVTYPE_CHR=d.catid_chr(+) and d.groupid
             int RecipeType = 0;     // 1 正方; 非1 副方
             if (blnRegFlag)
             {
-                RecipeType = int.Parse(this.m_strGetRecipeType(tempdt.Rows[0]["registerid_chr"].ToString(), tempdt.Rows[0]["diagdr_chr"].ToString(), 1));
+                RecipeType = int.Parse(this.m_strGetRecipeType(registerId, doctId, 1));
                 ArchTakeFlag = 1;
             }
             else
             {
-                RecipeType = int.Parse(this.m_strGetRecipeType(tempdt.Rows[0]["patientid_chr"].ToString(), tempdt.Rows[0]["diagdr_chr"].ToString(), 0));
+                RecipeType = int.Parse(this.m_strGetRecipeType(tempdt.Rows[0]["patientid_chr"].ToString(), doctId, 0));
             }
 
             #region 2020-03-04 副方.空白处方不允许保存            
@@ -4965,6 +4993,34 @@ where  A.ITEMSRCID_VCHR = ? AND a.ITEMOPINVTYPE_CHR=d.catid_chr(+) and d.groupid
                 }
             }
             #endregion
+
+            // 2020-09-14 改在保存处方时
+            //string macAddr = string.Empty;
+            //strSQL = @"select t.macname_vchr, t.mac_vchr
+            //              from t_sys_log t
+            //             where t.empid_chr = ?
+            //               and (t.logtime_dat between
+            //                   to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
+            //                   to_date(?, 'yyyy-mm-dd hh24:mi:ss'))
+            //             order by t.logtime_dat desc";
+
+            //objHRPSvc.CreateDatabaseParameter(3, out ParamArr);
+            //ParamArr[0].Value = doctId;
+            //ParamArr[1].Value = DateTime.Now.ToString("yyyy-MM-dd") + " 00:00:00";
+            //ParamArr[2].Value = DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59";
+            //lngRes = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref tempdt, ParamArr);
+            //if (tempdt != null && tempdt.Rows.Count > 0)//判断如果已经收费处方就返回
+            //{
+            //    macAddr = tempdt.Rows[0]["mac_vchr"].ToString();
+            //}
+
+            //strSQL = @"update t_opr_outpatientrecipe set pstauts_int = 4, recipeflag_int = ?, archtakeflag_int = ?, macAddr = ? where outpatrecipeid_chr = ?";
+
+            //objHRPSvc.CreateDatabaseParameter(4, out ParamArr);
+            //ParamArr[0].Value = RecipeType;
+            //ParamArr[1].Value = ArchTakeFlag;
+            //ParamArr[2].Value = macAddr;
+            //ParamArr[3].Value = strID;
 
             strSQL = @"update t_opr_outpatientrecipe set pstauts_int = 4, recipeflag_int = ?, archtakeflag_int = ? where outpatrecipeid_chr = ?";
 

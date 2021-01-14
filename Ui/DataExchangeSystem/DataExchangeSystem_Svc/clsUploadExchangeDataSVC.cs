@@ -149,6 +149,35 @@ values
 
         #endregion
 
+        #region 入库数据删除
+        /// <summary>
+        /// 入库数据删除
+        /// </summary>
+        /// <returns></returns>
+        [AutoComplete]
+        public long m_lngDelInStorageData(DateTime dayTime)
+        {
+            long lngRes = -1;
+            try
+            {
+                string p_dtmBegin = dayTime.ToString("yyyy-MM-dd") + " 00:00:00";
+                string p_dtmEnd = dayTime.ToString("yyyy-MM-dd") + " 23:59:59";
+                clsDatabaseSVC objSvc = new clsDatabaseSVC();
+                string strSQL = @"delete  采购入库 where 日期 between '{0}' and '{1}'";
+                strSQL = string.Format(strSQL, p_dtmBegin, p_dtmEnd);
+                lngRes = objSvc.ExecuteScalar(strSQL);
+                objSvc.Dispose();
+            }
+            catch (Exception objExt)
+            {
+                clsLogText logtxt = new clsLogText();
+                logtxt.LogError(objExt);
+            }
+            return lngRes;
+        }
+
+        #endregion
+
         #region 出库数据上传
         /// <summary>
         /// 出库数据上传
@@ -283,6 +312,35 @@ values
         }
         #endregion
 
+        #region 出库数据删除
+        /// <summary>
+        /// 出库数据删除
+        /// </summary>
+        /// <returns></returns>
+        [AutoComplete]
+        public long m_lngDelOutStorageData(DateTime dayTime)
+        {
+            long lngRes = -1;
+            try
+            {
+                string p_dtmBegin = dayTime.ToString("yyyy-MM-dd") + " 00:00:00";
+                string p_dtmEnd = dayTime.ToString("yyyy-MM-dd") + " 23:59:59";
+                clsDatabaseSVC objSvc = new clsDatabaseSVC();
+                string strSQL = @"delete  出库 where 日期 between '{0}' and '{1}'";
+                strSQL = string.Format(strSQL, p_dtmBegin, p_dtmEnd);
+                lngRes = objSvc.ExecuteScalar(strSQL);
+                objSvc.Dispose();
+            }
+            catch (Exception objExt)
+            {
+                clsLogText logtxt = new clsLogText();
+                logtxt.LogError(objExt);
+            }
+            return lngRes;
+        }
+
+        #endregion
+
         #region 住院收入上传
         /// <summary>
         /// 住院收入上传
@@ -402,7 +460,6 @@ values
         }
 
         #endregion
-
 
         #region 住院收入删除
         /// <summary>

@@ -8,6 +8,9 @@ using System.EnterpriseServices;
 using System.Text;
 using weCare.Core.Entity;
 using weCare.Core.Dac;
+using System.Data.OleDb;
+using System.IO;
+using System.Diagnostics;
 
 namespace Lis.Service
 {
@@ -1177,15 +1180,10 @@ values
             string sqlConnStr = string.Empty;
             clsHRPTableService svcLis = null;
             SqlHelper svc = null;
-            SqlHelper svcLis2 = null;
             try
             {
                 DataRow drPat = null;
                 DataTable dtItem = null;
-                DataTable dtParm = null;
-                DataTable dt = null;
-                bool isJj = false;
-                bool isJtj = false;
                 DateTime? peSamplingDate = null;
                 sampleVo.checkDate = DateTime.Now;
                 List<DacParm> lstParm = new List<DacParm>();
@@ -1291,8 +1289,6 @@ values
                     }
                     #endregion
 
-                   
-
                 }
                 else if (sampleVo.typeId == 1)      // 体检采样时间
                 {
@@ -1384,7 +1380,7 @@ values
                 dtCheckItem = svc.GetDataTable(Sql);
 
                 //FB200R 粪便分析仪-写数据库
-                FB200RExecpro(sampleVo, drPat);
+                FB200RExecpro(sampleVo.barCode);
 
                 #region 2020--11-05 住院核收: 一定要直接发回，不再执行体检流程
                 if (sampleVo.typeId == 1)
@@ -1848,7 +1844,7 @@ values
         /// 
         /// </summary>
         /// <param name="barCode"></param>
-        void FB200RExecpro(EntitySamplePack sampleVo, DataRow drPat)
+        public void FB200RExecpro(string barCode)
         {
             string sqlConnStr = string.Empty;
             SqlHelper svc = null;
@@ -1858,11 +1854,14 @@ values
             int affectRows = -1;
             bool isJj = false;
             bool isJtj = false;
+            string cardNo = string.Empty;
+            string ipNo = string.Empty;
+            string patName = string.Empty;
+            string sex = string.Empty;
             List<DacParm> lstParm = new List<DacParm>();
 
             try
             {
-
                 string Sql = @"select a.parmcode_chr, a.parmvalue_vchr, a.note_vchr
                           from t_bse_sysparm a
                          where a.status_int = 1
@@ -1876,14 +1875,14 @@ values
                 }
                 else
                     return;
-                svcLis2 = new SqlHelper(EnumBiz.lisDB);
-                //仪器库中已存在该条码
-                Sql = @"select * from tb_sample_info where sample_no = " + sampleVo.barCode;
-                DataTable dt = svcLis2.GetDataTable(Sql);
-                if (dt != null && dt.Rows.Count > 0)
-                    return;
-
-                Sql = @"select a.barcode_vchr, b.apply_unit_id_chr, c.jclx_jj, c.jclx_jtj
+                DataTable dt = null;
+                Sql = @"select a.barcode_vchr,a.patient_name_vchr,a.sex_chr,
+                                nvl(a.bedno_chr, '') as bedNo,
+                                nvl(a.patientcardid_chr, '') as cardNo,
+                                nvl(a.patient_inhospitalno_chr, '') as ipNo,
+                                b.apply_unit_id_chr, 
+                                c.jclx_jj, 
+                                c.jclx_jtj
                           from t_opr_lis_sample a
                           left join t_opr_lis_app_apply_unit b
                             on a.application_id_chr = b.application_id_chr
@@ -1892,13 +1891,17 @@ values
                          where a.status_int > 0
                            and a.barcode_vchr = '{0}'";
 
-                Sql = string.Format(Sql, sampleVo.barCode);
+                Sql = string.Format(Sql, barCode);
 
                 dt = svc.GetDataTable(Sql);
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     foreach (DataRow dr in dt.Rows)
                     {
+                        cardNo = dr["cardNo"].ToString();
+                        ipNo = dr["ipNo"].ToString();
+                        patName = dr["patient_name_vchr"].ToString();
+                        sex = dr["sex_chr"].ToString();
                         string jj = dr["jclx_jj"].ToString();
                         string jtj = dr["jclx_jtj"].ToString();
                         if (jj == "1")
@@ -1910,13 +1913,20 @@ values
 
                 if (isJj || isJtj)
                 {
+                    svcLis2 = new SqlHelper(EnumBiz.lisDB);
+                    //仪器库中已存在该条码
+                    Sql = @"select * from tb_sample_info where sample_no = " + barCode;
+                    dt = svcLis2.GetDataTable(Sql);
+                    if (dt != null && dt.Rows.Count > 0)
+                        return;
+
                     parms = svcLis2.CreateParm(11);
                     Sql = @"exec proc_Receive_Sample ?,?,'','','',?,?,'粪便',?,'','','',?,'',8,13,23,32,?,?,?,?,? ";
-                    parms[0].Value = sampleVo.patName;
-                    parms[1].Value = sampleVo.sex.Trim();
-                    parms[2].Value = (drPat == null ? "" : drPat["cardNo"].ToString());
-                    parms[3].Value = (drPat == null ? "" : drPat["ipNo"].ToString());
-                    parms[4].Value = sampleVo.barCode;
+                    parms[0].Value = patName;
+                    parms[1].Value = sex.Trim();
+                    parms[2].Value = cardNo;
+                    parms[3].Value = ipNo;
+                    parms[4].Value = barCode;
                     parms[5].Value = DateTime.Now.ToString("yyyy-MM-dd");
                     parms[6].Value = (isJj == true ? "1" : "0");
                     parms[7].Value = (isJtj == true ? "15" : "0");
@@ -1928,11 +1938,11 @@ values
                 else
                     return;
 
-                Sql = @"delete from T_FB2000R where barcode = '" + sampleVo.barCode + "'";
+                Sql = @"delete from T_FB2000R where barcode = '" + barCode + "'";
                 lstParm.Add(svc.GetDacParm(EnumExecType.ExecSql, Sql));
                 Sql = @"insert into T_FB2000R values (?, ?, ?)";
                 parms = svc.CreateParm(3);
-                parms[0].Value = sampleVo.barCode;
+                parms[0].Value = barCode;
                 parms[1].Value = DateTime.Now;
                 parms[2].Value = affectRows > 0 ? 1:0 ;
                 lstParm.Add(svc.GetDacParm(EnumExecType.ExecSql, Sql, parms));
@@ -1942,13 +1952,295 @@ values
             }
             catch (Exception ex)
             {
-                ExceptionLog.OutPutException(ex);
+                ExceptionLog.OutPutException("FB200RExecpro-->"+ex);
             }
             finally
             {
                 svc = null;
                 parms = null;
                 svcLis2 = null;
+            }
+        }
+        #endregion
+
+        #region  希森美康全自动血液分析仪检测 写文件
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="barCode"></param>
+        public void LabomanWrite2File(string barCode)
+        {
+            if (string.IsNullOrEmpty(barCode))
+                return;
+
+            string filePath = string.Empty;
+            string user = string.Empty;
+            string pwd = string.Empty;
+            clsHRPTableService svcLis = null;
+            string appplyUnitParam = string.Empty;
+
+            try
+            {
+                string Sql = @"select a.parmcode_chr, a.parmvalue_vchr, a.note_vchr
+                          from t_bse_sysparm a
+                         where a.status_int = 1
+                           and a.parmcode_chr = '7013'";
+                svcLis = new clsHRPTableService();
+                DataTable dtParm = null;
+                svcLis.lngGetDataTableWithoutParameters(Sql, ref dtParm);
+                if (dtParm != null && dtParm.Rows.Count > 0)
+                {
+                    DataRow drParm = dtParm.Rows[0];
+                    if (drParm["parmvalue_vchr"] != DBNull.Value && drParm["parmvalue_vchr"].ToString().Trim() != "" &&
+                           drParm["note_vchr"] != DBNull.Value && drParm["note_vchr"].ToString().Trim() != "")
+                    {
+                        appplyUnitParam = drParm["parmvalue_vchr"].ToString();
+                        filePath = drParm["note_vchr"].ToString().Split(';')[0];
+                        user = drParm["note_vchr"].ToString().Split(';')[1];
+                        pwd = drParm["note_vchr"].ToString().Split(';')[2];
+                    }
+                }
+                else
+                    return;
+
+                Sql = @"select a.barcode_vchr,
+                                    b.apply_unit_id_chr
+                                    from 
+                                    t_opr_lis_sample a
+                                    left join t_opr_lis_app_apply_unit b
+                                    on a.application_id_chr = b.application_id_chr
+                                    where a.status_int > 1 and a.barcode_vchr = '{0}'";
+                Sql = string.Format(Sql, barCode);
+                DataTable dt = null;
+                svcLis.lngGetDataTableWithoutParameters(Sql, ref dt);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    string strApplyUnit = string.Empty;
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        string appplyUnit = dr["apply_unit_id_chr"].ToString();
+                        if (!string.IsNullOrEmpty(appplyUnit) && appplyUnitParam.IndexOf(appplyUnit) >= 0)
+                        {
+                            strApplyUnit += "'" + appplyUnit + "',";
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(strApplyUnit))
+                    {
+                        Sql = @"select distinct c.check_item_id_chr, d.device_check_item_name_vchr
+                                  from t_opr_lis_sample a
+                                 inner join t_opr_lis_app_check_item b
+                                    on b.application_id_chr = a.application_id_chr
+                                 inner join t_bse_lis_check_item_dev_item c
+                                    on c.check_item_id_chr = b.check_item_id_chr
+                                 inner join t_bse_lis_device_check_item d
+                                    on d.device_check_item_id_chr = c.device_check_item_id_chr
+                                   and d.device_model_id_chr = c.device_model_id_chr
+                                 where a.status_int >= 3
+                                   and a.barcode_vchr = '{0}'
+                                   and a.status_int > 0
+                                 order by c.check_item_id_chr";
+
+                        Sql = string.Format(Sql, barCode);
+                        svcLis.lngGetDataTableWithoutParameters(Sql, ref dt);
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            string content = ",CBC";
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                string itemName = dr["device_check_item_name_vchr"].ToString();
+                                if (itemName.Contains("#") && !content.Contains("DIFF"))
+                                    content += "+DIFF";
+                                if (itemName.Contains("%") && !content.Contains("RET"))
+                                    content += "+RET";
+                            }
+                            content += "+NRBC|";
+                            bool status = connectState(filePath, user, pwd);
+                            if (status)
+                            {
+                                //共享文件夹的目录
+                                DirectoryInfo theFolder = new DirectoryInfo(filePath);
+                                string filename = theFolder.ToString() + "\\RET.txt";
+                                FileStream fs = new FileStream(filename, FileMode.Append, FileAccess.Write, FileShare.None);
+                                if (fs != null)
+                                {
+                                    StreamWriter sw = new StreamWriter(fs);
+                                    sw.Write(barCode + content);
+                                    sw.Flush();
+                                    sw.Close();
+                                    fs.Close();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                weCare.Core.Utils.ExceptionLog.OutPutException("LabomanWrite2File-->" + ex);
+            }
+            finally
+            {
+                svcLis = null;
+            }
+        }
+        #endregion
+
+        #region 连接远程共享文件夹
+        /// <summary>
+        /// 连接远程共享文件夹
+        /// </summary>
+        /// <param name="path">远程共享文件夹的路径</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="passWord">密码</param>
+        /// <returns></returns>
+        public static bool connectState(string path, string userName, string passWord)
+        {
+            bool Flag = false;
+            Process proc = new Process();
+            try
+            {
+                proc.StartInfo.FileName = "cmd.exe";
+                proc.StartInfo.UseShellExecute = false;
+                proc.StartInfo.RedirectStandardInput = true;
+                proc.StartInfo.RedirectStandardOutput = true;
+                proc.StartInfo.RedirectStandardError = true;
+                proc.StartInfo.CreateNoWindow = true;
+                proc.Start();
+                string dosLine = "net use " + path + " " + passWord + " /user:" + userName;
+                proc.StandardInput.WriteLine(dosLine);
+                proc.StandardInput.WriteLine("exit");
+                while (!proc.HasExited)
+                {
+                    proc.WaitForExit(1000);
+                }
+                string errormsg = proc.StandardError.ReadToEnd();
+                proc.StandardError.Close();
+                if (string.IsNullOrEmpty(errormsg))
+                {
+                    Flag = true;
+                }
+                else
+                {
+                    weCare.Core.Utils.ExceptionLog.OutPutException(errormsg);
+                }
+            }
+            catch (Exception ex)
+            {
+                weCare.Core.Utils.ExceptionLog.OutPutException(ex);
+            }
+            finally
+            {
+                proc.Close();
+                proc.Dispose();
+            }
+            return Flag;
+        }
+        #endregion
+
+        #region  Mejer 尿沉渣/干化学 写数据
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="barCode"></param>
+        public void MejerWrite2Access(string barCode)
+        {
+            if (string.IsNullOrEmpty(barCode))
+                return;
+
+            string filePath = string.Empty;
+            string user = string.Empty;
+            string pwd = string.Empty;
+            SqlHelper svcLis = null;
+            string nccAppUnitId = string.Empty;
+            string ghxAppUnitId = string.Empty;
+            bool isNcc = false;
+            bool isGhx = false;
+            string testitem = string.Empty;
+            List<string> lstAppUnitId = null;
+
+            try
+            {
+                string Sql = @"select a.parmcode_chr, a.parmvalue_vchr, a.note_vchr
+                          from t_bse_sysparm a
+                         where a.status_int = 1
+                           and a.parmcode_chr in('7016','7017') ";
+                svcLis = new SqlHelper(EnumBiz.onlineDB);
+                DataTable dtParm = null;
+                dtParm = svcLis.GetDataTable(Sql);
+                if (dtParm != null && dtParm.Rows.Count > 0)
+                {
+                    DataRow drParm = dtParm.Rows[0];
+                    if (drParm["parmvalue_vchr"] != DBNull.Value && drParm["parmvalue_vchr"].ToString().Trim() != "" &&
+                           drParm["note_vchr"] != DBNull.Value && drParm["note_vchr"].ToString().Trim() != "")
+                    {
+                        filePath = drParm["note_vchr"].ToString();
+                        nccAppUnitId = dtParm.Rows[0]["parmvalue_vchr"].ToString();
+                        ghxAppUnitId = dtParm.Rows[1]["parmvalue_vchr"].ToString();
+                    }
+                }
+                else
+                    return;
+                Sql = @"select a.barcode_vchr,
+                                    b.apply_unit_id_chr
+                                    from 
+                                    t_opr_lis_sample a
+                                    left join t_opr_lis_app_apply_unit b
+                                    on a.application_id_chr = b.application_id_chr
+                                    where a.status_int > 1 and a.barcode_vchr = '{0}'";
+                Sql = string.Format(Sql, barCode);
+                DataTable dt = null;
+                dt = svcLis.GetDataTable(Sql);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    string strApplyUnit = string.Empty;
+                    lstAppUnitId = new List<string>();
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        string appplyUnit = dr["apply_unit_id_chr"].ToString();
+                        if (!lstAppUnitId.Contains(appplyUnit))
+                            lstAppUnitId.Add(appplyUnit);
+                    }
+                    if (lstAppUnitId != null)
+                    {
+                        foreach (var appUnitId in lstAppUnitId)
+                        {
+                            if (nccAppUnitId.IndexOf(appUnitId) >= 0)
+                                isNcc = true;
+                            if (ghxAppUnitId.IndexOf(appUnitId) >= 0)
+                                isGhx = true;
+                        }
+                    }
+                }
+                if (isGhx)
+                    testitem = "1";
+                if (isNcc && isGhx)
+                    testitem = "2";
+
+                if (testitem == "1" || testitem == "2")
+                {
+                    //写数据库
+                    Sql = "select orderid from sampleTest order by orderid desc";
+                    int orderId = 0;
+                    ODBCHelper svc = new ODBCHelper(filePath);
+                    DataTable dtOrder = svc.GetDataTable(Sql);
+                    if (dtOrder != null && dtOrder.Rows.Count > 0)
+                        orderId = Convert.ToInt32(dtOrder.Rows[0]["orderid"]) + 1;
+                    else
+                        orderId = 1;
+                    Log.Output("orderId-->" + orderId.ToString());
+                    Sql = @"insert into sampleTest values('{0}','{1}','{2}','{3}','0')";
+                    string acqudate = DateTime.Now.ToString("yyyyMMdd");
+                    Sql = string.Format(Sql, orderId, barCode, acqudate, testitem);
+                    svc.ExecSql(Sql);
+                }
+            }
+            catch (Exception ex)
+            {
+                weCare.Core.Utils.ExceptionLog.OutPutException("MejerWrite2Access-->" + ex);
+            }
+            finally
+            {
+                svcLis = null;
             }
         }
         #endregion
@@ -1962,5 +2254,51 @@ values
             GC.SuppressFinalize(this);
         }
         #endregion
+    }
+
+    public class ODBCHelper
+    {
+        public ODBCHelper(string filePath)
+        {
+            conString += filePath;
+        }
+        string conString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source="; //连接Access数据
+        public DataTable GetDataTable(string sql)
+        {
+            DataTable dt = null;
+            try
+            {
+                OleDbConnection con = new OleDbConnection(conString);
+                con.Open();
+                OleDbCommand com = new OleDbCommand(sql, con);
+                OleDbDataAdapter da = new OleDbDataAdapter(com);
+                dt = new DataTable();
+                da.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog.OutPutException(ex);
+            }
+
+            return dt;
+        }
+
+        public int ExecSql(string sql)
+        {
+            int affectedRows = -1;
+            try
+            {
+                OleDbConnection con = new OleDbConnection(conString);
+                con.Open();
+                OleDbCommand com = new OleDbCommand(sql, con);
+                affectedRows = com.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                ExceptionLog.OutPutException(ex);
+            }
+
+            return affectedRows;
+        }
     }
 }

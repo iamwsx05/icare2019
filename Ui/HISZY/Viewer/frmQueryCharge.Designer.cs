@@ -3,13 +3,15 @@
     partial class frmQueryCharge
     {
         /// <summary>
-        /// 必需的设计器变量。
+        /// 必需的设计器变量。
+
 
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 清理所有正在使用的资源。
+        /// 清理所有正在使用的资源。
+
 
         /// </summary>
         /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
@@ -26,7 +28,8 @@
 
         /// <summary>
         /// 设计器支持所需的方法 - 不要
-        /// 使用代码编辑器修改此方法的内容。
+        /// 使用代码编辑器修改此方法的内容。
+
 
         /// </summary>
         private void InitializeComponent()
@@ -94,8 +97,11 @@
             this.ToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.ucPatientInfo = new com.digitalwave.iCare.gui.HIS.ucPatientInfo();
             this.panelRight = new System.Windows.Forms.Panel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.lblSyzCheck = new System.Windows.Forms.LinkLabel();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.llblFeeCheck = new System.Windows.Forms.LinkLabel();
             this.picFeeCheck = new System.Windows.Forms.PictureBox();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
@@ -231,7 +237,6 @@
             this.chargeDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buyprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemunit2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ucPatientInfo = new com.digitalwave.iCare.gui.HIS.ucPatientInfo();
             this.contextMenuStrip2.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -241,6 +246,7 @@
             this.splitContainer1.SuspendLayout();
             this.panelRight.SuspendLayout();
             this.panelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picFeeCheck)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -469,6 +475,21 @@
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 1;
             // 
+            // ucPatientInfo
+            // 
+            this.ucPatientInfo.BackColor = System.Drawing.SystemColors.Control;
+            this.ucPatientInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ucPatientInfo.FeeCheckStatus = 0;
+            this.ucPatientInfo.IsChanged = false;
+            this.ucPatientInfo.Location = new System.Drawing.Point(0, 0);
+            this.ucPatientInfo.Name = "ucPatientInfo";
+            this.ucPatientInfo.ShowFeeCheckStatusFlag = false;
+            this.ucPatientInfo.Size = new System.Drawing.Size(288, 605);
+            this.ucPatientInfo.Status = 0;
+            this.ucPatientInfo.TabIndex = 0;
+            this.ucPatientInfo.CardNOChanged += new com.digitalwave.iCare.gui.HIS.TextCardNOChanged(this.ucPatientInfo_CardNOChanged);
+            this.ucPatientInfo.ZyhChanged += new com.digitalwave.iCare.gui.HIS.TextZyhChanged(this.ucPatientInfo_ZyhChanged);
+            // 
             // panelRight
             // 
             this.panelRight.Controls.Add(this.panelTop);
@@ -482,6 +503,8 @@
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.lblSyzCheck);
+            this.panelTop.Controls.Add(this.pictureBox7);
             this.panelTop.Controls.Add(this.llblFeeCheck);
             this.panelTop.Controls.Add(this.picFeeCheck);
             this.panelTop.Controls.Add(this.linkLabel2);
@@ -504,6 +527,35 @@
             this.panelTop.Size = new System.Drawing.Size(999, 30);
             this.panelTop.TabIndex = 0;
             // 
+            // lblSyzCheck
+            // 
+            this.lblSyzCheck.ActiveLinkColor = System.Drawing.Color.Blue;
+            this.lblSyzCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSyzCheck.AutoSize = true;
+            this.lblSyzCheck.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblSyzCheck.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblSyzCheck.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lblSyzCheck.LinkColor = System.Drawing.Color.Black;
+            this.lblSyzCheck.Location = new System.Drawing.Point(737, 10);
+            this.lblSyzCheck.Name = "lblSyzCheck";
+            this.lblSyzCheck.Size = new System.Drawing.Size(77, 14);
+            this.lblSyzCheck.TabIndex = 17;
+            this.lblSyzCheck.TabStop = true;
+            this.lblSyzCheck.Text = "适应症修改";
+            this.lblSyzCheck.VisitedLinkColor = System.Drawing.Color.Red;
+            this.lblSyzCheck.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblSyzCheck_LinkClicked);
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
+            this.pictureBox7.Location = new System.Drawing.Point(717, 9);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox7.TabIndex = 16;
+            this.pictureBox7.TabStop = false;
+            // 
             // llblFeeCheck
             // 
             this.llblFeeCheck.ActiveLinkColor = System.Drawing.Color.Blue;
@@ -514,7 +566,7 @@
             this.llblFeeCheck.ForeColor = System.Drawing.Color.DeepPink;
             this.llblFeeCheck.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.llblFeeCheck.LinkColor = System.Drawing.Color.DeepPink;
-            this.llblFeeCheck.Location = new System.Drawing.Point(716, 10);
+            this.llblFeeCheck.Location = new System.Drawing.Point(608, 10);
             this.llblFeeCheck.Name = "llblFeeCheck";
             this.llblFeeCheck.Size = new System.Drawing.Size(91, 14);
             this.llblFeeCheck.TabIndex = 15;
@@ -528,7 +580,7 @@
             // 
             this.picFeeCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picFeeCheck.Image = ((System.Drawing.Image)(resources.GetObject("picFeeCheck.Image")));
-            this.picFeeCheck.Location = new System.Drawing.Point(696, 9);
+            this.picFeeCheck.Location = new System.Drawing.Point(588, 9);
             this.picFeeCheck.Name = "picFeeCheck";
             this.picFeeCheck.Size = new System.Drawing.Size(16, 16);
             this.picFeeCheck.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -541,6 +593,7 @@
             this.linkLabel2.ActiveLinkColor = System.Drawing.Color.Blue;
             this.linkLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkLabel2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.linkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel2.LinkColor = System.Drawing.Color.Black;
@@ -570,10 +623,11 @@
             this.linkLabel1.ActiveLinkColor = System.Drawing.Color.Blue;
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.linkLabel1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel1.LinkColor = System.Drawing.Color.Black;
-            this.linkLabel1.Location = new System.Drawing.Point(846, 10);
+            this.linkLabel1.Location = new System.Drawing.Point(852, 10);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(49, 14);
             this.linkLabel1.TabIndex = 11;
@@ -586,7 +640,7 @@
             // 
             this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
-            this.pictureBox5.Location = new System.Drawing.Point(826, 9);
+            this.pictureBox5.Location = new System.Drawing.Point(832, 9);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(16, 16);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -2207,7 +2261,7 @@
             // colTotalDiffCost
             // 
             this.colTotalDiffCost.DataPropertyName = "totaldiffcostmoney_dec";
-            this.colTotalDiffCost.HeaderText = "药品已让利";
+            this.colTotalDiffCost.HeaderText = "让利金额";
             this.colTotalDiffCost.Name = "colTotalDiffCost";
             this.colTotalDiffCost.ReadOnly = true;
             this.colTotalDiffCost.Width = 80;
@@ -2253,21 +2307,6 @@
             this.itemunit2.ReadOnly = true;
             this.itemunit2.Visible = false;
             // 
-            // ucPatientInfo
-            // 
-            this.ucPatientInfo.BackColor = System.Drawing.SystemColors.Control;
-            this.ucPatientInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucPatientInfo.FeeCheckStatus = 0;
-            this.ucPatientInfo.IsChanged = false;
-            this.ucPatientInfo.Location = new System.Drawing.Point(0, 0);
-            this.ucPatientInfo.Name = "ucPatientInfo";
-            this.ucPatientInfo.ShowFeeCheckStatusFlag = false;
-            this.ucPatientInfo.Size = new System.Drawing.Size(288, 605);
-            this.ucPatientInfo.Status = 0;
-            this.ucPatientInfo.TabIndex = 0;
-            this.ucPatientInfo.CardNOChanged += new com.digitalwave.iCare.gui.HIS.TextCardNOChanged(this.ucPatientInfo_CardNOChanged);
-            this.ucPatientInfo.ZyhChanged += new com.digitalwave.iCare.gui.HIS.TextZyhChanged(this.ucPatientInfo_ZyhChanged);
-            // 
             // frmQueryCharge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2296,6 +2335,7 @@
             this.panelRight.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picFeeCheck)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
@@ -2461,6 +2501,8 @@
         private System.Windows.Forms.Timer timer;
         internal System.Windows.Forms.LinkLabel llblFeeCheck;
         internal System.Windows.Forms.PictureBox picFeeCheck;
+        internal System.Windows.Forms.LinkLabel lblSyzCheck;
+        private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.DataGridViewTextBoxColumn serno;
         private System.Windows.Forms.DataGridViewTextBoxColumn colrq;
         private System.Windows.Forms.DataGridViewTextBoxColumn invoname;

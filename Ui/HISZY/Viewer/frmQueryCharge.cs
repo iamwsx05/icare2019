@@ -479,5 +479,9 @@ namespace com.digitalwave.iCare.gui.HIS
             ((clsCtl_QueryCharge)this.objController).SetPatFeeCheck();
         }
 
+        private void lblSyzCheck_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ((clsCtl_QueryCharge)this.objController).ModifySYZ();
+        }
     }
 }

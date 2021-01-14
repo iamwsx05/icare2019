@@ -45,6 +45,18 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             get { return _strReportName; }
             set { _strReportName = value; }
         }
+
+        /// <summary>
+        /// 2020-06-22药品比例分母去掉中草药费
+        /// </summary>
+        bool isNoZcy { get; set; }
+
+        public void Show2()
+        {
+            isNoZcy = true;
+            this.Show();
+        }
+
         private void frmRptOpDoctorPerformance_Load(object sender, EventArgs e)
         {
             //this.rdoDoctor.Checked = true;
@@ -53,8 +65,17 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             this.rdoDept.Checked = true;
             this.buttonXP1.Enabled = false;
             this.btnByDept.Enabled = true;
-            this.m_dwShow.LibraryList = Application.StartupPath + "\\PB_OP.pbl";
-            this.m_dwShow.DataWindowObject = "d_op_doctorperformance";
+            
+            if (this.isNoZcy)
+            {
+                this.m_dwShow.LibraryList = Application.StartupPath + "\\pbwindow.pbl";
+                this.m_dwShow.DataWindowObject = "d_op_doctorperformance_nozcy";
+            }
+            else
+            {
+                this.m_dwShow.LibraryList = Application.StartupPath + "\\PB_OP.pbl";
+                this.m_dwShow.DataWindowObject = "d_op_doctorperformance";
+            }
             dteRq1.Value = Convert.ToDateTime(dteRq1.Value.Year.ToString() + "-" + dteRq1.Value.Month.ToString() + "-" + "01");
             this.cmbSeachType.SelectedIndex = 0;
             _strReportName = this.m_dwShow.Describe("t_title.text");

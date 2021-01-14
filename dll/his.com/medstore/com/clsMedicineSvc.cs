@@ -10,8 +10,6 @@ namespace com.digitalwave.iCare.middletier.HIS
     /// <summary>
     /// 药品信息的服务层 Create By Sam 2004-5-24
     /// </summary>
-    /// 
-
     [Transaction(TransactionOption.Required)]
     [ObjectPooling(Enabled = true)]
     // 药品管理中间件
@@ -730,8 +728,11 @@ namespace com.digitalwave.iCare.middletier.HIS
             {
                 newID = SaveRow["medicineid_chr"].ToString();
             }
+            string Sql = string.Empty;
 
-            string strSQL = @"insert into t_bse_medicine
+            #region insert into t_sys_updateitemlog
+
+            Sql = @"insert into t_bse_medicine
   (medicineid_chr,
    medicinename_vchr,
    medicinetypeid_chr,
@@ -787,6 +788,169 @@ namespace com.digitalwave.iCare.middletier.HIS
    putmedtype_int,
    ipunitprice_mny,
    standarddate,requestunit_chr,requestpackqty_dec,
+   expenselimit_mny,
+   diffprice_mny,
+   medbagunit,
+   highriskflag,
+   isproducedrugs,
+   transno,
+   varietycode )
+values
+  ({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9},
+   {10}, {11}, {12}, {13}, {14}, {15}, {16}, {17}, {18}, {19},
+   {20}, {21}, {22}, {23}, {24}, {25}, {26}, {27}, {28}, {29},
+   {30}, {31}, {32}, {33}, {34}, {35}, {36}, {37}, {38}, {39},
+   {40}, {41}, {42}, {43}, {44}, {45}, {46}, {47}, {48}, {49},
+   {50}, {51}, {52}, {53}, {54}, {55}, {56}, {57}, {58}, {59}, 
+   {60}, {61}, {62}, {63})";
+
+            int n = -1;
+            object[] objs = new object[64];
+
+            objs[++n] = newID;
+            objs[++n] = SaveRow["MEDICINENAME_VCHR"].ToString();
+            objs[++n] = SaveRow["MEDICINETYPEID_CHR"].ToString();
+            objs[++n] = SaveRow["MEDSPEC_VCHR"].ToString();
+            objs[++n] = SaveRow["MEDICINESTDID_CHR"].ToString();
+            objs[++n] = SaveRow["PYCODE_CHR"].ToString();
+            objs[++n] = SaveRow["WBCODE_CHR"].ToString();
+            objs[++n] = SaveRow["MEDICINEPREPTYPE_CHR"].ToString();
+            objs[++n] = SaveRow["ISANAESTHESIA_CHR"].ToString();
+            objs[++n] = SaveRow["ISCHLORPROMAZINE_CHR"].ToString();
+            objs[++n] = SaveRow["ISCOSTLY_CHR"].ToString();
+            objs[++n] = SaveRow["ISSELF_CHR"].ToString();
+            objs[++n] = SaveRow["ISIMPORT_CHR"].ToString();
+            objs[++n] = SaveRow["ISSELFPAY_CHR"].ToString();
+            objs[++n] = SaveRow["MEDICINEENGNAME_VCHR"].ToString();
+            objs[++n] = SaveRow["ASSISTCODE_CHR"].ToString();
+            objs[++n] = SaveRow["DOSAGE_DEC"].ToString();
+            objs[++n] = SaveRow["DOSAGEUNIT_CHR"].ToString();
+            objs[++n] = SaveRow["OPUNIT_CHR"].ToString();
+            objs[++n] = SaveRow["IPUNIT_CHR"].ToString();
+            objs[++n] = SaveRow["PACKQTY_DEC"].ToString();
+            objs[++n] = SaveRow["TRADEPRICE_MNY"].ToString();
+            objs[++n] = SaveRow["UNITPRICE_MNY"].ToString();
+            objs[++n] = SaveRow["MINDOSAGE_DEC"].ToString();
+            objs[++n] = SaveRow["MAXDOSAGE_DEC"].ToString();
+            objs[++n] = SaveRow["PRODUCTORID_CHR"].ToString();
+            objs[++n] = SaveRow["POFLAG_INT"].ToString();
+            objs[++n] = SaveRow["USAGEID_CHR"].ToString();
+            objs[++n] = SaveRow["OPCHARGEFLG_INT"].ToString();
+            objs[++n] = SaveRow["IPCHARGEFLG_INT"].ToString();
+            objs[++n] = SaveRow["IFSTOP_INT"].ToString();
+            objs[++n] = SaveRow["INSURANCEID_VCHR"].ToString();
+            objs[++n] = SaveRow["STANDARD_INT"].ToString();
+            objs[++n] = SaveRow["NMLDOSAGE_DEC"].ToString();
+            objs[++n] = 1;
+            objs[++n] = 1;
+            objs[++n] = SaveRow["ADULTDOSAGE_DEC"].ToString();
+            objs[++n] = SaveRow["CHILDDOSAGE_DEC"].ToString();
+            objs[++n] = SaveRow["MEDICINESTDESC_VCHR"].ToString();
+            objs[++n] = SaveRow["HYPE_INT"].ToString();
+            objs[++n] = SaveRow["INSURANCETYPE_VCHR"].ToString();
+            objs[++n] = SaveRow["MEDNORMALNAME_VCHR"].ToString();
+            objs[++n] = SaveRow["PERMITNO_VCHR"].ToString();
+            objs[++n] = SaveRow["pharmaid_chr"].ToString();
+            objs[++n] = SaveRow["MEDICNETYPE_INT"].ToString();
+            objs[++n] = SaveRow["ISPOISON_CHR"].ToString();
+            objs[++n] = SaveRow["ISCHLORPROMAZINE2_CHR"].ToString();
+            objs[++n] = SaveRow["ORDERCATEID_CHR"].ToString();
+            objs[++n] = SaveRow["LIMITUNITPRICE_MNY"].ToString();
+            objs[++n] = SaveRow["FREQID_CHR"].ToString();
+            objs[++n] = SaveRow["INPINSURANCETYPE_VCHR"].ToString();
+            objs[++n] = SaveRow["ORDERCATEID1_CHR"].ToString();
+            objs[++n] = SaveRow["PUTMEDTYPE_INT"].ToString();
+            objs[++n] = SaveRow["IPUNITPRICE_MNY"].ToString();
+            objs[++n] = SaveRow["STANDARDDATE"].ToString();
+            objs[++n] = SaveRow["REQUESTUNIT_CHR"].ToString();
+            objs[++n] = SaveRow["REQUESTPACKQTY_DEC"].ToString();
+            objs[++n] = SaveRow["EXPENSELIMIT_MNY"].ToString();
+            objs[++n] = SaveRow["DIFFPRICE_MNY"].ToString();//Added by: 吴汉明 2014-12-9 药品让利
+            objs[++n] = SaveRow["medbagunit"].ToString();
+            objs[++n] = SaveRow["highriskflag"].ToString();
+            objs[++n] = SaveRow["isproducedrugs"].ToString();
+            objs[++n] = SaveRow["transno"].ToString();
+            objs[++n] = SaveRow["varietycode"].ToString();
+
+            if (SaveDtb.TableName.IndexOf("|") > 0)
+            {
+                string[] data = SaveDtb.TableName.Split('|');
+                if (data.Length == 4)
+                {
+                    EntitySysItemUpdateLog updateLogVo = new EntitySysItemUpdateLog()
+                    {
+                        fTypeId = 1,
+                        fOperId = data[1],
+                        fOperName = data[2],
+                        fIpAddr = data[3],
+                        fKeyword = newID,
+                        fUpdateSql = string.Format(Sql, objs)
+                    };
+                    (new clsChargeItemSvc()).SaveSysItemUpdateLog(updateLogVo);
+                }
+            }
+
+            #endregion
+
+
+            Sql = @"insert into t_bse_medicine
+  (medicineid_chr,
+   medicinename_vchr,
+   medicinetypeid_chr,
+   medspec_vchr,
+   medicinestdid_chr,
+   pycode_chr,
+   wbcode_chr,
+   medicinepreptype_chr,
+   isanaesthesia_chr,
+   ischlorpromazine_chr,
+   iscostly_chr,
+   isself_chr,
+   isimport_chr,
+   isselfpay_chr,
+   medicineengname_vchr,
+   assistcode_chr,
+   dosage_dec,
+   dosageunit_chr,
+   opunit_chr,
+   ipunit_chr,
+   packqty_dec,
+   tradeprice_mny,
+   unitprice_mny,
+   mindosage_dec,
+   maxdosage_dec,
+   productorid_chr,
+   poflag_int,
+   usageid_chr,
+   opchargeflg_int,
+   ipchargeflg_int,
+   ifstop_int,
+   insuranceid_vchr,
+   standard_int,
+   nmldosage_dec,
+   noqtyflag_int,
+   ipnoqtyflag_int,
+   adultdosage_dec,
+   childdosage_dec,
+   medicinestdesc_vchr,
+   hype_int,
+   insurancetype_vchr,
+   mednormalname_vchr,
+   permitno_vchr,
+   pharmaid_chr,
+   medicnetype_int,
+   ispoison_chr,
+   ischlorpromazine2_chr,
+   ordercateid_chr,
+   limitunitprice_mny,
+   freqid_chr,
+   inpinsurancetype_vchr,
+   ordercateid1_chr,
+   putmedtype_int,
+   ipunitprice_mny,
+   standarddate,
+   requestunit_chr,
+   requestpackqty_dec,
    expenselimit_mny,
    diffprice_mny,
    medbagunit,
@@ -871,7 +1035,7 @@ values
                 objDPArr[62].Value = SaveRow["transno"].ToString();
                 objDPArr[63].Value = SaveRow["varietycode"].ToString();
                 long lngEff = -1;
-                lngReg = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                lngReg = objHRPSvc.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
 
                 #region 写入痕迹记录
                 string strSQLForMark = @"insert into t_bse_medicine(MEDICINEID_CHR,MEDICINENAME_VCHR,MEDICINETYPEID_CHR,MEDSPEC_VCHR,MEDICINESTDID_CHR,PYCODE_CHR,WBCODE_CHR,MEDICINEPREPTYPE_CHR,ISANAESTHESIA_CHR,ISCHLORPROMAZINE_CHR,ISCOSTLY_CHR,ISSELF_CHR,ISIMPORT_CHR,ISSELFPAY_CHR,MEDICINEENGNAME_VCHR,ASSISTCODE_CHR,DOSAGE_DEC,DOSAGEUNIT_CHR,OPUNIT_CHR,IPUNIT_CHR,PACKQTY_DEC,TRADEPRICE_MNY,UNITPRICE_MNY,MINDOSAGE_DEC,MAXDOSAGE_DEC,PRODUCTORID_CHR,POFLAG_INT,USAGEID_CHR,OPCHARGEFLG_INT,IPCHARGEFLG_INT,IFSTOP_INT,INSURANCEID_VCHR,STANDARD_INT,NMLDOSAGE_DEC,NOQTYFLAG_INT,IPNOQTYFLAG_INT,ADULTDOSAGE_DEC,CHILDDOSAGE_DEC,MEDICINESTDESC_VCHR,HYPE_INT,INSURANCETYPE_VCHR,MEDNORMALNAME_VCHR,PERMITNO_VCHR,pharmaid_chr,MEDICNETYPE_INT,ISPOISON_CHR,ISCHLORPROMAZINE2_CHR,ORDERCATEID_CHR,LIMITUNITPRICE_MNY,FREQID_CHR,INPINSURANCETYPE_VCHR,ORDERCATEID1_CHR,PUTMEDTYPE_INT,standarddate,REQUESTUNIT_CHR,REQUESTPACKQTY_DEC,DIFFPRICE_MNY, medbagunit, highriskflag, isproducedrugs, transno, varietycode) values ('" + newID + "','" + SaveRow["MEDICINENAME_VCHR"].ToString() + "','" + SaveRow["MEDICINETYPEID_CHR"].ToString() + "','" + SaveRow["MEDSPEC_VCHR"].ToString() + "','" + SaveRow["MEDICINESTDID_CHR"].ToString() + "','" + SaveRow["PYCODE_CHR"].ToString() + "','" + SaveRow["WBCODE_CHR"].ToString() + "','" + SaveRow["MEDICINEPREPTYPE_CHR"].ToString() + "','" + SaveRow["ISANAESTHESIA_CHR"].ToString() + "','" + SaveRow["ISCHLORPROMAZINE_CHR"].ToString() + "','" + SaveRow["ISCOSTLY_CHR"].ToString() + "','" + SaveRow["ISSELF_CHR"].ToString() + "','" + SaveRow["ISIMPORT_CHR"].ToString() + "','" + SaveRow["ISSELFPAY_CHR"].ToString() + "','" + SaveRow["MEDICINEENGNAME_VCHR"].ToString() + "','" + SaveRow["ASSISTCODE_CHR"].ToString() + "'," + SaveRow["DOSAGE_DEC"].ToString() + ",'" + SaveRow["DOSAGEUNIT_CHR"].ToString() + "','" + SaveRow["OPUNIT_CHR"].ToString() + "','" + SaveRow["IPUNIT_CHR"].ToString() + "'," + SaveRow["PACKQTY_DEC"].ToString() + "," + SaveRow["TRADEPRICE_MNY"].ToString() + "," + SaveRow["UNITPRICE_MNY"].ToString() + "," + SaveRow["MINDOSAGE_DEC"].ToString() + "," + SaveRow["MAXDOSAGE_DEC"].ToString() + ",'" + SaveRow["PRODUCTORID_CHR"].ToString() + "'," + SaveRow["POFLAG_INT"].ToString() + ",'" + SaveRow["USAGEID_CHR"].ToString() + "'," + SaveRow["OPCHARGEFLG_INT"].ToString() + "," + SaveRow["IPCHARGEFLG_INT"] + "," + SaveRow["IFSTOP_INT"].ToString();
@@ -892,7 +1056,7 @@ values
             }
             if (strStorageID.Trim() != "" && p_strType == "0")
             {
-                strSQL = @"insert into t_bse_storageandmedicine(storageid_chr,medicineid_chr) values (?,?)";
+                Sql = @"insert into t_bse_storageandmedicine(storageid_chr,medicineid_chr) values (?,?)";
                 try
                 {
                     IDataParameter[] objDPArr = null;
@@ -901,7 +1065,7 @@ values
                     objDPArr[1].Value = newID;
 
                     long lngEff = -1;
-                    lngReg = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                    lngReg = objHRPSvc.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
 
                 }
                 catch (Exception objEx)
@@ -913,7 +1077,7 @@ values
             }
             else if (strStorageID.Trim() != "" && p_strType == "1")
             {
-                strSQL = @"insert into t_bse_storageandmaterial(storageid_chr,materialid_chr) values (?,?)";
+                Sql = @"insert into t_bse_storageandmaterial(storageid_chr,materialid_chr) values (?,?)";
                 try
                 {
                     IDataParameter[] objDPArr = null;
@@ -922,7 +1086,7 @@ values
                     objDPArr[1].Value = newID;
 
                     long lngEff = -1;
-                    lngReg = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                    lngReg = objHRPSvc.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
 
                 }
                 catch (Exception objEx)
@@ -940,7 +1104,7 @@ values
                     clsPriceChgeAppl objApplAuto = new clsPriceChgeAppl();
                     clsPriceChgeApplDe[] objArrDe = new clsPriceChgeApplDe[1];
                     string strDate = DateTime.Now.ToString("yyyyMMdd");
-                    strSQL = @"select max(medicinepricechgapplno_chr) from t_opr_medicinepricechgappl where medicinepricechgapplno_chr like ?";
+                    Sql = @"select max(medicinepricechgapplno_chr) from t_opr_medicinepricechgappl where medicinepricechgapplno_chr like ?";
                     DataTable dt = new DataTable();
                     try
                     {
@@ -948,7 +1112,7 @@ values
                         objHRPSvc.CreateDatabaseParameter(1, out objDPArr);
                         objDPArr[0].Value = strDate + "%";
 
-                        lngReg = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref dt, objDPArr);
+                        lngReg = objHRPSvc.lngGetDataTableWithParameters(Sql, ref dt, objDPArr);
 
                     }
                     catch (Exception objEx)
@@ -977,11 +1141,11 @@ values
                     objApplAuto.m_strCREATEDATE_DAT = DateTime.Now.ToString();
                     objApplAuto.m_strMEMO_VCHR = "药品基本信息维护界面自动添加的调价单";
                     objApplAuto.m_intPSTATUS_INT = 1;
-                    strSQL = @"select periodid_chr,startdate_dat,enddate_dat  from t_bse_period";
+                    Sql = @"select periodid_chr,startdate_dat,enddate_dat  from t_bse_period";
                     DataTable dt1 = new DataTable();
                     try
                     {
-                        lngReg = objHRPSvc.DoGetDataTable(strSQL, ref dt1);
+                        lngReg = objHRPSvc.DoGetDataTable(Sql, ref dt1);
 
                     }
                     catch (Exception objEx)
@@ -1024,7 +1188,7 @@ values
                     string strID = "";
                     objPrice.m_lngSaveChangPriceData(objApplAuto, objArrDe, out strID);
                 }
-                strSQL = @"select itemcatid_chr from t_aid_chargemderla where medicinetypeid_chr=?";
+                Sql = @"select itemcatid_chr from t_aid_chargemderla where medicinetypeid_chr=?";
                 DataTable tbCHARGEMDERLA = new DataTable();
                 try
                 {
@@ -1032,7 +1196,7 @@ values
                     objHRPSvc.CreateDatabaseParameter(1, out objDPArr);
                     objDPArr[0].Value = SaveRow["MEDICINETYPEID_CHR"].ToString();
 
-                    lngReg = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref tbCHARGEMDERLA, objDPArr);
+                    lngReg = objHRPSvc.lngGetDataTableWithParameters(Sql, ref tbCHARGEMDERLA, objDPArr);
 
                 }
                 catch (Exception objEx)
@@ -1052,7 +1216,7 @@ values
                     SaveRow["ISCOSTLY_CHR"] = "0";
                 #region 插入收费项目数据
                 string newItemID = objHRPSvc.m_strGetNewID("t_bse_chargeitem", "ITEMID_CHR", 10);
-                strSQL = @"insert into t_bse_chargeitem
+                Sql = @"insert into t_bse_chargeitem
   (ITEMID_CHR,
    ITEMNAME_VCHR,
    ITEMCODE_VCHR,
@@ -1143,7 +1307,7 @@ values
                     objDPArr[38].Value = SaveRow["DIFFPRICE_MNY"].ToString();
 
                     long lngEff = -1;
-                    lngReg = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                    lngReg = objHRPSvc.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
                     #region 写入痕迹记录
                     string strSQLForMark = @"insert into t_bse_chargeitem(ITEMID_CHR,ITEMNAME_VCHR,ITEMCODE_VCHR,ITEMPYCODE_CHR,ITEMWBCODE_CHR,ITEMSRCID_VCHR,ITEMSRCTYPE_INT,ITEMSPEC_VCHR,ITEMPRICE_MNY,ITEMOPUNIT_CHR,ITEMIPUNIT_CHR,DOSAGE_DEC,DOSAGEUNIT_CHR,ISGROUPITEM_INT,USAGEID_CHR,INSURANCEID_CHR,PACKQTY_DEC,TRADEPRICE_MNY,POFLAG_INT,ISRICH_INT,OPCHARGEFLG_INT,ITEMENGNAME_VCHR,IFSTOP_INT,PDCAREA_VCHR,IPCHARGEFLG_INT,ITEMCATID_CHR,ITEMOPCALCTYPE_CHR,ITEMIPCALCTYPE_CHR,ITEMOPINVTYPE_CHR,ITEMIPINVTYPE_CHR,INSURANCETYPE_VCHR,ITEMBIHCTYPE_CHR,ITEMCOMMNAME_VCHR,ORDERCATEID_CHR,FREQID_CHR,INPINSURANCETYPE_VCHR,ORDERCATEID1_CHR,ISSELFPAY_CHR,DIFFPRICE_MNY) values('" + newItemID + "','" + SaveRow["MEDICINENAME_VCHR"].ToString() + "','" + SaveRow["ASSISTCODE_CHR"].ToString() + "','" + SaveRow["PYCODE_CHR"].ToString() + "','" + SaveRow["WBCODE_CHR"].ToString() + "','" + newID + "',1,'" + SaveRow["MEDSPEC_VCHR"].ToString() + "'," + SaveRow["UNITPRICE_MNY"].ToString() + ",'" + SaveRow["OPUNIT_CHR"].ToString() + "','" + SaveRow["IPUNIT_CHR"].ToString() + "'," + SaveRow["DOSAGE_DEC"].ToString() + ",'" + SaveRow["DOSAGEUNIT_CHR"].ToString() + "',0,'" + SaveRow["USAGEID_CHR"].ToString() + "','" + SaveRow["INSURANCEID_VCHR"].ToString() + "'," + SaveRow["PACKQTY_DEC"].ToString() + "," + SaveRow["TRADEPRICE_MNY"].ToString() + "," + SaveRow["POFLAG_INT"].ToString() + "," + SaveRow["ISCOSTLY_CHR"].ToString() + "," + SaveRow["OPCHARGEFLG_INT"].ToString() + ",'" + SaveRow["MEDICINEENGNAME_VCHR"].ToString() + "'," + SaveRow["IFSTOP_INT"].ToString() + ",'" + SaveRow["PRODUCTORID_CHR"].ToString() + "'," + SaveRow["IPCHARGEFLG_INT"].ToString() + ",'" + strItemType + "','" + SaveRow["ITEMOPCALCTYPE_CHR"].ToString() + "','" + SaveRow["ITEMIPCALCTYPE_CHR"].ToString() + "','" + SaveRow["ITEMOPINVTYPE_CHR"].ToString() + "','" + SaveRow["ITEMIPINVTYPE_CHR"].ToString() + "','" + SaveRow["INSURANCETYPE_VCHR"].ToString() + "','" + SaveRow["ITEMBIHCTYPE_CHR"].ToString() + "','" + SaveRow["MEDNORMALNAME_VCHR"].ToString() + "','" + SaveRow["ORDERCATEID_CHR"].ToString() + "','" + SaveRow["FREQID_CHR"].ToString() + "','" + SaveRow["INPINSURANCETYPE_VCHR"].ToString() + "','" + SaveRow["ORDERCATEID1_CHR"].ToString() + "','" + SaveRow["ISSELFPAY_CHR"].ToString() + "','" + SaveRow["DIFFPRICE_MNY"].ToString() + "')";//Added by: 吴汉明 2014-12-9 药品让利Log
                     Markvo.m_strOPERATORID_CHR = strEmpID;
@@ -1163,11 +1327,11 @@ values
                 #region 插入诊疗项目数据
 
                 string newbihID = "";
-                strSQL = @"select lpad(seq_ORDERDICID.NEXTVAL,10,'0') p_strRecordID   from dual";
+                Sql = @"select lpad(seq_ORDERDICID.NEXTVAL,10,'0') p_strRecordID   from dual";
                 DataTable dtbih = new DataTable();
                 try
                 {
-                    lngReg = objHRPSvc.DoGetDataTable(strSQL, ref dtbih);
+                    lngReg = objHRPSvc.DoGetDataTable(Sql, ref dtbih);
 
                     if (dtbih.Rows.Count > 0)
                     {
@@ -1182,7 +1346,7 @@ values
                     bool blnRes = objLogger.LogError(objEx);
                 }
 
-                strSQL = @"select a.ordercateid_chr
+                Sql = @"select a.ordercateid_chr
   from t_bse_chgcatevsordercate a, t_aid_chargemderla b
  where b.itemcatid_chr = a.itemcatid_chr
    and b.medicinetypeid_chr = ?";
@@ -1193,7 +1357,7 @@ values
                     objHRPSvc.CreateDatabaseParameter(1, out objDPArr);
                     objDPArr[0].Value = SaveRow["MEDICINETYPEID_CHR"].ToString();
 
-                    lngReg = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref dtbih, objDPArr);
+                    lngReg = objHRPSvc.lngGetDataTableWithParameters(Sql, ref dtbih, objDPArr);
 
                 }
                 catch (Exception objEx)
@@ -1210,7 +1374,7 @@ values
                 {
                     SaveRow["MEDICINETYPEID_CHR"] = "";
                 }
-                strSQL = @"insert into t_bse_bih_orderdic
+                Sql = @"insert into t_bse_bih_orderdic
   (orderdicid_chr,
    name_chr,
    des_vchr,
@@ -1246,7 +1410,7 @@ values
                     objDPArr[12].Value = SaveRow["IFSTOP_INT"].ToString().Trim() == "0" ? 1 : 0;
 
                     long lngEff = -1;
-                    lngReg = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                    lngReg = objHRPSvc.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
                     #region 写入痕迹记录
                     string strSQLForMark = @"insert into t_bse_bih_orderdic(ORDERDICID_CHR,NAME_CHR,DES_VCHR,USERCODE_CHR,WBCODE_CHR,PYCODE_CHR,ORDERCATEID_CHR,ITEMID_CHR,NULLITEMDOSAGEUNIT_CHR,NULLITEMDOSETYPEID_CHR,ENGNAME_VCHR,COMMNAME_VCHR,STATUS_INT) values('" + newbihID + "','" + SaveRow["MEDICINENAME_VCHR"].ToString() + "','药库自己生成','" + SaveRow["ASSISTCODE_CHR"].ToString() + "','" + SaveRow["WBCODE_CHR"].ToString() + "','" + SaveRow["PYCODE_CHR"].ToString() + "','" + SaveRow["MEDICINETYPEID_CHR"].ToString() + "','" + newItemID + "','" + SaveRow["DOSAGEUNIT_CHR"].ToString() + "','" + SaveRow["USAGEID_CHR"].ToString() + "','" + SaveRow["MEDICINEENGNAME_VCHR"].ToString() + "','" + SaveRow["MEDNORMALNAME_VCHR"].ToString() + "'," + (SaveRow["IFSTOP_INT"].ToString().Trim() == "0" ? 1 : 0) + ")";
 
@@ -1265,11 +1429,11 @@ values
 
                 // string newbihDeID = objHRPSvc.m_strGetNewID("t_aid_bih_orderdic_charge", "OCMAPID_CHR", 18);
                 string newbihDeID = "";
-                strSQL = @"select lpad(seq_ocmapid.NEXTVAL,18,'0') p_strRecordID  from dual";
+                Sql = @"select lpad(seq_ocmapid.NEXTVAL,18,'0') p_strRecordID  from dual";
                 DataTable m_objTable = new DataTable();
                 try
                 {
-                    lngReg = objHRPSvc.lngGetDataTableWithoutParameters(strSQL, ref m_objTable);
+                    lngReg = objHRPSvc.lngGetDataTableWithoutParameters(Sql, ref m_objTable);
                     if (m_objTable.Rows.Count > 0)
                     {
                         newbihDeID = m_objTable.Rows[0][0].ToString();
@@ -1284,7 +1448,7 @@ values
 
 
 
-                strSQL = @"insert into t_aid_bih_orderdic_charge
+                Sql = @"insert into t_aid_bih_orderdic_charge
             (ocmapid_chr, orderdicid_chr, itemid_chr, qty_int, type_int
             ) values(?,?,?,?,?)";
                 try
@@ -1298,7 +1462,7 @@ values
                     objDPArr[4].Value = SaveRow["IPCHARGEFLG_INT"].ToString();
 
                     long lngEff = -1;
-                    lngReg = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                    lngReg = objHRPSvc.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
                     #region 写入痕迹记录
                     string strSQLMark = @"INSERT INTO t_aid_bih_orderdic_charge
             (ocmapid_chr, orderdicid_chr, itemid_chr, qty_int, type_int
@@ -1321,7 +1485,7 @@ values
                 //新增药品时亦可操作比例
                 if (p_dtbChargeItem == null || p_dtbChargeItem.Rows.Count == 0)
                 {
-                    strSQL = @"select 100                decdiscount,
+                    Sql = @"select 100                decdiscount,
 			 b.paytypeid_chr    copayid_chr,
 			 b.paytypename_vchr catname
 	from t_bse_patientpaytype b
@@ -1330,7 +1494,7 @@ values
 
                     try
                     {
-                        lngReg = objHRPSvc.DoGetDataTable(strSQL, ref p_dtbChargeItem);
+                        lngReg = objHRPSvc.DoGetDataTable(Sql, ref p_dtbChargeItem);
                     }
                     catch (Exception objEx)
                     {
@@ -1345,7 +1509,7 @@ values
                     IDataParameter[] objDPArr = null;
                     for (int k1 = 0; k1 < p_dtbChargeItem.Rows.Count; k1++)
                     {
-                        strSQL = @"insert into t_aid_inschargeitem(precent_dec,itemid_chr,copayid_chr) values(?,?,?)";
+                        Sql = @"insert into t_aid_inschargeitem(precent_dec,itemid_chr,copayid_chr) values(?,?,?)";
                         try
                         {
                             objHRPSvc.CreateDatabaseParameter(3, out objDPArr);
@@ -1353,7 +1517,7 @@ values
                             objDPArr[1].Value = newItemID;
                             objDPArr[2].Value = p_dtbChargeItem.Rows[k1]["copayid_chr"].ToString();
 
-                            lngReg = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                            lngReg = objHRPSvc.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
                         }
                         catch (Exception objEx)
                         {
@@ -1453,12 +1617,167 @@ values
             }
             DataRow SaveRow = dtbSave.Rows[0];
             long lngReg = 0;
+            string Sql = string.Empty;
             clsRecordMark_VO Markvo = new clsRecordMark_VO();
             //clsRecordMark recordMark = new clsRecordMark();
 
             com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
             com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRP = new clsHRPTableService();
-            string strSQL = @"update t_bse_medicine
+
+            #region save t_sys_updateitemlog
+
+            Sql = @"update t_bse_medicine
+   set medicinename_vchr     = {0},
+       medicinetypeid_chr    = {1},
+       medspec_vchr          = {2},
+       medicinestdid_chr     = {3},
+       pycode_chr            = {4},
+       wbcode_chr            = {5},
+       medicinepreptype_chr  = {6},
+       isanaesthesia_chr     = {7},
+       ischlorpromazine_chr  = {8},
+       iscostly_chr          = {9},
+       isself_chr            = {10},
+       isimport_chr          = {11},
+       isselfpay_chr         = {12},
+       medicineengname_vchr  = {13},
+       assistcode_chr        = {14},
+       dosage_dec            = {15},
+       dosageunit_chr        = {16},
+       opunit_chr            = {17},
+       ipunit_chr            = {18},
+       packqty_dec           = {19},
+       tradeprice_mny        = {20},
+       unitprice_mny         = {21},
+       mindosage_dec         = {22},
+       maxdosage_dec         = {23},
+       productorid_chr       = {24},
+       poflag_int            = {25},
+       usageid_chr           = {26},
+       opchargeflg_int       = {27},
+       ipchargeflg_int       = {28},
+       ifstop_int            = {29},
+       insuranceid_vchr      = {30},
+       standard_int          = {31},
+       nmldosage_dec         = {32},
+       adultdosage_dec       = {33},
+       childdosage_dec       = {34},
+       medicinestdesc_vchr   = {35},
+       hype_int              = {36},
+       insurancetype_vchr    = {37},
+       mednormalname_vchr    = {38},
+       permitno_vchr         = {39},
+       pharmaid_chr          = {40},
+       medicnetype_int       = {41},
+       ispoison_chr          = {42},
+       ischlorpromazine2_chr = {43},
+       deptprep_int          = {44},
+       ordercateid_chr       = {45},
+       limitunitprice_mny    = {46},
+       freqid_chr            = {47},
+       inpinsurancetype_vchr = {48},
+       ordercateid1_chr      = {49},
+       putmedtype_int        = {50},
+       ipunitprice_mny       = {51},
+       standarddate          = {52},
+       requestunit_chr       = {53},
+       requestpackqty_dec    = {54},
+       expenselimit_mny      = {55},
+       diffprice_mny         = {56},
+       medbagunit            = {57},
+       highriskflag          = {58},
+       isproducedrugs        = {59},
+       transno               = {60},
+       varietycode           = {61}
+ where medicineid_chr = {62}";
+
+            int n = -1;
+            object[] objs = new object[63];
+            objs[++n] = SaveRow["MEDICINENAME_VCHR"].ToString();
+            objs[++n] = SaveRow["MEDICINETYPEID_CHR"].ToString();
+            objs[++n] = SaveRow["MEDSPEC_VCHR"].ToString();
+            objs[++n] = SaveRow["MEDICINESTDID_CHR"].ToString();
+            objs[++n] = SaveRow["PYCODE_CHR"].ToString();
+            objs[++n] = SaveRow["WBCODE_CHR"].ToString();
+            objs[++n] = SaveRow["MEDICINEPREPTYPE_CHR"].ToString();
+            objs[++n] = SaveRow["ISANAESTHESIA_CHR"].ToString();
+            objs[++n] = SaveRow["ISCHLORPROMAZINE_CHR"].ToString();
+            objs[++n] = SaveRow["ISCOSTLY_CHR"].ToString();
+            objs[++n] = SaveRow["ISSELF_CHR"].ToString();
+            objs[++n] = SaveRow["ISIMPORT_CHR"].ToString();
+            objs[++n] = SaveRow["ISSELFPAY_CHR"].ToString();
+            objs[++n] = SaveRow["MEDICINEENGNAME_VCHR"].ToString();
+            objs[++n] = SaveRow["ASSISTCODE_CHR"].ToString();
+            objs[++n] = SaveRow["DOSAGE_DEC"].ToString();
+            objs[++n] = SaveRow["DOSAGEUNIT_CHR"].ToString();
+            objs[++n] = SaveRow["OPUNIT_CHR"].ToString();
+            objs[++n] = SaveRow["IPUNIT_CHR"].ToString();
+            objs[++n] = SaveRow["PACKQTY_DEC"].ToString();
+            objs[++n] = SaveRow["TRADEPRICE_MNY"].ToString();
+            objs[++n] = SaveRow["UNITPRICE_MNY"].ToString();
+            objs[++n] = SaveRow["MINDOSAGE_DEC"].ToString();
+            objs[++n] = SaveRow["MAXDOSAGE_DEC"].ToString();
+            objs[++n] = SaveRow["PRODUCTORID_CHR"].ToString();
+            objs[++n] = SaveRow["POFLAG_INT"].ToString();
+            objs[++n] = SaveRow["USAGEID_CHR"].ToString();
+            objs[++n] = SaveRow["OPCHARGEFLG_INT"].ToString();
+            objs[++n] = SaveRow["IPCHARGEFLG_INT"].ToString();
+            objs[++n] = SaveRow["IFSTOP_INT"].ToString();
+            objs[++n] = SaveRow["INSURANCEID_VCHR"].ToString();
+            objs[++n] = SaveRow["STANDARD_INT"].ToString();
+            objs[++n] = SaveRow["NMLDOSAGE_DEC"].ToString();
+            objs[++n] = SaveRow["ADULTDOSAGE_DEC"].ToString();
+            objs[++n] = SaveRow["CHILDDOSAGE_DEC"].ToString();
+            objs[++n] = SaveRow["MEDICINESTDESC_VCHR"].ToString();
+            objs[++n] = SaveRow["HYPE_INT"].ToString();
+            objs[++n] = SaveRow["INSURANCETYPE_VCHR"].ToString();
+            objs[++n] = SaveRow["MEDNORMALNAME_VCHR"].ToString();
+            objs[++n] = SaveRow["PERMITNO_VCHR"].ToString();
+            objs[++n] = SaveRow["pharmaid_chr"].ToString();
+            objs[++n] = SaveRow["MEDICNETYPE_INT"].ToString();
+            objs[++n] = SaveRow["ISPOISON_CHR"].ToString();
+            objs[++n] = SaveRow["ISCHLORPROMAZINE2_CHR"].ToString();
+            objs[++n] = SaveRow["DEPTPREP_INT"].ToString();
+            objs[++n] = SaveRow["ORDERCATEID_CHR"].ToString();
+            objs[++n] = SaveRow["LIMITUNITPRICE_MNY"].ToString();
+            objs[++n] = SaveRow["FREQID_CHR"].ToString();
+            objs[++n] = SaveRow["INPINSURANCETYPE_VCHR"].ToString();
+            objs[++n] = SaveRow["ORDERCATEID1_CHR"].ToString();
+            objs[++n] = SaveRow["PUTMEDTYPE_INT"].ToString();
+            objs[++n] = SaveRow["ipunitprice_mny"].ToString();
+            objs[++n] = SaveRow["STANDARDDATE"].ToString();
+            objs[++n] = SaveRow["REQUESTUNIT_CHR"].ToString();
+            objs[++n] = SaveRow["REQUESTPACKQTY_DEC"].ToString();
+            objs[++n] = SaveRow["EXPENSELIMIT_MNY"].ToString();
+            objs[++n] = SaveRow["DIFFPRICE_MNY"].ToString();
+            objs[++n] = SaveRow["medbagunit"].ToString();
+            objs[++n] = SaveRow["highriskflag"].ToString();
+            objs[++n] = SaveRow["isproducedrugs"].ToString();
+            objs[++n] = SaveRow["transno"].ToString();
+            objs[++n] = SaveRow["varietycode"].ToString();
+            objs[++n] = SaveRow["MEDICINEID_CHR"].ToString();
+
+            if (dtbSave.TableName.IndexOf("|") > 0)
+            {
+                string[] data = dtbSave.TableName.Split('|');
+                if (data.Length == 4)
+                {
+                    EntitySysItemUpdateLog updateLogVo = new EntitySysItemUpdateLog()
+                    {
+                        fTypeId = 1,
+                        fOperId = data[1],
+                        fOperName = data[2],
+                        fIpAddr = data[3],
+                        fKeyword = SaveRow["MEDICINEID_CHR"].ToString(),
+                        fUpdateSql = string.Format(Sql, objs)
+                    };
+                    (new clsChargeItemSvc()).SaveSysItemUpdateLog(updateLogVo);
+                }
+            }
+            #endregion
+
+
+            Sql = @"update t_bse_medicine
    set medicinename_vchr     = ?,
        medicinetypeid_chr    = ?,
        medspec_vchr          = ?,
@@ -1515,12 +1834,12 @@ values
        requestunit_chr       = ?,
        requestpackqty_dec    = ?,
        expenselimit_mny      = ?,
-       diffprice_mny      = ?,
+       diffprice_mny         = ?,
        medbagunit            = ?,
-       highriskflag         = ?,
-       isproducedrugs       = ?,
-       transno              = ?,
-       varietycode          = ?    
+       highriskflag          = ?,
+       isproducedrugs        = ?,
+       transno               = ?,
+       varietycode           = ?
  where medicineid_chr = ?";
 
             #region 写入痕迹记录
@@ -1601,11 +1920,11 @@ values
                 objDPArr[62].Value = SaveRow["MEDICINEID_CHR"].ToString();
 
                 long lngEff = -1;
-                lngReg = objHRP.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                lngReg = objHRP.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
 
                 if (lngReg > 0)
                 {
-                    strSQL = @"insert into t_bse_medicine_history
+                    Sql = @"insert into t_bse_medicine_history
   (medicineid_chr,
    modifydate_dat,
    modifyuserid_chr,
@@ -1638,7 +1957,7 @@ values
                     objDPArr[2].Value = SaveRow["MEDICINEID_CHR"].ToString();
 
                     lngEff = -1;
-                    lngReg = objHRP.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                    lngReg = objHRP.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
                 }
             }
             catch (Exception objEx)
@@ -1649,7 +1968,7 @@ values
             }
             if (isInsertItem == 1)
             {
-                strSQL = @"select itemid_chr from t_bse_chargeitem where  itemsrcid_vchr=? and itemsrctype_int=1";
+                Sql = @"select itemid_chr from t_bse_chargeitem where  itemsrcid_vchr=? and itemsrctype_int=1";
                 DataTable tbIs = new DataTable();
                 try
                 {
@@ -1657,7 +1976,7 @@ values
                     objHRP.CreateDatabaseParameter(1, out objDPArr);
                     objDPArr[0].Value = SaveRow["MEDICINEID_CHR"].ToString();
 
-                    lngReg = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref tbIs, objDPArr);
+                    lngReg = objHRPSvc.lngGetDataTableWithParameters(Sql, ref tbIs, objDPArr);
 
                 }
                 catch (Exception objEx)
@@ -1674,7 +1993,7 @@ values
 
                 if (tbIs.Rows.Count == 0)//如果收费项目中没有此记录则插入一件数据
                 {
-                    strSQL = @"select itemcatid_chr from t_aid_chargemderla where medicinetypeid_chr=?";
+                    Sql = @"select itemcatid_chr from t_aid_chargemderla where medicinetypeid_chr=?";
                     DataTable tbCHARGEMDERLA = new DataTable();
                     try
                     {
@@ -1682,7 +2001,7 @@ values
                         objHRPSvc.CreateDatabaseParameter(1, out objDPArr);
                         objDPArr[0].Value = SaveRow["MEDICINETYPEID_CHR"].ToString();
 
-                        lngReg = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref tbCHARGEMDERLA, objDPArr);
+                        lngReg = objHRPSvc.lngGetDataTableWithParameters(Sql, ref tbCHARGEMDERLA, objDPArr);
 
                     }
                     catch (Exception objEx)
@@ -1700,7 +2019,7 @@ values
                         SaveRow["MEDICINETYPEID_CHR"] = "";
                     }
                     string newItemID = objHRPSvc.m_strGetNewID("t_bse_chargeitem", "ITEMID_CHR", 10);
-                    strSQL = @"insert into t_bse_chargeitem
+                    Sql = @"insert into t_bse_chargeitem
   (itemid_chr,
    itemname_vchr,
    itemcode_vchr,
@@ -1783,7 +2102,7 @@ values
                         objDPArr[34].Value = SaveRow["DIFFPRICE_MNY"].ToString();
 
                         long lngEff = -1;
-                        lngReg = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                        lngReg = objHRPSvc.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
                         #region 写入痕迹记录
                         strSQLForMark = @"insert into t_bse_chargeitem(ITEMID_CHR,ITEMNAME_VCHR,ITEMCODE_VCHR,ITEMPYCODE_CHR,ITEMWBCODE_CHR,ITEMSRCID_VCHR,ITEMSRCTYPE_INT,ITEMSPEC_VCHR,ITEMPRICE_MNY,ITEMOPUNIT_CHR,ITEMIPUNIT_CHR,DOSAGE_DEC,DOSAGEUNIT_CHR,ISGROUPITEM_INT,USAGEID_CHR,INSURANCEID_CHR,PACKQTY_DEC,TRADEPRICE_MNY,POFLAG_INT,ISRICH_INT,OPCHARGEFLG_INT,ITEMENGNAME_VCHR,IFSTOP_INT,PDCAREA_VCHR,IPCHARGEFLG_INT,ITEMCATID_CHR,INSURANCETYPE_VCHR,ITEMBIHCTYPE_CHR,ITEMCOMMNAME_VCHR,ORDERCATEID_CHR,FREQID_CHR,INPINSURANCETYPE_VCHR,ORDERCATEID1_CHR,ISSELFPAY_CHR,DIFFPRICE_MNY) values('" + newItemID + "','" + SaveRow["MEDICINENAME_VCHR"].ToString() + "','" + SaveRow["ASSISTCODE_CHR"].ToString() + "','" + SaveRow["PYCODE_CHR"].ToString() + "','" + SaveRow["WBCODE_CHR"].ToString() + "','" + SaveRow["MEDICINEID_CHR"].ToString() + "',1,'" + SaveRow["MEDSPEC_VCHR"].ToString() + "'," + SaveRow["UNITPRICE_MNY"].ToString() + ",'" + SaveRow["OPUNIT_CHR"].ToString() + "','" + SaveRow["IPUNIT_CHR"].ToString() + "'," + SaveRow["DOSAGE_DEC"].ToString() + ",'" + SaveRow["DOSAGEUNIT_CHR"].ToString() + "',0,'" + SaveRow["USAGEID_CHR"].ToString() + "','" + SaveRow["INSURANCEID_VCHR"].ToString() + "'," + SaveRow["PACKQTY_DEC"].ToString() + "," + SaveRow["TRADEPRICE_MNY"].ToString() + "," + SaveRow["POFLAG_INT"].ToString() + "," + SaveRow["ISCOSTLY_CHR"].ToString() + "," + SaveRow["OPCHARGEFLG_INT"].ToString() + ",'" + SaveRow["MEDICINEENGNAME_VCHR"].ToString() + "'," + SaveRow["IFSTOP_INT"].ToString() + ",'" + SaveRow["PRODUCTORID_CHR"].ToString() + "'," + SaveRow["IPCHARGEFLG_INT"].ToString() + ",'" + SaveRow["MEDICINETYPEID_CHR"].ToString() + "','" + SaveRow["INSURANCETYPE_VCHR"].ToString() + "','" + SaveRow["ITEMBIHCTYPE_CHR"].ToString() + "','" + SaveRow["MEDNORMALNAME_VCHR"].ToString() + "','" + SaveRow["ORDERCATEID_CHR"].ToString() + "','" + SaveRow["FREQID_CHR"].ToString() + "','" + SaveRow["INPINSURANCETYPE_VCHR"].ToString() + "','" + SaveRow["ORDERCATEID1_CHR"].ToString() + "','" + SaveRow["ISSELFPAY_CHR"].ToString() + "','" + SaveRow["DIFFPRICE_MNY "].ToString() + "')";
                         Markvo.m_strOPERATORID_CHR = strEmpID;
@@ -1802,11 +2121,11 @@ values
                     #region 插入诊疗项目数据
 
                     string newbihID = "";
-                    strSQL = @"select lpad(seq_ORDERDICID.NEXTVAL,10,'0') p_strRecordID   from dual";
+                    Sql = @"select lpad(seq_ORDERDICID.NEXTVAL,10,'0') p_strRecordID   from dual";
                     DataTable dtbih = new DataTable();
                     try
                     {
-                        lngReg = objHRPSvc.DoGetDataTable(strSQL, ref dtbih);
+                        lngReg = objHRPSvc.DoGetDataTable(Sql, ref dtbih);
 
                         if (dtbih.Rows.Count > 0)
                         {
@@ -1821,7 +2140,7 @@ values
                         bool blnRes = objLogger.LogError(objEx);
                     }
 
-                    strSQL = @"select a.ordercateid_chr from t_bse_chgcatevsordercate a,t_aid_chargemderla
+                    Sql = @"select a.ordercateid_chr from t_bse_chgcatevsordercate a,t_aid_chargemderla
  b where b.itemcatid_chr=a.itemcatid_chr and b.medicinetypeid_chr=?";
                     dtbih = new DataTable();
                     try
@@ -1830,7 +2149,7 @@ values
                         objHRPSvc.CreateDatabaseParameter(1, out objDPArr);
                         objDPArr[0].Value = SaveRow["MEDICINETYPEID_CHR"].ToString();
 
-                        lngReg = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref dtbih, objDPArr);
+                        lngReg = objHRPSvc.lngGetDataTableWithParameters(Sql, ref dtbih, objDPArr);
 
                     }
                     catch (Exception objEx)
@@ -1847,7 +2166,7 @@ values
                     {
                         SaveRow["MEDICINETYPEID_CHR"] = "";
                     }
-                    strSQL = @"insert into t_bse_bih_orderdic
+                    Sql = @"insert into t_bse_bih_orderdic
   (orderdicid_chr,
    name_chr,
    des_vchr,
@@ -1883,7 +2202,7 @@ values
                         objDPArr[12].Value = SaveRow["IFSTOP_INT"].ToString().Trim() == "0" ? 1 : 0;
 
                         long lngEff = -1;
-                        lngReg = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                        lngReg = objHRPSvc.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
                         #region 写入痕迹记录
                         strSQLForMark = @"insert into t_bse_bih_orderdic(ORDERDICID_CHR,NAME_CHR,DES_VCHR,USERCODE_CHR,WBCODE_CHR,PYCODE_CHR,ORDERCATEID_CHR,ITEMID_CHR,NULLITEMDOSAGEUNIT_CHR,NULLITEMDOSETYPEID_CHR,ENGNAME_VCHR,COMMNAME_VCHR,STATUS_INT) values('" + newbihID + "','" + SaveRow["MEDICINENAME_VCHR"].ToString() + "','药库自己生成','" + SaveRow["ASSISTCODE_CHR"].ToString() + "','" + SaveRow["WBCODE_CHR"].ToString() + "','" + SaveRow["PYCODE_CHR"].ToString() + "','" + SaveRow["MEDICINETYPEID_CHR"].ToString() + "','" + newItemID + "','" + SaveRow["DOSAGEUNIT_CHR"].ToString() + "','" + SaveRow["USAGEID_CHR"].ToString() + "','" + SaveRow["MEDICINEENGNAME_VCHR"].ToString() + "','" + SaveRow["MEDNORMALNAME_VCHR"].ToString() + "'," + (SaveRow["IFSTOP_INT"].ToString().Trim() == "0" ? 1 : 0) + ")";
                         Markvo.m_strOPERATORID_CHR = strEmpID;
@@ -1901,11 +2220,11 @@ values
 
                     // string newbihDeID = objHRPSvc.m_strGetNewID("t_aid_bih_orderdic_charge", "OCMAPID_CHR", 18);
                     string newbihDeID = "";
-                    strSQL = @"select lpad(seq_ocmapid.NEXTVAL,18,'0') p_strRecordID  from dual";
+                    Sql = @"select lpad(seq_ocmapid.NEXTVAL,18,'0') p_strRecordID  from dual";
                     DataTable m_objTable = new DataTable();
                     try
                     {
-                        lngReg = objHRPSvc.lngGetDataTableWithoutParameters(strSQL, ref m_objTable);
+                        lngReg = objHRPSvc.lngGetDataTableWithoutParameters(Sql, ref m_objTable);
                         if (m_objTable.Rows.Count > 0)
                         {
                             newbihDeID = m_objTable.Rows[0][0].ToString();
@@ -1920,7 +2239,7 @@ values
 
 
 
-                    strSQL = @"insert into t_aid_bih_orderdic_charge
+                    Sql = @"insert into t_aid_bih_orderdic_charge
             (ocmapid_chr, orderdicid_chr, itemid_chr, qty_int, type_int
             ) values(?,?,?,?,?)";
                     try
@@ -1934,7 +2253,7 @@ values
                         objDPArr[4].Value = SaveRow["IPCHARGEFLG_INT"].ToString();
 
                         long lngEff = -1;
-                        lngReg = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                        lngReg = objHRPSvc.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
                         #region 写入痕迹记录
                         strSQLForMark = @"INSERT INTO t_aid_bih_orderdic_charge
             (ocmapid_chr, orderdicid_chr, itemid_chr, qty_int, type_int
@@ -1958,7 +2277,7 @@ values
                 else//存在修改
                 {
 
-                    strSQL = @"update t_bse_chargeitem
+                    Sql = @"update t_bse_chargeitem
    set itemname_vchr         = ?,
        itempycode_chr        = ?,
        itemwbcode_chr        = ?,
@@ -2045,7 +2364,7 @@ values
                         objDPArr[35].Value = SaveRow["MEDICINEID_CHR"].ToString();
 
                         long lngEff = -1;
-                        lngReg = objHRP.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                        lngReg = objHRP.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
                     }
                     catch (Exception objEx)
                     {
@@ -2053,7 +2372,7 @@ values
                         com.digitalwave.Utility.clsLogText objLogger = new clsLogText();
                         bool blnRes = objLogger.LogError(objEx);
                     }
-                    strSQL = @"select orderdicid_chr
+                    Sql = @"select orderdicid_chr
   from t_bse_bih_orderdic
  where itemid_chr in (select itemid_chr
                         from t_bse_chargeitem
@@ -2066,7 +2385,7 @@ values
                         objHRP.CreateDatabaseParameter(1, out objDPArr);
                         objDPArr[0].Value = SaveRow["MEDICINEID_CHR"].ToString();
 
-                        lngReg = objHRP.lngGetDataTableWithParameters(strSQL, ref m_objTable, objDPArr);
+                        lngReg = objHRP.lngGetDataTableWithParameters(Sql, ref m_objTable, objDPArr);
 
                     }
                     catch (Exception objEx)
@@ -2077,7 +2396,7 @@ values
                     }
                     if (lngReg > 0 && m_objTable.Rows.Count > 0)
                     {
-                        strSQL = @"update t_bse_bih_orderdic a
+                        Sql = @"update t_bse_bih_orderdic a
    set a.name_chr        = ?,
        a.usercode_chr    = ?,
        a.wbcode_chr      = ?,
@@ -2106,7 +2425,7 @@ values
                             objDPArr[8].Value = SaveRow["MEDICINEID_CHR"].ToString();
 
                             long lngEff = -1;
-                            lngReg = objHRP.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                            lngReg = objHRP.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
                         }
                         catch (Exception objEx)
                         {
@@ -2122,11 +2441,11 @@ values
                             #region 插入诊疗项目数据
 
                             string newbihID = "";
-                            strSQL = @"select lpad(seq_ORDERDICID.NEXTVAL,10,'0') p_strRecordID   from dual";
+                            Sql = @"select lpad(seq_ORDERDICID.NEXTVAL,10,'0') p_strRecordID   from dual";
                             DataTable dtbih = new DataTable();
                             try
                             {
-                                lngReg = objHRPSvc.DoGetDataTable(strSQL, ref dtbih);
+                                lngReg = objHRPSvc.DoGetDataTable(Sql, ref dtbih);
 
                                 if (dtbih.Rows.Count > 0)
                                 {
@@ -2141,7 +2460,7 @@ values
                                 bool blnRes = objLogger.LogError(objEx);
                             }
 
-                            strSQL = @"select a.ordercateid_chr from t_bse_chgcatevsordercate a,t_aid_chargemderla
+                            Sql = @"select a.ordercateid_chr from t_bse_chgcatevsordercate a,t_aid_chargemderla
  b where b.itemcatid_chr=a.itemcatid_chr and b.medicinetypeid_chr=?";
                             dtbih = new DataTable();
                             try
@@ -2150,7 +2469,7 @@ values
                                 objHRP.CreateDatabaseParameter(1, out objDPArr);
                                 objDPArr[0].Value = SaveRow["MEDICINETYPEID_CHR"].ToString();
 
-                                lngReg = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref dtbih, objDPArr);
+                                lngReg = objHRPSvc.lngGetDataTableWithParameters(Sql, ref dtbih, objDPArr);
 
                             }
                             catch (Exception objEx)
@@ -2167,7 +2486,7 @@ values
                             {
                                 SaveRow["MEDICINETYPEID_CHR"] = "";
                             }
-                            strSQL = @"insert into t_bse_bih_orderdic
+                            Sql = @"insert into t_bse_bih_orderdic
   (orderdicid_chr,
    name_chr,
    des_vchr,
@@ -2203,7 +2522,7 @@ values
                                 objDPArr[12].Value = SaveRow["IFSTOP_INT"].ToString().Trim() == "0" ? 1 : 0;
 
                                 long lngEff = -1;
-                                lngReg = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                                lngReg = objHRPSvc.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
                                 #region 写入痕迹记录
                                 strSQLForMark = @"insert into t_bse_bih_orderdic(ORDERDICID_CHR,NAME_CHR,DES_VCHR,USERCODE_CHR,WBCODE_CHR,PYCODE_CHR,ORDERCATEID_CHR,ITEMID_CHR,NULLITEMDOSAGEUNIT_CHR,NULLITEMDOSETYPEID_CHR,ENGNAME_VCHR,COMMNAME_VCHR,STATUS_INT) values('" + newbihID + "','" + SaveRow["MEDICINENAME_VCHR"].ToString() + "','药库自己生成','" + SaveRow["ASSISTCODE_CHR"].ToString() + "','" + SaveRow["WBCODE_CHR"].ToString() + "','" + SaveRow["PYCODE_CHR"].ToString() + "','" + SaveRow["MEDICINETYPEID_CHR"].ToString() + "','" + tbIs.Rows[0][0].ToString() + "','" + SaveRow["DOSAGEUNIT_CHR"].ToString() + "','" + SaveRow["USAGEID_CHR"].ToString() + "','" + SaveRow["MEDICINEENGNAME_VCHR"].ToString() + "','" + SaveRow["MEDNORMALNAME_VCHR"].ToString() + "'," + (SaveRow["IFSTOP_INT"].ToString().Trim() == "0" ? 1 : 0) + ")";
                                 Markvo.m_strOPERATORID_CHR = strEmpID;
@@ -2221,11 +2540,11 @@ values
 
                             // string newbihDeID = objHRPSvc.m_strGetNewID("t_aid_bih_orderdic_charge", "OCMAPID_CHR", 18);
                             string newbihDeID = "";
-                            strSQL = @"select lpad(seq_ocmapid.NEXTVAL,18,'0') p_strRecordID  from dual";
+                            Sql = @"select lpad(seq_ocmapid.NEXTVAL,18,'0') p_strRecordID  from dual";
                             m_objTable = new DataTable();
                             try
                             {
-                                lngReg = objHRPSvc.lngGetDataTableWithoutParameters(strSQL, ref m_objTable);
+                                lngReg = objHRPSvc.lngGetDataTableWithoutParameters(Sql, ref m_objTable);
                                 if (m_objTable.Rows.Count > 0)
                                 {
                                     newbihDeID = m_objTable.Rows[0][0].ToString();
@@ -2240,7 +2559,7 @@ values
 
 
 
-                            strSQL = @"insert into t_aid_bih_orderdic_charge
+                            Sql = @"insert into t_aid_bih_orderdic_charge
             (ocmapid_chr, orderdicid_chr, itemid_chr, qty_int, type_int
             ) values(?,?,?,?,?)";
                             try
@@ -2254,7 +2573,7 @@ values
                                 objDPArr[4].Value = SaveRow["IPCHARGEFLG_INT"].ToString();
 
                                 long lngEff = -1;
-                                lngReg = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEff, objDPArr);
+                                lngReg = objHRPSvc.lngExecuteParameterSQL(Sql, ref lngEff, objDPArr);
                                 #region 写入痕迹记录
                                 strSQLForMark = @"INSERT INTO t_aid_bih_orderdic_charge
             (ocmapid_chr, orderdicid_chr, itemid_chr, qty_int, type_int

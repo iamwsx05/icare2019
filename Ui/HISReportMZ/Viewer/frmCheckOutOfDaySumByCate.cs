@@ -149,6 +149,9 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             this.FenyuanSFCdeptIDArr = clsPublic.m_ArrGettoken(strParam, ";");
 
             ((clsControllCheckOutOfDaySumCate)this.objController).BirthPayTypeID = clsPublic.m_strGetSysparm("0084");
+            ((clsControllCheckOutOfDaySumCate)this.objController).JsPayTypeId = clsPublic.m_strGetSysparm("0086");
+            ((clsControllCheckOutOfDaySumCate)this.objController).mzjzPayTypeId = clsPublic.m_strGetSysparm("0095");
+            
         }
 
         private void m_mthGetCheckManByXML(out DataTable dtbResult, string internalFlag)

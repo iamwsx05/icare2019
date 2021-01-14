@@ -258,6 +258,7 @@ namespace com.digitalwave.iCare.gui.LIS
                                             vo.m_strAbnormalFlag = dr["abnormal_flag_chr"].ToString();
                                             vo.m_strDeviceCheckItemName = dr["device_check_item_name_vchr"].ToString();
                                             vo.m_strResult = dr["result_vchr"].ToString();
+                                            vo.m_strDeviceSampleID = dr["check_item_id_chr"].ToString();
                                             lstResult.Add(vo);
 
                                         }
@@ -266,8 +267,23 @@ namespace com.digitalwave.iCare.gui.LIS
                                     {
                                         foreach (clsDeviceReslutVO item in lstResult)
                                         {
+                                            
                                             if (aidRemarkVO.highOrLow == 1)
                                             {
+                                                if (!string.IsNullOrEmpty(aidRemarkVO.checkItemId))
+                                                {
+                                                    clsDeviceReslutVO vo = lstResult.Find(r=>r.m_strDeviceSampleID == aidRemarkVO.checkItemId);
+                                                    if(vo != null)
+                                                    {
+                                                        if (vo.m_strAbnormalFlag == "H")
+                                                        {
+                                                            isPass = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                    break;
+                                                }
+
                                                 if (item.m_strAbnormalFlag == "H")
                                                 {
                                                     isPass = true;
@@ -276,6 +292,20 @@ namespace com.digitalwave.iCare.gui.LIS
                                             }
                                             else if (aidRemarkVO.highOrLow == 2)
                                             {
+                                                if (!string.IsNullOrEmpty(aidRemarkVO.checkItemId))
+                                                {
+                                                    clsDeviceReslutVO vo = lstResult.Find(r => r.m_strDeviceSampleID == aidRemarkVO.checkItemId);
+                                                    if (vo != null)
+                                                    {
+                                                        if (vo.m_strAbnormalFlag == "L")
+                                                        {
+                                                            isPass = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                    break;
+                                                }
+
                                                 if (item.m_strAbnormalFlag == "L")
                                                 {
                                                     isPass = true;
@@ -284,6 +314,20 @@ namespace com.digitalwave.iCare.gui.LIS
                                             }
                                             else  if(aidRemarkVO.highOrLow == 3)
                                             {
+                                                if (!string.IsNullOrEmpty(aidRemarkVO.checkItemId))
+                                                {
+                                                    clsDeviceReslutVO vo = lstResult.Find(r => r.m_strDeviceSampleID == aidRemarkVO.checkItemId);
+                                                    if (vo != null)
+                                                    {
+                                                        if (vo.m_strResult.Contains("阳"))
+                                                        {
+                                                            isPass = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                    break;
+                                                }
+
                                                 if (item.m_strResult.Contains("阳"))
                                                 {
                                                     isPass = true;
@@ -656,7 +700,7 @@ namespace com.digitalwave.iCare.gui.LIS
         #region 打印报告单实验室提示
         private float m_fltPrintSummary(float p_fltX, float p_fltY, float p_fltPrintWidth)
         {
-            string summaryInfo = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim() + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
+            string summaryInfo = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim()+ "\r\n" + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
 
             if (!m_blnSummaryEmptyVisible && summaryInfo == "")
                 return p_fltY;
@@ -977,7 +1021,7 @@ namespace com.digitalwave.iCare.gui.LIS
         #region 打印页信息
         private void m_mthPrintDetail()
         {
-            string strSummary = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim() + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
+            string strSummary = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim() + "\r\n" + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
             SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, strSummary, m_fltPrintWidth, m_fltTitleSpace,
                 m_fltItemSpace);
             if (m_objPrintPage == null)
@@ -1022,7 +1066,7 @@ namespace com.digitalwave.iCare.gui.LIS
         //茶山式检验报告样式
         private void m_mthPrintDetail_DGCS()
         {
-            string strSummary = m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim() + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
+            string strSummary = m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim() + "\r\n" + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
             SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, strSummary, m_fltPrintWidth, m_fltTitleSpace,
                 m_fltItemSpace);
             if (m_objPrintPage == null)
@@ -1656,7 +1700,7 @@ namespace com.digitalwave.iCare.gui.LIS
             #endregion
 
             //实验室提示
-            string strSummary = m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim() + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
+            string strSummary = m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim() + "\r\n" + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
             SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, strSummary, m_fltPrintWidth, m_fltTitleSpace, m_fltItemSpace);
             if (sf.Height > 0 && sf.Height > p_fltMaxHeight - fltY)
             {
@@ -1820,7 +1864,7 @@ namespace com.digitalwave.iCare.gui.LIS
                 lstAppUnitID.AddRange(appUnitId.Split(';'));
             }
 
-            string Sql = @"select appunitid, appunitname, sex, highorlow, remarkinfo, keyword,appunitGroup from t_aid_lis_report_remark";
+            string Sql = @"select appunitid, appunitname, sex, highorlow, remarkinfo, keyword,appunitGroup,checkItemId from t_aid_lis_report_remark";
             DataTable dt = null;
             (new weCare.Proxy.ProxyBase()).Service.GetDataTable(Sql, out dt);
             if (dt != null && dt.Rows.Count > 0)
@@ -1836,8 +1880,8 @@ namespace com.digitalwave.iCare.gui.LIS
                         highOrLow = Function.Int(dr["highorlow"].ToString()),
                         remarkInfo = dr["remarkinfo"].ToString(),
                         keyWord = dr["keyword"].ToString(),
-                        appunitgroup = Function.Int(dr["appunitGroup"].ToString())
-
+                        appunitgroup = Function.Int(dr["appunitGroup"].ToString()),
+                        checkItemId = dr["checkItemId"].ToString()
                     });
                 }
             }
@@ -1942,6 +1986,7 @@ namespace com.digitalwave.iCare.gui.LIS
         public string remarkInfo { get; set; }
         public string keyWord { get; set; }
         public int appunitgroup { get; set; }
+        public string checkItemId { get; set; }
     }
 
     #region 封装打印相关的方法

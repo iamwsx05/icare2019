@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{19ADDE2D-8E19-4D17-A2E5-C3E7CF719E65}</ProjectGuid>
+    <ProjectGuid>{48E52E41-3F75-4C27-9129-92AFC52CBF1B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MAGLUMI_4000_plus</RootNamespace>

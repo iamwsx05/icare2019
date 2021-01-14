@@ -33,10 +33,10 @@
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
@@ -94,18 +94,10 @@
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             // 
-            // memoEdit1
-            // 
-            this.memoEdit1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.memoEdit1.Location = new System.Drawing.Point(2, 2);
-            this.memoEdit1.Name = "memoEdit1";
-            this.memoEdit1.Size = new System.Drawing.Size(798, 519);
-            this.memoEdit1.TabIndex = 0;
-            // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "gridColumn1";
-            this.gridColumn1.FieldName = "barCode";
+            this.gridColumn1.FieldName = "strDevice_Sample_ID";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -125,6 +117,14 @@
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
+            // 
+            // memoEdit1
+            // 
+            this.memoEdit1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.memoEdit1.Location = new System.Drawing.Point(2, 2);
+            this.memoEdit1.Name = "memoEdit1";
+            this.memoEdit1.Size = new System.Drawing.Size(798, 519);
+            this.memoEdit1.TabIndex = 0;
             // 
             // Form4
             // 

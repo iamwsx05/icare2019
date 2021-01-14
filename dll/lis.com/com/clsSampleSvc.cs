@@ -7,7 +7,8 @@ using weCare.Core.Entity;
 using com.digitalwave.Utility; //Utility.dll
 using Microsoft.VisualBasic;
 using System.Text;
-using System.Data; 
+using System.Data;
+using weCare.Core.Dac;
 
 namespace com.digitalwave.iCare.middletier.LIS
 {
@@ -18,7 +19,7 @@ namespace com.digitalwave.iCare.middletier.LIS
     [ObjectPooling(Enabled = true)]
     public class clsSampleSvc : com.digitalwave.iCare.middletier.clsMiddleTierBase
     {
-        //#region	根据标本号查询标本状态
+        #region	根据标本号查询标本状态
         //[AutoComplete]
         //public long m_lngFindStatusBySampleID( string p_strSampleID,out int p_intStatus)
         //{
@@ -60,7 +61,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         //    return lngRes;
         //}
-        //#endregion
+        #endregion
 
         #region [U] 修改检验版本号
         [AutoComplete]
@@ -793,7 +794,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         //            }
         //            return lngRes;
         //        }
-        //        #endregion
+        #endregion
 
         #region 接收标本或退回
         /// <summary>
@@ -909,7 +910,6 @@ namespace com.digitalwave.iCare.middletier.LIS
                     #endregion
                 }
 
-
                 objHRPSvc.Dispose();
             }
             catch (Exception objEx)
@@ -920,7 +920,9 @@ namespace com.digitalwave.iCare.middletier.LIS
             }
             return lngRes;
         }
+        #endregion
 
+        #region
         private void m_mthItemsConfirm(string p_strReceiveEmp, DataRow dr)
         {
             long lngEff = -1;
@@ -967,7 +969,6 @@ namespace com.digitalwave.iCare.middletier.LIS
                 bool blnRes = objLogger.LogError(objEx);
             }
         }
-        #endregion
         #endregion
 
         #region 仪器样本插队处理 童华
@@ -1140,7 +1141,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         }
         #endregion
 
-        //        #region 根据条件查询仪器与样本之间的关系 
+        #region 根据条件查询仪器与样本之间的关系 
         //        [AutoComplete]
         //        public long m_lngGetDeviceRelationVOArrByCondition(string p_strDeviceID,string p_strReceptDatFrom,
         //            string p_strReceptDatTo,out clsT_LIS_DeviceRelationVO[] p_objResultArr)
@@ -1256,7 +1257,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         //            }
         //            return lngRes;
         //        }
-        //        #endregion
+                #endregion
 
         #region [U]增加一个样本,同时修改申请样本组
         /// <summary>
@@ -1332,7 +1333,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         }
         #endregion
 
-        //        #region 根据标本的BarCode查询相应的标本及标本组信息
+        #region 根据标本的BarCode查询相应的标本及标本组信息
         //        [AutoComplete]
         //        public long m_lngGetSampleInfoByBarCode(string p_strBarCode,
         //            out DataTable p_dtbResult)
@@ -1643,7 +1644,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         //            }
         //            return lngRes;
         //        }
-        //        #endregion
+                #endregion
 
         #region [U]m_lngInsertSampleRecord  为表 t_opr_lis_sample 新增,修改,删除 记录时用
 
@@ -2112,7 +2113,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         #endregion
 
 
-        //#region 根据BarCode 得到样本VO 
+        #region 根据BarCode 得到样本VO 
         //[AutoComplete]
         //public long m_lngGetSampleVOByBarcode(string p_strBarCode,out clsT_OPR_LIS_SAMPLE_VO[] p_objResultArr)
         //{
@@ -2129,15 +2130,9 @@ namespace com.digitalwave.iCare.middletier.LIS
         //    lngRes = m_lngGetSampleVOArrByCondition(strCondition,out p_objResultArr);
         //    return lngRes;
         //}
-        //#endregion
+        #endregion
 
-
-
-
-
-
-
-        //        #region 获得全部的样品种类的列表 
+        #region 获得全部的样品种类的列表 
         //        /// <summary>
         //        /// 获得全部的样品种类的列表 
         //        /// 
@@ -2468,7 +2463,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         //            }
         //            return lngRes;
         //        }
-        //        #endregion
+         #endregion
 
         #region 核收时更新样本表的标志位信息
         [AutoComplete]
@@ -2515,12 +2510,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         #endregion
 
 
-
-
-
-
-
-        //        #region 查询所有未核收的标本（含未审请的）
+        #region 查询所有未核收的标本（含未审请的）
         //        /// <summary>
         //        /// 查询所有未核收的标本（含未审请的） 刘彬 2004.05.06
         //        /// </summary>
@@ -2549,7 +2539,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         //            }
         //            return lngRes;
         //        }
-        //        #endregion
+         #endregion
 
         #region 审核样本,并修改相关的所有标志位
         /// <summary>
@@ -2640,16 +2630,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         #endregion
 
 
-
-
-
-
-
-
-
-
-
-        //        #region 根据检验申请表号和检验组（第一层）查询已经采集的各标本数量 
+        #region 根据检验申请表号和检验组（第一层）查询已经采集的各标本数量 
         //        [AutoComplete]
         //        public long m_lngGetAllSampleCountByApplFormNoAndGroupID(string strApplFormNo,string strGroupID,out DataTable dtbGroupSampleCount)
         //        {
@@ -2732,7 +2713,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         //            }
         //            return lngRes;
         //        }
-        //        #endregion
+        #endregion
 
 
         #region 根据DeviceID和DeviceSampleID设置表t_opr_lis_device_relation的标本记录状态
@@ -2788,7 +2769,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         }
         #endregion
 
-        //#region 根据检验申请表上的号查出本申请已经有的样品。
+        #region 根据检验申请表上的号查出本申请已经有的样品。
         //[AutoComplete]
         //public long m_lngGetSampleInfoByFormId(
         //    string strFormNo, out System.Data.DataTable dtbSampleInfo)
@@ -2810,7 +2791,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         //    }
         //    return lngRes;
         //}
-        //#endregion
+        #endregion
 
 
         #region 增加一个样本到样本表中。Old
@@ -2930,7 +2911,7 @@ namespace com.digitalwave.iCare.middletier.LIS
         }
         #endregion
 
-        //        #region 查询报告单上的样本信息和一些申请单信息(有些字段是ID的要查询相关表，查出ID对应的说明) 
+        #region 查询报告单上的样本信息和一些申请单信息(有些字段是ID的要查询相关表，查出ID对应的说明) 
         //        [AutoComplete]
         //        public long  m_lngGetApplSampleInfo(string p_strSampleID,out System.Data.DataTable p_dtbSample)
         //        {
@@ -3150,7 +3131,7 @@ namespace com.digitalwave.iCare.middletier.LIS
 
         //        }
 
-        //        #endregion
+        #endregion
 
         #region 根据BarCode查询申请单所对应的所有Group(无子组)
         //        public long m_lngGetGroupByBarCode( string p_strBarCode,out System.Data.DataTable p_dtbGroup)
@@ -3821,9 +3802,7 @@ namespace com.digitalwave.iCare.middletier.LIS
             }
             return (int)lngRes;
         }
-        #endregion
-
-
+        #endregion   
     }
     #region 生成IDataParameter 数组的辅助类
     [Transaction(TransactionOption.Required)]

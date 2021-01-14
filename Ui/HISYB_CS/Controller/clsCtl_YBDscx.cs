@@ -197,6 +197,9 @@ namespace com.digitalwave.iCare.gui.HIS
                         case "71":
                             strJZLB = "生育";
                             break;
+                        case "73":
+                            strJZLB = "生育保险(产检)";
+                            break;
                         case "72":
                             strJZLB = "生育剖腹产待遇";
                             break;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using weCare.Core.Entity;
 using weCare.Core.Utils;
+using weCare.Core.Dac;
 
 namespace Lis.Service
 {
@@ -1153,11 +1154,63 @@ namespace Lis.Service
         /// <returns></returns>
         public long m_lngReceiveSample(int p_intStatus, string p_strSampleID, string p_strReceiveDat, string p_strReceiveEmp, string p_strSendPeopleID)
         {
-            using (clsSampleSvc svc = new clsSampleSvc())
+            long lngRes = -1;
+            try
             {
-                return svc.m_lngReceiveSample(p_intStatus, p_strSampleID, p_strReceiveDat, p_strReceiveEmp, p_strSendPeopleID);
+                using (clsSampleSvc sampleSvc = new clsSampleSvc())
+                {
+                    lngRes = sampleSvc.m_lngReceiveSample(p_intStatus, p_strSampleID, p_strReceiveDat, p_strReceiveEmp, p_strSendPeopleID);
+                }
+                if(lngRes < 0)
+                    return lngRes;
+
+                string strSql = @"select t.outpatrecipeid_chr,a.sourceitemid_vchr, d.barcode_vchr,t.orderid_int
+                                  from t_opr_attachrelation a, 
+                                  t_opr_lis_sample d,
+                                  t_opr_outpatient_orderdic t
+                                 where a.attachid_vchr = d.application_id_chr
+                                   and d.status_int > 0
+                                   and a.sourceitemid_vchr = t.outpatrecipeid_chr
+                                   and d.sample_id_chr = ?";
+                IDataParameter[] objParas = null;
+
+                List<string> lstBarCode = new List<string>();
+                SqlHelper svc = new SqlHelper(EnumBiz.onlineDB);
+                objParas = svc.CreateParm(1);
+                objParas[0].Value = p_strSampleID;
+                DataTable dtTemp = new DataTable();
+                dtTemp = svc.GetDataTable(strSql, objParas);
+
+                if (dtTemp != null && dtTemp.Rows.Count > 0)
+                {
+                    foreach(DataRow dr in dtTemp.Rows)
+                    {
+                        string barCode = dr["barcode_vchr"].ToString();
+                        if (!string.IsNullOrEmpty(barCode) && lstBarCode.IndexOf(barCode) < 0)
+                        {
+                            lstBarCode.Add(barCode);
+                        }
+                    }
+                }
+
+                foreach(var barCode in lstBarCode)
+                {
+                    using (BizLis proxy = new BizLis())
+                    {
+                        proxy.LabomanWrite2File(barCode);
+                        proxy.MejerWrite2Access(barCode);
+                        proxy.FB200RExecpro(barCode);
+                    }
+                }
+            }                                                                                                      
+            catch (Exception ex)
+            {
+                ExceptionLog.OutPutException(ex);
             }
+
+            return lngRes;
         }
+            
 
         // 新增一条记录
         public long m_lngAddNewSampleInterpose(clsLisSampleInterposeVO p_objRecord)

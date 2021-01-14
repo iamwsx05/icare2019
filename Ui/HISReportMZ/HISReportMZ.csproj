@@ -86,7 +86,6 @@
     <Reference Include="HISControl, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="HisDrugStore_GUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="HISRegister, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="HISZY, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Interop.Excel, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="PinkieControls, Version=1.0.1362.15156, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
@@ -340,6 +339,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HISZY\HISZY.csproj">
+      <Project>{b4301f30-19c2-49d1-92b3-6056c8ff2dbf}</Project>
+      <Name>HISZY</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

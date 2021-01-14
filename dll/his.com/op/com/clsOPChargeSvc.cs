@@ -210,11 +210,33 @@ namespace com.digitalwave.iCare.middletier.HIS
 
             try
             {
+                string strSQL = string.Empty;
+                if (string.IsNullOrEmpty(clsVO.ipAddr))
+                { 
+                    DataTable tempdt = null;
+                    strSQL = @"select t.macname_vchr, t.mac_vchr
+                                  from t_sys_log t
+                                 where t.empid_chr = ?
+                                   and (t.logtime_dat between
+                                       to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
+                                       to_date(?, 'yyyy-mm-dd hh24:mi:ss'))
+                                 order by t.logtime_dat desc";
 
-                string strSQL = @"Insert Into t_opr_outpatientrecipe(OUTPATRECIPEID_CHR,PATIENTID_CHR,CREATEDATE_DAT,REGISTERID_CHR,DIAGDR_CHR,DIAGDEPT_CHR,RECORDEMP_CHR,RECORDDATE_DAT,PSTAUTS_INT,PAYTYPEID_CHR,RECIPEFLAG_INT, ISPROXYBOILMED) Values(
-                                                                ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?)";
+                    objHRPSvc.CreateDatabaseParameter(3, out ParamArr);
+                    ParamArr[0].Value = clsVO.m_strDoctorID;
+                    ParamArr[1].Value = DateTime.Now.AddDays(-100).ToString("yyyy-MM-dd") + " 00:00:00";
+                    ParamArr[2].Value = DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59";
+                    lngRes = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref tempdt, ParamArr);
+                    if (tempdt != null && tempdt.Rows.Count > 0)//判断如果已经收费处方就返回
+                    {
+                        clsVO.ipAddr = tempdt.Rows[0]["mac_vchr"].ToString();
+                    }
+                }
 
-                objHRPSvc.CreateDatabaseParameter(12, out ParamArr);
+                strSQL = @"Insert Into t_opr_outpatientrecipe(OUTPATRECIPEID_CHR,PATIENTID_CHR,CREATEDATE_DAT,REGISTERID_CHR,DIAGDR_CHR,DIAGDEPT_CHR,RECORDEMP_CHR,RECORDDATE_DAT,PSTAUTS_INT,PAYTYPEID_CHR,RECIPEFLAG_INT, ISPROXYBOILMED, macAddr) Values(
+                                                              ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, ?)";
+
+                objHRPSvc.CreateDatabaseParameter(13, out ParamArr);
                 ParamArr[0].Value = clsVO.m_strOutpatRecipeID;
                 ParamArr[1].Value = clsVO.m_strPatientID;
                 ParamArr[2].Value = clsVO.m_strCreateDate;
@@ -227,6 +249,7 @@ namespace com.digitalwave.iCare.middletier.HIS
                 ParamArr[9].Value = clsVO.m_strPatientType;
                 ParamArr[10].Value = clsVO.m_intType;
                 ParamArr[11].Value = clsVO.IsProxyBoilMed;
+                ParamArr[12].Value = clsVO.ipAddr;
 
                 lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngAffects, ParamArr);
 
@@ -529,20 +552,26 @@ namespace com.digitalwave.iCare.middletier.HIS
                 DataTable dt = new DataTable();
 
                 int secuLevel = 0;
+                string macAddr = string.Empty;
                 foreach (clsOutPatientRecipe_VO objTempMain in objVOMainArr)
                 {
-                    strSQL = @"select seculevel from t_opr_outpatientrecipe where outpatrecipeid_chr = ?";
+                    strSQL = @"select seculevel, macAddr from t_opr_outpatientrecipe where outpatrecipeid_chr = ?";
                     objHRPSvc.CreateDatabaseParameter(1, out ParamArr);
                     ParamArr[0].Value = objTempMain.m_strOutpatRecipeID;
                     lngRes = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref dt, ParamArr);
-                    if (dt.Rows.Count > 0 && dt.Rows[0]["seculevel"] != DBNull.Value)
+                    if (dt.Rows.Count > 0)
                     {
-                        secuLevel = Convert.ToInt32(dt.Rows[0]["seculevel"]);
+                        if (dt.Rows[0]["seculevel"] != DBNull.Value)
+                            secuLevel = Convert.ToInt32(dt.Rows[0]["seculevel"]);
+                        else
+                            secuLevel = 0;
+                        macAddr = dt.Rows[0]["macAddr"].ToString();
                     }
                     else
                     {
                         secuLevel = 0;
                     }
+
 
                     //lngRes =objEmployeeSvc.m_lngGetGroupEmp(objTempMain.m_strDoctorID,out tempDt);
                     lngRes = this.m_lngGetGroupEmp(objTempMain.m_strDoctorID, out tempDt);
@@ -596,10 +625,10 @@ namespace com.digitalwave.iCare.middletier.HIS
 
                     //处方主表
                     strSQL = @"insert into t_opr_outpatientrecipe(outpatrecipeid_chr,patientid_chr,createdate_dat,registerid_chr,diagdr_chr,diagdept_chr,recordemp_chr,
-                                                                  recorddate_dat,pstauts_int,paytypeid_chr,recipeflag_int,groupid_chr,casehisid_chr,type_int, createtype_int, deptmed_int,chargedeptid_chr, seculevel, isproxyboilmed) values(
-                                                                  ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                                                                  recorddate_dat,pstauts_int,paytypeid_chr,recipeflag_int,groupid_chr,casehisid_chr,type_int, createtype_int, deptmed_int,chargedeptid_chr, seculevel, isproxyboilmed, macAddr) values(
+                                                                  ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-                    objHRPSvc.CreateDatabaseParameter(19, out ParamArr);
+                    objHRPSvc.CreateDatabaseParameter(20, out ParamArr);
                     ParamArr[0].Value = objTempMain.m_strOutpatRecipeID;
                     ParamArr[1].Value = objTempMain.m_strPatientID;
                     ParamArr[2].Value = objTempMain.m_strCreateDate;
@@ -619,6 +648,7 @@ namespace com.digitalwave.iCare.middletier.HIS
                     ParamArr[16].Value = strOpChargeDeptId;
                     ParamArr[17].Value = secuLevel;
                     ParamArr[18].Value = objTempMain.IsProxyBoilMed;
+                    ParamArr[19].Value = macAddr;
                     lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngAffects, ParamArr);
 
                     //根据处方号更新检验、检查等项目收费标志(已收费)
@@ -1336,12 +1366,34 @@ namespace com.digitalwave.iCare.middletier.HIS
                         lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngAffects, ParamArr);
                     }
 
+                    if (string.IsNullOrEmpty(objTempMain.ipAddr))
+                    { 
+                        DataTable tempdt = null;
+                        strSQL = @"select t.macname_vchr, t.mac_vchr
+                                  from t_sys_log t
+                                 where t.empid_chr = ?
+                                   and (t.logtime_dat between
+                                       to_date(?, 'yyyy-mm-dd hh24:mi:ss') and
+                                       to_date(?, 'yyyy-mm-dd hh24:mi:ss'))
+                                 order by t.logtime_dat desc";
+
+                        objHRPSvc.CreateDatabaseParameter(3, out ParamArr);
+                        ParamArr[0].Value = objTempMain.m_strDoctorID;
+                        ParamArr[1].Value = DateTime.Now.AddDays(-100).ToString("yyyy-MM-dd") + " 00:00:00";
+                        ParamArr[2].Value = DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59";
+                        lngRes = objHRPSvc.lngGetDataTableWithParameters(strSQL, ref tempdt, ParamArr);
+                        if (tempdt != null && tempdt.Rows.Count > 0)//判断如果已经收费处方就返回
+                        {
+                            objTempMain.ipAddr = tempdt.Rows[0]["mac_vchr"].ToString();
+                        }
+                    }
+
                     //处方主表
                     strSQL = @"Insert Into t_opr_outpatientrecipe(OUTPATRECIPEID_CHR,PATIENTID_CHR,CREATEDATE_DAT,REGISTERID_CHR,DIAGDR_CHR,DIAGDEPT_CHR,RECORDEMP_CHR,
-                                                                  RECORDDATE_DAT,PSTAUTS_INT,PAYTYPEID_CHR,RECIPEFLAG_INT,GROUPID_CHR,CASEHISID_CHR,TYPE_INT, createtype_int, deptmed_int, isproxyboilmed) Values(
-                                                                  ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                                                                  RECORDDATE_DAT,PSTAUTS_INT,PAYTYPEID_CHR,RECIPEFLAG_INT,GROUPID_CHR,CASEHISID_CHR,TYPE_INT, createtype_int, deptmed_int, isproxyboilmed, macAddr) Values(
+                                                                  ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, to_date(?,'yyyy-mm-dd hh24:mi:ss'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-                    objHRPSvc.CreateDatabaseParameter(17, out ParamArr);
+                    objHRPSvc.CreateDatabaseParameter(18, out ParamArr);
                     ParamArr[0].Value = objTempMain.m_strOutpatRecipeID;
                     ParamArr[1].Value = objTempMain.m_strPatientID;
                     ParamArr[2].Value = objTempMain.m_strCreateDate;
@@ -1359,6 +1411,7 @@ namespace com.digitalwave.iCare.middletier.HIS
                     ParamArr[14].Value = objTempMain.intCreatetype;
                     ParamArr[15].Value = objTempMain.intDeptmed;
                     ParamArr[16].Value = objTempMain.IsProxyBoilMed;
+                    ParamArr[17].Value = objTempMain.ipAddr;
 
                     lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngAffects, ParamArr);
 
@@ -5408,7 +5461,7 @@ order by a.seq_int desc";
                                archtakeflag_int,
                                printed_int,
                                chargedeptid_chr,
-                               isgreen_int)
+                               isgreen_int, macAddr)
                               select '" + p_oprVO.m_strOutpatRecipeID + @"',
                                      patientid_chr,
                                      createdate_dat,
@@ -5431,7 +5484,7 @@ order by a.seq_int desc";
                                      archtakeflag_int,
                                      printed_int,
                                      chargedeptid_chr,
-                                     0
+                                     0, macAddr 
                                 from t_opr_outpatientrecipe t
                                 where t.outpatrecipeid_chr = ?"; //pstauts_int = 1收费处创建
 

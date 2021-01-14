@@ -105,6 +105,7 @@ namespace com.digitalwave.iCare.gui.HIS
 
             clsPublic.SuspendLayout(ucPatientInfo.Handle);
             ((clsCtl_DirCharge)this.objController).m_mthInit();
+            this.ucPatientInfo.inputHealthCode.MedStepCode = "สีทั";
             this.timer.Enabled = true;
         }
 

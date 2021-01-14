@@ -60,8 +60,6 @@ namespace com.digitalwave.iCare.middletier.LIS
         }
         #endregion
 
-
-
         #region 查询所有的仪器类型名称
         [AutoComplete]
         public long m_lngGetDeviceModelNameByDeviceID( out DataTable dtbAllDeciveName)

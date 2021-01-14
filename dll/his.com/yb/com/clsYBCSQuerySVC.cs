@@ -669,6 +669,11 @@ namespace com.digitalwave.iCare.middletier.HIS
                                 }
                             }
 
+                            decimal JE = this.Round(vo.JG * vo.MCYL, 2);
+                            vo.JE = decTotalMoney;//金额 NUMBER	(12,2) 该条记录的总费用金额
+                            if (JE != decTotalMoney)
+                                vo.JE = JE;
+
                             lstDgzyxmcsVo.Add(vo);
                         }
                     }

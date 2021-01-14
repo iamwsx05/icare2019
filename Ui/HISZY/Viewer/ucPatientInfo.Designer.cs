@@ -114,6 +114,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip3 = new System.Windows.Forms.ToolTip(this.components);
+            this.picHealthCode = new System.Windows.Forms.PictureBox();
+            this.inputHealthCode = new Hisitf.EHealthCode.InputHealthCode();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel19.SuspendLayout();
@@ -137,6 +139,7 @@
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel21.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHealthCode)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -185,6 +188,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(2, 2);
@@ -243,13 +247,14 @@
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("宋体", 9.5F);
-            this.label10.Location = new System.Drawing.Point(2, 4);
+            this.label10.Location = new System.Drawing.Point(2, 20);
             this.label10.Margin = new System.Windows.Forms.Padding(0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(63, 24);
             this.label10.TabIndex = 24;
             this.label10.Text = "基本资料";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label10.Visible = false;
             // 
             // lblInType
             // 
@@ -283,7 +288,7 @@
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 179F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195F));
             this.tableLayoutPanel1.Controls.Add(this.label14, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel19, 1, 19);
             this.tableLayoutPanel1.Controls.Add(this.label13, 0, 15);
@@ -361,7 +366,7 @@
             this.panel19.Location = new System.Drawing.Point(66, 576);
             this.panel19.Margin = new System.Windows.Forms.Padding(0);
             this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(179, 29);
+            this.panel19.Size = new System.Drawing.Size(195, 29);
             this.panel19.TabIndex = 69;
             // 
             // lblSelfPay
@@ -404,7 +409,7 @@
             this.panel18.Location = new System.Drawing.Point(66, 546);
             this.panel18.Margin = new System.Windows.Forms.Padding(0);
             this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(179, 28);
+            this.panel18.Size = new System.Drawing.Size(195, 28);
             this.panel18.TabIndex = 68;
             // 
             // lblYbFee
@@ -435,7 +440,7 @@
             this.panel17.Location = new System.Drawing.Point(66, 486);
             this.panel17.Margin = new System.Windows.Forms.Padding(0);
             this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(179, 28);
+            this.panel17.Size = new System.Drawing.Size(195, 28);
             this.panel17.TabIndex = 67;
             // 
             // lblSpecialInfo
@@ -457,7 +462,7 @@
             this.panel16.Location = new System.Drawing.Point(66, 456);
             this.panel16.Margin = new System.Windows.Forms.Padding(0);
             this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(179, 28);
+            this.panel16.Size = new System.Drawing.Size(195, 28);
             this.panel16.TabIndex = 66;
             // 
             // lblBalanceMoney
@@ -480,7 +485,7 @@
             this.panel15.Location = new System.Drawing.Point(66, 516);
             this.panel15.Margin = new System.Windows.Forms.Padding(0);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(179, 28);
+            this.panel15.Size = new System.Drawing.Size(195, 28);
             this.panel15.TabIndex = 65;
             // 
             // lblNote
@@ -502,7 +507,7 @@
             this.panel14.Location = new System.Drawing.Point(66, 426);
             this.panel14.Margin = new System.Windows.Forms.Padding(0);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(179, 28);
+            this.panel14.Size = new System.Drawing.Size(195, 28);
             this.panel14.TabIndex = 64;
             // 
             // lblPrepayMoney
@@ -524,7 +529,7 @@
             this.panel13.Location = new System.Drawing.Point(66, 396);
             this.panel13.Margin = new System.Windows.Forms.Padding(0);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(179, 28);
+            this.panel13.Size = new System.Drawing.Size(195, 28);
             this.panel13.TabIndex = 63;
             // 
             // lblClearDate
@@ -547,7 +552,7 @@
             this.panel12.Location = new System.Drawing.Point(66, 366);
             this.panel12.Margin = new System.Windows.Forms.Padding(0);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(179, 28);
+            this.panel12.Size = new System.Drawing.Size(195, 28);
             this.panel12.TabIndex = 62;
             // 
             // lblDirectorFee
@@ -557,7 +562,7 @@
             this.lblDirectorFee.Location = new System.Drawing.Point(71, 10);
             this.lblDirectorFee.Margin = new System.Windows.Forms.Padding(0);
             this.lblDirectorFee.Name = "lblDirectorFee";
-            this.lblDirectorFee.Size = new System.Drawing.Size(0, 14);
+            this.lblDirectorFee.Size = new System.Drawing.Size(0, 12);
             this.lblDirectorFee.TabIndex = 35;
             this.lblDirectorFee.Tag = "edit";
             this.lblDirectorFee.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -568,7 +573,7 @@
             this.lblCompleteClearFee.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblCompleteClearFee.Location = new System.Drawing.Point(7, 10);
             this.lblCompleteClearFee.Name = "lblCompleteClearFee";
-            this.lblCompleteClearFee.Size = new System.Drawing.Size(0, 14);
+            this.lblCompleteClearFee.Size = new System.Drawing.Size(0, 12);
             this.lblCompleteClearFee.TabIndex = 36;
             this.lblCompleteClearFee.Tag = "edit";
             this.lblCompleteClearFee.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -583,7 +588,7 @@
             this.panel11.Location = new System.Drawing.Point(66, 336);
             this.panel11.Margin = new System.Windows.Forms.Padding(0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(179, 28);
+            this.panel11.Size = new System.Drawing.Size(195, 28);
             this.panel11.TabIndex = 61;
             // 
             // lblWaitReckoningFee
@@ -593,7 +598,7 @@
             this.lblWaitReckoningFee.Location = new System.Drawing.Point(75, 9);
             this.lblWaitReckoningFee.Margin = new System.Windows.Forms.Padding(0);
             this.lblWaitReckoningFee.Name = "lblWaitReckoningFee";
-            this.lblWaitReckoningFee.Size = new System.Drawing.Size(0, 14);
+            this.lblWaitReckoningFee.Size = new System.Drawing.Size(0, 12);
             this.lblWaitReckoningFee.TabIndex = 34;
             this.lblWaitReckoningFee.Tag = "edit";
             this.lblWaitReckoningFee.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -605,7 +610,7 @@
             this.lblWaitClearFee.Location = new System.Drawing.Point(1, 9);
             this.lblWaitClearFee.Margin = new System.Windows.Forms.Padding(0);
             this.lblWaitClearFee.Name = "lblWaitClearFee";
-            this.lblWaitClearFee.Size = new System.Drawing.Size(0, 14);
+            this.lblWaitClearFee.Size = new System.Drawing.Size(0, 12);
             this.lblWaitClearFee.TabIndex = 37;
             this.lblWaitClearFee.Tag = "edit";
             this.lblWaitClearFee.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -618,7 +623,7 @@
             this.panel10.Location = new System.Drawing.Point(66, 306);
             this.panel10.Margin = new System.Windows.Forms.Padding(0);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(179, 28);
+            this.panel10.Size = new System.Drawing.Size(195, 28);
             this.panel10.TabIndex = 60;
             // 
             // lblTotalFee
@@ -640,7 +645,7 @@
             this.panel9.Location = new System.Drawing.Point(66, 216);
             this.panel9.Margin = new System.Windows.Forms.Padding(0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(179, 28);
+            this.panel9.Size = new System.Drawing.Size(195, 28);
             this.panel9.TabIndex = 59;
             // 
             // lblNoChargeDays
@@ -672,7 +677,7 @@
             this.panel8.Location = new System.Drawing.Point(66, 276);
             this.panel8.Margin = new System.Windows.Forms.Padding(0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(179, 28);
+            this.panel8.Size = new System.Drawing.Size(195, 28);
             this.panel8.TabIndex = 58;
             // 
             // lblOutHospitalDate
@@ -694,7 +699,7 @@
             this.panel7.Location = new System.Drawing.Point(66, 246);
             this.panel7.Margin = new System.Windows.Forms.Padding(0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(179, 28);
+            this.panel7.Size = new System.Drawing.Size(195, 28);
             this.panel7.TabIndex = 53;
             // 
             // lblDiag
@@ -716,7 +721,7 @@
             this.panel5.Location = new System.Drawing.Point(66, 156);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(179, 28);
+            this.panel5.Size = new System.Drawing.Size(195, 28);
             this.panel5.TabIndex = 52;
             // 
             // lblFee
@@ -740,7 +745,7 @@
             this.panel6.Location = new System.Drawing.Point(66, 96);
             this.panel6.Margin = new System.Windows.Forms.Padding(0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(179, 28);
+            this.panel6.Size = new System.Drawing.Size(195, 28);
             this.panel6.TabIndex = 51;
             // 
             // panel1
@@ -753,7 +758,7 @@
             this.panel1.Location = new System.Drawing.Point(66, 36);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(179, 28);
+            this.panel1.Size = new System.Drawing.Size(195, 28);
             this.panel1.TabIndex = 34;
             // 
             // pictureBox2
@@ -812,7 +817,7 @@
             this.panel2.Location = new System.Drawing.Point(66, 66);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(179, 28);
+            this.panel2.Size = new System.Drawing.Size(195, 28);
             this.panel2.TabIndex = 35;
             // 
             // lblCheckStatus
@@ -837,7 +842,7 @@
             this.panel3.Location = new System.Drawing.Point(66, 126);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(179, 28);
+            this.panel3.Size = new System.Drawing.Size(195, 28);
             this.panel3.TabIndex = 48;
             // 
             // lblAge
@@ -881,7 +886,7 @@
             this.panel4.Location = new System.Drawing.Point(66, 186);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(179, 28);
+            this.panel4.Size = new System.Drawing.Size(195, 28);
             this.panel4.TabIndex = 49;
             // 
             // lblInHospitalDate
@@ -1034,20 +1039,22 @@
             // 
             // panel21
             // 
+            this.panel21.Controls.Add(this.picHealthCode);
+            this.panel21.Controls.Add(this.inputHealthCode);
             this.panel21.Controls.Add(this.lblStatus);
             this.panel21.Controls.Add(this.label10);
             this.panel21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel21.Location = new System.Drawing.Point(66, 2);
             this.panel21.Margin = new System.Windows.Forms.Padding(0);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(179, 32);
+            this.panel21.Size = new System.Drawing.Size(195, 32);
             this.panel21.TabIndex = 71;
             // 
             // lblStatus
             // 
             this.lblStatus.Font = new System.Drawing.Font("宋体", 9F);
             this.lblStatus.ForeColor = System.Drawing.Color.Black;
-            this.lblStatus.Location = new System.Drawing.Point(66, 5);
+            this.lblStatus.Location = new System.Drawing.Point(64, 5);
             this.lblStatus.Margin = new System.Windows.Forms.Padding(0);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(100, 23);
@@ -1068,6 +1075,35 @@
             // timer
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // picHealthCode
+            // 
+            this.picHealthCode.BackColor = System.Drawing.Color.White;
+            this.picHealthCode.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picHealthCode.Dock = System.Windows.Forms.DockStyle.Left;
+            this.picHealthCode.Image = ((System.Drawing.Image)(resources.GetObject("picHealthCode.Image")));
+            this.picHealthCode.Location = new System.Drawing.Point(0, 0);
+            this.picHealthCode.Name = "picHealthCode";
+            this.picHealthCode.Size = new System.Drawing.Size(63, 32);
+            this.picHealthCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picHealthCode.TabIndex = 26;
+            this.picHealthCode.TabStop = false;
+            this.picHealthCode.Click += new System.EventHandler(this.picHealthCode_Click);
+            // 
+            // inputHealthCode
+            // 
+            this.inputHealthCode.DeptId = null;
+            this.inputHealthCode.HisPatientVo = null;
+            this.inputHealthCode.IsRegistration = false;
+            this.inputHealthCode.Location = new System.Drawing.Point(20, 4);
+            this.inputHealthCode.MedStepCode = null;
+            this.inputHealthCode.MedType = "1";
+            this.inputHealthCode.Name = "inputHealthCode";
+            this.inputHealthCode.Size = new System.Drawing.Size(32, 24);
+            this.inputHealthCode.TabIndex = 27;
+            this.inputHealthCode.TerminalType = "1";
+            this.inputHealthCode.Visible = false;
+            this.inputHealthCode.HandleReadCard += new Hisitf.EHealthCode._HandleReadCard(this.inputHealthCode_HandleReadCard);
             // 
             // ucPatientInfo
             // 
@@ -1107,6 +1143,7 @@
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel21.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picHealthCode)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1191,5 +1228,7 @@
         private System.Windows.Forms.ToolTip toolTip3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label lblCheckStatus;
+        private System.Windows.Forms.PictureBox picHealthCode;
+        public Hisitf.EHealthCode.InputHealthCode inputHealthCode;
     }
 }

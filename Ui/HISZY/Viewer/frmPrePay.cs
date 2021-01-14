@@ -85,6 +85,7 @@ namespace com.digitalwave.iCare.gui.HIS
                 ((clsCtl_PrePay)this.objController).m_mthGetPrintParm();
                 ((clsCtl_PrePay)this.objController).m_mthInit();
             }
+            this.ucPatientInfo.inputHealthCode.MedStepCode = "สีทั";
             this.timer.Enabled = true;
         }
 

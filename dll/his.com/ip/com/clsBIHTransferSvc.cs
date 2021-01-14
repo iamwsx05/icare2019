@@ -1197,6 +1197,45 @@ namespace com.digitalwave.iCare.middletier.HIS
                 objLisAddItemRefArr[41].Value = p_objRecord.ConsigneeAddr;
                 objLisAddItemRefArr[42].Value = p_objRecord.m_strPATIENTID_CHR;
 
+                #region 写修改出生日期日志 2020-11-19
+                DataTable dt = null;
+                string Sql = string.Format("select a.patientid_chr, a.birth_dat, a.lastname_vchr from t_bse_patient a where a.patientid_chr = '{0}'", p_objRecord.m_strPATIENTID_CHR);
+                objHRPSvc.lngGetDataTableWithoutParameters(Sql, ref dt);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    if (dt.Rows[0]["birth_dat"] != DBNull.Value)
+                    {
+                        DateTime dteBirthPre = Convert.ToDateTime(dt.Rows[0]["birth_dat"]);
+                        DateTime dteBirthCur = Convert.ToDateTime(p_objRecord.m_strBIRTH_DAT);
+                        if (dteBirthPre != dteBirthCur)
+                        {
+                            object[] objs = new object[4] { p_objRecord.m_strPATIENTID_CHR, dteBirthPre.ToString("yyyy-MM-dd HH:mm:ss"), dteBirthCur.ToString("yyyy-MM-dd HH:mm:ss"), (string.IsNullOrEmpty(p_objRecord.m_strOPERATORID_CHR) ? "未记录" : p_objRecord.m_strOPERATORID_CHR) };
+                            Sql = @"insert into t_log_birthday
+                                          (fseqid, fpatientid, fbirthdaypre, fbirthdaycur, frecoperid, frecdate)
+                                        values
+                                          (seq_log_birthday.nextval, '{0}', to_date('{1}', 'yyyy-mm-dd hh24:mi:ss'), to_date('{2}', 'yyyy-mm-dd hh24:mi:ss'), '{3}', sysdate)";
+                            objHRPSvc.DoExcute(string.Format(Sql, objs));
+                        }
+                    }
+
+                    // 2020-11-29
+                    if (dt.Rows[0]["lastname_vchr"] != DBNull.Value)
+                    {
+                        string patNamePre = dt.Rows[0]["lastname_vchr"].ToString();
+                        string patNameCur = p_objRecord.m_strLASTNAME_VCHR;
+                        if (patNamePre != patNameCur)
+                        {
+                            object[] objs = new object[4] { p_objRecord.m_strPATIENTID_CHR, patNamePre, patNameCur, (string.IsNullOrEmpty(p_objRecord.m_strOPERATORID_CHR) ? "未记录" : p_objRecord.m_strOPERATORID_CHR) };
+                            Sql = @"insert into t_log_patientname
+                                          (fseqid, fpatientid, fpatnamepre, fpatnamecur, frecoperid, frecdate)
+                                        values
+                                          (seq_log_patientname.nextval, '{0}', '{1}', '{2}', '{3}', sysdate)";
+                            objHRPSvc.DoExcute(string.Format(Sql, objs));
+                        }
+                    }
+                }
+                #endregion
+
                 objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngRes, objLisAddItemRefArr);
             }
             catch (Exception objEx)
@@ -4819,13 +4858,14 @@ ORDER BY icdcode_chr";
                                        icd10diagid_vchr = ?,
                                        icd10diagtext_vchr = ?,
                                        STATE_INT = ?,
-                                       NURSING_CLASS = ?
+                                       NURSING_CLASS = ?,
+                                       inareadate_dat = ? 
                                  WHERE registerid_chr = ?";
 
             try
             {
                 System.Data.IDataParameter[] objLisAddItemRefArr = null;
-                objHRPSvc.CreateDatabaseParameter(8, out objLisAddItemRefArr);
+                objHRPSvc.CreateDatabaseParameter(9, out objLisAddItemRefArr);
                 //Please change the datetime and reocrdid 
                 objLisAddItemRefArr[0].Value = objPatientVO.m_strCASEDOCTOR_CHR;
                 objLisAddItemRefArr[1].Value = objPatientVO.m_strDIAGNOSEID_CHR;
@@ -4834,7 +4874,8 @@ ORDER BY icdcode_chr";
                 objLisAddItemRefArr[4].Value = objPatientVO.m_strICD10DIAGTEXT_VCHR;
                 objLisAddItemRefArr[5].Value = objPatientVO.m_intSTATE_INT;
                 objLisAddItemRefArr[6].Value = objPatientVO.m_intNursingClass;
-                objLisAddItemRefArr[7].Value = objPatientVO.m_strREGISTERID_CHR;
+                objLisAddItemRefArr[7].Value = Convert.ToDateTime(objPatientVO.m_strINAREADATE_DAT);
+                objLisAddItemRefArr[8].Value = objPatientVO.m_strREGISTERID_CHR;
                 //修改记录
 
                 #region 修改痕迹保留
@@ -6007,7 +6048,7 @@ ORDER BY icdcode_chr";
         public long GetGroupbyEmpID(string p_strEmpID, out DataTable p_dtResult)
         {
             p_dtResult = new DataTable();
-            long lngRes = 0; 
+            long lngRes = 0;
 
             string strSQL = @"select t.empid_chr, t.groupid_chr
                                 from t_bse_groupemp t

@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Data.SqlClient;
 using weCare.Core.Dac;
+using weCare.Core.Utils;
 
 namespace com.digitalwave.iCare.middletier.LIS
 {
@@ -1048,7 +1049,7 @@ values
 
                             if (strDid == "000041" || strDid == "000047")
                             {
-                                Log.Output("new: " + strDid + " importReqId:" + intImportReq.ToString() + " beginIdx:" + minIdx.ToString() + "  endIdx:" + maxIdx.ToString());
+                                weCare.Core.Utils.Log.Output("new: " + strDid + " importReqId:" + intImportReq.ToString() + " beginIdx:" + minIdx.ToString() + "  endIdx:" + maxIdx.ToString());
                             }
 
                             lngRes = 0;
@@ -1158,7 +1159,7 @@ values
                             objDPArr1[2].Value = Convert.ToDateTime(strConditionList[3]); //检验日期
                             objDPArr1[3].Value = Convert.ToInt32(strConditionList[2]); //系统内部结果序列
 
-                            Log.Output("append: " + strConditionList[1] + " importReqId:" + strConditionList[2] + "  endIdx:" + maxIdx2.ToString());
+                            weCare.Core.Utils.Log.Output("append: " + strConditionList[1] + " importReqId:" + strConditionList[2] + "  endIdx:" + maxIdx2.ToString());
                         }
                         else
                         {
@@ -2914,10 +2915,6 @@ values
                 Sql = string.Format(Sql, groupCodeArr);
                 svcLis.lngGetDataTableWithoutParameters(Sql, ref dtCheckItem);
 
-                #region 全自动血液分析仪/全自动粪便分析仪
-                LabomanWrite2File(sampleVo.barCode);
-                #endregion
-
                 #region 2020--11-05 住院核收: 一定要直接发回，不再执行体检流程
                 if (sampleVo.typeId == 1)
                 {
@@ -3673,188 +3670,7 @@ values
         }
         #endregion
 
-        #region  希森美康全自动血液分析仪检测 写文件
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="barCode"></param>
-        void LabomanWrite2File(string barCode)
-        {
-            if (string.IsNullOrEmpty(barCode))
-                return;
 
-            string filePath = string.Empty;
-            string user = string.Empty;
-            string pwd = string.Empty;
-            clsHRPTableService svcLis = null;
-
-            try
-            {
-                string Sql = @"select a.parmcode_chr, a.parmvalue_vchr, a.note_vchr
-                          from t_bse_sysparm a
-                         where a.status_int = 1
-                           and a.parmcode_chr = '7013'";
-                svcLis = new clsHRPTableService();
-                DataTable dtParm = null;
-                svcLis.lngGetDataTableWithoutParameters(Sql, ref dtParm);
-                if (dtParm != null && dtParm.Rows.Count > 0)
-                {
-                    DataRow drParm = dtParm.Rows[0];
-                    if (drParm["parmvalue_vchr"] != DBNull.Value && drParm["parmvalue_vchr"].ToString().Trim() != "" &&
-                           drParm["note_vchr"] != DBNull.Value && drParm["note_vchr"].ToString().Trim() != "")
-                    {
-                        filePath = drParm["note_vchr"].ToString().Split(';')[0];
-                        user = drParm["note_vchr"].ToString().Split(';')[1];
-                        pwd = drParm["note_vchr"].ToString().Split(';')[2];
-                    }
-                }
-                else
-                    return;
-
-                Sql = @"select a.barcode_vchr,
-                                    b.apply_unit_id_chr,
-                                    d.device_model_id_chr,
-                                    e.devicename_vchr 
-                                    from 
-                                    t_opr_lis_sample a
-                                    left join t_opr_lis_app_apply_unit b
-                                    on a.application_id_chr = b.application_id_chr
-                                    left join t_aid_lis_sample_group_unit c
-                                    on b.apply_unit_id_chr = c.apply_unit_id_chr
-                                    left join t_aid_lis_sample_group_model d
-                                    on c.sample_group_id_chr = d.sample_group_id_chr
-                                    left join t_bse_lis_device e
-                                    on d.device_model_id_chr = e.device_model_id_chr
-                                    where a.status_int > 1 and a.barcode_vchr = {0}";
-                Sql = string.Format(Sql, barCode);
-                DataTable dt = null;
-                svcLis.lngGetDataTableWithoutParameters(Sql, ref dt);
-                if (dt != null && dt.Rows.Count > 0)
-                {
-                    string strApplyUnit = string.Empty;
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        string deviceName = dr["devicename_vchr"].ToString();
-                        string appplyUnit = dr["apply_unit_id_chr"].ToString();
-                        if (!string.IsNullOrEmpty(appplyUnit) && deviceName == "Laboman")
-                        {
-                            strApplyUnit += "'" + appplyUnit + "',";
-                        }
-                    }
-                    if (!string.IsNullOrEmpty(strApplyUnit))
-                    {
-                          Sql = @"select distinct c.check_item_id_chr, d.device_check_item_name_vchr
-                                  from t_opr_lis_sample a
-                                 inner join t_opr_lis_app_check_item b
-                                    on b.application_id_chr = a.application_id_chr
-                                 inner join t_bse_lis_check_item_dev_item c
-                                    on c.check_item_id_chr = b.check_item_id_chr
-                                 inner join t_bse_lis_device_check_item d
-                                    on d.device_check_item_id_chr = c.device_check_item_id_chr
-                                   and d.device_model_id_chr = c.device_model_id_chr
-                                 where a.status_int >= 3
-                                   and a.barcode_vchr = '{0}'
-                                   and a.status_int > 0
-                                 order by c.check_item_id_chr";
-
-                        Sql = string.Format(Sql, barCode);
-                        svcLis.lngGetDataTableWithoutParameters(Sql, ref dt);
-                        if (dt != null && dt.Rows.Count > 0)
-                        {
-                            string content = ",CBC";
-                            foreach(DataRow dr in dt.Rows)
-                            {
-                                string itemName = dr["device_check_item_name_vchr"].ToString();
-                                if (itemName.Contains("#") && !content.Contains("DIFF"))
-                                    content += "+DIFF";
-                                if (itemName.Contains("%") && !content.Contains("RET"))
-                                    content += "+RET";
-                            }
-                            content += "+NRBC|";
-                            bool status = connectState(filePath, user, pwd);
-                            if (status)
-                            {
-                                //共享文件夹的目录
-                                DirectoryInfo theFolder = new DirectoryInfo(filePath);
-                                string filename = theFolder.ToString() + "\\RET.txt";
-                                FileStream fs = new FileStream(filename, FileMode.Append, FileAccess.Write, FileShare.None);
-                                if (fs != null)
-                                {
-                                    StreamWriter sw = new StreamWriter(fs);
-                                    sw.Write(barCode + content);
-                                    sw.Flush();
-                                    sw.Close();
-                                    fs.Close();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ExceptionLog.OutPutException(ex);
-            }
-            finally
-            {
-                svcLis = null;
-            }
-        }
-        #endregion
-
-        #region 连接远程共享文件夹
-        /// <summary>
-        /// 连接远程共享文件夹
-        /// </summary>
-        /// <param name="path">远程共享文件夹的路径</param>
-        /// <param name="userName">用户名</param>
-        /// <param name="passWord">密码</param>
-        /// <returns></returns>
-        public static bool connectState(string path, string userName, string passWord)
-        {
-            bool Flag = false;
-            Process proc = new Process();
-            try
-            {
-                proc.StartInfo.FileName = "cmd.exe";
-                proc.StartInfo.UseShellExecute = false;
-                proc.StartInfo.RedirectStandardInput = true;
-                proc.StartInfo.RedirectStandardOutput = true;
-                proc.StartInfo.RedirectStandardError = true;
-                proc.StartInfo.CreateNoWindow = true;
-                proc.Start();
-                string dosLine = "net use " + path + " " + passWord + " /user:" + userName;
-                proc.StandardInput.WriteLine(dosLine);
-                proc.StandardInput.WriteLine("exit");
-                while (!proc.HasExited)
-                {
-                    proc.WaitForExit(1000);
-                }
-                string errormsg = proc.StandardError.ReadToEnd();
-                proc.StandardError.Close();
-                if (string.IsNullOrEmpty(errormsg))
-                {
-                    Flag = true;
-                }
-                else
-                {
-                    ExceptionLog.OutPutException(errormsg);
-                }
-            }
-            catch (Exception ex)
-            {
-                ExceptionLog.OutPutException(ex);
-            }
-            finally
-            {
-                proc.Close();
-                proc.Dispose();
-            }
-            return Flag;
-        }
-        #endregion
-
-        
     }
     /// <summary>
     /// clsLIS_Svc2

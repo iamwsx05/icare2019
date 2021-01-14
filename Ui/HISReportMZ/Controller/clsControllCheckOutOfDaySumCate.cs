@@ -45,6 +45,16 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
         /// </summary>
         internal string BirthPayTypeID { get; set; }
 
+        /// <summary>
+        /// 计划生育门诊 身份ID
+        /// </summary>
+        internal string JsPayTypeId { get; set; }
+
+        /// <summary>
+        /// 民政救助 身份ID
+        /// </summary>
+        internal string mzjzPayTypeId { get; set; }
+
         public void m_mthBeginStat()
         {
             arrReList.Clear();
@@ -105,6 +115,8 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             dtStatistics.Columns.Add("支票");
             dtStatistics.Columns.Add("特诊卡");
             dtStatistics.Columns.Add("生育保险");
+            dtStatistics.Columns.Add("计生记账");
+            dtStatistics.Columns.Add("民政救助");
             dtStatistics.Columns.Add("微信合计");
             dtStatistics.Columns.Add("支付宝合计");
             dtStatistics.Columns.Add("微信2合计");
@@ -143,6 +155,8 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
             StatisticsRow["本院记帐"] = 0;
             StatisticsRow["其它记帐"] = 0;
             StatisticsRow["生育保险"] = 0;
+            StatisticsRow["计生记账"] = 0;
+            StatisticsRow["民政救助"] = 0;
             StatisticsRow["第一张发票时间"] = "";
             StatisticsRow["最后一张发票时间"] = "";
             if (dtCheckOut.Rows.Count > 0)
@@ -794,6 +808,50 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
                     }
                     #endregion
 
+                    #region 计生记账
+
+                    if (!string.IsNullOrEmpty(JsPayTypeId) && JsPayTypeId == dtCheckOut.Rows[i1]["paytypeid_chr"].ToString().Trim())
+                    {
+                        if (i1 == 0)
+                        {
+                            StatisticsRow["计生记账"] = Convert.ToDouble(StatisticsRow["计生记账"].ToString().Trim()) + Convert.ToDouble(dtCheckOut.Rows[i1]["ACCTSUM_MNY"].ToString());
+                        }
+                        else
+                        {
+                            if (dtCheckOut.Rows[i1]["INVOICENO_VCHR"].ToString().Trim() == dtCheckOut.Rows[i1 - 1]["INVOICENO_VCHR"].ToString().Trim() && dtCheckOut.Rows[i1]["SEQID_CHR"].ToString().Trim() == dtCheckOut.Rows[i1 - 1]["SEQID_CHR"].ToString().Trim())
+                            {
+
+                            }
+                            else
+                            {
+                                StatisticsRow["计生记账"] = Convert.ToDouble(StatisticsRow["计生记账"].ToString().Trim()) + Convert.ToDouble(dtCheckOut.Rows[i1]["ACCTSUM_MNY"].ToString());
+                            }
+                        }
+                    }
+                    #endregion
+
+                    #region 民政救助
+
+                    if (!string.IsNullOrEmpty(mzjzPayTypeId) && mzjzPayTypeId == dtCheckOut.Rows[i1]["paytypeid_chr"].ToString().Trim())
+                    {
+                        if (i1 == 0)
+                        {
+                            StatisticsRow["民政救助"] = Convert.ToDouble(StatisticsRow["民政救助"].ToString().Trim()) + Convert.ToDouble(dtCheckOut.Rows[i1]["ACCTSUM_MNY"].ToString());
+                        }
+                        else
+                        {
+                            if (dtCheckOut.Rows[i1]["INVOICENO_VCHR"].ToString().Trim() == dtCheckOut.Rows[i1 - 1]["INVOICENO_VCHR"].ToString().Trim() && dtCheckOut.Rows[i1]["SEQID_CHR"].ToString().Trim() == dtCheckOut.Rows[i1 - 1]["SEQID_CHR"].ToString().Trim())
+                            {
+
+                            }
+                            else
+                            {
+                                StatisticsRow["民政救助"] = Convert.ToDouble(StatisticsRow["民政救助"].ToString().Trim()) + Convert.ToDouble(dtCheckOut.Rows[i1]["ACCTSUM_MNY"].ToString());
+                            }
+                        }
+                    }
+                    #endregion
+
                 }
             }
             double decDiffSum = 0;
@@ -859,14 +917,20 @@ namespace com.digitalwave.iCare.gui.HIS.Reports
 
             decimal sbSum = clsPublic.ConvertObjToDecimal(StatisticsRow["医保记账金额"]);
             decimal sySum = clsPublic.ConvertObjToDecimal(StatisticsRow["生育保险"]);
-            if (sbSum > sySum) sbSum = sbSum - sySum;
+            decimal jsSum = clsPublic.ConvertObjToDecimal(StatisticsRow["计生记账"]);
+            if (sbSum > sySum) sbSum = sbSum - sySum- jsSum;
+
+            acctSum += Convert.ToDouble(sbSum);
 
             this.m_objViewer.m_dwShow.Modify("sum_cash.text = '￥" + StatisticsRow["实收现金合计"].ToString() + "'");
             this.m_objViewer.m_dwShow.Modify("sum_ic.text = '￥" + StatisticsRow["IC卡金额合计"].ToString() + "'");
             this.m_objViewer.m_dwShow.Modify("sum_bankcard.text = '￥" + StatisticsRow["刷卡金额合计"].ToString() + "'");
             this.m_objViewer.m_dwShow.Modify("sum_acct.text = '￥" + acctSum.ToString("0.00") + "'");
-            this.m_objViewer.m_dwShow.Modify("sum_acctspes.text = '￥" + sbSum.ToString() + "'");
-            this.m_objViewer.m_dwShow.Modify("sum_other.text = '￥" + StatisticsRow["其它金额合计"].ToString() + "'");
+            //this.m_objViewer.m_dwShow.Modify("sum_acctspes.text = '￥" + sbSum.ToString() + "'");
+            this.m_objViewer.m_dwShow.Modify("sum_js.text = '￥" + jsSum.ToString() + "'");
+            //this.m_objViewer.m_dwShow.Modify("sum_other.text = '￥" + StatisticsRow["其它金额合计"].ToString() + "'");
+            //改为民政救助
+            this.m_objViewer.m_dwShow.Modify("sum_other.text = '￥" + StatisticsRow["民政救助"].ToString() + "'");
             this.m_objViewer.m_dwShow.Modify("t_diffPriceSum.text= '￥-" + StatisticsRow["药品已让利"].ToString() + "'");
             this.m_objViewer.m_dwShow.Modify("t_zhipiao.text ='￥" + StatisticsRow["支票金额合计"].ToString() + "'");
             this.m_objViewer.m_dwShow.Modify("sum_sybx.text ='￥" + sySum.ToString() + "'");

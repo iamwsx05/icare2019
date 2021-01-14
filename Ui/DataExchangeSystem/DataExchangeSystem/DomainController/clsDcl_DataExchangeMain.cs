@@ -37,7 +37,19 @@ namespace com.digitalwave.iCare.gui.DataExchangeSystem
             return lngRes;
         }
 
-
+        /// <summary>
+        /// 药库入库删除
+        /// </summary>
+        /// <param name="InHospital"></param>
+        /// <returns></returns>
+        public long m_lngDelInStorageData(DateTime dayTime)
+        {
+            long lngRes = -1;
+            com.digitalwave.iCare.middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC objSvc = new middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC();
+            //(com.digitalwave.iCare.middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(com.digitalwave.iCare.middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC));
+            lngRes = objSvc.m_lngDelInStorageData(dayTime);
+            return lngRes;
+        }
 
 
         /// <summary>
@@ -69,6 +81,21 @@ namespace com.digitalwave.iCare.gui.DataExchangeSystem
             lngRes = objSvc.m_lngUploadOutStorageData(OutStorageData);
             return lngRes;
         }
+
+        /// <summary>
+        /// 药库出库删除
+        /// </summary>
+        /// <param name="InHospital"></param>
+        /// <returns></returns>
+        public long m_lngDelOutStorageData(DateTime dayTime)
+        {
+            long lngRes = -1;
+            com.digitalwave.iCare.middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC objSvc = new middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC();
+            //(com.digitalwave.iCare.middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC)com.digitalwave.iCare.common.clsObjectGenerator.objCreatorObjectByType(typeof(com.digitalwave.iCare.middletier.DataExchangeSystem_Svc.clsUploadExchangeDataSVC));
+            lngRes = objSvc.m_lngDelOutStorageData(dayTime);
+            return lngRes;
+        }
+
 
         #region 住院收入数据
         /// <summary>

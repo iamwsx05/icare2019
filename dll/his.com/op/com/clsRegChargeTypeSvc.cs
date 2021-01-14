@@ -228,6 +228,8 @@ namespace com.digitalwave.iCare.middletier.HIS
                         p_objResultArr[i1].m_intINTERNALFLAG_INT = Convert.ToInt16(dtbResult.Rows[i1]["INTERNALFLAG_INT"].ToString().Trim());
                         p_objResultArr[i1].m_strCOALITIONRECIPEFLAG_INT = dtbResult.Rows[i1]["COALITIONRECIPEFLAG_INT"].ToString().Trim();
                         p_objResultArr[i1].m_strBIHLIMITRATE_DEC = dtbResult.Rows[i1]["BIHLIMITRATE_DEC"].ToString().Trim();
+                        p_objResultArr[i1].BaPayTypeName = dtbResult.Rows[i1]["bapaytypename"].ToString();
+                        p_objResultArr[i1].WxPayTypeId = dtbResult.Rows[i1]["wxpaytypeid"].ToString().Trim();
                     }
                 }
             }
@@ -265,10 +267,10 @@ namespace com.digitalwave.iCare.middletier.HIS
             if (lngRes < 0)
                 return lngRes;
 
-            string strSQL = @"INSERT INTO t_bse_patientPaytype (PAYTYPEID_CHR,PAYTYPENAME_VCHR,MEMO_VCHR,PAYLIMIT_MNY,PAYFLAG_DEC,PAYPERCENT_DEC,PAYTYPENO_VCHR,COPAYID_CHR,CHARGEPERCENT_DEC,INTERNALFLAG_INT,COALITIONRECIPEFLAG_INT,BIHLIMITRATE_DEC) VALUES ('" +
+            string strSQL = @"INSERT INTO t_bse_patientPaytype (PAYTYPEID_CHR,PAYTYPENAME_VCHR,MEMO_VCHR,PAYLIMIT_MNY,PAYFLAG_DEC,PAYPERCENT_DEC,PAYTYPENO_VCHR,COPAYID_CHR,CHARGEPERCENT_DEC,INTERNALFLAG_INT,COALITIONRECIPEFLAG_INT,BIHLIMITRATE_DEC, bapaytypename, wxpaytypeid) VALUES ('" +
                 p_strRecordID + "','" + objResult.m_strPAYTYPENAME_VCHR + "','" + objResult.m_strMEMO_VCHR + "','" + objResult.m_strPAYLIMIT_MNY + "','" + objResult.m_strPAYFLAG_DEC + "','" + objResult.m_strPAYPERCENT_DEC + "','" +
                 objResult.m_strPAYTYPENO_VCHR + "','" + objResult.m_strCOPAYID_CHR + "','" +
-                objResult.m_strCHARGEPERCENT_DEC + "'," + objResult.m_intINTERNALFLAG_INT + "," + objResult.m_strCOALITIONRECIPEFLAG_INT + "," + objResult.m_strBIHLIMITRATE_DEC + ")";
+                objResult.m_strCHARGEPERCENT_DEC + "'," + objResult.m_intINTERNALFLAG_INT + "," + objResult.m_strCOALITIONRECIPEFLAG_INT + "," + objResult.m_strBIHLIMITRATE_DEC + ",'" + objResult.BaPayTypeName + "','" + objResult.WxPayTypeId + "')";
             string strSQL2 = "insert into t_aid_InsChargeItem (PRECENT_DEC,ITEMID_CHR,COPAYID_CHR) " +
                 " select 100 as PRECENT_DEC, ItemID_chr,'" + p_strRecordID + "' as COPAYID_CHR from t_bse_ChargeItem ";
             try
@@ -311,6 +313,8 @@ namespace com.digitalwave.iCare.middletier.HIS
                 ", COALITIONRECIPEFLAG_INT='" + objResult.m_strCOALITIONRECIPEFLAG_INT + "' " +
                 ",INTERNALFLAG_INT=" + objResult.m_intINTERNALFLAG_INT +
                 ",BIHLIMITRATE_DEC=" + objResult.m_strBIHLIMITRATE_DEC +
+                ",bapaytypename = '" + objResult.BaPayTypeName + "' " +
+                ",wxpaytypeid = '" + objResult.WxPayTypeId + "' " +
                 "  Where PAYTYPEID_CHR='" + objResult.m_strPAYTYPEID_CHR + "' ";
 
             try

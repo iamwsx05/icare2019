@@ -241,13 +241,13 @@ namespace Laboman
                 clsLIS_Device_Test_ResultVO vo = null;
                 List<string> lstSampleId = new List<string>();
 
-                string today1 = DateTime.Now.ToString("yyyyMdd") ;  //"20200110"
+                string today1 = DateTime.Now.ToString("yyyyMd") ;  //"20200110"
                 if (this.Today.Equals(today1) == false)
                 {
                     this.Today = today1;
                     this.CheckDataSoure.Clear();
                 }
-                string today2 = DateTime.Now.ToString("yyyyMdd");    //"20200110"
+                string today2 = DateTime.Now.ToString("yyyyMd");    //"20200110"
                 //this.lstFile.Clear();
                 this.RecuRead(today2, this.FilePath);  // exp: D:\Beion\
                 if (this.lstFile.Count > 0)

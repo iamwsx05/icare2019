@@ -2270,5 +2270,30 @@ namespace com.digitalwave.iCare.gui.HIS
             }
         }
         #endregion
+
+        #region 修改适应症
+        /// <summary>
+        /// 修改适应症
+        /// </summary>
+        internal void ModifySYZ()
+        {
+            DataView dv = this.m_objViewer.dtItem.DataSource as DataView;
+            DataTable dt = dv.ToTable();
+            List<string> lstPChargeId = new List<string>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                lstPChargeId.Add(dr["pchargeid_chr"].ToString());
+            }
+            if (lstPChargeId.Count == 0)
+            {
+                MessageBox.Show("查无记录。");
+                return;
+            }
+
+            frmModifySYZ frm = new frmModifySYZ(lstPChargeId);
+            frm.ShowDialog();
+        }
+        #endregion
+
     }
 }

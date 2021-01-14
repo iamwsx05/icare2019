@@ -1423,47 +1423,58 @@ namespace com.digitalwave.iCare.middletier.HIS
 
                 lngRes = objHRPSvc.lngGetDataTableWithParameters(SQL, ref dtCharge, ParamArr);
 
-                SQL = @"select a.recemp_chr as empid, '#' || b.paytype_int as paytype, sum(b.paysum_mny - b.refusum_mny) as paysum 
+                SQL = @"select a.recemp_chr as empid, 
+                                '#' || b.paytype_int as paytype,  
+                                sum(b.paysum_mny - b.refusum_mny) as paysum 
                           from t_opr_bih_charge a,
                                t_opr_bih_payment b  
                          where a.chargeno_chr = b.chargeno_vchr                            
                            and a.recflag_int = 1 
                            and a.status_int = 1 
-                           and (a.recdate_dat between to_date(?,'yyyy-mm-dd hh24:mi:ss') and to_date(?,'yyyy-mm-dd hh24:mi:ss'))
+                           and (a.recdate_dat between to_date(?,'yyyy-mm-dd hh24:mi:ss') 
+                           and to_date(?,'yyyy-mm-dd hh24:mi:ss'))
                       group by a.recemp_chr, b.paytype_int 
             
                       union all
 
-                      select a.recemp_chr as empid, '&' || b.internalflag_int as paytype, sum(a.acctsum_mny) as paysum   
-                            from t_opr_bih_charge a,
-                                 t_bse_patientpaytype b 
-                           where a.paytypeid_chr = b.paytypeid_chr(+)                             
-                             and a.recflag_int = 1 
+                     select  a.recemp_chr as empid, '&' || b.internalflag_int as paytype,sum(a.acctsum_mny) as paysum
+                            from t_opr_bih_charge a
+                              left join   t_bse_patientpaytype b 
+                           on a.paytypeid_chr = b.paytypeid_chr
+                             where  a.recflag_int = 1 
                              and a.status_int = 1                                 
                              and a.acctsum_mny <> 0 
-                             and (a.recdate_dat between to_date(?,'yyyy-mm-dd hh24:mi:ss') and to_date(?,'yyyy-mm-dd hh24:mi:ss'))
+                             and (a.recdate_dat between to_date(?,'yyyy-mm-dd hh24:mi:ss') 
+                           and to_date(?,'yyyy-mm-dd hh24:mi:ss'))
                         group by a.recemp_chr, b.internalflag_int
 
                       union all 
 
-                      select a.recemp_chr as empid, '999' as paytype, sum(c.money_dec) as paysum
+                      select a.recemp_chr as empid, 
+                            '999' as paytype, 
+                            
+                            sum(c.money_dec) as paysum
                             from t_opr_bih_charge a,
                                  t_opr_bih_prepay c 
                            where a.chargeno_chr = c.chargeno_chr                                
                              and a.recflag_int = 1 
                              and a.status_int = 1                              
-                             and (a.recdate_dat between to_date(?,'yyyy-mm-dd hh24:mi:ss') and to_date(?,'yyyy-mm-dd hh24:mi:ss')) 
+                             and (a.recdate_dat between to_date(?,'yyyy-mm-dd hh24:mi:ss') 
+                           and to_date(?,'yyyy-mm-dd hh24:mi:ss')) 
                         group by a.recemp_chr
 
                         union all 
 
-                        select   a.creatorid_chr as empid, '#999' as paytype, sum (a.money_dec)
+                        select   a.creatorid_chr as empid, 
+                                '#999' as paytype, 
+                              
+                                sum (a.money_dec) as paysum
                             from t_opr_bih_prepay a, t_opr_bih_prepaybalance b
                            where a.balanceid_vchr = b.balanceid_vchr
                              and a.balanceflag_int = 1
                              and a.status_int = 1
-                             and b.balance_dat between to_date (?, 'yyyy-mm-dd hh24:mi:ss')
-                                                   and to_date (?, 'yyyy-mm-dd hh24:mi:ss')
+                             and b.balance_dat between to_date(?,'yyyy-mm-dd hh24:mi:ss') 
+                           and to_date(?,'yyyy-mm-dd hh24:mi:ss')
                         group by a.creatorid_chr ";
 
                 objHRPSvc.CreateDatabaseParameter(8, out ParamArr);
@@ -5833,16 +5844,105 @@ namespace com.digitalwave.iCare.middletier.HIS
         {
             long lngRes = 0;
             long lngEffect = 0;
-            string strSQL = string.Empty;
-            HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
-            IDataParameter[] paraArr = null;
+            string Sql = string.Empty;
+            HRPService.clsHRPTableService svc = new clsHRPTableService();
+            IDataParameter[] parms = null;
             try
             {
-                strSQL = @"delete from t_bse_chargeitemybrla a where a.hisitemcode_vchr = ?";
-                objHRPSvc.CreateDatabaseParameter(1, out paraArr);
-                paraArr[0].Value = objVO.HosCode;
-                lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEffect, paraArr);
+                #region save t_sys_updateitemlog
 
+                Sql = @"select 1 from t_bse_chargeitemybrla a where a.hisitemcode_vchr = ?";
+                svc.CreateDatabaseParameter(1, out parms);
+                parms[0].Value = objVO.HosCode;
+                DataTable dt = null;
+                svc.lngGetDataTableWithParameters(Sql, ref dt, parms);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    Sql = @"update t_bse_chargeitemybrla
+   set itemtype            = {0},
+       itemname_vchr       = {1},
+       englishname_vchr    = {2},
+       itemjixingtype_vchr = {3},
+       xzsyzbz             = {4},
+       xzsysm              = {5},
+       yxbz                = {6}
+ where hisitemcode_vchr = {7}
+   and ybitemcode_vchr = {8}";
+
+                    int n = -1;
+                    object[] objs = new object[9];
+                    objs[++n] = objVO.itemtype;
+                    objs[++n] = objVO.itemname;
+                    objs[++n] = objVO.englishname;
+                    objs[++n] = objVO.itemjixingtype;
+                    objs[++n] = objVO.xzsyzbz;
+                    objs[++n] = objVO.xzsysm;
+                    objs[++n] = objVO.yxbz;
+                    objs[++n] = objVO.HosCode;
+                    objs[++n] = objVO.ybitemcode;
+
+                    if (!string.IsNullOrEmpty(objVO.ipAddr))
+                    {
+                        EntitySysItemUpdateLog updateLogVo = new EntitySysItemUpdateLog()
+                        {
+                            fTypeId = 3,
+                            fOperId = objVO.operId,
+                            fOperName = objVO.operName,
+                            fIpAddr = objVO.ipAddr,
+                            fKeyword = objVO.HosCode,
+                            fUpdateSql = string.Format(Sql, objs)
+                        };
+                        (new clsChargeItemSvc()).SaveSysItemUpdateLog(updateLogVo);
+                    }
+
+                    Sql = @"delete from t_bse_chargeitemybrla a where a.hisitemcode_vchr = ?";
+                    svc.CreateDatabaseParameter(1, out parms);
+                    parms[0].Value = objVO.HosCode;
+                    lngRes = svc.lngExecuteParameterSQL(Sql, ref lngEffect, parms);
+                }
+                else
+                {
+                    Sql = @"insert into t_bse_chargeitemybrla
+  (hisitemcode_vchr,
+   ybitemcode_vchr,
+   itemtype,
+   itemname_vchr,
+   englishname_vchr,
+   itemjixingtype_vchr,
+   xzsyzbz,
+   xzsysm,
+   yxbz)
+values
+  ({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8})";
+
+                    int n = -1;
+                    object[] objs = new object[9];
+                    objs[++n] = objVO.HosCode;
+                    objs[++n] = objVO.ybitemcode;
+                    objs[++n] = objVO.itemtype;
+                    objs[++n] = objVO.itemname;
+                    objs[++n] = objVO.englishname;
+                    objs[++n] = objVO.itemjixingtype;
+                    objs[++n] = objVO.xzsyzbz;
+                    objs[++n] = objVO.xzsysm;
+                    objs[++n] = objVO.yxbz;
+                    
+                    if (!string.IsNullOrEmpty(objVO.ipAddr))
+                    {
+                        EntitySysItemUpdateLog updateLogVo = new EntitySysItemUpdateLog()
+                        {
+                            fTypeId = 3,
+                            fOperId = objVO.operId,
+                            fOperName = objVO.operName,
+                            fIpAddr = objVO.ipAddr,
+                            fKeyword = objVO.HosCode,
+                            fUpdateSql = string.Format(Sql, objs)
+                        };
+                        (new clsChargeItemSvc()).SaveSysItemUpdateLog(updateLogVo);
+                    }
+                }
+
+                #endregion
             }
             catch (Exception objEx)
             {
@@ -5852,18 +5952,18 @@ namespace com.digitalwave.iCare.middletier.HIS
             }
             try
             {
-                strSQL = @"insert into t_bse_chargeitemybrla values(?,?,?,?,?,?,?,?,?)";
-                objHRPSvc.CreateDatabaseParameter(9, out paraArr);
-                paraArr[0].Value = objVO.HosCode;
-                paraArr[1].Value = objVO.ybitemcode;
-                paraArr[2].Value = objVO.itemtype;
-                paraArr[3].Value = objVO.itemname;
-                paraArr[4].Value = objVO.englishname;
-                paraArr[5].Value = objVO.itemjixingtype;
-                paraArr[6].Value = objVO.xzsyzbz;
-                paraArr[7].Value = objVO.xzsysm;
-                paraArr[8].Value = objVO.yxbz;
-                lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEffect, paraArr);
+                Sql = @"insert into t_bse_chargeitemybrla values(?,?,?,?,?,?,?,?,?)";
+                svc.CreateDatabaseParameter(9, out parms);
+                parms[0].Value = objVO.HosCode;
+                parms[1].Value = objVO.ybitemcode;
+                parms[2].Value = objVO.itemtype;
+                parms[3].Value = objVO.itemname;
+                parms[4].Value = objVO.englishname;
+                parms[5].Value = objVO.itemjixingtype;
+                parms[6].Value = objVO.xzsyzbz;
+                parms[7].Value = objVO.xzsysm;
+                parms[8].Value = objVO.yxbz;
+                lngRes = svc.lngExecuteParameterSQL(Sql, ref lngEffect, parms);
 
             }
             catch (Exception objEx)
@@ -5876,10 +5976,10 @@ namespace com.digitalwave.iCare.middletier.HIS
             {
                 try
                 {
-                    strSQL = @"delete from t_bse_shiying a where a.menucode_vchr = ?";
-                    objHRPSvc.CreateDatabaseParameter(1, out paraArr);
-                    paraArr[0].Value = objVO.ybitemcode;
-                    lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEffect, paraArr);
+                    Sql = @"delete from t_bse_shiying a where a.menucode_vchr = ?";
+                    svc.CreateDatabaseParameter(1, out parms);
+                    parms[0].Value = objVO.ybitemcode;
+                    lngRes = svc.lngExecuteParameterSQL(Sql, ref lngEffect, parms);
 
                 }
                 catch (Exception objEx)
@@ -5890,15 +5990,15 @@ namespace com.digitalwave.iCare.middletier.HIS
                 }
                 try
                 {
-                    strSQL = @"insert into t_bse_shiying values(?,?,?,?,?,?)";
-                    objHRPSvc.CreateDatabaseParameter(6, out paraArr);
-                    paraArr[0].Value = objVO.ybitemcode;
-                    paraArr[1].Value = objVO.itemtype;
-                    paraArr[2].Value = objVO.itemname;
-                    paraArr[3].Value = objVO.englishname;
-                    paraArr[4].Value = objVO.itemjixingtype;
-                    paraArr[5].Value = objVO.xzsysm;
-                    lngRes = objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngEffect, paraArr);
+                    Sql = @"insert into t_bse_shiying values(?,?,?,?,?,?)";
+                    svc.CreateDatabaseParameter(6, out parms);
+                    parms[0].Value = objVO.ybitemcode;
+                    parms[1].Value = objVO.itemtype;
+                    parms[2].Value = objVO.itemname;
+                    parms[3].Value = objVO.englishname;
+                    parms[4].Value = objVO.itemjixingtype;
+                    parms[5].Value = objVO.xzsysm;
+                    lngRes = svc.lngExecuteParameterSQL(Sql, ref lngEffect, parms);
 
                 }
                 catch (Exception objEx)
@@ -6001,6 +6101,8 @@ namespace com.digitalwave.iCare.middletier.HIS
             return lngRes;
         }
         #endregion
+
+
 
         #region 社保登记日志
         /// <summary>

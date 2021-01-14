@@ -67,6 +67,7 @@ namespace com.digitalwave.iCare.gui.HIS
             {
                 this.Text = "结帐管理窗口 … 普通结帐";
             }
+            this.ucPatientInfo.inputHealthCode.MedStepCode = "收费";
             this.timer.Enabled = true;
         }
 

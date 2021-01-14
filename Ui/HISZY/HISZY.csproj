@@ -135,7 +135,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Debug\wecare.core.dll</HintPath>
     </Reference>
-    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=90ad5968fbc6e760, processorArchitecture=x86">
+    <Reference Include="wecaredata, Version=2.0.0.1, Culture=neutral, PublicKeyToken=4bdb6de9b3ca5966, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Debug\wecaredata.dll</HintPath>
     </Reference>
@@ -183,6 +183,12 @@
     </Compile>
     <Compile Include="Viewer\frmItemUpdateLog.Designer.cs">
       <DependentUpon>frmItemUpdateLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer\frmModifySYZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmModifySYZ.Designer.cs">
+      <DependentUpon>frmModifySYZ.cs</DependentUpon>
     </Compile>
     <Compile Include="Viewer\frmPrintSMListConfirm.cs">
       <SubType>Form</SubType>
@@ -383,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Viewer\frmIPInvoiceinput.resx">
       <DependentUpon>frmIPInvoiceinput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmModifySYZ.resx">
+      <DependentUpon>frmModifySYZ.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Viewer\frmPrePayNoInput.resx">
       <DependentUpon>frmPrePayNoInput.cs</DependentUpon>

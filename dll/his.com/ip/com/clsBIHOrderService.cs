@@ -4829,6 +4829,7 @@ order by k.recipeno_int,k.PARENTID_CHR desc,k.ORDERID_CHR
         [AutoComplete]
         public long m_lngPostOrder(string[] arrOrderID, string strDoctorID, string strDoctorName, DateTime dtPost)
         {
+            #region comment
             //            int intNewStatus = 1;
             //            string strSql = @"
             //				update T_Opr_Bih_Order
@@ -4867,11 +4868,12 @@ order by k.recipeno_int,k.PARENTID_CHR desc,k.ORDERID_CHR
             //                bool blnRes = objLogger.LogError(objEx);
             //            }
             //            return ret;
+            #endregion
 
             #region 提交医嘱
             int n = 0;
             long lngRes = 0;
-            string strSQL = @"  
+            string Sql = @"  
 	            update T_Opr_Bih_Order
 				set Status_Int = 1 , PosterID_Chr=?, Poster_Chr = ? ,PostDate_Dat =sysdate,STARTDATE_DAT=sysdate
 				where (Status_Int = 0 OR Status_Int = 7) and OrderID_Chr =?
@@ -4900,7 +4902,7 @@ order by k.recipeno_int,k.PARENTID_CHR desc,k.ORDERID_CHR
                 try
                 {
                     com.digitalwave.iCare.middletier.HRPService.clsHRPTableService objHRPSvc = new clsHRPTableService();
-                    lngRes = objHRPSvc.m_lngSaveArrayWithParameters(strSQL, objValues, dbTypes);
+                    lngRes = objHRPSvc.m_lngSaveArrayWithParameters(Sql, objValues, dbTypes);
 
                     if (lngRes > 0)
                     {
@@ -4909,9 +4911,9 @@ order by k.recipeno_int,k.PARENTID_CHR desc,k.ORDERID_CHR
                         //查1027机关 跳过医嘱转抄这个流程，0－不跳过，1－跳过
                         int ShowCodexRemarkFrmTimerinterval = -1;//跳过医嘱转抄这个流程，0－不跳过，1－跳过
 
-                        strSQL = "select a.setstatus_int,a.setid_chr from t_sys_setting a where a.setid_chr ='1027' ";
+                        Sql = "select a.setstatus_int,a.setid_chr from t_sys_setting a where a.setid_chr ='1027' ";
                         DataTable dtbResult = new DataTable();
-                        lngRes = objHRPSvc.lngGetDataTableWithoutParameters(strSQL, ref dtbResult);
+                        lngRes = objHRPSvc.lngGetDataTableWithoutParameters(Sql, ref dtbResult);
 
                         if (lngRes > 0 && dtbResult.Rows.Count > 0)
                         {
@@ -4927,18 +4929,55 @@ order by k.recipeno_int,k.PARENTID_CHR desc,k.ORDERID_CHR
                         }
                         if (ShowCodexRemarkFrmTimerinterval == 1)
                         {
-                            strSQL = @"  
+                            Sql = @"  
 	            update T_Opr_Bih_Order
 				set Status_Int = 5 , CONFIRMERID_CHR=?, CONFIRMER_VCHR = ? ,CONFIRM_DAT =sysdate
 				where Status_Int = 1  and OrderID_Chr =?
 			                      ";
-                            lngRes = objHRPSvc.m_lngSaveArrayWithParameters(strSQL, objValues, dbTypes);
+                            lngRes = objHRPSvc.m_lngSaveArrayWithParameters(Sql, objValues, dbTypes);
 
                         }
-                        objHRPSvc.Dispose();
+                        
                         #endregion
                     }
-                    /*<================================*/
+
+                    #region 为了视图速度，更新检查申请表住院次数
+                    //long affectRows = 0;
+                    //if(isUpdate)
+                    //{
+                    //    Sql = @"update ar_common_apply t
+                    //               set t.iptimes = ?
+                    //             where t.applyid in
+                    //                   (select a.applyid
+                    //                      from ar_common_apply a
+                    //                     where a.bihno = ?
+                    //                       and a.applydate > to_date(?, 'yyyy-mm-dd hh24:mi:ss'))";
+
+                    //    IDataParameter[] iparms = null;
+                    //    objHRPSvc.CreateDatabaseParameter(3, out iparms);
+                    //    iparms[0].Value = ipTimes;
+                    //    iparms[1].Value = ipNo;
+                    //    iparms[2].Value = inDate;
+                    //    objHRPSvc.lngExecuteParameterSQL(Sql, ref affectRows, iparms);
+
+                    //    Sql = @"update eafinterface t
+                    //               set t.iptimes = ?
+                    //             where t.requisitionid in
+                    //                   (select a.appid
+                    //                      from eafapplication a
+                    //                     inner join eafinterface b
+                    //                        on a.appid = b.requisitionid
+                    //                     where b.inhospitalnum = ?
+                    //                       and a.appdate > to_date(?, 'yyyy-mm-dd hh24:mi:ss'))";
+                    //    objHRPSvc.CreateDatabaseParameter(3, out iparms);
+                    //    iparms[0].Value = ipTimes;
+                    //    iparms[1].Value = ipNo;
+                    //    iparms[2].Value = inDate;
+                    //    objHRPSvc.lngExecuteParameterSQL(Sql, ref affectRows, iparms);
+                    //}
+                    #endregion
+
+                    objHRPSvc.Dispose();
                 }
                 catch (Exception objEx)
                 {
@@ -16283,7 +16322,7 @@ ORDER BY orderstr
             str = "select icdcode_chr  as \"ICD码\", icdname_vchr as \"手     术     名     称\", pycode_chr as \"拼  音  码\"  from t_aid_oprticd";
             p_dtValue = null;
             service = new clsHRPTableService();
-        Label_0013:
+            Label_0013:
             try
             {
                 try
@@ -16294,25 +16333,25 @@ ORDER BY orderstr
                 }
                 catch (Exception exception1)
                 {
-                Label_0026:
+                    Label_0026:
                     exception = exception1;
                     str2 = exception.Message;
                     text = new clsLogText();
                     flag = text.LogError(exception);
                     goto Label_0047;
                 }
-            Label_0047:
+                Label_0047:
                 goto Label_0056;
             }
             finally
             {
-            Label_004A:
+                Label_004A:
                 service.Dispose();
                 service = null;
             }
-        Label_0056:
+            Label_0056:
             num2 = num;
-        Label_005C:
+            Label_005C:
             return num2;
         }
         #endregion
@@ -16338,7 +16377,7 @@ ORDER BY orderstr
             p_dtResult = null;
             str = null;
             service = null;
-        Label_000B:
+            Label_000B:
             try
             {
                 try
@@ -16406,24 +16445,24 @@ ORDER BY orderstr
                 }
                 catch (Exception exception1)
                 {
-                Label_003B:
+                    Label_003B:
                     exception = exception1;
                     text = new clsLogText();
                     text.LogDetailError(exception, false);
                     goto Label_0053;
                 }
-            Label_0053:
+                Label_0053:
                 goto Label_0062;
             }
             finally
             {
-            Label_0056:
+                Label_0056:
                 service.Dispose();
                 service = null;
             }
-        Label_0062:
+            Label_0062:
             num2 = num;
-        Label_0068:
+            Label_0068:
             return num2;
         }
         #endregion
@@ -19162,6 +19201,7 @@ ORDER BY orderstr
                                a.fbackdate,
                                a.fbackreason,
                                a.fstatus,
+                               a.fappdeptid,
                                b.inpatient_dat      as inDate,
                                b.inpatientid_chr    as ipNo,
                                b.inpatientcount_int as ipTimes,
@@ -19187,7 +19227,7 @@ ORDER BY orderstr
                           left join t_bse_employee f
                             on a.fsendoperid = f.empid_chr
                           left join t_bse_deptdesc g
-                            on b.deptid_chr = g.deptid_chr
+                            on a.fappdeptid = g.deptid_chr
                           left join t_bse_bed h
                             on b.bedid_chr = h.bedid_chr
                           left join t_bse_employee i
@@ -19270,6 +19310,7 @@ ORDER BY orderstr
                         else if (vo.fstatus == 3)
                             vo.statusName = "发送";
                         vo.appName = vo.statusName + " " + Convert.ToDateTime(dr["fappdate"]).ToString("yyyy-MM-dd HH:mm");
+                        vo.fappdeptid = dr["fappdeptid"].ToString();
                         data.Add(vo);
                     }
                 }
@@ -19333,12 +19374,13 @@ ORDER BY orderstr
                            fsenddate,
                            fresponse,
                            fbackreason,
-                           fstatus)
+                           fstatus,
+                           fappdeptid)
                         values
-                          (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                          (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 int n = -1;
-                svc.CreateDatabaseParameter(13, out parm);
+                svc.CreateDatabaseParameter(14, out parm);
                 parm[++n].Value = appId;
                 parm[++n].Value = appVo.fappclass;
                 parm[++n].Value = appVo.fregisterid;
@@ -19352,6 +19394,7 @@ ORDER BY orderstr
                 parm[++n].Value = null;           // 10
                 parm[++n].Value = null;
                 parm[++n].Value = appVo.fstatus;
+                parm[++n].Value = appVo.fappdeptid;
 
                 svc.lngExecuteParameterSQL(Sql, ref affectRows, parm);
 

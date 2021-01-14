@@ -157,8 +157,9 @@ namespace com.digitalwave.iCare.gui.MFZ
             }
             catch (Exception ex)
             {
-                msg = ex.Message;
-                new clsLogText().LogError(ex.Message);
+                // msg = ex.Message;
+                // new clsLogText().LogError(ex.Message);
+                ExceptionLog.OutPutException("Start-->" + ex);
             }
             return this.blnRunning;
         }
@@ -181,6 +182,8 @@ namespace com.digitalwave.iCare.gui.MFZ
             }
             catch (Exception ex)
             {
+                ExceptionLog.OutPutException("ListenerCallBack-->" + ex);
+
                 if (ConnectionError != null)
                 {
                     ConnectionError(this, new ConnectionErrorEventArgs(ex.Message, null));
@@ -197,6 +200,8 @@ namespace com.digitalwave.iCare.gui.MFZ
             }
             catch (Exception ex)
             {
+                ExceptionLog.OutPutException("ListenerCallBack-->" + ex);
+
                 if (ConnectionError != null)
                 {
                     ConnectionError(this, new ConnectionErrorEventArgs(ex.Message, null));
@@ -243,7 +248,10 @@ namespace com.digitalwave.iCare.gui.MFZ
                         string strMsg = null;
                         SocketSend(socket, bytArr, out strMsg);
                     }
-                    catch { }
+                    catch (Exception ex)
+                    {
+                        ExceptionLog.OutPutException("ClientConnectRequest-->" + ex);
+                    }
 
                     System.Threading.Thread.Sleep(5000);
 
@@ -277,15 +285,8 @@ namespace com.digitalwave.iCare.gui.MFZ
             }
             catch (Exception ex)
             {
-                //if (ex.InnerException is System.Net.Sockets.SocketException)
-                //{
-                //    if ((ex.InnerException as System.Net.Sockets.SocketException).ErrorCode == 10054)
-                //    {
-                //        this.hasClients.Remove(strClient);
-                //        socket.Close();
-                //        return;
-                //    }
-                //}
+                ExceptionLog.OutPutException("DataReceived-->" + ex);
+
                 if (cli.socket != null)
                 {
                     this.hasClients.Remove(strClient);
@@ -339,6 +340,7 @@ namespace com.digitalwave.iCare.gui.MFZ
                 catch (Exception ex)
                 {
                     strMsg = ex.Message;
+                    ExceptionLog.OutPutException("SocketSend-->" + ex);
                     return false;
                 }
                 finally
@@ -358,39 +360,46 @@ namespace com.digitalwave.iCare.gui.MFZ
         public bool Send(string strClient, byte[] data, out string strMsg)
         {
             strMsg = string.Empty;
-
-            if (strClient == null || strClient.Trim() == string.Empty)
+            try
             {
-                strMsg = "没有确定的客户机目标，发送失败！";
-                return false;
-            }
-            if (data == null || data.Length <= 0)
-            {
-                strMsg = "不能发送空数据！";
-                return false;
-            }
-
-            if (!this.hasClients.ContainsKey(strClient))
-            {
-                strMsg = "指定的目标不存在或未联机！";
-                return false;
-            }
-            clsClient client = (clsClient)hasClients[strClient];
-
-            if (!SocketSend(client.socket, data, out strMsg))
-            {
-                this.hasClients.Remove(client.clientName);
-                if (client.socket != null)
+                if (strClient == null || strClient.Trim() == string.Empty)
                 {
-                    client.socket.Close();
-                    client.socket = null;
+                    strMsg = "没有确定的客户机目标，发送失败！";
+                    return false;
                 }
-                if (ConnectionError != null)
+                if (data == null || data.Length <= 0)
                 {
-                    ConnectionError(this, new ConnectionErrorEventArgs(strMsg, strClient));
+                    strMsg = "不能发送空数据！";
+                    return false;
                 }
-                return false;
+
+                if (!this.hasClients.ContainsKey(strClient))
+                {
+                    strMsg = "指定的目标不存在或未联机！";
+                    return false;
+                }
+                clsClient client = (clsClient)hasClients[strClient];
+
+                if (!SocketSend(client.socket, data, out strMsg))
+                {
+                    this.hasClients.Remove(client.clientName);
+                    if (client.socket != null)
+                    {
+                        client.socket.Close();
+                        client.socket = null;
+                    }
+                    if (ConnectionError != null)
+                    {
+                        ConnectionError(this, new ConnectionErrorEventArgs(strMsg, strClient));
+                    }
+                    return false;
+                }
             }
+            catch(Exception ex)
+            {
+                ExceptionLog.OutPutException("Send-->" + ex);
+            }
+            
             return true;
         }
         public void Stop()

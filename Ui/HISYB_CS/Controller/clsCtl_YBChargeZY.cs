@@ -281,6 +281,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         if (lstDgzyxmcsVo[k].JE + diffMoney > 0)
                         {
                             lstDgzyxmcsVo[k].JE += diffMoney;
+                            lstDgzyxmcsVo[k].JG = lstDgzyxmcsVo[k].JE / lstDgzyxmcsVo[k].MCYL;
                             break;
                         }
                     }

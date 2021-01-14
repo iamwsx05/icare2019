@@ -4,7 +4,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{53D45A72-9FB8-4601-B673-719B7B261EAA}</ProjectGuid>
+    <ProjectGuid>{3579F481-6908-4798-B4A8-2E97F3297D41}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mejer</RootNamespace>

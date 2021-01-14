@@ -105,60 +105,74 @@ namespace com.digitalwave.iCare.gui.DataExchangeSystem
             clsInStorageData_VO[] ArrInStorageData = null;
             try
             {
-                long lngRes = objDomain.m_lngGetInStorageData(Convert.ToDateTime(this.m_objViewer.dtmBegin.Value.ToString("yyyy-MM-dd 00:00:00")), Convert.ToDateTime(this.m_objViewer.dtmEnd.Value.ToString("yyyy-MM-dd 23:59:59")), out ArrInStorageData);
-                if (ArrInStorageData != null && ArrInStorageData.Length > 0)
-                {
-                    lisInStorageData.AddRange(ArrInStorageData);
-                }
-                if (lngRes < 0)
-                {
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tsp_showProgress.Value = 100;
-                    this.m_objViewer.tslStat.Text = "下载药库入库数据失败,请核查!";
-                    this.m_objViewer.Update();
-                }
-                if (lisInStorageData.Count > 0)
-                {
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tsp_showProgress.Value = 40;
-                    this.m_objViewer.tslStat.Text = "准备上传药库入库数据,请稍后...";
-                    this.m_objViewer.Update();
+                DateTime startTime = Convert.ToDateTime(this.m_objViewer.dtmBegin.Value.ToString("yyyy-MM-dd"));
+                DateTime endTime = Convert.ToDateTime(this.m_objViewer.dtmEnd.Value.ToString("yyyy-MM-dd"));
 
-                    for (int i = 0; i < lisInStorageData.Count; i++)
+                for (var dayTime = startTime; dayTime <= endTime; dayTime = dayTime.AddDays(1))
+                {
+                    lisInStorageData = new List<clsInStorageData_VO>();
+                    long lngRes = objDomain.m_lngGetInStorageData(Convert.ToDateTime(dayTime.ToString("yyyy-MM-dd") + " 00:00:00"), Convert.ToDateTime(dayTime.ToString("yyyy-MM-dd") + " 23:59:59"), out ArrInStorageData);
+                    if (ArrInStorageData != null && ArrInStorageData.Length > 0)
                     {
-                        System.Windows.Forms.Application.DoEvents();
-                        this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 正在上传药库入库数据共" + lisInStorageData.Count.ToString() + "条,正在上传第" + (i + 1).ToString() + "条");
-                        this.m_objViewer.tslStat.Text = "正在上传第" + (i + 1).ToString() + "条数据";
-                        this.m_objViewer.Update();
-                        lngRes = objDomain.m_lngUploadInStorageData(lisInStorageData[i]);
-                        if (lngRes < 0)
-                        {
-                            this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传药库入库数据第" + (i + 1).ToString() + "条数据失败,请核查");
-                        }
-                        else
-                        {
-                            this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传药库入库数据第" + (i + 1).ToString() + "条数据成功");
-                        }
-
-                        this.m_objViewer.tsp_showProgress.Value = i % 100;
-
+                        lisInStorageData.AddRange(ArrInStorageData);
+                    }
+                    if (lngRes < 0)
+                    {
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tsp_showProgress.Value = 100;
+                        this.m_objViewer.tslStat.Text = "下载药库入库数据失败,请核查!";
                         this.m_objViewer.Update();
                     }
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tslStat.Text = "上传完成,请查看日志确认是否全部成功";
-                    this.m_objViewer.rtb_showLog.AppendText("\n 药库入库数据上传完成,请查看日志确认是否全部成功");
-                    com.digitalwave.Utility.clsLogText objLogErr = new clsLogText();
-                    objLogErr.LogError("[" + DateTime.Now.ToString("yyyy-MM-dd hh24:mi:ss") + "]: " + "药库入库数据上传成功");
-                    this.m_objViewer.tsp_showProgress.Value = 100;
-                    this.m_objViewer.Update();
+                    if (lisInStorageData.Count > 0)
+                    {
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tsp_showProgress.Value = 40;
+                        this.m_objViewer.tslStat.Text = "准备上传药库入库数据,请稍后...";
+                        this.m_objViewer.Update();
 
-                }
-                else
-                {
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tsp_showProgress.Value = 100;
-                    this.m_objViewer.tslStat.Text = "此时间段内没有入库数据,请核查!";
-                    this.m_objViewer.Update();
+                        lngRes = objDomain.m_lngDelInStorageData(dayTime);
+                        if (lngRes < 0)
+                        {
+                            this.m_objViewer.rtb_showLog.AppendText("\n [" + dayTime.ToString("yyyy-MM-dd") + "] 删除数据失败！");
+                            continue;
+                        }
+
+                        for (int i = 0; i < lisInStorageData.Count; i++)
+                        {
+                            System.Windows.Forms.Application.DoEvents();
+                            this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 正在上传药库入库数据共" + lisInStorageData.Count.ToString() + "条,正在上传第" + (i + 1).ToString() + "条");
+                            this.m_objViewer.tslStat.Text = "正在上传"+ dayTime.ToString("yyyy-MM-dd") + "第" + (i + 1).ToString() + "条数据";
+                            this.m_objViewer.Update();
+                            lngRes = objDomain.m_lngUploadInStorageData(lisInStorageData[i]);
+                            if (lngRes < 0)
+                            {
+                                this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传药库入库数据第" + (i + 1).ToString() + "条数据失败,请核查");
+                            }
+                            else
+                            {
+                                this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传药库入库数据第" + (i + 1).ToString() + "条数据成功");
+                            }
+
+                            this.m_objViewer.tsp_showProgress.Value = i % 100;
+
+                            this.m_objViewer.Update();
+                        }
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tslStat.Text = "上传完成,请查看日志确认是否全部成功";
+                        this.m_objViewer.rtb_showLog.AppendText("\n 药库入库数据上传完成,请查看日志确认是否全部成功");
+                        com.digitalwave.Utility.clsLogText objLogErr = new clsLogText();
+                        objLogErr.LogError("[" + DateTime.Now.ToString("yyyy-MM-dd hh24:mi:ss") + "]: " + "药库入库数据上传成功");
+                        this.m_objViewer.tsp_showProgress.Value = 100;
+                        this.m_objViewer.Update();
+
+                    }
+                    else
+                    {
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tsp_showProgress.Value = 100;
+                        this.m_objViewer.tslStat.Text = "此时间段内没有入库数据,请核查!";
+                        this.m_objViewer.Update();
+                    }
                 }
             }
             catch
@@ -196,60 +210,72 @@ namespace com.digitalwave.iCare.gui.DataExchangeSystem
             clsOutStorageData_VO[] ArrOutStorageData = null;
             try
             {
-                long lngRes = objDomain.m_lngGetOutStorageData(Convert.ToDateTime(this.m_objViewer.dtmBegin.Value.ToString("yyyy-MM-dd 00:00:00")), Convert.ToDateTime(this.m_objViewer.dtmEnd.Value.ToString("yyyy-MM-dd 23:59:59")), out ArrOutStorageData);
-                if (ArrOutStorageData != null && ArrOutStorageData.Length > 0)
+                DateTime startTime = Convert.ToDateTime(this.m_objViewer.dtmBegin.Value.ToString("yyyy-MM-dd"));
+                DateTime endTime = Convert.ToDateTime(this.m_objViewer.dtmEnd.Value.ToString("yyyy-MM-dd"));
+                for (var dayTime = startTime; dayTime <= endTime; dayTime = dayTime.AddDays(1))
                 {
-                    lisOutStorageData.AddRange(ArrOutStorageData);
-                }
-                if (lngRes < 0)
-                {
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tsp_showProgress.Value = 100;
-                    this.m_objViewer.tslStat.Text = "下载药库出库数据失败,请核查!";
-                    this.m_objViewer.Update();
-                }
-                if (lisOutStorageData.Count > 0)
-                {
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tsp_showProgress.Value = 40;
-                    this.m_objViewer.tslStat.Text = "准备上传药库出库数据,请稍后...";
-                    this.m_objViewer.Update();
-
-                    for (int i = 0; i < lisOutStorageData.Count; i++)
+                    lisOutStorageData = new List<clsOutStorageData_VO>();
+                    long lngRes = objDomain.m_lngGetOutStorageData(Convert.ToDateTime(dayTime.ToString("yyyy-MM-dd") + " 00:00:00"), Convert.ToDateTime(dayTime.ToString("yyyy-MM-dd") + " 23:59:59"), out ArrOutStorageData);
+                    if (ArrOutStorageData != null && ArrOutStorageData.Length > 0)
                     {
-                        System.Windows.Forms.Application.DoEvents();
-                        this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 正在上传药库出库数据共" + lisOutStorageData.Count.ToString() + "条,正在上传第" + (i + 1).ToString() + "条");
-                        this.m_objViewer.tslStat.Text = "正在上传第" + (i + 1).ToString() + "条数据";
-                        this.m_objViewer.Update();
-                        lngRes = objDomain.m_lngUploadOutStorageData(lisOutStorageData[i]);
-                        if (lngRes < 0)
-                        {
-                            this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传药库出库数据第" + (i + 1).ToString() + "条数据失败,请核查");
-                        }
-                        else
-                        {
-                            this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传药库出库数据第" + (i + 1).ToString() + "条数据成功");
-                        }
-
-                        this.m_objViewer.tsp_showProgress.Value = i % 100;
-
+                        lisOutStorageData.AddRange(ArrOutStorageData);
+                    }
+                    if (lngRes < 0)
+                    {
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tsp_showProgress.Value = 100;
+                        this.m_objViewer.tslStat.Text = "下载药库出库数据失败,请核查!";
                         this.m_objViewer.Update();
                     }
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tslStat.Text = "上传完成,请查看日志确认是否全部成功";
-                    this.m_objViewer.rtb_showLog.AppendText("\n 药库出库数据上传完成,请查看日志确认是否全部成功");
-                    com.digitalwave.Utility.clsLogText objLogErr = new clsLogText();
-                    objLogErr.LogError("[" + DateTime.Now.ToString("yyyy-MM-dd hh24:mi:ss") + "]: " + "药库出库数据上传成功");
-                    this.m_objViewer.tsp_showProgress.Value = 100;
-                    this.m_objViewer.Update();
+                    if (lisOutStorageData.Count > 0)
+                    {
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tsp_showProgress.Value = 40;
+                        this.m_objViewer.tslStat.Text = "准备上传药库出库数据,请稍后...";
+                        this.m_objViewer.Update();
+                        lngRes = objDomain.m_lngDelOutStorageData(dayTime);
+                        if (lngRes < 0)
+                        {
+                            this.m_objViewer.rtb_showLog.AppendText("\n [" + dayTime.ToString("yyyy-MM-dd") + "] 删除数据失败！");
+                            continue;
+                        }
 
-                }
-                else
-                {
-                    this.m_objViewer.Invalidate(true);
-                    this.m_objViewer.tsp_showProgress.Value = 100;
-                    this.m_objViewer.tslStat.Text = "此时间段内没有出库数据,请核查!";
-                    this.m_objViewer.Update();
+                        for (int i = 0; i < lisOutStorageData.Count; i++)
+                        {
+                            System.Windows.Forms.Application.DoEvents();
+                            this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 正在上传药库出库数据共" + lisOutStorageData.Count.ToString() + "条,正在上传第" + (i + 1).ToString() + "条");
+                            this.m_objViewer.tslStat.Text = "正在上传" + dayTime.ToString("yyyy-MM-dd") + "第" + (i + 1).ToString() + "条数据";
+                            this.m_objViewer.Update();
+                            lngRes = objDomain.m_lngUploadOutStorageData(lisOutStorageData[i]);
+                            if (lngRes < 0)
+                            {
+                                this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传药库出库数据第" + (i + 1).ToString() + "条数据失败,请核查");
+                            }
+                            else
+                            {
+                                this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 上传药库出库数据第" + (i + 1).ToString() + "条数据成功");
+                            }
+
+                            this.m_objViewer.tsp_showProgress.Value = i % 100;
+
+                            this.m_objViewer.Update();
+                        }
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tslStat.Text = "上传完成,请查看日志确认是否全部成功";
+                        this.m_objViewer.rtb_showLog.AppendText("\n 药库出库数据上传完成,请查看日志确认是否全部成功");
+                        com.digitalwave.Utility.clsLogText objLogErr = new clsLogText();
+                        objLogErr.LogError("[" + DateTime.Now.ToString("yyyy-MM-dd hh24:mi:ss") + "]: " + "药库出库数据上传成功");
+                        this.m_objViewer.tsp_showProgress.Value = 100;
+                        this.m_objViewer.Update();
+
+                    }
+                    else
+                    {
+                        this.m_objViewer.Invalidate(true);
+                        this.m_objViewer.tsp_showProgress.Value = 100;
+                        this.m_objViewer.tslStat.Text = "此时间段内没有出库数据,请核查!";
+                        this.m_objViewer.Update();
+                    }
                 }
             }
             catch
@@ -426,7 +452,7 @@ namespace com.digitalwave.iCare.gui.DataExchangeSystem
                         {
                             System.Windows.Forms.Application.DoEvents();
                             this.m_objViewer.rtb_showLog.AppendText("\n [" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "] 正在上传门诊收入数据共" + lisOutpatient.Count.ToString() + "条,正在上传第" + (i + 1).ToString() + "条");
-                            this.m_objViewer.tslStat.Text = "正在上传第" + (i + 1).ToString() + "条数据";
+                            this.m_objViewer.tslStat.Text = "正在上传"+ dayTime.ToString("yyyy-MM-dd") + "第" + (i + 1).ToString() + "条数据";
                             this.m_objViewer.Update();
                             lngRes = objDomain.m_lngUploadOutpatient(lisOutpatient[i]);
                             if (lngRes < 0)

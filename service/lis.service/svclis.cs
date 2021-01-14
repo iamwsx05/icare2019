@@ -227,6 +227,7 @@ namespace Lis.Service
             bool isJj = false;
             bool isJtj = false;
             bool isFB2000RUse = false;
+            bool flgRes = false;
             try
             {
                 svc = new weCare.Core.Dac.SqlHelper(weCare.Core.Dac.EnumBiz.onlineDB);
@@ -271,20 +272,29 @@ namespace Lis.Service
                 return false;
             }
 
-            if ((isJj || isJtj) && isFB2000RUse)
+            using (clsLIS_Svc proxy = new clsLIS_Svc())
             {
+                flgRes =  proxy.SamplePackCheck(sampleVo);
+            }
+
+            if(flgRes)
+            {
+                if ((isJj || isJtj) && isFB2000RUse)
+                {
+                    using (BizLis proxy = new BizLis())
+                    {
+                        proxy.FB200RExecpro(sampleVo.barCode);
+                    }
+                }
+
                 using (BizLis proxy = new BizLis())
                 {
-                    return proxy.SamplePackCheck(sampleVo);
+                    proxy.LabomanWrite2File(sampleVo.barCode);
+                    proxy.MejerWrite2Access(sampleVo.barCode);
                 }
             }
-            else
-            {
-                using (clsLIS_Svc proxy = new clsLIS_Svc())
-                {
-                    return proxy.SamplePackCheck(sampleVo);
-                }
-            }
+
+            return flgRes;
         }
 
         /// <summary>

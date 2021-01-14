@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <DBMS text="数据库连接参数">
+    <onlineDB text="在线数据库(体检)" dbms="1" connStr="Server=.;Database=wecare_debug;User id=sa;Password=sql;Max Pool Size=32767;Enlist=true" />  
+  </DBMS> 
+  <IsOutputSql>1</IsOutputSql> 
+</configuration>

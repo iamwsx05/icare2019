@@ -163,7 +163,14 @@
     </Reference>
     <Reference Include="LIS_DataAcquisition, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="LIS_Data_Acquisition_SendCommend, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="MAGLUMI_4000_plus, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="MAGLUMI_4000_plus, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\MAGLUMI_4000_plus.dll</HintPath>
+    </Reference>
+    <Reference Include="Mejer, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\Mejer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic">
       <Name>Microsoft.VisualBasic</Name>
     </Reference>
@@ -212,6 +219,10 @@
     <Reference Include="utility, Version=2.0.0.1, Culture=neutral, PublicKeyToken=55813ad8fa3e5102, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\debug\utility.dll</HintPath>
+    </Reference>
+    <Reference Include="VITROS_350, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\VITROS_350.dll</HintPath>
     </Reference>
     <Reference Include="wecare.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=456d275b15712733, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -278,6 +289,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\dll\YH_30\YH_30.csproj">
+      <Project>{19adde2d-8e19-4d17-a2e5-c3e7cf719e65}</Project>
+      <Name>YH_30</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

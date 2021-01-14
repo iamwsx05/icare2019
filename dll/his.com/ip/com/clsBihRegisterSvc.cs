@@ -3075,6 +3075,46 @@ ORDER BY t1.areaid_chr, t1.modify_dat DESC";
                 objLisAddItemRefArr[39].Value = p_objRecord.m_strINPATIENTTEMPID_VCHR;
                 objLisAddItemRefArr[40].Value = p_objRecord.ConsigneeAddr;
                 objLisAddItemRefArr[41].Value = p_objRecord.m_strPATIENTID_CHR;
+                
+                #region 写修改出生日期日志 2020-11-19
+                DataTable dt = null;
+                string Sql = string.Format("select a.patientid_chr, a.birth_dat, a.lastname_vchr from t_bse_patient a where a.patientid_chr = '{0}'", p_objRecord.m_strPATIENTID_CHR);
+                objHRPSvc.lngGetDataTableWithoutParameters(Sql, ref dt);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    if (dt.Rows[0]["birth_dat"] != DBNull.Value)
+                    {
+                        DateTime dteBirthPre = Convert.ToDateTime(dt.Rows[0]["birth_dat"]);
+                        DateTime dteBirthCur = Convert.ToDateTime(p_objRecord.m_strBIRTH_DAT);
+                        if (dteBirthPre != dteBirthCur)
+                        {
+                            object[] objs = new object[4] { p_objRecord.m_strPATIENTID_CHR, dteBirthPre.ToString("yyyy-MM-dd HH:mm:ss"), dteBirthCur.ToString("yyyy-MM-dd HH:mm:ss"), (string.IsNullOrEmpty(p_objRecord.m_strOPERATORID_CHR) ? "未记录" : p_objRecord.m_strOPERATORID_CHR) };
+                            Sql = @"insert into t_log_birthday
+                                          (fseqid, fpatientid, fbirthdaypre, fbirthdaycur, frecoperid, frecdate)
+                                        values
+                                          (seq_log_birthday.nextval, '{0}', to_date('{1}', 'yyyy-mm-dd hh24:mi:ss'), to_date('{2}', 'yyyy-mm-dd hh24:mi:ss'), '{3}', sysdate)";
+                            objHRPSvc.DoExcute(string.Format(Sql, objs));
+                        }
+                    }
+
+                    // 2020-11-29
+                    if (dt.Rows[0]["lastname_vchr"] != DBNull.Value)
+                    {
+                        string patNamePre = dt.Rows[0]["lastname_vchr"].ToString();
+                        string patNameCur = p_objRecord.m_strLASTNAME_VCHR;
+                        if (patNamePre != patNameCur)
+                        {
+                            object[] objs = new object[4] { p_objRecord.m_strPATIENTID_CHR, patNamePre, patNameCur, (string.IsNullOrEmpty(p_objRecord.m_strOPERATORID_CHR) ? "未记录" : p_objRecord.m_strOPERATORID_CHR) };
+                            Sql = @"insert into t_log_patientname
+                                          (fseqid, fpatientid, fpatnamepre, fpatnamecur, frecoperid, frecdate)
+                                        values
+                                          (seq_log_patientname.nextval, '{0}', '{1}', '{2}', '{3}', sysdate)";
+                            objHRPSvc.DoExcute(string.Format(Sql, objs));
+                        }
+                    }
+                }
+                #endregion
+
                 objHRPSvc.lngExecuteParameterSQL(strSQL, ref lngRes, objLisAddItemRefArr);
             }
             catch (Exception objEx)

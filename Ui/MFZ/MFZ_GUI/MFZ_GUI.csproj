@@ -65,6 +65,11 @@
     </Reference>
     <Reference Include="HISControl, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="HISZY, Version=2.0.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Interop.SpeechLib, Version=5.4.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>..\..\..\..\Debug\Interop.SpeechLib.dll</HintPath>
+    </Reference>
     <Reference Include="LEDManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Debug\LEDManager.dll</HintPath>
@@ -393,16 +398,6 @@
   <ItemGroup>
     <None Include="Resources\50.ico" />
     <Content Include="Resources\logo1.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="SpeechLib">
-      <Guid>{C866CA3A-32F7-11D2-9602-00C04F8EE628}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

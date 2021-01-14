@@ -943,6 +943,41 @@ namespace com.digitalwave.iCare.gui.LIS_Data_Acquisition_Controller
                         if (lngRes > 0) this.ShowWaitInfo(objConfig_VO);
                         return;
                     }
+                    else if (!string.IsNullOrEmpty(objConfig_VO.strData_Analysis_Namespace) && objConfig_VO.strData_Analysis_Namespace.Contains("Mejer"))
+                    {
+                        Mejer.Mejer_Duplex mejer = new Mejer.Mejer_Duplex(objConfig_VO);
+                        lngRes = mejer.Start();
+                        mejer.ShowResult += new Mejer.LISResultSavedEvent(ShowResult);
+
+                        if (lngRes > 0) this.ShowWaitInfo(objConfig_VO);
+                        return;
+                    }
+                    else if (!string.IsNullOrEmpty(objConfig_VO.strData_Analysis_Namespace) && objConfig_VO.strData_Analysis_Namespace.Contains("Mejer"))
+                    {
+                        Mejer.Mejer_Duplex mejer = new Mejer.Mejer_Duplex(objConfig_VO);
+                        lngRes = mejer.Start();
+                        mejer.ShowResult += new Mejer.LISResultSavedEvent(ShowResult);
+
+                        if (lngRes > 0) this.ShowWaitInfo(objConfig_VO);
+                        return;
+                    }
+                    else if (!string.IsNullOrEmpty(objConfig_VO.strData_Analysis_Namespace) && objConfig_VO.strData_Analysis_Namespace.Contains("VITROS"))
+                    {
+                        VITROS_350.VITROS_350_Duplex vitros = new VITROS_350.VITROS_350_Duplex(objConfig_VO);
+                        lngRes = vitros.Start();
+                        vitros.ShowResult += new VITROS_350.LISResultSavedEvent(ShowResult);
+
+                        if (lngRes > 0) this.ShowWaitInfo(objConfig_VO);
+                        return;
+                    }
+                    else if (!string.IsNullOrEmpty(objConfig_VO.strData_Analysis_Namespace) && objConfig_VO.strData_Analysis_Namespace.Contains("YH_30"))
+                    {
+                        YH_30.YH_30_Duplex YH30= new YH_30.YH_30_Duplex(objConfig_VO);
+                        lngRes = YH30.Start();
+                        YH30.ShowResult += new YH_30.LISResultSavedEvent(ShowResult);
+                        if (lngRes > 0) this.ShowWaitInfo(objConfig_VO);
+                        return;
+                    }
 
                     if (!string.IsNullOrEmpty(objConfig_VO.strCOM_No))
                     {

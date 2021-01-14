@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.EnterpriseServices;
 using System.Text;
+using System.Linq;
 using com.digitalwave.iCare.middletier.HRPService;
 using weCare.Core.Entity;
 using com.digitalwave.Utility;
@@ -10341,7 +10342,7 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
         /// <param name="lstPutMedCfkl">摆药.中药颗粒</param>
         /// <returns></returns>
         [AutoComplete]
-        public long m_lngUpdateBihOrderExecConfirmer(System.Collections.Generic.List<clsExecOrderVO> m_glstExecutablePhysicianOrderList, List<clsPatientNurseVO> m_arrNurseVO, List<EntityCureMed> lstCureMed, List<EntityCureSubStock> lstSubStock, out List<clsT_Bih_Opr_Putmeddetail_VO> lstPutMedCfkl, out string error)
+        public long m_lngUpdateBihOrderExecConfirmer(List<clsExecOrderVO> m_glstExecutablePhysicianOrderList, List<clsPatientNurseVO> m_arrNurseVO, List<EntityCureMed> lstCureMed, List<EntityCureSubStock> lstSubStock, out List<clsT_Bih_Opr_Putmeddetail_VO> lstPutMedCfkl, out string error)
         {
             long lngRes = 0;
             DateTime CreateDate = DateTime.MinValue;
@@ -10394,7 +10395,7 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
                     string Tmp = "";
                     DataTable dt = new DataTable();
                     DataTable dtbOrderid = null;
-                    System.Text.StringBuilder stbOrderID = new System.Text.StringBuilder(2150);//每次放100个orderid, orderid 是18个字符,加上引号和逗号，正好21个字符，总共2100个字符，但多留50个字符，总共2150个字符
+                    StringBuilder stbOrderID = new StringBuilder(2150);//每次放100个orderid, orderid 是18个字符,加上引号和逗号，正好21个字符，总共2100个字符，但多留50个字符，总共2150个字符
                     for (int i = 0; i < intOrderID_Count; i++)
                     {
                         stbOrderID.Append("'" + glstOrderID[i] + "',");
@@ -10439,13 +10440,13 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
 
                     #region 今天已执行过的医嘱不再执行
 
-                    System.Collections.Generic.List<string> glstAlreadyExecutedOrderID = null;
+                    List<string> glstAlreadyExecutedOrderID = null;
 
                     if (lngRes > 0 && dtbOrderid != null && dtbOrderid.Rows.Count > 0)
                     {
                         int intAlreadyExecutedOrders_Count = dtbOrderid.Rows.Count;
-                        glstAlreadyExecutedOrderID = new System.Collections.Generic.List<string>(intAlreadyExecutedOrders_Count);
-                        System.Data.DataRow objOneAlreadyExecutedOrderRow = null;
+                        glstAlreadyExecutedOrderID = new List<string>(intAlreadyExecutedOrders_Count);
+                        DataRow objOneAlreadyExecutedOrderRow = null;
                         for (int i = 0; i < intAlreadyExecutedOrders_Count; i++)
                         {
                             objOneAlreadyExecutedOrderRow = dtbOrderid.Rows[i];
@@ -10646,7 +10647,7 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
                             {
                                 //SEQ_PCHARGEID++;
                                 //m_strSEQ_PCHARGEID = SEQ_PCHARGEID.ToString().PadLeft(18, '0');
-                                dt2 = svc2.GetDataTable(Sql2);                                
+                                dt2 = svc2.GetDataTable(Sql2);
                                 ExecOrder.m_arrPatientChareVO[k1].PchargeID = dt2.Rows[0][0].ToString().PadLeft(18, '0');
                                 ExecOrder.m_arrPatientChareVO[k1].OrderExecID = ExecOrder.ORDEREXECID_CHR;
                                 // 摆药填值
@@ -10654,11 +10655,11 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
                                 {
                                     for (int k2 = 0; k2 < ExecOrder.m_arrPutmeddetail_VO.Length; k2++)
                                     {
-                                        if (((clsT_Bih_Opr_Putmeddetail_VO)ExecOrder.m_arrPutmeddetail_VO[k2]).m_strPUTMEDDETAILID_CHR.Equals(ExecOrder.m_arrPatientChareVO[k1].m_strPUTMEDREQID_CHR))
+                                        if (ExecOrder.m_arrPutmeddetail_VO[k2].m_strPUTMEDDETAILID_CHR.Equals(ExecOrder.m_arrPatientChareVO[k1].m_strPUTMEDREQID_CHR))
                                         {
-                                            ((clsT_Bih_Opr_Putmeddetail_VO)ExecOrder.m_arrPutmeddetail_VO[k2]).m_strPCHARGEID_CHR = ExecOrder.m_arrPatientChareVO[k1].PchargeID;
-                                            ((clsT_Bih_Opr_Putmeddetail_VO)ExecOrder.m_arrPutmeddetail_VO[k2]).m_strORDEREXECID_CHR = ExecOrder.m_arrPatientChareVO[k1].OrderExecID;
-                                            m_arrPutmeddetail_VO.Add((clsT_Bih_Opr_Putmeddetail_VO)ExecOrder.m_arrPutmeddetail_VO[k2]);
+                                            ExecOrder.m_arrPutmeddetail_VO[k2].m_strPCHARGEID_CHR = ExecOrder.m_arrPatientChareVO[k1].PchargeID;
+                                            ExecOrder.m_arrPutmeddetail_VO[k2].m_strORDEREXECID_CHR = ExecOrder.m_arrPatientChareVO[k1].OrderExecID;
+                                            m_arrPutmeddetail_VO.Add(ExecOrder.m_arrPutmeddetail_VO[k2]);
                                         }
                                     }
                                 }
@@ -10726,7 +10727,7 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
                                 for (int k1 = 0; k1 < m_glstExecutablePhysicianOrderList[k].m_arrPatientChareVO.Length; k1++)
                                 {
                                     n = -1;
-                                    clsBihPatientCharge_VO PatientCharge = (clsBihPatientCharge_VO)(m_glstExecutablePhysicianOrderList[k].m_arrPatientChareVO[k1]);
+                                    clsBihPatientCharge_VO PatientCharge = m_glstExecutablePhysicianOrderList[k].m_arrPatientChareVO[k1];
                                     //根据医嘱单ID，收费项目ID取适应症。
                                     strSQLShiying = @"select  t.itemchargetype_vchr from t_opr_bih_orderchargedept t where t.chargeitemid_chr = ? and t.orderid_chr = ? ";
                                     paraArr = null;
@@ -10984,13 +10985,10 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
                                    status_int = 2
                              where orderid_chr = ?";
 
-                dbTypes = new DbType[] {
-                        DbType.String,DbType.String,DbType.Date, DbType.String
-
-                        };
+                dbTypes = new DbType[] { DbType.String, DbType.String, DbType.Date, DbType.String };
                 objValues = new object[4][];
                 intExecutablePhysicianOrderListCount = m_glstExecutablePhysicianOrderList.Count;
-                System.Collections.Generic.List<clsExecOrderVO> glstExecOrdersToBeUpdated = new System.Collections.Generic.List<clsExecOrderVO>(intExecutablePhysicianOrderListCount);
+                List<clsExecOrderVO> glstExecOrdersToBeUpdated = new List<clsExecOrderVO>(intExecutablePhysicianOrderListCount);
                 for (int i = 0; i < intExecutablePhysicianOrderListCount; i++)
                 {
                     if (m_glstExecutablePhysicianOrderList[i].ISFIRST_INT != 1 && m_glstExecutablePhysicianOrderList[i].ISRECRUIT_INT == 0)
@@ -11033,10 +11031,7 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
                                    status_int = 2
                              where orderid_chr = ?";
 
-                dbTypes = new DbType[] {
-                        DbType.String,DbType.String,DbType.Date,DbType.Date,DbType.String
-
-                        };
+                dbTypes = new DbType[] { DbType.String, DbType.String, DbType.Date, DbType.Date, DbType.String };
                 objValues = new object[5][];
                 glstExecOrdersToBeUpdated.Clear();
                 intExecutablePhysicianOrderListCount = m_glstExecutablePhysicianOrderList.Count;
@@ -11084,32 +11079,33 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
                 #region 批插入病人饮食护理历史记录表
 
                 #region 更新原等级护理的数据
-                ArrayList m_arrCare = new ArrayList();//等级护理
-                ArrayList m_arrCareOrder = new ArrayList();//等级护理的流水号
-                ArrayList m_arrLastCareOrder = new ArrayList();//最后有效的护理数组
-                ArrayList m_arrEat = new ArrayList();//饮食护理
+                List<string> m_arrCare = new List<string>();//等级护理
+                List<clsPatientNurseVO> m_arrCareOrder = new List<clsPatientNurseVO>();//等级护理的流水号
+                List<clsPatientNurseVO> m_arrLastCareOrder = new List<clsPatientNurseVO>();//最后有效的护理数组
+                List<string> m_arrEat = new List<string>();//饮食护理
                 for (int i = 0; i < m_arrNurseVO.Count; i++)
                 {
-                    if (((clsPatientNurseVO)m_arrNurseVO[i]).m_intTYPE_INT == 1)
+                    if (m_arrNurseVO[i].m_intTYPE_INT == 1)
                     {
-                        if (!m_arrCare.Contains(((clsPatientNurseVO)m_arrNurseVO[i]).m_strREGISTERID_CHR))
+                        if (!m_arrCare.Contains(m_arrNurseVO[i].m_strREGISTERID_CHR))
                         {
-                            m_arrCare.Add(((clsPatientNurseVO)m_arrNurseVO[i]).m_strREGISTERID_CHR);
+                            m_arrCare.Add(m_arrNurseVO[i].m_strREGISTERID_CHR);
                         }
-                        if (!m_arrLastCareOrder.Contains(((clsPatientNurseVO)m_arrNurseVO[i]).m_strREGISTERID_CHR))
+                        //if (!m_arrLastCareOrder.Contains(m_arrNurseVO[i].m_strREGISTERID_CHR))
+                        if (m_arrLastCareOrder.Any(p => p.m_strREGISTERID_CHR == m_arrNurseVO[i].m_strREGISTERID_CHR) == false)     // 2020-06-15
                         {
-                            if (((clsPatientNurseVO)m_arrNurseVO[i]).m_intACTIVE_INT == 1)
+                            if (m_arrNurseVO[i].m_intACTIVE_INT == 1)
                             {
-                                m_arrLastCareOrder.Add(((clsPatientNurseVO)m_arrNurseVO[i]));
+                                m_arrLastCareOrder.Add(m_arrNurseVO[i]);
                             }
                         }
-                        m_arrCareOrder.Add(((clsPatientNurseVO)m_arrNurseVO[i]));
+                        m_arrCareOrder.Add(m_arrNurseVO[i]);
                     }
-                    else if (((clsPatientNurseVO)m_arrNurseVO[i]).m_intTYPE_INT == 2)
+                    else if (m_arrNurseVO[i].m_intTYPE_INT == 2)
                     {
-                        if (!m_arrEat.Contains(((clsPatientNurseVO)m_arrNurseVO[i]).m_strREGISTERID_CHR))
+                        if (!m_arrEat.Contains(m_arrNurseVO[i].m_strREGISTERID_CHR))
                         {
-                            m_arrEat.Add(((clsPatientNurseVO)m_arrNurseVO[i]).m_strREGISTERID_CHR);
+                            m_arrEat.Add(m_arrNurseVO[i].m_strREGISTERID_CHR);
                         }
                     }
 
@@ -11118,9 +11114,7 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
                 strSQL = @"update t_opr_bih_patientnurse
                                set active_int = 0
                              where registerid_chr = ? and type_int = 1";
-                dbTypes = new DbType[] {
-                              DbType.String
-                             };
+                dbTypes = new DbType[] { DbType.String };
                 objValues = new object[1][];
 
                 for (int j = 0; j < objValues.Length; j++)
@@ -11190,7 +11184,7 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
                 {
 
                     n = -1;
-                    clsPatientNurseVO m_objNurseVO = (clsPatientNurseVO)m_arrNurseVO[k1];
+                    clsPatientNurseVO m_objNurseVO = m_arrNurseVO[k1];
                     m_objNurseVO.m_strORDEREXECID_CHR = m_htAidOrderNurse[m_objNurseVO.m_strORDERID_CHR].ToString();
                     //流水号
                     objValues[++n][k1] = m_objNurseVO.m_strREGISTERID_CHR;
@@ -11212,7 +11206,7 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
                 ArrayList m_arrCare2 = new ArrayList();
                 for (int i = 0; i < m_arrNurseVO.Count; i++)
                 {
-                    if (((clsPatientNurseVO)m_arrNurseVO[i]).m_intTYPE_INT == 1)
+                    if ((m_arrNurseVO[i]).m_intTYPE_INT == 1)
                     {
                         m_arrCare2.Add(m_arrNurseVO[i]);
                     }
@@ -11266,8 +11260,8 @@ ta.chargedoctor_vchr, ta.pchargeidorg_chr, ta.chargedoctorgroupid_chr, ta.return
                 for (int k1 = 0; k1 < m_arrLastCareOrder.Count; k1++)
                 {
                     n = -1;
-                    objValues[++n][k1] = ((clsPatientNurseVO)m_arrLastCareOrder[k1]).m_strORDERID_CHR;
-                    objValues[++n][k1] = ((clsPatientNurseVO)m_arrLastCareOrder[k1]).m_strREGISTERID_CHR;
+                    objValues[++n][k1] = m_arrLastCareOrder[k1].m_strORDERID_CHR;
+                    objValues[++n][k1] = m_arrLastCareOrder[k1].m_strREGISTERID_CHR;
                 }
                 if (m_arrCareOrder.Count > 0)
                 {

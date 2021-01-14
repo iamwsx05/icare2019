@@ -104,6 +104,7 @@ namespace com.digitalwave.iCare.gui.HIS
             //}
             this.dtgDetail.AutoGenerateColumns = false;
             ((clsCtl_LeaveCharge)this.objController).m_mthInt();
+            this.ucPatientInfo.inputHealthCode.MedStepCode = "สีทั";
             this.timer.Enabled = true;
         }
 
