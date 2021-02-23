@@ -3581,7 +3581,8 @@ namespace com.digitalwave.iCare.middletier.HIS
                                                              activator_chr, activatetype_int, isrich_int, isconfirmrefundment, refundmentchecker, refundmentdate, bmstatus_int, curareaid_chr,
                                                              curbedid_chr, doctorid_chr, doctor_vchr, doctorgroupid_chr, needconfirm_int, confirmerid_chr, confirmer_vchr, confirm_dat, 
                                                              chargeactive_dat, TotalMoney_dec, AcctMoney_dec, attachorderid_vchr, attachorderbasenum_dec, spec_vchr, putmedicineflag_int, 
-                                                             chargedoctorid_chr, chargedoctor_vchr, chargedoctorgroupid_chr, pchargeidorg_chr,manyreturnmedill_int,returnmedbillno,itemchargetype_vchr,totaldiffcostmoney_dec, buyprice_dec)
+                                                             chargedoctorid_chr, chargedoctor_vchr, chargedoctorgroupid_chr, pchargeidorg_chr,manyreturnmedill_int,returnmedbillno,itemchargetype_vchr,
+                                                             totaldiffcostmoney_dec, buyprice_dec, reductionreason)
                                                       select lpad (seq_pchargeid.nextval, 18, '0'),
                                                              patientid_chr,
                                                              registerid_chr,
@@ -3634,11 +3635,12 @@ namespace com.digitalwave.iCare.middletier.HIS
                                                                                                                                                decode(nvl(buyprice_dec, 0),
                                                                                                                                                       0,
                                                                                                                                                       totaldiffcostmoney_dec,
-                                                                                                                                                      ((unitprice_dec - buyprice_dec) * ?)))),2) as newdiffmoney, buyprice_dec  
+                                                                                                                                                      ((unitprice_dec - buyprice_dec) * ?)))),2) as newdiffmoney, 
+                                                             buyprice_dec, ?   
                                                         from t_opr_bih_patientcharge 
                                                        where pchargeid_chr = ? ";//,manyreturnmedill_int,returnmedbillno ,?,lpad (seq_returnmedbillno.nextval, 18, '0') //
 
-                    objHRPSvc.CreateDatabaseParameter(12, out ParamArr);
+                    objHRPSvc.CreateDatabaseParameter(13, out ParamArr);
                     ParamArr[0].Value = OrderID;
                     ParamArr[1].Value = Ref_VO.RefAmount;
                     ParamArr[2].Value = EmpID;
@@ -3651,7 +3653,8 @@ namespace com.digitalwave.iCare.middletier.HIS
                     ParamArr[8].Value = Ref_VO.PChargeID;
                     ParamArr[9].Value = m_intManyReturnMed;
                     ParamArr[10].Value = Ref_VO.RefAmount;
-                    ParamArr[11].Value = Ref_VO.PChargeID;
+                    ParamArr[11].Value = Ref_VO.ReductionReason;
+                    ParamArr[12].Value = Ref_VO.PChargeID;
                     lngRes = objHRPSvc.lngExecuteParameterSQL(SQL, ref lngAffects, ParamArr);
 
                     if (intAuditintMed == 0)//Î´°ÚÒ©

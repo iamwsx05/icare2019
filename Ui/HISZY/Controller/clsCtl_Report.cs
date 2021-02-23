@@ -1283,7 +1283,7 @@ namespace com.digitalwave.iCare.gui.HIS
             {
                 string jsPayTypeId = clsPublic.m_strGetSysparm("0094");
                 string syPayTypeId = clsPublic.m_strGetSysparm("0093");
-                string gsPayTypeId = clsPublic.m_strGetSysparm("0087"); 
+                string gsPayTypeId = clsPublic.m_strGetSysparm("0087");
                 string snydPayTypeId = clsPublic.m_strGetSysparm("0092");
                 string swydPayTypeId = clsPublic.m_strGetSysparm("0091");
                 string mzjzPayTypeId = clsPublic.m_strGetSysparm("0090");
@@ -1315,13 +1315,13 @@ namespace com.digitalwave.iCare.gui.HIS
                     dwRep.Modify("t_sum_yprl.text = ''");
                     dwRep.Modify("t_sum_ajhj.text = ''");
 
-                    dwRep.Modify("t_sum_ylzy.text = ''");
-                    dwRep.Modify("t_sum_gsbx.text = ''");
-                    dwRep.Modify("t_sum_sybx.text = ''");
-                    dwRep.Modify("t_sum_jsjz.text = ''");
-                    dwRep.Modify("t_sum_snyd.text = ''");
-                    dwRep.Modify("t_sum_swyd.text = ''");
-                    dwRep.Modify("t_sum_mzjz.text = ''");
+                    //dwRep.Modify("t_sum_ylzy.text = ''");
+                    //dwRep.Modify("t_sum_gsbx.text = ''");
+                    //dwRep.Modify("t_sum_sybx.text = ''");
+                    //dwRep.Modify("t_sum_jsjz.text = ''");
+                    //dwRep.Modify("t_sum_snyd.text = ''");
+                    //dwRep.Modify("t_sum_swyd.text = ''");
+                    //dwRep.Modify("t_sum_mzjz.text = ''");
 
                     //╜с╒╩╚╒╞┌
                     dwRep.Modify("t_jzrq.text = '" + BeginDate + "бл" + EndDate + "'");
@@ -1519,48 +1519,48 @@ namespace com.digitalwave.iCare.gui.HIS
                                     yb += clsPublic.ConvertObjToDecimal(drv["paysum"]);
                                     sum_yb += clsPublic.ConvertObjToDecimal(drv["paysum"]);
 
-                                    if (jsPayTypeId == drv["paytypeid_chr"].ToString() )
-                                    {
-                                        jsjz += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                        sum_jsjz += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                    }
+                                    //if (jsPayTypeId == drv["paytypeid_chr"].ToString())
+                                    //{
+                                    //    jsjz += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //    sum_jsjz += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //}
 
-                                    if(syPayTypeId == drv["paytypeid_chr"].ToString())
-                                    {
-                                        sybx += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                        sum_sybx += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                    }
+                                    //if (syPayTypeId == drv["paytypeid_chr"].ToString())
+                                    //{
+                                    //    sybx += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //    sum_sybx += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //}
 
-                                    if(gsPayTypeId == drv["paytypeid_chr"].ToString())
-                                    {
-                                        gsbx += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                        sum_gsbx += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                    }
+                                    //if (gsPayTypeId == drv["paytypeid_chr"].ToString())
+                                    //{
+                                    //    gsbx += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //    sum_gsbx += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //}
 
 
-                                    if (snydPayTypeId == drv["paytypeid_chr"].ToString())
-                                    {
-                                        snyd += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                        sum_snyd += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                    }
+                                    //if (snydPayTypeId == drv["paytypeid_chr"].ToString())
+                                    //{
+                                    //    snyd += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //    sum_snyd += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //}
 
-                                    if (swydPayTypeId == drv["paytypeid_chr"].ToString())
-                                    {
-                                        swyd += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                        sum_swyd += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                    }
+                                    //if (swydPayTypeId == drv["paytypeid_chr"].ToString())
+                                    //{
+                                    //    swyd += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //    sum_swyd += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //}
 
-                                    if (mzjzPayTypeId == drv["paytypeid_chr"].ToString())
-                                    {
-                                        mzjz += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                        sum_mzjz += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                    }
+                                    //if (mzjzPayTypeId == drv["paytypeid_chr"].ToString())
+                                    //{
+                                    //    mzjz += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //    sum_mzjz += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //}
 
-                                    if ( drv["zylb_vchr"].ToString() == "1")
-                                    {
-                                        ylzy += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                        sum_ylzy += clsPublic.ConvertObjToDecimal(drv["paysum"]);
-                                    }
+                                    //if (drv["zylb_vchr"].ToString() == "1")
+                                    //{
+                                    //    ylzy += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //    sum_ylzy += clsPublic.ConvertObjToDecimal(drv["paysum"]);
+                                    //}
                                 }
                                 else if (drv["paytype"].ToString() == "&1")
                                 {
@@ -1603,21 +1603,22 @@ namespace com.digitalwave.iCare.gui.HIS
                                 }
                             }
 
-                            dwRep.SetItemString(row, "yb2", "гд" + yb.ToString("###,##0.00"));
-                            dwRep.SetItemString(row, "ylzy2", "гд" + ylzy.ToString("###,##0.00"));
-                            dwRep.SetItemString(row, "jsjz2", "гд" + jsjz.ToString("###,##0.00"));
-                            dwRep.SetItemString(row, "sybx2", "гд" + sybx.ToString("###,##0.00"));
-                            dwRep.SetItemString(row, "gsbx2", "гд" + gsbx.ToString("###,##0.00"));
-                            dwRep.SetItemString(row, "snyd2", "гд" + snyd.ToString("###,##0.00"));
-                            dwRep.SetItemString(row, "swyd2", "гд" + swyd.ToString("###,##0.00"));
-                            dwRep.SetItemString(row, "mzjz2", "гд" + mzjz.ToString("###,##0.00"));
+                            dwRep.SetItemString(row, "yb", "гд" + yb.ToString("###,##0.00"));
+                            //dwRep.SetItemString(row, "yb2", "гд" + yb.ToString("###,##0.00"));
+                            //dwRep.SetItemString(row, "ylzy2", "гд" + ylzy.ToString("###,##0.00"));
+                            //dwRep.SetItemString(row, "jsjz2", "гд" + jsjz.ToString("###,##0.00"));
+                            //dwRep.SetItemString(row, "sybx2", "гд" + sybx.ToString("###,##0.00"));
+                            //dwRep.SetItemString(row, "gsbx2", "гд" + gsbx.ToString("###,##0.00"));
+                            //dwRep.SetItemString(row, "snyd2", "гд" + snyd.ToString("###,##0.00"));
+                            //dwRep.SetItemString(row, "swyd2", "гд" + swyd.ToString("###,##0.00"));
+                            //dwRep.SetItemString(row, "mzjz2", "гд" + mzjz.ToString("###,##0.00"));
                             dwRep.SetItemString(row, "yprl", "гд" + rlje.ToString("###,##0.00"));
 
                             xj = xj - (yjktotal - yjk);
                             sum_xj += xj;
                             dwRep.SetItemString(row, "xj", "гд" + xj.ToString("###,##0.00"));
                             dwRep.SetItemString(row, "yjhj", "гд" + Convert.ToDecimal(kpje + tpje + ajhj - yjktotal).ToString("###,##0.00"));
-                            
+
                             //dwRep.SetItemString(row, "yjhj", "гд" + Convert.ToDecimal(xj + zp + yhk + qt + yb + gf + tk + qt2).ToString("###,##0.00"));
 
                             string Remark = "";
@@ -1704,7 +1705,7 @@ namespace com.digitalwave.iCare.gui.HIS
                             dwRep.Modify("t_sum_yprl.text='гд" + sum_rlje.ToString("###,##0.00") + "'");
                         }
 
-                        if(sum_gsbx != 0)
+                        if (sum_gsbx != 0)
                         {
                             dwRep.Modify("t_sum_gsbx.text='гд" + sum_gsbx.ToString("###,##0.00") + "'");
                         }

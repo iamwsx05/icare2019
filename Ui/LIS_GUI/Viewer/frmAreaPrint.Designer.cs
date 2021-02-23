@@ -33,17 +33,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -55,6 +44,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbQuery = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -76,19 +76,6 @@
             this.dteRq1 = new System.Windows.Forms.DateTimePicker();
             this.lblDate = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sortNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bedNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ipNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -102,6 +89,19 @@
             this.reportDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.reportgroupid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.applicationId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -129,7 +129,7 @@
             this.tsbQuery.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbQuery.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbQuery.Name = "tsbQuery";
-            this.tsbQuery.Size = new System.Drawing.Size(71, 36);
+            this.tsbQuery.Size = new System.Drawing.Size(68, 36);
             this.tsbQuery.Text = "查询";
             this.tsbQuery.Click += new System.EventHandler(this.tsbQuery_Click);
             // 
@@ -144,7 +144,7 @@
             this.tsbiCheck.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbiCheck.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbiCheck.Name = "tsbiCheck";
-            this.tsbiCheck.Size = new System.Drawing.Size(71, 36);
+            this.tsbiCheck.Size = new System.Drawing.Size(68, 36);
             this.tsbiCheck.Text = "全选";
             this.tsbiCheck.Click += new System.EventHandler(this.tsbiCheck_Click);
             // 
@@ -159,7 +159,7 @@
             this.tsbPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPrint.Name = "tsbPrint";
-            this.tsbPrint.Size = new System.Drawing.Size(71, 36);
+            this.tsbPrint.Size = new System.Drawing.Size(68, 36);
             this.tsbPrint.Text = "打印";
             this.tsbPrint.Click += new System.EventHandler(this.tsbPrint_Click);
             // 
@@ -174,7 +174,7 @@
             this.tsbClose.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbClose.Name = "tsbClose";
-            this.tsbClose.Size = new System.Drawing.Size(71, 36);
+            this.tsbClose.Size = new System.Drawing.Size(68, 36);
             this.tsbClose.Text = "关闭";
             this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
             // 
@@ -203,7 +203,7 @@
             this.cboPrinter.Font = new System.Drawing.Font("宋体", 10.5F);
             this.cboPrinter.FormattingEnabled = true;
             this.cboPrinter.ItemHeight = 14;
-            this.cboPrinter.Location = new System.Drawing.Point(862, 9);
+            this.cboPrinter.Location = new System.Drawing.Point(904, 9);
             this.cboPrinter.Name = "cboPrinter";
             this.cboPrinter.Size = new System.Drawing.Size(222, 22);
             this.cboPrinter.TabIndex = 20;
@@ -212,7 +212,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(802, 13);
+            this.label4.Location = new System.Drawing.Point(844, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 14);
             this.label4.TabIndex = 19;
@@ -222,7 +222,7 @@
             // 
             this.btnDept.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDept.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDept.Location = new System.Drawing.Point(180, 8);
+            this.btnDept.Location = new System.Drawing.Point(196, 8);
             this.btnDept.Name = "btnDept";
             this.btnDept.Size = new System.Drawing.Size(24, 24);
             this.btnDept.TabIndex = 18;
@@ -235,7 +235,7 @@
             this.txtDeptName.Font = new System.Drawing.Font("宋体", 11F);
             this.txtDeptName.Location = new System.Drawing.Point(78, 8);
             this.txtDeptName.Name = "txtDeptName";
-            this.txtDeptName.Size = new System.Drawing.Size(100, 24);
+            this.txtDeptName.Size = new System.Drawing.Size(118, 24);
             this.txtDeptName.TabIndex = 17;
             // 
             // label3
@@ -251,7 +251,7 @@
             // txtIpNo
             // 
             this.txtIpNo.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtIpNo.Location = new System.Drawing.Point(688, 8);
+            this.txtIpNo.Location = new System.Drawing.Point(730, 8);
             this.txtIpNo.Name = "txtIpNo";
             this.txtIpNo.Size = new System.Drawing.Size(100, 24);
             this.txtIpNo.TabIndex = 15;
@@ -260,7 +260,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(627, 13);
+            this.label1.Location = new System.Drawing.Point(669, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 14);
             this.label1.TabIndex = 14;
@@ -270,7 +270,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(451, 13);
+            this.label2.Location = new System.Drawing.Point(480, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 14);
             this.label2.TabIndex = 13;
@@ -281,9 +281,9 @@
             this.dteRq2.CustomFormat = "yyyy年MM月dd日";
             this.dteRq2.Font = new System.Drawing.Font("宋体", 11F);
             this.dteRq2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dteRq2.Location = new System.Drawing.Point(476, 8);
+            this.dteRq2.Location = new System.Drawing.Point(505, 8);
             this.dteRq2.Name = "dteRq2";
-            this.dteRq2.Size = new System.Drawing.Size(139, 24);
+            this.dteRq2.Size = new System.Drawing.Size(151, 24);
             this.dteRq2.TabIndex = 11;
             // 
             // dteRq1
@@ -291,16 +291,16 @@
             this.dteRq1.CustomFormat = "yyyy年MM月dd日";
             this.dteRq1.Font = new System.Drawing.Font("宋体", 11F);
             this.dteRq1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dteRq1.Location = new System.Drawing.Point(309, 8);
+            this.dteRq1.Location = new System.Drawing.Point(325, 8);
             this.dteRq1.Name = "dteRq1";
-            this.dteRq1.Size = new System.Drawing.Size(139, 24);
+            this.dteRq1.Size = new System.Drawing.Size(151, 24);
             this.dteRq1.TabIndex = 10;
             // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblDate.Location = new System.Drawing.Point(213, 13);
+            this.lblDate.Location = new System.Drawing.Point(229, 13);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(91, 14);
             this.lblDate.TabIndex = 12;
@@ -361,6 +361,141 @@
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(1355, 388);
             this.dataGridView.TabIndex = 3;
+            // 
+            // sortNo
+            // 
+            this.sortNo.DataPropertyName = "sortNo";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sortNo.DefaultCellStyle = dataGridViewCellStyle2;
+            this.sortNo.HeaderText = "序号";
+            this.sortNo.Name = "sortNo";
+            this.sortNo.ReadOnly = true;
+            this.sortNo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.sortNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sortNo.Width = 50;
+            // 
+            // bedNo
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.bedNo.DefaultCellStyle = dataGridViewCellStyle3;
+            this.bedNo.HeaderText = "床号";
+            this.bedNo.Name = "bedNo";
+            this.bedNo.ReadOnly = true;
+            this.bedNo.Width = 60;
+            // 
+            // ipNo
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ipNo.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ipNo.HeaderText = "住院号";
+            this.ipNo.Name = "ipNo";
+            this.ipNo.ReadOnly = true;
+            this.ipNo.Width = 80;
+            // 
+            // barCode
+            // 
+            this.barCode.DataPropertyName = "barCode";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.barCode.DefaultCellStyle = dataGridViewCellStyle5;
+            this.barCode.HeaderText = "条码号";
+            this.barCode.Name = "barCode";
+            this.barCode.ReadOnly = true;
+            this.barCode.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.barCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // patName
+            // 
+            this.patName.DataPropertyName = "patName";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.patName.DefaultCellStyle = dataGridViewCellStyle6;
+            this.patName.HeaderText = "姓名";
+            this.patName.Name = "patName";
+            this.patName.ReadOnly = true;
+            this.patName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.patName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.patName.Width = 80;
+            // 
+            // sex
+            // 
+            this.sex.DataPropertyName = "sex";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.sex.DefaultCellStyle = dataGridViewCellStyle7;
+            this.sex.HeaderText = "性别";
+            this.sex.Name = "sex";
+            this.sex.ReadOnly = true;
+            this.sex.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.sex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.sex.Width = 43;
+            // 
+            // age
+            // 
+            this.age.DataPropertyName = "age";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.age.DefaultCellStyle = dataGridViewCellStyle8;
+            this.age.HeaderText = "年龄";
+            this.age.Name = "age";
+            this.age.ReadOnly = true;
+            this.age.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.age.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.age.Width = 80;
+            // 
+            // itemName
+            // 
+            this.itemName.DataPropertyName = "itemName";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.itemName.DefaultCellStyle = dataGridViewCellStyle9;
+            this.itemName.HeaderText = "项目名称";
+            this.itemName.Name = "itemName";
+            this.itemName.ReadOnly = true;
+            this.itemName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.itemName.Width = 600;
+            // 
+            // itemCode
+            // 
+            this.itemCode.DataPropertyName = "applyUnit";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.itemCode.DefaultCellStyle = dataGridViewCellStyle10;
+            this.itemCode.HeaderText = "申请单元";
+            this.itemCode.Name = "itemCode";
+            this.itemCode.ReadOnly = true;
+            this.itemCode.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.itemCode.Visible = false;
+            // 
+            // recordDate
+            // 
+            this.recordDate.DataPropertyName = "applyDate";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.recordDate.DefaultCellStyle = dataGridViewCellStyle11;
+            this.recordDate.HeaderText = "申请时间";
+            this.recordDate.Name = "recordDate";
+            this.recordDate.ReadOnly = true;
+            this.recordDate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.recordDate.Width = 120;
+            // 
+            // reportDate
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.reportDate.DefaultCellStyle = dataGridViewCellStyle12;
+            this.reportDate.HeaderText = "报告时间";
+            this.reportDate.Name = "reportDate";
+            this.reportDate.ReadOnly = true;
+            this.reportDate.Width = 120;
+            // 
+            // reportgroupid
+            // 
+            this.reportgroupid.HeaderText = "报告组ID";
+            this.reportgroupid.Name = "reportgroupid";
+            this.reportgroupid.ReadOnly = true;
+            this.reportgroupid.Visible = false;
+            // 
+            // applicationId
+            // 
+            this.applicationId.HeaderText = "申请单ID";
+            this.applicationId.Name = "applicationId";
+            this.applicationId.ReadOnly = true;
+            this.applicationId.Visible = false;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -507,141 +642,6 @@
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             this.dataGridViewTextBoxColumn13.ReadOnly = true;
             this.dataGridViewTextBoxColumn13.Visible = false;
-            // 
-            // sortNo
-            // 
-            this.sortNo.DataPropertyName = "sortNo";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sortNo.DefaultCellStyle = dataGridViewCellStyle2;
-            this.sortNo.HeaderText = "序号";
-            this.sortNo.Name = "sortNo";
-            this.sortNo.ReadOnly = true;
-            this.sortNo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.sortNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sortNo.Width = 50;
-            // 
-            // bedNo
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.bedNo.DefaultCellStyle = dataGridViewCellStyle3;
-            this.bedNo.HeaderText = "床号";
-            this.bedNo.Name = "bedNo";
-            this.bedNo.ReadOnly = true;
-            this.bedNo.Width = 60;
-            // 
-            // ipNo
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ipNo.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ipNo.HeaderText = "住院号";
-            this.ipNo.Name = "ipNo";
-            this.ipNo.ReadOnly = true;
-            this.ipNo.Width = 80;
-            // 
-            // barCode
-            // 
-            this.barCode.DataPropertyName = "barCode";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.barCode.DefaultCellStyle = dataGridViewCellStyle5;
-            this.barCode.HeaderText = "条码号";
-            this.barCode.Name = "barCode";
-            this.barCode.ReadOnly = true;
-            this.barCode.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.barCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // patName
-            // 
-            this.patName.DataPropertyName = "patName";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.patName.DefaultCellStyle = dataGridViewCellStyle6;
-            this.patName.HeaderText = "姓名";
-            this.patName.Name = "patName";
-            this.patName.ReadOnly = true;
-            this.patName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.patName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.patName.Width = 80;
-            // 
-            // sex
-            // 
-            this.sex.DataPropertyName = "sex";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.sex.DefaultCellStyle = dataGridViewCellStyle7;
-            this.sex.HeaderText = "性别";
-            this.sex.Name = "sex";
-            this.sex.ReadOnly = true;
-            this.sex.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.sex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.sex.Width = 43;
-            // 
-            // age
-            // 
-            this.age.DataPropertyName = "age";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.age.DefaultCellStyle = dataGridViewCellStyle8;
-            this.age.HeaderText = "年龄";
-            this.age.Name = "age";
-            this.age.ReadOnly = true;
-            this.age.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.age.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.age.Width = 80;
-            // 
-            // itemName
-            // 
-            this.itemName.DataPropertyName = "itemName";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.itemName.DefaultCellStyle = dataGridViewCellStyle9;
-            this.itemName.HeaderText = "项目名称";
-            this.itemName.Name = "itemName";
-            this.itemName.ReadOnly = true;
-            this.itemName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.itemName.Width = 600;
-            // 
-            // itemCode
-            // 
-            this.itemCode.DataPropertyName = "applyUnit";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.itemCode.DefaultCellStyle = dataGridViewCellStyle10;
-            this.itemCode.HeaderText = "申请单元";
-            this.itemCode.Name = "itemCode";
-            this.itemCode.ReadOnly = true;
-            this.itemCode.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.itemCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.itemCode.Visible = false;
-            // 
-            // recordDate
-            // 
-            this.recordDate.DataPropertyName = "applyDate";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.recordDate.DefaultCellStyle = dataGridViewCellStyle11;
-            this.recordDate.HeaderText = "申请时间";
-            this.recordDate.Name = "recordDate";
-            this.recordDate.ReadOnly = true;
-            this.recordDate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.recordDate.Width = 120;
-            // 
-            // reportDate
-            // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.reportDate.DefaultCellStyle = dataGridViewCellStyle12;
-            this.reportDate.HeaderText = "报告时间";
-            this.reportDate.Name = "reportDate";
-            this.reportDate.ReadOnly = true;
-            this.reportDate.Width = 120;
-            // 
-            // reportgroupid
-            // 
-            this.reportgroupid.HeaderText = "报告组ID";
-            this.reportgroupid.Name = "reportgroupid";
-            this.reportgroupid.ReadOnly = true;
-            this.reportgroupid.Visible = false;
-            // 
-            // applicationId
-            // 
-            this.applicationId.HeaderText = "申请单ID";
-            this.applicationId.Name = "applicationId";
-            this.applicationId.ReadOnly = true;
-            this.applicationId.Visible = false;
             // 
             // frmAreaPrint
             // 

@@ -96,29 +96,6 @@ namespace com.digitalwave.iCare.gui.LIS
             {
                 this.m_strBarCode = m_objReportInfo.m_strBarCode;
             }
-
-            #region 取得收费状态 lyoubing (在申请单打印时不用打印收费状态 modified by lyoubing 2005.08.04)
-            //			if(lngRes > 0 && m_objReportInfo != null)
-            //			{
-            //				lngRes = 0;
-            //				lngRes = clsDomainController_ApplicationManage.m_lngGetChargeState(p_strApplicationID);
-            //				switch(lngRes)
-            //				{
-            //					case 0:
-            //						m_objReportInfo.m_strChargeState = "";
-            //						break;
-            //					case 1:
-            //						m_objReportInfo.m_strChargeState = "未 付费";
-            //						break;
-            //					case 2:
-            //						m_objReportInfo.m_strChargeState = "已 付费";
-            //						break;
-            //					default:
-            //						m_objReportInfo.m_strChargeState = ""; 
-            //						break;
-            //				}
-            //			}
-            #endregion
         }
         public void m_mthGetPrintContent(string p_strApplicationID, string p_strBarCode)
         {
@@ -126,29 +103,17 @@ namespace com.digitalwave.iCare.gui.LIS
             clsDomainController_ApplicationManage objManage = new clsDomainController_ApplicationManage();
             lngRes = objManage.m_lngGetApplicationReportInfo(p_strApplicationID, out m_objReportInfo);
             this.m_strBarCode = p_strBarCode;
-
-            #region 取得收费状态 lyoubing (在申请单打印时不用打印收费状态 modified by lyoubing 2005.08.04)
-            //			if(lngRes > 0 && m_objReportInfo != null)
-            //			{
-            //				lngRes = 0;
-            //				lngRes = clsDomainController_ApplicationManage.m_lngGetChargeState(p_strApplicationID);
-            //				switch(lngRes)
-            //				{
-            //					case 0:
-            //						m_objReportInfo.m_strChargeState = "";
-            //						break;
-            //					case 1:
-            //						m_objReportInfo.m_strChargeState = "未 付费";
-            //						break;
-            //					case 2:
-            //						m_objReportInfo.m_strChargeState = "已 付费";
-            //						break;
-            //					default:
-            //						m_objReportInfo.m_strChargeState = "";
-            //						break;
-            //				}
-            //			}
-            #endregion
+        }
+        public void m_mthGetPrintContentCovid(string applicationID, string patSampleNo)
+        {
+            long lngRes = 0;
+            clsDomainController_ApplicationManage objManage = new clsDomainController_ApplicationManage();
+            lngRes = objManage.m_lngGetApplicationReportInfo(applicationID, out m_objReportInfo);
+            if (m_objReportInfo != null && !string.IsNullOrEmpty(m_objReportInfo.m_strBarCode))
+            {
+                this.m_strBarCode = m_objReportInfo.m_strBarCode;
+                m_objReportInfo.m_strColor += "" + patSampleNo;
+            }
         }
         #endregion
 
@@ -422,7 +387,7 @@ namespace com.digitalwave.iCare.gui.LIS
             currX = 6;
             currY = 105;
             e.Graphics.DrawString(applyTime, TextFont, Brushes.Black, currX, currY);
-            currX += e.Graphics.MeasureString(applyTime, TextFont).Width + 10;
+            currX += e.Graphics.MeasureString(applyTime, TextFont).Width - 2; //10;  // 为了打印核酸检测编号 左挪
             e.Graphics.DrawString(colorAmont, TextFont, Brushes.Black, currX, currY);
 
         }

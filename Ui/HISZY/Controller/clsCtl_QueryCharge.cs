@@ -1247,7 +1247,7 @@ namespace com.digitalwave.iCare.gui.HIS
             {
                 return;
             }
-
+            
             if (IsAllowPatchNegativeMed == false && IsAllowPatchNegativeNoMed == false)
             {
                 MessageBox.Show("对不起，您没有权限对收费项目退费(负数冲帐)。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1269,13 +1269,10 @@ namespace com.digitalwave.iCare.gui.HIS
                 DataRow dr = ((DataRowView)this.m_objViewer.dtItem.SelectedRows[i].DataBoundItem).Row;
 
                 #region 检查
-
+                
                 if (dr["rptStatus"].ToString() == "1")
                 {
-                    this.m_objViewer.Cursor = Cursors.Default;
-                    //MessageBox.Show("对不起，" + dr["chargeitemname_chr"].ToString().Trim() + "：对应的检查报告已审核，不能退费。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //return;
-
+                    this.m_objViewer.Cursor = Cursors.Default; 
                     MessageBox.Show(dr["chargeitemname_chr"].ToString().Trim() + "：对应的检查报告已审核，请谨慎退费。", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
@@ -1338,7 +1335,7 @@ namespace com.digitalwave.iCare.gui.HIS
                         return;
                     }
                 }
-
+                
                 #endregion
 
                 clsParmDiagItem_VO DiagItem_VO = new clsParmDiagItem_VO();
@@ -1408,7 +1405,8 @@ namespace com.digitalwave.iCare.gui.HIS
         {
             try
             {
-                frmAidEditAmount fedit = new frmAidEditAmount(this.dtSource, p_RefDiagArr);
+                //frmAidEditAmount fedit = new frmAidEditAmount(this.dtSource, p_RefDiagArr);
+                frmAidEditAmountNew fedit = new frmAidEditAmountNew(this.dtSource, p_RefDiagArr);
                 if (fedit.ShowDialog() == DialogResult.OK)
                 {
                     List<clsBihRefCharge_VO> ChargeIDArr = fedit.ChargeIDArr;

@@ -121,6 +121,11 @@
       <HintPath>..\..\..\Debug\CommonInfo.dll</HintPath>
     </Reference>
     <Reference Include="DataWindow, Version=2.0.4600.0, Culture=neutral, PublicKeyToken=cc0f66dd9541b3da, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DigitalWaveControls">
       <Name>DigitalWaveControls</Name>
       <HintPath>..\..\..\bin\Debug\DigitalWaveControls.dll</HintPath>
@@ -162,11 +167,13 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
@@ -1037,6 +1044,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>frmSTMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -79,6 +79,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Sybase\DataWindow .NET 2.0\DataWindow.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.BonusSkins.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Debug\DevExpress.BonusSkins.v16.2.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Data.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Sparkline.v16.2.Core, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -166,6 +170,12 @@
     <Compile Include="DomainController\clsDcl_ModifyZyh.cs" />
     <Compile Include="DomainController\clsDcl_PrePay.cs" />
     <Compile Include="DomainController\clsDcl_Report.cs" />
+    <Compile Include="Viewer\frmAidEditAmountNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer\frmAidEditAmountNew.Designer.cs">
+      <DependentUpon>frmAidEditAmountNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="Viewer\frmInvoiceRefundReason.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -299,6 +309,9 @@
     <EmbeddedResource Include="Viewer\frmAidEditAmount.resx">
       <SubType>Designer</SubType>
       <DependentUpon>frmAidEditAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer\frmAidEditAmountNew.resx">
+      <DependentUpon>frmAidEditAmountNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Viewer\frmAidEditItem_OutPatientDefault.resx">
       <DependentUpon>frmAidEditItem_OutPatientDefault.cs</DependentUpon>

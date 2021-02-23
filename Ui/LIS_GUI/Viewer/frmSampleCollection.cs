@@ -131,6 +131,28 @@ namespace com.digitalwave.iCare.gui.LIS
         private GroupBox groupBox2;
         internal com.digitalwave.controls.clsCardTextBox txtPatientCardID;
         private ColumnHeader chPrint;
+        private TabPage pageCovid;
+        private DevExpress.XtraEditors.TextEdit txtQrCode;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl lblPatBarCodePrintStatus;
+        private DevExpress.XtraEditors.LabelControl lblPatTelNo;
+        private DevExpress.XtraEditors.LabelControl lblPatAddr;
+        private DevExpress.XtraEditors.LabelControl lblPatAge;
+        private DevExpress.XtraEditors.LabelControl lblPatSex;
+        private DevExpress.XtraEditors.LabelControl lblPatName;
+        private DevExpress.XtraEditors.SimpleButton btnCovidPrint;
+        private DevExpress.XtraEditors.LabelControl labelControl7;
+        private DevExpress.XtraEditors.LabelControl labelControl6;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private GroupBox groupBox4;
+        private DevExpress.XtraEditors.LabelControl labelControl8;
+        private DevExpress.XtraEditors.LabelControl lblxx;
+        private DevExpress.XtraEditors.LabelControl lblIdCardNo;
+        private DevExpress.XtraEditors.LabelControl labelControl9;
+        private DevExpress.XtraEditors.LabelControl lblInVoNo;
         private System.Windows.Forms.Panel m_palSamplingInfo;
         #endregion
 
@@ -207,11 +229,12 @@ namespace com.digitalwave.iCare.gui.LIS
             this.m_dtpFromDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.m_lsvApplication = new System.Windows.Forms.ListView();
-            this.chApplNO = new System.Windows.Forms.ColumnHeader();
-            this.chName = new System.Windows.Forms.ColumnHeader();
-            this.chApplDate = new System.Windows.Forms.ColumnHeader();
-            this.chStatus = new System.Windows.Forms.ColumnHeader();
-            this.chSampleBackReason = new System.Windows.Forms.ColumnHeader();
+            this.chApplNO = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chApplDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chPrint = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chSampleBackReason = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.m_txtBedNo = new System.Windows.Forms.TextBox();
             this.m_txtSex = new System.Windows.Forms.TextBox();
             this.lblSex = new System.Windows.Forms.Label();
@@ -267,7 +290,28 @@ namespace com.digitalwave.iCare.gui.LIS
             this.m_txtAppDoct = new com.digitalwave.Utility.ctlEmpTextBox();
             this.m_tabControlCollection = new System.Windows.Forms.TabControl();
             this.m_tabPageApplication = new System.Windows.Forms.TabPage();
-            this.chPrint = new System.Windows.Forms.ColumnHeader();
+            this.pageCovid = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lblxx = new DevExpress.XtraEditors.LabelControl();
+            this.lblIdCardNo = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
+            this.lblInVoNo = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
+            this.txtQrCode = new DevExpress.XtraEditors.TextEdit();
+            this.lblPatBarCodePrintStatus = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.lblPatTelNo = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.lblPatAddr = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.lblPatAge = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.lblPatSex = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.lblPatName = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            this.btnCovidPrint = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.m_grpQuery.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -279,12 +323,15 @@ namespace com.digitalwave.iCare.gui.LIS
             this.m_palPatientInfo.SuspendLayout();
             this.m_tabControlCollection.SuspendLayout();
             this.m_tabPageApplication.SuspendLayout();
+            this.pageCovid.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQrCode.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // m_grpQuery
             // 
-            this.m_grpQuery.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.m_grpQuery.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.m_grpQuery.Controls.Add(this.txtPatientCardID);
             this.m_grpQuery.Controls.Add(this.groupBox3);
             this.m_grpQuery.Controls.Add(this.groupBox2);
@@ -475,14 +522,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // m_txtAppDeptQuery
             // 
-            //this.m_txtAppDeptQuery.EnableAutoValidation = true;
-            //this.m_txtAppDeptQuery.EnableEnterKeyValidate = true;
-            //this.m_txtAppDeptQuery.EnableEscapeKeyUndo = true;
-            //this.m_txtAppDeptQuery.EnableLastValidValue = true;
-            //this.m_txtAppDeptQuery.ErrorProvider = null;
-            //this.m_txtAppDeptQuery.ErrorProviderMessage = "Invalid value";
             this.m_txtAppDeptQuery.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            //this.m_txtAppDeptQuery.ForceFormatText = true;
             this.m_txtAppDeptQuery.ForeColor = System.Drawing.SystemColors.WindowText;
             this.m_txtAppDeptQuery.Location = new System.Drawing.Point(76, 44);
             this.m_txtAppDeptQuery.m_StrDeptID = null;
@@ -546,8 +586,8 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // m_lsvApplication
             // 
-            this.m_lsvApplication.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.m_lsvApplication.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.m_lsvApplication.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chApplNO,
             this.chName,
@@ -565,9 +605,9 @@ namespace com.digitalwave.iCare.gui.LIS
             this.m_lsvApplication.TabIndex = 2;
             this.m_lsvApplication.UseCompatibleStateImageBehavior = false;
             this.m_lsvApplication.View = System.Windows.Forms.View.Details;
-            this.m_lsvApplication.MouseUp += new System.Windows.Forms.MouseEventHandler(this.m_lsvApplication_MouseUp);
-            this.m_lsvApplication.KeyDown += new System.Windows.Forms.KeyEventHandler(this.m_lsvApplication_KeyDown);
             this.m_lsvApplication.Click += new System.EventHandler(this.m_lsvApplication_Click);
+            this.m_lsvApplication.KeyDown += new System.Windows.Forms.KeyEventHandler(this.m_lsvApplication_KeyDown);
+            this.m_lsvApplication.MouseUp += new System.Windows.Forms.MouseEventHandler(this.m_lsvApplication_MouseUp);
             // 
             // chApplNO
             // 
@@ -583,6 +623,12 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             this.chApplDate.Text = "申请日期";
             this.chApplDate.Width = 100;
+            // 
+            // chPrint
+            // 
+            this.chPrint.Text = "打印";
+            this.chPrint.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.chPrint.Width = 48;
             // 
             // chStatus
             // 
@@ -905,9 +951,9 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // m_grpWork
             // 
-            this.m_grpWork.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.m_grpWork.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.m_grpWork.Controls.Add(this.m_palSamplingInfo);
             this.m_grpWork.Location = new System.Drawing.Point(352, 352);
             this.m_grpWork.Name = "m_grpWork";
@@ -1002,14 +1048,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // m_txtOperatorID
             // 
             this.m_txtOperatorID.BackColor = System.Drawing.SystemColors.Info;
-            //this.m_txtOperatorID.EnableAutoValidation = true;
-            //this.m_txtOperatorID.EnableEnterKeyValidate = true;
-            //this.m_txtOperatorID.EnableEscapeKeyUndo = true;
-            //this.m_txtOperatorID.EnableLastValidValue = true;
-            //this.m_txtOperatorID.ErrorProvider = null;
-            //this.m_txtOperatorID.ErrorProviderMessage = "Invalid value";
             this.m_txtOperatorID.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            //this.m_txtOperatorID.ForceFormatText = true;
             this.m_txtOperatorID.ForeColor = System.Drawing.SystemColors.WindowText;
             this.m_txtOperatorID.Location = new System.Drawing.Point(76, 32);
             this.m_txtOperatorID.m_intShowOtherEmp = 0;
@@ -1088,8 +1127,8 @@ namespace com.digitalwave.iCare.gui.LIS
             // 
             // m_gpbPatientInfo
             // 
-            this.m_gpbPatientInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.m_gpbPatientInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.m_gpbPatientInfo.Controls.Add(this.m_palPatientInfo);
             this.m_gpbPatientInfo.Location = new System.Drawing.Point(352, 175);
             this.m_gpbPatientInfo.Name = "m_gpbPatientInfo";
@@ -1229,14 +1268,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // m_txtAppDept
             // 
             this.m_txtAppDept.BackColor = System.Drawing.SystemColors.Info;
-            //this.m_txtAppDept.EnableAutoValidation = true;
-            //this.m_txtAppDept.EnableEnterKeyValidate = true;
-            //this.m_txtAppDept.EnableEscapeKeyUndo = true;
-            //this.m_txtAppDept.EnableLastValidValue = true;
-            //this.m_txtAppDept.ErrorProvider = null;
-            //this.m_txtAppDept.ErrorProviderMessage = "Invalid value";
             this.m_txtAppDept.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            //this.m_txtAppDept.ForceFormatText = true;
             this.m_txtAppDept.ForeColor = System.Drawing.SystemColors.WindowText;
             this.m_txtAppDept.Location = new System.Drawing.Point(496, 12);
             this.m_txtAppDept.m_StrDeptID = null;
@@ -1251,14 +1283,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // m_txtAppDoct
             // 
             this.m_txtAppDoct.BackColor = System.Drawing.SystemColors.Info;
-            //this.m_txtAppDoct.EnableAutoValidation = true;
-            //this.m_txtAppDoct.EnableEnterKeyValidate = true;
-            //this.m_txtAppDoct.EnableEscapeKeyUndo = true;
-            //this.m_txtAppDoct.EnableLastValidValue = true;
-            //this.m_txtAppDoct.ErrorProvider = null;
-            //this.m_txtAppDoct.ErrorProviderMessage = "Invalid value";
             this.m_txtAppDoct.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            //this.m_txtAppDoct.ForceFormatText = true;
             this.m_txtAppDoct.ForeColor = System.Drawing.SystemColors.WindowText;
             this.m_txtAppDoct.Location = new System.Drawing.Point(496, 60);
             this.m_txtAppDoct.m_intShowOtherEmp = 0;
@@ -1275,6 +1300,7 @@ namespace com.digitalwave.iCare.gui.LIS
             // m_tabControlCollection
             // 
             this.m_tabControlCollection.Controls.Add(this.m_tabPageApplication);
+            this.m_tabControlCollection.Controls.Add(this.pageCovid);
             this.m_tabControlCollection.Dock = System.Windows.Forms.DockStyle.Fill;
             this.m_tabControlCollection.ItemSize = new System.Drawing.Size(68, 0);
             this.m_tabControlCollection.Location = new System.Drawing.Point(0, 0);
@@ -1290,13 +1316,270 @@ namespace com.digitalwave.iCare.gui.LIS
             this.m_tabPageApplication.Name = "m_tabPageApplication";
             this.m_tabPageApplication.Size = new System.Drawing.Size(1253, 535);
             this.m_tabPageApplication.TabIndex = 0;
-            this.m_tabPageApplication.Text = "样本采集";
+            this.m_tabPageApplication.Text = "  样本采集  ";
             // 
-            // chPrint
+            // pageCovid
             // 
-            this.chPrint.Text = "打印";
-            this.chPrint.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.chPrint.Width = 48;
+            this.pageCovid.BackColor = System.Drawing.SystemColors.Control;
+            this.pageCovid.Controls.Add(this.groupBox4);
+            this.pageCovid.Location = new System.Drawing.Point(4, 24);
+            this.pageCovid.Name = "pageCovid";
+            this.pageCovid.Padding = new System.Windows.Forms.Padding(3);
+            this.pageCovid.Size = new System.Drawing.Size(1253, 535);
+            this.pageCovid.TabIndex = 1;
+            this.pageCovid.Text = "  核酸检测微信小程序扫码打印  ";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.lblxx);
+            this.groupBox4.Controls.Add(this.lblIdCardNo);
+            this.groupBox4.Controls.Add(this.labelControl9);
+            this.groupBox4.Controls.Add(this.lblInVoNo);
+            this.groupBox4.Controls.Add(this.labelControl8);
+            this.groupBox4.Controls.Add(this.txtQrCode);
+            this.groupBox4.Controls.Add(this.lblPatBarCodePrintStatus);
+            this.groupBox4.Controls.Add(this.labelControl1);
+            this.groupBox4.Controls.Add(this.lblPatTelNo);
+            this.groupBox4.Controls.Add(this.labelControl2);
+            this.groupBox4.Controls.Add(this.lblPatAddr);
+            this.groupBox4.Controls.Add(this.labelControl3);
+            this.groupBox4.Controls.Add(this.lblPatAge);
+            this.groupBox4.Controls.Add(this.labelControl4);
+            this.groupBox4.Controls.Add(this.lblPatSex);
+            this.groupBox4.Controls.Add(this.labelControl5);
+            this.groupBox4.Controls.Add(this.lblPatName);
+            this.groupBox4.Controls.Add(this.labelControl6);
+            this.groupBox4.Controls.Add(this.btnCovidPrint);
+            this.groupBox4.Controls.Add(this.labelControl7);
+            this.groupBox4.Location = new System.Drawing.Point(24, 16);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(612, 504);
+            this.groupBox4.TabIndex = 15;
+            this.groupBox4.TabStop = false;
+            // 
+            // lblxx
+            // 
+            this.lblxx.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblxx.Appearance.Options.UseFont = true;
+            this.lblxx.Location = new System.Drawing.Point(76, 259);
+            this.lblxx.Name = "lblxx";
+            this.lblxx.Size = new System.Drawing.Size(60, 12);
+            this.lblxx.TabIndex = 18;
+            this.lblxx.Text = "身份证号：";
+            // 
+            // lblIdCardNo
+            // 
+            this.lblIdCardNo.Appearance.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblIdCardNo.Appearance.ForeColor = System.Drawing.Color.Crimson;
+            this.lblIdCardNo.Appearance.Options.UseFont = true;
+            this.lblIdCardNo.Appearance.Options.UseForeColor = true;
+            this.lblIdCardNo.Location = new System.Drawing.Point(156, 259);
+            this.lblIdCardNo.Name = "lblIdCardNo";
+            this.lblIdCardNo.Size = new System.Drawing.Size(128, 13);
+            this.lblIdCardNo.TabIndex = 19;
+            this.lblIdCardNo.Text = "3423423432423423";
+            // 
+            // labelControl9
+            // 
+            this.labelControl9.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl9.Appearance.Options.UseFont = true;
+            this.labelControl9.Location = new System.Drawing.Point(64, 99);
+            this.labelControl9.Name = "labelControl9";
+            this.labelControl9.Size = new System.Drawing.Size(72, 12);
+            this.labelControl9.TabIndex = 16;
+            this.labelControl9.Text = "缴费发票号：";
+            // 
+            // lblInVoNo
+            // 
+            this.lblInVoNo.Appearance.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblInVoNo.Appearance.ForeColor = System.Drawing.Color.Crimson;
+            this.lblInVoNo.Appearance.Options.UseFont = true;
+            this.lblInVoNo.Appearance.Options.UseForeColor = true;
+            this.lblInVoNo.Location = new System.Drawing.Point(156, 99);
+            this.lblInVoNo.Name = "lblInVoNo";
+            this.lblInVoNo.Size = new System.Drawing.Size(88, 13);
+            this.lblInVoNo.TabIndex = 17;
+            this.lblInVoNo.Text = "XG234324234";
+            // 
+            // labelControl8
+            // 
+            this.labelControl8.Appearance.BackColor = System.Drawing.Color.DarkGray;
+            this.labelControl8.Appearance.Font = new System.Drawing.Font("宋体", 5.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelControl8.Appearance.Options.UseBackColor = true;
+            this.labelControl8.Appearance.Options.UseFont = true;
+            this.labelControl8.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl8.Location = new System.Drawing.Point(20, 423);
+            this.labelControl8.Name = "labelControl8";
+            this.labelControl8.Size = new System.Drawing.Size(580, 1);
+            this.labelControl8.TabIndex = 15;
+            this.labelControl8.Text = "                                                                                 " +
+    "                   ";
+            // 
+            // txtQrCode
+            // 
+            this.txtQrCode.EditValue = "123456789012345678";
+            this.txtQrCode.Location = new System.Drawing.Point(148, 36);
+            this.txtQrCode.Name = "txtQrCode";
+            this.txtQrCode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQrCode.Properties.Appearance.Options.UseFont = true;
+            this.txtQrCode.Size = new System.Drawing.Size(344, 42);
+            this.txtQrCode.TabIndex = 1;
+            this.txtQrCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtQrCode_KeyDown);
+            // 
+            // lblPatBarCodePrintStatus
+            // 
+            this.lblPatBarCodePrintStatus.Appearance.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblPatBarCodePrintStatus.Appearance.ForeColor = System.Drawing.Color.Crimson;
+            this.lblPatBarCodePrintStatus.Appearance.Options.UseFont = true;
+            this.lblPatBarCodePrintStatus.Appearance.Options.UseForeColor = true;
+            this.lblPatBarCodePrintStatus.Location = new System.Drawing.Point(156, 379);
+            this.lblPatBarCodePrintStatus.Name = "lblPatBarCodePrintStatus";
+            this.lblPatBarCodePrintStatus.Size = new System.Drawing.Size(42, 13);
+            this.lblPatBarCodePrintStatus.TabIndex = 14;
+            this.lblPatBarCodePrintStatus.Text = "未打印";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Location = new System.Drawing.Point(52, 52);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(84, 12);
+            this.labelControl1.TabIndex = 0;
+            this.labelControl1.Text = "小程序二维码：";
+            // 
+            // lblPatTelNo
+            // 
+            this.lblPatTelNo.Appearance.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblPatTelNo.Appearance.ForeColor = System.Drawing.Color.Crimson;
+            this.lblPatTelNo.Appearance.Options.UseFont = true;
+            this.lblPatTelNo.Appearance.Options.UseForeColor = true;
+            this.lblPatTelNo.Location = new System.Drawing.Point(156, 339);
+            this.lblPatTelNo.Name = "lblPatTelNo";
+            this.lblPatTelNo.Size = new System.Drawing.Size(88, 13);
+            this.lblPatTelNo.TabIndex = 13;
+            this.lblPatTelNo.Text = "13888889999";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Location = new System.Drawing.Point(100, 139);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(36, 12);
+            this.labelControl2.TabIndex = 2;
+            this.labelControl2.Text = "姓名：";
+            // 
+            // lblPatAddr
+            // 
+            this.lblPatAddr.Appearance.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblPatAddr.Appearance.ForeColor = System.Drawing.Color.Crimson;
+            this.lblPatAddr.Appearance.Options.UseFont = true;
+            this.lblPatAddr.Appearance.Options.UseForeColor = true;
+            this.lblPatAddr.Location = new System.Drawing.Point(156, 299);
+            this.lblPatAddr.Name = "lblPatAddr";
+            this.lblPatAddr.Size = new System.Drawing.Size(154, 13);
+            this.lblPatAddr.TabIndex = 12;
+            this.lblPatAddr.Text = "广州市天河区区委办公楼";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl3.Appearance.Options.UseFont = true;
+            this.labelControl3.Location = new System.Drawing.Point(100, 179);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(36, 12);
+            this.labelControl3.TabIndex = 3;
+            this.labelControl3.Text = "性别：";
+            // 
+            // lblPatAge
+            // 
+            this.lblPatAge.Appearance.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblPatAge.Appearance.ForeColor = System.Drawing.Color.Crimson;
+            this.lblPatAge.Appearance.Options.UseFont = true;
+            this.lblPatAge.Appearance.Options.UseForeColor = true;
+            this.lblPatAge.Location = new System.Drawing.Point(156, 219);
+            this.lblPatAge.Name = "lblPatAge";
+            this.lblPatAge.Size = new System.Drawing.Size(16, 13);
+            this.lblPatAge.TabIndex = 11;
+            this.lblPatAge.Text = "56";
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl4.Appearance.Options.UseFont = true;
+            this.labelControl4.Location = new System.Drawing.Point(100, 219);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(36, 12);
+            this.labelControl4.TabIndex = 4;
+            this.labelControl4.Text = "年龄：";
+            // 
+            // lblPatSex
+            // 
+            this.lblPatSex.Appearance.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblPatSex.Appearance.ForeColor = System.Drawing.Color.Crimson;
+            this.lblPatSex.Appearance.Options.UseFont = true;
+            this.lblPatSex.Appearance.Options.UseForeColor = true;
+            this.lblPatSex.Location = new System.Drawing.Point(156, 179);
+            this.lblPatSex.Name = "lblPatSex";
+            this.lblPatSex.Size = new System.Drawing.Size(14, 13);
+            this.lblPatSex.TabIndex = 10;
+            this.lblPatSex.Text = "男";
+            // 
+            // labelControl5
+            // 
+            this.labelControl5.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl5.Appearance.Options.UseFont = true;
+            this.labelControl5.Location = new System.Drawing.Point(100, 299);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(36, 12);
+            this.labelControl5.TabIndex = 5;
+            this.labelControl5.Text = "住址：";
+            // 
+            // lblPatName
+            // 
+            this.lblPatName.Appearance.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblPatName.Appearance.ForeColor = System.Drawing.Color.Crimson;
+            this.lblPatName.Appearance.Options.UseFont = true;
+            this.lblPatName.Appearance.Options.UseForeColor = true;
+            this.lblPatName.Location = new System.Drawing.Point(156, 139);
+            this.lblPatName.Name = "lblPatName";
+            this.lblPatName.Size = new System.Drawing.Size(56, 13);
+            this.lblPatName.TabIndex = 9;
+            this.lblPatName.Text = "测试人员";
+            // 
+            // labelControl6
+            // 
+            this.labelControl6.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl6.Appearance.Options.UseFont = true;
+            this.labelControl6.Location = new System.Drawing.Point(100, 339);
+            this.labelControl6.Name = "labelControl6";
+            this.labelControl6.Size = new System.Drawing.Size(36, 12);
+            this.labelControl6.TabIndex = 6;
+            this.labelControl6.Text = "电话：";
+            // 
+            // btnCovidPrint
+            // 
+            this.btnCovidPrint.Appearance.Font = new System.Drawing.Font("宋体", 9F);
+            this.btnCovidPrint.Appearance.Options.UseFont = true;
+            this.btnCovidPrint.Image = ((System.Drawing.Image)(resources.GetObject("btnCovidPrint.Image")));
+            this.btnCovidPrint.Location = new System.Drawing.Point(240, 447);
+            this.btnCovidPrint.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.btnCovidPrint.Name = "btnCovidPrint";
+            this.btnCovidPrint.Size = new System.Drawing.Size(108, 32);
+            this.btnCovidPrint.TabIndex = 8;
+            this.btnCovidPrint.Text = "打印 &P";
+            this.btnCovidPrint.Click += new System.EventHandler(this.btnCovidPrint_Click);
+            // 
+            // labelControl7
+            // 
+            this.labelControl7.Appearance.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl7.Appearance.Options.UseFont = true;
+            this.labelControl7.Location = new System.Drawing.Point(40, 379);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(96, 12);
+            this.labelControl7.TabIndex = 7;
+            this.labelControl7.Text = "条码是否已打印：";
             // 
             // frmSampleCollection
             // 
@@ -1309,8 +1592,8 @@ namespace com.digitalwave.iCare.gui.LIS
             this.Name = "frmSampleCollection";
             this.Text = "样本采集";
             this.Load += new System.EventHandler(this.frmSampleCollection_Load);
-            this.Validated += new System.EventHandler(this.frmSampleCollection_Validated);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmSampleCollection_KeyDown);
+            this.Validated += new System.EventHandler(this.frmSampleCollection_Validated);
             this.m_grpQuery.ResumeLayout(false);
             this.m_grpQuery.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1326,6 +1609,10 @@ namespace com.digitalwave.iCare.gui.LIS
             this.m_palPatientInfo.PerformLayout();
             this.m_tabControlCollection.ResumeLayout(false);
             this.m_tabPageApplication.ResumeLayout(false);
+            this.pageCovid.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtQrCode.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1365,6 +1652,16 @@ namespace com.digitalwave.iCare.gui.LIS
 
         private void frmSampleCollection_Load(object sender, System.EventArgs e)
         {
+            this.lblInVoNo.Text = string.Empty;
+            this.txtQrCode.Text = "";
+            this.lblPatName.Text = "";
+            this.lblPatSex.Text = "";
+            this.lblPatAge.Text = "";
+            this.lblPatAddr.Text = "";
+            this.lblPatTelNo.Text = "";
+            this.lblPatBarCodePrintStatus.Text = "";
+            this.lblIdCardNo.Text = string.Empty;
+            
             m_mthSetFormControlCanBeNull(this);
             m_mthSetEnter2Tab(new System.Windows.Forms.Control[] { });
 
@@ -2214,6 +2511,81 @@ namespace com.digitalwave.iCare.gui.LIS
             this.m_strSubmitDoctorId = string.Empty;
             this.m_lblSubmitDoctor.Text = "(空)";
             SubmitLogin();
+        }
+
+        private void txtQrCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.PrintByQrCode();
+            }
+        }
+
+        #region PrintByQrCode
+        /// <summary>
+        /// PrintByQrCode
+        /// </summary>
+        void PrintByQrCode()
+        {
+            string val = this.txtQrCode.Text.Trim();
+            if (val == "")
+            {
+                MessageBox.Show("请扫码", "系统提示");
+                this.txtQrCode.Focus();
+                return;
+            }
+            DataTable dtPat = (new weCare.Proxy.ProxyOP()).Service.GetChargeCcovid19Wechat(val);
+            if (dtPat != null && dtPat.Rows.Count > 0)
+            {
+                DataRow dr = dtPat.Rows[0];
+                this.lblInVoNo.Text = dr["invoiceno"].ToString();
+                this.lblPatName.Text = dr["patientName"].ToString();
+                this.lblPatSex.Text = dr["sex"].ToString();
+                this.lblPatAge.Text = (new weCare.Core.Entity.clsBrithdayToAge()).m_strGetAge(weCare.Core.Utils.Function.Datetime(dr["birth_dat"].ToString()));
+                this.lblIdCardNo.Text = dr["idCardNo"].ToString();
+                this.lblPatAddr.Text = dr["homeAddr"].ToString();
+                this.lblPatTelNo.Text = dr["telNo"].ToString();
+                this.lblPatBarCodePrintStatus.Text = weCare.Core.Utils.Function.Int(dr["printed_num"].ToString()) > 0 ? ("已打印 次数:" + dr["printed_num"].ToString()) : "未打印";
+
+                string applicationId = dr["applicationId"].ToString();
+                string sampleId = dr["sampleId"].ToString();
+                clsSealedLisApplyReportPrint print = new clsSealedLisApplyReportPrint();
+                print.m_mthGetPrintContent(applicationId);
+
+                print.PrintNew();
+
+                string empId = null;
+                if (!string.IsNullOrEmpty(m_strSubmitDoctorId))
+                {
+                    empId = m_strSubmitDoctorId;
+                }
+                else
+                {
+                    empId = this.LoginInfo.m_strEmpID;
+                }
+                m_objController.m_mthUpdateCollector(empId, sampleId, applicationId);
+                this.txtQrCode.Text = "";
+            }
+            else
+            {
+                this.lblInVoNo.Text = string.Empty;
+                this.lblPatName.Text = string.Empty;
+                this.lblPatSex.Text = string.Empty;
+                this.lblPatAge.Text = string.Empty;
+                this.lblIdCardNo.Text = string.Empty;
+                this.lblPatAddr.Text = string.Empty;
+                this.lblPatTelNo.Text = string.Empty;
+                this.lblPatBarCodePrintStatus.Text = string.Empty;
+
+                MessageBox.Show("查无记录", "系统提示");
+            }
+            this.txtQrCode.Focus();
+        }
+        #endregion
+
+        private void btnCovidPrint_Click(object sender, EventArgs e)
+        {
+            this.PrintByQrCode();
         }
     }
 }

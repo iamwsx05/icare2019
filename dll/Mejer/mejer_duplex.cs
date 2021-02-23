@@ -218,7 +218,23 @@ namespace Mejer
                                 vo.strDevice_Sample_ID = sampleId;
                                 vo.barCode = barCode;
                                 vo.strDevice_Check_Item_Name = this.dtConfig.Rows[0][itemName].ToString().Trim();
-                                vo.strResult = dr[itemName].ToString();
+                                vo.strResult = dr[itemName].ToString().Replace("*WBC", "").Replace("WBC", "").Replace("*NIT", "").Replace("NIT", "").Replace("*URO", "").Replace("URO", "").Replace("*PRO", "").Replace("PRO", "").Replace("pH", "").Replace("*BLD", "").Replace("BLD", "").Replace("SG", "").Replace("Vc", "").Replace("*KET", "").Replace("KET", "").Replace("*GLU", "").Replace("GLU", "").Replace("Cells/uL", "").Replace("mmol/L", "").Replace("umol/L", "").Replace("g/L", "").Replace("*BIL", "").Replace("BIL", "").Trim();
+                                if(vo.strResult.Contains("+") || vo.strResult.Contains("-"))
+                                {
+                                    if(vo.strResult.Contains(" "))
+                                    {
+                                        vo.strResult = vo.strResult.Split(' ')[0];
+                                    }
+                                    if (vo.strResult.Contains(">"))
+                                    {
+                                        vo.strResult = vo.strResult.Split('>')[0];
+                                    }
+                                    if (vo.strResult.Contains("<"))
+                                    {
+                                        vo.strResult = vo.strResult.Split('<')[0];
+                                    }
+                                }
+
                                 if (string.IsNullOrEmpty(vo.strResult))
                                     vo.strResult = "/";
                                 vo.strDevice_ID = DeviceID;

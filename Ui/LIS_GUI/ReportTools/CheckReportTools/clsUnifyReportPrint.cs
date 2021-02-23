@@ -267,13 +267,13 @@ namespace com.digitalwave.iCare.gui.LIS
                                     {
                                         foreach (clsDeviceReslutVO item in lstResult)
                                         {
-                                            
+
                                             if (aidRemarkVO.highOrLow == 1)
                                             {
                                                 if (!string.IsNullOrEmpty(aidRemarkVO.checkItemId))
                                                 {
-                                                    clsDeviceReslutVO vo = lstResult.Find(r=>r.m_strDeviceSampleID == aidRemarkVO.checkItemId);
-                                                    if(vo != null)
+                                                    clsDeviceReslutVO vo = lstResult.Find(r => r.m_strDeviceSampleID == aidRemarkVO.checkItemId);
+                                                    if (vo != null)
                                                     {
                                                         if (vo.m_strAbnormalFlag == "H")
                                                         {
@@ -312,7 +312,7 @@ namespace com.digitalwave.iCare.gui.LIS
                                                     break;
                                                 }
                                             }
-                                            else  if(aidRemarkVO.highOrLow == 3)
+                                            else if (aidRemarkVO.highOrLow == 3)
                                             {
                                                 if (!string.IsNullOrEmpty(aidRemarkVO.checkItemId))
                                                 {
@@ -384,7 +384,7 @@ namespace com.digitalwave.iCare.gui.LIS
                  on t1.sample_id_chr = t2.sample_id_chr
                 WHERE t2.status_int > 0
                 AND t1.application_id_chr = '{0}' and t2.deviceid_chr= '{1}'";
-            Sql = string.Format(Sql,appId,mejerParm);
+            Sql = string.Format(Sql, appId, mejerParm);
             DataTable dt = null;
             (new weCare.Proxy.ProxyBase()).Service.GetDataTable(Sql, out dt);
             if (dt != null && dt.Rows.Count > 0)
@@ -393,7 +393,7 @@ namespace com.digitalwave.iCare.gui.LIS
                 string devSampleId = dt.Rows[0]["device_sampleid_chr"].ToString().Trim();
                 string checkDate = Function.Datetime(dt.Rows[0]["check_dat"]).ToString("yyyy-MM-dd HH:mm:ss");
 
-                if(!string.IsNullOrEmpty(deviceId) && !string.IsNullOrEmpty(devSampleId) && !string.IsNullOrEmpty(checkDate))
+                if (!string.IsNullOrEmpty(deviceId) && !string.IsNullOrEmpty(devSampleId) && !string.IsNullOrEmpty(checkDate))
                 {
                     Sql = @"select a.sampleimg from t_checkresult_img a 
                                     where a.deviceid = '{0}' 
@@ -403,9 +403,9 @@ namespace com.digitalwave.iCare.gui.LIS
                     Sql = string.Format(Sql, deviceId, devSampleId, checkDate);
 
                     (new weCare.Proxy.ProxyBase()).Service.GetDataTable(Sql, out dt);
-                    if(dt != null && dt.Rows.Count > 0)
+                    if (dt != null && dt.Rows.Count > 0)
                     {
-                        byte [] bytGraph = (byte[])dt.Rows[0]["sampleimg"];
+                        byte[] bytGraph = (byte[])dt.Rows[0]["sampleimg"];
                         img = Function.ConvertByteToImage(bytGraph);
                     }
                 }
@@ -607,7 +607,7 @@ namespace com.digitalwave.iCare.gui.LIS
                         {
                             cardNo = dt.Rows[0]["idcard_chr"].ToString().Trim();
                         }
-                            
+
                         if (!string.IsNullOrEmpty(cardNo))
                         {
                             //证件类型
@@ -700,13 +700,29 @@ namespace com.digitalwave.iCare.gui.LIS
         #region 打印报告单实验室提示
         private float m_fltPrintSummary(float p_fltX, float p_fltY, float p_fltPrintWidth)
         {
-            string summaryInfo = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim()+ "\r\n" + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
+            string summaryInfo = "";
+            if (m_dtbSample.Rows[0]["SUMMARY_VCHR"] != DBNull.Value)
+            {
+                summaryInfo = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim();
+            }
+            string remarkInfo = GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
+            if (!string.IsNullOrEmpty(remarkInfo) && remarkInfo.Trim() != "")
+            {
+                summaryInfo += "\r\n" + remarkInfo;
+            }
 
             if (!m_blnSummaryEmptyVisible && summaryInfo == "")
                 return p_fltY;
             float fltY = p_fltY + 10;
 
-            m_printMethodTool.m_mthDrawString(m_strSummary, m_fntSmallBold, p_fltX, fltY);
+            if (lstCov2019 != null && lstCov2019.Count > 0)
+            {
+                // 核酸检测不打实验室提示
+            }
+            else
+            {
+                m_printMethodTool.m_mthDrawString(m_strSummary, m_fntSmallBold, p_fltX, fltY);
+            }
             fltY += m_fntSmallBold.Height + m_fltTitleSpace;
             SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, summaryInfo, p_fltPrintWidth, m_fltTitleSpace, m_fltItemSpace);
             Rectangle rectSummary = new Rectangle((int)p_fltX, (int)fltY, (int)sf.Width, (int)sf.Height);
@@ -714,6 +730,52 @@ namespace com.digitalwave.iCare.gui.LIS
                 m_dtbSample.Rows[0]["XML_SUMMARY_VCHR"].ToString().Trim(), m_fntSmallNotBold, Color.Black, rectSummary, m_printMethodTool.m_printEventArg.Graphics);
             fltY += rectSummary.Height;
             return fltY;
+        }
+        #endregion
+
+        #region ReadImageFile
+        /// <summary>
+        /// 读取图片文件
+        /// </summary>
+        /// <param name="path">图片文件路径</param>
+        /// <returns>图片文件</returns>
+        Bitmap ReadImageFile(string path)
+        {
+            Bitmap bitmap = null;
+            try
+            {
+                FileStream fileStream = File.OpenRead(path);
+                Int32 filelength = 0;
+                filelength = (int)fileStream.Length;
+                Byte[] image = new Byte[filelength];
+                fileStream.Read(image, 0, filelength);
+                System.Drawing.Image result = System.Drawing.Image.FromStream(fileStream);
+                fileStream.Close();
+                bitmap = new Bitmap(result);
+            }
+            catch (Exception ex)
+            {
+                //  异常输出
+            }
+            return bitmap;
+        }
+        #endregion
+
+        #region PrintHsjcGZ
+        /// <summary>
+        /// PrintHsjcGZ 打印核酸检测公章
+        /// </summary>
+        void PrintHsjcGZ(int x, int y)
+        {
+            string filePath = Application.StartupPath + "\\csyyylzyz.jpg";
+            if (File.Exists(filePath))
+            {
+                Image imgGZ = this.ReadImageFile(filePath);
+                if (imgGZ != null)
+                {
+                    m_printMethodTool.DrawImageXYWH(imgGZ, x, y, 110, 110);
+                }
+            }
         }
         #endregion
 
@@ -875,7 +937,7 @@ namespace com.digitalwave.iCare.gui.LIS
                     float m_fltWidth = 0.9f * graph.Width;
                     float m_fltHeight = 0.9f * graph.Height;
                     m_printMethodTool.m_printEventArg.Graphics.DrawImage(graph, fltColumn3 - 190,
-                        m_fltEnd-180, m_fltWidth, m_fltHeight);
+                        m_fltEnd - 180, m_fltWidth, m_fltHeight);
                 }
             }
 
@@ -903,17 +965,16 @@ namespace com.digitalwave.iCare.gui.LIS
             //检验医生
             if (m_dtbSample.Columns.IndexOf("reportorSign") >= 0)
             {
-
                 if (isCov2019)
                 {
                     if (m_dtbSample.Rows[0]["reportorSign"] == DBNull.Value)
                     {
-                        m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, m_strCheckDoc, m_dtbSample.Rows[0]["reportor"].ToString().Trim(), fltColumn2-102, m_fltEnd);
+                        m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, m_strCheckDoc, m_dtbSample.Rows[0]["reportor"].ToString().Trim(), fltColumn2 - 102, m_fltEnd);
                     }
                     else
                     {
                         MemoryStream ms = new MemoryStream((byte[])m_dtbSample.Rows[0]["reportorSign"]);
-                        m_printMethodTool.DrawImage(m_strCheckDoc, m_fntSmallBold, Image.FromStream(ms), fltColumn2-102, m_fltEnd, isUseA4);
+                        m_printMethodTool.DrawImage(m_strCheckDoc, m_fntSmallBold, Image.FromStream(ms), fltColumn2 - 102, m_fltEnd, isUseA4);
                     }
                 }
                 else
@@ -928,7 +989,7 @@ namespace com.digitalwave.iCare.gui.LIS
                         m_printMethodTool.DrawImage(m_strCheckDoc, m_fntSmallBold, Image.FromStream(ms), fltColumn2, m_fltEnd, isUseA4);
                     }
                 }
-               
+
             }
             else
             {
@@ -942,12 +1003,12 @@ namespace com.digitalwave.iCare.gui.LIS
                 {
                     if (m_dtbSample.Rows[0]["confirmerSign"] == DBNull.Value)
                     {
-                        m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, m_strConfirmEmp, m_dtbSample.Rows[0]["confirmer"].ToString().Trim(), fltColumn3-140, m_fltEnd);
+                        m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, m_strConfirmEmp, m_dtbSample.Rows[0]["confirmer"].ToString().Trim(), fltColumn3 - 140, m_fltEnd);
                     }
                     else
                     {
                         MemoryStream ms = new MemoryStream((byte[])m_dtbSample.Rows[0]["confirmerSign"]);
-                        m_printMethodTool.DrawImage(m_strConfirmEmp, m_fntSmallBold, Image.FromStream(ms), fltColumn3-140, m_fltEnd, isUseA4);
+                        m_printMethodTool.DrawImage(m_strConfirmEmp, m_fntSmallBold, Image.FromStream(ms), fltColumn3 - 140, m_fltEnd, isUseA4);
                     }
                 }
                 else
@@ -969,10 +1030,12 @@ namespace com.digitalwave.iCare.gui.LIS
             }
             if (isCov2019)
             {
-                m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, "检测机构：机构名称（盖章）", "", fltColumn3+10, m_fltEnd);
+                m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallBold, m_fntSmallBold, "检测机构：机构名称（盖章）", "", fltColumn3 + 10, m_fltEnd);
+                // 增加打印公章
+                this.PrintHsjcGZ(Convert.ToInt32(fltColumn3 + 30), Convert.ToInt32(m_fltEnd - 120));
             }
 
-           m_fltEnd += m_printMethodTool.m_fltGetStringHeight(m_strReportDate, m_fntSmallBold) + 6;
+            m_fltEnd += m_printMethodTool.m_fltGetStringHeight(m_strReportDate, m_fntSmallBold) + 6;
 
             ////画线
             //m_printMethodTool.m_mthDrawLine(m_fltStartX - 5, m_fltEnd, m_fltPaperWidth * 0.9f, m_fltEnd);
@@ -990,7 +1053,7 @@ namespace com.digitalwave.iCare.gui.LIS
                 m_printMethodTool.m_mthDrawString(str, m_fntSmallBold, m_fltStartX + diff + 5, m_fltEnd);
                 diff += m_printMethodTool.m_fltGetStringWidth(str, m_fntSmallBold) + 65;
             }
-            if(isCov2019)
+            if (isCov2019)
             {
                 //Notice
                 m_printMethodTool.m_printEventArg.Graphics.DrawString(m_strNotice, new Font("SimSun", 11f, FontStyle.Regular), Brushes.Red, fltColumn2 - 102, m_fltEnd);
@@ -1011,9 +1074,9 @@ namespace com.digitalwave.iCare.gui.LIS
                 blnPrintAnnotation = true;
             }
             if (blnPrintAnnotation)
-            { 
+            {
                 m_printMethodTool.m_mthDrawTextAndContent(m_fntSmallNotBold, m_fntSmallNotBold, m_strAnnotation, m_dtbSample.Rows[0]["annotation_vchr"].ToString().Trim(),
-                                m_fltStartX + fltNoticeWidth, m_fltEnd);   
+                                m_fltStartX + fltNoticeWidth, m_fltEnd);
             }
         }
         #endregion
@@ -1021,8 +1084,17 @@ namespace com.digitalwave.iCare.gui.LIS
         #region 打印页信息
         private void m_mthPrintDetail()
         {
-            string strSummary = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim() + "\r\n" + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
-            SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, strSummary, m_fltPrintWidth, m_fltTitleSpace,
+            string summaryInfo = "";
+            if (m_dtbSample.Rows[0]["SUMMARY_VCHR"] != DBNull.Value)
+            {
+                summaryInfo = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim();
+            }
+            string remarkInfo = GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
+            if (!string.IsNullOrEmpty(remarkInfo) && remarkInfo.Trim() != "")
+            {
+                summaryInfo += "\r\n" + remarkInfo;
+            }
+            SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, summaryInfo, m_fltPrintWidth, m_fltTitleSpace,
                 m_fltItemSpace);
             if (m_objPrintPage == null)
             {
@@ -1061,13 +1133,24 @@ namespace com.digitalwave.iCare.gui.LIS
             {
                 m_fltY = m_fltPrintSummary(m_fltStartX, m_fltY, m_fltPrintWidth);
             }
+
         }
 
         //茶山式检验报告样式
         private void m_mthPrintDetail_DGCS()
         {
-            string strSummary = m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim() + "\r\n" + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
-            SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, strSummary, m_fltPrintWidth, m_fltTitleSpace,
+            string summaryInfo = "";
+            if (m_dtbSample.Rows[0]["SUMMARY_VCHR"] != DBNull.Value)
+            {
+                summaryInfo = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim();
+            }
+            string remarkInfo = GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
+            if (!string.IsNullOrEmpty(remarkInfo) && remarkInfo.Trim() != "")
+            {
+                summaryInfo += "\r\n" + remarkInfo;
+            }
+
+            SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, summaryInfo, m_fltPrintWidth, m_fltTitleSpace,
                 m_fltItemSpace);
             if (m_objPrintPage == null)
             {
@@ -1100,7 +1183,7 @@ namespace com.digitalwave.iCare.gui.LIS
                         m_fltY = fltY;
                 }
             }
-              
+
             if (m_printMethodTool.m_printEventArg.HasMorePages == false)
             {
                 m_fltY = m_fltPrintSummary(m_fltStartX, m_fltY, m_fltPrintWidth);
@@ -1700,8 +1783,17 @@ namespace com.digitalwave.iCare.gui.LIS
             #endregion
 
             //实验室提示
-            string strSummary = m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim() + "\r\n" + GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
-            SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, strSummary, m_fltPrintWidth, m_fltTitleSpace, m_fltItemSpace);
+            string summaryInfo = "";
+            if (m_dtbSample.Rows[0]["SUMMARY_VCHR"] != DBNull.Value)
+            {
+                summaryInfo = m_dtbSample.Rows[0]["SUMMARY_VCHR"].ToString().Trim();
+            }
+            string remarkInfo = GetAllergenRemarkInfo(m_dtbSample.Rows[0]["application_id_chr"].ToString(), m_dtbSample.Rows[0]["summary_vchr"].ToString().Trim(), m_dtbSample.Rows[0]["sex_chr"].ToString().Trim());
+            if (!string.IsNullOrEmpty(remarkInfo) && remarkInfo.Trim() != "")
+            {
+                summaryInfo += "\r\n" + remarkInfo;
+            }
+            SizeF sf = m_rectGetPrintStringRectangle(m_fntSmallBold, m_fntSmallNotBold, summaryInfo, m_fltPrintWidth, m_fltTitleSpace, m_fltItemSpace);
             if (sf.Height > 0 && sf.Height > p_fltMaxHeight - fltY)
             {
                 intPage++;
@@ -1998,6 +2090,23 @@ namespace com.digitalwave.iCare.gui.LIS
         float m_fltCurrentX;
         float m_fltBseSpace = 5;
 
+        public float PageWidth
+        {
+            get
+            {
+                return (float)m_printEventArg.PageSettings.PaperSize.Width;
+            }
+        }
+
+        public float PageHeight
+        {
+            get
+            {
+                return (float)m_printEventArg.PageSettings.PaperSize.Height;
+            }
+        }
+
+
         #region 说明文本与内容之间的基本间隔
         /// <summary>
         /// 说明文本与内容之间的基本间隔
@@ -2138,7 +2247,6 @@ namespace com.digitalwave.iCare.gui.LIS
         }
         #endregion
 
-
         #region 打印图标  2011-04-01 李杰文添加
         /// <summary>
         /// 打印图标
@@ -2156,7 +2264,24 @@ namespace com.digitalwave.iCare.gui.LIS
             catch
             { }
         }
+        #endregion
 
+        #region DrawImageXYWH
+        /// <summary>
+        /// DrawImageXYWH 打印图像方法
+        /// </summary>
+        /// <param name="img"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void DrawImageXYWH(Image img, float x, float y, float width, float height)
+        {
+            try
+            {
+                m_printEventArg.Graphics.DrawImage(img, x, y, width, height);
+            }
+            catch
+            { }
+        }
         #endregion
 
         #region 打印字符串
